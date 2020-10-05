@@ -1,0 +1,60 @@
+default:
+    suites:
+        default:
+            contexts:
+                - App\Tests\Behat\DemoContext
+        login:
+            paths:    [ features/login ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        sheet:
+            paths:    [features/sheet ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        menu:
+            paths:    [features/menu ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        section:
+            paths:    [features/section]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        post:
+            paths:    [features/post ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        contact:
+            paths:    [features/front/contact ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        atlas:
+            paths:    [features/atlas ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        modeles:
+            paths:    [features/modeles ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+#            errors
+        error:
+            paths:    [features/error ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        sheet-error:
+            paths:    [features/error/sheet ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        menu-error:
+            paths:    [features/error/menu ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        post-error:
+            paths:    [features/error/post ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+#            bootstrap: features/bootstrap/bootstrap.php
+            kernel:
+                class: App\Kernel
+                path: ~
+                environment: test
+                debug: false
+        Behat\MinkExtension:
+            base_url: http://localhost:8000
+            selenium2:
+#                capabilities: {"browserName": "chrome", "browser": "chrome", 'chrome': {'switches': ['--disable-gpu', '--window-size=1280,1600']}, "marionette": true}
+#            browser_name: chrome
+#            sessions:
+#                symfony:
+#                    symfony: ~
+            files_path: 'public/img/hermes/test/'
+
