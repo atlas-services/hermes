@@ -149,7 +149,7 @@ parameters:
           value: '#888888'
         nav_bgcolor_shrink:
           summary: Couleur de fond de la barre de menu après scroll
-          value: '#aaaaaa'
+          value: 'transparent'
         nav_bgcolor_active:
           summary: Couleur de fond du menu sélectionné
           value: 'transparent'

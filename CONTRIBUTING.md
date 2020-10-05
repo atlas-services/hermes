@@ -5,12 +5,12 @@ When reporting a bug make sure to include information about which browser and op
 
 ### Todo List
 - Graphist
+    - Improve html presentation,css and js based on Bootstrap
     - Improve css and js organization (using webpack-encore)
-    - Improve html presentation based on bootstrap.
     - Add beautiful templates for new presentation.
 - Admin
+    - Clean translations files ("fr" and "en").
     - Need translations ("fr" to "en" and to "es").
-    - Should be made towards the **dev branch**
 - Tests
     - Improve Behat/Mink Backend Tests.
     - Create Behat/Mink Frontend Tests.
