@@ -1,0 +1,71 @@
+{#{% if _context.app_template is not null  %}#}
+{#    {% set directory = _context.app_template %}#}
+{#{% endif %}#}
+{#{% if config.directory.value is not null  %}#}
+{#    {% set directory = config.directory.value %}#}
+{#{% endif %}#}
+{#{% extends 'front/reveal/base.html.twig' %}#}
+{#{% extends 'front/base/base.html.twig' %}#}
+{% extends 'front/base/' ~ directory ~'/base.html.twig' %}
+
+{% block content %}
+    {% if 'true' == app_multi_users  %}
+        {% if menu.user.sections is defined  %}
+            {% set sections =  menu.user.sections %}
+            {% set user =  menu.user %}
+        {% endif %}
+    {% endif %}
+
+    {% if 'false' == app_multi_users  %}
+        {% if menu.sections is defined  %}
+            {% set sections =  menu.sections %}
+            {% set user =  null %}
+        {% endif %}
+    {% endif %}
+
+    {% if sections is defined %}
+        {% if sections|length > 0 %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-info">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div id="top" class="hide" ></div>
+            {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
+                {% include 'front/base/' ~ directory ~'/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %}
+            {% endfor %}
+        {% endif %}
+{#        {% if user is not null  %}#}
+{#            {% include 'front/base/' ~ directory ~'/template/contact.html.twig' with {'user': user, 'form': form } %}#}
+{#        {% endif %}#}
+    {% endif %}
+
+    {% if('livre-d-or' == app.request.attributes.get('_route')) %}
+        {% include 'front/base/' ~ directory ~'/template/temoignage.html.twig' with {'user': menu.user?? '', 'form': form } %}
+    {% endif %}
+    {% if('contact' == app.request.attributes.get('_route')) %}
+        {% include 'front/base/' ~ directory ~'/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}
+    {% endif %}
+    <section id="section_bottom" ></section>
+{% endblock content %}
+
+

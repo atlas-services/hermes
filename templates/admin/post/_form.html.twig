@@ -1,0 +1,40 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{% form_theme form.tags 'admin/form/theme_tags.html.twig' %}
+{{ form_start(form) }}
+    {% if form.section is not defined %}
+        <h4 id="{{ form.vars.value.section.template.name }}" class="text-success"> {{ 'section.template_show'|trans() }}
+            : {{ form.vars.value.section.template.name }}</h4>
+    {% endif %}
+    {{ form_row(form.active) }}
+    {% if form.position is defined %}
+        {{ form_row(form.position) }}
+    {% endif %}
+    {% if form.section is defined %}
+        {{ form_row(form.section) }}
+    {% endif %}
+    {% if form.imageFile is defined %}
+        {{ form_row(form.imageFile) }}
+    {% endif %}
+    {% if vich_uploader_asset(form.vars.data, 'imageFile') is not null %}
+        <tr>
+            <td><img  src="{{ asset(vich_uploader_asset(form.vars.data, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
+        </tr>
+    {% endif  %}
+    {{ form_row(form.name) }}
+    {{ form_row(form.content) }}
+    {% if form.section is not defined %}
+{#    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">#}
+{#        {% for tag in form.tags %}#}
+{#            <li class="list-unstyled btn btn-primary">#}
+{#                {{ form_row(tag.name) }}#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+    {% endif %}
+    {% if( app.request.attributes.get('_route') in ['post_new_section', 'post_edit']) %}
+        {{ form_row(form.saveAndAddPost) }}
+{#        {{ form_row(form.saveAndAddSectionPost) }}#}
+    {% endif %}
+    {{ form_row(form.save) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

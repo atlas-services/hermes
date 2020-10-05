@@ -1,0 +1,13 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.new_page'|trans() }}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1 class="text-success">{{ 'global.new_page'|trans()|raw }}</h1>
+
+    {{ include('admin/sheet/_form.html.twig') }}
+
+    <a href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>{{ 'config.label'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+        <th>{{ 'global.active'|trans() }}</th>
+        <th>{{ 'config.type'|trans() }}</th>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <th>{{ 'global.code'|trans() }}</th>
+        {% endif %}
+        <th>{{ 'global.summary'|trans() }}</th>
+        <th>{{ 'global.value'|trans() }}</th>
+        <th>{{ 'global.image'|trans() }}</th>
+        <th>{{ 'global.actions'|trans() }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for config in configs  %}
+                <tr>
+                    <td>{{ config.active ? 'global.active'|trans()|raw : 'global.inactive'|trans()|raw }}</td>
+                    <td>{{ config.type }}</td>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <td>{{ config.code }}</td>
+                    {% endif %}
+                    <td>{{ config.summary }}</td>
+                    <td>
+                        {% if 'color' in config.code  %}
+                            <span class="mt-0 mr-1" style="width:20px;height:10px;border:1px solid ;background-color:{{ config.value }}" >&nbsp; &nbsp; &nbsp; </span>
+                        {% endif %}
+                        {{ config.value }}
+                    </td>
+                    <td>
+                        {% if vich_uploader_asset(config, 'imageFile') is not null %}
+                        <img style="max-height: 100px;" src="{{ asset(vich_uploader_asset(config, 'imageFile')) }}" /></td>
+                    {% endif %}
+                    <td>
+                        <a href="{{ path('config_show', {'id': config.id}) }}">{{ 'action.show'|trans()|raw }}</a>
+                        <a href="{{ path('config_edit', {'id': config.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    </td>
+                </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('config_new') }}">{{ 'global.new'|trans() }}</a>
+    {% endif %}
+{% endblock %}

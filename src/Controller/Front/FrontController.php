@@ -1,0 +1,129 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: atlas
+ * Date: 06/09/19
+ * Time: 10:28
+ */
+
+namespace App\Controller\Front;
+
+use App\Entity\Contact;
+use App\Entity\Temoignage;
+use App\Form\ContactType;
+use App\Form\Admin\TemoignageType;
+use App\Mailer\Mailer;
+use App\Menu\Page;
+use App\Repository\TemoignageRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+
+class FrontController extends AbstractController
+{
+
+    /**
+     * @Route(
+     *     "/contact",
+     *     name="contact",
+     *     methods={"GET|POST"}
+     *     )
+     * @Route(
+     *     "/livre-d-or",
+     *     name="livre-d-or",
+     *     methods={"GET|POST"}
+     *     )
+     */
+    public function form(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
+    {
+        $route = $request->attributes->get('_route');
+        if ('livre-d-or' == $route) {
+            $array = $page->getActiveMenu('livre-d-or', 'livre-d-or', $route);
+            $entity = new Temoignage();
+            $form = $this->createForm(TemoignageType::class, $entity,
+                array(
+                    'action' => $this->generateUrl('livre-d-or'),
+                    'method' => 'POST',
+                ));
+            $entityManager = $this->getDoctrine()->getManager();
+            $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
+            $array['livredor'] = $livredor;
+        }
+        if ('contact' == $route) {
+            $array = $page->getActiveMenu('contact', 'contact',$route);
+            $entity = new Contact();
+            $form = $this->createForm(ContactType::class, $entity,
+                array(
+                    'action' => $this->generateUrl('contact'),
+                    'method' => 'POST',
+                ));
+        }
+
+        // On vérifie qu'elle est de type « POST ».
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                if ('livre-d-or' == $route) {
+                    $entityManager->persist($form->getData());
+                    $entityManager->flush();
+                }
+
+                // On récupère notre objet.
+                $entity = $form->getData();
+                $context = array_merge(['contact_form'=>$entity], $array );
+                $template = 'front/contact/_includes/email.html.twig';
+                $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $context);
+                $this->addFlash($return['type'], $return['message']);
+                $notification = $return['message'];
+                $this->addFlash('info', $notification);
+                return $this->redirect('/');
+//                return $this->redirectToRoute($route);
+            } else {
+                $notification = "Votre message n'a pas été envoyé.";
+                $this->addFlash('error', $notification);
+            }
+            $array['notification'] = $notification;
+        }
+        $array['form'] = $form->createView();
+
+        return $this->render('front/index.html.twig', $array);
+    }
+
+    /**
+     * @Route(
+     *     "/{sheet}/{slug}",
+     *     name="sheet",
+     *     methods={"GET|POST"}
+     *     )
+     * @Route(
+     *     "/{slug}",
+     *     name="slug",
+     *     methods={"GET|POST"}
+     *     )
+     */
+    public function page(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
+    {
+        $route = $request->attributes->get('_route');
+        if ('contact' == $sheet) {
+            return $this->redirectToRoute('contact');
+        }
+        if ('livre-d-or' == $sheet) {
+            return $this->redirectToRoute('livre-d-or');
+        }
+
+        if ('ACCUEIL' != strtoupper($sheet)) {
+            if (strtoupper($slug) == strtoupper($sheet)) {
+                return $this->redirectToRoute('slug', ['slug' => $slug]);
+            }
+        }
+        $array = $page->getActiveMenu($sheet, $slug,$route);
+
+        return $this->render('front/index.html.twig', $array);
+    }
+
+
+}

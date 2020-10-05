@@ -1,0 +1,14 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    {{ include('admin/post/_form.html.twig', {'button_label': 'global.update'|trans()}) }}
+
+    <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    {{ include('admin/post/_delete_form.html.twig') }}
+{% endblock %}

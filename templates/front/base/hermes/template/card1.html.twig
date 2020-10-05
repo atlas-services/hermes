@@ -1,0 +1,30 @@
+<!-- Section carousel -->
+<section id="{{ section.name }}" class="section_content">
+    {% if('previsualidation_sheet' == app.request.get('_route')) %}
+        {% set posts = section.getPrevisualisationPosts %}
+    {% else %}
+        {% set posts = section.posts %}
+    {% endif %}
+
+    <div class="col-lg-{{ content_container_width|col_lg() }} col-xs-12 mx-auto">
+        {% for key, post in posts|sort((a, b) => a.position <=> b.position) %}
+            {% if key is even %}
+                <div class="row col-lg-12 col-xs-12 mx-auto">
+                {% set margin = 'ml-lg-auto mr-lg-4 mt-lg-3' %}
+            {% else %}
+                {% set margin = 'mr-lg-auto ml-lg-4 mt-lg-3'  %}
+            {% endif %}
+                <div class="col-lg-5 col-xs-12 bg-white h-rounded-lg-1 p-5 {{ margin }} my-3 w-auto shadow-lg ">
+                    {{ post.content|raw }}
+                    {% if vich_uploader_asset(post, 'imageFile') is not null %}
+                        <a class="btn h-w-40 btn-outline-danger h-rounded-lg-4 pt-2" style="height: 40px; "
+                           href="{{ asset(vich_uploader_asset(post, 'imageFile')) }}"
+                           rel="noopener noreferrer" target="_blank">Télécharger</a>
+                    {% endif %}
+                </div>
+            {% if key is  odd %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>

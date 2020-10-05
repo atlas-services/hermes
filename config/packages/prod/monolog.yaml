@@ -1,0 +1,45 @@
+monolog:
+    channels: ['email', 'directoryNamer']
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%/prod.log"
+            level: debug
+            channels: ["!event", "!email", "!directoryNamer"]
+        email:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%/email.log"
+            level: debug
+            channels: ["email"]
+        directoryNamer:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%/directoryNamer.log"
+            level: debug
+            channels: ["directoryNamer"]
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine", "!console"]
+#monolog:
+#    handlers:
+#        main:
+#            type: fingers_crossed
+#            action_level: error
+#            handler: nested
+#            excluded_http_codes: [404, 405]
+#        nested:
+#            type: stream
+#            path: "%kernel.logs_dir%/%kernel.environment%.log"
+#            level: debug
+#        console:
+#            type: console
+#            process_psr_3_messages: false
+#            channels: ["!event", "!doctrine"]
+#        deprecation:
+#            type: stream
+#            path: "%kernel.logs_dir%/%kernel.environment%.deprecations.log"
+#        deprecation_filter:
+#            type: filter
+#            handler: deprecation
+#            max_level: info
+#            channels: ["php"]

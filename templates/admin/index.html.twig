@@ -1,0 +1,103 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block content %}
+    <section id="admin">
+        <p class="text-secondary lead">
+            {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
+        </p>
+        <p class="text-secondary lead">
+            {{ 'global.admin_presentation'|trans()|raw }}
+        </p>
+        <div class="mt-lg-3">
+            <h5 class="mt-lg-4 text-secondary lead">
+                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
+                          clip-rule="evenodd"/>
+                    <path fill-rule="evenodd"
+                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"
+                          clip-rule="evenodd"/>
+                </svg>
+                {{ 'global.new_libelle_sheet'|trans()|raw }} <br/>
+            </h5>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {% include '/admin/info/index.html.twig' %}
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('sheet_new') }}"> {{ 'global.new_rapid_sheet'|trans()|raw }}</a>
+                    </button>
+                </li>
+            </ul>
+            <h5 class="mt-lg-4 text-secondary lead">
+                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
+                          clip-rule="evenodd"/>
+                    <path fill-rule="evenodd"
+                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"
+                          clip-rule="evenodd"/>
+                </svg>
+                {{ 'global.update_libelle'|trans()|raw }}
+            </h5>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info" href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info" href="{{ path('section_index') }}"> {{ 'section.list'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a>
+                    </button>
+                </li>
+            </ul>
+            <h5 class="mt-lg-4 text-secondary lead">
+                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
+                          clip-rule="evenodd"/>
+                    <path fill-rule="evenodd"
+                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"
+                          clip-rule="evenodd"/>
+                </svg>
+                {{ 'global.config_site'|trans()|raw }}
+            </h5>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        <a class="text-info"
+                           href="{{ path('config_index', {'type': 'form'}) }}"> {{ 'config.affiche_list_formulaire'|trans()|raw }}</a>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+{% endblock content %}
+
+

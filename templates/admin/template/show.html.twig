@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<title>Template</title>
+
+{% block body %}
+    <h1>Template</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ template.id }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ template.active ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ template.code }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ template.name }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ template.summary }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('template_index') }}">back to list</a>
+
+    <a href="{{ path('template_edit', {'id': template.id}) }}">edit</a>
+
+    {{ include('admin/template/_delete_form.html.twig') }}
+{% endblock %}

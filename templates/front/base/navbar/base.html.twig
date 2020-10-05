@@ -1,0 +1,103 @@
+<nav style="max-width: 100%; background-color: {{ nav_bgcolor  }}" id="logo" class="center navbar navbar-expand-lg navbar-dark" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+    <div class="container-fluid justify-content-center">
+            {% set affiche_logo = false %}
+            <div class="navbar-header page-scroll">
+                <button  type="button" class="navbar-toggle navbar-toggler collapsed" style="background-color: transparent" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="fa fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
+                    <span class="close-icon py-1" style="color: {{ nav_header_color ?? 'transparent' }}">✖</span>
+                </button>
+            </div>
+            {% if('accueil' ==  app.request.attributes.get('sheet')|lower and 'accueil' ==  app.request.attributes.get('slug')|lower) %}
+                  {% if accueil.filename is defined %}
+                        {% if accueil.filename is not null %}
+                            {% set app_filter = '10' %}
+                            {% if accueil.value in 10..100 %}
+                                {% set app_filter = accueil.value %}
+                            {% endif %}
+                            <img class="flex-fill d-none  d-sm-block"  src="{{ asset(vich_uploader_asset(accueil, 'imageFile'))| imagine_filter('app_fixed_accueil_'~ app_filter)}}"  alt="{{ accueil.filename }}" class="app_accueil">
+                            <img class="flex-fill d-block d-sm-none" src="{{ asset(vich_uploader_asset(accueil, 'imageFile'))| imagine_filter('app_fixed_logo')}}"  alt="{{ accueil.filename }}" class="app_accueil">
+                        {% else %}
+                            {% set affiche_logo = true %}
+                        {% endif %}
+                {% else %}
+                    {{ accueil.value ?? "" }}
+                    {% set affiche_logo = true %}
+                {% endif %}
+            {% endif %}
+            {% if('accueil' !=  app.request.attributes.get('sheet')|lower or 'accueil' !=  app.request.attributes.get('slug')|lower  or affiche_logo == true ) %}
+                {% if logo.filename is defined %}
+                    {% if logo.filename is not null %}
+                        <a class="navbar-brand js-scroll-trigger ml-0 mr-0 " href="{{ path('sheet') }}">
+                            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="app_logo">
+                        </a>
+                    {% else %}
+                        <img src="../{{ asset('img/hermes.png') }}"  alt="{{ logo.filename }}" class="app_logo">
+                        {{ logo.value ?? "" }}
+                    {% endif %}
+                {% else %}
+                {{ logo.value ?? "" }}
+                {% endif %}
+            {% endif %}
+    </div>
+</nav>
+
+<nav style=" background-color:{{ nav_bgcolor }}; max-width: 100%" class="navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+    <div class="container border-0" style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+            <ul class="nav navbar-nav text-uppercase " style="background-color: {{ nav_menu_bgcolor }}">
+                {% for sheet_name, listmenu in nav %}
+                    {% set sheet_slug = sheetsSlug[sheet_name] %}
+                    {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
+                    {% set active = listmenu.config.active ?? '' %}
+                    {% set dropdown = listmenu.config.dropdown ?? '' %}
+                    {% set dropdowntoggle = listmenu.config.dropdowntoggle ?? '' %}
+                    {% set border_bottom = listmenu.config.border_bottom ?? '' %}
+                    {% if (sheet_slug == app.request.get('_route')) %}
+                        {% set active = 'active' %}
+                    {% endif %}
+                    {% if('active' == active) %}
+                        <li class="nav-item {{ active }} {{ dropdown }} "  style="background-color: {{ nav_bgcolor_active }};  "  >
+                        {% set colorlink =  nav_color_active  %}
+                    {% else %}
+                        <li class="nav-item {{ active }} {{ dropdown }} " >
+                        {% set colorlink =  nav_link_color  %}
+                    {% endif %}
+                        <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="nav-link js-scroll {{ dropdowntoggle }} " role="button"  data-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
+                           href={{ href }}>{{ sheet_name }}
+                        </a>
+                        {% if (listmenu.name is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
+                            <ul class="dropdown-menu "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
+{#                                {% if listmenu|length > 2 %}#}
+{#                                    {% set border_bottom = "border-bottom" %}#}
+{#                                {% endif %}#}
+{#                                {% for menu_name, menu in listmenu|sort((a, b) => a.position <=> b.position) %}#}
+                                {% for menu_name, menu in listmenu %}
+                                    {% if menu.slug is defined  %}
+                                        <li class="nav-item  mb-2 mr-2 {{ nav_link_border_bottom }}" >
+                                            <a style="color: {{ nav_link_color }}"  class="page-scroll pl-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% if('reveal' != directory) %}
+<div id="chevron_down_div" class="top right" style="top: {{ chevron_position ?? '0%' }};right: {{ chevron_right ?? '15px' }}" >
+    <h3 class="section-subheading text-right">
+        <a id ="chevron_down"  class="js-scroll-trigger" href="#section_bottom">
+            <i class="fa fa-chevron-{{ chevron ?? '' }}down fa-6" style="color: {{ chevron_color ?? '' }}; "></i>
+        </a>
+    </h3>
+</div>
+<div id="chevron_up_div" class="top"  style="top: {{ chevron_position ?? '0%' }};right: {{ chevron_right ?? '15px' }}; display:none" >
+    <h3 class="section-subheading text-muted">
+        <a id="chevron_up" class="js-scroll-trigger" href="#logo">
+            <i class="fa fa-chevron-{{ chevron ?? '' }}up fa-6" style="color: {{ chevron_color ?? '' }};"></i></a>
+    </h3>
+</div>
+{% endif %}

@@ -1,0 +1,17 @@
+<!-- Header -->
+<header id="{{ section.name ~ section.template.name }}" class="masthead" style="background-image: url({{vich_uploader_asset(menu, 'imageFile') }})">
+    <div class="container" style="max-width: {{ container_width }}">
+        {% for post in section.posts %}
+            <div class="intro-text">
+                <div class="intro-lead-in">{{ post.name }}</div>
+                {% if (services is defined ) %}
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#services">Services</a>
+                {% endif %}
+            </div>
+            {{ post.content|raw }}
+        {% endfor %}
+    </div>
+</header>
+
+
+

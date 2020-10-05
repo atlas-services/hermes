@@ -1,0 +1,24 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% set config_favicon = favicon ?? logo  %}
+    {% if(config_favicon.filename is null) %}
+        {% set favicon = asset('favicon.ico')  %}
+    {% else %}
+        {% set favicon = asset(vich_uploader_asset(config_favicon, 'imageFile'))   %}
+    {% endif %}
+
+    <link rel="icon" href="{{ favicon}}" />
+
+    <title>{{ title.name ?? ''}}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('hermes_nav_'~ nav_bar) }}
+        {{ encore_entry_link_tags('hermes_front') }}
+        <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
+    {% endblock %}
+
+</head>

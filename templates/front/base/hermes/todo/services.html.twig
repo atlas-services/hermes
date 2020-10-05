@@ -1,0 +1,26 @@
+<!-- Services -->
+<section id="{{ section.name ~ section.template.name }}"  class="page-section" style="background: url({{ vich_uploader_asset(menu, 'imageFile') }}) no-repeat center center ;background-size: cover;">
+    <div class="container" style="max-width: {{ container_width }}">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">{{ section.name }}</h2>
+                <h3 class="section-subheading text-muted">{{ section.summary }}</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            {% for post in section.posts %}
+                <div class="col-md-{{ section.posts|list_length }}">
+                    <span class="fa-stack fa-{{ section.posts|list_length }}x">
+                    <i class="fas fa-stack-2x text-primary"></i>
+                    <i class="fas fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="post-heading">{{ post.name }}</h4>
+{#                    <p class="text-muted">{{ post.summary }}</p>#}
+                    <img src="{{ asset(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.name }}" class="col-md-{{ section.posts|list_length+6 }}" >
+                </div>
+                {{ post.content|raw }}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+

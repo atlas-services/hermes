@@ -1,0 +1,168 @@
+# See dos how to configure the bundle: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
+liip_imagine:
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    driver: "gd"
+    resolvers:
+        default:
+            web_path:
+                cache_prefix: '%env(APP_PATH_CACHE_IMAGES)%'
+
+    filter_sets:
+        cache: ~
+        app_fixed_flag:
+            filters:
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 20px
+                    height: 13px
+        app_fixed_flag_selected:
+            filters:
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 30px
+                    height: 20px
+        app_fixed_logo:
+            filters:
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 150px
+                    height: 100px
+        app_fixed_carre:
+            filters:
+                fixed:
+                    # set the fixed size to "150x150" pixels
+                    width: 150px
+                    height: 150px
+        app_fixed_accueil_100:
+            filters:
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 1000px
+                    height: 500px
+        app_fixed_accueil_90:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 450px
+        app_fixed_accueil_80:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 400px
+        app_fixed_accueil_70:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 350px
+        app_fixed_accueil_60:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 300px
+        app_fixed_accueil_50:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 250px
+        app_fixed_accueil_40:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 200px
+        app_fixed_accueil_30:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 150px
+        app_fixed_accueil_20:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 100px
+        app_fixed_accueil_10:
+            filters:
+                fixed:
+                    width: 1000px
+                    height: 50px
+        # the name of the "filter set"
+        app_thumb:
+
+            # adjust the image quality to 75%
+            quality: 75
+
+            # list of transformations to apply (the "filters")
+            filters:
+
+                # create a thumbnail: set size to 180x110 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail: { size: [180, 110], mode: outbound }
+
+                # create a 2px black border: center the thumbnail on a black background
+                # 4px larger to create a 2px border around the final image
+                background: { size: [184, 114], position: center, color: '#000000' }
+
+        # the name of the "filter set"
+        app_fixed_isotope_filter:
+            # adjust the image quality to 75%
+            quality: 90
+            # list of transformations to apply (the "filters")
+            filters:
+                # create a thumbnail: set size to 180x110 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail: { size: [160, 90], mode: outbound }
+                # create a 2px black border: center the thumbnail on a black background
+                # 4px larger to create a 2px border around the final image
+#                background: { size: [184, 114], position: center, color: '#aaaaaa' }
+
+        # name our filter set "my_fixed_filter"
+        app_fixed_folio_filter:
+            filters:
+                # use and setup the "fixed" filter
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 120
+                    height: 90
+        app_fixed_folio_modale_filter:
+            filters:
+                # use and setup the "scale" filter
+                scale:
+                    # input 1200x1600px -> output 750x1000px (relative down-scale)
+                    dim: [ 1000, 1200 ]
+        app_fixed_carousel_filter:
+            filters:
+                # use and setup the "fixed" filter
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 1200
+                    height: 750
+        # name our filter set "my_watermark_filter"
+        app_watermark_filter:
+            filters:
+
+                # use and setup the "watermark" filter
+                watermark_image:
+
+                    # path to the watermark file (prepended with "%kernel.root_dir%")
+                    image: img/Logoatlas.jpg
+
+                    # size of the water mark relative to the input image
+                    size: 100.5
+
+                    # set the position of the watermark
+                    position: center
+        relative_resize_1:
+            filters:
+                relative_resize:
+                    heighten: 60
+        relative_resize_2:
+            filters:
+                relative_resize:
+                    widen: 32
+        relative_resize_3:
+            filters:
+                relative_resize:
+                    increase: 10
+        relative_resize_4:
+            filters:
+                relative_resize:
+                    scale: 2.5

@@ -1,0 +1,54 @@
+<!-- Site footer -->
+{% set site = app.request.getSchemeAndHttpHost() %}
+<footer class="site-footer"
+        style="max-width: {{ footer_container_width ?? '100%' }}; background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
+    <div class="container">
+        <div class="row">
+            {% if footer_about is defined %}
+            <div class="col-sm-12 col-md-12">
+                <h6 style="color: {{ footer_color ?? '#ffffff' }}">{{ 'global.about'|trans() }}</h6>
+                <p class="text-justify">{{ footer_about ?? '' }}</p>
+            </div>
+            {% endif %}
+
+{#            <div class="col-xs-12 col-md-3">#}
+{#                <h6  style="color: {{ footer_color ?? '#ffffff' }}">Categories</h6>#}
+{#                <ul class="footer-links">#}
+{#                    <li  style="color: {{ footer_color ?? '#ffffff' }}"><a href="http://scanfcode.com/category/c-language/">C</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p>Copyright &copy; {{ 'global.copyright'|trans() }} {{ site }}
+                </p>
+                <p>{{ 'global.created_by'|trans()|raw }}</p>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    {% if instagram is not null %}
+                        <li><a  href="{{ instagram }}" target="_blanks"><i class="fa fa-instagram"></i></a></li>
+                    {% endif %}
+                    {% if facebook is not null %}
+                        <li><a href="{{ facebook }}" target="_blanks"><i class="fa fa-facebook"></i></a></li>
+                    {% endif %}
+                    {% if twitter is not null %}
+                        <li><a href="{{ twitter }}" target="_blanks"><i class="fa fa-twitter"></i></a></li>
+                    {% endif %}
+                    {% if linkedin is not null %}
+                        <li><a  href="{{ linkedin }}" target="_blanks"><i class="fa fa-linkedin"></i></a></li>
+                    {% endif %}
+                    {% if instagram is not null %}
+                        <li><a href="{{ youtube }}" target="_blanks"><i class="fa fa-youtube"></i></a></li>
+                    {% endif %}
+                    {% if dribbble is not null %}
+                        <li><a  href="{{ dribbble }}" target="_blanks"><i class="fa fa-dribbble"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

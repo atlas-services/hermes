@@ -1,0 +1,81 @@
+<button type="button" class="btn btn-info btn-lg">
+<a type="button" class="portfolio-link text-info" data-toggle="modal" href="#infoModal">
+    <h6>{{ 'global.info'|trans()|raw }}</h6>
+</a>
+</button>
+<div class="portfolio-modal modal fade" id="infoModal" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+
+                    </div>
+                </div>
+            </div>
+            <h3><i class="fa fa-info-circle"></i> {{ 'global.info'|trans()|raw }}</h3>
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <a class="btn btn-info" data-toggle="collapse" href="#collapseTexte" role="button" aria-expanded="false" aria-controls="collapseTexte">
+                                {{ 'global.new_rapid_sheet'|trans()|raw }}
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTexte" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            {% include '/admin/info/base/sheet.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <a class="btn btn-info" data-toggle="collapse" href="#collapseVideo" role="button" aria-expanded="true" aria-controls="collapseVideo">
+                                <i class="fa fa-save"> </i><i class="fa fa-plus"></i> {{ 'sheet.update_next'|trans()|raw}}
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseVideo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body"> {% include '/admin/info/base/sheet_menu.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row center">
+                <button class="btn btn-info" data-dismiss="modal" type="button">
+                    <i class="fas fa-times"></i>
+                    {{ 'general.close'|trans() }}
+                </button>
+                <!-- Button trigger modal -->
+                <input id="copyinfo" type="hidden" class="btn btn-info" data-toggle="modal" data-target="#copyModal" />
+{#                        {{ 'global.copy_done'|trans()|raw }}#}
+{#                </input>#}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="copyModal" tabindex="-1" role="dialog" aria-labelledby="copyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="copyModalLabel">{{ 'global.copy_done'|trans()|raw }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-success">{{ 'global.copy_texte'|trans()|raw }}</p>
+            </div>
+            <div class="modal-footer center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'general.close'|trans() }}</button>
+            </div>
+        </div>
+    </div>
+</div>

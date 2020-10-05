@@ -1,0 +1,47 @@
+{% if menus['contact'] is defined %}
+    {% if menus['contact'] is not null %}
+        {% set background_image =  vich_uploader_asset(menus['contact'], 'imageFile')   %}
+        {% set background_image_style =  "no-repeat center center ;background-size: cover ;"   %}
+    {% endif %}
+{% endif %}
+{#    {% endif %}#}
+    {% if menu is defined %}
+        {% if menu is not null %}
+            {% if vich_uploader_asset(menu, 'imageFile') is not null %}
+                {% set background_image = asset(vich_uploader_asset(menu, 'imageFile'))  %}
+                {% set background_image_style =  "no-repeat center center ;background-size: cover ;"   %}
+                {% set url ='"' ~  background_image ~ '"' %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+{% if background_image is defined %}
+{% if background_image is null %}
+    {% set background_image = vich_uploader_asset(bgcolor, 'imageFile')   %}
+    {% set background_image_style =  "no-repeat center center ;background-size: cover ;"   %}
+{% endif %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    {% block head %}
+        {% include 'front/base/'~ directory ~'/head.html.twig' %}
+    {% endblock head %}
+    <body style="background: url({{ url ?? '' }}) no-repeat center center ;background-size: cover; background-color: {{ bgcolor.value ?? 'white' }}">
+        {% block body %}
+            {% block nav %}
+                {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
+            {% endblock nav %}
+            <div class="content">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock body %}
+        {% block footer %}
+            {% include 'front/base/footer.html.twig' %}
+        {% endblock footer %}
+        {% block javascript %}
+            {% include 'front/base/'~ directory ~'/javascript.html.twig' %}
+        {% endblock javascript %}
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!-- Modale -->
+{% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+    <div class="portfolio-modal modal fade" id="portfolioModal{{ post.id }}" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content col-lg-8 col-xs-12 mx-auto" style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr"  style="background-color: {{ modale_color }}">
+                        <div class="rl" style="background-color: {{ modale_color }}"></div>
+                    </div>
+                </div>
+                <div class="hermes_center" col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12 mx-auto">
+                            <div class="row hermes_center modal-body col-xs-12">
+                                <!-- Project Details Go Here -->
+                                <h3 class=" text-center" >{{ post.name }}</h3>
+                                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                                    <img class="img  col-xs-12 col-sm-12 col-lg-12"
+                                         src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                         alt="{{ post.name }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {{ post.content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,11 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{{ form_start(form) }}
+    {% if( app.request.attributes.get('_route') not in ['sheet_new']) %}
+        {{ form_row(form.active) }}
+        {{ form_row(form.position) }}
+    {% endif %}
+    {{ form_row(form.name) }}
+    {{ form_row(form.saveAndAdd) }}
+    {{ form_row(form.save) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

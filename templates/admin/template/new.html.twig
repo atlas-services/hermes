@@ -1,0 +1,11 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.template'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>Create new Template</h1>
+
+    {{ include('admin/template/_form.html.twig') }}
+
+    <a href="{{ path('template_index') }}">back to list</a>
+{% endblock %}

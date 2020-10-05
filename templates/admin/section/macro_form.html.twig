@@ -1,0 +1,44 @@
+{% macro section_form(form, is_section = true) %}
+    {% form_theme form 'admin/form/theme_posts.html.twig' %}
+    {% form_theme form.posts 'admin/form/theme_posts.html.twig' %}
+    {{ form_start(form) }}
+    {% if is_section  == true %}
+    {% endif %}
+    {{ form_row(form.template) }}
+    <div class="row post-wrapper"
+         data-prototype="{{ form_widget(form.posts.vars.prototype)|e('html_attr') }}"
+         data-index="{{ form.posts|length }}">
+
+        {{ form_errors(form.posts) }}
+        {% for post in form.posts %}
+            <button class="btn btn-primary ml-3" type="button" data-toggle="collapse"
+                    data-target="#post{{ post.vars.value.id }}" aria-expanded="false"
+                    aria-controls="post{{ post.vars.value.id }}">
+                {{ post.vars.value.name ?? 'global.new_rapid_post'|trans()|raw }}
+            </button>
+        {% endfor %}
+        <hr/>
+        <div class="row post-wrapper">
+            {% for post in form.posts %}
+                <div class="collapse" id="post{{ post.vars.value.id }}">
+                    <div class="col-xs-4 post-item">
+                        <br>
+                        <a href="#" class="remove-post pull-right">
+                            <span class="fa fa-close">{{ 'global.delete'|trans()|raw }}</span>
+                        </a>
+                        <br>
+                        <br>
+                        {{ form_errors(post) }}
+                        {{ form_row(post) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if is_section  == true %}
+        {{ form_row(form.saveAndAdd) }}
+        {{ form_row(form.save) }}
+        {{ form_widget(form._token) }}
+    {% endif %}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endmacro %}

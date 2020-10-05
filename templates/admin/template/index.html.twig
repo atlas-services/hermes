@@ -1,0 +1,40 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'sheet.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>Template index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Active</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Summary</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for template in templates %}
+            <tr>
+                <td>{{ template.id }}</td>
+                <td>{{ template.active ? 'Yes' : 'No' }}</td>
+                <td>{{ template.code }}</td>
+                <td>{{ template.name }}</td>
+                <td>{{ template.summary }}</td>
+                <td>
+                    <a href="{{ path('template_edit', {'id': template.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('template_new') }}">Create new</a>
+{% endblock %}

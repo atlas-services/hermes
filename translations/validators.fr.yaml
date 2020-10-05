@@ -1,0 +1,25 @@
+# Messages
+#Admin
+error_message:
+  name: Saisissez un nom.
+  post:
+    name: Saisissez un nom pour ce contenu.
+    content: Saisissez un contenu.
+    too_short_content: La longueur du texte doit être suprieure à {{ limit }}.
+  menu:
+    name: Saisissez un nom pour ce menu.
+  sheet:
+    name: Saisissez un nom pour cette page.
+
+sheet:
+  exists: Ce nom existe déja dans la barre de menu.
+menu:
+  exists: Ce nom de menu existe déja dans la barre de menu.
+post:
+  exists: Ce nom de contenu existe déja dans ce menu.
+#Front
+content:
+  blank_content: Saisie obligatoire
+  too_short_content: La longueur du texte doit être suprieure à {{ limit }}.
+  error_phone: Merci de saisir votre numéro de téléphone
+

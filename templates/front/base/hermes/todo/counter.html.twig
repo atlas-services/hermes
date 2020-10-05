@@ -1,0 +1,26 @@
+<!-- counter -->
+<section id="{{ section.name ~ section.template.name }}" class="ftco-section ftco-counter img" id="section-counter"
+         style="background: url({{ vich_uploader_asset(menu, 'imageFile') }}) no-repeat center center ;background-size: cover;"
+         data-stellar-background-ratio="0.5">
+    <div class="container" style="max-width: {{ container_width }}">
+        {% for  post in  section.posts %}
+            <div class="row d-md-flex align-items-center justify-content-end">
+                <div class="col-lg-10">
+                    <div class="row d-md-flex align-items-center">
+                        <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="18">{{ post.name }}</strong>
+{#                                    <span>{{ post.summary }}</span>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ post.content|raw }}
+        {% endfor %}
+    </div>
+</section>
+
+

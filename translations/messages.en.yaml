@@ -1,0 +1,256 @@
+#########################
+###### Admin ############
+#########################
+User: Utilisateur
+Menu: Menu
+Sheet: Page
+Template: Choisir le Bloc de Content
+Post: Content
+Config: Configuration
+Readme: Readme
+
+form:
+  label:
+    delete: Supprimer
+
+global:
+  copyright: 2016 All Rights Reserved by
+  created_by: This site has been powered by the CMS<a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
+  about: A propos
+  hello: Hello
+  admin: Admin
+  dashboard: My Dashboard
+  breadcrumb: 'Vous êtes ici : '
+  new_content: Nouveau Content
+  new_menu: Nouveau menu
+  active: Actif
+  inactive: Inactif
+  admin_presentation: In order to enrich your site, here are the different links that will allow you to
+    create pages quickly, then manage more finely the menus, submenus and content that you have created.
+  new_rapid_post: Nouveau Content
+  new_rapid_sheet: <i class="fa fa-plus"></i> New pages
+  new_page: Menus
+  new_post: Nouveau Content dans le menu
+  new_menu_post: Ajout d'un menu avec un Content
+  add_menu_post: Ajouter un Content
+  menu_entete: Menus
+  actions: Actions
+  show: Voir
+  preview: <i class="fa fa-eye" aria-hidden="true"></i>
+  edit: <i class="fa fa-edit"></i>
+  new: Créer
+  new_libelle_sheet: To start, consult the heading "Info - Help" which will guide you to create new pages.
+  new_libelle_post: Puis, créer vos Contents (en les rattachant bien à un élément du menu)
+  delete: <i class="fa fa-trash"></i>
+  back_to_list: <i class="fa fa-angle-double-left"></i> Back to the list
+  confirm_delete: Êtes vous certain de vouloir supprimer cet item?
+  update: Sauvegarder
+  update_next: Sauvegarder et Continuer
+  update_libelle: Update your site (your content, menus and sub menus)
+  config_site: Configure your Web site (contact email, logo, background image, background color ...)
+  more: "Aller plus loin : Modifier l''agencement des menus, des pages, désactiver (ou activer) certaines pages..."
+  sheet: Menu
+  section: Section
+  post: Content
+  menu: Sous Menu
+  template: Affichage
+  position: Position
+  label: Label
+  code: Code
+  name: Nom
+  image: Image (Taille maximale < 2 Mo)
+  image_fond: Image de fond (Taille maximale < 2 Mo)
+  value: Valeur
+  summary: Description sommaire
+  content: Content
+  updatedAt: Mis à jour le
+  publishedAt: Publié le
+  users: Utilisateurs
+  user: Utilisateur
+  gestion: Gestion du Content
+  firstname: Prénom
+  lastname: Nom
+  email: Email
+  phone: Téléphone
+  no_record: Aucun enregitrement
+  #  exemple_libre: <i class="fa fa-question-circle"></i> Exemples de Content -- à copier <i class="fa fa-question-circle"></i>
+  exemple_libre: <i class="fa fa-info-circle"></i> Exemples de Content -- à copier <i class="fa fa-info-circle"></i>
+  info: Info - Help
+  fa_info_couleur: <i class="fa fa-info-circle"></i> Cliquez ici pour sélectionner un code couleur (copier la valeur de "Nom de la couleur")
+  copy: <i class="fas fa-copy"></i>
+  copy_done: Copie effectuée!
+  copy_texte: Vous pouvez désormais coller le texte copié en effectuant un "Ctrl v" dans la champ Content.
+  copy_html: Vous pouvez désormais coller le code html copié en effectuant un "Ctrl v" dans le champ Content.
+  all: Tout
+  sort:
+    title: Trier par
+    original: Tri original
+    name: Nom
+    year: Année
+    category: Catégorie
+
+action:
+  edit: <i class="fa fa-edit"></i>
+  add: <i class="fa fa-plus-circle"></i>
+  delete: <i class="fa fa-trash"></i>
+  show: <i class="fa fa-show"></i>
+
+
+
+readme:
+  label: Readme
+  list: Readme
+
+config:
+  label: Configuration
+  value: Valeur
+  list: Configuration
+  list_image: Configuration des images
+  affiche_list: General Web site configuration
+  affiche_list_menu: Configuration du menu
+  affiche_list_content: Configuration du Content
+  affiche_list_footer: Configuration du pied de page
+  affiche_list_formulaire: Configuration des formulaires
+  affiche_list_isotope: Configuration isotope
+
+temoignage:
+  affiche_list: Livre d'or
+  list: Liste des témoignages
+
+template:
+  list: Liste des templates
+  label: Templates
+  sheet: Page du template
+  sections: Sections du template
+  user: Créateur du template
+  code: Code du template
+  name: Bloc de Content
+
+# User
+user:
+  label: Utilisateur
+  firstname: Prénom
+  lastname: Nom
+  email: Email
+  roles: Roles
+  username: Username
+  password: Password
+  forgot_password: Mot de passe oublié
+  send_email: Envoyer
+  sign_in: Sign in
+  identification: Sign in
+  edit: User
+  logout: Logout
+
+# Sheet
+sheet:
+  update_next: Ajouter un Content
+  list: Menus
+  list_form: Menu's forms
+  affiche_list: Menus
+  edit: Modifier le menu
+  add: Créer un élément dans le menu
+  show: Menus
+  label: Menu
+  name: Menu
+  posts: Content
+  image: Image de fond de la page (Taille maximale < 2 Mo)
+  images: Images de la page (Taille maximale < 2 Mo)
+
+menu:
+  update_next: Add a content avec le même affichage
+  update_next_different: Add a content avec un affichage différent
+  affiche_list: Sub menus
+  list: Sub menus
+  edit: Modifier le menu
+  add: Créer un menu
+  show: Menu
+  add_section: Ajouter une section
+  label: Sub menus
+  sheet: Page du menu
+  sections: Sections du menu
+  user: Utilisateur du menu
+  image: Image du menu (Taille maximale < 2 Mo)
+  name: Sous Menu
+  slug: Slug du menu
+  front: Atlas
+  home: Accueil
+  about: À propos
+  project: Projet
+  services: Services
+  team: Équipe
+  blog: Blog
+  contact: Contact
+# Tag
+tag:
+  list: Liste des tags
+  translations: Langues
+  label: Tags
+  name: Tag
+
+# Image
+image:
+  list: Liste des images
+  label: Images
+  name: Nom de l'image
+  description: Description de l'image
+  image: Image
+  sheet: Page
+
+# Post
+post:
+  list: Contents
+  affiche_list: Contents
+  edit: Modifier le Content
+  add: Créer un Content
+  label: Contents
+  sheet: Page du Content
+  section: Section du Content
+  tags: Tags
+  user: Créateur du Content
+  name: Content
+  content: Content
+  image: Image du Content (Taille maximale < 2 Mo)
+
+# Section
+section:
+  list: Pages
+  affiche_list: Page
+  edit: Update menu
+  add: Create a section
+  posts: Contents
+  label: Sections
+  template_show: Bloc of contents
+  template: Choose the Bloc of content
+  name: Section
+  menu: Menu
+  add_post: Add a content
+##########################
+###### Front  ############
+##########################
+
+##########################
+###### Général  ############
+##########################
+
+general:
+  open: Ouvrir
+  decouvrir: A découvrir
+  close: Close
+  reset: Votre mail a été ré-initialisé
+
+######### Titre page ############
+formulaire:
+  contact: Contact
+  texte: Pour des informations supplémentaires
+  titre: Formulaire de Contact
+  name: Nom
+  name_placeholder: Votre Nom
+  email: Email
+  email_placeholder: Votre Email
+  phone: Téléphone
+  phone_placehoder: Numéro de téléphone
+  message: Message
+  message_placeholder: Votre message
+  send: Envoyer
+

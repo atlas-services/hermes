@@ -1,0 +1,53 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'menu.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>{{ 'menu.list'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+                <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.sheet'|trans() }}</th>
+                <th>{{ 'global.name'|trans() }}</th>
+                <th>{{ 'global.position'|trans() }}</th>
+                <th>{{ 'global.image_fond'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for menu in menus|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.sheet.name <=> b.sheet.name) %}
+            <tr>
+                <td>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="menu-active custom-control-input" id="{{ menu.id }}"  {{ menu.isActive ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ menu.id }}"></label>
+                    </div>
+                </td>
+                <td>{{ menu.sheet }}</td>
+                <td>{{ menu.name }}</td>
+                <td>{{ menu.position }}</td>
+                {% if vich_uploader_asset(menu, 'imageFile') is not null %}
+                    <td>
+                        <img  src="{{ asset(vich_uploader_asset(menu, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
+                    </td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                <td>
+                    {% if menu.sheet.slug is not null %}
+                    <a id="{{ menu.name }}-edit" href="{{ path('menu_edit', {'sheet': menu.sheet.slug ,'menu': menu.slug }) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    {% endif %}
+                    <a  id="{{ menu.name }}-add" href="{{ path('section_post_new_menu', {'menu': menu.slug }) }}">{{ 'action.add'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">{{ 'global.no_record'|trans() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a id="menu-add" href="{{ path('menu_section_post_new_sheet', {'sheet': 'nouvelle'}) }}">{{ 'global.new_rapid_post'|trans() }}</a>
+{% endblock %}

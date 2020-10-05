@@ -1,0 +1,57 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'post.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>{{ 'post.list'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.sheet'|trans() }}</th>
+                <th>{{ 'global.menu'|trans() }}</th>
+                <th>{{ 'global.template'|trans() }}</th>
+                <th>{{ 'global.position'|trans() }}</th>
+                <th>{{ 'global.name'|trans() }}</th>
+                <th>{{ 'global.publishedAt'|trans() }}</th>
+                <th>{{ 'global.updatedAt'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.section.menu.name <=> b.section.menu.name) |sort((a, b) =>a.section.menu.sheet.name <=> b.section.menu.sheet.name)  %}
+{#        {% for post in posts|sort((a, b) => a.position <=> b.position)  %}#}
+            <tr>
+                <td>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="post-active custom-control-input" id="{{ post.id }}"  {{ post.isActive ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ post.id }}"></label>
+                    </div>
+                </td>
+                <td>{{ post.section.menu.sheet ?? '' }}</td>
+                <td>{{ post.section.menu ?? '' }}</td>
+                <td>{{ post.section.template.name ?? '' }}</td>
+                <td>{{ post.position }}</td>
+                <td>{{ post.name }}</td>
+                <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    {% set sheet_slug = post.section.menu.sheet.slug ?? null %}
+                    {% set menu_slug = post.section.menu.slug ?? null %}
+                    {% if (sheet_slug is not null and menu_slug is not null)  %}
+                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': sheet_slug, 'slug': menu_slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a id="post-add" href="{{ path('menu_section_post_new_sheet', {'sheet':'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
+{% endblock %}

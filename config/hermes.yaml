@@ -1,0 +1,214 @@
+parameters:
+  version: v1.0.0
+  app.locales: [fr, en] #'%env(APP_LOCALES)%'
+  hermes_pages: '%env(APP_PAGES)%'
+  hermes_list_templates: '%env(APP_LIST_TEMPLATES)%'
+  hermes_list_type_image: '%env(APP_LIST_TYPE_IMAGE)%'
+  hermes_database_dir: '%env(DATABASE_URL)%'
+  hermes_path_content_image: '%env(APP_PATH_CONTENT_IMAGES)%'
+  hermes_path_content_image_post: '%env(APP_PATH_CONTENT_IMAGES_POSTS)%'
+  hermes_path_cache_image: '%env(APP_PATH_CACHE_IMAGES)%'
+#      hermes: hermes
+#      reveal: reveal
+  init:
+    user:
+      super_admin:
+        firstname: Hermes
+        lastname: Hermes
+        email: hermes@atlas-services.fr
+        password: hermeshermes
+        roles:
+          ROLE_SUPER_ADMIN
+      admin:
+        firstname: Firstname
+        lastname: Lastname
+        email: firstname.lastname@yopmail.com
+        password: firstname
+        roles:
+          ROLE_ADMIN
+    template:
+      libre:
+        summary: Template libre
+        code: libre
+        name: libre
+      libre_code:
+        summary: Template libre et affichage du code
+        code: libre_code
+        name: libre avec code
+      carousel1:
+        summary: Présentation carousel slide avec madale
+        code: carousel1
+        name: Carousel slide avec modale
+      carousel2:
+        summary: Présentation carousel fade avec modale
+        code: carousel2
+        name: Carousel fade avec modale
+      folio1:
+        summary: Folio classique avec modale
+        code: folio1
+        name: Folio classique avec modale slide
+      folio2:
+        summary: Folio effet survol (+) avec modale
+        code: folio2
+        name: Folio effet survol (+) avec modale
+      folio3:
+        summary: Folio gallery avec modale
+        code: folio3
+        name:  Folio gallery avec modale
+      folio4:
+        summary: Folio serré avec modale
+        code: folio4
+        name:  Folio serré avec modale
+      folio5:
+        summary: Folio serré sans modale
+        code: folio5
+        name:  Folio serré sans modale
+      card1:
+        summary: Cartes affichée par 2 avec fichier à télécharger
+        code: card1
+        name: Cartes avec pdf à télécharger
+    config:
+      site:
+        directory:
+          summary: Choix du template général d'affichage (agency ou merlin)
+          value: hermes
+        title:
+          summary: Texte affiché sur l'onglet du navigateur web
+          value: c-hermes
+        favicon:
+          summary: favicon
+          value: ~
+          image: ~
+        logo:
+          summary: logo
+          value: ~
+          image: ~
+        accueil:
+          summary: image d'accueil du site
+          value: ~
+          image: ~
+        bgcolor:
+          summary: Couleur de fond par défaut
+          value: '#ffffff'
+        container_width:
+          summary: Largeur du contenu affiché (en %)
+          value: '100%'
+        chevron:
+          summary: Style chevron
+          value: ~
+        chevron_position:
+          summary: Position verticale du chevron
+          value: '95%'
+        chevron_right:
+          summary: Position latérale du chevron
+          value: ~
+        chevron_color:
+          summary: Couleur du chevron
+          value: '#000000'
+        chevron_bgcolor:
+          summary: Couleur de fond du chevron
+          value: '#ffffff'
+      network:
+        linkedin:
+          summary: configuration linkedin
+          value: ~
+        facebook:
+          summary: configuration facebook
+          value: ~
+        twitter:
+          summary: configuration twitter
+          value: ~
+        instagram:
+          summary: configuration instagram
+          value: ~
+        youtube:
+          summary: configuration youtube
+          value: ~
+        dribbble:
+          summary: configuration dribbble
+          value: ~
+      contact:
+        contact:
+          summary: Email de contact (utilisé dans le formulaire de contact)
+          value: hermes@atlas-services.fr
+        contact_user:
+          summary: contact (utilisé dans le formulaire de contact)
+          value: ~
+        contact_presentation:
+          summary: présentation contact (utilisé dans le formulaire de contact)
+          value: ~
+      nav:
+        nav_bar:
+          summary: selection de la barre de menu
+          value: base
+        nav_li_bgcolor:
+          summary: Couleur de fond des éléments du sous menu
+          value: '#888888'
+        nav_bgcolor:
+          summary: Couleur de fond du menu
+          value: '#888888'
+        nav_bgcolor_shrink:
+          summary: Couleur de fond de la barre de menu après scroll
+          value: '#aaaaaa'
+        nav_bgcolor_active:
+          summary: Couleur de fond du menu sélectionné
+          value: 'transparent'
+        nav_color_active:
+          summary: Couleur du menu sélectionné
+          value: '#444444'
+        nav_link_color:
+          summary: Couleur des liens de la barre de menu
+          value: '#ffffff'
+        nav_link_border_bottom:
+          summary: Séparation des liens de la barre de menu
+          value: ~
+        nav_menu_bgcolor:
+          summary: Couleur de fond de la barre de menu
+          value: '#888888'
+        nav_header_bgcolor:
+          summary: Couleur de fond du header (barres du bouton responsive)
+          value: 'transparent'
+        nav_header_color:
+          summary: Couleur du header (barres du bouton responsive)
+          value: '#000000'
+        nav_container_width:
+          summary: Largeur du menu (en %)
+          value: '100%'
+      content:
+        content_bgcolor:
+          summary: Couleur de fond du contenu
+          value: '#ffffff'
+        content_container_width:
+          summary: Largeur du contenu affiché (en %)
+          value: '60%'
+      carousel:
+        carousel_container_width:
+          summary: Largeur du carousel affiché (en %)
+          value: '60%'
+      modale:
+        modale_bgcolor:
+          summary: Couleur de fond des modales
+          value: '#000000'
+        modale_color:
+          summary: Couleur des modales et du bouton
+          value: '#ffffff'
+        modale_container_width:
+          summary: Largeur du modales affiché (en %)
+          value: '80%'
+      footer:
+        footer_bgcolor:
+          summary: Couleur de fond du footer
+          value: '#ffffff'
+        footer_color:
+          summary: Couleur du texte du footer
+          value: '#000000'
+        footer_container_width:
+          summary: Largeur du footer (en %)
+          value: '100%'
+        footer_about:
+          summary: texte du footer about
+          value: ~
+      form:
+        form:
+          summary: Formulaires
+          value: contact

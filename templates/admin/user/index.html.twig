@@ -1,0 +1,35 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'menu.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>{{ 'user.list'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+                <th>{{ 'global.firstname'|trans() }}</th>
+                <th>{{ 'global.lastname'|trans() }}</th>
+                <th>{{ 'global.email'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">{{ 'action.show'|trans() }}</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('user_new') }}">{{ 'global.new'|trans() }}</a>
+{% endblock %}

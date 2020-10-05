@@ -1,0 +1,13 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.new_user'|trans() }}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>{{ 'global.new_user'|trans() }}</h1>
+
+    {{ include('admin/user/_form.html.twig') }}
+
+    <a href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    </div>
+{% endblock %}

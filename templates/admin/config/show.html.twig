@@ -1,0 +1,29 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.show'|trans() }}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>{{ 'global.show'|trans() }} {{ config.value }}</h1>
+
+    <table class="table">
+        <tbody>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <tr>
+                <th>{{ 'global.code'|trans() }}</th>
+                <td>{{ config.code }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>{{ 'global.value'|trans() }}</th>
+                <td>{{ config.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    <a href="{{ path('config_edit', {'id': config.id}) }}">edit</a>
+
+    {{ include('admin/config/_delete_form.html.twig') }}
+{% endblock %}

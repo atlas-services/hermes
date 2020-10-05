@@ -1,0 +1,40 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'menu.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>{{ 'temoignage.list'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+                <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.position'|trans() }}</th>
+                <th>{{ 'global.name'|trans() }}</th>
+                <th>{{ 'global.content'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for temoignage in temoignages|sort((a, b) =>a.position <=> b.position) %}
+            <tr>
+                <td>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="temoignage-active custom-control-input" id="{{ temoignage.id }}"  {{ temoignage.isActive ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ temoignage.id }}"></label>
+                    </div>
+                </td>
+                <td>{{ temoignage.position }}</td>
+                <td>{{ temoignage.name }}</td>
+                <td>{{ temoignage.content }}</td>
+                <td>
+                    <a id="{{ temoignage.id }}" href="{{ path('temoignage_edit', {'id': temoignage.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">{{ 'global.no_record'|trans() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

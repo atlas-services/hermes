@@ -1,0 +1,91 @@
+<!-- Section Libre -->
+<section id="{{ section.name }}" class="section_content">
+    {% if('previsualidation_sheet' == app.request.get('_route')) %}
+        {% set posts = section.getPrevisualisationPosts %}
+    {% else %}
+        {% set posts = section.posts %}
+    {% endif %}
+
+    <div class="container" style="max-width: {{ isotope_container_width }}">
+        <div class="button-group" id="filters">
+            <button style="background-color:{{ isotope_bgcolor ?? 'transparent' }}" class="button is-checked"
+                    data-filter="*">{{ 'global.all'|trans() }}</button>
+            {% set listtag = '' %}
+            {% for post in posts|sort((a, b) => a.position <=> b.position) %}
+                {% for tags in post.tags %}
+                    {% if section.id ~ tags.name|replace({' ':''}) not in listtag %}
+                        <button style="background-color:{{ isotope_bgcolor }}" class="button filter" data-filter=".{{ section.id ~ tags.name|replace({' ':''})  }}">{{ tags.name }}</button>
+                    {% endif %}
+                    {% set listtag = listtag ~ ' ' ~ section.id ~ tags.name|replace({' ':''})  %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <h2>{{ 'global.sort.title'|trans() }}</h2>
+
+        <div class="button-group " id="sorts">
+            <button style="background-color: {{ isotope_bgcolor }}" class="button is-checked" data-sort-by="original-order">{{ 'global.sort.original'|trans() }}</button>
+            <button style="background-color: {{ isotope_bgcolor }}" class="button" data-sort-by="name">{{ 'global.sort.name'|trans() }}</button>
+        </div>
+        <div class="grid " style=" background-color: {{ isotope_bgcolor }} ">
+            {% for post in posts|sort((a, b) => a.position <=> b.position) %}
+                {% set listtag = '' %}
+                {% for tags in post.tags %}
+                    {% set listtag = listtag ~ ' ' ~ section.id ~ tags.name|replace({' ':''})  %}
+                {% endfor %}
+                <div style="color: {{ isotope_color }}"   class="col-xs-12 element-item {{ listtag }} rounded  " data-category="{{ post.name }}" style=" background-color: {{ isotope_bgcolor }} ">
+                    <h5 class="name text-center">{{ post.name }}</h5>
+                    {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                            {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                                <img class="center col-xs-12"
+                                     src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_isotope_filter') }}"
+                                     alt="img">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div
+    </div>
+</section>
+
+<!-- Modale -->
+{% for post in  posts|sort((a, b) => a.position <=> b.position) %}
+    <div class="portfolio-modal modal fade" id="portfolioModal{{ post.id }}" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl"></div>
+                    </div>
+                </div>
+                <div class="center" style="max-width: {{ container_width }} col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12 mx-auto">
+                            <div class="row center modal-body col-xs-12">
+                                <!-- Project Details Go Here -->
+                                <h3 class=" center text-center" >{{ post.name }}</h3>
+                                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                                    <img class="center col-xs-12"
+                                         src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                         alt="{{ post.name }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {{ post.content|raw }}
+                    <div class="row center">
+                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                            <i class="fas fa-times"></i>
+                            {{ 'general.close'|trans() }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+

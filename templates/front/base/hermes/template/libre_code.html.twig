@@ -1,0 +1,36 @@
+<!-- Section Libre -->
+<section id="{{ section.name }}" class="section_content col-lg-12 col-xs-12"
+         style="max-width: {{ container_width }} ; background-color:{{ content_bgcolor }}">
+    {% if('previsualidation_sheet' == app.request.get('_route')) %}
+        {% set posts = section.getPrevisualisationPosts %}
+    {% else %}
+        {% set posts = section.posts %}
+    {% endif %}
+
+    <div class="container col-lg-{{ content_container_width|col_lg() }} text-center mx-auto pb-5">
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Cliquer pour passer du rendu au code du rendu à copier</button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="collapse multi-collapse show" id="multiCollapseExample1">
+                {% for post in posts|sort((a, b) => a.position <=> b.position) %}
+                    <div class="container col-lg-{{ content_container_width|col_lg() }}">
+                        {{ post.content|raw }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                {% for post in posts|sort((a, b) => a.position <=> b.position) %}
+                    <div class="container col-lg-{{ content_container_width|col_lg() }} bg-danger text-warning pt-3 pb-3">
+                        {{ post.content }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</section>
+
+

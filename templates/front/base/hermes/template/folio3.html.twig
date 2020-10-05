@@ -1,0 +1,31 @@
+<!-- Portfolio Grid -->
+<section id="portfolio" class="section_content" style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
+    <div class="container-fluid" >
+       <div id="folio" class="row_gallery">
+            {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                    <div class="column">
+                        <div class="content_gallery">
+                            <!-- Modale1  -->
+{#                            <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"#}
+{#                               data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"#}
+{#                               data-target="#image-gallery">#}
+                             <!-- Modale2  -->
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                <img src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre')  }}" alt="" style="width:100%">
+                            </a>
+                            <h3>{{ post.name }}</h3>
+                            <p>{{ post.content|striptags|u.truncate(40, '...') }} </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Modale -->
+{#{% include 'front/base/hermes/template/modale1.html.twig' %}#}
+{% include 'front/base/hermes/template/modale2.html.twig' %}
+
+

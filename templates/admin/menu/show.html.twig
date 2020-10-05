@@ -1,0 +1,31 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'menu.show'|trans() }}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>{{ 'menu.show'|trans() }} {{ menu.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'global.active'|trans() }}</th>
+                <td>{{ menu.active ? 'global.active'|trans()|raw : 'global.inactive'|trans()|raw }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.position'|trans() }}</th>
+                <td>{{ menu.position }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.name'|trans() }}</th>
+                <td>{{ menu.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    <a href="{{ path('menu_edit', {'sheet': menu.sheet.slug, 'menu': menu.slug}) }}">edit</a>
+
+    {{ include('admin/menu/_delete_form.html.twig') }}
+{% endblock %}

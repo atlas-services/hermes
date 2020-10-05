@@ -1,0 +1,42 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{#{% import "admin/section/macro_form.html.twig" as forms %}#}
+
+{{ form_start(form) }}
+    {% if form.position is defined %}
+        {{ form_row(form.position) }}
+    {% endif %}
+    {{ form_row(form.template) }}
+    <hr style="  border: 2px solid #123456;border-radius: 5px;"/>
+{#    {{ form_row(form.posts) }}#}
+    {% for form_posts in form  %}
+        {% if( 'posts' == form_posts.vars.name) %}
+            {% for form_post in form_posts %}
+                {% form_theme form_post.tags 'admin/form/theme_tags.html.twig' %}
+                {{ form_row(form_post.name) }}
+                {{ form_row(form_post.imageFile) }}
+                {% if vich_uploader_asset(form_post.vars.data, 'imageFile') is not null %}
+                    <tr>
+                       <td><img  src="{{ asset(vich_uploader_asset(form_post.vars.data, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
+                    </tr>
+                {% endif  %}
+                {% if form_post.content is defined %}
+                    {{ form_row(form_post.content) }}
+                {% endif %}
+{#                <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form_post.tags.vars.prototype)|e('html_attr') }}">#}
+{#                    {% for tag in form_post.tags %}#}
+{#                        <li class="list-unstyled btn btn-primary">#}
+{#                            {{ form_row(tag.name) }}#}
+{#                        </li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+                <hr style="  border: 1px dashed #123456;"/>
+            {% endfor  %}
+        {% endif  %}
+    {% endfor  %}
+    {% if( app.request.attributes.get('_route') in ['section_post_new_menu','section_new', 'section_edit']) %}
+        {{ form_row(form.saveAndAddPost) }}
+{#        {{ form_row(form.saveAndAddSectionPost) }}#}
+        {{ form_row(form.save) }}
+    {% endif %}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

@@ -1,0 +1,63 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'section.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <div class="row mb-2">
+    <h1 class="col-lg-2">{{ 'section.list'|trans() }}</h1>
+    <select class="col-lg-3 text-success" id="select_page" >
+        <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
+    {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
+        <option class="text-success" value="{{ section.menu.id }}">{{ section.menu.name }}</option>
+    {% endfor %}
+    </select>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'sheet.name'|trans() }}</th>
+                <th>{{ 'menu.name'|trans() }}</th>
+                <th>{{ 'template.name'|trans() }}</th>
+                <th>{{ 'post.list'|trans() }}</th>
+                <th>{{ 'global.position'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
+            <tr class="{{ section.menu.id }}">
+                <td>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="section-active custom-control-input" id="{{ section.id }}"  {{ section.isActive ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ section.id }}"></label>
+                    </div>
+                </td>
+                <td>{{ section.menu.sheet.name }}</td>
+                <td>{{ section.menu.name }}</td>
+                <td>{{ section.template.name }}</td>
+                <td>
+                    {%  for post in section.posts|sort((a, b) => a.position <=> b.position) %}
+                        <li class="list-unstyled">
+                            <a class="text-warning h5" href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ post.name }}</a>
+                        </li>
+                    {%  endfor %}
+                </td>
+                <td>{{ section.position }}</td>
+                <td>
+                    <a href="{{ path('section_edit', {'section': section.name}) }}">{{ 'action.edit'|trans()|raw }}</a>
+{#                    <a href="{{ path('post_new_section', {'section': section.id }) }}">{{ 'action.add'|trans()|raw }}</a>#}
+                    <a href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('menu_section_post_new_sheet', {'sheet':'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
+{% endblock %}

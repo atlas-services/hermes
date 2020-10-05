@@ -1,0 +1,19 @@
+<!-- Breadcrumb -->
+<section id="{{ section.name ~ section.template.name }}" class="hero-wrap hero-wrap-2" style="background: url({{ vich_uploader_asset(menu, 'imageFile') }}) no-repeat center center ;background-size: cover;" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container" style="max-width: {{ container_width }}">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-2 bread">{{ section.name }}</h1>
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        {{ section.summary }}
+                            <i class="ion-ios-arrow-forward"></i></span>
+                    <span>
+                    <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+

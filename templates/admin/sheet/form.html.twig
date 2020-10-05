@@ -1,0 +1,44 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'sheet.list'|trans() }}{% endblock %}
+
+{% block content %}
+
+    {% if(is_granted('ROLE_SUPER_ADMIN')) %}
+    <h1>{{ 'sheet.list_form'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+                <th>{{ 'global.active'|trans() }}/{{ 'global.inactive'|trans() }}</th>
+                <th>{{ 'global.position'|trans() }}</th>
+                <th>{{ 'global.name'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sheet in sheets|sort((a, b) => a.position <=> b.position)  %}
+            {% if(sheet.name in config.value ) %}
+            <tr>
+                <td>{{ sheet.active ?  'global.active'|trans()|raw : 'global.inactive'|trans()|raw  }}</td>
+                <td>{{ sheet.position }}</td>
+                <td>{{ sheet.name }}</td>
+                <td>
+{#                    {% if( 'contact' != sheet.code) %}#}
+                    {% if( null != sheet.slug) %}
+                        <a id="{{ sheet.slug }}" href="{{ path('sheet_edit', {'sheet': sheet.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    {% endif %}
+{#                    {% endif %}#}
+                </td>
+            </tr>
+        {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+{% endblock %}

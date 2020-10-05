@@ -1,0 +1,4 @@
+<!-- Page -->
+{% for section in sections %}
+    {% include 'front/base/section/'~ section.template ~ '.html.twig' %}
+{% endfor %}

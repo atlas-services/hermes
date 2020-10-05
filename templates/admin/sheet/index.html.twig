@@ -1,0 +1,50 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'sheet.list'|trans() }}{% endblock %}
+
+{% block content %}
+
+    <h1>{{ 'sheet.list'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+        <th>{{ 'global.active'|trans() }}/{{ 'global.inactive'|trans() }}</th>
+        <th>{{ 'global.position'|trans() }}</th>
+        <th>{{ 'global.name'|trans() }}</th>
+        <th>{{ 'global.actions'|trans() }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sheet in sheets|sort((a, b) => a.position <=> b.position)  %}
+            {% if(sheet.name not in config.value ) %}
+                <tr>
+                    <td>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="sheet-active custom-control-input" id="{{ sheet.id }}"  {{ sheet.isActive ? 'checked': '' }} >
+                            <label class="custom-control-label" for="{{ sheet.id }}"></label>
+                        </div>
+                    </td>
+                    <td>{{ sheet.position }}</td>
+                    <td>{{ sheet.name }}</td>
+                    <td>
+                        {#                    {% if( 'contact' != sheet.code) %}#}
+                        {% if( null != sheet.slug) %}
+                            <a id="{{ sheet.slug }}" href="{{ path('sheet_edit', {'sheet': sheet.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                        {% endif %}
+                        {#                    {% endif %}#}
+                    </td>
+                </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <a id="sheet-add" href="{{ path('sheet_new') }}">{{ 'global.new'|trans() }}</a>
+{% endblock %}

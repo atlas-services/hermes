@@ -1,0 +1,52 @@
+<html lang="fr">
+
+{% set bgcolor= "#ffffff" %}
+{% if( 'sheet' in app.request.get('_route')) %}
+    {% set bgcolor= "#F9F9F9" %}
+{% endif %}
+{% if( 'menu' in app.request.get('_route')) %}
+    {% set bgcolor= "#FCFCFC" %}
+{% endif %}
+{% if( 'post' in app.request.get('_route')) %}
+    {% set bgcolor= "#ffffff" %}
+{% endif %}
+{% block head %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>{{ 'global.admin'|trans }} {{ app.request.getSchemeAndHttpHost() }}</title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('hermes_admin') }}
+            <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
+        {% endblock %}
+    </head>
+{% endblock head %}
+
+<body>
+<div class="content">
+    {% block body %}
+        {% block nav %}
+            <section id="section_top" class="container"></section>
+            {% include '/admin/nav.html.twig' %}
+        {% endblock nav %}
+    <div class="container"  style="background-color: {{ bgcolor }}">
+        {% block content %}
+            {% include '/admin/breadcrumb.html.twig' %}
+        {% endblock content %}
+    </div>
+        <section id="section_bottom"></section>
+    {% endblock body %}
+</div>
+{% block footer %}
+    {% include '/admin/footer.html.twig' %}
+{% endblock footer %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('hermes_admin') }}
+{% endblock javascript %}
+</body>
+</html>

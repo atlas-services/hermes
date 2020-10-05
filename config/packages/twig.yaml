@@ -1,0 +1,17 @@
+twig:
+    paths:
+        # point this wherever your images live
+        '%kernel.project_dir%/public/%env(APP_PATH_CONTENT_IMAGES)%': images
+        '%kernel.project_dir%/assets/inline/css': css
+        '%kernel.project_dir%/public/build': build
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        - 'admin/form/theme.html.twig'
+    globals:
+        content_images_prefix: '%env(APP_PATH_CONTENT_IMAGES)%'
+        app_multi_users: '%env(APP_MULTI_USERS)%'
+        app_template: '%env(APP_TEMPLATE)%'
+        locales: '%app.locales%'

@@ -1,0 +1,31 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'user.show'|trans() }}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>{{ 'user.show'|trans() }} {{ user.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'global.firstname'|trans() }}</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.lastname'|trans() }}</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.email'|trans() }}</th>
+                <td>{{ user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('admin/user/_delete_form.html.twig') }}
+{% endblock %}

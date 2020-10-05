@@ -1,0 +1,24 @@
+.reveal .slides section .fragment.pointy.current-fragment::before{
+    content:"👉 " ;
+}
+
+.reveal .slides section .fragment.bold {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.bold.current-fragment{
+    font-weight: bold;
+}
+
+.reveal .slides section .fragment.sparkley {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.sparkley.current-fragment{
+    border: none;
+    font-weight: normal;
+    color:pink;
+}
+

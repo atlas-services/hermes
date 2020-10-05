@@ -1,0 +1,10 @@
+{#{% form_theme form 'admin/form/theme_posts.html.twig' %}#}
+{{ form_start(form) }}
+    {{ form_row(form.active) }}
+    {{ form_row(form.position) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.save) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

@@ -1,0 +1,125 @@
+/*!
+ * Hermes-bootstrap % Bootstrapv4.5.2 (https://getbootstrap.com/)
+ * Copyright 2020 The CMS hermes Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+
+/*
+add width values
+ */
+@media (min-width: 576px) {
+    .h-w-10 {
+        width: 10% !important;
+    }
+
+    .h-w-20 {
+        width: 20% !important;
+    }
+
+    .h-w-30 {
+        width: 30% !important;
+    }
+
+    .h-w-40 {
+        width: 40% !important;
+    }
+
+    .h-w-60 {
+        width: 60% !important;
+    }
+
+    .h-w-70 {
+        width: 70% !important;
+    }
+
+    .h-w-80 {
+        width: 80% !important;
+    }
+
+    .h-w-90 {
+        width: 90% !important;
+    }
+}
+
+.h-w-10, .h-w-20, .h-w-30, .h-w-40 {
+    width: 50% !important;
+}
+
+/*
+add border radius values
+ */
+
+.h-rounded-lg-04 {
+    border-radius: 0.4rem !important;
+}
+
+.h-rounded-lg-05 {
+    border-radius: 0.5rem !important;
+}
+
+.h-rounded-lg-06 {
+    border-radius: 0.6rem !important;
+}
+
+.h-rounded-lg-07 {
+    border-radius: 0.7rem !important;
+}
+
+.h-rounded-lg-08 {
+    border-radius: 0.8rem !important;
+}
+
+.h-rounded-lg-09 {
+    border-radius: 0.9rem !important;
+}
+
+.h-rounded-lg-1 {
+    border-radius: 1.0rem !important;
+}
+
+.h-rounded-lg-2 {
+    border-radius: 2.0rem !important;
+}
+
+.h-rounded-lg-3 {
+    border-radius: 3.0rem !important;
+}
+
+.h-rounded-lg-4 {
+    border-radius: 4.0rem !important;
+}
+
+.h-rounded-lg-5 {
+    border-radius: 5.0rem !important;
+}
+
+.h-rounded-lg-6 {
+    border-radius: 6.0rem !important;
+}
+
+.h-rounded-lg-7 {
+    border-radius: 7.0rem !important;
+}
+
+.h-rounded-lg-8 {
+    border-radius: 8.0rem !important;
+}
+
+.h-rounded-lg-9 {
+    border-radius: 9.0rem !important;
+}
+
+.h-rounded-lg-10 {
+    border-radius: 10.0rem !important;
+}
+
+/*
+add text colors
+*/
+
+.h-text-success {
+    color: #a4c52e !important;
+}
+.h-bg-success {
+    background-color: #a4c52e !important;
+}

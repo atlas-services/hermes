@@ -1,0 +1,13 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.new_page'|trans() }}{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <a href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    {{ include('admin/temoignage/_form.html.twig') }}
+
+    <a href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    </div>
+{% endblock %}

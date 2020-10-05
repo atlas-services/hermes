@@ -1,0 +1,46 @@
+<!-- Team -->
+<section id="{{ section.name ~ section.template.name }}" class="bg-light page-section" style="background: url({{ vich_uploader_asset(menu, 'imageFile') }}) no-repeat center center ;background-size: cover;">
+    <div class="container" style="max-width: {{ container_width }}">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">{{ section.name }}</h2>
+                {#<h3 class="section-subheading text-muted">{{ section.summary }}</h3>#}
+            </div>
+        </div>
+        <div class="row">
+            {% for  post in  section.posts %}
+                <div class="col-sm-{{ section.posts|list_length }}">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{ asset(vich_uploader_asset(post, 'imageFile')) }}"
+                             alt="">
+                        <h4>{{ post.name }}</h4>
+{#                        <p class="text-muted">{{ post.summary }}</p>#}
+                        {#<ul class="list-inline social-buttons">#}
+                            {#<li class="list-inline-item">#}
+                                {#<a href="#">#}
+                                    {#<i class="fab fa-twitter"></i>#}
+                                {#</a>#}
+                            {#</li>#}
+                            {#<li class="list-inline-item">#}
+                                {#<a href="#">#}
+                                    {#<i class="fab fa-facebook-f"></i>#}
+                                {#</a>#}
+                            {#</li>#}
+                            {#<li class="list-inline-item">#}
+                                {#<a href="#">#}
+                                    {#<i class="fab fa-linkedin-in"></i>#}
+                                {#</a>#}
+                            {#</li>#}
+                        {#</ul>#}
+                    </div>
+                    {{ post.content|raw }}
+                </div>
+            {% endfor %}
+        </div>
+        {#<div class="row">#}
+            {#<div class="col-lg-8 mx-auto text-center">#}
+                {#{{ post.content|raw }}#}
+            {#</div>#}
+        {#</div>#}
+    </div>
+</section>

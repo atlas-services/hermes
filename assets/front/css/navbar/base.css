@@ -1,0 +1,148 @@
+.navbar {
+    padding-left: 0;
+    padding-right: 0;
+}
+#mainNav {
+    background-color: var(--color-green1); /* #212529; */
+    z-index: 1000;
+}
+
+#mainNav .navbar-toggler {
+    font-size: 12px;
+    right: 0;
+    padding: 13px;
+    text-transform: uppercase;
+    color: white;
+    border: 0;
+    background-color: var(--color-green4); /* #fed136; */;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+#mainNav .navbar-brand {
+    color: var(--color-green1);/*#fed136;*/
+    font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+#mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+    color: #fec503;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    font-size: 90%;
+    font-weight: 400;
+    padding: 0.75em 0;
+    letter-spacing: 1px;
+    vertical-align: center;
+    color: white;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #fed136;
+}
+
+@media (min-width: 992px) {
+    #mainNav {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        transition: padding-top 0.3s, padding-bottom 0.3s;
+        border: none;
+        background-color: transparent;
+    }
+    #mainNav .navbar-brand {
+        font-size: 1.75em;
+        transition: all 0.3s;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+        padding: 1.1em 1em !important;
+    }
+    #mainNav.navbar-shrink {
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: #212529;
+    }
+    #mainNav.navbar-shrink .navbar-brand {
+        font-size: 1.25em;
+        padding: 12px 0;
+    }
+}
+
+.modal-dialog {
+    max-width: 1000px;
+    margin: 1.75rem auto;
+}
+.dropdown-menu{
+    white-space: nowrap;
+}
+/*
+    Atlas Services
+ */
+/*.ml-auto, .mx-auto {*/
+/*    margin: auto !important;*/
+/*}*/
+#logo{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/*#chevron_down, #chevron_up{*/
+/*    position: absolute;*/
+/*    right : 15px;*/
+/*    top: 0.3rem;*/
+/*}*/
+
+#chevron_down_div, #chevron_up_div{
+    z-index: 9998;
+    position: fixed;
+    right : 15px;
+    top: 50%;
+}
+
+/*
+    Sticky header
+ */
+
+/* Style the header */
+.header {
+    /*padding: 10px 16px;*/
+    /*background: #555;*/
+    /*color: #ff0000;*/
+}
+
+/* Page content */
+.content {
+    padding: 0px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+    z-index: 1000;
+    position: fixed;
+    top: 0px;
+    width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+    padding-top: 10px;
+}
+
+.navbar-header{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+/* hide close when burger shown */
+.navbar-toggler.collapsed .close-icon {
+    display: none;
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+    display: none;
+}
+.navbar-toggler:not(.collapsed) .fa {
+    display: none;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+{% block head %}
+    {% include 'front/base/hermes/head.html.twig' %}
+{% endblock head %}
+
+{% apply inline_css(source( '@css/app.css')) %}
+{#<body style=" background: url('{{ background_image ?? '' }}'); {{ background_image_style ?? '' }} background-color: {{ bgcolor ?? 'white' }}">#}
+<body style="background-color: #f2f3f4">
+
+    <div class="content container text-center center" style="background-color: #ffffff ; max-width: {{ container_width }} ">
+        {% block body %}
+            {% block nav %}
+        <div class="text-center center" style="background-color: #ffffff ; max-width: {{ container_width }} " >
+                <a class="navbar-brand js-scroll-trigger center" href="{{ path('sheet') }}">
+                    {% if logo.filename is defined %}
+                        {% if logo.filename is not null %}
+                        {% if 'logo.png' == logo.filename  %}
+                            <a href="{{ url('sheet') }}">
+                                <img src="{{ email.image('@images/Config/logo.png') }}" class="logo" alt="SpaceBar Logo">
+                                <svg class="app_logo" viewBox="0 0 100 100"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink">
+                                </svg>
+                            </a>
+                        {% endif %}
+                        {% else %}
+                            {{ logo ?? "Accueil" }}
+                        {% endif %}
+                    {% else %}
+                        {{ logo ?? "Accueil" }}
+                    {% endif %}
+                </a>
+            </div>
+
+            {% endblock nav %}
+
+            {% block content %}
+            {% endblock content %}
+
+        {% endblock body %}
+
+    </div>
+
+
+    {% block footer %}
+        {% include 'front/base/footer.html.twig' %}
+    {% endblock footer %}
+
+    {% block javascript %}
+    {% endblock javascript %}
+
+</body>
+{% endapply %}
+</html>

@@ -1,0 +1,35 @@
+<!-- testimony -->
+<section id="{{ section.name ~ section.template.name }}" class="ftco-section testimony-section bg-light" style="background: url({{ vich_uploader_asset(menu, 'imageFile') }}) no-repeat center center ;background-size: cover;">
+    <div class="container" style="max-width: {{ container_width }}">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+                <span class="subheading subheading-with-line"><small class="pr-2 bg-light">{{ section.name }}</small></span>
+                <h2 class="mb-4">{{ section.summary }}</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel">
+                    {% for  post in  section.posts %}
+                        <div class="item">
+                            <div class="testimony-wrap p-4 pb-5">
+                                <div class="user-img mb-5" style="background-image: url({{ asset(vich_uploader_asset(post, 'imageFile')) }})">
+                                    <span class="quote d-flex align-items-center justify-content-center">
+                                      <i class="icon-quote-left"></i>
+                                    </span>
+                                </div>
+                                <div class="text">
+                                    <div class="pl-5">
+                                        <p class="name">{{ post.name }}</p>
+                                        {#<span class="position"></span>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ post.content|raw }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

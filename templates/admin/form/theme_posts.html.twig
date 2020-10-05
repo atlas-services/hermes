@@ -1,0 +1,96 @@
+{% use "bootstrap_4_horizontal_layout.html.twig" %}
+
+{% block form_label_class -%}
+    mt-3 pl-0 col-lg-12 col-xs-12 text-success
+{%- endblock form_label_class %}
+
+{% block checkbox_row -%}
+    {% set label_box = '' %}
+    {% set myclass = '' %}
+    {% if 'active' == form.vars.name   %}
+        {% set myclass = 'pl-0 form-group-row col-xs-12' %}
+        {% set label_box = 'Activer/Désactiver' %}
+    {% endif %}
+
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ myclass )|trim})} %}{{ block('attributes') }}{% endwith %}>{#--#}
+        <div class="{{ block('form_label_class') }}">{{ label_box }}</div>{#--#}
+        <div class="{{ block('form_group_class') }}">
+            {{- form_widget(form) -}}
+            {{- form_help(form) -}}
+        </div>{#--#}
+    </div>
+{%- endblock checkbox_row %}
+
+{% block form_label -%}
+    {{- parent() -}}
+    {% if 'content' == form.vars.name   %}
+        {% if 'test' == app.environment   %}
+            {% include '/admin/exemple/libre.html.twig' %}
+        {% endif %}
+    {% endif %}
+{%- endblock form_label %}
+
+{% block form_row -%}
+    {% set myclass = 'pl-0 form-group-row col-xs-12' %}
+    {%- if expanded is defined and expanded -%}
+    {{ block('fieldset_form_row') }}
+    {%- else -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ myclass ~ ((not compound or force_error|default(false)) and not valid ? ' is-invalid'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        <div class="{{ block('form_group_class') }}">
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_help(form) -}}
+        </div>
+</div>
+{%- endif -%}
+{%- endblock form_row %}
+
+{% block form_group_class -%}
+    {% set myclass = 'pl-0 form-group-row col-xs-12' %}
+   {{ myclass }} col-xs-12
+{%- endblock form_group_class %}
+
+
+{% block button_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ml-3 btn mt-4 col-xs-12')|trim}) %}
+    {% if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    {% if icon|default %}
+        {% set iconHtml = icon %}
+    {% else %}
+        {% set iconHtml = '' %}
+    {% endif %}
+    {% if icon_before|default %}
+        {% set iconHtmlBefore = icon_before %}
+    {% else %}
+        {% set iconHtmlBefore = '' %}
+    {% endif %}
+    {% if icon_after|default %}
+        {% set iconHtmlAfter = icon_after %}
+    {% else %}
+        {% set iconHtmlAfter = '' %}
+    {% endif %}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        {% if iconHtml %}
+            {{ iconHtml|raw }}
+        {% elseif iconHtmlBefore %}
+            {{ iconHtmlBefore|raw }} {{ label|trans({}, translation_domain) }}
+        {% elseif iconHtmlAfter %}
+            {{ label|trans({}, translation_domain) }} {{ iconHtmlAfter|raw }}
+        {% else %}
+            {{ label|trans({}, translation_domain) }}
+        {% endif %}
+    </button>
+{%- endblock button_widget %}

@@ -1,0 +1,187 @@
+:root {
+    --color-white: #fff;
+    --color-grey1: #eee;
+    --color-grey2: #d3d3d3;
+    --color-grey3: #565656;
+    --color-grey4: #444444;
+    --color-black: #000;
+    --color-yellow: #fed136;
+    --color-green1: #F5FFFA;
+    --color-green2: #B0F2B6;
+    --color-green3: #A5D152;
+    --color-green4: #82C46C;
+    --color-green5: #01796F;
+    --color-green6: #2E8B57;
+    --font-family-1: Verdana,sans-serif;
+    --percent-1: 99.9999999999%;
+    --percent-2: 49.9999999999%;
+    --percent-3: 33.3333333334%;
+    --percent-4: 24.9999999999%;
+    --percent-5: 19.9999999999%;
+    --percent-6: 16.6666666667%;
+    --percent-7: 14.28%;
+    --percent: var(--percent-4);
+    /*
+    vert/noir
+     */
+    --color-base-chevron: var(--color-yellow);
+    --color-base1-front: var(--color-green4);
+    --color-base1-back: var(--color-black);
+    /*
+    noir/vert
+ */
+    --color-base2-front: var(--color-black);
+    --color-base2-back: var(--color-green4);
+}
+
+/*
+Content
+ */
+.section_content{
+    padding-top: 60px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group{
+    width: 350px; /* 100%; /* 1050px; */
+}
+
+.content {
+    /*min-height: calc(100vh - 105px);*/
+    min-height: calc(100vh - 110px);
+}
+
+.vl {
+    border-left: 1px solid #8f2160;
+    /*height:  !* 515px; *!*/
+    /*margin-left: -35px;*/
+    /*margin-right: -50px;*/
+}
+
+/*.footer {*/
+/*    display: block;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    height: 110px;*/
+/*    background-color: var(--color-base2-back);*/
+/*    color: var(--color-base2-front);*/
+/*}*/
+
+.hermes_center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /*margin-bottom: 30px;*/
+    /*width: 100%;*/
+}
+
+a {
+    color: var(--color-yellow);
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+a:hover {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+li.active{
+    background-color: var(--color-green4);
+}
+
+/*
+Menu
+ */
+#mainNav {
+    background-color: var(--color-grey2);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link{
+    color: var(--color-white);
+    width: max-content;
+}
+
+
+.bg-dark{
+    background-color: var(--color-green3) !important ;
+}
+
+.img-fluid {
+    background-size: cover;
+    width: 300px;
+    /*height: 200px;*/
+    object-fit: cover;
+}
+
+.img-fluid img {
+    display: none;
+}
+
+.img-fluid-big {
+    background-size: cover;
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.img-fluid-big img {
+    display: none;
+}
+
+.btn:focus, .btn:active, button:focus, button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#image-gallery .modal-footer{
+    display: block;
+}
+
+.thumb{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.fa-chevron-circle-down, .fa-chevron-circle-up {
+    font-size: 44px;
+}
+
+.container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media (max-width: 500px) {
+.row{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+.container{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+/*
+reveal js
+ */
+
+.reveal .controls{
+    position: absolute;
+    bottom: 30%;
+}
+
+/*
+resolve conflict between bootstrap and reveal js
+ */
+
+[hidden] {
+    display: inherit !important;
+}

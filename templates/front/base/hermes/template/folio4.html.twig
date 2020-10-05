@@ -1,0 +1,25 @@
+<!-- Portfolio Grid -->
+<section id="portfolio" class="section_content"
+         style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
+    <div id="folio" class="row ml-5">
+    <div class="container">
+        <div id="staggering">
+            {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                    <!-- Modale2  -->
+                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                    <span class="staggering">
+                        <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre') }}"/>
+                    </span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- Modale -->
+{% include 'front/base/hermes/template/modale2.html.twig' %}
+
+
