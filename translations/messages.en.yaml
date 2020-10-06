@@ -13,6 +13,30 @@ form:
   label:
     delete: Supprimer
 
+info:
+  admin_presentation: In order to enrich your site, here are the different links that will allow you to
+    create pages quickly, then manage more finely the menus, submenus and content that you have created.
+  begin: Start with content cretation.
+  new_rapid_post: Nouveau contenu
+  new_rapid_sheet: <i class="fa fa-plus"></i> Nouvelles pages
+  new_libelle_sheet_1: Create a page - part 1.
+  first_step_p1: First step create a menu.
+  first_step_li1: Follow "My Dashboard" and select
+  first_step_li2: Click to the link
+  first_step_li3: Set the name of your menu "My menu" (You can change it after), then click the button
+  first_step_p2: Now, the menu "My menu" is created, but there is no content associated.
+  first_step_next: To learn how to add a content, you can follow the next step by clicking the button
+  second_step_p1: LThe second step consists to add a content to the menu "My menu".
+  second_step_li1: "Page : Set the name of your page \"My page\". Vous can modify it later."
+  second_step_li2: "Template : In this first exemple, we wil select The template \"Libre\"."
+  second_step_li3: "Name : Set the name of your content \"My content\" in order to find it easaly when you want to modify it."
+  second_step_li4: "Content : That's the point! CThat's what will be shown in your page and it deserves our full attention ."
+  second_step_li5: "Content (following) : In order to start well, I invite you to copy a content template."
+  second_step_li6: "Hermes will regularly add \"Free \" contents to copy and adapt to your site. "
+  second_step_p2: Here you have created your first page, more tutorials will follow..
+  new_libelle_sheet_2: Create a page - part 2.
+  new_libelle_post: Add new contents
+
 global:
   copyright: 2016 All Rights Reserved by
   created_by: This site has been powered by the CMS<a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>

@@ -13,6 +13,30 @@ form:
   label:
     delete: Supprimer
 
+info:
+  admin_presentation: Afin d'enrichir votre site, voici les différents liens qui vous permettront de
+    créer des pages rapidement, puis de gérer plus finement les menus, les sous-menus et les contenus que vous avez créés.
+  begin: Pour bien débuter
+  new_rapid_post: Nouveau contenu
+  new_rapid_sheet: <i class="fa fa-plus"></i> Nouvelles pages
+  new_libelle_sheet_1: Créer une page - partie 1.
+  first_step_p1: La première étape consiste à créer un menu.
+  first_step_li1: Aller sur le menu "Mon Tableau de Bord" et sélectionner
+  first_step_li2: Cliquer sur le lien
+  first_step_li3: Saisir le nom de votre menu "Mon menu" (Vous pourrez le modifier plus tard), puis cliquer sur le bouton
+  first_step_p2: À ce stade, le menu "Mon menu" est créé, mais il n'y a pas encore de contenu associé.
+  first_step_next: Pour apprendre à ajouter un contenu,vous pouvez passer à l'étape suivante en cliquant sur le bouton
+  second_step_p1: La deuxième étape consiste à ajouter un contenu au menu "Mon menu".
+  second_step_li1: "Page : Saisissez le nom de votre page \"Ma page\". Vous pourrez le modifier plus tard."
+  second_step_li2: "Template : Sélectionner pour ce premier exemple, nous choisirons le template \"Libre\"."
+  second_step_li3: "Nom : Saisissez le nom de votre contenu \"Mon contenu\" afin de le retrouver lorsque vous voudrez le modifier."
+  second_step_li4: "Contenu : On y arrive! C'est ce qui sera affiché sur votre page et qui mérite tout nos soins."
+  second_step_li5: "Contenu (suite) : Afin de bien débuter, je vous invite à recopier un modèle de contenu."
+  second_step_li6: "Contenu (suite et fin) : Hermes ajoutera régulièrement des contenus \"Libre\" à recopier et à adapter à votre site."
+  second_step_p2: Voila, vous avez créé votre première page.D'autres tutoriels vont suivre...
+  new_libelle_sheet_2: Créer une page - partie 2.
+  new_libelle_post: Ajoutez de nouveaux contenus
+
 global:
   copyright: 2016 Tous droits réservés par
   created_by: Ce site a été conçu avec le CMS <a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
@@ -25,10 +49,6 @@ global:
   new_menu: Nouveau menu
   active: Actif
   inactive: Inactif
-  admin_presentation: Afin d'enrichir votre site, voici les différents liens qui vous permettront de
-    créer des pages rapidement, puis de gérer plus finement les menus, les sous-menus et les contenus que vous avez créés.
-  new_rapid_post: Nouveau contenu
-  new_rapid_sheet: <i class="fa fa-plus"></i> Nouvelles pages
   new_page: Menus
   new_post: Nouveau contenu dans le menu
   new_menu_post: Ajout d'un menu avec un contenu
@@ -39,8 +59,6 @@ global:
   preview: <i class="fa fa-2x fa-eye" aria-hidden="true"></i>
   edit: <i class="fa fa-edit"></i>
   new: Créer
-  new_libelle_sheet: Pour commencer, consultez la rubrique "Info - Aide" qui vous guidera pour créer de nouvelles pages.
-  new_libelle_post: Puis, créer vos contenus (en les rattachant bien à un élément du menu)
   delete: <i class="fa fa-trash"></i>
   back_to_list: <i class="fa fa-angle-double-left"></i> Retour à la liste
   confirm_delete: Êtes vous certain de vouloir supprimer cet item?

@@ -30,11 +30,11 @@ parameters:
       libre:
         summary: Template libre
         code: libre
-        name: libre
+        name: Libre
       libre_code:
         summary: Template libre et affichage du code
         code: libre_code
-        name: libre avec code
+        name: Libre avec code
       carousel1:
         summary: Présentation carousel slide avec madale
         code: carousel1
