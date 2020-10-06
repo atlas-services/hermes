@@ -24,25 +24,32 @@ add width values
         width: 40% !important;
     }
 
-    .h-w-60 {
-        width: 60% !important;
+    .h-w-50 {
+        width: 50% !important;
     }
 
-    .h-w-70 {
-        width: 70% !important;
-    }
+}
 
-    .h-w-80 {
-        width: 80% !important;
-    }
-
-    .h-w-90 {
-        width: 90% !important;
+@media (max-width: 576px) {
+    .h-w-10, .h-w-20,.h-w-30, .h-w-40, .h-w-50 {
+        width: 50% !important;
     }
 }
 
-.h-w-10, .h-w-20, .h-w-30, .h-w-40 {
-    width: 50% !important;
+.h-w-60 {
+    width: 60% !important;
+}
+
+.h-w-70 {
+    width: 70% !important;
+}
+
+.h-w-80 {
+    width: 80% !important;
+}
+
+.h-w-90 {
+    width: 90% !important;
 }
 
 /*
@@ -120,6 +127,7 @@ add text colors
 .h-text-success {
     color: #a4c52e !important;
 }
+
 .h-bg-success {
     background-color: #a4c52e !important;
 }
