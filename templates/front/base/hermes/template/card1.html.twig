@@ -15,7 +15,7 @@
                 {% set margin = 'mr-lg-auto ml-lg-4 mt-lg-3'  %}
             {% endif %}
                 <div class="col-lg-5 col-xs-12 bg-white h-rounded-lg-1 pt-5 pl-5 pr-5 pb-2 {{ margin }} my-3 w-auto shadow-lg text-center">
-                    <div class="text-left pb-2">
+                    <div class="text-left pb-5">
                     {{ post.content|raw }}
                     </div>
                     {% if vich_uploader_asset(post, 'imageFile') is not null %}
