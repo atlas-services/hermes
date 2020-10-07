@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                            <img class="img-fluid hermes_center" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_filter') }}"
+                            <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_filter') }}"
                                  alt="{{ post.name }}">
                         {% endif %}
                     </a>

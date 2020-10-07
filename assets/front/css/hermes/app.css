@@ -69,15 +69,15 @@ Content
 /*    color: var(--color-base2-front);*/
 /*}*/
 
-.hermes_center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    /*margin-bottom: 30px;*/
-    /*width: 100%;*/
-}
+/*.hermes_center {*/
+/*    display: block;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    margin-top: 3px;*/
+/*    margin-bottom: 3px;*/
+/*    !*margin-bottom: 30px;*!*/
+/*    !*width: 100%;*!*/
+/*}*/
 
 a {
     color: var(--color-yellow);
