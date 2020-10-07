@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Sheet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -25,7 +26,7 @@ class SheetFixtures extends Fixture  implements FixtureGroupInterface, Dependent
             $item = new Sheet();
             $item->setActive(true);
             $item->setCode($value);
-            if('contact' == $value){
+            if(ContactInterface::CONTACT == $value){
                 $n = 99999 ;
                 $item->setSlug($value);
             }

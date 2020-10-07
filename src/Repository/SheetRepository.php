@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Sheet;
 use App\Repository\Traits\BaseRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -57,7 +58,7 @@ class SheetRepository extends ServiceEntityRepository
     {
             $qb = $this->getQbSheets()
                 ->where('s.code != :contact ')
-                ->setParameter('contact', 'contact')
+                ->setParameter(ContactInterface::CONTACT, ContactInterface::CONTACT)
             ;
         return $qb;
     }

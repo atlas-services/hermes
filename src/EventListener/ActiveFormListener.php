@@ -3,6 +3,7 @@ namespace App\EventListener;
 
 
 use App\Entity\Config;
+use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Sheet;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
@@ -27,7 +28,7 @@ class ActiveFormListener
         // add some code to check the entity type as early as possible
 
             if ('form' == $config->getCode()) {
-                if('contact' == $config->getValue()){
+                if(ContactInterface::CONTACT == $config->getValue()){
                     $form = $config->getValue();
                     $entityManager = $args->getObjectManager();
                     $sheet_form = $entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);

@@ -9,6 +9,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\Contact;
+use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Temoignage;
 use App\Form\ContactType;
 use App\Form\Admin\TemoignageType;
@@ -40,20 +41,20 @@ class FrontController extends AbstractController
     public function form(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $route = $request->attributes->get('_route');
-        if ('livre-d-or' == $route) {
-            $array = $page->getActiveMenu('livre-d-or', 'livre-d-or', $route);
+        if (ContactInterface::LIVREDOR_ROUTE == $route) {
+            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
             $entity = new Temoignage();
             $form = $this->createForm(TemoignageType::class, $entity,
                 array(
-                    'action' => $this->generateUrl('livre-d-or'),
+                    'action' => $this->generateUrl(ContactInterface::LIVREDOR_ROUTE),
                     'method' => 'POST',
                 ));
             $entityManager = $this->getDoctrine()->getManager();
             $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
-            $array['livredor'] = $livredor;
+            $array[ContactInterface::LIVREDOR] = $livredor;
         }
-        if ('contact' == $route) {
-            $array = $page->getActiveMenu('contact', 'contact',$route);
+        if (ContactInterface::CONTACT == $route) {
+            $array = $page->getActiveMenu(ContactInterface::CONTACT, ContactInterface::CONTACT,$route);
             $entity = new Contact();
             $form = $this->createForm(ContactType::class, $entity,
                 array(
@@ -67,7 +68,7 @@ class FrontController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                if ('livre-d-or' == $route) {
+                if (ContactInterface::LIVREDOR_ROUTE == $route) {
                     $entityManager->persist($form->getData());
                     $entityManager->flush();
                 }

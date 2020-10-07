@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Config;
+use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Template;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -52,7 +53,7 @@ class ConfigFixtures extends Fixture implements FixtureGroupInterface
          */
         $item = new Config();
         $item->setActive(true);
-        $item->setCode('contact');
+        $item->setCode(ContactInterface::CONTACT);
         $item->setValue('contact@atlas-services.fr');
         $item->setSummary("Email de contact (utilisé dans le formulaire de contact)");
 
