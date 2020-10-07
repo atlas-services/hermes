@@ -27,12 +27,18 @@ liip_imagine:
                     # set the fixed size to "120x90" pixels
                     width: 150px
                     height: 100px
-        app_fixed_carre:
+        app_fixed_carre_150:
             filters:
                 fixed:
                     # set the fixed size to "150x150" pixels
                     width: 150px
                     height: 150px
+        app_fixed_carre_300:
+            filters:
+                fixed:
+                    # set the fixed size to "150x150" pixels
+                    width: 300px
+                    height: 300px
         app_fixed_accueil_100:
             filters:
                 fixed:
@@ -122,6 +128,13 @@ liip_imagine:
                     # set the fixed size to "120x90" pixels
                     width: 120
                     height: 90
+        app_fixed_folio2_filter:
+            filters:
+                # use and setup the "fixed" filter
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 400
+                    height: 300
         app_fixed_folio_modale_filter:
             filters:
                 # use and setup the "scale" filter

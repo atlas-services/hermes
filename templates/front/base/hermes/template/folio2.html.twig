@@ -8,7 +8,7 @@
         </div>
         <div id="folio" class="row">
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-                <div class="col-md-{{ section.posts|list_length }} col-sm-{{ section.posts|list_length }} portfolio-item">
+                <div class="col-md-{{ section.posts|list_length }} col-sm-{{ section.posts|list_length }} portfolio-item text-center">
                     <a class="portfolio-link " data-toggle="modal" href="#portfolioModal{{ post.id }}">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                            <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_filter') }}"
+                            <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio2_filter') }}"
                                  alt="{{ post.name }}">
                         {% endif %}
                     </a>

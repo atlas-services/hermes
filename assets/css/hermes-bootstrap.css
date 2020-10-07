@@ -53,6 +53,47 @@ add width values
 }
 
 /*
+add height values
+ */
+.h-h-10 {
+    height: 10% !important;
+}
+.h-h-20 {
+    height: 20% !important;
+}
+.h-h-30 {
+    height: 30% !important;
+}
+.h-h-40 {
+    height: 40% !important;
+}
+
+/*
+add position (n'existe pas dans bootstrap)
+ */
+@media (min-width: 576px) {
+    .h-position-absolute{
+        position: absolute !important;
+    }
+}
+
+.h-bottom-10 {
+    bottom: 10px !important;
+}
+.h-bottom-20 {
+    bottom: 20px !important;
+}
+.h-bottom-30 {
+    bottom: 30px !important;
+}
+.h-bottom-40 {
+    bottom: 40px !important;
+}
+.h-bottom-50 {
+    bottom: 50px !important;
+}
+
+/*
 add border radius values
  */
 

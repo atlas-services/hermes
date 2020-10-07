@@ -111,16 +111,17 @@ Menu
     background-color: var(--color-green3) !important ;
 }
 
-.img-fluid {
-    background-size: cover;
-    width: 300px;
-    /*height: 200px;*/
-    object-fit: cover;
-}
+/*.img-fluid {*/
+/*    background-size: cover;*/
+/*    width: 300px;*/
+/*    !*height: 200px;*!*/
+/*    height: 300px;*/
+/*    object-fit: cover;*/
+/*}*/
 
-.img-fluid img {
-    display: none;
-}
+/*.img-fluid img {*/
+/*    display: none;*/
+/*}*/
 
 .img-fluid-big {
     background-size: cover;

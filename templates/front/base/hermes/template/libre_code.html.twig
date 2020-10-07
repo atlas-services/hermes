@@ -23,8 +23,8 @@
         <div class="col-12">
             <div class="collapse multi-collapse" id="multiCollapseExample2">
                 {% for post in posts|sort((a, b) => a.position <=> b.position) %}
-                    <div class="container col-lg-{{ content_container_width|col_lg() }} bg-danger text-warning pt-3 pb-3">
-                        {{ post.content }}
+                    <div class="container col-lg-{{ content_container_width|col_lg() }} bg-danger text-warning pt-3 pb-3 pl-2 pr-2">
+                        {{ post.content|nl2br }}
                     </div>
                 {% endfor %}
             </div>

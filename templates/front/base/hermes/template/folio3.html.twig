@@ -12,7 +12,7 @@
 {#                               data-target="#image-gallery">#}
                              <!-- Modale2  -->
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
-                                <img src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre')  }}" alt="" style="width:100%">
+                                <img src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300')  }}" alt="" style="width:100%">
                             </a>
                             <h3>{{ post.name }}</h3>
                             <p>{{ post.content|striptags|u.truncate(40, '...') }} </p>
