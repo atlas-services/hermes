@@ -1,0 +1,35 @@
+<!-- Section carousel -->
+<section id="{{ section.name }}" class="section_content">
+    {% if('previsualidation_sheet' == app.request.get('_route')) %}
+        {% set posts = section.getPrevisualisationPosts %}
+    {% else %}
+        {% set posts = section.posts %}
+    {% endif %}
+
+    <div class="col-lg-{{ content_container_width|col_lg() }} col-xs-12 mx-auto">
+        {% for key, post in posts|sort((a, b) => a.position <=> b.position) %}
+            {% if key is even %}
+                <div class="row col-lg-12 col-xs-12 mx-auto">
+                {% set margin = 'ml-lg-auto mr-lg-4 mt-lg-3' %}
+                {% set float_direction = 'float-left mr-4' %}
+            {% else %}
+                {% set margin = 'mr-lg-auto ml-lg-4 mt-lg-3'  %}
+                {% set float_direction = 'float-right ml-4' %}
+            {% endif %}
+
+                <div class="col-lg-5 col-xs-12 bg-white h-rounded-lg-04 pt-5 pl-3 pr-5 pb-2 {{ margin }} my-3 w-auto shadow-lg text-center">
+                    <div class="text-left pb-5"  style="font-size: 0.875em;">
+                        <p class="text-justify">
+                        {% if vich_uploader_asset(post, 'imageFile') is not null %}
+                            <img class="h-rounded-lg-4 {{ float_direction }}" alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}" />
+                        {% endif %}
+                        {{ post.content|raw }}
+                        </p>
+                    </div>
+                </div>
+                {% if key is  odd %}
+                    </div>
+                {% endif %}
+        {% endfor %}
+    </div>
+</section>

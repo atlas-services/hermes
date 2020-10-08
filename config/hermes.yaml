@@ -67,6 +67,10 @@ parameters:
         summary: Cartes affichée par 2 avec fichier à télécharger
         code: card1
         name: Cartes avec pdf à télécharger
+      card2:
+        summary: Carte de présentation avec photo
+        code: card2
+        name: Carte de présentation avec photo
     config:
       site:
         directory:
