@@ -132,6 +132,7 @@ config:
   affiche_list_content: Configuration du contenu
   affiche_list_carousel: Configuration des carousels
   affiche_list_modale: Configuration des modales
+  affiche_list_card: Configuration des cards
   affiche_list_footer: Configuration du pied de page
   affiche_list_network: Configuration des réseaux sociaux
   affiche_list_formulaire: Configuration des formulaires

@@ -199,6 +199,16 @@ parameters:
         modale_container_width:
           summary: Largeur du modales affiché (en %)
           value: '80%'
+      card:
+        card_bgcolor:
+          summary: Couleur de fond des cards
+          value: '#000000'
+        card_color:
+          summary: Couleur des cards et du bouton
+          value: '#ffffff'
+        card_container_width:
+          summary: Largeur du cards affiché (en %)
+          value: '80%'
       footer:
         footer_bgcolor:
           summary: Couleur de fond du footer
