@@ -112,6 +112,9 @@ parameters:
         chevron_bgcolor:
           summary: Couleur de fond du chevron
           value: '#ffffff'
+        chevron_opacity:
+          summary: Opacité de fond du chevron
+          value: 0.5
       network:
         linkedin:
           summary: configuration linkedin
