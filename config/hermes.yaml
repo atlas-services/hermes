@@ -115,6 +115,15 @@ parameters:
         chevron_opacity:
           summary: Opacité de fond du chevron
           value: 0.5
+        chevron_accueil_color:
+          summary: Couleur du chevron de l'accueil
+          value: '#000000'
+        chevron_accueil_bgcolor:
+          summary: Couleur de fond du chevron de l'accueil
+          value: '#ffffff'
+        chevron_accueil_opacity:
+          summary: Opacité de fond du chevron de l'accueil
+          value: 0.4
       network:
         linkedin:
           summary: configuration linkedin

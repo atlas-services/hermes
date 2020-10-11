@@ -49,7 +49,7 @@
                     {{ message }}
                 </div>
             {% endfor %}
-            <div id="top" class="hide" ></div>
+            <div id="top" class="hide mt-2" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
                 {% include 'front/base/' ~ directory ~'/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %}
             {% endfor %}

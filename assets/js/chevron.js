@@ -16,9 +16,11 @@
         if (posYBody < 0) {
             $("#chevron_down_div").hide();
             $("#chevron_up_div").show();
+            $("#chevron_accueil_down_div").hide();
         } else {
             $("#chevron_up_div").hide();
             $("#chevron_down_div").show();
+            $("#chevron_accueil_down_div").show();
         }
     });
 
