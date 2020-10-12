@@ -1,0 +1,65 @@
+<!-- Section carousel -->
+<section id="{{ section.name }}" class="section_content">
+    {% if('previsualidation_sheet' == app.request.get('_route')) %}
+        {% set posts = section.getPrevisualisationPosts %}
+    {% else %}
+        {% set posts = section.posts %}
+    {% endif %}
+
+    <div class="container col-xs-12 col-lg-{{ carousel_multiple_container_width|col_lg() }}" >
+        <!--Carousel Wrapper-->
+        <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+            <!--Controls-->
+            <div class="controls-top">
+                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+            </div>
+            <!--/.Controls-->
+                <!--Slides-->
+                <div class="carousel-inner" role="listbox">
+                    {% for post in posts|sort((a, b) => a.position <=> b.position) %}
+                        {% set active = '' %}
+                        {% set card_class = 'clearfix d-none d-md-block' %}
+                        {% if ((loop.index  - 1) is divisible by(3)) %}
+                            {% set card_class = '' %}
+                        {% endif %}
+                        {% if (loop.index  == 1 ) %}
+                            {% set active = 'active' %}
+                        {% endif %}
+                    <!--begin 3 slide-->
+                        {% if ((loop.index  - 1) is divisible by(3)) %}
+                            <div class="carousel-item {{ active }}">
+                            <div class="row">
+                        {% endif %}
+                        <div class="col-md-4 {{ card_class }}">
+                            <div class="card mb-2">
+                                <img class="card-img-top" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carousel_filter') }}"
+                                     alt="{{ post.filename }}">
+                                <div class="card-body">
+                                    <h4 class="card-title"><a class="portfolio-link"  data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                            {{ post.name }}
+                                        </a>
+                                    </h4>
+                                    <p class="card-text">{{ post.content|striptags|u.truncate(25, '...') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% if ((loop.index ) is divisible by(3)) %}
+                            </div>
+                            </div>
+                        {% endif %}
+
+                    <!--/.End 3 slide-->
+
+                    {% endfor %}
+                </div>
+                <!--/.Slides-->
+            </div>
+            <!--/.Carousel Wrapper-->
+        </div>>
+</section>
+
+
+<!-- Modale 2 -->
+{% include 'front/base/hermes/template/modale2.html.twig' %}

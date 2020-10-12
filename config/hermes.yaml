@@ -43,6 +43,10 @@ parameters:
         summary: Présentation carousel fade avec modale
         code: carousel2
         name: Carousel fade avec modale
+      carousel3:
+        summary: Présentation carousel par groupe de 3 images
+        code: carousel3
+        name: Carousel par groupe de 3 images avec modale
       folio1:
         summary: Folio classique avec modale
         code: folio1
@@ -201,6 +205,9 @@ parameters:
         carousel_container_width:
           summary: Largeur du carousel affiché (en %)
           value: '60%'
+        carousel_multiple_container_width:
+          summary: Largeur du carousel multi images affiché (en %)
+          value: '80%'
       modale:
         modale_bgcolor:
           summary: Couleur de fond des modales

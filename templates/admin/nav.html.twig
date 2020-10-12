@@ -34,21 +34,21 @@
                         <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
                              aria-expanded="false">
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <p><a class="text-info ml-3"
+                                <p><a class="text-info mx-3 "
                                       href="{{ path('sheet_form_index') }}"> {{ 'sheet.list_form'|trans()|raw }}</a></p>
                             {% endif %}
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3 "
                                   href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info  ml-3"
+                            <p><a class="text-info  mx-3"
                                   href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 {% if(config.value is defined) %}
                                     {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}
-                                        <p><a class="text-info ml-3"
+                                        <p><a class="text-info mx-3"
                                               href="{{ path('temoignage_index') }}"> {{ 'temoignage.affiche_list'|trans()|raw }}</a>
                                         </p>
                                     {% endif %}
@@ -66,37 +66,37 @@
                         </a>
                         <div class="dropdown-menu bg-dark" style="min-width: 20rem;"
                              aria-labelledby="{{ 'global.dashboard'|trans()|raw }}" aria-expanded="false">
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'contact'}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'carousel'}) }}"> {{ 'config.affiche_list_carousel'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'modale'}) }}"> {{ 'config.affiche_list_modale'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'card'}) }}"> {{ 'config.affiche_list_card'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'network'}) }}"> {{ 'config.affiche_list_network'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info ml-3"
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'form'}) }}"> {{ 'config.affiche_list_formulaire'|trans()|raw }}</a>
                             </p>
                         </div>
@@ -110,7 +110,7 @@
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <p><a class="text-info ml-3"
+                                <p><a class="text-info mx-3"
                                       href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a></p>
                             {% endif %}
                             <a class="page-scroll nav-link js-scroll-trigger"
