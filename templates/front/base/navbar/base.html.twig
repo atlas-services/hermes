@@ -31,11 +31,12 @@
                             <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="app_logo">
                         </a>
                     {% else %}
-                        <img src="../{{ asset('img/hermes.png') }}"  alt="{{ logo.filename }}" class="app_logo">
-                        {{ logo.value ?? "" }}
+                        {% if affiche_img_hermes == true %}
+                            <img src="../{{ asset('img/hermes.png') }}"  alt="{{ logo.filename }}" class="app_logo">
+                        {% else %}
+                            <div class="d-block d-sm-none bg-transparent"> &nbsp; </div>
+                        {% endif %}
                     {% endif %}
-                {% else %}
-                {{ logo.value ?? "" }}
                 {% endif %}
             {% endif %}
     </div>
@@ -87,7 +88,7 @@
     </div>
 </nav>
 {% if('reveal' != directory) %}
-    {% if ( 'accueil' == app.request.attributes.get('sheet')|lower and accueil.value >= 80 ) %}
+    {% if ( 'accueil' == app.request.attributes.get('sheet')|lower and accueil.filename is not null and accueil.value >= 80 ) %}
         <div id="chevron_accueil_down_div" class="top right position-fixed" style="top: 50% ;right: 50% ;background-color: {{ chevron_accueil_bgcolor }}; opacity: {{ chevron_accueil_opacity }}" >
             <h3 class="section-subheading text-right">
                 <a id ="chevron_down"  class="js-scroll-trigger" href="#top">

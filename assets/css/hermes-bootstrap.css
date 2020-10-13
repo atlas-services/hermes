@@ -169,6 +169,15 @@ add text colors
     color: #a4c52e !important;
 }
 
+
+.h-text-secondary{
+    color: #303030 !important;
+}
+
 .h-bg-success {
     background-color: #a4c52e !important;
+}
+
+.h-bg-secondary{
+    background-color: #303030 !important;
 }

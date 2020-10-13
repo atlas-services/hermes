@@ -115,6 +115,14 @@ class ConfigType extends AbstractBaseType
                         'bottom' =>'95%',
                     ];
                 break;
+                // affiche_img_hermes
+                case 'affiche_img_hermes':
+                    $choice = true;
+                    $options = [
+                        'true'  => true,
+                        'false' => false ,
+                    ];
+                break;
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [

@@ -95,6 +95,10 @@ parameters:
           summary: image d'accueil du site
           value: ~
           image: ~
+        affiche_img_hermes:
+          summary: image d'Hermes - si pas de logo
+          value: true
+          image: ~
         bgcolor:
           summary: Couleur de fond par défaut
           value: '#ffffff'
