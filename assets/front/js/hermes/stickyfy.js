@@ -11,7 +11,7 @@
 
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function stickyfy() {
-        var sectionContentPaddingTop = 60 ;
+        var sectionContentPaddingTop = 20 ;
         var navBarHeight =  $('.navbar').height() ;
         var navBarSectionContentPaddingTop = navBarHeight + sectionContentPaddingTop;
         if (navBarSectionContentPaddingTop > sticky) {

@@ -186,6 +186,13 @@ add text colors
 add font size
  */
 
+@media (max-width: 600px) {
+    h1, .h1, h2, .h2 {
+        font-size: 2.0rem;
+    }
+}
+
+
 .h-h7, .h-h8{
     margin-bottom: 0.5rem;
     font-weight: 500;
