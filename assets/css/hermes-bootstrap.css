@@ -181,3 +181,32 @@ add text colors
 .h-bg-secondary{
     background-color: #303030 !important;
 }
+
+/*
+add font size
+ */
+
+.h-h7, .h-h8{
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+ .h-h7 {
+    font-size: 0.9rem;
+}
+
+.h-h8 {
+    font-size: 0.8rem;
+}
+
+/*
+polices
+ */
+
+.h-comic{
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+.h-impact{
+    font-family: Impact, fantasy;
+}

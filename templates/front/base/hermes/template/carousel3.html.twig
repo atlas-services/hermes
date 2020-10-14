@@ -6,12 +6,12 @@
         {% set posts = section.posts %}
     {% endif %}
 
-    <div class="container col-xs-12 col-lg-{{ carousel_multiple_container_width|col_lg() }}" >
+    <div class="container col-xs-12 col-lg-{{ carousel_multiple_container_width|col_lg() }}" style="background-color:{{ content_bgcolor }}" >
         <!--Carousel Wrapper-->
         <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
             <!--Controls-->
-            <div class="controls-top">
+            <div class="controls-top mb-5 text-center">
                 <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
                 <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
             </div>
