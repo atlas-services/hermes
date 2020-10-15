@@ -161,6 +161,15 @@ parameters:
         contact_presentation:
           summary: présentation contact (utilisé dans le formulaire de contact)
           value: ~
+        contact_bgcolor:
+          summary: Couleur de fond de la page contact
+          value: 'transparent'
+        contact_color:
+          summary: Couleur des textes la page contact
+          value: '#ffffff'
+        contact_width:
+          summary: Largeur de la page contact (en %)
+          value: '100%'
       nav:
         nav_bar:
           summary: selection de la barre de menu
