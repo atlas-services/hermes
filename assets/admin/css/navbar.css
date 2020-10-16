@@ -41,7 +41,7 @@
         padding-bottom: 25px;
         transition: padding-top 0.3s, padding-bottom 0.3s;
         border: none;
-        background-color: #123456;
+        background-color: var(--color-back);
     }
     #mainNav .navbar-brand {
         font-size: 1.75em;
@@ -64,4 +64,8 @@
 .modal-dialog {
     max-width: 1000px;
     margin: 1.75rem auto;
+}
+
+.footer{
+    background-color: var(--color-back);
 }

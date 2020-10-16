@@ -17,6 +17,8 @@ import '../../css/bootstrap/video.css';
 import '../../css/bootstrap/gallery.css';
 import '../../css/bootstrap/anime.css';
 // import '../../css/bootstrap/todo.css';
+import "fontsource-oswald";
+import "fontsource-bai-jamjuree";
 /*
     js
  */
@@ -29,6 +31,7 @@ import 'carousel';
 import 'bootstrap-slider';
 import 'jquery.easing';
 import '../../../js/chevron';
+import '../../../js/menu';
 import '../../../js/anime';
 import '../hermes/modale';
 // import '../hermes/video';

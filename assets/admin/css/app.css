@@ -13,6 +13,7 @@
     --color-green6: #2E8B57;
     --color-blue1: #0000ff;
     --color-blue2: #123456;
+    --color-back: var(--color-green3);
     --font-family-1: Verdana,sans-serif;
     --percent-1: 99.9999999999%;
     --percent-2: 49.9999999999%;
@@ -45,7 +46,7 @@ Backend
 .btn-primary {
     color: #fff;
     /*background-color: #007bff;*/
-    background-color: var(--color-blue2); /* #007bff */;
+    background-color: var(--color-back); /* #007bff */;
     border-color: var(--color-green4); /* #007bff */;
 }
 
@@ -65,8 +66,8 @@ Position footer calculée
 }
 .footer {
     height: 110px;
-    background-color: var(--color-blue2);
-    color: var(--color-blue2);
+    background-color: var(--color-back);
+    color: var(--color-back);
 }
 
 .container{
@@ -156,7 +157,7 @@ Menu
 
 
 .bg-dark{
-    background-color: var(--color-blue2) !important ;
+    background-color: var(--color-back) !important ;
 }
 
 /*

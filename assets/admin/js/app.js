@@ -15,7 +15,10 @@ import 'bootstrap';
 
 import './exemples';
 import './custom';
+import 'bootstrap-slider';
+import 'jquery.easing';
 import './../../js/chevron';
+import './../../js/menu';
 import './../../js/anime';
 import './tags';
 import './active';
