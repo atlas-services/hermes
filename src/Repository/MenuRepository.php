@@ -48,15 +48,20 @@ class MenuRepository extends ServiceEntityRepository
         return 1;
     }
 
-    public function getQbMenus()
+    public function getQbMenus($active = true)
     {
         $qb = $this->createQueryBuilder('m')
             ->join('m.sheet', 'sheet')
-            ->where('m.active = true ')
             ->andWhere('sheet.active = true ')
             ->orderBy('m.position', 'ASC')
             ->orderBy('sheet.position', 'ASC')
         ;
+
+        if($active){
+            $qb->where('m.active = :active')
+                ->setParameter('active', $active)
+            ;
+        }
 
         return $qb;
     }
@@ -64,7 +69,7 @@ class MenuRepository extends ServiceEntityRepository
     public function getMenus()
     {
         try {
-            $list = $this->getQbMenus()
+            $list = $this->getQbMenus(true)
                 ->getQuery()
                 ->getResult()
             ;
@@ -86,8 +91,8 @@ class MenuRepository extends ServiceEntityRepository
 
     public function getMyMenuBySheetAndMenuSlugs($sheet_slug, $menu_slug)
     {
-        $qb = $this->getQbMenus()
-            ->where('m.active = true ')
+        $qb = $this->getQbMenus(false)
+//            ->where('m.active = true ')
         ;
 
         if('accueil' != $sheet_slug){
