@@ -28,7 +28,7 @@ info:
   first_step_next: Pour apprendre à ajouter un contenu,vous pouvez passer à l'étape suivante en cliquant sur le bouton
   second_step_p1: "La deuxième étape consiste à ajouter un contenu au menu \"Mariage\" en complétant les informations suivantes :"
   second_step_li1: "Page : Saisissez le nom de votre page \"Vin d'honneur\". Vous pourrez le modifier plus tard - c'est le nom que vous choisissez comme sous menu de \"Mariage\"."
-  second_step_li2: "Template : Pour ce premier exemple, nous choisirons le template \"Libre\"."
+  second_step_li2: "Template : Pour ce premier exemple, nous choisirons le template \"Libre\". (vous pouvez consulter le <a href='http://hermes.atlas-services.fr/hermes/guide-utilisateur' target='_blank' > Guide Utilisateur  </a>)"
   second_step_li3: "Nom : Saisissez le nom de votre contenu \"Vin d'honneur\" afin de le retrouver lorsque vous voudrez le modifier."
   second_step_li4: "Contenu : On y arrive! C'est ce qui sera affiché sur votre page et qui mérite tout nos soins."
   second_step_li5: "Contenu (suite) : Afin de bien débuter, je vous invite à recopier le code html du \"Template 1\" à l'adresse suivante : <a href='http://hermes.atlas-services.fr/hermes/template-1' target='_blank' > Template 1  </a>"

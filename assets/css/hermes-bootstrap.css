@@ -208,12 +208,64 @@ add font size
 }
 
 /*
-polices
+polices && size
  */
 
 .h-comic{
     font-family: Comic Sans MS, Comic Sans, cursive;
 }
+
 .h-impact{
     font-family: Impact, fantasy;
+}
+
+.h-palatino{
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+.h-bay-jamjuree{
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+/*
+font-size
+ */
+
+.h-font-size-1{
+    font-size: 1.0em;
+}
+.h-font-size-11{
+    font-size: 1.1em;
+}
+.h-font-size-12{
+    font-size: 1.2em;
+}
+.h-font-size-13{
+    font-size: 1.3em;
+}
+.h-font-size-14{
+    font-size: 1.4em;
+}
+.h-font-size-15{
+    font-size: 1.5em;
+}
+.h-font-size-16{
+    font-size: 1.6em;
+}
+.h-font-size-17{
+    font-size: 1.7em;
+}
+.h-font-size-18{
+    font-size: 1.8em;
+}
+.h-font-size-19{
+    font-size: 1.9em;
+}
+
+.h-font-size-2{
+    font-size: 2.0em ;
+}
+
+.h-font-size-3{
+    font-size: 3.0em;
 }

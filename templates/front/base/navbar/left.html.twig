@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
-                <ul class="nav navbar-nav text-uppercase " style="background-color: {{ nav_menu_bgcolor }}">
+                <ul class="nav navbar-nav " style="background-color: {{ nav_menu_bgcolor }}">
                     {% for sheet_name, listmenu in nav %}
                         {% set sheet_slug = sheetsSlug[sheet_name] %}
                         {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}

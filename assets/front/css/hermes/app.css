@@ -187,3 +187,14 @@ resolve conflict between bootstrap and reveal js
 [hidden] {
     display: inherit !important;
 }
+
+/*
+zoom img
+ */
+
+.zoom img:hover {
+    -webkit-transform: scale(1.7);
+    transform: scale(1.7);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}

@@ -43,9 +43,9 @@
 </nav>
 
 <nav style=" background-color:{{ nav_bgcolor }}; max-width: 100%" class="navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
-    <div class="container border-0" style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}">
+    <div class="container border-0 " style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}">
         <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
-            <ul class="nav navbar-nav text-uppercase " style="background-color: {{ nav_menu_bgcolor }}">
+            <ul class="nav navbar-nav  h-font-size-12" style="background-color: {{ nav_menu_bgcolor }}">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}
                     {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
