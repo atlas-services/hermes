@@ -192,7 +192,7 @@ resolve conflict between bootstrap and reveal js
 zoom img
  */
 
-.zoom img:hover {
+.zoom img:active {
     -webkit-transform: scale(1.7);
     transform: scale(1.7);
     -webkit-transition: .3s ease-in-out;

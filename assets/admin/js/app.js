@@ -17,6 +17,7 @@ import './exemples';
 import './custom';
 import 'bootstrap-slider';
 import 'jquery.easing';
+import './../../js/scroll';
 import './../../js/chevron';
 import './../../js/menu';
 import './../../js/anime';

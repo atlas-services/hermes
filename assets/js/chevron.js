@@ -3,10 +3,10 @@
     "use strict"; // Start of use strict
 
     // Smooth scrolling using jQuery easing
-    $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
-        $('.dropdown-menu').removeClass('show');
-        $(this).parent().children().addClass('active');
-    });
+    // $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
+    //     $('.dropdown-menu').removeClass('show');
+    //     $(this).parent().children().addClass('active');
+    // });
     // Smooth scrolling using jQuery easing
     // $('.modal-content').css('background-color', '#e4e5e6');
 
