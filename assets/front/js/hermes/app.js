@@ -17,8 +17,7 @@ import '../../css/bootstrap/video.css';
 import '../../css/bootstrap/gallery.css';
 import '../../css/bootstrap/anime.css';
 // import '../../css/bootstrap/todo.css';
-import "fontsource-oswald";
-import "fontsource-bai-jamjuree";
+
 /*
     js
  */

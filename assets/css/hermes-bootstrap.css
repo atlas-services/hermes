@@ -211,6 +211,10 @@ add font size
 polices && size
  */
 
+.h-verdana{
+    font-family: Verdana;
+}
+
 .h-comic{
     font-family: Comic Sans MS, Comic Sans, cursive;
 }
@@ -225,6 +229,14 @@ polices && size
 
 .h-bay-jamjuree{
     font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.h-sofia{
+    font-family: 'Sofia', sans-serif;
+}
+
+.h-snowburstOne{
+    font-family: 'Snowburst One', sans-serif;
 }
 
 /*

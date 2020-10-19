@@ -1,8 +1,9 @@
 // /*
 //     css
 //  */
-import '../css/hermes/base.css';
+// import '../css/hermes/base.css';
 // import '../css/navbar.css';
+import '../../css/base.css';
 import '../css/hermes/app.css';
 import 'reveal.js/dist/reveal.css';
 import 'reveal.js/dist/theme/black.css';

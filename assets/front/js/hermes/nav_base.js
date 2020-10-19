@@ -1,7 +1,7 @@
 /*
     css
  */
-import '../../css/hermes/base.css';
+import '../../../css/base.css';
 import '../../css/navbar/base.css';
 
 /*

@@ -61,28 +61,8 @@ Content
     /*margin-right: -50px;*/
 }
 
-/*.footer {*/
-/*    display: block;*/
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
-/*    height: 110px;*/
-/*    background-color: var(--color-base2-back);*/
-/*    color: var(--color-base2-front);*/
-/*}*/
-
-/*.hermes_center {*/
-/*    display: block;*/
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
-/*    margin-top: 3px;*/
-/*    margin-bottom: 3px;*/
-/*    !*margin-bottom: 30px;*!*/
-/*    !*width: 100%;*!*/
-/*}*/
-
 a {
     color: var(--color-yellow);
-    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 a:hover {
     color: var(--color-white);
@@ -111,18 +91,6 @@ Menu
 .bg-dark{
     background-color: var(--color-green3) !important ;
 }
-
-/*.img-fluid {*/
-/*    background-size: cover;*/
-/*    width: 300px;*/
-/*    !*height: 200px;*!*/
-/*    height: 300px;*/
-/*    object-fit: cover;*/
-/*}*/
-
-/*.img-fluid img {*/
-/*    display: none;*/
-/*}*/
 
 .img-fluid-big {
     background-size: cover;

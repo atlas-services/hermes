@@ -1,12 +1,11 @@
 /*
     css
  */
-import '../css/base.css';
+import '../../css/base.css';
 import '../css/navbar.css';
 import '../css/portfolio.css';
 import '../css/app.css';
 import '../../css/anime.css';
-import '../../css/hermes-bootstrap.css';
 /*
     js
  */
