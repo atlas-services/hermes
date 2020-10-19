@@ -23,7 +23,7 @@ info:
   first_step_p1: La première étape consiste à créer un menu.Nous allons créér ici un Menu "Mariage"
   first_step_li1: Aller sur le menu "Mon Tableau de Bord" et sélectionner
   first_step_li2: Cliquer sur le lien
-  first_step_li3: Saisir le nom de votre menu "Mariage" (Vous pourrez le modifier plus tard), puis cliquer sur le bouton
+  first_step_li3: "Menu : Saisir le nom de votre menu \"Mariage\" (Vous pourrez le modifier plus tard), puis cliquer sur le bouton"
   first_step_p2: À ce stade, le menu "Mariage" est créé, mais il n'y a pas encore de contenu associé, il ne sera donc pas visible.
   first_step_next: Pour apprendre à ajouter un contenu,vous pouvez passer à l'étape suivante en cliquant sur le bouton
   second_step_p1: "La deuxième étape consiste à ajouter un contenu au menu \"Mariage\" en complétant les informations suivantes :"
