@@ -1,5 +1,5 @@
 <!-- Portfolio Grid -->
-<section id="portfolio" class="section_content" style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
+<section id="portfolio" class="section_content px-0" style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
     <div class="container-fluid" >
        <div id="folio" class="row_gallery">
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}

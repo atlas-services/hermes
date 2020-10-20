@@ -1,5 +1,5 @@
 <!-- Section Libre -->
-<section id="{{ section.name }}" class="section_content col-lg-12 col-xs-12" style="max-width: {{ container_width }} ; background-color:{{ content_bgcolor }}">
+<section id="{{ section.name }}" class="section_content px-0 col-lg-12 col-12" style="max-width: {{ container_width }} ; background-color:{{ content_bgcolor }}">
     {% if('previsualidation_sheet' == app.request.get('_route')) %}
         {% set posts = section.getPrevisualisationPosts %}
     {% else %}

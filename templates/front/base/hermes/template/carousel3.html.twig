@@ -1,12 +1,12 @@
 <!-- Section carousel -->
-<section id="{{ section.name }}" class="section_content">
+<section id="{{ section.name }}" class="section_content px-0">
     {% if('previsualidation_sheet' == app.request.get('_route')) %}
         {% set posts = section.getPrevisualisationPosts %}
     {% else %}
         {% set posts = section.posts %}
     {% endif %}
 
-    <div class="container col-xs-12 col-lg-{{ carousel_multiple_container_width|col_lg() }}" style="background-color:{{ content_bgcolor }}" >
+    <div class="container col-12 col-lg-{{ carousel_multiple_container_width|col_lg() }}" style="background-color:{{ content_bgcolor }}" >
         <!--Carousel Wrapper-->
         <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
