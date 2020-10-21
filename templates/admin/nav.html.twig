@@ -2,7 +2,7 @@
 {#<nav class="navbar navbar-expand-lg navbar-dark ftco-navbar-light fixed-top navbar-shrink" id="mainNav">#}
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger " href="{{ path('admin_index') }}">Admin
+        <a class="navbar-brand  " href="{{ path('admin_index') }}">Admin
         </a>
         {% for locale in locales %}
             {% if locale == app.request.locale %}
@@ -13,11 +13,11 @@
             <a class="mr-2" href="{{ path('change_locale', {'locale': locale}) }}"><img
                         src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
         {% endfor %}
-        <div class="navbar-header page-scroll">
+        <div class="navbar-header ">
             <button class="navbar-toggler navbar-toggler-right collapsed" type="button"
                     data-toggle="collapse" data-target="#navbarResponsive" aria-label="Toggle navigation"
                     aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span> {{ 'global.sheet'|trans() }} <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -26,7 +26,7 @@
                     style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">
                     <li class=" nav-item dropdown ">
                         <a id="{{ 'global.dashboard'|trans() }}"
-                           class="nav-link js-scroll-trigger page-scroll dropdown-toggle " role="button"
+                           class="nav-link  page-scroll dropdown-toggle " role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.dashboard'|trans()|raw }}
@@ -59,7 +59,7 @@
 
                     <li class=" nav-item dropdown">
                         <a id="{{ 'config.label'|trans() }}"
-                           class="nav-link js-scroll-trigger page-scroll dropdown-toggle " role="button"
+                           class="nav-link  page-scroll dropdown-toggle " role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'config.list'|trans()|raw }}
@@ -102,20 +102,20 @@
                         </div>
 
                     <li class=" nav-item dropdown">
-                        <a id="{{ 'User'|trans() }}" class="nav-link js-scroll-trigger page-scroll dropdown-toggle "
+                        <a id="{{ 'User'|trans() }}" class="nav-link  page-scroll dropdown-toggle "
                            role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
-                            <a class="page-scroll nav-link js-scroll-trigger"
+                            <a class="page-scroll nav-link "
                                href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> </a>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 <a class="text-info mx-3"
                                       href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a>
                             {% endif %}
-                            <a class="page-scroll nav-link js-scroll-trigger"
+                            <a class="page-scroll nav-link "
                                href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
                         </div>
                     </li>
