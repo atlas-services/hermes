@@ -53,8 +53,8 @@ class MenuRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('m')
             ->join('m.sheet', 'sheet')
             ->andWhere('sheet.active = true ')
-            ->orderBy('m.position', 'ASC')
             ->orderBy('sheet.position', 'ASC')
+            ->addOrderBy('m.position', 'ASC')
         ;
 
         if($active){
@@ -73,6 +73,7 @@ class MenuRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult()
             ;
+//            dd($list);
             if([] == $list){
                 return [];
             }

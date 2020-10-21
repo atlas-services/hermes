@@ -7,14 +7,14 @@ Feature: New Menu
     As a user
     I want to create a new menu
     @javascript
-    Scenario: New Sheet, new Menu from previous sheet and add 1 Content libre and save content
+    Scenario: New Sheet, new Menu from previous sheet and add 1 Content Libre and save content
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Les plats"
         And I press "sheet_saveAndAdd"
         When I fill in "menu_name" with "les pizzas"
         And I fill in "menu_sections_0_posts_0_name" with "post pizza"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I fill in wysiwyg on field "menu_sections_0_posts_0_content" with "content_pizzas"
         And I scroll "menu_save" into view
         And I press "menu_save"
@@ -23,14 +23,14 @@ Feature: New Menu
         Then I should see "Les pizzas"
         Then I should see "HERMES HERMES"
     @javascript
-    Scenario: New Sheet, new Menu from previous sheet and add 2 Content libre. save one and coninue with the second content
+    Scenario: New Sheet, new Menu from previous sheet and add 2 Content Libre. save one and coninue with the second content
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Les desserts"
         And I press "sheet_saveAndAdd"
         When I fill in "menu_name" with "les glaces"
         And I fill in "menu_sections_0_posts_0_name" with "post glaces"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I fill in wysiwyg on field "menu_sections_0_posts_0_content" with "content_glaces"
         And I wait for 2 seconds
         And I scroll "menu_saveAndAddPost" into view

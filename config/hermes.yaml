@@ -188,7 +188,7 @@ parameters:
           value: 'transparent'
         nav_color_active:
           summary: Couleur du menu sélectionné
-          value: '#444444'
+          value: '#ffffff'
         nav_link_color:
           summary: Couleur des liens de la barre de menu
           value: '#ffffff'

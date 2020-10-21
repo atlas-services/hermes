@@ -45,16 +45,16 @@ global:
   admin: Admin
   dashboard: My Dashboard
   breadcrumb: 'Vous êtes ici : '
-  new_content: Nouveau Content
-  new_menu: Nouveau menu
+  new_content: New Content
+  new_menu: New menu
   active: Actif
   inactive: Inactif
   admin_presentation: In order to enrich your site, here are the different links that will allow you to
     create pages quickly, then manage more finely the menus, submenus and content that you have created.
-  new_rapid_post: Nouveau Content
+  new_rapid_post: New Content
   new_rapid_sheet: <i class="fa fa-plus"></i> New pages
   new_page: Menus
-  new_post: Nouveau Content dans le menu
+  new_post: New Content
   new_menu_post: Ajout d'un menu avec un Content
   add_menu_post: Ajouter un Content
   menu_entete: Menus

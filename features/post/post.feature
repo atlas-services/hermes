@@ -8,14 +8,14 @@ Feature: New sheet
     I want to create a new posts
 
     @javascript
-    Scenario: New Sheet, Menu from previous sheet and add 2 Content libre
+    Scenario: New Sheet, Menu from previous sheet and add 2 Content Libre
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Présentation"
         And I press "sheet_saveAndAdd"
 #       Menu Texte et Vidéo
         When I fill in "menu_name" with "Texte et vidéo"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I fill in "menu_sections_0_posts_0_name" with "texte1"
         And I press "modal-exemple"
         And I wait for 1 seconds
@@ -63,14 +63,14 @@ Feature: New sheet
         And I follow "Nouveau contenu"
 
     @javascript
-    Scenario: New Sheet, Menu from previous sheet and add 2 Content libre
+    Scenario: New Sheet, Menu from previous sheet and add 2 Content Libre
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Cuisine"
         And I press "sheet_saveAndAdd"
 #       Menu Cuisine tradi
         When I fill in "menu_name" with "Tradi"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I fill in "menu_sections_0_posts_0_name" with "cuisine1"
         And I press "modal-exemple"
         And I wait for 1 seconds
@@ -91,7 +91,7 @@ Feature: New sheet
         And I wait for 2 seconds
         And I select "Cuisine" from "menu_sheet"
         When I fill in "menu_name" with "Monde 1"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         When I fill in "menu_sections_0_posts_0_name" with "Monde 1"
         And I press "modal-exemple"
         And I wait for 1 seconds
@@ -112,7 +112,7 @@ Feature: New sheet
 #       Menu Cuisine du monde2
         And I select "Cuisine" from "menu_sheet"
         When I fill in "menu_name" with "Monde 2"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         When I fill in "menu_sections_0_posts_0_name" with "Monde 2"
         And I press "modal-exemple"
         And I wait for 1 seconds

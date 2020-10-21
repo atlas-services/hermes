@@ -22,7 +22,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
-                <ul class="nav navbar-nav ml-auto"
+                <ul class="h-rounded-lg-09 nav navbar-nav ml-auto"
                     style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">
                     <li class=" nav-item dropdown ">
                         <a id="{{ 'global.dashboard'|trans() }}"
@@ -64,7 +64,7 @@
                            href="#">
                             {{ 'config.list'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu bg-dark" style="min-width: 20rem;"
+                        <div class="dropdown-menu bg-dark " style="min-width: 17rem;"
                              aria-labelledby="{{ 'global.dashboard'|trans()|raw }}" aria-expanded="false">
                             <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
@@ -109,12 +109,12 @@
                             {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <p><a class="text-info mx-3"
-                                      href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a></p>
-                            {% endif %}
                             <a class="page-scroll nav-link js-scroll-trigger"
                                href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> </a>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a class="text-info mx-3"
+                                      href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a>
+                            {% endif %}
                             <a class="page-scroll nav-link js-scroll-trigger"
                                href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
                         </div>

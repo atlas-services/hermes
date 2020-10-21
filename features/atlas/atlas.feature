@@ -8,7 +8,7 @@ Feature: New sheet for atlas
     I want to create a atlas services posts
 
     @javascript
-    Scenario: New Sheet, Menu from previous sheet and add 2 Content libre
+    Scenario: New Sheet, Menu from previous sheet and add 2 Content Libre
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Présentation"
@@ -16,7 +16,7 @@ Feature: New sheet for atlas
 #       Menu Texte et Vidéo
         When I fill in "menu_name" with "projet"
         And I fill in "menu_sections_0_posts_0_name" with "projet"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -78,7 +78,7 @@ Feature: New sheet for atlas
         Then I should see "Sous menus"
         Then I should see "HERMES HERMES"
     @javascript
-    Scenario: New Sheet, Menu from previous sheet and add 2 Content libre
+    Scenario: New Sheet, Menu from previous sheet and add 2 Content Libre
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Services"
@@ -86,7 +86,7 @@ Feature: New sheet for atlas
 #       Menu Services Projet
         When I fill in "menu_name" with "projet"
         And I fill in "menu_sections_0_posts_0_name" with "projet"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -107,7 +107,7 @@ Feature: New sheet for atlas
         And I select "Services" from "menu_sheet"
         When I fill in "menu_name" with "expertise"
         When I fill in "menu_sections_0_posts_0_name" with "expertise"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -129,7 +129,7 @@ Feature: New sheet for atlas
         And I select "Services" from "menu_sheet"
         When I fill in "menu_name" with "à propos"
         When I fill in "menu_sections_0_posts_0_name" with "à propos"
-        And I select "libre" from "menu_sections_0_template"
+        And I select "Libre" from "menu_sections_0_template"
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
