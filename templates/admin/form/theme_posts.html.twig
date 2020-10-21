@@ -56,7 +56,7 @@
 
 
 {% block button_widget -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ml-3 btn mt-4 col-12')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ml-3 btn mt-4 col-12 col-lg-4')|trim}) %}
     {% if label is empty -%}
         {%- if label_format is not empty -%}
             {% set label = label_format|replace({

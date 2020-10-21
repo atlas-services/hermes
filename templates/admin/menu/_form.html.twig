@@ -25,13 +25,13 @@
                     {{ form_row(form_post.imageFile) }}
                     {{ form_row(form_post.name) }}
                     {{ form_row(form_post.content) }}
-                    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form_post.tags.vars.prototype)|e('html_attr') }}">
-                        {% for tag in form_post.tags %}
-                            <li class="list-unstyled btn btn-primary">
-                                {{ form_row(tag.name) }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+{#                    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form_post.tags.vars.prototype)|e('html_attr') }}">#}
+{#                        {% for tag in form_post.tags %}#}
+{#                            <li class="list-unstyled btn btn-primary">#}
+{#                                {{ form_row(tag.name) }}#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
                 {% endfor  %}
             {% endif  %}
         {% endfor  %}
@@ -39,7 +39,7 @@
 {% endif %}
 {% if( app.request.attributes.get('_route') in ['menu_section_post_new_sheet']) %}
     {{ form_row(form.saveAndAddPost) }}
-    {{ form_row(form.saveAndAddSectionPost) }}
+{#    {{ form_row(form.saveAndAddSectionPost) }}#}
 {% endif %}
     {{ form_row(form.save) }}
 {{ form_widget(form._token) }}

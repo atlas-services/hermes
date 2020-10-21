@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+:root {
+    --h-color-success: #a4c52e;
+}
+
+
 /*
 add width values
  */
@@ -190,7 +195,7 @@ add text colors
 */
 
 .h-text-success {
-    color: #a4c52e !important;
+    color: var(--h-color-success) !important;
 }
 
 
@@ -199,7 +204,7 @@ add text colors
 }
 
 .h-bg-success {
-    background-color: #a4c52e !important;
+    background-color: var(--h-color-success) !important;
 }
 
 .h-bg-secondary{
@@ -304,4 +309,49 @@ font-size
 
 .h-font-size-3{
     font-size: 3.0em;
+}
+
+/*
+add button
+ */
+
+.h-btn-outline-success {
+    color: var(--h-color-success);
+    border-color: var(--h-color-success);
+}
+
+.h-btn-outline-success:hover {
+    color: #fff;
+    background-color: var(--h-color-success);
+    border-color: var(--h-color-success);
+}
+
+.h-btn-outline-success:focus, .h-btn-outline-success.focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+.h-btn-outline-success.disabled, .h-btn-outline-success:disabled {
+    color: var(--h-color-success);
+    background-color: transparent;
+}
+
+.h-btn-outline-success:not(:disabled):not(.disabled):active, .h-btn-outline-success:not(:disabled):not(.disabled).active,
+.show > .h-btn-outline-success.dropdown-toggle {
+    color: #fff;
+    background-color: var(--h-color-success);
+    border-color: var(--h-color-success);
+}
+
+.h-btn-outline-success:not(:disabled):not(.disabled):active:focus, .h-btn-outline-success:not(:disabled):not(.disabled).active:focus,
+.show > .h-btn-outline-success.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+/*
+add border
+ */
+
+
+.h-border-success {
+    border-color: var(--h-color-success) !important;
 }

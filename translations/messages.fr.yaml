@@ -163,6 +163,7 @@ user:
   password: Mot de passe
   forgot_password: Mot de passe oublié
   send_email: Envoyer
+  admin: Mon espace d'administration
   sign_in: Se connecter
   identification: Se connecter
   edit: Utilisateur
@@ -184,8 +185,10 @@ sheet:
   images: Images de la page (Taille maximale < 2 Mo)
 
 menu:
-  update_next: Ajouter un contenu avec le même affichage
-  update_next_different: Ajouter un contenu avec un affichage différent
+#  update_next: Ajouter un contenu avec le même affichage
+  update_next: Continuer
+#  update_next_different: Ajouter un contenu avec un affichage différent
+  update_next_different: Nouveau
   affiche_list: Sous menus
   list: Sous menus
   edit: Modifier le menu
