@@ -214,6 +214,10 @@ parameters:
         content_container_width:
           summary: Largeur du contenu affiché (en %)
           value: '60%'
+      folio:
+        folio_container_width:
+          summary: Largeur du folio affiché (en %)
+          value: '60%'
       carousel:
         carousel_container_width:
           summary: Largeur du carousel affiché (en %)

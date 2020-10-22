@@ -1,7 +1,6 @@
 <!-- Portfolio Grid -->
-<section id="portfolio" class="section_content px-0"
-         style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
-    <div class="container">
+<section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
+    <div class="container col-12 col-lg-{{ folio_container_width|col_lg() }}">
         <div class="row ml-5" id="folio">
         <div id="staggering">
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}

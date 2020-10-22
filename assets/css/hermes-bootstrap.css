@@ -272,6 +272,12 @@ polices && size
 font-size
  */
 
+.h-font-size-08{
+    font-size: 0.8em;
+}
+.h-font-size-09{
+    font-size: 0.9em;
+}
 .h-font-size-1{
     font-size: 1.0em;
 }

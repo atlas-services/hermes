@@ -1,8 +1,7 @@
 <!-- Portfolio Grid -->
-<section id="portfolio" class="section_content px-0"
-         style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
+<section id="portfolio" class="section_content px-0" style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
     <div id="folio" class="row ml-5">
-    <div class="container">
+    <div class="container col-12 col-lg-{{ folio_container_width|col_lg() }}">
         <div id="staggering">
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                 {% if(vich_uploader_asset(post, 'imageFile') is not null) %}

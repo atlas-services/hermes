@@ -131,6 +131,7 @@ config:
   affiche_list_contact: Configuration du contact
   affiche_list_menu: Configuration du menu
   affiche_list_content: Configuration du contenu
+  affiche_list_folio: Configuration des folios
   affiche_list_carousel: Configuration des carousels
   affiche_list_modale: Configuration des modales
   affiche_list_card: Configuration des cards
