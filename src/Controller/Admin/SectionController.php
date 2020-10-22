@@ -31,15 +31,16 @@ class SectionController extends AbstractController
     {
         $sections = $this->getDoctrine()
             ->getRepository(Section::class)
-            ->findAll();
-//            ->findBy(['menu'=> '1']);
-
-//            dd($sections);
-
-//        dd($sections[0]->getMenu()->getName());
+            ->findAll()
+        ;
+        $menus = $this->getDoctrine()
+            ->getRepository(Menu::class)
+            ->findAll()
+        ;
 
         return $this->render('admin/section/index.html.twig', [
             'sections' => $sections,
+            'menus' => $menus,
         ]);
     }
 

@@ -12,6 +12,8 @@ import '../../css/anime.css';
 import $ from 'jquery';
 const jQuery = $;
 import 'bootstrap';
+import 'select2';
+import 'maximize-select2-height';
 
 import './exemples';
 import './custom';

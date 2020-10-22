@@ -211,6 +211,9 @@ parameters:
         content_bgcolor:
           summary: Couleur de fond du contenu
           value: '#ffffff'
+        content_color:
+          summary: Couleur du contenu
+          value: '#000000'
         content_container_width:
           summary: Largeur du contenu affiché (en %)
           value: '60%'

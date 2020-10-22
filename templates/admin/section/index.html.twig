@@ -5,10 +5,10 @@
 {% block content %}
     <div class="row mb-2">
     <h1 class="col-lg-2">{{ 'section.list'|trans() }}</h1>
-    <select class="col-lg-3 text-success" id="select_page" >
+    <select class="mt-4 select2 bg-primary" id="select_page" >
         <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
-    {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
-        <option class="text-success" value="{{ section.menu.id }}">{{ section.menu.name }}</option>
+    {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
+        <option value="{{ menu.id }}">{{ menu.name }}</option>
     {% endfor %}
     </select>
     </div>
