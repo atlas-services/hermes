@@ -5,6 +5,7 @@ fos_ck_editor:
     my_config:
       jquery: true
       toolbar: full
+      height: '50%'
       filebrowserBrowseRoute: elfinder
       filebrowserBrowseRouteParameters: []
       basicEntities: false;

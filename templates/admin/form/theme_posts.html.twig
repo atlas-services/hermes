@@ -24,7 +24,11 @@
 {% block form_label -%}
     {{- parent() -}}
     {% if 'content' == form.vars.name   %}
-        {% if 'test' == app.environment   %}
+            <a type="button" class="btn h-bg-success text-white " href="http://hermes.atlas-services.fr/hermes/guide-utilisateur#template_libre" target="_blank" >
+                <h6><i class="fa fa-info-circle"></i> {{ 'info.guide'|trans() }}
+                </h6>
+            </a>
+         {% if 'test' == app.environment   %}
             {% include '/admin/exemple/libre.html.twig' %}
         {% endif %}
     {% endif %}
