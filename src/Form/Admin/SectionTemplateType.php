@@ -34,7 +34,7 @@ class SectionTemplateType extends AbstractType
                         ->where('t.active = 1')
                         ;
                 },
-                'attr'=> ['class' => 'custom-select custom-select-lg mb-3 ']
+                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ])
             ->add('posts', CollectionType::class, [
                 'entry_type' => PostType::class,
@@ -51,7 +51,7 @@ class SectionTemplateType extends AbstractType
             $builder
                 ->add('menu', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                     'class'=> Menu::class,
-                    'attr'=> ['class' => 'custom-select custom-select-lg mb-3 ']
+                    'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                 ]);
         }
         if($options['position']){

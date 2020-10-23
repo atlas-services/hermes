@@ -36,7 +36,7 @@ class MenuType extends AbstractNameBaseType
                 'query_builder'=>  function (SheetRepository $er) {
                     return $er->getQbSheetsWithoutContact();
                 },
-                'attr'=> ['class' => 'custom-select custom-select-lg mb-3']
+                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ]);
         }
         $builder

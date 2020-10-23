@@ -31,7 +31,7 @@ class BaseMenuType extends AbstractNameBaseType
                     'class' => Sheet::class,
                     'required' => true,
                     'label' => 'global.sheet',
-                    'attr' => ['class' => 'custom-select custom-select-lg mb-3']
+                    'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3']
                 ])
             ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
                 'required' => false,

@@ -54,7 +54,7 @@ jQuery(document).ready(function () {
     $( ".select2").select2({
         theme: "bootstrap",
         // templateResult: formatMenu
-    }).maximizeSelect2Height('10');
+    }).maximizeSelect2Height();
     $('.select2-selection').css('margin-top', '12px');
     $('.select2-selection').css('border-color', '#a4c52e');
     $(".select2-results__option").css("background-color", "#123456");

@@ -19,13 +19,13 @@ class ConfigType extends AbstractBaseType
             ->add('code', TextType::class, ['disabled' => $options['code_disabled']])
             ->add('type', ChoiceType::class, [
                 'choices' => $options['type_choices'],
-                'attr' => ['class' => 'custom-select custom-select-lg mb-3']
+                'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
             ]);
         if (null != $options['value_choices']) {
             $builder
                 ->add('value', ChoiceType::class, [
                     'choices' => $options['value_choices'],
-                    'attr' => ['class' => 'custom-select custom-select-lg mb-3']
+                    'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                 ]);
         }
 //            else{
@@ -127,7 +127,7 @@ class ConfigType extends AbstractBaseType
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
                     'choices' => $options,
-                    'attr' => ['class' => 'custom-select custom-select-lg mb-3']
+                    'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                 ]);
             }
             if(!$choice) {
@@ -140,14 +140,14 @@ class ConfigType extends AbstractBaseType
                             'transparent.no' => false,
                             'transparent.yes' => true ,
                         ],
-                        'attr' => ['class' => 'custom-select custom-select-lg mb-3']
+                        'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                     ]);
                 } else {
                     if (strpos($code, 'width')) {
                         $form->add('value', ChoiceType::class, [
                             'required' => false,
                             'choices' =>   $options_pct,
-                            'attr' => ['class' => 'custom-select custom-select-lg mb-3']
+                            'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                         ]);
                     }else{
                         $form->add('value', TextType::class, [

@@ -25,7 +25,7 @@ class SectionType extends AbstractNameBaseType
                     'class'=> Template::class,
                     'required' => true,
                     'label' => 'section.template',
-                    'attr'=> ['class' => 'custom-select custom-select-lg mb-3']
+                    'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3']
                 ])
             ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
                 'required' => false,

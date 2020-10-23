@@ -25,7 +25,7 @@ class PostType extends AbstractNameBaseType
                     'class' => 'App\Entity\Section',
                     'choice_label' => 'template',
                     'label_format' => 'section.template',
-                    'attr'=> ['class' => 'custom-select custom-select-lg mb-3']
+                    'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                 ]);
         }
         if ($options['position']) {
