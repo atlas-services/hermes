@@ -1,44 +1,40 @@
 <!-- Breadcrumb -->
-<section class="hero-wrap hero-wrap-2 rounded-pill bg-light mb-lg-3 pl-2 pt-0 pb-0">
+<section class="hero-wrap hero-wrap-2 mb-lg-3 pl-2 pt-0 pb-0">
     <div class="overlay"></div>
-    {#    <div class="container">#}
-    <div class="row no-gutters slider-text text-left">
-        <div class="col-md-19 text-center">
-{#            <h1 class="mb-2 bread"></h1>#}
-            <h3 class="breadcrumbs text-left" >
-                <span class="mr-2  h3">
-                      <a href="{{ path('admin_index') }}">{{ 'global.dashboard'|trans()|raw }}</a>
-                    <i class="fa fa-angle-right text-dark"></i><i class="fa fa-angle-right text-dark"></i>
-{#                    {{ 'global.breadcrumb'|trans() }}#}
-                </span>
-                {% if( app.request.attributes.get('_route') in ['post_edit', 'post_new_section','section_post_new_menu', 'section_edit','menu_edit', 'menu_section_edit', 'menu_section_post_new_sheet']) %}
-                    {% set sheetId = post.section.menu.sheet.id ?? section.menu.sheet.id ?? menu.sheet.id ?? 'false' %}
-                    <span class="mr-2  h3 ">
-                        <a class="text-info" href="{{ path('sheet_edit', {'sheet': post.section.menu.sheet.slug ?? section.menu.sheet.slug ?? menu.sheet.slug ?? 'nouvelle' } ) }}"> {{ post.section.menu.sheet.name ?? section.menu.sheet.name ?? menu.sheet.name ?? '' }} </a>
+    <div class="row no-gutters slider-text">
+        <div class="col-lg-12 text-center">
+            <h3 class="breadcrumbs " >
+                {% if( app.request.attributes.get('_route') in [ 'menu_section_post_new_sheet' ]) %}
+                    <span class=" h-text-success mr-2 h3 ">
+                        Je crée une nouvelle page.
                     </span>
-                    <span class="text-danger h3">
-                   {% if( app.request.attributes.get('_route') in ['post_edit', 'post_new_section', 'section_edit','section_post_new_menu']) %}
-                       {% set menuId = post.section.menu.id ?? section.menu.id ?? menu.id ?? 'false' %}
-                        {% if( menuId != 'false') %}
-                       <i class="fa fa-angle-right text-dark"></i>
-                       <a class="text-success h3" href="{{ path('menu_edit', {'sheet': post.section.menu.sheet.slug ?? section.menu.sheet.slug ?? menu.sheet.slug ?? 'nouveau','menu': post.section.menu.slug ?? section.menu.slug ?? menu.slug ?? 'nouveau' }) }}"> {{ post.section.menu.name ?? section.menu.name ?? menu.name ?? '' }} </a>
-                            <i class="fa fa-angle-right text-dark"></i>
-                        {% endif %}
-                        {% if( app.request.attributes.get('_route') not in [ 'section_edit']) %}
-                        {{ post.name ?? 'global.new_content'|trans()|raw }}
-                        {% endif %}
-                    {% endif %}
-                    {% if( app.request.attributes.get('_route') in ['menu_new','menu_edit', 'menu_section_edit', 'menu_section_post_new_sheet' ]) %}
-                        {% if( sheetId != 'false') %}
-                        <i class="fa fa-angle-right text-dark"></i>
-                        {% endif %}
-                        {{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}
-                    {% endif %}
+                {% endif %}
+                 {% if( app.request.attributes.get('_route') in ['menu_edit' ]) %}
+                    <span class=" h-text-success mr-2 h3 ">
+                        Je met à jour mon sous-menu
+                        "{{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}"
+                    </span>
+                {% endif %}
+                 {% if( app.request.attributes.get('_route') in ['section_post_new_menu' ]) %}
+                    <span class=" h-text-success mr-2 h3 ">
+                        J'ajoute un contenu à mon sous-menu "{{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}"
+                    </span>
+                {% endif %}
+                 {% if( app.request.attributes.get('_route') in ['section_edit' ]) %}
+                    <span class=" h-text-success mr-2 h3 ">
+                        Je met à jour l'affichage de mon sous-menu "{{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}".
+                    </span><br/>
+                    <span class=" h-text-success mr-2 h3 ">
+                        Je met à jour ses contenus (Nom et Image).
+                    </span>
+                {% endif %}
+                 {% if( app.request.attributes.get('_route') in ['post_edit' ]) %}
+                    <span class=" h-text-success mr-2 h3 ">
+                        Je met à jour mon contenu "{{ post.name ?? 'global.new_content'|trans()|raw }}" du sous-menu "{{ post.section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}".
                     </span>
                 {% endif %}
             </h3>
         </div>
-        {#        </div>#}
     </div>
 </section>
 

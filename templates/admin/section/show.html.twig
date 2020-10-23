@@ -25,7 +25,8 @@
 
     <a href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
-    <a href="{{ path('section_edit', {'section': section.name}) }}">edit</a>
+{#    <a href="{{ path('section_edit', {'section': section.name}) }}">edit</a>#}
+    <a href="{{ path('section_edit', {'section': section.id}) }}">edit</a>
 
     {{ include('admin/section/_delete_form.html.twig') }}
 {% endblock %}

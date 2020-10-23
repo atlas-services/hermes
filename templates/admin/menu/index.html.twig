@@ -3,8 +3,16 @@
 {% block title %}{{ 'menu.list'|trans() }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'menu.list'|trans() }}</h1>
 
+    <div class="row mb-2">
+    <h1 class="col-lg-3">{{ 'menu.list'|trans() }}</h1>
+        <select class="mt-4 select2 bg-primary" id="select_page" >
+            <option value="{{ 'menu.all'|trans() }}" >{{ 'menu.all_text'|trans() }}</option>
+            {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
+                <option value="{{ menu.id }}">{{ menu.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <table class="table">
         <thead>
                 <th>{{ 'global.active'|trans() }}</th>
@@ -17,7 +25,7 @@
         </thead>
         <tbody>
         {% for menu in menus|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.sheet.name <=> b.sheet.name) %}
-            <tr>
+            <tr class="{{ menu.id }}" >
                 <td>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="menu-active custom-control-input" id="{{ menu.id }}"  {{ menu.isActive ? 'checked': '' }} >

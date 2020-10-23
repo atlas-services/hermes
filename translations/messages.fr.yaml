@@ -197,6 +197,8 @@ menu:
   add: Créer un menu
   show: Menu
   add_section: Ajouter une section
+  all: All
+  all_text: Tout les sous-menu
   label: Sous menus
   sheet: Page du menu
   sections: Sections du menu

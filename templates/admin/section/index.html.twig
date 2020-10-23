@@ -5,12 +5,12 @@
 {% block content %}
     <div class="row mb-2">
     <h1 class="col-lg-2">{{ 'section.list'|trans() }}</h1>
-    <select class="mt-4 select2 bg-primary" id="select_page" >
-        <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
-    {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
-        <option value="{{ menu.id }}">{{ menu.name }}</option>
-    {% endfor %}
-    </select>
+        <select class="mt-4 select2 bg-primary" id="select_page" >
+            <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
+        {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
+            <option value="{{ menu.id }}">{{ menu.name }}</option>
+        {% endfor %}
+        </select>
     </div>
 
     <table class="table">
@@ -46,8 +46,8 @@
                 </td>
                 <td>{{ section.position }}</td>
                 <td>
-                    <a href="{{ path('section_edit', {'section': section.name}) }}">{{ 'action.edit'|trans()|raw }}</a>
-{#                    <a href="{{ path('post_new_section', {'section': section.id }) }}">{{ 'action.add'|trans()|raw }}</a>#}
+{#                    <a href="{{ path('section_edit', {'section': section.name}) }}">{{ 'action.edit'|trans()|raw }}</a>#}
+                    <a href="{{ path('section_edit', {'section': section.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                     <a href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
                 </td>
             </tr>

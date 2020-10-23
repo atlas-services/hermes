@@ -122,7 +122,7 @@ class SectionController extends AbstractController
 
     /**
      * @Route("/modele/edit/{section}", name="section_edit", methods={"GET","POST"})
-     * @ParamConverter("section",class="App\Entity\Section", options={"mapping": {"section": "name"}})
+     * @ParamConverter("section",class="App\Entity\Section", options={"mapping": {"section": "id"}})
      */
     public function edit(Request $request, CacheInterface $backCache, Section $section): Response
     {
