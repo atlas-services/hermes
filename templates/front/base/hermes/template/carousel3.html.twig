@@ -41,7 +41,7 @@
                                             {{ post.name }}
                                         </a>
                                     </h4>
-                                    <p class="card-text">{{ post.content|striptags|u.truncate(25, '...') }}</p>
+                                    <p class="card-text">{{ post.content|striptags|u.truncate(25, '...')|raw }}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                 <!--/.Slides-->
             </div>
             <!--/.Carousel Wrapper-->
-        </div>>
+        </div>
 </section>
 
 

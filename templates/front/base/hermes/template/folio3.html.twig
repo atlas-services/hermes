@@ -18,7 +18,7 @@
                             </a>
                             <h4>{{ post.name }}</h4>
                             {% set ligne = post.content|length - maxlength %}
-                            <p class="h-font-size-09">{{ post.content|striptags|u.truncate(maxlength, '...') }} </p>
+                            <p class="h-font-size-09">{{ post.content|striptags|u.truncate(maxlength, '...')|raw }} </p>
                             {% if ligne < 0 %}
                                 <br/>
                             {% endif %}
