@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\TemplateRepository")
  * @ORM\Table(name="template")
  * Defines the properties of the Sheet entity to represent the blog menus.
  *

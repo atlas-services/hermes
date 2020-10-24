@@ -6,7 +6,7 @@ use App\Entity\Menu;
 use App\Entity\Section;
 
 use App\Entity\Template;
-use Doctrine\ORM\EntityRepository;
+use App\Repository\TemplateRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,11 +28,11 @@ class SectionTemplateType extends AbstractType
         $builder
             ->add('template', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class'=> Template::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('t')
-                        ->orderBy('t.code', 'ASC')
-                        ->where('t.active = 1')
-                        ;
+                'query_builder' => function (TemplateRepository $er)  use ($options) {
+                if($options['full_template']){
+                    return $er->getQbTemplates();
+                }
+                    return $er->getQbInitTemplates();
                 },
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ])
@@ -99,6 +99,7 @@ class SectionTemplateType extends AbstractType
             'save_visibility' => true,
             'content' => true,
             'menu' => false,
+            'full_template' => true,
             'name_constraints' => [],
             'position' => false,
             'saveAndAddSectionPost' => false,

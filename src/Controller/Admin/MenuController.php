@@ -57,6 +57,7 @@ class MenuController extends AbstractController
         $section->addPost($post);
         $menu->addSection($section);
         $options['sheet'] = true;
+        $options['full_template'] = true;
         if(!is_null($sheet)) {
             $menu->setSheet($sheet);
             $options['sheet'] = false;

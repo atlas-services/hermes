@@ -58,7 +58,7 @@ class MenuType extends AbstractNameBaseType
                 'by_reference' => false,
                 'allow_delete' => true,
                 'label'=> false,
-                'entry_options' => ['label' => false, 'save_visibility'=> false],
+                'entry_options' => ['label' => false, 'save_visibility'=> false, 'full_template' => $options['full_template']],
             ])
         ;
 
@@ -112,6 +112,7 @@ class MenuType extends AbstractNameBaseType
             'saveAndAddLabel' => 'menu.update_next',
             'saveAndAddPost' => true,
             'saveAndAddSectionPost' => true,
+            'full_template' => true,
         ]);
     }
 }
