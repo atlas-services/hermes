@@ -43,8 +43,8 @@
                                   href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
                             <p><a class="text-info  mx-3"
                                   href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
-{#                            <p><a class="text-info mx-3"#}
-{#                                  href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>#}
+                            <p><a class="text-info mx-3"
+                                  href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 {% if(config.value is defined) %}
                                     {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}

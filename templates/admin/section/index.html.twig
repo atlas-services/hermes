@@ -49,6 +49,9 @@
 {#                    <a href="{{ path('section_edit', {'section': section.name}) }}">{{ 'action.edit'|trans()|raw }}</a>#}
                     <a href="{{ path('section_edit', {'section': section.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                     <a href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
+                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}
+                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

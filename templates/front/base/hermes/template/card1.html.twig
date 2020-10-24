@@ -7,10 +7,14 @@
     {% endif %}
 
     <div class="col-lg-{{ card_container_width|col_lg() }} col-12 mx-auto pl-0 pr-0">
-        {% for key, post in posts|sort((a, b) => a.position <=> b.position) %}
-            {% if key is even %}
+        {% for post in posts|sort((a, b) => a.position <=> b.position) %}
+            {% if loop.index is odd %}
                 <div class="row col-lg-12 col-12 mx-auto">
-                {% set margin = 'ml-lg-auto mr-lg-4 mt-lg-3' %}
+                {% if not loop.last  %}
+                    {% set margin = 'ml-lg-auto mr-lg-4 mt-lg-3 ' %}
+                {% else %}
+                    {% set margin = 'ml-lg-auto mr-lg-auto mt-lg-3 ' %}
+                {% endif %}
             {% else %}
                 {% set margin = 'mr-lg-auto ml-lg-4 mt-lg-3'  %}
             {% endif %}
@@ -26,7 +30,7 @@
                         </div>
                     {% endif %}
                 </div>
-            {% if key is  odd %}
+            {% if loop.index is  even %}
                 </div>
             {% endif %}
         {% endfor %}

@@ -186,6 +186,7 @@ class ConfigType extends AbstractBaseType
                 'contenu' => 'content',
                 'folio' => 'folio',
                 'carousel' => 'carousel',
+                'carte' => 'card',
                 'modale' => 'modale',
                 'footer' => 'footer',
                 'réseaux sociaux' => 'network',
