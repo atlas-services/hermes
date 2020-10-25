@@ -6,7 +6,7 @@
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                 {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                     <span class="staggering">
-                        <img class="stagge" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre') }}"/>
+                        <img class="stagge" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
                     </span>
                 {% endif %}
             {% endfor %}
