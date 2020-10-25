@@ -67,10 +67,10 @@
     }
 }
 
-.modal-dialog {
-    max-width: 1000px;
-    margin: 1.75rem auto;
-}
+/*.modal-dialog {*/
+/*    max-width: 1000px;*/
+/*    margin: 1.75rem auto;*/
+/*}*/
 .dropdown-menu{
     white-space: nowrap;
 }
