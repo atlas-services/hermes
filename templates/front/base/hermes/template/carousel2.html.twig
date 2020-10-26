@@ -28,8 +28,10 @@
                             {% set active = 'active' %}
                         {% endif %}
                         <div class="carousel-item  col-12 {{ active }}">
+                            {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                             <img class="d-block w-100" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carousel_filter') }}"
                                  alt="{{ post.name }}">
+                            {% endif %}
                             <div class="carousel-caption">
                                 <h5>
                                     <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">

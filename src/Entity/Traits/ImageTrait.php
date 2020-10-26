@@ -24,6 +24,7 @@ trait ImageTrait
      * @Assert\Image(
      *     mimeTypes={"image/jpeg","image/gif","image/png","image/svg","image/pdf","application/pdf"}
      * )
+     * @Assert\NotBlank(groups={"image"}, message="error_message.post.image")
      * @Vich\UploadableField(mapping="content_images", fileNameProperty="filename")
      */
     protected $imageFile;

@@ -6,6 +6,7 @@ error_message:
     name: Saisissez un nom pour ce contenu.
     content: Saisissez un contenu.
     too_short_content: La longueur du texte doit être suprieure à {{ limit }}.
+    image: Vous devez ajouter une image.
   menu:
     name: Saisissez un nom pour ce menu.
   sheet:

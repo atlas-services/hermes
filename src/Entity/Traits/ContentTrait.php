@@ -13,7 +13,7 @@ trait ContentTrait
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank(message="error_message.post.content")
+     * @Assert\NotBlank(groups={"content"}, message="error_message.post.content")
      */
     protected $content;
 

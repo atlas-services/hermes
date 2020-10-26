@@ -4,11 +4,14 @@ namespace App\Form\Admin;
 
 use App\Entity\Post;
 use App\Entity\Tag;
+use App\Entity\Template;
 use App\Form\Admin\TagType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GroupSequence;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostType extends AbstractNameBaseType
@@ -36,6 +39,7 @@ class PostType extends AbstractNameBaseType
                 ]);
         }
         if ($options['image_file']) {
+            $builder->add('fileName');
             $builder
                 ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
                     'required' => false,
@@ -47,17 +51,7 @@ class PostType extends AbstractNameBaseType
         if ($options['content']) {
         $builder
             ->add('content', 'FOS\CKEditorBundle\Form\Type\CKEditorType', [
-                'constraints' => new NotBlank(['message'=> 'error_message.post.content']),
                 'config_name' => 'my_config',
-//                'config' => array(
-//                    'extraPlugins' => 'ckeditor-gwf-plugin',
-//                ),
-//                'plugins' => array(
-//                    'ckeditor-gwf-plugin' => array(
-//                        'path'     => '/bundles/fosckeditor/plugins/font/gwf/', // with trailing slash
-//                        'filename' => 'plugin.js',
-//                    ),
-//                ),
                 'label_format' => 'global.content',
                 'required'=> true,
                 'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']
@@ -82,6 +76,16 @@ class PostType extends AbstractNameBaseType
             'name_required'=> false,
             'name_constraints'=> new NotBlank(['message'=> 'error_message.post.name']),
             'content' => true,
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+                $template = $data->getSection()->getTemplate();
+                if ('libre' == $template->getCode()) {
+                    return ['Default','content'];
+                }else{
+                    return ['Default','image'];
+                }
+                return ['Default'];
+            },
             'image_file' => true,
             'save_visibility' => true,
             'save' => true,

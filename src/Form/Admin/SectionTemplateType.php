@@ -3,16 +3,19 @@
 namespace App\Form\Admin;
 
 use App\Entity\Menu;
+use App\Entity\Post;
 use App\Entity\Section;
 
 use App\Entity\Template;
 use App\Repository\TemplateRepository;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -38,6 +41,7 @@ class SectionTemplateType extends AbstractType
             ])
             ->add('posts', CollectionType::class, [
                 'entry_type' => PostType::class,
+                'constraints' => new \Symfony\Component\Validator\Constraints\Valid(),
                 'prototype'=> true,
                 'prototype_name' => 'post',
                 'allow_add' => true,
@@ -103,6 +107,21 @@ class SectionTemplateType extends AbstractType
             'name_constraints' => [],
             'position' => false,
             'saveAndAddSectionPost' => false,
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+                if($data instanceof Section ){
+                    $template = $data->getTemplate();
+                }
+                if($data instanceof Post){
+                    $template = $data->getSection()->getTemplate();
+                }
+                if ('libre' == $template->getCode()) {
+                    return ['Default','content'];
+                }else{
+                    return ['Default','image'];
+                }
+                return ['Default'];
+            },
         ]);
     }
 }
