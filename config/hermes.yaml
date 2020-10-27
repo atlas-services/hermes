@@ -237,7 +237,7 @@ parameters:
           value: '#ffffff'
         modale_container_width:
           summary: Largeur du modales affiché (en %)
-          value: '80%'
+          value: '50%'
       card:
         card_bgcolor:
           summary: Couleur de fond des cards

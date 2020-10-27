@@ -126,8 +126,18 @@ class SectionController extends AbstractController
      */
     public function edit(Request $request, CacheInterface $backCache, Section $section): Response
     {
-        $options['position'] = true;
-        $options['content'] = false;
+
+        $options['posts'] = [
+            'entry_type' => PostType::class,
+            'prototype'=> true,
+            'prototype_name' => 'post',
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'label'=> false,
+            'entry_options' => ['label' => false, 'active'=> false, 'position'=>true, 'name'=>true, 'content'=>false, 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
+        ];
+
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
         $form->handleRequest($request);
 

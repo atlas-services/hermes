@@ -39,17 +39,19 @@ class SectionTemplateType extends AbstractType
                 },
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ])
-            ->add('posts', CollectionType::class, [
-                'entry_type' => PostType::class,
-                'constraints' => new \Symfony\Component\Validator\Constraints\Valid(),
-                'prototype'=> true,
-                'prototype_name' => 'post',
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' => true,
-                'label'=> false,
-                'entry_options' => ['label' => false, 'active'=> false, 'position'=>false, 'name'=>true, 'content'=>$options['content'], 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
-            ])
+            ->add('posts', CollectionType::class, $options['posts']
+//                [
+//                'entry_type' => PostType::class,
+//                'constraints' => $options['constraints'],
+//                'prototype'=> true,
+//                'prototype_name' => 'post',
+//                'allow_add' => true,
+//                'by_reference' => false,
+//                'allow_delete' => true,
+//                'label'=> false,
+//                'entry_options' => ['label' => false, 'active'=> false, 'position'=>false, 'name'=>true, 'content'=>$options['content'], 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
+//            ]
+    )
         ;
         if($options['menu']){
             $builder
@@ -103,6 +105,17 @@ class SectionTemplateType extends AbstractType
             'save_visibility' => true,
             'content' => true,
             'menu' => false,
+            'posts' =>                 [
+                'entry_type' => PostType::class,
+                'constraints' => new \Symfony\Component\Validator\Constraints\Valid(),
+                'prototype'=> true,
+                'prototype_name' => 'post',
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+                'label'=> false,
+                'entry_options' => ['label' => false, 'active'=> false, 'position'=>false, 'name'=>true, 'content'=> true, 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
+            ],
             'full_template' => true,
             'name_constraints' => [],
             'position' => false,
