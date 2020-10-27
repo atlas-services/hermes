@@ -49,27 +49,4 @@
         });
     });
 
-    // select2
-jQuery(document).ready(function () {
-    $( ".select2").select2({
-        theme: "bootstrap",
-        // templateResult: formatMenu
-    }).maximizeSelect2Height();
-    $('.select2-selection').css('margin-top', '12px');
-    $('.select2-selection').css('border-color', '#a4c52e');
-    $(".select2-results__option").css("background-color", "#123456");
-    // $('.select2-selection').css('color', '#a4c52e');
-
-});
-
-function formatMenu (menu) {
-
-    var $menu = $(
-        '<span class="px-0 mx-0  h-text-success">'+ menu.text + '</span>'
-    );
-    return $menu;
-};
-
-
-
 })(jQuery); // End of use strict

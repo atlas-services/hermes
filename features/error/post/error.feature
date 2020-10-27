@@ -13,7 +13,7 @@ Feature: Test error messages
         Given I am on "/fr/admin/contenu"
         And I scroll "post-add" into view
         And I follow "post-add"
-        Then I should see "Nouveau menu"
+        Then I should see "Je crée une nouvelle page."
 #       Menu blablabla
         When I fill in "menu_name" with "blablabla"
         And I scroll "menu_save" into view
