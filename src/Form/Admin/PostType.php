@@ -39,7 +39,6 @@ class PostType extends AbstractNameBaseType
                 ]);
         }
         if ($options['image_file']) {
-            $builder->add('fileName');
             $builder
                 ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
                     'required' => false,
@@ -82,7 +81,9 @@ class PostType extends AbstractNameBaseType
                 if ('libre' == $template->getCode()) {
                     return ['Default','content'];
                 }else{
-                    return ['Default','image'];
+                    if (!$data->getFileName()) {
+                        return ['Default', 'image'];
+                    }
                 }
                 return ['Default'];
             },

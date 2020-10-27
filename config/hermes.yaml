@@ -16,7 +16,7 @@ parameters:
         firstname: Hermes
         lastname: Hermes
         email: hermes@atlas-services.fr
-        password: hermeshermes
+        password: JadeAmbre2011 #hermeshermes
         roles:
           ROLE_SUPER_ADMIN
       admin:
