@@ -3,7 +3,7 @@
 <form method="post" action="{{ path('section_delete', {'id': section.id}) }}" onsubmit="return confirm({{ 'global.confirm_delete'|trans() }});">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ section.id) }}">
-    <button class="btn">{{ 'global.delete'|trans()|raw }}</button>
+    <button type="button" class="btn bg-danger text-white ">{{ 'global.delete'|trans()|raw }}</button>
 </form>
 {% endif %}
 {% endif %}

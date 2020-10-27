@@ -50,7 +50,9 @@ class MenuController extends AbstractController
     {
 
         $menu = new Menu();
-        $menu->setName('page '. $sheet->getName());
+        if(isset($sheet)){
+            $menu->setName('page '. $sheet->getName());
+        }
         $section= new Section();
         $post = new Post();
         $post->setName('contenu '. $menu->getName());
