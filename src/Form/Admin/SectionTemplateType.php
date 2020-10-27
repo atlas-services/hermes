@@ -122,6 +122,13 @@ class SectionTemplateType extends AbstractType
             'saveAndAddSectionPost' => false,
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
+                $image_valid = true;
+                foreach($data->getPosts() as $post){
+                    if( !$post->getImageFile() && !$post->getFileName()){
+                        $image_valid = false;
+                        break;
+                    }
+                }
                 if($data instanceof Section ){
                     $template = $data->getTemplate();
                 }
@@ -131,7 +138,9 @@ class SectionTemplateType extends AbstractType
                 if ('libre' == $template->getCode()) {
                     return ['Default','content'];
                 }else{
-                    return ['Default','image'];
+                    if(!$image_valid){
+                        return ['Default','image'];
+                    }
                 }
                 return ['Default'];
             },

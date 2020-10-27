@@ -81,7 +81,7 @@ class PostType extends AbstractNameBaseType
                 if ('libre' == $template->getCode()) {
                     return ['Default','content'];
                 }else{
-                    if (!$data->getFileName()) {
+                    if( !$data->getImageFile() && !$data->getFileName()){
                         return ['Default', 'image'];
                     }
                 }

@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * @Route("/{_locale}/admin")
@@ -124,11 +123,12 @@ class SectionController extends AbstractController
      * @Route("/modele/edit/{section}", name="section_edit", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Section", options={"mapping": {"section": "id"}})
      */
-    public function edit(Request $request, CacheInterface $backCache, Section $section): Response
+    public function edit(Request $request, Section $section): Response
     {
 
         $options['posts'] = [
             'entry_type' => PostType::class,
+            'constraints' => new \Symfony\Component\Validator\Constraints\Valid(),
             'prototype'=> true,
             'prototype_name' => 'post',
             'allow_add' => true,
@@ -146,9 +146,6 @@ class SectionController extends AbstractController
             $em->persist($section);
             $em->flush();
 
-            $sheet = $section->getMenu()->getSheet()->getSlug();
-            $slug = $section->getMenu()->getSlug();
-            $backCache->delete('front_page_cache_key'.$sheet.$slug);
             if ($form->get('saveAndAddPost')->isClicked()) {
                 return $this->redirectToRoute('post_new_section', ['section'=> $section->getId()]);
             }
