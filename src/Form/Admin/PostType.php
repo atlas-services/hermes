@@ -78,7 +78,7 @@ class PostType extends AbstractNameBaseType
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
                 $template = $data->getSection()->getTemplate();
-                if ('libre' == $template->getCode()) {
+                if ('libre' == $template->getCode() || 'libre_code' == $template->getCode()) {
                     return ['Default','content'];
                 }else{
                     if( !$data->getImageFile() && !$data->getFileName()){

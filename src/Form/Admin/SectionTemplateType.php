@@ -135,7 +135,7 @@ class SectionTemplateType extends AbstractType
                 if($data instanceof Post){
                     $template = $data->getSection()->getTemplate();
                 }
-                if ('libre' == $template->getCode()) {
+                if ('libre' == $template->getCode() || 'libre_code' == $template->getCode()) {
                     return ['Default','content'];
                 }else{
                     if(!$image_valid){
