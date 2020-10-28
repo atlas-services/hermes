@@ -383,3 +383,20 @@ select2
     background-color: var(--h-color-success);
     color: #fff;
 }
+/*
+transfome
+ */
+
+.h-transform-moins5050{
+    -webkit-transform: translate(-50%, 50%);
+    -ms-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+}
+
+.h-presentation > span {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

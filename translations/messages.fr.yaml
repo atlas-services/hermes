@@ -27,6 +27,7 @@ info:
   generate_step_li3: "<a href='http://hermes.atlas-services.fr/hermes/template-3' target='_blank' > Voir le Template 3  </a> puis créer la page en cliquant sur ce lien :"
   generate_step_li4: "<a href='http://hermes.atlas-services.fr/hermes/template-4' target='_blank' > Voir le Template 4  </a> puis créer la page en cliquant sur ce lien :"
   generate_step_li5: "<a href='http://hermes.atlas-services.fr/hermes/template-5' target='_blank' > Voir le Template 5  </a> puis créer la page en cliquant sur ce lien :"
+  generate_step_li6: "<a href='http://hermes.atlas-services.fr/hermes/template-6' target='_blank' > Voir le Template 6  </a> puis créer la page en cliquant sur ce lien :"
   new_libelle_sheet_1: Créer une page - partie 1.
   first_step_p1: La première étape consiste à créer un menu.Nous allons créér ici un Menu "<b>Mariage</b>"
   first_step_li1: Aller sur le menu "Mon Tableau de Bord" et sélectionner

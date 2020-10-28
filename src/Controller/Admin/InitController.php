@@ -110,8 +110,8 @@ class InitController extends AbstractController
 
     private function addPage($libre){
         $entityManager = $this->getDoctrine()->getManager();
-
-        $content = $this->render('admin/exemple/base/'.$libre.'.html.twig', [])->getContent();
+        $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
+        $content = $this->render('admin/exemple/base/'.$template_libre.'.html.twig', [])->getContent();
         try {
             $sheet = $this->getDoctrine()
                 ->getRepository(Sheet::class)
@@ -120,23 +120,23 @@ class InitController extends AbstractController
                 // add sheet
                 $sheet = new Sheet();
                 $sheet->setCode($libre);
-                $sheet->setName(str_replace('-', ' ', $libre));
+                $sheet->setName($libre);
                 $sheet->setPosition(1);
                 $sheet->setSummary('Menu '.$libre);
-                $sheet->setSlug($libre);
+                $sheet->setSlug(str_replace(' ', '-', $libre));
                 // add menu
                 $menu = new Menu();
                 $menu->setCode($libre);
-                $menu->setName(str_replace('-', ' ', $libre));
+                $menu->setName($libre);
                 $menu->setPosition(1);
-                $menu->setSlug($libre);
+                $menu->setSlug(str_replace(' ', '-', $libre));
                 $menu->setSheet($sheet);
                 // add section
                 $template = $this->getDoctrine()
                     ->getRepository(Template::class)
                     ->findOneBy(['code'=> 'libre']);
                 $section = new Section();
-                $section->setName('section-'.$libre);
+                $section->setName('section-'.str_replace(' ', '-', $libre));
                 $section->setPosition(1);
                 $section->setMenu($menu);
                 $section->setTemplate($template);
