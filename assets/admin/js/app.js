@@ -27,5 +27,6 @@ import './../../js/anime';
 import './exemples';
 import './custom';
 import './select2';
+import './modale';
 import './tags';
 import './active';

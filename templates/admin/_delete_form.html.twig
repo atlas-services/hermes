@@ -1,0 +1,27 @@
+<div class="row col-lg-12 mb-3">
+    <button type="submit" class="delete btn bg-danger text-white " data-toggle="modal" data-target="#exampleModal">{{ 'global.delete'|trans()|raw }}</button>
+</div><!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ 'global.confirm_delete_question'|trans() }} {{ objet }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row col-lg-12 mx-auto px-0 ">
+                <span class="col-lg-6" >
+                    <button type="button" class="btn bg-secondary text-white float-right" data-dismiss="modal">{{ 'global.unconfirm_delete'|trans() }}</button>
+                </span>
+                <span class="col-lg-6" >
+                    <form class="delete" method="post" action="{{ action }}">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="_token" value="{{ csrf_token_delete }}">
+                        <button type="submit" class="btn bg-danger text-white float-left " data-toggle="modal" data-target="#exampleModal">{{ 'global.confirm_delete'|trans() }}</button>
+                    </form>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -68,7 +68,13 @@ global:
   new: Créer
   delete: <i class="fa fa-trash"></i>
   back_to_list: <i class="fa fa-angle-double-left"></i> Retour à la liste
-  confirm_delete: Êtes vous certain de vouloir supprimer cet item?
+  confirm_delete_question: Êtes vous certain de vouloir supprimer
+  confirm_delete: Supprimer
+  unconfirm_delete: Annuler
+  delete_content: le contenu
+  delete_section: le(s) contenu(s) de
+  delete_menu: le sous-menu (et ses contenus)
+  delete_sheet: le menu
   update: Sauvegarder
   update_next: Sauvegarder et Continuer
   update_libelle: Mettez à jour votre site (vos contenus, vos menus et sous menus)
