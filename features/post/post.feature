@@ -28,22 +28,22 @@ Feature: New sheet
         And I paste in wysiwyg on field "menu_sections_0_posts_0_content" with "tocopy-texte1"
         And I scroll "menu_saveAndAddPost" into view
         And I press "menu_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Présentation Texte et vidéo"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
-        When I fill in "post_name" with "video1"
-        And I press "modal-exemple"
-        And I wait for 1 seconds
-        And I press "modal-exemple-video"
-        And I wait for 1 seconds
-        And I press "js-copy-video1"
-        And I wait for 1 seconds
-        And I press "close"
-        And I wait for 1 seconds
-        And I paste in wysiwyg on field "post_content" with "tocopy-video1"
-        And I scroll "post_saveAndAddPost" into view
-        And I press "post_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Présentation Texte et vidéo"
-        Then I should see "HERMES HERMES"
+#        When I fill in "post_name" with "video1"
+#        And I press "modal-exemple"
+#        And I wait for 1 seconds
+#        And I press "modal-exemple-video"
+#        And I wait for 1 seconds
+#        And I press "js-copy-video1"
+#        And I wait for 1 seconds
+#        And I press "close"
+#        And I wait for 1 seconds
+#        And I paste in wysiwyg on field "post_content" with "tocopy-video1"
+#        And I scroll "post_saveAndAddPost" into view
+#        And I press "post_saveAndAddPost"
+#        Then I should see "J'ajoute un contenu à mon sous-menu"
+#        Then I should see "HERMES HERMES"
         When I fill in "post_name" with "texte2"
         And I press "modal-exemple"
         And I wait for 1 seconds

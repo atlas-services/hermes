@@ -35,10 +35,9 @@ Feature: New Menu
         And I wait for 2 seconds
         And I scroll "menu_saveAndAddPost" into view
         And I press "menu_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Les desserts les glaces Nouveau contenu"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "Template"
         Then I should see "Continuer"
-        Then I should see "Nouveau"
         Then I should see "Sauvegarder"
         Then I should see "HERMES HERMES"
     @javascript
@@ -56,9 +55,8 @@ Feature: New Menu
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/menu/"
         Then I follow "Nouveau contenu"
-        Then I should see "Mon Tableau de Bord Nouveau menu"
+        Then I should see "Je crée une nouvelle page."
         Then I should see "Continuer"
-        Then I should see "Nouveau"
         Then I should see "Sauvegarder"
         Then I should see "HERMES HERMES"
     @javascript
@@ -69,7 +67,6 @@ Feature: New Menu
         Then I should see "Sauvegarder"
         Then I should see "HERMES HERMES"
         Then I should not see "Continuer"
-        Then I should not see "Nouveau"
         When I fill in "base_menu_name" with "les nouvelles glaces"
         And I scroll "base_menu_save" into view
         And I press "base_menu_save"
@@ -79,9 +76,8 @@ Feature: New Menu
         Given I am logged in as a superadmin
         Given I am on "/fr/admin/menu/"
         Then I follow "les nouvelles glaces-add"
-        Then I should see "Mon Tableau de Bord Les desserts les nouvelles glaces Nouveau contenu"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "Template"
         Then I should see "Continuer"
-        Then I should see "Nouveau"
         Then I should see "Sauvegarder"
         Then I should see "HERMES HERMES"

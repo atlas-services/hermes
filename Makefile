@@ -80,10 +80,10 @@ behat-post:
 behat-contact:
 	clear && vendor/bin/behat --suite=contact
 
-behat-atlas: doctrine-re-init
+behat-atlas:
 	clear && vendor/bin/behat --suite=atlas
 
-behat-modeles: doctrine-re-init
+behat-modeles:
 	clear && vendor/bin/behat --suite=modeles
 
 behat-error:

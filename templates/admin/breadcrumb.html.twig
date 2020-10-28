@@ -15,7 +15,7 @@
                         "{{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}"
                     </span>
                 {% endif %}
-                 {% if( app.request.attributes.get('_route') in ['section_post_new_menu' ]) %}
+                 {% if( app.request.attributes.get('_route') in ['section_post_new_menu', 'post_new_section' ]) %}
                     <span class=" h-text-success mr-2 h3 ">
                         J'ajoute un contenu à mon sous-menu "{{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}"
                     </span>

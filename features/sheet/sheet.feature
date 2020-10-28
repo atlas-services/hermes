@@ -21,7 +21,7 @@ Feature: New sheet
         When I fill in "sheet_name" with "page menu"
         And I press "sheet_saveAndAdd"
         Then I should see "HERMES HERMES"
-        Then I should see "Mon Tableau de Bord page menu Nouveau menu"
+        Then I should see "Je crée une nouvelle page."
     @javascript
     Scenario: Update Sheet name
         Given I am logged in as a superadmin

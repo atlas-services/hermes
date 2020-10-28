@@ -28,7 +28,7 @@ Feature: New sheet for atlas
         And I paste in wysiwyg on field "menu_sections_0_posts_0_content" with "tocopy-atlas1"
         And I scroll "menu_saveAndAddPost" into view
         And I press "menu_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Présentation projet"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
         When I fill in "post_name" with "expertise"
         And I press "modal-exemple"
@@ -43,7 +43,7 @@ Feature: New sheet for atlas
         And I paste in wysiwyg on field "post_content" with "tocopy-atlas2"
         And I scroll "post_saveAndAddPost" into view
         And I press "post_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Présentation projet"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
         When I fill in "post_name" with "apropos"
         And I press "modal-exemple"
@@ -59,7 +59,7 @@ Feature: New sheet for atlas
         And I paste in wysiwyg on field "post_content" with "tocopy-atlas3"
         And I scroll "post_saveAndAddPost" into view
         And I press "post_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Présentation projet"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
         When I fill in "post_name" with "slides"
         And I press "modal-exemple"
@@ -160,7 +160,7 @@ Feature: New sheet for atlas
         And I fill in wysiwyg on field "menu_sections_0_posts_0_content" with "Carousel1 image 1"
         And I scroll "menu_saveAndAddPost" into view
         And I press "menu_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Services slides Nouveau contenu "
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
 #       image2
         And I upload the image "atlas/team/TayebChikhi.jpg"
@@ -170,7 +170,7 @@ Feature: New sheet for atlas
         And I fill in wysiwyg on field "post_content" with "Carousel1 image 2"
         And I scroll "post_saveAndAddPost" into view
         And I press "post_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Services slides Nouveau contenu"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
 #       image3
         And I upload the image "atlas/team/TayebChikhi.jpg"
@@ -180,5 +180,5 @@ Feature: New sheet for atlas
         And I fill in wysiwyg on field "post_content" with "Carousel1 image 3"
         And I scroll "post_saveAndAddPost" into view
         And I press "post_saveAndAddPost"
-        Then I should see "Mon Tableau de Bord Services slides Nouveau contenu"
+        Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
