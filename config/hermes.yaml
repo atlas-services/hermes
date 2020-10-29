@@ -210,7 +210,7 @@ parameters:
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu
-          value: '#ffffff'
+          value: 'transparent'
         content_color:
           summary: Couleur du contenu
           value: '#000000'

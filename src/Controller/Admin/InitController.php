@@ -111,6 +111,7 @@ class InitController extends AbstractController
     private function addPage($libre){
         $entityManager = $this->getDoctrine()->getManager();
         $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
+        $slug = strtolower($template_libre);
         $content = $this->render('admin/exemple/base/'.$template_libre.'.html.twig', [])->getContent();
         try {
             $sheet = $this->getDoctrine()
@@ -123,13 +124,13 @@ class InitController extends AbstractController
                 $sheet->setName($libre);
                 $sheet->setPosition(1);
                 $sheet->setSummary('Menu '.$libre);
-                $sheet->setSlug(str_replace(' ', '-', $libre));
+                $sheet->setSlug($slug);
                 // add menu
                 $menu = new Menu();
                 $menu->setCode($libre);
                 $menu->setName($libre);
                 $menu->setPosition(1);
-                $menu->setSlug(str_replace(' ', '-', $libre));
+                $menu->setSlug($slug);
                 $menu->setSheet($sheet);
                 // add section
                 $template = $this->getDoctrine()

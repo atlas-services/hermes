@@ -27,7 +27,12 @@
     {% block head %}
         {% include 'front/base/'~ directory ~'/head.html.twig' %}
     {% endblock head %}
-    <body style="background: url({{ url ?? '' }}) no-repeat center center ;background-size: cover; background-color: {{ bgcolor.value ?? 'white' }}">
+{#    <body style="background: url({{ url ?? '' }}) no-repeat center center ;background-size: cover; background-color: {{ bgcolor.value ?? 'white' }}">#}
+    {% set bgstyle1 = "background-color: rgba(0, 0, 0, 0);background-position-x: 0%;background-position-y: 0%;background-repeat: repeat;background-attachment: scroll;
+    background-size: auto; background-origin: padding-box;background-clip: border-box;" %}
+{#    {% set bgstyle2 = "no-repeat center center ;background-size: cover;" %}#}
+
+    <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ;">
         {% block body %}
             {% block nav %}
                 {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
