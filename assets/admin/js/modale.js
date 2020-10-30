@@ -6,6 +6,9 @@ jQuery(document).ready(function () {
     $( "#exampleModal").hide();
 });
 
+$('.select2').on("select2:select", function(e) {
+    $( "#exampleModal").hide();
+});
 
 
 })(jQuery); // End of use strict
