@@ -14,7 +14,7 @@ Feature: Create Hermes Cartes
     Given I am on "/fr/admin/nouvelle-page"
     When I fill in "sheet_name" with "Nos Cartes"
     And I press "sheet_saveAndAdd"
-    Then I should see "Mon Tableau de Bord Nos Cartes Nouveau menu"
+    Then I should see "Je crée une nouvelle page."
 #          Sous Menu "Cartes avec pdf à télécharger"
 #       pdf1
     And I wait for 2 seconds
@@ -26,7 +26,7 @@ Feature: Create Hermes Cartes
     And I fill in wysiwyg on field "menu_sections_0_posts_0_content" with "Carte1 pdf 1"
     And I scroll "menu_saveAndAddPost" into view
     And I press "menu_saveAndAddPost"
-    Then I should see "Mon Tableau de Bord Nos Cartes Cartes avec pdf à télécharger Nouveau contenu "
+    Then I should see "J'ajoute un contenu à mon sous-menu"
     Then I should see "HERMES HERMES"
 #       pdf2
     And I upload the image "pdf/2.pdf"
@@ -36,7 +36,7 @@ Feature: Create Hermes Cartes
     And I fill in wysiwyg on field "post_content" with "Carte1 pdf 2"
     And I scroll "post_saveAndAddPost" into view
     And I press "post_saveAndAddPost"
-    Then I should see "Mon Tableau de Bord Nos Cartes Cartes avec pdf à télécharger Nouveau contenu "
+    Then I should see "J'ajoute un contenu à mon sous-menu"
     Then I should see "HERMES HERMES"
 #       pdf3
     And I upload the image "pdf/3.pdf"
@@ -46,7 +46,7 @@ Feature: Create Hermes Cartes
     And I fill in wysiwyg on field "post_content" with "Carte1 pdf 3"
     And I scroll "post_saveAndAddPost" into view
     And I press "post_saveAndAddPost"
-    Then I should see "Mon Tableau de Bord Nos Cartes Cartes avec pdf à télécharger Nouveau contenu "
+    Then I should see "J'ajoute un contenu à mon sous-menu"
     Then I should see "HERMES HERMES"
 #       pdf4
     And I upload the image "pdf/4.pdf"
@@ -56,5 +56,5 @@ Feature: Create Hermes Cartes
     And I fill in wysiwyg on field "post_content" with "Carte1 pdf 4"
     And I scroll "post_saveAndAddPost" into view
     And I press "post_saveAndAddPost"
-    Then I should see "Mon Tableau de Bord Nos Cartes Cartes avec pdf à télécharger Nouveau contenu "
+    Then I should see "J'ajoute un contenu à mon sous-menu"
     Then I should see "HERMES HERMES"

@@ -17,6 +17,7 @@ Feature: New sheet for atlas
         When I fill in "menu_name" with "projet"
         And I fill in "menu_sections_0_posts_0_name" with "projet"
         And I select "Libre" from "menu_sections_0_template"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -31,6 +32,7 @@ Feature: New sheet for atlas
         Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
         When I fill in "post_name" with "expertise"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -46,6 +48,7 @@ Feature: New sheet for atlas
         Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
         When I fill in "post_name" with "apropos"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -62,6 +65,7 @@ Feature: New sheet for atlas
         Then I should see "J'ajoute un contenu à mon sous-menu"
         Then I should see "HERMES HERMES"
         When I fill in "post_name" with "slides"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -87,6 +91,7 @@ Feature: New sheet for atlas
         When I fill in "menu_name" with "projet"
         And I fill in "menu_sections_0_posts_0_name" with "projet"
         And I select "Libre" from "menu_sections_0_template"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -108,6 +113,7 @@ Feature: New sheet for atlas
         When I fill in "menu_name" with "expertise"
         When I fill in "menu_sections_0_posts_0_name" with "expertise"
         And I select "Libre" from "menu_sections_0_template"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"
@@ -130,6 +136,7 @@ Feature: New sheet for atlas
         When I fill in "menu_name" with "à propos"
         When I fill in "menu_sections_0_posts_0_name" with "à propos"
         And I select "Libre" from "menu_sections_0_template"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-atlas"

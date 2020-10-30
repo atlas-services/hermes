@@ -93,6 +93,7 @@ Feature: New sheet
         When I fill in "menu_name" with "Monde 1"
         And I select "Libre" from "menu_sections_0_template"
         When I fill in "menu_sections_0_posts_0_name" with "Monde 1"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-texte-cuisine"
@@ -114,6 +115,7 @@ Feature: New sheet
         When I fill in "menu_name" with "Monde 2"
         And I select "Libre" from "menu_sections_0_template"
         When I fill in "menu_sections_0_posts_0_name" with "Monde 2"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-texte-cuisine"

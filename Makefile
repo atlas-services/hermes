@@ -19,7 +19,7 @@ doctrine-init:
 	bin/console doctrine:cache:clear-result
 	bin/console d:s:u --force
 	bin/console hermes:db-update
-	rm -r var/cache/* var/log/*
+	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 init-test:
 	cp .env.test .env
@@ -37,7 +37,7 @@ init-test:
 	bin/console ckeditor:install --clear=skip
 	bin/console elfinder:install
 	bin/console assets:install --symlink
-	rm -r var/cache/* var/log/*
+	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 init-prod:
 	composer install --no-dev --optimize-autoloader
@@ -49,7 +49,7 @@ init-prod:
 	bin/console ckeditor:install --clear=skip
 	bin/console elfinder:install
 	bin/console assets:install --symlink
-	rm -r var/cache/* var/log/*
+	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 doctrine-re-init:
 	bin/console doctrine:cache:clear-metadata
@@ -59,31 +59,31 @@ doctrine-re-init:
 	bin/console doctrine:database:create
 	bin/console d:s:u --force
 	bin/console hermes:db-update
-	rm -r var/cache/* var/log/*
+	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 
 behat-login:
 	clear && vendor/bin/behat --suite=login
 
-behat-sheet:
+behat-sheet: doctrine-re-init
 	clear && vendor/bin/behat --suite=sheet
 
-behat-menu:
+behat-menu: doctrine-re-init
 	clear && vendor/bin/behat --suite=menu
 
-behat-section:
+behat-section: doctrine-re-init
 	clear && vendor/bin/behat --suite=section
 
-behat-post:
+behat-post: doctrine-re-init
 	clear && vendor/bin/behat --suite=post
 
 behat-contact:
 	clear && vendor/bin/behat --suite=contact
 
-behat-atlas:
+behat-atlas: doctrine-re-init
 	clear && vendor/bin/behat --suite=atlas
 
-behat-modeles:
+behat-modeles: doctrine-re-init
 	clear && vendor/bin/behat --suite=modeles
 
 behat-error:
