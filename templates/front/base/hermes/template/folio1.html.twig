@@ -15,6 +15,19 @@
                 {% endif %}
             {% endfor %}
         </div>
+        <div id="folio"  class="row">
+            {% for image in  section.images %}
+                {% if(image is not null) %}
+                    <div class="col-lg-{{ section.images|list_length }} col-md-{{ section.images|list_length }} col-12">
+                        <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"
+                           data-image ="{{ image }}"
+                           data-target="#image-gallery">
+                            <img alt="" class="img-fluid img-thumbnail" src="{{ image }}" />
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 </section>
 

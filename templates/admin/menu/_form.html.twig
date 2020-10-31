@@ -17,6 +17,7 @@
 {% endif %}
 {% if( app.request.attributes.get('_route') in ['menu_section_post_new_sheet']) %}
     {% for form_section in form.sections  %}
+        {{ form_row(form_section.remote) }}
         {{ form_row(form_section.template) }}
         {% for form_posts in form_section  %}
             {% if( 'posts' == form_posts.vars.name) %}

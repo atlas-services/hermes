@@ -25,16 +25,16 @@
                 <td>{{ template.name }}</td>
                 <td>{{ template.summary }}</td>
                 <td>
-                    <a href="{{ path('template_edit', {'id': template.id}) }}">edit</a>
+                    <a href="{{ path('template_edit', {'id': template.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'global.no_record'|trans() }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('template_new') }}">Create new</a>
+    <a class="btn h-bg-success text-white" href="{{ path('template_new') }}">{{ 'global.new'|trans() }}</a>
 {% endblock %}

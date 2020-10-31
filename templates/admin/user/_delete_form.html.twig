@@ -1,5 +1,1 @@
-<form method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm({{ 'global.confirm_delete'|trans() }});">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-    <button class="btn">{{ 'global.delete'|trans()|raw }}</button>
-</form>
+{{ include('admin/_delete_form.html.twig', {'objet': 'global.delete_content'|trans() ~ ' "'~ user.username ~ '" ?', 'action': path('user_delete', {'id': user.id}), 'csrf_token_delete': csrf_token('delete' ~ user.id) }) }}
