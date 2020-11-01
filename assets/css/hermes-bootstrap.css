@@ -248,6 +248,14 @@ polices && size
     font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
+.h-oswald{
+    font-family: 'Oswald',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.h-antiqua{
+    font-family: 'The Antiqua B', Georgia, Droid-serif, serif;
+}
+
 .h-impact{
     font-family: Impact, fantasy;
 }
