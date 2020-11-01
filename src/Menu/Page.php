@@ -99,7 +99,7 @@ class Page
         $configuration = $this->entityManager->getRepository(Config::class)->findBy(['active' => true]);
         foreach ($configuration as $conf) {
             $config[$conf->getCode()] = $conf;
-            if('bgcolor' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
+            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
                 $config_simple[$conf->getCode()] = $conf->getValue();
             }else{
                 $config_simple[$conf->getCode()] = $conf;
