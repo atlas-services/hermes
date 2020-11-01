@@ -87,6 +87,10 @@ parameters:
           summary: favicon
           value: ~
           image: ~
+        bg_image:
+          summary: Image de fond par défaut
+          value: ~
+          image: ~
         logo:
           summary: logo
           value: ~

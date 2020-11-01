@@ -51,7 +51,7 @@
             {% endfor %}
             <div id="top" class="hide mt-2" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
-                {% if(section.images is not null) %}
+                {% if(section.remote is not null) %}
                     {% if( 'libre' not in section.template.code) %}
                         {{ include('front/base/hermes/template/libre.html.twig') }}
                     {% endif %}

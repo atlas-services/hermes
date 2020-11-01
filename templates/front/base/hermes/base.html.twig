@@ -1,25 +1,31 @@
+{% if bg_image is defined %}
+    {% if bg_image is not null %}
+        {% if vich_uploader_asset(bg_image, 'imageFile') is not null %}
+            {% set background_image = asset(vich_uploader_asset(bg_image, 'imageFile'))  %}
+            {% set url =  background_image %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
 {% if menus['contact'] is defined %}
     {% if menus['contact'] is not null %}
         {% set background_image =  vich_uploader_asset(menus['contact'], 'imageFile')   %}
-        {% set background_image_style =  "no-repeat center center ;background-size: cover ;"   %}
     {% endif %}
 {% endif %}
 {#    {% endif %}#}
-    {% if menu is defined %}
-        {% if menu is not null %}
-            {% if vich_uploader_asset(menu, 'imageFile') is not null %}
-                {% set background_image = asset(vich_uploader_asset(menu, 'imageFile'))  %}
-                {% set background_image_style =  "no-repeat center center ;background-size: cover ;"   %}
-                {% set url ='"' ~  background_image ~ '"' %}
-            {% endif %}
+{% if menu is defined %}
+    {% if menu is not null %}
+        {% if vich_uploader_asset(menu, 'imageFile') is not null %}
+            {% set background_image = asset(vich_uploader_asset(menu, 'imageFile'))  %}
+            {% set url ='"' ~  background_image ~ '"' %}
         {% endif %}
     {% endif %}
+{% endif %}
 
 {% if background_image is defined %}
-{% if background_image is null %}
-    {% set background_image = vich_uploader_asset(bgcolor, 'imageFile')   %}
-    {% set background_image_style =  "no-repeat center center ;background-size: cover ;"   %}
-{% endif %}
+    {% if background_image is null %}
+        {% set background_image = vich_uploader_asset(bg_image, 'imageFile')   %}
+    {% endif %}
 {% endif %}
 
 <!DOCTYPE html>
@@ -29,7 +35,7 @@
     {% endblock head %}
 {#    <body style="background: url({{ url ?? '' }}) no-repeat center center ;background-size: cover; background-color: {{ bgcolor.value ?? 'white' }}">#}
     {% set bgstyle1 = "background-color: rgba(0, 0, 0, 0);background-position-x: 0%;background-position-y: 0%;background-repeat: repeat;background-attachment: scroll;
-    background-size: auto; background-origin: padding-box;background-clip: border-box;" %}
+    background-size: auto; background-origin: padding-box;background-clip: border-box; background-color:" ~ bgcolor   %}
 {#    {% set bgstyle2 = "no-repeat center center ;background-size: cover;" %}#}
 
     <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ;">
