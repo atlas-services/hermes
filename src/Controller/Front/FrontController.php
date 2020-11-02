@@ -106,7 +106,7 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function page(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
+    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $route = $request->attributes->get('_route');
         if ('contact' == $sheet) {
@@ -121,6 +121,26 @@ class FrontController extends AbstractController
                 return $this->redirectToRoute('slug', ['slug' => $slug]);
             }
         }
+
+/*
+ * @todo cache remote sauf si sheet, menu section sont modifiés ?
+ */
+//        $cache = $page->getCacheMenu($sheet, $slug);
+//        if(!empty($cache)){
+//                    // The callable will only be executed on a cache miss.
+//                $response = $frontCache->get($cache['front_cache'], function (ItemInterface $item) use($page, $sheet, $slug, $route) {
+//
+//                    $array = $page->getActiveMenu($sheet, $slug, $route);
+//                    $cached_response = $this->render('front/index.html.twig', $array);
+//
+//
+//                    return $cached_response ;
+//                });
+//
+//                return $response;
+//        }
+
+
         $array = $page->getActiveMenu($sheet, $slug,$route);
 
         return $this->render('front/index.html.twig', $array);

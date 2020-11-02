@@ -143,4 +143,35 @@ class Page
         return $newMenus;
     }
 
+    public function getCacheMenu($sheet, $slug)
+    {
+        $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug);
+//        // cache remote pictures
+        $cache = [];
+        if(!is_null($menu)){
+//            // cache menu
+//            if(!is_null($menu->getSheet()->getUpdatedAt())) {
+//                $cache['front_cache'] = 'front_cache_sheet' . $sheet . $slug . $menu->getSheet()->getUpdatedAt()->format('Y-m-d-H-i-s');
+//            }
+//            // cache sous-menu
+//            if(!is_null($menu->getUpdatedAt())) {
+//                $cache['front_cache'] = 'front_cache_menu' . $sheet . $slug . $menu->getUpdatedAt()->format('Y-m-d-H-i-s');
+//            }
+//            //cache section
+            foreach ($menu->getSections() as $section){
+                if(!is_null($section->getRemote())){
+                    $cache['front_cache'] =  'front_cache_remote_'.$sheet.$slug.$section->getRemote()->getUpdatedAt()->format('Y-m-d-H-i-s');
+                }
+//                // cache Posts
+//                foreach ($section->getPosts() as $post){
+//                    if(!is_null($post->getUpdatedAt())) {
+//                        $cache['front_cache'] = 'front_cache_post' . $sheet . $slug . $post->getUpdatedAt()->format('Y-m-d-H-i-s');
+//                    }
+//                }
+            }
+        }
+
+        return $cache;
+    }
+
 }

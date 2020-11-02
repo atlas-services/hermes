@@ -1,0 +1,42 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'sheet.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>remote index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Active</th>
+                <th>Name</th>
+                <th>Server</th>
+                <th>Directory</th>
+                <th>Last update</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for remote in remotes %}
+            <tr>
+                <td>{{ remote.id }}</td>
+                <td>{{ remote.active ? 'Yes' : 'No' }}</td>
+                <td>{{ remote.name }}</td>
+                <td>{{ remote.url }}</td>
+                <td>{{ remote.directory }}</td>
+                <td>{{ remote.updatedAt|date() }}</td>
+                <td>
+                    <a href="{{ path('remote_edit', {'id': remote.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">{{ 'global.no_record'|trans() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('remote_new') }}">{{ 'global.new'|trans() }}</a>
+{% endblock %}

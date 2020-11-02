@@ -2,6 +2,16 @@
     "use strict"; // Start of use strict
 
     // afficher l'upload d'image uniquement si le modèle est différent de 'libre'
+    $('.select2').on("select2:select", function(e) {
+        var modeleselect =  $(this).find(':selected').text();
+
+        if (modeleselect == "Libre") {
+            $('.vich-image').hide();
+        } else {
+            $('.vich-image').show();
+        }
+    });
+
     if ($('#libre').length > 0) {
         $('.vich-image').parent().parent().children().hide();
     } else {

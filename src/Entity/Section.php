@@ -12,21 +12,20 @@
 namespace App\Entity;
 
 use App\Entity\Traits\ActiveTrait;
-use App\Entity\Traits\ContentTrait;
 use App\Entity\Traits\IdTrait;
-use App\Entity\Traits\ImageTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
-use App\Entity\Traits\SummaryTrait;
 use App\Entity\Traits\TemplateTrait;
+use App\Entity\Traits\RemoteTrait;
 use App\Entity\Traits\UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\SectionRepository")
  * @ORM\Table(name="section")
  *
  * Defines the properties of the Post entity to represent the blog posts.
@@ -46,6 +45,7 @@ class Section
     use ActiveTrait;
     use IdTrait;
     use TemplateTrait;
+    use RemoteTrait;
     use PositionTrait;
     use NameTrait;
     use UserTrait;
@@ -73,6 +73,14 @@ class Section
      * @ORM\JoinColumn(nullable=true)
      */
     protected $template;
+
+    /**
+     * @var Remote
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Remote", inversedBy="sections")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $remote;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Menu", inversedBy="sections")
@@ -125,6 +133,7 @@ class Section
         }
         return $this->posts;
     }
+
     public function getPrevisualisationPosts(): ?Collection
     {
         return $this->posts;

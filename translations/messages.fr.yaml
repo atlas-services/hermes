@@ -168,8 +168,20 @@ template:
   code: Code du template
   name: Template
 
+
+remote:
+  list: Liste des serveurs distants
+  label: Serveurs distant
+  user: Créateur du template
+  code: Code du template
+  name: Serveur
+  affiche_list: Liste des serveurs
+  edit: Modifier le contenu
+  add: Créer un serveur
+
 # User
 user:
+  list: Liste des utilisateurs
   label: Utilisateur
   firstname: Prénom
   lastname: Nom

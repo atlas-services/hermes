@@ -138,6 +138,9 @@ class SectionController extends AbstractController
             'entry_options' => ['label' => false, 'active'=> false, 'position'=>true, 'name'=>true, 'content'=>false, 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
         ];
 
+        // On peut gérer les images remote ici => true
+        $options['remote_pictures'] = true;
+
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
         $form->handleRequest($request);
 

@@ -4,6 +4,7 @@ namespace App\Form\Admin;
 
 use App\Entity\Menu;
 use App\Entity\Post;
+use App\Entity\Remote;
 use App\Entity\Section;
 
 use App\Entity\Template;
@@ -27,7 +28,16 @@ class SectionTemplateType extends AbstractType
         $options['active'] = false;
         $options['name'] = false;
         $options['tooltip']= 'Nom';
-        parent::buildForm($builder, $options);
+//        parent::buildForm($builder, $options);
+        if($options['remote_pictures']){
+            $builder
+                ->add('remote', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    'class'=> Remote::class,
+                    'required'=> false,
+                    'placeholder' => '-- pas d\'image distante --',
+                    'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+                ]);
+        }
         $builder
             ->add('template', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class'=> Template::class,
@@ -103,6 +113,7 @@ class SectionTemplateType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Section::class,
             'save_visibility' => true,
+            'remote_pictures' => true,
             'content' => true,
             'menu' => false,
             'posts' =>                 [
@@ -123,10 +134,19 @@ class SectionTemplateType extends AbstractType
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
                 $image_valid = true;
-                foreach($data->getPosts() as $post){
-                    if( !$post->getImageFile() && !$post->getFileName()){
+                if(is_null($data->getRemote())){
+                      $image_valid = true;
+                }else{
+                    if(is_null($data->getRemote()->getUrl())) {
                         $image_valid = false;
-                        break;
+                    }
+                }
+                if(!$image_valid){
+                    foreach($data->getPosts() as $post){
+                        if( !$post->getImageFile() && !$post->getFileName()){
+                            $image_valid = false;
+                            break;
+                        }
                     }
                 }
                 if($data instanceof Section ){
