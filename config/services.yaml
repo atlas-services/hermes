@@ -48,8 +48,3 @@ services:
         autowire: true
         tags:
         - { name: 'doctrine.event_listener', event: 'postPersist', method: 'postPersist'}
-
-    App\EventListener\AdminConfigListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.controller }
-            - { name: kernel.event_listener, event: kernel.response }
