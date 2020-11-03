@@ -1,9 +1,11 @@
 <!-- Portfolio Grid -->
 {% set maxlength = 40 %}
 {% set moinsmaxlength = -40 %}
+
 <section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ folio_container_width|col_lg() }}" >
-       <div id="folio" class="row_gallery">
+        {% if(section.remote is null) %}
+            <div id="folio" class="row_gallery">
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                 {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                     <div class="column">
@@ -27,6 +29,27 @@
                 {% endif %}
             {% endfor %}
         </div>
+        {% endif %}
+        {% if(section.remote is not null) %}
+            <div id="folio" class="row_gallery">
+            {% for img, image in  section.remote.images %}
+                {% if image is not null %}
+                    <div class="column">
+                        <div class="content_gallery">
+                            <!-- Modale1  -->
+{#                            <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"#}
+{#                               data-image ="{{ image }}"#}
+{#                               data-target="#image-gallery">#}
+                             <!-- Modale2  -->
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
+                                <img src="{{ image  }}" alt="{{ img }}" style="width:100%">
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 </section>
 

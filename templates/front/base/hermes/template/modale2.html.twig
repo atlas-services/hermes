@@ -1,31 +1,65 @@
 <!-- Modale -->
-{% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-    <div class="portfolio-modal modal fade" id="portfolioModal{{ post.id }}" tabindex="-1" role="dialog"
-         aria-hidden="true">
-        <div class="modal-dialog" >
-            <div class="modal-content col-lg-{{ modale_container_width|col_lg() }} col-12  mx-auto px-0" style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr"  style="background-color: {{ modale_color }}">
-                        <div class="rl" style="background-color: {{ modale_color }}"></div>
-                    </div>
-                </div>
-                <div class="col-12  mx-auto px-0 ">
-                    <div class="row col-12  mx-auto px-0">
-                        <div class="col-12  mx-auto px-0">
-                            <div class="modal-body col-12col-12  mx-auto px-0">
-                                <!-- Project Details Go Here -->
-                                <h3 class="col-lg-12 text-center" >{{ post.name }}</h3>
-                                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                                    <img class="img  col-12  mx-auto px-0 col-sm-12 col-lg-12"
-                                         src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
-                                         alt="{{ post.name }}">
-                                {% endif %}
-                            </div>
+{% if(section.remote is  null) %}
+    {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+        <div class="portfolio-modal modal fade" id="portfolioModal{{ post.id }}" tabindex="-1" role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content col-lg-{{ modale_container_width|col_lg() }} col-12  mx-auto px-0" style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
+                    <div class="close-modal" data-dismiss="modal">
+                        <div class="lr"  style="background-color: {{ modale_color }}">
+                            <div class="rl" style="background-color: {{ modale_color }}"></div>
                         </div>
                     </div>
-                    {{ post.content|raw }}
+                    <div class="col-12  mx-auto px-0 ">
+                        <div class="row col-12  mx-auto px-0">
+                            <div class="col-12  mx-auto px-0">
+                                <div class="modal-body col-12col-12  mx-auto px-0">
+                                    <!-- Project Details Go Here -->
+                                    <h3 class="col-lg-12 text-center" >{{ post.name }}</h3>
+                                    {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                                        <img class="img  col-12  mx-auto px-0 col-sm-12 col-lg-12"
+                                             src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                             alt="{{ post.name }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {{ post.content|raw }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-{% endfor %}
+    {% endfor %}
+{% endif %}
+{% if(section.remote is not null) %}
+    {% for img, image in  section.remote.images %}
+        <div class="portfolio-modal modal fade" id="portfolioModal{{ img }}" tabindex="-1" role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content col-lg-{{ modale_container_width|col_lg() }} col-12  mx-auto px-0" style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
+                    <div class="close-modal" data-dismiss="modal">
+                        <div class="lr"  style="background-color: {{ modale_color }}">
+                            <div class="rl" style="background-color: {{ modale_color }}"></div>
+                        </div>
+                    </div>
+                    <div class="col-12  mx-auto px-0 ">
+                        <div class="row col-12  mx-auto px-0">
+                            <div class="col-12  mx-auto px-0">
+                                <div class="modal-body col-12col-12  mx-auto px-0">
+                                    <!-- Project Details Go Here -->
+    {#                                <h3 class="col-lg-12 text-center" >{{ post.name }}</h3>#}
+                                    {% if(image is not null) %}
+                                        <img class="img  col-12  mx-auto px-0 col-sm-12 col-lg-12"
+                                             src="{{ image }}"
+                                             alt="{{ image }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+    {#                    {{ post.content|raw }}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

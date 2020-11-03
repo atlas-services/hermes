@@ -209,7 +209,8 @@ class Remote
         $ftp_user_pass = $this->getPassword();
         $directory = $this->getDirectory();
         // Mise en place d'une connexion basique
-        $conn_id = ftp_connect($ftp_server);
+        $conn_id = ftp_connect($ftp_server, '21','3');
+
         if(!$conn_id){
             return $contents ;
         }
@@ -217,8 +218,12 @@ class Remote
         // Identification avec un nom d'utilisateur et un mot de passe
         $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
 
+        if($login_result){
+            $contents = ftp_nlist($conn_id, $directory);
+        }
+
         // Récupération du contenu d'un dossier
-        $contents = ftp_nlist($conn_id, $directory);
+        ftp_close($conn_id);
 
         return $contents;
 
@@ -238,7 +243,7 @@ class Remote
 
         foreach ($contents as $img) {
             $img_path = str_replace($this->getUrl(), $site, $this->getUrl()).$this->getDirectory().$img;
-            $img_url[] = str_replace($public, '', $img_path);
+            $img_url[$img] = str_replace($public, '', $img_path);
         }
 
         // Liste des urls des images distantes

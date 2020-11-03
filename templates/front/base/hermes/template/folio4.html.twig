@@ -1,20 +1,36 @@
 <!-- Portfolio Grid -->
-<section id="portfolio" class="section_content px-0" style="max-width: {{ content_container_width }}; background-color:{{ content_bgcolor }}">
-    <div id="folio" class="row ml-5">
-    <div class="container col-12 col-lg-{{ folio_container_width|col_lg() }}">
-        <div id="staggering">
-            {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                    <!-- Modale2  -->
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
-                    <span class="staggering">
-                        <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
-                    </span>
-                    </a>
-                {% endif %}
-            {% endfor %}
+<section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
+    <div id="folio" class="row ">
+        <div class="container col-12 col-lg-{{ folio_container_width|col_lg() }}">
+            {% if(section.remote is null) %}
+                <div id="staggering row">
+                    {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+                        {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                            <!-- Modale2  -->
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                            <span class="staggering">
+                                <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
+                            </span>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if(section.remote is not null) %}
+                <div id="staggering row">
+                    {% for img, image in  section.remote.images %}
+                        {% if image is not null %}
+                            <!-- Modale2  -->
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
+                            <span class="staggering">
+                                <img class="stagge h-h-20 h-w-20" src="{{ image }}" />
+                            </span>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-    </div>
     </div>
 </section>
 
