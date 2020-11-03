@@ -38,7 +38,7 @@
     background-size: auto; background-origin: padding-box;background-clip: border-box; background-color:" ~ bgcolor   %}
 {#    {% set bgstyle2 = "no-repeat center center ;background-size: cover;" %}#}
 
-    <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ;">
+    <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ; color: {{ text_color ?? '#ff0000' }} ;font-family: {{ font_family }}">
         {% block body %}
             {% block nav %}
                 {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}

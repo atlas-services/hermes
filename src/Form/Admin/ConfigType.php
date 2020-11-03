@@ -51,6 +51,17 @@ class ConfigType extends AbstractBaseType
             $data = $event->getData();
             $form = $event->getForm();
             $code = $data->getCode();
+            $options_font_family = [
+                'Verdana' => 'Verdana',
+                ' Comic Sans MS, Comic Sans, cursive' => ' Comic Sans MS, Comic Sans, cursive',
+                '\'Oswald\',Helvetica,Arial,Lucida,sans-serif' => '\'Oswald\',Helvetica,Arial,Lucida,sans-serif',
+                '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
+                'Impact, fantasy' => 'Impact, fantasy',
+                '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif' => ' \'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
+                '\'Bai Jamjuree\', sans-serif' => '\'Bai Jamjuree\', sans-serif',
+                '\'Sofia\', sans-serif' => '\'Sofia\', sans-serif',
+                '\'Snowburst One\', sans-serif' => '\'Snowburst One\', sans-serif',
+            ];
             $options_pct = [
                 '10%' => '10%',
                 '20%' => '20%',
@@ -80,6 +91,10 @@ class ConfigType extends AbstractBaseType
                 case 'accueil':
                     $choice = true;
                     $options = $options_pct_value;
+                // font_family
+                case 'font_family':
+                    $choice = true;
+                    $options = $options_font_family;
                 break;
                 // nav_bar
                 case 'nav_bar':

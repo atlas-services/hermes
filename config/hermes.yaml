@@ -106,6 +106,12 @@ parameters:
         bgcolor:
           summary: Couleur de fond par défaut
           value: '#ffffff'
+        text_color:
+          summary: Couleur par défaut
+          value: '#666666'
+        font_family:
+          summary: Font
+          value: "'Bai Jamjuree', sans-serif"
         container_width:
           summary: Largeur du contenu affiché (en %)
           value: '100%'
