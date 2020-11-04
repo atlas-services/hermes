@@ -214,6 +214,9 @@ parameters:
         nav_header_color:
           summary: Couleur du header (barres du bouton responsive)
           value: '#000000'
+        nav_font_family:
+            summary: Font
+            value: "'Bai Jamjuree', sans-serif"
         nav_container_width:
           summary: Largeur du menu (en %)
           value: '100%'

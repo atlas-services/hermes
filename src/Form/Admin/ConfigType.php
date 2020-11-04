@@ -91,11 +91,6 @@ class ConfigType extends AbstractBaseType
                 case 'accueil':
                     $choice = true;
                     $options = $options_pct_value;
-                // font_family
-                case 'font_family':
-                    $choice = true;
-                    $options = $options_font_family;
-                break;
                 // nav_bar
                 case 'nav_bar':
                     $choice = true;
@@ -165,9 +160,18 @@ class ConfigType extends AbstractBaseType
                             'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                         ]);
                     }else{
-                        $form->add('value', TextType::class, [
-                            'required' => false,
-                        ]);
+                        if(strpos($code, 'font_family')){
+                            $form->add('value', ChoiceType::class, [
+                                'required' => false,
+                                'choices' =>   $options_font_family,
+                                'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                            ]);
+                        }
+                        else{
+                            $form->add('value', TextType::class, [
+                                'required' => false,
+                            ]);
+                        }
                     }
                 }
             }

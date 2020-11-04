@@ -4,7 +4,7 @@
         <span class="menu-icon__line menu-icon__line-right" style=" background-color: {{ nav_header_color ?? 'transparent' }}"></span>
 </div>
 
-<div class="nav" style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}">
+<div class="nav" style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}">
     <div class="nav__content">
         <ul class="nav__list" >
             {% for sheet_name, listmenu in nav %}
