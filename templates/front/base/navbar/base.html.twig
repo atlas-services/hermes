@@ -28,7 +28,7 @@
                 {% if logo.filename is defined %}
                     {% if logo.filename is not null %}
                         <a class="navbar-brand js-scroll-trigger ml-0 mr-0 " href="{{ path('sheet') }}">
-                            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="app_logo">
+                            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 mx-auto app_logo">
                         </a>
                     {% else %}
                         {% if affiche_img_hermes == true %}
