@@ -59,6 +59,9 @@ add width values
     .h-w-60, .h-w-70, .h-w-80, .h-w-90 {
         width: 100% !important;
     }
+    .h-w-max {
+        width: 100% !important;
+    }
 }
 
 

@@ -141,7 +141,7 @@ class ConfigType extends AbstractBaseType
                 ]);
             }
             if(!$choice) {
-                if (strpos($code, 'color')) {
+                if ('color' == $code || strpos($code, 'color')) {
                     $form->add('value', ColorType::class, [
                         'required' => false,
                     ]);
@@ -153,14 +153,14 @@ class ConfigType extends AbstractBaseType
                         'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                     ]);
                 } else {
-                    if (strpos($code, 'width')) {
+                    if ('width' == $code || strpos($code, 'width')) {
                         $form->add('value', ChoiceType::class, [
                             'required' => false,
                             'choices' =>   $options_pct,
                             'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                         ]);
                     }else{
-                        if(strpos($code, 'font_family')){
+                        if('font_family' == $code || strpos($code, 'font_family')){
                             $form->add('value', ChoiceType::class, [
                                 'required' => false,
                                 'choices' =>   $options_font_family,
