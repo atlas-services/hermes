@@ -88,15 +88,28 @@ add height values
 
 
 .h-mh-10 {
-    min-height: 10% !important;
+    max-height: 10% !important;
 }
 .h-mh-20 {
-    min-height: 20% !important;
+    max-height: 20% !important;
 }
 .h-mh-30 {
-    min-height: 30% !important;
+    max-height: 30% !important;
 }
 .h-mh-40 {
+    max-height: 40% !important;
+}
+
+.h-min-vh-10 {
+    min-height: 10% !important;
+}
+.h-min-vh-20 {
+    min-height: 20% !important;
+}
+.h-min-vh-30 {
+    min-height: 30% !important;
+}
+.h-min-vh-40 {
     min-height: 40% !important;
 }
 
