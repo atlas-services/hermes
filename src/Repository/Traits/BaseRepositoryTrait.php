@@ -6,6 +6,7 @@ use App\Entity\AbstractContent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 //use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
+use phpDocumentor\Reflection\Types\Collection;
 
 trait BaseRepositoryTrait
 {
@@ -41,6 +42,26 @@ trait BaseRepositoryTrait
 
         return $data;
 
+    }
+
+    /**
+     * @return Collection
+     */
+
+    public function findAllWithSearch(?string $term)
+    {
+
+        $qb = $this->createQueryBuilder('p');
+        if ($term) {
+            $qb->andWhere('p.content LIKE :term ')
+                ->setParameter('term', '%' . htmlentities($term) . '%')
+            ;
+        }
+        return $qb
+            ->andWhere('p.active = 1 ')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
 //     /**

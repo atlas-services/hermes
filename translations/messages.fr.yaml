@@ -106,6 +106,10 @@ global:
   email: Email
   phone: Téléphone
   no_record: Aucun enregitrement
+  search: Chercher...
+  search_result: Résultat de votre recherche
+  search_result_nb: Nombre de résultats
+  search_result_in: Résultat présent dans la page
 #  exemple_libre: <i class="fa fa-question-circle"></i> Exemples de contenu -- à copier <i class="fa fa-question-circle"></i>
   exemple_libre: <i class="fa fa-info-circle"></i> Exemples de contenu -- à copier <i class="fa fa-info-circle"></i>
   info: Info -Aide

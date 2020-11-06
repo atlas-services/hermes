@@ -33,6 +33,7 @@ import 'jquery-lazy';
 import '../../../js/scroll';
 import '../../../js/chevron';
 import '../../../js/menu';
+import '../../../js/search';
 import '../../../js/anime';
 import '../../../js/copy';
 import '../hermes/modale';

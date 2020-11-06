@@ -15,16 +15,52 @@ use App\Form\ContactType;
 use App\Form\Admin\TemoignageType;
 use App\Mailer\Mailer;
 use App\Menu\Page;
+use App\Repository\PostRepository;
 use App\Repository\TemoignageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 class FrontController extends AbstractController
 {
+    /**
+
+     * @Route(
+     *     "/search",
+     *     name="search_content",
+     *     methods={"GET|POST"}
+     *     )
+     */
+    public function search(Request $request, PostRepository $postRepository, TemoignageRepository $temoignageRepository, RouterInterface $router, Page $page)
+    {
+        $referer = $request->headers->get('referer');
+        $refererPathInfo = Request::create($referer)->getPathInfo();
+        $refererPathInfo = str_replace($request->getScriptName(), '', $refererPathInfo);
+        $routeInfos = $router->match($refererPathInfo);
+        if(ContactInterface::CONTACT == $routeInfos['_route'] || ContactInterface::LIVREDOR_ROUTE == $routeInfos['_route']){
+            $route = $routeInfos['_route'];
+            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
+        }else{
+            $sheet = $routeInfos['sheet'];
+            $slug = $routeInfos['slug'];
+            $array = $page->getActiveMenu($sheet, $slug);
+        }
+
+        $q = $request->query->get('q');
+        $posts = [
+            'posts' => array_merge($postRepository->findAllWithSearch($q),$temoignageRepository->findAllWithSearch($q) ),
+        ];
+
+        $array = array_merge($array, $posts);
+
+        return $this->render('front/search_result.html.twig', $array);
+
+    }
+
 
     /**
      * @Route(

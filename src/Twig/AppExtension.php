@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
@@ -12,6 +13,7 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFilter('list_length', [$this, 'listLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
+            new TwigFilter('get_class', 'get_class'),
         ];
     }
 
@@ -70,5 +72,15 @@ class AppExtension extends AbstractExtension
         }
 
         return $collg;
+    }
+
+    public function getName()
+    {
+        return 'class_twig_extension';
+    }
+
+    public function get_class($object)
+    {
+        return (new \ReflectionClass($object))->getShortName();
     }
 }

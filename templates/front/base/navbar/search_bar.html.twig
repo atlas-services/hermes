@@ -1,0 +1,39 @@
+{% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
+        <div class="row col-lg-2 mx-auto px-0 col-12 float-right h-h-10 " >
+            <div class="col-lg-2 py-1">
+                <i id="search_icon" class='fa fa-search fa-2x' style="color:{{ content_color }}"></i>
+            </div>
+            <div class="col-lg-10">
+                <form action="{{ path('search_content') }}">
+                <div class="input-group ">
+                    <input id="search_bar"
+                           type="text"
+                           name="q"
+                           class="border-0 form-control "
+                           placeholder="{{ 'global.search'|trans() }}"
+                           style="visibility: hidden"
+                    >
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endif %}
+
+{#{% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}#}
+{#    <div class="col-lg-2 mx-auto px-0 col-12 float-right " style="z-index: -1">#}
+{#        <form class="right"  action="{{ path('search_content') }}">#}
+
+{#            <div class="input-group pr-3">#}
+{#                <input id="search_bar"#}
+{#                       type="text"#}
+{#                       name="q"#}
+{#                       class="form-control mr-2"#}
+{#                       placeholder="{{ 'global.search'|trans() }}"#}
+{#                >#}
+{#                <div class="input-group-append">#}
+{#                    <i id="search_icon" class='fa fa-search fa-2x' style="color:{{ content_color }}"></i>#}
+{#                </div>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+{#{% endif %}#}

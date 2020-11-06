@@ -1,0 +1,12 @@
+{% extends 'front/base/' ~ directory ~'/base.html.twig' %}
+
+{% block content %}
+    {% set search = 'search1' %}
+    {% if posts is defined %}
+        <div id="top" class="hide mt-2" ></div>
+        {% include 'front/base/' ~ directory ~'/template/'~ search ~ '.html.twig'  %}
+    {% endif %}
+    <section id="section_bottom" ></section>
+{% endblock content %}
+
+
