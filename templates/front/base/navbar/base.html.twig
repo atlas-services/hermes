@@ -42,12 +42,12 @@
     </div>
 </nav>
 {% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
-    {% set offset = 'offset-lg-2' %}
+    {% set offset = 'offset-lg-4' %}
 {% endif %}
-<nav style=" background-color:{{ nav_bgcolor }}; max-width: 100%;font-family: {{ nav_font_family }}" class="navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
-    <div class="{{ offset ?? ''}} container border-0 " style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}};">
-        <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
-            <ul class="nav navbar-nav  h-font-size-12" style="background-color: {{ nav_menu_bgcolor }}">
+
+<nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">    <div class="{{ offset ?? ''}} container border-0 " style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}};">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive" style="height:{{ nav_height }};">
+            <ul class="nav navbar-nav  h-font-size-12 " style="background-color: {{ nav_menu_bgcolor }}">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}
                     {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
@@ -59,13 +59,13 @@
                         {% set active = 'active' %}
                     {% endif %}
                     {% if('active' == active) %}
-                        <li class="nav-item {{ active }} {{ dropdown }} "  style="background-color: {{ nav_bgcolor_active }};  "  >
+                        <li class="nav-item {{ active }} {{ dropdown }} mx-lg-2"  style="background-color: {{ nav_bgcolor_active }};  "  >
                         {% set colorlink =  nav_color_active  %}
                     {% else %}
-                        <li class="nav-item {{ active }} {{ dropdown }} " >
+                        <li class="nav-item {{ active }} {{ dropdown }} mx-lg-2" >
                         {% set colorlink =  nav_link_color  %}
                     {% endif %}
-                        <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="nav-link js-scroll {{ dropdowntoggle }} pl-2 " role="button"  data-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
+                        <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="remove-nav-link js-scroll {{ dropdowntoggle }}  " role="button"  data-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
                            href={{ href }}>{{ sheet_name }}
                         </a>
                         {% if (listmenu.name is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
@@ -86,10 +86,10 @@
                     </li>
                 {% endfor %}
             </ul>
+            <!-- search bar 2 -->
+            {% include 'front/base/navbar/search_bar.html.twig' %}
         </div>
     </div>
-    <!-- search bar 2 -->
-    {% include 'front/base/navbar/search_bar.html.twig' %}
 </nav>
 {% if('reveal' != directory) %}
     {% if ( 'accueil' == app.request.attributes.get('sheet')|lower and accueil.filename is not null and accueil.value >= 80 ) %}

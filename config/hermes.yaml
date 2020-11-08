@@ -184,6 +184,9 @@ parameters:
         nav_bar:
           summary: selection de la barre de menu
           value: base
+        nav_height:
+          summary: Hauteur du sous menu (en px)
+          value: '45px'
         nav_li_bgcolor:
           summary: Couleur de fond des éléments du sous menu
           value: '#888888'

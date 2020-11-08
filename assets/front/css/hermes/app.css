@@ -37,13 +37,13 @@
 /*
 Content
  */
-.section_content{
-    /*padding-top: 60px;*/
-    padding-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+/*.section_content{*/
+/*    !*padding-top: 60px;*!*/
+/*    padding-top: 20px;*/
+/*    display: block;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*}*/
 
 .form-group{
     width: 350px; /* 100%; /* 1050px; */
@@ -77,7 +77,7 @@ li.active{
 Menu
  */
 #mainNav {
-    background-color: var(--color-grey2);
+    /*background-color: var(--color-grey2);*/
     padding-top: 0;
     padding-bottom: 0;
 }
