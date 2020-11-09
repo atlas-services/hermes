@@ -9,10 +9,10 @@
 {#<body style=" background: url('{{ background_image ?? '' }}'); {{ background_image_style ?? '' }} background-color: {{ bgcolor ?? 'white' }}">#}
 <body style="background-color: #f2f3f4">
 
-    <div class="content container text-center center" style="background-color: #ffffff ; max-width: {{ container_width }} ">
+    <div class="content container col-lg-{{ container_width|col_lg()}} text-center center" style="background-color: #ffffff ;">
         {% block body %}
             {% block nav %}
-        <div class="text-center center" style="background-color: #ffffff ; max-width: {{ container_width }} " >
+        <div class="col-lg-{{ container_width|col_lg()}} text-center center" style="background-color: #ffffff ;" >
                 <a class="navbar-brand js-scroll-trigger center" href="{{ path('sheet') }}">
                     {% if logo.filename is defined %}
                         {% if logo.filename is not null %}

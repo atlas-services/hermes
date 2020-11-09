@@ -1,6 +1,6 @@
 <!-- Contact Section -->
-<section id="section_contact" class="section_content px-0 container col-lg-12 col-12 text-center" >
-    <div class="container " style="max-width: {{ content_container_width }}">
+<section id="section_contact" class="section_content px-0 container col-lg-{{ container_width|col_lg() }} col-12 text-center" >
+    <div class="container col-lg-{{ content_container_width|col_lg() }} " >
         <div class="row">
             <div class="col-lg-12 col-12 text-center">
                 {% if user.firstname is defined and  user.lastname is defined %}
