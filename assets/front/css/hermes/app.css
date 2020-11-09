@@ -76,16 +76,16 @@ li.active{
 /*
 Menu
  */
-#mainNav {
-    /*background-color: var(--color-grey2);*/
-    padding-top: 0;
-    padding-bottom: 0;
-}
+/*#mainNav {*/
+/*    !*background-color: var(--color-grey2);*!*/
+/*    padding-top: 0;*/
+/*    padding-bottom: 0;*/
+/*}*/
 
-#mainNav .navbar-nav .nav-item .nav-link{
-    color: var(--color-white);
-    width: max-content;
-}
+/*#mainNav .navbar-nav .nav-item .nav-link{*/
+/*    color: var(--color-white);*/
+/*    width: max-content;*/
+/*}*/
 
 
 .bg-dark{
