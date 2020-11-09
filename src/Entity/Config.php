@@ -23,7 +23,7 @@ use App\Entity\Traits\ActiveTrait;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\ConfigRepository")
  * @ORM\Table(name="config")
  * Defines the properties of the Config entity to represent the configuration.
  *

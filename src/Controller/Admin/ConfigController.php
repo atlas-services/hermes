@@ -6,6 +6,7 @@ use App\Entity\Config;
 use App\Entity\Menu;
 use App\Entity\Sheet;
 use App\Form\Admin\ConfigType;
+use App\Repository\ConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,14 +49,13 @@ class ConfigController extends AbstractController
     /**
      * @Route("/{type}", name="config_index", methods={"GET"})
      */
-    public function index($type): Response
+    public function index(ConfigRepository$configRepository, $type): Response
     {
         if('undefined'== $type){
             $type=null;
         }
-        $config = $this->getDoctrine()
-            ->getRepository(Config::class)
-            ->findBy(['type'=> $type]);
+
+        $config = $configRepository->getConfigByTypeOrderByCode($type);
 
         return $this->render('admin/config/index.html.twig', [
             'configs' => $config,
