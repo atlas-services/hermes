@@ -91,6 +91,7 @@ class ConfigType extends AbstractBaseType
                 case 'accueil':
                     $choice = true;
                     $options = $options_pct_value;
+                    break;
                 // nav_bar
                 case 'nav_bar':
                     $choice = true;
@@ -99,7 +100,7 @@ class ConfigType extends AbstractBaseType
                         'left' => 'left',
                         'full' => 'full',
                     ];
-                break;
+                    break;
                 // nav_bar
                 case 'nav_link_border_bottom':
                     $choice = true;
@@ -107,7 +108,7 @@ class ConfigType extends AbstractBaseType
                         'Aucune séparation' => ' ',
                         'border-bottom' => 'border-bottom',
                     ];
-                break;
+                    break;
                 // chevron
                 case 'chevron':
                     $choice = true;
@@ -115,7 +116,7 @@ class ConfigType extends AbstractBaseType
                         'circle' => 'circle-',
                         'base' => '',
                     ];
-                break;
+                    break;
                 // chevron
                 case 'chevron_position':
                     $choice = true;
@@ -124,7 +125,7 @@ class ConfigType extends AbstractBaseType
                         'middle' => '50%' ,
                         'bottom' =>'95%',
                     ];
-                break;
+                    break;
                 // affiche_img_hermes
                 case 'affiche_img_hermes':
                     $choice = true;
@@ -132,7 +133,7 @@ class ConfigType extends AbstractBaseType
                         'true'  => true,
                         'false' => false ,
                     ];
-                break;
+                    break;
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
