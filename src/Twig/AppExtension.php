@@ -13,6 +13,7 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFilter('list_length', [$this, 'listLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
+            new TwigFilter('col_nb_char', [$this, 'colNbChar']),
             new TwigFilter('get_class', 'get_class'),
         ];
     }
@@ -72,6 +73,44 @@ class AppExtension extends AbstractExtension
         }
 
         return $collg;
+    }
+
+    public function colNbChar($prct)
+    {
+        $nbchar = 35;
+
+        switch ($prct) {
+            case '10%':
+                $nbchar = 10;
+                break;
+            case '20%':
+                $nbchar = 20;
+                break;
+            case '30%':
+                $nbchar = 25;
+                break;
+            case '40%':
+                $nbchar = 25;
+                break;
+            case '50%':
+                $nbchar = 25;
+                break;
+            case '60%':
+                $nbchar = 30;
+                break;
+            case '70%':
+                $nbchar = 35;
+                break;
+            case '80%':
+                $nbchar = 40;
+                break;
+            case '90%':
+                $nbchar = 60;
+            case '100%':
+                $nbchar = 48;
+        }
+
+        return $nbchar;
     }
 
     public function getName()

@@ -1,9 +1,9 @@
 <!-- Portfolio Grid -->
 <section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
-    <div id="folio" class="row ">
-        <div class="container col-12 col-lg-{{ folio_container_width|col_lg() }}">
+    <div class="container col-12 col-lg-{{ folio_container_width|col_lg() }}">
+        <div class="row ml-5" id="folio">
             {% if(section.remote is null) %}
-                <div id="staggering row">
+                <div id="staggering">
                     {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                         {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                             <!-- Modale2  -->
@@ -17,7 +17,7 @@
                 </div>
             {% endif %}
             {% if(section.remote is not null) %}
-                <div id="staggering row">
+                <div id="staggering">
                     {% for img, image in  section.remote.images %}
                         {% if image is not null %}
                             <!-- Modale2  -->

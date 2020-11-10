@@ -114,7 +114,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/menu/{menu}/contenu/{id}/{post}", name="post_edit", methods={"GET","POST"})
+     * @Route("/menu/{menu}/contenu/{id}/{post}", name="post_edit", methods={"GET","POST"}, requirements={"post"=".+"})
      * @ParamConverter("post",class="App\Entity\Post", options={"mapping": {"post": "name"}})
      * @ParamConverter("menu",class="App\Entity\Menu", options={"mapping": {"menu": "slug"}})
      */

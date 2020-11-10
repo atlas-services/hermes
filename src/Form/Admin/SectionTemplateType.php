@@ -29,6 +29,13 @@ class SectionTemplateType extends AbstractType
         $options['name'] = false;
         $options['tooltip']= 'Nom';
 //        parent::buildForm($builder, $options);
+        if($options['position']){
+            $builder
+                ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
+                    'required'=> false,
+                    'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+                ]);
+        }
         if($options['remote_pictures']){
             $builder
                 ->add('remote', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
@@ -129,7 +136,7 @@ class SectionTemplateType extends AbstractType
             ],
             'full_template' => true,
             'name_constraints' => [],
-            'position' => false,
+            'position' => true,
             'saveAndAddSectionPost' => false,
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();

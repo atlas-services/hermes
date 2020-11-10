@@ -1,6 +1,7 @@
 <!-- Portfolio Grid -->
-{% set maxlength = 40 %}
-{% set moinsmaxlength = -40 %}
+
+{% set maxlengthname = folio_container_width|col_nb_char() %}
+{% set maxlengthcontent = 35 %}
 
 <section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ folio_container_width|col_lg() }}" >
@@ -18,12 +19,12 @@
                             <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
                                 <img src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300')  }}" alt="" style="width:100%">
                             </a>
-                            <h4>{{ post.name }}</h4>
-                            {% set ligne = post.content|length - maxlength %}
-                            <p class="h-font-size-09">{{ post.content|striptags|u.truncate(maxlength, '...')|raw }} </p>
-                            {% if ligne < 0 %}
-                                <br/>
-                            {% endif %}
+                            <h6 style="word-break: break-all;">
+                                {{ post.name|striptags|u.truncate(maxlengthname, '...') }}
+                            </h6>
+                             <p style="word-break: break-all;" class="h-font-size-09">
+                                 {{ post.content|striptags|u.truncate(maxlengthname, '...')|raw }}
+                             </p>
                         </div>
                     </div>
                 {% endif %}
