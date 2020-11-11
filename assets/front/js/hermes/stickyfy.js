@@ -25,7 +25,7 @@
             var bgcolor = $('#mainNav').data('navBgcolorShrink');
             $(".sticky .container ul").css("background-color", bgcolor);
             var stickyHeight =  $('.sticky').height() ;
-            var stickySectionContentPaddingTop = stickyHeight + sectionContentPaddingTop;
+            var stickySectionContentPaddingTop = stickyHeight + sectionContentPaddingTop + 50;
             $(".section_content").eq(0).css("padding-top", stickySectionContentPaddingTop + 'px');
         } else {
             header.classList.remove("sticky");

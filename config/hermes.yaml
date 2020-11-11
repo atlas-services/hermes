@@ -223,6 +223,9 @@ parameters:
         nav_container_width:
           summary: Largeur du menu (en %)
           value: '100%'
+        nav_espacement:
+          summary: "Espacement entre les éléments du menu(valeurs possibles : 1 - 2 - 3 - 4 - 5)"
+          value: 3
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu
