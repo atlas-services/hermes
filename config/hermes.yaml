@@ -35,38 +35,46 @@ parameters:
         summary: Template libre et affichage du code
         code: libre_code
         name: Libre avec code
+      modale1:
+        summary: Présentation modale slide
+        code: modale1
+        name: Modale slide
+      modale2:
+        summary: Présentation modale seule
+        code: modale2
+        name: Modale seule
       carousel1:
-        summary: Présentation carousel slide avec madale
+        summary: Présentation carousel slide
         code: carousel1
-        name: Carousel slide avec modale
+        name: Carousel slide
       carousel2:
-        summary: Présentation carousel fade avec modale
+        summary: Présentation carousel fade
         code: carousel2
-        name: Carousel fade avec modale
+        name: Carousel fade
       carousel3:
         summary: Présentation carousel par groupe de 3 images
         code: carousel3
-        name: Carousel par groupe de 3 images avec modale
+        name: Carousel par groupe de 3 images
       folio1:
-        summary: Folio classique avec modale
+        summary: Folio classique
         code: folio1
-        name: Folio classique avec modale slide
+        name: Folio classique avec
       folio2:
-        summary: Folio effet survol (+) avec modale
+        summary: Folio effet survol (+)
         code: folio2
-        name: Folio effet survol (+) avec modale
+        name: Folio effet survol (+)
       folio3:
-        summary: Folio gallery avec modale
+        summary: Folio gallery
         code: folio3
-        name:  Folio gallery avec modale
+        name:  Folio gallery
       folio4:
-        summary: Folio serré avec modale
+        summary: Folio serré
         code: folio4
-        name:  Folio serré avec modale
+        name:  Folio serré
       folio5:
-        summary: Folio serré sans modale
+        summary: Folio serré
         code: folio5
-        name:  Folio serré sans modale
+        name:  Folio serré
       card1:
         summary: Cartes affichée par 2 avec fichier à télécharger
         code: card1

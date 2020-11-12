@@ -75,6 +75,14 @@ class Section
     protected $template;
 
     /**
+     * @var Template
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Template", inversedBy="sections")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $template2;
+
+    /**
      * @var Remote
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Remote", inversedBy="sections")

@@ -34,9 +34,20 @@
                             {% endif %}
                             <div class="carousel-caption">
                                 <h5>
+                                    {% if( 'modale1' ==  section.template2.code) %}
+                                        <!-- Modale1  -->
+                                        <a class="thumbnail portfolio-link" href="#" data-image-id="" data-toggle="modal"
+                                           data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                           data-target="#image-gallery">
+                                            {{ post.name }}
+                                        </a>
+                                    {% endif %}
+                                    {% if( 'modale2' ==  section.template2.code) %}
+                                    <!-- Modale2  -->
                                     <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
                                         {{ post.name }}
                                     </a>
+                                    {% endif %}
                                 </h5>
                             </div>
                         </div>
@@ -60,4 +71,4 @@
 
 
 <!-- Modale 2 -->
-{% include 'front/base/hermes/template/modale2.html.twig' %}
+{% include 'front/base/hermes/template/modale.html.twig' %}

@@ -6,12 +6,24 @@
                 <div id="staggering">
                     {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                         {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                            <!-- Modale2  -->
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
-                            <span class="staggering">
-                                <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
-                            </span>
-                            </a>
+                            {% if( 'modale1' ==  section.template2.code) %}
+                                <!-- Modale1  -->
+                                    <a class="thumbnail portfolio-link" href="#" data-image-id="" data-toggle="modal"
+                                       data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                       data-target="#image-gallery">
+                                    <span class="staggering">
+                                        <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
+                                    </span>
+                                </a>
+                            {% endif %}
+                            {% if( 'modale2' ==  section.template2.code) %}
+                                <!-- Modale2  -->
+                                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                    <span class="staggering">
+                                        <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
+                                    </span>
+                                </a>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -35,6 +47,6 @@
 </section>
 
 <!-- Modale -->
-{% include 'front/base/hermes/template/modale2.html.twig' %}
+{% include 'front/base/hermes/template/modale.html.twig' %}
 
 

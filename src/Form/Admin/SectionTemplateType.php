@@ -56,6 +56,13 @@ class SectionTemplateType extends AbstractType
                 },
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ])
+            ->add('template2', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'class'=> Template::class,
+                'query_builder' => function (TemplateRepository $er)  use ($options) {
+                    return $er->getQbTemplate2();
+                },
+                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+            ])
             ->add('posts', CollectionType::class, $options['posts']
 //                [
 //                'entry_type' => PostType::class,
@@ -112,6 +119,7 @@ class SectionTemplateType extends AbstractType
         $form= $event->getForm();
         $section->setName($form->getViewData()->getTemplate()->getName().'-'.$section->getMenu()->getName());
         $section->setTemplate($form->getViewData()->getTemplate());
+        $section->setTemplate2($form->getViewData()->getTemplate2());
         $event->setData($section);
     }
 

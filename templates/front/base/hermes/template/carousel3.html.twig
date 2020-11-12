@@ -37,9 +37,21 @@
                                 <img class="card-img-top" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carousel_filter') }}"
                                      alt="{{ post.filename }}">
                                 <div class="card-body">
-                                    <h4 class="card-title"><a class="portfolio-link"  data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                    <h4 class="card-title">
+                                        {% if( 'modale1' ==  section.template2.code) %}
+                                        <!-- Modale1  -->
+                                        <a class="thumbnail portfolio-link" href="#" data-image-id="" data-toggle="modal"
+                                           data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                           data-target="#image-gallery">
                                             {{ post.name }}
                                         </a>
+                                        {% endif %}
+                                        {% if( 'modale2' ==  section.template2.code) %}
+                                        <!-- Modale2  -->
+                                        <a class="portfolio-link"  data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                            {{ post.name }}
+                                        </a>
+                                        {% endif %}
                                     </h4>
                                     <p class="card-text">{{ post.content|striptags|u.truncate(25, '...')|raw }}</p>
                                 </div>
@@ -61,5 +73,5 @@
 </section>
 
 
-<!-- Modale 2 -->
-{% include 'front/base/hermes/template/modale2.html.twig' %}
+<!-- Modale  -->
+{% include 'front/base/hermes/template/modale.html.twig' %}

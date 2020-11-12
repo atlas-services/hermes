@@ -20,4 +20,13 @@ trait TemplateTrait
     {
         $this->template = $template;
     }
+    public function getTemplate2(): ?Template
+    {
+        return $this->template2;
+    }
+
+    public function setTemplate2(?Template $template2): void
+    {
+        $this->template2 = $template2;
+    }
 }

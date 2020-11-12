@@ -50,6 +50,15 @@ class TemplateRepository extends ServiceEntityRepository
         ;
         return $qb;
     }
+    public function getQbTemplate2()
+    {
+        $qb = $this->getQbTemplates()
+            ->where('s.code LIKE :modale ' )
+            ->setParameter('modale',   '%modale%')
+            ->orderBy('s.id', 'ASC')
+        ;
+        return $qb;
+    }
     public function getTemplateLibre()
     {
         $result = $this->getQbTemplates()
