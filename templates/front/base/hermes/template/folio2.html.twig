@@ -1,7 +1,7 @@
 <!-- Portfolio Grid -->
 {#<section id="{{ section.name ~ section.template.name }}" class="portfolio bg-light page-section" >#}
 <section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
-    <div class="container-fluid col-12 col-lg-{{ folio_container_width|col_lg() }}" >
+    <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}" >
         {% if(section.remote is null) %}
             <div class="row">
                 <div class="col-lg-12 col-12 text-center">

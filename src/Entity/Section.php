@@ -75,6 +75,14 @@ class Section
     protected $template;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Length(max=3)
+     */
+    protected $template_width;
+
+    /**
      * @var Template
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Template", inversedBy="sections")
@@ -162,6 +170,25 @@ class Section
     {
         $this->menu = $menu;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTemplateWidth(): int
+    {
+        if( '' == $this->template_width){
+            return '100';
+        }
+        return $this->template_width;
+    }
+
+    /**
+     * @param int $template_width
+     */
+    public function setTemplateWidth(int $template_width): void
+    {
+        $this->template_width = $template_width;
     }
 
 }

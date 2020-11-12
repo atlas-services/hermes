@@ -56,6 +56,21 @@ class SectionTemplateType extends AbstractType
                 },
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ])
+            ->add('templateWidth', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'choices' => [
+                    '10%' => '10',
+                    '20%' => '20',
+                    '30%' => '30',
+                    '40%' => '40',
+                    '50%' => '50',
+                    '60%' => '60',
+                    '70%' => '70',
+                    '80%' => '80',
+                    '90%' => '90',
+                    '100%' => '100',
+                ],
+                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+            ])
             ->add('template2', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class'=> Template::class,
                 'query_builder' => function (TemplateRepository $er)  use ($options) {

@@ -43,25 +43,25 @@ class AppExtension extends AbstractExtension
 
         switch ($prct) {
             case '10%':
-                $collg = 3;
+                $collg = 2;
                 break;
             case '20%':
                 $collg = 4;
                 break;
             case '30%':
-                $collg = 5;
+                $collg = 4;
                 break;
             case '40%':
-                $collg = 6;
+                $collg = 5;
                 break;
             case '50%':
-                $collg = 7;
+                $collg = 6;
                 break;
             case '60%':
                 $collg = 8;
                 break;
             case '70%':
-                $collg = 9;
+                $collg = 10;
                 break;
             case '80%':
                 $collg = 10;

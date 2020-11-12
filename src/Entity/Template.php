@@ -7,8 +7,6 @@ use App\Entity\Traits\CodeTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\SummaryTrait;
-use App\Entity\Traits\TemplateTrait;
-use App\Entity\Section;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
