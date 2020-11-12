@@ -13,7 +13,7 @@
                         <div class="content_gallery">
                             {% if( 'modale1' ==  section.template2.code) %}
                                 <!-- Modale1  -->
-                                <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"
+                                <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
                                    data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
                                    data-target="#image-gallery">
                                     <img alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}" />
@@ -46,7 +46,7 @@
                         <div class="content_gallery">
                             {% if( 'modale1' ==  section.template2.code) %}
                                 <!-- Modale1  -->
-                                <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"
+                                <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
                                    data-image ="{{ image }}"
                                    data-target="#image-gallery">
                                     <img alt="" class="img-fluid img-thumbnail" src="{{ image }}" />

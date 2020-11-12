@@ -8,7 +8,7 @@
                     <div class="col-lg-{{ section.posts|list_length }} col-md-{{ section.posts|list_length }} col-12">
                         {% if( 'modale1' ==  section.template2.code) %}
                             <!-- Modale1  -->
-                            <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"
+                            <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}" data-toggle="modal"
                                data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
                                data-target="#image-gallery">
                                 <img alt="{{ post.filename }}" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}" />
@@ -31,7 +31,7 @@
                         <div class="col-lg-{{ section.remote.images|list_length }} col-md-{{ section.remote.images|list_length }} col-12">
                             {% if( 'modale1' ==  section.template2.code) %}
                                 <!-- Modale1  -->
-                                    <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-toggle="modal"
+                                    <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
                                        data-image ="{{ image }}"
                                        data-target="#image-gallery">
                                         <img id="{{ loop.index }}" alt="{{ image }}" class="img-fluid img-thumbnail" src="{{ image}}"  />
