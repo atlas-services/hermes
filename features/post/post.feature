@@ -17,6 +17,7 @@ Feature: New sheet
         When I fill in "menu_name" with "Texte et vidéo"
         And I select "Libre" from "menu_sections_0_template"
         And I fill in "menu_sections_0_posts_0_name" with "texte1"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-texte"
@@ -45,6 +46,7 @@ Feature: New sheet
 #        Then I should see "J'ajoute un contenu à mon sous-menu"
 #        Then I should see "HERMES HERMES"
         When I fill in "post_name" with "texte2"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-texte"
@@ -72,6 +74,7 @@ Feature: New sheet
         When I fill in "menu_name" with "Tradi"
         And I select "Libre" from "menu_sections_0_template"
         And I fill in "menu_sections_0_posts_0_name" with "cuisine1"
+        And I scroll "modal-exemple" into view
         And I press "modal-exemple"
         And I wait for 1 seconds
         And I press "modal-exemple-texte-cuisine"

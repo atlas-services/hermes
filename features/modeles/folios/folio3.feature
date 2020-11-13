@@ -3,21 +3,21 @@
 # http://behat.org/en/latest/quick_start.html
 
 Feature: Create Hermes modeles
-    In order to create "Folio gallery avec modale"
+    In order to create "Folio gallery"
     As a user
     I want to create hermes folios
 
     @javascript
-    Scenario: New Sheet Nos Folios, Menu Folio gallery avec modale with 28 uploded images
+    Scenario: New Sheet Nos Folios, Menu Folio gallery with 28 uploded images
         Given I am logged in as a superadmin
-#       Nouveau sous-menu ""Folio gallery avec modale" pour le menu "Nos Folios"
+#       Nouveau sous-menu ""Folio gallery" pour le menu "Nos Folios"
         Given I am on "fr/admin/page/nouvelle/nouveau-menu/nouveau-contenu"
         When I select "Nos Folios" from "menu_sheet"
-        #  Sous Menu "Folio gallery avec modale"
+        #  Sous Menu "Folio gallery"
 #       image1
         And I wait for 1 seconds
-        When I fill in "menu_name" with "Folio gallery avec modale"
-        And I select "Folio gallery avec modale" from "menu_sections_0_template"
+        When I fill in "menu_name" with "Folio gallery"
+        And I select "Folio gallery" from "menu_sections_0_template"
         And I upload the image "list/1.jpg"
         And I wait for 1 seconds
         And I fill in "menu_sections_0_posts_0_name" with "Folio3 image 1"

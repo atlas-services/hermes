@@ -3,20 +3,20 @@
 # http://behat.org/en/latest/quick_start.html
 
 Feature: Create Hermes modeles
-    In order to create "Folio effet survol (+) avec modale"
+    In order to create "Folio effet survol (+)"
     As a user
     I want to create hermes folios
 
     @javascript
-    Scenario: New Sheet Nos Folios, Menu "Folio effet survol (+) avec modale" with 28 uploded images
+    Scenario: New Sheet Nos Folios, Menu "Folio effet survol (+)" with 28 uploded images
         Given I am logged in as a superadmin
-#       Nouveau sous-menu "Folio effet survol (+) avec modale" pour le menu "Nos Folios"
+#       Nouveau sous-menu "Folio effet survol (+)" pour le menu "Nos Folios"
         Given I am on "fr/admin/page/nouvelle/nouveau-menu/nouveau-contenu"
         When I select "Nos Folios" from "menu_sheet"
 #       image1
         And I wait for 1 seconds
-        When I fill in "menu_name" with "Folio effet survol (+) avec modale"
-        And I select "Folio effet survol (+) avec modale" from "menu_sections_0_template"
+        When I fill in "menu_name" with "Folio effet survol (+)"
+        And I select "Folio effet survol (+)" from "menu_sections_0_template"
         And I upload the image "list/1.jpg"
         And I wait for 1 seconds
         And I fill in "menu_sections_0_posts_0_name" with "Folio2 image 1"

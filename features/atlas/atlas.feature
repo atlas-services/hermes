@@ -159,7 +159,7 @@ Feature: New sheet for atlas
         And I select "Services" from "menu_sheet"
         When I fill in "menu_name" with "slides"
         When I fill in "menu_sections_0_posts_0_name" with "slides"
-        And I select "Carousel slide avec modale" from "menu_sections_0_template"
+        And I select "Carousel slide" from "menu_sections_0_template"
         And I wait for 1 seconds
         And I upload the image "atlas/team/TayebChikhi.jpg"
         And I wait for 1 seconds

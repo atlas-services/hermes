@@ -49,7 +49,7 @@
                     {{ message }}
                 </div>
             {% endfor %}
-            <div id="top" class="hide mt-2" ></div>
+            <div id="top" class="hide" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
                 {% if(section.remote is not null) %}
                     {% if( 'libre' not in section.template.code) %}

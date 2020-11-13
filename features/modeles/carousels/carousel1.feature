@@ -3,22 +3,22 @@
 # http://behat.org/en/latest/quick_start.html
 
 Feature: Create Hermes carousels
-    In order to create "Carousel slide avec modale"
+    In order to create "Carousel"
     As a user
     I want to create hermes carousels
 
     @javascript
-    Scenario: New Sheet "Nos Carousels", Menu "Carousel slide avec modale" with 28 uploded images
+    Scenario: New Sheet "Nos Carousels", Menu "Carousel" with 28 uploded images
         Given I am logged in as a superadmin
 #       Nouveau menu "Nos Caroussels"
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Nos Caroussels"
         And I press "sheet_saveAndAdd"
-        #  Sous Menu "Carousel slide avec modale"
+        #  Sous Menu "Carousel"
 #       image1
         And I wait for 1 seconds
-        When I fill in "menu_name" with "Carousel slide avec modale"
-        And I select "Carousel slide avec modale" from "menu_sections_0_template"
+        When I fill in "menu_name" with "Carousel"
+        And I select "Carousel" from "menu_sections_0_template"
         And I upload the image "list/1.jpg"
         And I wait for 1 seconds
         And I fill in "menu_sections_0_posts_0_name" with "Carousel1 image 1"

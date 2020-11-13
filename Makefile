@@ -59,7 +59,7 @@ doctrine-re-init:
 	bin/console doctrine:database:create
 	bin/console d:s:u --force
 	bin/console hermes:db-update
-	rm -r var/cache/* var/log/* 2> /dev/null || true
+# 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 
 behat-login:

@@ -3,21 +3,21 @@
 # http://behat.org/en/latest/quick_start.html
 
 Feature: Create Hermes Folios
-    In order to create "Folio serré avec modale"
+    In order to create "Folio serré"
     As a user
     I want to create hermes folios
 
     @javascript
-    Scenario: New Sheet Nos Folios, Menu "Folio serré avec modale" with 28 uploded images
+    Scenario: New Sheet Nos Folios, Menu "Folio serré" with 28 uploded images
         Given I am logged in as a superadmin
-#       Nouveau sous-menu ""Folio serré avec modale" pour le menu "Nos Folios"
+#       Nouveau sous-menu ""Folio serré" pour le menu "Nos Folios"
         Given I am on "fr/admin/page/nouvelle/nouveau-menu/nouveau-contenu"
         When I select "Nos Folios" from "menu_sheet"
-        #  Sous Menu "Folio serré avec modale"
+        #  Sous Menu "Folio serré"
 #       image1
         And I wait for 1 seconds
-        When I fill in "menu_name" with "Folio serré avec modale"
-        And I select "Folio serré avec modale" from "menu_sections_0_template"
+        When I fill in "menu_name" with "Folio serré"
+        And I select "Folio serré" from "menu_sections_0_template"
         And I upload the image "list/1.jpg"
         And I wait for 1 seconds
         And I fill in "menu_sections_0_posts_0_name" with "Folio4 image 1"

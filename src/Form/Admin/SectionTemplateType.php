@@ -69,6 +69,8 @@ class SectionTemplateType extends AbstractType
                     '90%' => '90',
                     '100%' => '100',
                 ],
+                'required'=> false,
+                'data' => 100,
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
             ])
             ->add('template2', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [

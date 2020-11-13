@@ -3,22 +3,22 @@
 # http://behat.org/en/latest/quick_start.html
 
 Feature: Create Hermes folios
-    In order to create "Folio classique avec modale slide"
+    In order to create "Folio classique"
     As a user
     I want to create hermes folios
 
     @javascript
-    Scenario: New Sheet Nos Folios, Menu "Folio classique avec modale slide" with 28 uploded images
+    Scenario: New Sheet Nos Folios, Menu "Folio classique" with 28 uploded images
         Given I am logged in as a superadmin
 #       Nouveau menu "Nos Folios"
         Given I am on "/fr/admin/nouvelle-page"
         When I fill in "sheet_name" with "Nos Folios"
         And I press "sheet_saveAndAdd"
-        #  Sous Menu "Folio classique avec modale slide"
+        #  Sous Menu "Folio classique"
 #       image1
         And I wait for 1 seconds
-        When I fill in "menu_name" with "Folio classique avec modale slide"
-        And I select "Folio classique avec modale slide" from "menu_sections_0_template"
+        When I fill in "menu_name" with "Folio classique"
+        And I select "Folio classique" from "menu_sections_0_template"
         And I upload the image "list/1.jpg"
         And I wait for 1 seconds
         And I fill in "menu_sections_0_posts_0_name" with "Folio1 image 1"

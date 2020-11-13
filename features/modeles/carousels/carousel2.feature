@@ -3,21 +3,21 @@
 # http://behat.org/en/latest/quick_start.html
 
 Feature: Create Hermes carousels
-    In order to create "Carousel fade avec modale"
+    In order to create "Carousel fade"
     As a user
     I want to create hermes carousels
 
     @javascript
-    Scenario: New Sheet "Nos Carousels", Menu "Carousel fade avec modale" with 28 uploded images
+    Scenario: New Sheet "Nos Carousels", Menu "Carousel fade" with 28 uploded images
         Given I am logged in as a superadmin
-#       Nouveau sous-menu "Carousel fade avec modale" pour le menu "Nos Caroussels"
+#       Nouveau sous-menu "Carousel fade" pour le menu "Nos Caroussels"
         Given I am on "fr/admin/page/nouvelle/nouveau-menu/nouveau-contenu"
         When I select "Nos Caroussels" from "menu_sheet"
-        #  Sous Menu "Carousel fade avec modale"
+        #  Sous Menu "Carousel fade"
 #       image1
         And I wait for 1 seconds
-        When I fill in "menu_name" with "Carousel fade avec modale"
-        And I select "Carousel fade avec modale" from "menu_sections_0_template"
+        When I fill in "menu_name" with "Carousel fade"
+        And I select "Carousel fade" from "menu_sections_0_template"
         And I upload the image "list/1.jpg"
         And I wait for 1 seconds
         And I fill in "menu_sections_0_posts_0_name" with "Carousel2 image 1"
