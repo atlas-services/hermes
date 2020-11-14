@@ -88,9 +88,9 @@ Menu
 /*}*/
 
 
-.bg-dark{
-    background-color: var(--color-green3) !important ;
-}
+/*.bg-dark{*/
+/*    background-color: var(--color-green3) !important ;*/
+/*}*/
 
 .img-fluid-big {
     background-size: cover;

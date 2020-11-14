@@ -2,6 +2,7 @@
 {#<section id="{{ section.name ~ section.template.name }}" class="portfolio bg-light page-section" >#}
 <section id="portfolio" class="section_content mx-auto px-0" style="background-color:{{ content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0" >
+        {% if(section.remote is null) %}
         <div id="folio"  class="row ">
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                 {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
@@ -28,24 +29,29 @@
                 {% endif %}
             {% endfor %}
         </div>
+        {% endif %}
         {% if(section.remote is not null) %}
             <div id="folio"  class="row">
-                {% for image in  section.remote.images %}
+                {% for img, image in  section.remote.images %}
                     {% if(image is not null) %}
                         <div class="col-lg-{{ section.remote.images|list_length }} col-md-{{ section.remote.images|list_length }} col-12 text-center">
-                            {% if( 'modale1' ==  section.template2.code) %}
-                                <!-- Modale1  -->
-                                    <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
-                                       data-image ="{{ image }}"
-                                       data-target="#image-gallery">
+                            {% if( section.template2 == '') %}
+                                <img alt="{{ img }}" class="img-fluid img-thumbnail" src="{{ image }}" />
+                            {% else %}
+                                {% if( 'modale1' ==  section.template2.code) %}
+                                    <!-- Modale1  -->
+                                        <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
+                                           data-image ="{{ image }}"
+                                           data-target="#image-gallery">
+                                            <img id="{{ loop.index }}" alt="{{ image }}" class="img-fluid img-thumbnail" src="{{ image}}"  />
+                                        </a>
+                                {% endif %}
+                                {% if( 'modale2' ==  section.template2.code) %}
+                                    <!-- Modale2  -->
+                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
                                         <img id="{{ loop.index }}" alt="{{ image }}" class="img-fluid img-thumbnail" src="{{ image}}"  />
                                     </a>
-                            {% endif %}
-                            {% if( 'modale2' ==  section.template2.code) %}
-                                <!-- Modale2  -->
-                                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
-                                    <img id="{{ loop.index }}" alt="{{ image }}" class="img-fluid img-thumbnail" src="{{ image}}"  />
-                                </a>
+                                {% endif %}
                             {% endif %}
                         </div>
                     {% endif %}

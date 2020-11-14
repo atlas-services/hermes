@@ -70,7 +70,6 @@
     {% if('contact' == app.request.attributes.get('_route')) %}
         {% include 'front/base/' ~ directory ~'/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}
     {% endif %}
-    <section id="section_bottom" ></section>
 {% endblock content %}
 
 
