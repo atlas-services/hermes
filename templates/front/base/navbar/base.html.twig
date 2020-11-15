@@ -71,7 +71,7 @@
                            href={{ href }}>{{ sheet_name }}
                         </a>
                         {% if (listmenu.name is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
-                            <ul class="dropdown-menu "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
+                            <ul class="dropdown-menu mt-2 mx-lg-{{ nav_espacement }}"  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
 {#                                {% if listmenu|length > 2 %}#}
 {#                                    {% set border_bottom = "border-bottom" %}#}
 {#                                {% endif %}#}
