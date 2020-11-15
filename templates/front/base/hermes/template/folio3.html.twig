@@ -44,23 +44,27 @@
         {% endif %}
         {% if(section.remote is not null) %}
             <div id="folio" class="row_gallery">
-            {% for image, image in  section.remote.images %}
+            {% for img, image in  section.remote.images %}
                 {% if image is not null %}
                     <div class="column">
                         <div class="content_gallery text-center ">
-                            {% if( 'modale1' ==  section.template2.code) %}
-                                <!-- Modale1  -->
-                                <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
-                                   data-image ="{{ image }}"
-                                   data-target="#image-gallery">
-                                    <img alt="" class="img-fluid img-thumbnail" src="{{ image }}" />
-                                </a>
-                            {% endif %}
-                            {% if( 'modale2' ==  section.template2.code) %}
-                                 <!-- Modale2  -->
-                                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ image }}">
-                                    <img src="{{ image  }}" alt="{{ image }}" style="width:100%">
-                                </a>
+                            {% if( section.template2 == '') %}
+                                <img alt="" class="img-fluid img-thumbnail" src="{{ image }}" />
+                            {% else %}
+                                {% if( 'modale1' ==  section.template2.code) %}
+                                    <!-- Modale1  -->
+                                    <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? ''  }}"  data-toggle="modal"
+                                       data-image ="{{ image }}"
+                                       data-target="#image-gallery">
+                                        <img alt="" class="img-fluid img-thumbnail" src="{{ image }}" />
+                                    </a>
+                                {% endif %}
+                                {% if( 'modale2' ==  section.template2.code) %}
+                                     <!-- Modale2  -->
+                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
+                                        <img src="{{ image  }}" alt="{{ image }}" style="width:100%">
+                                    </a>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>

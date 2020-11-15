@@ -13,7 +13,7 @@
                         {% if( section.template2 == '') %}
                             <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio2_filter') }}"
                          alt="{{ post.name }}">
-                    {% else %}
+                        {% else %}
                         {% if( 'modale1' ==  section.template2.code) %}
                             <!-- Modale1  -->
                                 <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
@@ -31,7 +31,6 @@
                                 </a>
                             {% endif %}
                             {% if( 'modale2' ==  section.template2.code) %}
-                            <!-- Modale2  -->
                                 <!-- Modale2  -->
                                 <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
                                     <div class="portfolio-hover">
@@ -57,16 +56,40 @@
             <div id="folio" class="row">
             {% for img , image in  section.remote.images %}
                 <div class="col-md-{{ section.remote.images|list_length }} col-sm-{{ section.remote.images|list_length }} portfolio-item text-center">
-                    <a class="portfolio-link " data-toggle="modal" href="#portfolioModal{{ img }}">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        {% if(image is not null) %}
-                            <img class="img-fluid " src="{{ image }}"  alt="{{ img }}" />
+                    {% if( section.template2 == '') %}
+                        <img class="img-fluid " src="{{ image }}"
+                             alt="{{ img }}">
+                    {% else %}
+                        {% if( 'modale1' ==  section.template2.code) %}
+                            <!-- Modale1  -->
+                            <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
+                               data-image ="{{ image }}"
+                               data-target="#image-gallery">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content">
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                </div>
+                                {% if image is not null %}
+                                    <img class="img-fluid " src="{{ image }}"
+                                         alt="{{ img }}">
+                                {% endif %}
+                            </a>
                         {% endif %}
-                    </a>
+                        {% if( 'modale2' ==  section.template2.code) %}
+                        <!-- Modale2  -->
+                            <a class="portfolio-link " data-toggle="modal" href="#portfolioModal{{ img }}">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content">
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                </div>
+                                {% if(image is not null) %}
+                                    <img class="img-fluid " src="{{ image }}"  alt="{{ img }}" />
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    {% endif %}
 {#                    <div class="portfolio-caption">#}
 {#                        <h4>{{ image }}</h4>#}
 {#                    </div>#}

@@ -39,15 +39,33 @@
                 </div>
             {% endif %}
             {% if(section.remote is not null) %}
-                <div id="staggering">
+                <div id="staggering"  class="{{ staggering_px }}" >
                     {% for img, image in  section.remote.images %}
                         {% if image is not null %}
-                            <!-- Modale2  -->
-                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
-                            <span class="staggering">
-                                <img class="stagge h-h-20 h-w-20" src="{{ image }}" />
-                            </span>
-                            </a>
+                            {% if( section.template2 == '') %}
+                                <span class="staggering">
+                                        <img class="stagge" style="width: 300px;height:200px;object-fit:cover"   src="{{ image }}" />
+                                </span>
+                            {% else %}
+                                {% if( 'modale1' ==  section.template2.code) %}
+                                    <!-- Modale1  -->
+                                    <a class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
+                                       data-image ="{{ image }}"
+                                       data-target="#image-gallery">
+                                        <span class="staggering">
+                                            <img class="stagge"  style="width: 300px;height:200px;object-fit:cover"  src="{{ image }}"/>
+                                        </span>
+                                    </a>
+                                {% endif %}
+                                {% if( 'modale2' ==  section.template2.code) %}
+                                    <!-- Modale2  -->
+                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
+                                        <span class="staggering">
+                                            <img class="stagge" style="width: 300px;height:200px;object-fit:cover" src="{{ image }}"/>
+                                        </span>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
