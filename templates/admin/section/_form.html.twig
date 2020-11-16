@@ -4,7 +4,7 @@
 {{ form_start(form) }}
     {% if form.position is defined %}
         {{ form_row(form.position) }}
-    {% endif %}
+
     {% if form.remote is defined %}
         {{ form_row(form.remote) }}
     {% endif %}
@@ -13,8 +13,9 @@
     {{ form_row(form.templateNbCol) }}
     {{ form_row(form.templateImageFilter) }}
     {{ form_row(form.template2) }}
-    <hr style="  border: 2px solid #123456;border-radius: 5px;"/>
-{#    {{ form_row(form.posts) }}#}
+    {% endif %}
+
+    {% if form.posts is defined %}
     {% for form_posts in form  %}
         {% if( 'posts' == form_posts.vars.name) %}
             {% for form_post in form_posts %}
@@ -43,6 +44,7 @@
             {% endfor  %}
         {% endif  %}
     {% endfor  %}
+    {% endif %}
     {% if( app.request.attributes.get('_route') in ['section_post_new_menu','section_new', 'section_edit']) %}
         {{ form_row(form.saveAndAddPost) }}
 {#        {{ form_row(form.saveAndAddSectionPost) }}#}

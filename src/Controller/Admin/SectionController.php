@@ -120,10 +120,10 @@ class SectionController extends AbstractController
     }
 
     /**
-     * @Route("/modele/edit/{section}", name="section_edit", methods={"GET","POST"})
+     * @Route("/modele/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Section", options={"mapping": {"section": "id"}})
      */
-    public function edit(Request $request, Section $section): Response
+    public function edit(Request $request, Section $section, $config = 1): Response
     {
 
         $options['posts'] = [
@@ -140,6 +140,7 @@ class SectionController extends AbstractController
 
         // On peut gérer les images remote ici => true
         $options['remote_pictures'] = true;
+        $options['config'] = boolval($config);
 
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
         $form->handleRequest($request);
