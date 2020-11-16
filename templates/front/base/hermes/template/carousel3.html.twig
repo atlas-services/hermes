@@ -6,12 +6,15 @@
         {% set posts = section.posts %}
     {% endif %}
 
+    {% set filter = 'bd' %}
+    {% set col_xx = (12/section.templateNbCol)|round %}
+
     <div class="container col-12 col-lg-{{ (section.templateWidth ?? carousel_multiple_container_width)|col_lg()   }}" style="background-color:{{ content_bgcolor }}" >
         <!--Carousel Wrapper-->
-        <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+        <div id="multi-item-example" class="carousel slide carousel-multi-item " data-ride="carousel">
 
             <!--Controls-->
-            <div class="controls-top mb-5 text-center">
+            <div class="controls-top mb-3 text-center">
                 <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
                 <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
             </div>
@@ -21,20 +24,20 @@
                     {% for post in posts|sort((a, b) => a.position <=> b.position) %}
                         {% set active = '' %}
                         {% set card_class = 'clearfix d-none d-md-block' %}
-                        {% if ((loop.index  - 1) is divisible by(3)) %}
+                        {% if ((loop.index  - 1) is divisible by(section.templateNbCol)) %}
                             {% set card_class = '' %}
                         {% endif %}
                         {% if (loop.index  == 1 ) %}
                             {% set active = 'active' %}
                         {% endif %}
                     <!--begin 3 slide-->
-                        {% if ((loop.index  - 1) is divisible by(3)) %}
+                        {% if ((loop.index  - 1) is divisible by(section.templateNbCol)) %}
                             <div class="carousel-item col-12 px-0 {{ active }}">
                             <div class="row">
                         {% endif %}
-                        <div class="col-md-4 {{ card_class }}">
+                        <div class="col-md-{{col_xx}} mx-auto {{ card_class }}">
                             <div class="card mb-2">
-                                <img class="card-img-top" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carousel_filter') }}"
+                                <img  class="card-img-top" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carousel_filter_'~ section.templateImageFilter) }}"
                                      alt="{{ post.filename }}">
                                 <div class="card-body">
                                     <h4 class="card-title">
@@ -61,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% if ((loop.index ) is divisible by(3)) %}
+                        {% if ((loop.index ) is divisible by(section.templateNbCol)) %}
                             </div>
                             </div>
                         {% endif %}

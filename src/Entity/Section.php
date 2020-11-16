@@ -83,6 +83,21 @@ class Section
     protected $template_width;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Length(max=1)
+     */
+    protected $template_nb_col;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $template_image_filter;
+
+    /**
      * @var Template
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Template", inversedBy="sections")
@@ -189,6 +204,44 @@ class Section
     public function setTemplateWidth(int $template_width): void
     {
         $this->template_width = $template_width;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTemplateNbCol(): int
+    {
+        if( '' == $this->template_nb_col){
+            return 4 ;
+        }
+        return $this->template_nb_col;
+    }
+
+    /**
+     * @param int $template_nb_col
+     */
+    public function setTemplateNbCol(int $template_nb_col): void
+    {
+        $this->template_nb_col = $template_nb_col;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplateImageFilter(): string
+    {
+        if( '' == $this->template_image_filter){
+            return 'bd' ;
+        }
+        return $this->template_image_filter;
+    }
+
+    /**
+     * @param string $template_image_filter
+     */
+    public function setTemplateImageFilter(string $template_image_filter): void
+    {
+        $this->template_image_filter = $template_image_filter;
     }
 
 }

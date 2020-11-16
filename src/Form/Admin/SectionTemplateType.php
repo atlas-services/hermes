@@ -70,7 +70,26 @@ class SectionTemplateType extends AbstractType
                     '100%' => '100',
                 ],
                 'required'=> false,
-                'data' => 100,
+                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+            ])
+            ->add('templateNbCol', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'choices' => [
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                    '5' => '5',
+                    '6' => '6',
+                ],
+                'required'=> false,
+                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+            ])
+            ->add('templateImageFilter', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'choices' => [
+                    'Format Bd' => 'bd',
+                    'Format paysage' => 'paysage',
+                ],
+                'required'=> false,
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
             ])
             ->add('template2', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [

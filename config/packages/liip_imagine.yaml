@@ -148,6 +148,19 @@ liip_imagine:
                     # set the fixed size to "120x90" pixels
                     width: 1200
                     height: 750
+        app_fixed_carousel_filter_bd:
+            filters:
+                # use and setup the "fixed" filter
+                fixed:
+                    # set the fixed size to "120x90" pixels
+                    width: 618
+                    height: 860
+        app_fixed_carousel_filter_paysage:
+            filters:
+                # use and setup the "fixed" filter
+                fixed:
+                    width: 860
+                    height: 618
         # name our filter set "my_watermark_filter"
         app_watermark_filter:
             filters:

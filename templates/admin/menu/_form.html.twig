@@ -20,6 +20,8 @@
         {{ form_row(form_section.remote) }}
         {{ form_row(form_section.template) }}
         {{ form_row(form_section.templateWidth) }}
+        {{ form_row(form_section.templateNbCol) }}
+        {{ form_row(form_section.templateImageFilter) }}
         {% for form_posts in form_section  %}
             {% if( 'posts' == form_posts.vars.name) %}
                 {% for form_post in form_posts %}
