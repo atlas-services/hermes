@@ -10,13 +10,21 @@
         } else {
             $('.vich-image').show();
         }
+        // Nb col et filter seulement pour le slide multi-image
+        if (modeleselect == "Carousel par groupe") {
+            $('.templateNbCol').parent().parent().children().show();
+            // $('.templateImageFilter').parent().parent().children().show();
+        } else {
+            $('.templateNbCol').parent().parent().children().hide();
+            // $('.templateImageFilter').parent().parent().children().hide();
+        }
     });
 
     if ($('#libre').length > 0) {
         $('.vich-image').parent().parent().children().hide();
     } else {
         var modeleselect = $("[id$=template]  option:selected").eq(0);
-        if (modeleselect.text() != "libre") {
+        if (modeleselect.text() != "Libre") {
             $('.vich-image').parent().parent().children().show();
         } else {
             $('.vich-image').parent().parent().children().hide();
@@ -24,7 +32,7 @@
         var idmodele = '#' + $("[id$=template]").eq(0).prop('id');
         $(idmodele).change(function () {
             var modeleselect = $("[id$=template] option:selected").text();
-            if (modeleselect != "libre") {
+            if (modeleselect != "Libre") {
                 $('.vich-image').parent().parent().children().show();
             } else {
                 $('.vich-image').parent().parent().children().hide();

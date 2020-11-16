@@ -121,6 +121,41 @@ liip_imagine:
 #                background: { size: [184, 114], position: center, color: '#aaaaaa' }
 
         # name our filter set "my_fixed_filter"
+        app_fixed_filter_carre_550:
+            filters:
+                fixed:
+                    width: 550
+                    height: 550
+        app_fixed_filter_carre_300:
+            filters:
+                fixed:
+                    width: 300
+                    height: 300
+        app_fixed_filter_carre_150:
+            filters:
+                fixed:
+                    width: 150
+                    height: 150
+        app_fixed_filter_bd_500:
+            filters:
+                fixed:
+                    width: 500
+                    height: 695
+        app_fixed_filter_bd_309:
+            filters:
+                fixed:
+                    width: 308 # bug avec 309 => d'où le 308
+                    height: 430
+        app_fixed_filter_bd_154:
+            filters:
+                fixed:
+                    width: 154
+                    height: 215
+        app_fixed_filter_paysage:
+            filters:
+                fixed:
+                    width: 860
+                    height: 618
         app_fixed_folio_filter:
             filters:
                 # use and setup the "fixed" filter

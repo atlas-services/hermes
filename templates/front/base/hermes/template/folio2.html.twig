@@ -11,13 +11,13 @@
                 {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                     <div class="col-md-{{ section.posts|list_length }} col-sm-{{ section.posts|list_length }} portfolio-item text-center">
                         {% if( section.template2 == '') %}
-                            <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio2_filter') }}"
+                            <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                          alt="{{ post.name }}">
                         {% else %}
                         {% if( 'modale1' ==  section.template2.code) %}
                             <!-- Modale1  -->
                                 <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
-                                   data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio2_filter') }}"
+                                   data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                    data-target="#image-gallery">
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content">
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                                     {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                                        <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio2_filter') }}"
+                                        <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                              alt="{{ post.name }}">
                                     {% endif %}
                                 </a>

@@ -37,7 +37,7 @@
                         {% endif %}
                         <div class="col-md-{{col_xx}} mx-auto {{ card_class }}">
                             <div class="card mb-2">
-                                <img  class="card-img-top" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carousel_filter_'~ section.templateImageFilter) }}"
+                                <img  class="card-img-top" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                      alt="{{ post.filename }}">
                                 <div class="card-body">
                                     <h4 class="card-title">
@@ -47,7 +47,7 @@
                                             {% if( 'modale1' ==  section.template2.code) %}
                                             <!-- Modale1  -->
                                             <a class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
-                                               data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio_modale_filter') }}"
+                                               data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                                data-target="#image-gallery">
                                                 {{ post.name }}
                                             </a>

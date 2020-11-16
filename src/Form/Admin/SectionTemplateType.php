@@ -70,7 +70,7 @@ class SectionTemplateType extends AbstractType
                     '100%' => '100',
                 ],
                 'required'=> false,
-                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+                'attr'=> ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
             ])
             ->add('templateNbCol', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                 'choices' => [
@@ -82,15 +82,20 @@ class SectionTemplateType extends AbstractType
                     '6' => '6',
                 ],
                 'required'=> false,
-                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+                'attr'=> ['class' => 'templateNbCol select2 custom-select custom-select-lg mb-3 '],
             ])
             ->add('templateImageFilter', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                 'choices' => [
-                    'Format Bd' => 'bd',
+                    'Format Bd 154' => 'bd_154',
+                    'Format Bd 309' => 'bd_309',
+//                    'Format Bd 500' => 'bd_500',
+                    'Format carre 150' => 'carre_150',
+                    'Format carre 300' => 'carre_300',
+//                    'Format carre 550' => 'carre_550',
                     'Format paysage' => 'paysage',
                 ],
                 'required'=> false,
-                'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+                'attr'=> ['class' => 'templateImageFilter select2 custom-select custom-select-lg mb-3 '],
             ])
             ->add('template2', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class'=> Template::class,

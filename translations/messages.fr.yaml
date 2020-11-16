@@ -128,6 +128,7 @@ global:
 
 action:
   edit: <i class="fa fa-2x fa-edit"></i>
+  config: <i class="fa fa-2x fa-cogs"></i>
   add: <i class="fa fa-2x fa-plus-circle"></i>
   add_diff: <i class="fa fa-2x fa-plus-circle" style="color:green"></i>
   show: <i class="fa fa-2x fa-show"></i>
