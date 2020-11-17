@@ -1,12 +1,12 @@
 <!-- Section Libre -->
-<section id="{{ section.name }}" class="section_content px-0 col-lg-{{ container_width|col_lg()}} col-12" style="background-color:{{ content_bgcolor }}">
+<section id="{{ section.name }}" class="section_content mx-auto col-lg-{{ container_width|col_lg()}} col-12" style="background-color:{{ content_bgcolor }}">
     {% if('previsualidation_sheet' == app.request.get('_route')) %}
         {% set posts = section.getPrevisualisationPosts %}
     {% else %}
         {% set posts = section.posts %}
     {% endif %}
     {% for post in posts|sort((a, b) => a.position <=> b.position) %}
-        <div class="container col-lg-{{ content_container_width|col_lg() }}" >
+        <div class="container col-lg-{{ content_container_width|col_lg() }} mx-auto" >
             {{ post.content|raw }}
         </div>
     {% endfor %}
