@@ -52,15 +52,16 @@ class ConfigType extends AbstractBaseType
             $form = $event->getForm();
             $code = $data->getCode();
             $options_font_family = [
-                'Verdana' => 'Verdana',
-                ' Comic Sans MS, Comic Sans, cursive' => ' Comic Sans MS, Comic Sans, cursive',
-                '\'Oswald\',Helvetica,Arial,Lucida,sans-serif' => '\'Oswald\',Helvetica,Arial,Lucida,sans-serif',
-                '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
-                'Impact, fantasy' => 'Impact, fantasy',
-                '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif' => ' \'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
+                'Alfa Slab One' => 'Alfa Slab One',
                 '\'Bai Jamjuree\', sans-serif' => '\'Bai Jamjuree\', sans-serif',
+                ' Comic Sans MS, Comic Sans, cursive' => ' Comic Sans MS, Comic Sans, cursive',
+                'Impact, fantasy' => 'Impact, fantasy',
+                '\'Oswald\',Helvetica,Arial,Lucida,sans-serif' => '\'Oswald\',Helvetica,Arial,Lucida,sans-serif',
+                '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif' => ' \'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
                 '\'Sofia\', sans-serif' => '\'Sofia\', sans-serif',
                 '\'Snowburst One\', sans-serif' => '\'Snowburst One\', sans-serif',
+                '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
+                'Verdana' => 'Verdana',
             ];
             $options_pct = [
                 '10%' => '10%',

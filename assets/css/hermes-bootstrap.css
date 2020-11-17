@@ -256,40 +256,48 @@ add font size
 polices && size
  */
 
-.h-verdana{
-    font-family: Verdana;
-}
-
-.h-comic{
-    font-family: Comic Sans MS, Comic Sans, cursive;
-}
-
-.h-oswald{
-    font-family: 'Oswald',Helvetica,Arial,Lucida,sans-serif;
+.h-alfaSlabOne{
+    font-family: 'Alfa Slab One';
 }
 
 .h-antiqua{
     font-family: 'The Antiqua B', Georgia, Droid-serif, serif;
 }
 
+.h-bay-jamjuree{
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.h-comic{
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
 .h-impact{
     font-family: Impact, fantasy;
+}
+
+.h-lato{
+    font-family: Impact, fantasy;
+}
+
+.h-oswald{
+    font-family: Lato;
 }
 
 .h-palatino{
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 }
 
-.h-bay-jamjuree{
-    font-family: 'Bai Jamjuree', sans-serif;
+.h-snowburstOne{
+    font-family: 'Snowburst One', sans-serif;
 }
 
 .h-sofia{
     font-family: 'Sofia', sans-serif;
 }
 
-.h-snowburstOne{
-    font-family: 'Snowburst One', sans-serif;
+.h-verdana{
+    font-family: Verdana;
 }
 
 /*
