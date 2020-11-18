@@ -201,7 +201,7 @@ class Section
     public function getTemplateWidth(): int
     {
         if( '' == $this->template_width){
-            return '100';
+            return '70';
         }
         return $this->template_width;
     }
@@ -258,7 +258,7 @@ class Section
     public function getTemplate2Width(): int
     {
         if( '' == $this->template2_width){
-            return '100';
+            return '50';
         }
         return $this->template2_width;
     }
