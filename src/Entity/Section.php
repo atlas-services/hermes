@@ -106,6 +106,14 @@ class Section
     protected $template2;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Length(max=3)
+     */
+    protected $template2_width;
+
+    /**
      * @var Remote
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Remote", inversedBy="sections")
@@ -231,7 +239,7 @@ class Section
     public function getTemplateImageFilter(): string
     {
         if( '' == $this->template_image_filter){
-            return 'bd' ;
+            return 'bd_154' ;
         }
         return $this->template_image_filter;
     }
@@ -242,6 +250,25 @@ class Section
     public function setTemplateImageFilter(string $template_image_filter): void
     {
         $this->template_image_filter = $template_image_filter;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTemplate2Width(): int
+    {
+        if( '' == $this->template2_width){
+            return '100';
+        }
+        return $this->template2_width;
+    }
+
+    /**
+     * @param int $template2_width
+     */
+    public function setTemplate2Width(int $template2_width): void
+    {
+        $this->template2_width = $template2_width;
     }
 
 }

@@ -58,18 +58,7 @@ class SectionTemplateType extends AbstractType
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                 ])
                 ->add('templateWidth', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
-                    'choices' => [
-                        '10%' => '10',
-                        '20%' => '20',
-                        '30%' => '30',
-                        '40%' => '40',
-                        '50%' => '50',
-                        '60%' => '60',
-                        '70%' => '70',
-                        '80%' => '80',
-                        '90%' => '90',
-                        '100%' => '100',
-                    ],
+                    'choices' => $options['template_width'],
                     'required' => false,
                     'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
                 ])
@@ -104,6 +93,11 @@ class SectionTemplateType extends AbstractType
                         return $er->getQbTemplate2();
                     },
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+                ])
+                ->add('template2Width', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                    'choices' => $options['template_width'],
+                    'required' => false,
+                    'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
                 ]);
             if ($options['menu']) {
                 $builder
@@ -165,6 +159,18 @@ class SectionTemplateType extends AbstractType
             'content' => true,
             'menu' => false,
             'config' => true,
+            'template_width'=>  [
+                '10%' => '10',
+                '20%' => '20',
+                '30%' => '30',
+                '40%' => '40',
+                '50%' => '50',
+                '60%' => '60',
+                '70%' => '70',
+                '80%' => '80',
+                '90%' => '90',
+                '100%' => '100',
+            ],
             'posts' => [
                 'entry_type' => PostType::class,
                 'constraints' => new \Symfony\Component\Validator\Constraints\Valid(),
