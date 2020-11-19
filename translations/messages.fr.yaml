@@ -98,7 +98,8 @@ global:
   summary: Description sommaire
   content: Contenu
   updatedAt: Mis à jour le
-  publishedAt: Publié le
+  startPublishedAt: Date de début de publication
+  endPublishedAt: Date de fin de publication
   user: Utilisateur
   gestion: Gestion du Contenu
   firstname: Prénom

@@ -6,6 +6,12 @@
             : {{ form.vars.value.section.template.name }}</h4>
     {% endif %}
     {{ form_row(form.active) }}
+    {% if form.startPublishedAt is defined %}
+        {{ form_row(form.startPublishedAt) }}
+    {% endif %}
+    {% if form.endPublishedAt is defined %}
+        {{ form_row(form.endPublishedAt) }}
+    {% endif %}
     {% if form.position is defined %}
         {{ form_row(form.position) }}
     {% endif %}

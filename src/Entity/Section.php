@@ -163,9 +163,31 @@ class Section
         $post->setSection(null);
     }
 
-    public function getPosts(): ?Collection
+    public function getActivePosts(): ?Collection
     {
         foreach ($this->posts as $post){
+            if(!$post->isActive()){
+                $this->removePost($post);
+            }
+        }
+        return $this->posts;
+    }
+
+
+    public function getPosts(): ?Collection
+    {
+        $now = (new \DateTime("NOW"))->format('Y-m-d');
+        foreach ($this->posts as $post){
+            if($post->getStartPublishedAt()){
+                if($post->getStartPublishedAt()->format('Y-m-d') > $now){
+                    $this->removePost($post);
+                }
+            }
+            if($post->getEndPublishedAt()){
+                if($post->getEndPublishedAt()->format('Y-m-d') < $now){
+                    $this->removePost($post);
+                }
+            }
             if(!$post->isActive()){
                 $this->removePost($post);
             }

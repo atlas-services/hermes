@@ -28,8 +28,8 @@ class SectionTemplateType extends AbstractType
         $options['active'] = false;
         $options['name'] = false;
         $options['tooltip'] = 'Nom';
-
-        if (true == $options['config']) {
+dump($options['config'] );
+        if (true === $options['config'] || null  === $options['config']) {
             if ($options['position']) {
                 $builder
                     ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
@@ -110,7 +110,9 @@ class SectionTemplateType extends AbstractType
                 $builder
                     ->add('position');
             }
-        } else {
+        }
+
+        if (false === $options['config'] || null  === $options['config'] ) {
             $builder->add('posts', CollectionType::class, $options['posts']);
         }
 
@@ -158,7 +160,7 @@ class SectionTemplateType extends AbstractType
             'remote_pictures' => true,
             'content' => true,
             'menu' => false,
-            'config' => true,
+            'config' => null,
             'template_width'=>  [
                 '10%' => '10',
                 '20%' => '20',

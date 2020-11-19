@@ -3,11 +3,9 @@
 namespace App\Form\Admin;
 
 use App\Entity\Post;
-use App\Entity\Tag;
-use App\Entity\Template;
-use App\Form\Admin\TagType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -61,6 +59,20 @@ class PostType extends AbstractNameBaseType
             'entry_options' => ['label' => false],
             'allow_add' => true,
             'allow_delete' => true,
+        ]);
+        $builder->add('startPublishedAt', DateType::class, [
+            'required'=> false,
+            'label_format' => 'global.startPublishedAt',
+            'widget' => 'single_text',
+            // this is actually the default format for single_text
+            'format' => 'yyyy-MM-dd',
+        ]);
+        $builder->add('endPublishedAt', DateType::class, [
+            'required'=> false,
+            'label_format' => 'global.endPublishedAt',
+            'widget' => 'single_text',
+            // this is actually the default format for single_text
+            'format' => 'yyyy-MM-dd',
         ]);
     }
 

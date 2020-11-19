@@ -12,6 +12,7 @@
 namespace App\Entity;
 
 use App\Entity\Traits\PositionTrait;
+use App\Entity\Traits\PublishedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,6 +45,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Post extends AbstractContent
 {
     use PositionTrait;
+    use PublishedTrait;
     /**
      * @var User
      *
@@ -51,13 +53,6 @@ class Post extends AbstractContent
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
-     */
-    private $publishedAt;
 
     /**
      * @var Tag[]|ArrayCollection
@@ -78,7 +73,6 @@ class Post extends AbstractContent
 
     public function __construct()
     {
-        $this->publishedAt = new \DateTime();
         $this->tags = new ArrayCollection();
     }
 
@@ -104,16 +98,6 @@ class Post extends AbstractContent
     public function setUser(?User $user): void
     {
         $this->user = $user;
-    }
-
-    public function getPublishedAt(): \DateTime
-    {
-        return $this->publishedAt;
-    }
-
-    public function setPublishedAt(?\DateTime $publishedAt): void
-    {
-        $this->publishedAt = $publishedAt;
     }
 
     public function addTag(?Tag ...$tags): void

@@ -14,7 +14,8 @@
                 <th>{{ 'global.template'|trans() }}</th>
                 <th>{{ 'global.position'|trans() }}</th>
                 <th>{{ 'global.name'|trans() }}</th>
-                <th>{{ 'global.publishedAt'|trans() }}</th>
+                <th>{{ 'global.startPublishedAt'|trans() }}</th>
+                <th>{{ 'global.endPublishedAt'|trans() }}</th>
                 <th>{{ 'global.updatedAt'|trans() }}</th>
                 <th>{{ 'global.actions'|trans() }}</th>
             </tr>
@@ -34,7 +35,8 @@
                 <td>{{ post.section.template.name ?? '' }}</td>
                 <td>{{ post.position }}</td>
                 <td>{{ post.name }}</td>
-                <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.startPublishedAt ? post.startPublishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.endPublishedAt ? post.endPublishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
