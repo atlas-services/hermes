@@ -269,6 +269,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "stripe/stripe-php": {
+        "version": "v2.3.0"
+    },
     "studio-42/elfinder": {
         "version": "2.1.53"
     },

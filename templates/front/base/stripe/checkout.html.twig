@@ -1,0 +1,53 @@
+{% extends 'front/base/' ~ directory ~'/base.html.twig' %}
+{% block title %}SSC Checkout{% endblock %}
+
+{% block content %}
+    <div class="nav-space-checkout">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="checkout-header">Checkout</h1>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-xs-6 active">Product</th>
+                        <th class="col-xs-3 active text-center">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+{#                    {% for product in products %}#}
+{#                        <tr>#}
+{#                            <th class="col-xs-6 checkout-product-name">{{ product.name }}</th>#}
+{#                            <td class="col-xs-3">${{ product.price }}</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th class="col-xs-6 info">Total</th>
+{#                        <td class="col-xs-3 info checkout-total">${{ cart.total }}</td>#}
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <form action="{{ path('stripe_checkout') }}" method="POST">
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_51HrKP8AVdmNJM9zM2oe2q8cj1yJZ31BqjxDOL6OnNOfHOnA9thPUUzPqeShxI3GAIWnmIKCh0TOTTZKxM2FAtju500U8z2A23B"
+{#                            data-amount="{{ cart.total * 100 }}"#}
+                            data-amount="765"
+                            data-name="Test Hermes"
+                            data-description="Widget"
+                            data-image="{{ asset('/img/hermes.png') }}"
+                            data-zip-code="true"
+                            data-locale="auto">
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
