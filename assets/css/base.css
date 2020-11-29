@@ -10,3 +10,9 @@
 @import "~select2/dist/css/select2.css";
 @import "~select2-theme-bootstrap4/dist/select2-bootstrap.css";
 
+@import "~@icon/icofont/icofont.css";
+@import "~boxicons/css/boxicons.min.css";
+@import "~animate.css";
+@import "~venobox/venobox/venobox.min.css";
+@import "~owl.carousel/dist/assets/owl.carousel.min.css";
+@import "~aos/dist/aos.css";

@@ -28,7 +28,7 @@ class SectionTemplateType extends AbstractType
         $options['active'] = false;
         $options['name'] = false;
         $options['tooltip'] = 'Nom';
-dump($options['config'] );
+
         if (true === $options['config'] || null  === $options['config']) {
             if ($options['position']) {
                 $builder

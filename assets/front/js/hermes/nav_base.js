@@ -9,3 +9,4 @@ import '../../css/navbar/base.css';
  */
 // import '../hermes/scroll';
 import '../hermes/stickyfy';
+import '../hermes/aos';
