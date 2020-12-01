@@ -24,7 +24,7 @@
         "liip/imagine-bundle": "^2.0@dev",
         "select2/select2": "dev-master",
         "sensio/framework-extra-bundle": "^5.2",
-        "stripe/stripe-php": "^2.0@dev",
+        "stripe/stripe-php": "^7.66",
         "symfony/asset": "5.2.*",
         "symfony/cache": "5.2.*",
         "symfony/console": "5.2.*",

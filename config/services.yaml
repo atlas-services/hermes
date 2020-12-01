@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 imports:
 - { resource: 'hermes.yaml' }
+- { resource: 'stripe.yaml' }
 
 services:
     # default configuration for services in *this* file
@@ -48,3 +49,8 @@ services:
         autowire: true
         tags:
         - { name: 'doctrine.event_listener', event: 'postPersist', method: 'postPersist'}
+
+    App\Stripe\StripeClient:
+        class: App\Stripe\StripeClient
+        arguments: ['%stripe_secret_key%']
+        autowire: true

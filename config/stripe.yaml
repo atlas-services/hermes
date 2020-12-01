@@ -1,0 +1,3 @@
+parameters:
+    stripe_public_key: '%env(APP_STRIPE_PK)%'
+    stripe_secret_key: '%env(APP_STRIPE_SK)%'

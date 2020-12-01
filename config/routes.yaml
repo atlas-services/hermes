@@ -20,6 +20,11 @@ hermes_admin:
   resource: '../src/Controller/Admin/AdminController.php'
   type:     annotation
 
+hermes_stripe:
+  # loads routes from the PHP annotations of the controllers found in that directory
+  resource: '../src/Controller/Stripe'
+  type:     annotation
+
 hermes_front:
   # loads routes from the PHP annotations of the controllers found in that directory
   resource: '../src/Controller/Front'

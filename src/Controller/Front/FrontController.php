@@ -17,51 +17,15 @@ use App\Mailer\Mailer;
 use App\Menu\Page;
 use App\Repository\PostRepository;
 use App\Repository\TemoignageRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Stripe\Stripe;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
 
 class FrontController extends AbstractController
 {
 
-    /**
-     * @Route("/stripe/checkout", name="stripe_checkout", methods={"GET"})
-     */
-    public function checkout(Request $request, Page $page): Response
-    {
-
-        if ($request->isMethod('POST')) {
-            $token = $request->request->get('stripeToken');
-            \Stripe\Stripe::setApiKey("sk_test_51HrKP8AVdmNJM9zMBXtvPsor94Td1S0WvHd2ovALphLhMeJ28SoTh8zBsgpzpGwvt9A3cTIAbeyNTQRk3lsHTTce003iMtQqi2");
-            \Stripe\Charge::create(array(
-//                "amount" => $this->get('shopping_cart')->getTotal() * 100,
-                "amount" =>189,
-                "currency" => "eur",
-                "source" => $token,
-                "description" => "First test charge!"
-            ));
-            $this->get('shopping_cart')->emptyCart();
-            $this->addFlash('success', 'Order Complete! Yay!');
-            return $this->redirectToRoute('homepage');
-        }
-
-        $array = $page->getActiveMenu('accueil','accueil');
-        return $this->render('front/base/stripe/checkout.html.twig', $array);
-
-        return $this->render('order/checkout.html.twig', array(
-            'products' => $products,
-            'cart' => $this->get('shopping_cart')
-        ));
-
-
-    }
     /**
 
      * @Route(

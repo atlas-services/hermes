@@ -36,7 +36,7 @@
                 <form action="{{ path('stripe_checkout') }}" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="pk_test_51HrKP8AVdmNJM9zM2oe2q8cj1yJZ31BqjxDOL6OnNOfHOnA9thPUUzPqeShxI3GAIWnmIKCh0TOTTZKxM2FAtju500U8z2A23B"
+                            data-key="{{ APP_STRIPE_PK }}"
 {#                            data-amount="{{ cart.total * 100 }}"#}
                             data-amount="765"
                             data-name="Test Hermes"
