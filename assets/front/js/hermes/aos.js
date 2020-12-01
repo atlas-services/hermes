@@ -11,8 +11,7 @@ import AOS from 'aos';
     "use strict";
     AOS.init();
     $('.owl-carousel').owlCarousel();
-    $('.venobox').venobox();
-    $('[data-toggle="counter-up"]').counterUp();
+    // $('.venobox').venobox();
 
     // Smooth scroll for the navigation menu and links with .scrollto classes
     var scrolltoOffset = $('#header').outerHeight() - 1;
@@ -168,10 +167,18 @@ import AOS from 'aos';
         }
     });
 
-    // jQuery counterUp
-    $('[data-toggle="counter-up"]').counterUp({
-        delay: 10,
-        time: 1000
+    $(document).ready(function() {
+        $('[data-toggle="counter-up"]').each(function () {
+            $(this).prop('Counter',0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 4000,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
     });
 
     // Testimonials carousel (uses the Owl Carousel library)
