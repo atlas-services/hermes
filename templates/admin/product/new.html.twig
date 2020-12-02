@@ -1,0 +1,11 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.product'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>Create new product</h1>
+
+    {{ include('admin/product/_form.html.twig') }}
+
+    <a href="{{ path('product_index') }}">back to list</a>
+{% endblock %}

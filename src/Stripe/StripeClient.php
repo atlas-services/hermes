@@ -16,7 +16,8 @@ class StripeClient
     public function createCustomer(User $user, $paymentToken)
     {
         $customer = \Stripe\Customer::create([
-            'email' => $user->getEmail(),
+            'email' => $user->getEmail() ,
+            'name' => $user->getFirstname(). ' ' .  $user->getFirstname(),
             'source' => $paymentToken,
         ]);
         $user->setStripeCustomerId($customer->id);
@@ -30,11 +31,12 @@ class StripeClient
         $customer->source = $paymentToken;
         $customer->save();
     }
-    public function createInvoiceItem($amount, User $user, $description)
+    public function createInvoiceItem($unit_amount, $quantity, User $user, $description)
     {
         return \Stripe\InvoiceItem::create(array(
-            "amount" => $amount,
-            "currency" => "usd",
+            "unit_amount" => $unit_amount,
+            "quantity" => $quantity,
+            "currency" => $user->getCurrency(),
             "customer" => $user->getStripeCustomerId(),
             "description" => $description
         ));

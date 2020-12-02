@@ -326,3 +326,6 @@ transparent:
   yes: transparent
   no: couleur
 
+cart:
+  label: Panier
+  add: Ajouter au panier

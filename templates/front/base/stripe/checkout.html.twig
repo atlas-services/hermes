@@ -4,11 +4,11 @@
 {% block content %}
     <div class="nav-space-checkout">
     <div class="container">
-        <div class="row">
+        <div class="col-lg-12 mx-auto  mt-5 pt-5 text-center">
             <div class="col-xs-12">
-                <h1 class="checkout-header">Checkout</h1>
+                <h1 class="checkout-header">{{ 'cart.label'|trans() }}</h1>
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6 mx-auto">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -17,29 +17,28 @@
                     </tr>
                     </thead>
                     <tbody>
-{#                    {% for product in products %}#}
-{#                        <tr>#}
-{#                            <th class="col-xs-6 checkout-product-name">{{ product.name }}</th>#}
-{#                            <td class="col-xs-3">${{ product.price }}</td>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
+                    {% for product in products %}
+                        <tr>
+                            <th class="col-xs-6 checkout-product-name">{{ product.name }}</th>
+                            <td class="col-xs-3">{{ ((product.price)/100)|format_currency(app.user.currency) }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                     <tfoot>
                     <tr>
                         <th class="col-xs-6 info">Total</th>
-{#                        <td class="col-xs-3 info checkout-total">${{ cart.total }}</td>#}
+                        <td class="col-xs-3 info checkout-total">{{ ((total)/100)|format_currency(app.user.currency) }}</td>
                     </tr>
                     </tfoot>
                 </table>
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6 mx-auto">
                 <form action="{{ path('stripe_checkout') }}" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="{{ APP_STRIPE_PK }}"
-{#                            data-amount="{{ cart.total * 100 }}"#}
-                            data-amount="765"
-                            data-name="Test Hermes"
+                            data-amount="{{ total }}"
+                            data-name="Mon panier"
                             data-description="Widget"
                             data-image="{{ asset('/img/hermes.png') }}"
                             data-zip-code="true"

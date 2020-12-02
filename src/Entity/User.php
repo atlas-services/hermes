@@ -86,16 +86,31 @@ class User implements UserInterface
     private $menus;
 
     /**
+     * @var Cart[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="cart_user")
+     */
+    private $carts;
+
+    /**
      * @var string le token qui servira lors de l'oubli de mot de passe
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $resetToken;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=3, nullable=true)
+     */
+    protected $currency = "eur";
 
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->sections = new ArrayCollection();
         $this->menus = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function __toString()
@@ -332,5 +347,23 @@ class User implements UserInterface
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        if('null' == $this->currency){
+            return 'eur';
+        }
+        return $this->currency;
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency(string $currency): void
+    {
+        $this->currency = $currency;
+    }
 
 }

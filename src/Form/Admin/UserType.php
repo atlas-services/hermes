@@ -15,6 +15,7 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('email')
+            ->add('currency', 'Symfony\Component\Form\Extension\Core\Type\CurrencyType')
             ->add('password', 'Symfony\Component\Form\Extension\Core\Type\PasswordType')
             ->add('roles', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
                 [

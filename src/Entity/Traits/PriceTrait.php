@@ -13,7 +13,7 @@ trait PriceTrait
      * @var int
      *
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Length(max=4)
+     * @Assert\Length(max=5)
      */
     protected $price = 1 ;
 

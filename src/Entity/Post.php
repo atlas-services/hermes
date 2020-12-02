@@ -55,6 +55,11 @@ class Post extends AbstractContent
     protected $user;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Product",mappedBy="post")
+     */
+    protected $product;
+
+    /**
      * @var Tag[]|ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="posts",  cascade={"persist"})
@@ -127,6 +132,22 @@ class Post extends AbstractContent
     public function setSection(?Section $section): void
     {
         $this->section = $section;
+    }
+
+    /**
+     * @return Product
+     */
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function setProduct(?Product $product): void
+    {
+        $this->product = $product;
     }
 
 }

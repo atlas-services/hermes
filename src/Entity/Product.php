@@ -25,6 +25,18 @@ class Product
     use SummaryTrait;
     use UpdatedTrait;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Post",inversedBy="product")
+     */
+    protected $post;
+
+    /**
+     * @var CartProduct
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\CartProduct", inversedBy="carts")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $cart_product;
 
     public function __toString(): ?string
     {
@@ -33,6 +45,23 @@ class Product
         }
         return '';
     }
+
+    /**
+     * @return Post
+     */
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param Post $post
+     */
+    public function setPost(?Post $post): void
+    {
+        $this->post = $post;
+    }
+
 
 
 }

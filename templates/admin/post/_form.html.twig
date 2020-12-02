@@ -15,6 +15,9 @@
     {% if form.position is defined %}
         {{ form_row(form.position) }}
     {% endif %}
+    {% if form.product is defined %}
+        {{ form_row(form.product) }}
+    {% endif %}
     {% if form.section is defined %}
         {{ form_row(form.section) }}
     {% endif %}

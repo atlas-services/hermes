@@ -74,6 +74,17 @@ class PostType extends AbstractNameBaseType
             // this is actually the default format for single_text
             'format' => 'yyyy-MM-dd',
         ]);
+
+
+            $builder
+                ->add('product', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    'required' => false,
+                    'class' => 'App\Entity\Product',
+                    'choice_label' => 'name',
+//                    'label_format' => 'section.template',
+                    'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

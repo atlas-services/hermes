@@ -49,6 +49,7 @@
         "symfony/yaml": "5.2.*",
         "twig/cssinliner-extra": "3.x-dev",
         "twig/extra-bundle": "3.x-dev",
+        "twig/intl-extra": "3.x-dev",
         "twig/string-extra": "3.x-dev",
         "vich/uploader-bundle": "^1.8"
     },

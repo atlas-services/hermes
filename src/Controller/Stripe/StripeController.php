@@ -9,9 +9,12 @@
 namespace App\Controller\Stripe;
 
 
+use App\Cart\CartClient;
 use App\Entity\Product;
 use App\Menu\Page;
+use App\Stripe\Cart;
 use App\Stripe\StripeClient;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,52 +23,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class StripeController extends AbstractController
 {
 
-//    /**
-//     * @Route("/stripe/checkout", name="stripe_checkout", methods={"GET|POST"})
-//     */
-//    public function checkout(Request $request, Page $page): Response
-//    {
-//        $stripe = $this->getParameter('stripe');
-//        $api_key = $stripe['secret_key'];
-//        $public_key = $stripe['public_key'];
-//        if ($request->isMethod('POST')) {
-//            $token = $request->request->get('stripeToken');
-//            \Stripe\Stripe::setApiKey($api_key);
-//            \Stripe\Charge::create(array(
-////                "amount" => $this->get('shopping_cart')->getTotal() * 100,
-//                "amount" =>189,
-//                "currency" => "eur",
-//                "source" => $token,
-//                "description" => "First test charge!"
-//            ));
-////            $this->get('shopping_cart')->emptyCart();
-//            $notification= 'Order Complete! Yay!';
-//            $this->addFlash('success', $notification);
-//            $array['notification'] = $notification;
-//            return $this->redirect('/');
-//        }
-//
-//        $array = $page->getActiveMenu('accueil','accueil');
-//        $array['APP_STRIPE_PK']=$public_key;
-//        return $this->render('front/base/stripe/checkout.html.twig', $array);
-//
-//        return $this->render('order/checkout.html.twig', array(
-//            'products' => $products,
-//            'cart' => $this->get('shopping_cart')
-//        ));
-//
-//    }
-
     /**
-     * @Route("/stripe/checkout", name="stripe_checkout", methods={"GET|POST"})
+     * @Route("/checkout", name="stripe_checkout", methods={"GET|POST"})
      */
-    public function checkout(Request $request, Page $page, StripeClient $stripeClient): Response
+    public function checkout(Request $request, Page $page, StripeClient $stripeClient, CartClient $cartClient): Response
     {
-        $api_key = $this->getParameter('stripe_secret_key');
+        if(!$this->isGranted('ROLE_USER')){
+            $notification = "Afin de pouvoir commander un produit, vous devez vous connecter avec un compte acheteur";
+            $this->addFlash('danger', $notification);
+            return $this->redirect('/');
+        }
+
+        $products = $cartClient->getProducts();
+        $total = $cartClient->getTotal();
+
         $public_key = $this->getParameter('stripe_public_key');
         if ($request->isMethod('POST')) {
             $token = $request->request->get('stripeToken');
-//            $stripeClient = $this->get('stripe_client');
             /** @var User $user */
             $user = $this->getUser();
             if (!$user->getStripeCustomerId()) {
@@ -74,23 +48,17 @@ class StripeController extends AbstractController
                 $stripeClient->updateCustomerCard($user, $token);
             }
             // Get Products from cart
-//            $products = $this->get('shopping_cart')->getProducts();
-            $product1 = new Product();
-            $product1->setName('P01');
-            $product1->setPrice(25);
-            $product2 = new Product();
-            $product2->setName('P02');
-            $product2->setPrice(75);
-            $products= [$product1,$product2];
+
             foreach ($products as $product) {
                 $stripeClient->createInvoiceItem(
-                    $product->getPrice() * 100,
+                    $product->getProduct()->getPrice() ,
+                    $product->getQuantity() ,
                     $user,
-                    $product->getName()
+                    $product->getName(),
                 );
             }
             $stripeClient->createInvoice($user, true);
-//            $this->get('shopping_cart')->emptyCart();
+            $cartClient->emptyCart();
             $notification= 'Order Complete! Yay!';
             $this->addFlash('success', $notification);
             return $this->redirect('/');
@@ -98,12 +66,33 @@ class StripeController extends AbstractController
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['APP_STRIPE_PK'] = $public_key;
+        $array['products'] = $products;
+        $array['total'] = $total;
         return $this->render('front/base/stripe/checkout.html.twig', $array);
 
         return $this->render('order/checkout.html.twig', array(
             'products' => $products,
+            'total' => $total,
             'cart' => $this->get('shopping_cart')
         ));
+
+    }
+
+
+    /**
+     * @Route("/cart", name="cart", methods={"GET|POST"})
+     */
+    public function cart(Request $request, Page $page, CartClient $cartClient): Response
+    {
+        if ($request->isXMLHttpRequest()) {
+            $id = $request->request->get('id');
+            $quantity = $request->request->get('quantity');
+            // add product to cart
+            $cartClient->createCartProduct($id,$quantity);
+            $cartClient->addCustomer($this->getUser());
+
+            return new JsonResponse(array('data' => 'ok'));
+        }
 
     }
 
