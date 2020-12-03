@@ -33,7 +33,7 @@ class Product
     /**
      * @var CartProduct
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\CartProduct", inversedBy="carts")
+     * @ORM\OneToOne(targetEntity="App\Entity\CartProduct", inversedBy="product")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $cart_product;

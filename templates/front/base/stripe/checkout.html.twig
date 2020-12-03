@@ -32,7 +32,7 @@
                         <tr class="bg-white">
                             <th class="col-xs-4 checkout-product-name">{{ product.name }}</th>
                             <td class="col-xs-3">{{ ((product.product.price)/100)|format_currency(currency) }}</td>
-                            <td class="col-xs-3">{{ product.quantity }}</td>
+                            <td class="col-xs-3"><input class="col-lg-4" type="number" value="{{ product.quantity }}"></td>
                             <td class="col-xs-3">{{ ((product.price)/100)|format_currency(currency) }}</td>
                         </tr>
                     {% endfor %}
@@ -53,8 +53,8 @@
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="{{ APP_STRIPE_PK }}"
                             data-amount="{{ total }}"
-                            data-name="Mon panier"
-                            data-description="Widget"
+                            data-name="{{ 'cart.paiement'|trans() }}"
+                            data-description="{{ 'cart.stripe'|trans() }}"
                             data-image="{{ asset('/img/hermes.png') }}"
                             data-zip-code="true"
                             data-locale="auto">
