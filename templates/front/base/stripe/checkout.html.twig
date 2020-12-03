@@ -1,9 +1,18 @@
 {% extends 'front/base/' ~ directory ~'/base.html.twig' %}
-{% block title %}SSC Checkout{% endblock %}
-
+{% block title %}{{ 'cart.label'|trans() }}{% endblock %}
+{% set currency = 'eur' %}
+{% if app.user %}
+{% set currency = app.user.currency %}
+{% endif %}
 {% block content %}
     <div class="nav-space-checkout">
     <div class="container">
+        {% for message in app.flashes('warning') %}
+            <div class="mt-5 alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ message|raw }}
+            </div>
+        {% endfor %}
         <div class="col-lg-12 mx-auto  mt-5 pt-5 text-center">
             <div class="col-xs-12">
                 <h1 class="checkout-header">{{ 'cart.label'|trans() }}</h1>
@@ -12,22 +21,28 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-xs-6 active">Product</th>
-                        <th class="col-xs-3 active text-center">Price</th>
+                        <th class="col-xs-6 active">{{ 'cart.product'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'cart.unit_price'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'cart.quantity'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'cart.price'|trans() }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for product in products %}
-                        <tr>
-                            <th class="col-xs-6 checkout-product-name">{{ product.name }}</th>
-                            <td class="col-xs-3">{{ ((product.price)/100)|format_currency(app.user.currency) }}</td>
+                        <tr class="bg-white">
+                            <th class="col-xs-4 checkout-product-name">{{ product.name }}</th>
+                            <td class="col-xs-3">{{ ((product.product.price)/100)|format_currency(currency) }}</td>
+                            <td class="col-xs-3">{{ product.quantity }}</td>
+                            <td class="col-xs-3">{{ ((product.price)/100)|format_currency(currency) }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>
-                    <tr>
-                        <th class="col-xs-6 info">Total</th>
-                        <td class="col-xs-3 info checkout-total">{{ ((total)/100)|format_currency(app.user.currency) }}</td>
+                    <tr class="font-weight-bold">
+                        <th class="col-xs-6 info ">Total</th>
+                        <th class="col-xs-6 info">&nbsp;</th>
+                        <th class="col-xs-6 info">&nbsp;</th>
+                        <td class="col-xs-3 info checkout-total">{{ ((total)/100)|format_currency(currency) }}</td>
                     </tr>
                     </tfoot>
                 </table>

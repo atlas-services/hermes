@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StripeController extends AbstractController
 {
@@ -26,12 +27,11 @@ class StripeController extends AbstractController
     /**
      * @Route("/checkout", name="stripe_checkout", methods={"GET|POST"})
      */
-    public function checkout(Request $request, Page $page, StripeClient $stripeClient, CartClient $cartClient): Response
+    public function checkout(Request $request, Page $page, StripeClient $stripeClient, CartClient $cartClient, TranslatorInterface $translator): Response
     {
         if(!$this->isGranted('ROLE_USER')){
-            $notification = "Afin de pouvoir commander un produit, vous devez vous connecter avec un compte acheteur";
-            $this->addFlash('danger', $notification);
-            return $this->redirect('/');
+            $notification = $translator->trans('cart.message_compte');
+            $this->addFlash('warning', $notification);
         }
 
         $products = $cartClient->getProducts();
