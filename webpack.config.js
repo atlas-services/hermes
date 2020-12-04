@@ -26,10 +26,10 @@ Encore
      */
      .addEntry('hermes_admin', './assets/admin/js/app.js')
      .addEntry('hermes_front', './assets/front/js/hermes/app.js')
+     .addEntry('hermes_wow', './assets/front/js/hermes/app_wow.js')
      .addEntry('hermes_nav_base', './assets/front/js/hermes/nav_base.js')
      .addEntry('hermes_nav_left', './assets/front/js/hermes/nav_left.js')
      .addEntry('hermes_nav_full', './assets/front/js/hermes/nav_full.js')
-     .addEntry('hermes_reveal', './assets/front/reveal/app.js')
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
