@@ -59,7 +59,7 @@ class StripeController extends AbstractController
             }
             $stripeClient->createInvoice($user, true);
             $cartClient->emptyCart();
-            $notification= 'Order Complete! Yay!';
+            $notification = $translator->trans('cart.paiement_done');
             $this->addFlash('success', $notification);
             return $this->redirect('/');
         }

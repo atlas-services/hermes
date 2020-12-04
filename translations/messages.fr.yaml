@@ -331,6 +331,7 @@ transparent:
 cart:
   message_compte: Afin de pouvoir commander un produit, vous devez vous connecter avec votre compte utilisateur  <a href='/fr/login'>Mon compte</a>
   paiement: Paiement
+  paiement_done: Paiement effectué!
   stripe: Stripe
   label: Panier
   add: Ajouter au panier
