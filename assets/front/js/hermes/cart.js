@@ -1,7 +1,9 @@
 var $addProduct;
+var $quantityProduct;
 var $id;
 var $quantity = 1;
 var $url;
+var $message= '';
 
 
 jQuery(document).ready(function () {
@@ -12,11 +14,39 @@ jQuery(document).ready(function () {
         $id = $(this).attr('id');
         $quantity = $(this).attr('quantity');
         $url = "/cart";
-        updateCart($url, $id);
+
+        $message = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
+            '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+            '            Le produit a bien été <strong>ajouté à votre panier</strong>!.\n' +
+            '        </div>';
+        handleProductCart($url, $id, $quantity, $message);
     });
+
+    // Cart quantity
+    // update product quantity
+    $quantityProduct = '.product-quantity';
+    $(document).on('change', $quantityProduct, function(e) {
+        if (e.handled !== true) {
+            // change quantity
+            $id = $(this).attr('id');
+            $quantity = $(this).val();
+            $url = "/cart";
+            handleProductCart($url, $id, $quantity, '');
+            e.handled = true;
+            return;
+        }
+    });
+
+
+
+
+
+
 });
 
-function updateCart($url, $id) {
+
+
+function handleProductCart($url, $id, $quantity, $message) {
 
     $.ajax({
         type: "POST",
@@ -27,11 +57,13 @@ function updateCart($url, $id) {
         },
         dataType: "json",
         success: function (response) {
-            var text_alert = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
-                '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                '            Le produit a bien été <strong>ajouté à votre panier</strong>!.\n' +
-                '        </div>';
-            document.getElementById($id).insertAdjacentHTML('afterend',text_alert);
+            // update menu cart
+            $('#menu-cart').replaceWith(response.data.cart_html);
+            $('#checkout-table').replaceWith(response.data.checkout_html);
+            // message produit ajouté au panier
+            if('' != $message){
+                document.getElementById($id).insertAdjacentHTML('afterend',$message);
+            }
         }
     });
 

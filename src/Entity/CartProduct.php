@@ -87,7 +87,7 @@ class CartProduct
     /**
      * @param Cart $cart
      */
-    public function setCart(Cart $cart): void
+    public function setCart(?Cart $cart): void
     {
         $this->cart = $cart;
     }

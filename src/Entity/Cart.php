@@ -55,8 +55,10 @@ class Cart
     {
         foreach ($cartProducts as $cartProduct) {
             if (!$this->cart_products->contains($cartProduct)) {
-                $this->cart_products->add($cartProduct);
-                $cartProduct->setCart($this);
+                if (0 != $cartProduct->getQuantity()) {
+                    $this->cart_products->add($cartProduct);
+                    $cartProduct->setCart($this);
+                }
             }
         }
     }

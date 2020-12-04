@@ -31,14 +31,20 @@ class CartClient
         return $cart;
     }
 
-    public function handleCartProducts(Product $product)
+    public function handleCartProducts(Product $product, $quantity=1 )
     {
         $has_cart = $this->session->has('cart');
         if(true == $has_cart){
             $cart = $this->session->get('cart');
             foreach($cart->getCartProducts() as $cartProduct){
                 if($cartProduct->getProduct()->getId() == $product->getId() ){
-                    $quantity = $cartProduct->getQuantity() + 1;
+                    if(0 == $quantity){
+                        $this->removeCartProduct($cart, $cartProduct);
+                        break;
+                    }
+                    if(1 == $quantity){
+                        $quantity = $cartProduct->getQuantity() + $quantity;
+                    }
                     $cartProduct->setQuantity($quantity);
                     $this->addCartProduct($cart, $cartProduct);
                     return true;
@@ -48,27 +54,37 @@ class CartClient
         return false;
     }
 
-    public function addCustomer(User $user, Cart $cart)
+    public function addCustomer(?User $user)
     {
-        $cart->setUser($user);
+        if( $user instanceof User){
+            $this->createCart()->setUser($user);
+        }
     }
 
     public function createCartProduct($id,  $quantity = 1)
     {
         $product = $this->em->getRepository(Product::class)->findOneById($id);
-        if(true != $this->handleCartProducts($product)) {
-            $cartProduct = new CartProduct();
-            $cartProduct->setProduct($product);
-            $cartProduct->setQuantity($quantity);
+        if(true != $this->handleCartProducts($product,$quantity)) {
+            if(0!= $quantity){
+                $cartProduct = new CartProduct();
+                $cartProduct->setProduct($product);
+                $cartProduct->setQuantity($quantity);
 
-            $cart = $this->createCart();
-            $this->addCartProduct($cart, $cartProduct);
+                $cart = $this->createCart();
+                $this->addCartProduct($cart, $cartProduct);
+            }
         }
     }
 
     public function addCartProduct(Cart $cart, CartProduct $cartProduct)
     {
         $cart->addCartProduct($cartProduct);
+        $this->session->set('cart' , $cart);
+    }
+
+    public function removeCartProduct(Cart $cart, CartProduct $cartProduct)
+    {
+        $cart->removeCartProduct($cartProduct);
         $this->session->set('cart' , $cart);
     }
 

@@ -1,0 +1,65 @@
+{% set currency = 'eur' %}
+{% if app.user %}
+    {% set currency = app.user.currency %}
+{% endif %}
+<div id="checkout-table" class="col-lg-12 mx-auto  mt-5 pt-5 text-center">
+            <div class="col-xs-12">
+                <h1 class="checkout-header">{{ 'cart.label'|trans() }}</h1>
+            </div>
+            <div class="col-xs-12 col-sm-6 mx-auto">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-xs-6 active">{{ 'cart.product'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'cart.unit_price'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'cart.quantity'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'cart.price'|trans() }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cartproduct in products %}
+                        <tr class="bg-white">
+                            <th class="col-xs-4 checkout-product-name">{{ cartproduct.name }}</th>
+                            <td class="col-xs-3">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
+                            <td class="col-xs-3 mx-auto">
+{#                                <input class="col-lg-4" type="number" value="{{ product.quantity }}">#}
+                                <select class="product-quantity col-lg-12 mx-auto form-control browser-default custom-select " id="{{ cartproduct.product.id }}">
+                                    {% for i in 0..20 %}
+                                        {% set selected= ''  %}
+                                        {% if i == cartproduct.quantity  %}
+                                            {% set selected= 'selected'  %}
+                                        {% endif  %}
+                                    <option {{ selected}} value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td id="price-{{ cartproduct.product.id }}" class="col-xs-3">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr class="font-weight-bold">
+                        <th class="col-xs-6 info ">Total</th>
+                        <th class="col-xs-6 info">&nbsp;</th>
+                        <th class="col-xs-6 info">&nbsp;</th>
+                        <td class="col-xs-3 info checkout-total">{{ ((total)/100)|format_currency(currency) }}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-6 mx-auto">
+                <form action="{{ path('stripe_checkout') }}" method="POST">
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="{{ APP_STRIPE_PK }}"
+                            data-amount="{{ total }}"
+                            data-name="{{ 'cart.paiement'|trans() }}"
+                            data-description="{{ 'cart.stripe'|trans() }}"
+                            data-image="{{ asset('/img/hermes.png') }}"
+                            data-zip-code="true"
+                            data-locale="auto">
+                    </script>
+                </form>
+            </div>
+        </div>
+
