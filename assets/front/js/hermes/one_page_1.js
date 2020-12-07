@@ -1,6 +1,6 @@
 import '../../css/bootstrap/animate.css';
-import '../../css/bootstrap/wow-default.css';
-import '../../css/bootstrap/wow.css';
+import '../../css/bootstrap/one_page_1_default.css';
+import '../../css/bootstrap/one_page_1.css';
 
 import 'waypoints/lib/jquery.waypoints.min';
 import 'counterup/jquery.counterup.min';

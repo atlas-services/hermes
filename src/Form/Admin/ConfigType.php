@@ -87,11 +87,20 @@ class ConfigType extends AbstractBaseType
                 '90%' => '90%',
                 '100%' => '100',
             ];
+            $options_template_value = [
+                'one_page_1' => 'one_page_1',
+                'front' => 'front',
+            ];
             switch ($code) {
                 // accueil
                 case 'accueil':
                     $choice = true;
                     $options = $options_pct_value;
+                    break;
+                // accueil
+                case 'template':
+                    $choice = true;
+                    $options = $options_template_value;
                     break;
                 // nav_bar
                 case 'nav_bar':
