@@ -41,7 +41,9 @@
     <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ; color: {{ text_color ?? '#ff0000' }} ;font-family: {{ font_family }}">
         {% block body %}
             {% block nav %}
+                {% if 'one_page_' not in template  %}
                 {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
+                {% endif %}
             {% endblock nav %}
             <div class="content">
                 {% block content %}

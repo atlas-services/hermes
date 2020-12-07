@@ -17,8 +17,7 @@
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('hermes_nav_'~ nav_bar) }}
-        {{ encore_entry_link_tags('hermes_front') }}
-        {{ encore_entry_link_tags('hermes_wow') }}
+        {{ encore_entry_link_tags('hermes_' ~ template) }}
         <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
     {% endblock %}
 

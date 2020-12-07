@@ -88,6 +88,9 @@ parameters:
         directory:
           summary: Choix du template général d'affichage (agency ou merlin)
           value: hermes
+        template:
+          summary: Choix du template général d'affichage
+          value: one_page_1
         title:
           summary: Texte affiché sur l'onglet du navigateur web
           value: c-hermes
