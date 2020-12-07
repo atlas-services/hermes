@@ -34,6 +34,7 @@ import 'owl.carousel';
 import 'jquery-waypoints/waypoints.min';
 import 'jquery.counterup';
 import '../../../js/scroll';
+import '../../../js/scrollspy';
 import '../../../js/chevron';
 import '../../../js/menu';
 import '../../../js/search';

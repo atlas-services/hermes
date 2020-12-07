@@ -26,7 +26,7 @@ Encore
      */
      .addEntry('hermes_admin', './assets/admin/js/app.js')
      .addEntry('hermes_front', './assets/front/js/hermes/app.js')
-     .addEntry('hermes_one_page_1', './assets/front/js/hermes/one_page_1.js')
+     .addEntry('hermes_one_page_1', './assets/front/js/hermes/app_one_page_1.js')
      .addEntry('hermes_nav_base', './assets/front/js/hermes/nav_base.js')
      .addEntry('hermes_nav_left', './assets/front/js/hermes/nav_left.js')
      .addEntry('hermes_nav_full', './assets/front/js/hermes/nav_full.js')
