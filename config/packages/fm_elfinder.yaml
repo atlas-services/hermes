@@ -10,6 +10,6 @@ fm_elfinder:
                     uploads:
                         driver: LocalFileSystem
                         path:  '%env(APP_PATH_CONTENT_IMAGES_POSTS)%'  # Chemin d'upload
-                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/svg+xml' , 'image/svg' , 'application/pdf'] # Fichiers autorisés
+                        upload_allow: ['image/jpeg','image/jpg', 'image/gif', 'image/png',  'image/svg' , 'image/svg+xml',"image/pdf" , 'application/pdf'] # Fichiers autorisés
                         upload_deny: ['all'] # Fichiers interdits
                         upload_max_size: 2M # Taille maximum
