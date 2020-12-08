@@ -41,8 +41,16 @@
     <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ; color: {{ text_color ?? '#ff0000' }} ;font-family: {{ font_family }}">
         {% block body %}
             {% block nav %}
+                {% if  (vich_uploader_asset(logo, 'imageFile')) %}
+                    {% set asset_logo1 = asset(vich_uploader_asset(logo, 'imageFile')) %}
+                {% endif %}
+                {% if  (vich_uploader_asset(accueil, 'imageFile')) %}
+                    {% set asset_logo2 = asset(vich_uploader_asset(accueil, 'imageFile')) %}
+                {% endif %}
+                <input type="hidden" id="hidden_logo1" value="{{ asset_logo1 ?? '' }}">
+                <input type="hidden" id="hidden_logo2" value="{{ asset_logo2 ?? asset_logo1 ?? '' }}">
                 {% if 'one_page_' not in template  %}
-                {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
+                    {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
                 {% endif %}
             {% endblock nav %}
             <div class="content">
