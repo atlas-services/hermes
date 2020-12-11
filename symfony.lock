@@ -662,6 +662,9 @@
     "twig/extra-bundle": {
         "version": "3.x-dev"
     },
+    "twig/intl-extra": {
+        "version": "3.x-dev"
+    },
     "twig/string-extra": {
         "version": "3.x-dev"
     },
