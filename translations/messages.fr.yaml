@@ -201,6 +201,7 @@ user:
   username: Username
   password: Mot de passe
   forgot_password: Mot de passe oublié
+  reset_password: Cliquer sur ce lien pour réinitialiser Votre mot de passe
   send_email: Envoyer
   admin: Mon espace d'administration
   sign_in: Se connecter

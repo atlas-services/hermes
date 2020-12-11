@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
             /* @var $user User */
 
             if ($user === null) {
-                $this->addFlash('danger', 'Email Inconnu');
+                $this->addFlash('danger', 'Email ou mot de passe Inconnu');
                 return $this->redirectToRoute('app_login');
             }
             $token = $tokenGenerator->generateToken();
@@ -58,7 +58,7 @@ class SecurityController extends AbstractController
                 'url' => $url,
                 'username' => $user->getUsername(),
             ];
-            $return = $mailer->send($contact, $user->getEmail(), 'Reset Password', 'security/sent_forgotten_password.html.twig', $context);
+            $return = $mailer->send($contact, $user->getEmail(), 'Reset Password', 'admin/security/sent_forgotten_password.html.twig', $context);
 
             $this->addFlash($return['type'], $return['message']);
 
