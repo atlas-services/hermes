@@ -246,7 +246,7 @@ parameters:
           value: '#000000'
         content_container_width:
           summary: Largeur du contenu affiché (en %)
-          value: '60%'
+          value: '100%'
       folio:
         folio_container_width:
           summary: Largeur du folio affiché (en %)
