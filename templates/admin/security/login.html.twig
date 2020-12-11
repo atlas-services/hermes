@@ -6,16 +6,19 @@
     <section id="container" class="align-content-center" style="font-family:'Bai Jamjuree', sans-serif;">
         {% for message in app.flashes('notice') %}
             <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 {{ message }}
             </div>
         {% endfor %}
         {% for message in app.flashes('danger') %}
             <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 {{ message }}
             </div>
         {% endfor %}
         {% for message in app.flashes('warning') %}
             <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 {{ message }}
             </div>
         {% endfor %}
