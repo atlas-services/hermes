@@ -89,6 +89,7 @@ class ConfigType extends AbstractBaseType
             ];
             $options_template_value = [
                 'one_page_1' => 'one_page_1',
+                'one_page_2' => 'one_page_2',
                 'front' => 'front',
             ];
             switch ($code) {
@@ -138,6 +139,14 @@ class ConfigType extends AbstractBaseType
                     break;
                 // affiche_img_hermes
                 case 'affiche_img_hermes':
+                    $choice = true;
+                    $options = [
+                        'true'  => true,
+                        'false' => false ,
+                    ];
+                    break;
+                // affiche_footer
+                case 'footer_affiche':
                     $choice = true;
                     $options = [
                         'true'  => true,
