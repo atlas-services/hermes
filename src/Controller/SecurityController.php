@@ -143,4 +143,45 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute($routeInfos['_route'], ['_locale'=> $locale]);
 
     }
+
+    /**
+     * @Route("/user/new", name="app_user_new")
+     */
+    public function user_new(Request $request)
+    {
+
+        if ($request->isMethod('POST')) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $firstname = $request->request->get('firstname');
+            $lastname = $request->request->get('lastname');
+            $email = $request->request->get('email');
+            $password = $request->request->get('password');
+            $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
+            /* @var $user User */
+
+            if ($user !== null) {
+                $this->addFlash('info', 'Cet utilisateur existe déjà ');
+                return $this->redirectToRoute('app_login');
+            }
+
+            $user = new User();
+            $user->setRoles(['ROLE_USER']);
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $user->setPassword($password);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'Votre compte utilsatzur a été créé');
+
+            return $this->redirectToRoute('admin_index');
+        }else {
+
+            return $this->render('admin/security/reset_password.html.twig', ['token' => $token]);
+        }
+
+    }
 }

@@ -200,6 +200,7 @@ user:
   roles: Roles
   username: Username
   password: Mot de passe
+  new: Je créé mon compte
   forgot_password: Mot de passe oublié
   reset_password: Cliquer sur ce lien pour réinitialiser Votre mot de passe
   send_email: Envoyer
