@@ -90,8 +90,11 @@ class CartClient
 
     public function getProducts()
     {
+        $cartProducts = [];
         $cart = $this->session->get('cart' );
-        $cartProducts = $cart->getCartProducts();
+        if(isset($cart)){
+            $cartProducts = $cart->getCartProducts();
+        }
         return $cartProducts;
     }
 
