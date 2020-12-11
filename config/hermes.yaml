@@ -279,6 +279,9 @@ parameters:
           summary: Largeur du cards affiché (en %)
           value: '80%'
       footer:
+        footer_affiche:
+          summary: Affichage du footer
+          value: true
         footer_bgcolor:
           summary: Couleur de fond du footer
           value: '#ffffff'

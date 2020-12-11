@@ -145,6 +145,14 @@ class ConfigType extends AbstractBaseType
                         'false' => false ,
                     ];
                     break;
+                // affiche_footer
+                case 'footer_affiche':
+                    $choice = true;
+                    $options = [
+                        'true'  => true,
+                        'false' => false ,
+                    ];
+                    break;
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [

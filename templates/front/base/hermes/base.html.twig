@@ -59,7 +59,9 @@
             </div>
         {% endblock body %}
         {% block footer %}
-            {% include 'front/base/footer.html.twig' %}
+            {% if footer_affiche == 1 %}
+                {% include 'front/base/footer.html.twig' %}
+            {% endif %}
         {% endblock footer %}
         {% block javascript %}
             {% include 'front/base/'~ directory ~'/javascript.html.twig' %}
