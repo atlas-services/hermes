@@ -1,0 +1,18 @@
+{% extends 'front/base/' ~ directory ~'/base.html.twig' %}
+{% block title %}{{ 'cart.label'|trans() }}{% endblock %}
+{% block content %}
+    <div class="nav-space-checkout">
+        <div class="container">
+            {% for message in app.flashes('warning') %}
+                <div class="mt-5 alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+            {% include 'front/base/cart/table.twig' %}
+            <p class="text-center">
+                <a class="btn h-btn-outline-success" href={{ path('stripe_checkout') }}> Commander</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

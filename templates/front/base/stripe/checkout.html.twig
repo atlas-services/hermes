@@ -1,5 +1,5 @@
 {% extends 'front/base/' ~ directory ~'/base.html.twig' %}
-{% block title %}{{ 'cart.label'|trans() }}{% endblock %}
+{% block title %}{{ 'order.label'|trans() }}{% endblock %}
 {% block content %}
     <div class="nav-space-checkout">
     <div class="container">
@@ -10,6 +10,9 @@
             </div>
         {% endfor %}
         {% include 'front/base/stripe/checkout_table.html.twig' %}
+        <p class="mt-5 text-center">
+            <a class="btn h-btn-outline-success" href={{ path('cart') }}> {{ 'order.update_cart'|trans }}</a>
+        </p>
     </div>
     </div>
 {% endblock %}

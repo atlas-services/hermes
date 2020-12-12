@@ -79,28 +79,28 @@ class StripeController extends AbstractController
     }
 
 
-    /**
-     * @Route("/cart", name="cart", methods={"GET|POST"})
-     */
-    public function cart(Request $request, Page $page, CartClient $cartClient): Response
-    {
-        if ($request->isXMLHttpRequest()) {
-            $id = $request->request->get('id');
-            $quantity = $request->request->get('quantity');
-            // add product to cart
-            $cartClient->createCartProduct($id,$quantity);
-            $cartClient->addCustomer($this->getUser());
-
-            $products = $cartClient->getProducts();
-            $total = $cartClient->getTotal();
-            $public_key = $this->getParameter('stripe_public_key');
-            $cart_html= $this->renderView('front/base/navbar/cart.html.twig');
-            $checkout_html = $this->renderView('front/base/stripe/checkout_table.html.twig', ['products' =>$products, 'total' =>$total, 'APP_STRIPE_PK' => $public_key]);
-            $data['cart_html'] = $cart_html;
-            $data['checkout_html'] = $checkout_html;
-            return new JsonResponse(array('data' => $data));
-        }
-
-    }
+//    /**
+//     * @Route("/cart", name="cart", methods={"GET|POST"})
+//     */
+//    public function cart(Request $request, Page $page, CartClient $cartClient): Response
+//    {
+//        if ($request->isXMLHttpRequest()) {
+//            $id = $request->request->get('id');
+//            $quantity = $request->request->get('quantity');
+//            // add product to cart
+//            $cartClient->createCartProduct($id,$quantity);
+//            $cartClient->addCustomer($this->getUser());
+//
+//            $products = $cartClient->getProducts();
+//            $total = $cartClient->getTotal();
+//            $public_key = $this->getParameter('stripe_public_key');
+//            $cart_html= $this->renderView('front/base/navbar/cart.html.twig');
+//            $checkout_html = $this->renderView('front/base/stripe/checkout_table.html.twig', ['products' =>$products, 'total' =>$total, 'APP_STRIPE_PK' => $public_key]);
+//            $data['cart_html'] = $cart_html;
+//            $data['checkout_html'] = $checkout_html;
+//            return new JsonResponse(array('data' => $data));
+//        }
+//
+//    }
 
 }

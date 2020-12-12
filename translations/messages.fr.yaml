@@ -206,7 +206,7 @@ user:
   send_email: Envoyer
   admin: Mon espace d'administration
   sign_in: Se connecter
-  identification: Se connecter
+  identification: Je me connecte
   edit: Utilisateur
   logout: Se déconnecter
 
@@ -337,8 +337,18 @@ cart:
   paiement: Paiement
   paiement_done: Paiement effectué!
   stripe: Stripe
-  label: Panier
+  label: Mon panier
   add: Ajouter au panier
+  product: Produit(s)
+  price: Prix
+  unit_price: Prix Unitaire
+  quantity: Quantité
+  total: Total
+
+order:
+  update_cart: Modifier mon panier
+  label: Ma commande
+  stripe: Stripe
   product: Produit(s)
   price: Prix
   unit_price: Prix Unitaire
