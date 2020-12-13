@@ -1,7 +1,7 @@
 {% extends 'front/base/' ~ directory ~'/base.html.twig' %}
 {% block title %}{{ 'cart.label'|trans() }}{% endblock %}
 {% block content %}
-    <div class="nav-space-checkout">
+    <div class="nav-space-cart">
         <div class="container">
             {% for message in app.flashes('warning') %}
                 <div class="mt-5 alert alert-warning">

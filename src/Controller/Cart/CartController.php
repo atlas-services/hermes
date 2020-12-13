@@ -33,6 +33,9 @@ class CartController extends AbstractController
      */
     public function mycart(Request $request, Page $page, CartClient $cartClient, TranslatorInterface $translator): Response
     {
+        if(0 == $cartClient->getTotal()){
+            return $this->redirect('/');
+        }
         if(!$this->isGranted('ROLE_USER')){
             $notification = $translator->trans('cart.message_compte');
             $this->addFlash('warning', $notification);
@@ -64,14 +67,16 @@ class CartController extends AbstractController
             $quantity = $request->request->get('quantity');
             // add product to cart
             $cartClient->createCartProduct($id,$quantity);
-            $cartClient->addCustomer($this->getUser());
-
-            $products = $cartClient->getProducts();
             $total = $cartClient->getTotal();
-            $cart_html= $this->renderView('front/base/navbar/cart.html.twig');
-            $checkout_html = $this->renderView('front/base/cart/table.twig', ['products' =>$products, 'total' =>$total]);
+            $products = $cartClient->getProducts();
+            if(!is_null($this->getUser())){
+                $cartClient->addCustomer($this->getUser());
+            }
+            $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig');
+            $cart_html = $this->renderView('front/base/cart/table.twig', ['products' =>$products, 'total' =>$total]);
+            $data['total'] = $total;
+            $data['navbar_cart_html'] = $navbar_cart_html;
             $data['cart_html'] = $cart_html;
-            $data['checkout_html'] = $checkout_html;
             return new JsonResponse(array('data' => $data));
         }
 
