@@ -25,7 +25,11 @@ class CartController extends AbstractController
 {
 
     /**
-     * @Route("/mon/panier", name="cart", methods={"GET|POST"})
+     * @Route({
+     * "fr": "/mon/panier",
+     * "en": "/my/cart"
+     * },
+     * name="cart", methods={"GET|POST"})
      */
     public function mycart(Request $request, Page $page, CartClient $cartClient, TranslatorInterface $translator): Response
     {
@@ -47,7 +51,11 @@ class CartController extends AbstractController
 
 
     /**
-     * @Route("/cart", name="ajax_cart", methods={"GET|POST"})
+     * @Route({
+     * "fr": "/panier",
+     * "en": "/cart"
+     * },
+     *     name="ajax_cart", methods={"GET|POST"})
      */
     public function cart(Request $request, Page $page, CartClient $cartClient): Response
     {

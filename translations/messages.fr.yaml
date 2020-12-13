@@ -339,7 +339,7 @@ cart:
   stripe: Stripe
   label: Mon panier
   add: Ajouter au panier
-  product: Produit(s)
+  product: Article(s)
   price: Prix
   unit_price: Prix Unitaire
   quantity: Quantité
@@ -349,7 +349,7 @@ order:
   update_cart: Modifier mon panier
   label: Ma commande
   stripe: Stripe
-  product: Produit(s)
+  product: Articles(s)
   price: Prix
   unit_price: Prix Unitaire
   quantity: Quantité
