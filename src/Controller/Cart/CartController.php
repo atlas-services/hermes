@@ -37,10 +37,10 @@ class CartController extends AbstractController
             $cartClient->emptyCart();
             return $this->redirect('/');
         }
-        if(!$this->isGranted('ROLE_USER')){
-            $notification = $translator->trans('cart.message_compte');
-            $this->addFlash('warning', $notification);
-        }
+//        if(!$this->isGranted('ROLE_USER')){
+//            $notification = $translator->trans('cart.message_compte');
+//            $this->addFlash('warning', $notification);
+//        }
 
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();

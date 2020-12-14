@@ -338,7 +338,7 @@ cart:
   paiement_done: Paiement effectué!
   stripe: Stripe
   label: Mon panier
-  add: Ajouter au panier
+  add: Ajouter
   product: Article(s)
   price: Prix
   unit_price: Prix Unitaire
