@@ -20,7 +20,7 @@ class CartClient
         $this->session = $session;
     }
 
-    public function createCart()
+    public function getCart()
     {
         if(!$this->session->has('cart')){
             $cart = new Cart();
@@ -57,7 +57,7 @@ class CartClient
     public function addCustomer(?User $user)
     {
         if( $user instanceof User){
-            $this->createCart()->setUser($user);
+            $this->getCart()->setUser($user);
         }
     }
 
@@ -70,7 +70,7 @@ class CartClient
                 $cartProduct->setProduct($product);
                 $cartProduct->setQuantity($quantity);
 
-                $cart = $this->createCart();
+                $cart = $this->getCart();
                 $this->addCartProduct($cart, $cartProduct);
             }
         }

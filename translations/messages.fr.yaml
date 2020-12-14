@@ -344,6 +344,7 @@ cart:
   unit_price: Prix Unitaire
   quantity: Quantité
   total: Total
+  delete: Supprimer
 
 order:
   update_cart: Modifier mon panier
