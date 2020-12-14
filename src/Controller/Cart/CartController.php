@@ -34,6 +34,7 @@ class CartController extends AbstractController
     public function mycart(Request $request, Page $page, CartClient $cartClient, TranslatorInterface $translator): Response
     {
         if(0 == $cartClient->getTotal()){
+            $cartClient->emptyCart();
             return $this->redirect('/');
         }
         if(!$this->isGranted('ROLE_USER')){
@@ -68,12 +69,18 @@ class CartController extends AbstractController
             // add product to cart
             $cartClient->createCartProduct($id,$quantity);
             $total = $cartClient->getTotal();
-            $products = $cartClient->getProducts();
             if(!is_null($this->getUser())){
                 $cartClient->addCustomer($this->getUser());
             }
-            $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig');
-            $cart_html = $this->renderView('front/base/cart/table.twig', ['products' =>$products, 'total' =>$total]);
+            if(0 == $total){
+                $cartClient->emptyCart();
+                $navbar_cart_html = '';
+                $cart_html= '';
+            }else{
+                $products = $cartClient->getProducts();
+                $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig');
+                $cart_html = $this->renderView('front/base/cart/table.twig', ['products' =>$products, 'total' =>$total]);
+            }
             $data['total'] = $total;
             $data['navbar_cart_html'] = $navbar_cart_html;
             $data['cart_html'] = $cart_html;

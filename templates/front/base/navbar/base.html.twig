@@ -88,7 +88,13 @@
                     </li>
                 {% endfor %}
                 {% include 'front/base/navbar/user.html.twig' %}
-                {% include 'front/base/navbar/cart.html.twig' %}
+                {% if(app.session.get('cart')) %}
+                    {% if(app.session.get('cart').cartProducts|length > 0) %}
+                        {% include 'front/base/navbar/cart.html.twig' %}
+                    {% endif %}
+                {% else %}
+                    <li id="menu-cart" class="hidden"></li>
+                {% endif %}
             </ul>
         </div>
     </div>

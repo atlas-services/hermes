@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
         $url = "/panier";
         $message = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
             '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-            '            Le produit a bien été <strong>ajouté à votre panier</strong>!.\n' +
+            '            Cet article a bien été <strong>ajouté à votre panier</strong>!.\n' +
             '        </div>';
         handleProductCart($url, $id, $quantity, $message);
     });
