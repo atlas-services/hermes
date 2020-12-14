@@ -352,7 +352,7 @@ class User implements UserInterface
      */
     public function getCurrency(): string
     {
-        if('null' == $this->currency){
+        if(null == $this->currency){
             return 'eur';
         }
         return $this->currency;

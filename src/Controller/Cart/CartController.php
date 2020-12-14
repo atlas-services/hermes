@@ -77,8 +77,10 @@ class CartController extends AbstractController
                 $navbar_cart_html = '';
                 $cart_html= '';
             }else{
+                $config = $page->getActiveConfig();
+                $nav_link_color = $config['nav_link_color'];
                 $products = $cartClient->getProducts();
-                $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig');
+                $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig', ['nav_link_color' => $nav_link_color]);
                 $cart_html = $this->renderView('front/base/cart/table.twig', ['products' =>$products, 'total' =>$total]);
             }
             $data['total'] = $total;
