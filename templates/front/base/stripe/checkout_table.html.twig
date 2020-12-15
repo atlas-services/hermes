@@ -18,14 +18,14 @@
                     </thead>
                     <tbody>
                     {% for cartproduct in products %}
-                        <tr class="bg-white">
-                            <th class="col-xs-4 cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
-                            <td class="col-xs-3">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
-                            <td class="col-xs-3 mx-auto">
+                        <tr class="bg-white ">
+                            <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
+                            <td class="col-xs-3 align-middle">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
+                            <td class="col-xs-3 align-middle mx-auto">
                                 {{ cartproduct.quantity }}
                             </td>
-                            <td id="price-{{ cartproduct.product.id }}" class="col-xs-3">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
-                        </tr>
+                            <td id="price-{{ cartproduct.product.id }}" class="col-xs-3 align-middle">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
+                         </tr>
                     {% endfor %}
                     </tbody>
                     <tfoot>

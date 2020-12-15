@@ -10,19 +10,19 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-xs-6 active">{{ 'cart.product'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.unit_price'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.quantity'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.price'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.delete'|trans() }}</th>
+                        <th class="col-xs-6 ">{{ 'cart.product'|trans() }}</th>
+                        <th class="col-xs-3 text-center">{{ 'cart.unit_price'|trans() }}</th>
+                        <th class="col-xs-3 text-center">{{ 'cart.quantity'|trans() }}</th>
+                        <th class="col-xs-3 text-center">{{ 'cart.price'|trans() }}</th>
+                        <th class="col-xs-3 text-center">{{ 'cart.delete'|trans() }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for cartproduct in products %}
-                        <tr class="bg-white">
-                            <th class="col-xs-4 cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
-                            <td class="col-xs-3">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
-                            <td class="col-xs-3 mx-auto">
+                        <tr class="bg-white ">
+                            <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
+                            <td class="col-xs-3 align-middle">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
+                            <td class="col-xs-3 align-middle mx-auto">
                                 <select class="product-quantity col-lg-5 mx-auto form-control browser-default custom-select " id="{{ cartproduct.product.id }}" data-type="update">
                                     {% for i in 0..20 %}
                                         {% set selected= ''  %}
@@ -33,8 +33,8 @@
                                     {% endfor %}
                                 </select>
                             </td>
-                            <td id="price-{{ cartproduct.product.id }}" class="col-xs-3">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
-                            <td class="col-xs-3"><a href="{{ path('cart_delete', {'id': cartproduct.product.id}) }}"><i class="text-danger fa fa-trash"></i></a></td>
+                            <td id="price-{{ cartproduct.product.id }}" class="col-xs-3 align-middle">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
+                            <td class="col-xs-3 align-middle"><a href="{{ path('cart_delete', {'id': cartproduct.product.id}) }}"><i class="text-danger fa fa-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
