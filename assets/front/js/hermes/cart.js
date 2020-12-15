@@ -11,13 +11,18 @@ jQuery(document).ready(function () {
     $addProduct.on('click', function (e) {
         // active/desactive
         $id = $(this).attr('id');
-        $quantity = $(this).attr('quantity');
+        $quantity = $(this).data('quantity');
+        $type = $(this).data('type');
         $url = "/panier";
-        $message = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
-            '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-            '            Cet article a bien été <strong>ajouté à votre panier</strong>!.\n' +
-            '        </div>';
-        handleProductCart($url, $id, $quantity, $message);
+        $message = '';
+        if($('#alert').length == 0){
+            $message = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
+                '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                '            Cet article a bien été <strong>ajouté à votre panier</strong>!.\n' +
+                '        </div>';
+        }
+
+        handleProductCart($url, $id, $quantity, $type , $message);
     });
 
     // Cart quantity
@@ -28,8 +33,9 @@ jQuery(document).ready(function () {
             // change quantity
             $id = $(this).attr('id');
             $quantity = $(this).val();
+            $type = $(this).data('type');
             $url = "/panier";
-            handleProductCart($url, $id, $quantity, '');
+            handleProductCart($url, $id, $quantity, $type , '');
             e.handled = true;
             return;
         }
@@ -38,7 +44,7 @@ jQuery(document).ready(function () {
 
 
 
-function handleProductCart($url, $id, $quantity, $message) {
+function handleProductCart($url, $id, $quantity,$type, $message) {
 
     $.ajax({
         type: "POST",
@@ -46,6 +52,7 @@ function handleProductCart($url, $id, $quantity, $message) {
         data: {
             id: $id,
             quantity: $quantity,
+            type: $type,
         },
         dataType: "json",
         success: function (response) {

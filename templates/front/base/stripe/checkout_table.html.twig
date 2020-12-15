@@ -6,7 +6,7 @@
             <div class="col-xs-12">
                 <h1 class="checkout-header">{{ 'order.label'|trans() }}</h1>
             </div>
-            <div class="col-xs-12 col-sm-6 mx-auto">
+            <div class="col-xs-12 col-sm-12 mx-auto">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -19,7 +19,7 @@
                     <tbody>
                     {% for cartproduct in products %}
                         <tr class="bg-white">
-                            <th class="col-xs-4 checkout-product-name">{{ cartproduct.name }}</th>
+                            <th class="col-xs-4 cart-product-name">{{ cartproduct.product.name }}</th>
                             <td class="col-xs-3">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
                             <td class="col-xs-3 mx-auto">
                                 {{ cartproduct.quantity }}

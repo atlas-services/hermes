@@ -89,7 +89,7 @@
                 {% endfor %}
                 {% include 'front/base/navbar/user.html.twig' %}
                 {% if(app.session.get('cart')) %}
-                    {% if(app.session.get('cart').cartProducts|length > 0) %}
+                    {% if(app.session.get('cart')|length > 0) %}
                         {% include 'front/base/navbar/cart.html.twig' %}
                     {% endif %}
                 {% else %}

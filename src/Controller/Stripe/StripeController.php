@@ -9,7 +9,7 @@
 namespace App\Controller\Stripe;
 
 
-use App\Cart\CartClient;
+use App\Cart\OrderClient;
 use App\Entity\Product;
 use App\Menu\Page;
 use App\Stripe\Cart;
@@ -31,15 +31,15 @@ class StripeController extends AbstractController
      * },
      *     name="stripe_checkout", methods={"GET|POST"})
      */
-    public function checkout(Request $request, Page $page, StripeClient $stripeClient, CartClient $cartClient, TranslatorInterface $translator): Response
+    public function checkout(Request $request, Page $page, StripeClient $stripeClient, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
         if(!$this->isGranted('ROLE_USER')){
             $notification = $translator->trans('cart.message_compte');
             $this->addFlash('warning', $notification);
         }
 
-        $products = $cartClient->getProducts();
-        $total = $cartClient->getTotal();
+        $products = $orderClient->handleCartProducts();
+        $total = $orderClient->getTotal();
 
         $public_key = $this->getParameter('stripe_public_key');
         if ($request->isMethod('POST')) {
@@ -62,7 +62,7 @@ class StripeController extends AbstractController
                 );
             }
             $stripeClient->createInvoice($user, true);
-            $cartClient->emptyCart();
+            $orderClient->emptyCart();
             $notification = $translator->trans('cart.paiement_done');
             $this->addFlash('success', $notification);
             return $this->redirect('/');

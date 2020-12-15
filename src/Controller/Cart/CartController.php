@@ -12,8 +12,6 @@ namespace App\Controller\Cart;
 use App\Cart\CartClient;
 use App\Entity\Product;
 use App\Menu\Page;
-use App\Stripe\Cart;
-use App\Stripe\StripeClient;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,14 +35,9 @@ class CartController extends AbstractController
             $cartClient->emptyCart();
             return $this->redirect('/');
         }
-//        if(!$this->isGranted('ROLE_USER')){
-//            $notification = $translator->trans('cart.message_compte');
-//            $this->addFlash('warning', $notification);
-//        }
 
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();
-
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['products'] = $products;
@@ -61,17 +54,32 @@ class CartController extends AbstractController
      * },
      *     name="ajax_cart", methods={"GET|POST"})
      */
-    public function cart(Request $request, Page $page, CartClient $cartClient): Response
+    public function cart(Request $request, Page $page, CartClient $cartClient ): Response
     {
         if ($request->isXMLHttpRequest()) {
+
+            // add product to cart
             $id = $request->request->get('id');
             $quantity = $request->request->get('quantity');
-            // add product to cart
-            $cartClient->createCartProduct($id,$quantity);
-            $total = $cartClient->getTotal();
+            $type = $request->request->get('type');
+
+            switch ($type) {
+                case 'update':
+                    $cartClient->update($id, $quantity);
+                    break;
+                case 'add':
+                    $cartClient->add($id, $quantity);
+                    break;
+            }
+
+            // Get customer
             if(!is_null($this->getUser())){
                 $cartClient->addCustomer($this->getUser());
             }
+
+            // get Total
+            $total = $cartClient->getTotal();
+
             if(0 == $total){
                 $cartClient->emptyCart();
                 $navbar_cart_html = '';
@@ -88,6 +96,20 @@ class CartController extends AbstractController
             $data['cart_html'] = $cart_html;
             return new JsonResponse(array('data' => $data));
         }
+
+    }
+
+    /**
+     * @Route({
+     * "fr": "/mon/panier/delete/{id}",
+     * "en": "/my/cart/delete/{id}"
+     * },
+     * name="cart_delete", methods={"GET|POST"})
+     */
+    public function cart_remove($id, CartClient $cartClient): Response
+    {
+            $cartClient->update($id, 0);
+            return $this->redirectToRoute("cart");
 
     }
 
