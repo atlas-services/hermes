@@ -3,7 +3,7 @@
 {% set maxlengthname = folio_container_width|col_nb_char() %}
 {% set maxlengthcontent = 35 %}
 
-<section id="portfolio" class="section_content px-0" style="background-color:{{ content_bgcolor }}">
+<section id="portfolio" class="section_content pb-0  px-0" style="background-color:{{ content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}" >
         {% if(section.remote is null) %}
             <div id="folio" class="row_gallery">
