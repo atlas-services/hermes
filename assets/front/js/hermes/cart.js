@@ -66,7 +66,8 @@ function handleProductCart($url, $id, $quantity,$type, $message) {
             }
             // message produit ajouté au panier
             if('' != $message){
-                document.getElementById($id).insertAdjacentHTML('afterend',$message);
+                // document.getElementById($id).insertAdjacentHTML('afterend',$message);
+                document.getElementById('top').insertAdjacentHTML('afterend',$message);
             }
         }
     });

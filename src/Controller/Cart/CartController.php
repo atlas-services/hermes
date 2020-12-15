@@ -72,11 +72,6 @@ class CartController extends AbstractController
                     break;
             }
 
-            // Get customer
-            if(!is_null($this->getUser())){
-                $cartClient->addCustomer($this->getUser());
-            }
-
             // get Total
             $total = $cartClient->getTotal();
 

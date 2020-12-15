@@ -360,7 +360,7 @@ add button
 
 .h-btn-outline-success:hover {
     color: #fff;
-    background-color: var(--h-color-success);
+    background-color: var(--color-grey2);
     border-color: var(--h-color-success);
 }
 

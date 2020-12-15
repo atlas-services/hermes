@@ -106,7 +106,11 @@ liip_imagine:
                 # create a 2px black border: center the thumbnail on a black background
                 # 4px larger to create a 2px border around the final image
                 background: { size: [184, 114], position: center, color: '#000000' }
-
+        app_thumb_paysage:
+            filters:
+                fixed:
+                    width: 62
+                    height: 86
         # the name of the "filter set"
         app_fixed_isotope_filter:
             # adjust the image quality to 75%
