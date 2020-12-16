@@ -1,0 +1,20 @@
+<!-- Breadcrumb -->
+<div class="container" >
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-12 pb-0 text-center">
+            {% dump(breadcrumb) %}
+            <h1 class="breadcrumbs mt-3 mb-3">
+                <span>
+                    <a class="mx-3 btn {{ (breadcrumb == 'cart.label'|trans() ) ? 'btn-outline-dark'  : 'h-btn-outline-success' }}" href={{ path('cart') }}>  {{ 'cart.label'|trans() }} </a>
+                </span>
+                <span>
+                    <a class="mx-3 btn {{ (breadcrumb == 'order.label'|trans() )  ? 'btn-outline-dark'  : 'h-btn-outline-success' }}"  href={{ path('order') }}>  {{ 'order.label'|trans() }} </a>
+                </span>
+                <span>
+                    <a class="mx-3 btn {{ (breadcrumb == 'paiement.label'|trans() ) ? 'btn-outline-dark'  : 'h-btn-outline-success' }}" href={{ path('stripe_checkout') }}>  {{ 'paiement.label'|trans() }} </a>
+                </span>
+            </h1>
+        </div>
+    </div>
+</div>
+

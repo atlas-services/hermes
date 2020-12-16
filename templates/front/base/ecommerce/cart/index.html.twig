@@ -9,6 +9,7 @@
                     {{ message|raw }}
                 </div>
             {% endfor %}
+            {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'cart.label'|trans()} %}
             {% include 'front/base/ecommerce/cart/table.html.twig' %}
             <p class="text-center">
                 <a class="btn h-btn-outline-success" href={{ path('order') }}> Commander</a>

@@ -332,8 +332,11 @@ transparent:
   yes: transparent
   no: couleur
 
+ecommerce:
+  label: Mes achats
+
 cart:
-  message_compte: Afin de pouvoir commander un produit, vous devez vous connecter avec votre compte utilisateur  <a href='/fr/login'>Mon compte</a>
+  message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte utilisateur ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon panier
   add: Ajouter
   product: Article(s)
@@ -354,7 +357,7 @@ order:
   total: Total
 
 paiement:
-  label: Paiement
+  label: Mon paiement
   done: Paiement effectué!
   stripe:
     label: Stripe

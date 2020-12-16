@@ -2,10 +2,7 @@
 {% if app.user %}
     {% set currency = app.user.currency %}
 {% endif %}
-<div id="checkout-table" class="col-lg-12 mx-auto  mt-5 pt-5 text-center">
-            <div class="col-xs-12">
-                <h1 class="checkout-header">{{ 'order.label'|trans() }}</h1>
-            </div>
+<div id="checkout-table" class="col-lg-12 mx-auto  mt-5 text-center">
             <div class="col-xs-12 col-sm-12 mx-auto">
                 <table class="table table-bordered">
                     <thead>
