@@ -6,14 +6,13 @@
  * Time: 10:28
  */
 
-namespace App\Controller\Stripe;
+namespace App\Controller\Ecommerce;
 
 
-use App\Cart\OrderClient;
+use App\Ecommerce\OrderClient;
 use App\Entity\Product;
 use App\Menu\Page;
-use App\Stripe\Cart;
-use App\Stripe\StripeClient;
+use App\Ecommerce\StripeClient;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,8 +25,8 @@ class StripeController extends AbstractController
 
     /**
      * @Route({
-     * "fr": "/ma/commande",
-     * "en": "/my/order"
+     * "fr": "/mon/paiement/stripe",
+     * "en": "/my/paiement/stripe"
      * },
      *     name="stripe_checkout", methods={"GET|POST"})
      */
@@ -63,7 +62,7 @@ class StripeController extends AbstractController
             }
             $stripeClient->createInvoice($user, true);
             $orderClient->emptyCart();
-            $notification = $translator->trans('cart.paiement_done');
+            $notification = $translator->trans('paiement.done');
             $this->addFlash('success', $notification);
             return $this->redirect('/');
         }
@@ -72,7 +71,7 @@ class StripeController extends AbstractController
         $array['APP_STRIPE_PK'] = $public_key;
         $array['products'] = $products;
         $array['total'] = $total;
-        return $this->render('front/base/stripe/checkout.html.twig', $array);
+        return $this->render('front/base/ecommerce/stripe/checkout.html.twig', $array);
 
         return $this->render('order/checkout.html.twig', array(
             'products' => $products,

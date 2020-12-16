@@ -23,7 +23,7 @@
                             <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
                             <td class="col-xs-3 align-middle">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
                             <td class="col-xs-3 align-middle mx-auto">
-                                <select class="product-quantity col-lg-5 mx-auto form-control browser-default custom-select " id="{{ cartproduct.product.id }}" data-type="update">
+                                <select class="product-quantity col-lg-6 mx-auto form-control browser-default custom-select " id="{{ cartproduct.product.id }}" data-type="update">
                                     {% for i in 0..20 %}
                                         {% set selected= ''  %}
                                         {% if i == cartproduct.quantity  %}

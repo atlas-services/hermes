@@ -20,15 +20,25 @@ hermes_admin:
   resource: '../src/Controller/Admin/AdminController.php'
   type:     annotation
 
-hermes_cart:
+hermes_ecommerce:
   # loads routes from the PHP annotations of the controllers found in that directory
-  resource: '../src/Controller/Cart'
+  resource: '../src/Controller/Ecommerce'
   type:     annotation
 
-hermes_stripe:
-  # loads routes from the PHP annotations of the controllers found in that directory
-  resource: '../src/Controller/Stripe'
-  type:     annotation
+#hermes_cart:
+#  # loads routes from the PHP annotations of the controllers found in that directory
+#  resource: '../src/Controller/Cart'
+#  type:     annotation
+#
+#hermes_order:
+#  # loads routes from the PHP annotations of the controllers found in that directory
+#  resource: '../src/Controller/Order'
+#  type:     annotation
+#
+#hermes_stripe:
+#  # loads routes from the PHP annotations of the controllers found in that directory
+#  resource: '../src/Controller/Stripe'
+#  type:     annotation
 
 hermes_front:
   # loads routes from the PHP annotations of the controllers found in that directory

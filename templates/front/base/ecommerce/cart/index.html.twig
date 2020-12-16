@@ -9,9 +9,9 @@
                     {{ message|raw }}
                 </div>
             {% endfor %}
-            {% include 'front/base/cart/table.twig' %}
+            {% include 'front/base/ecommerce/cart/table.html.twig' %}
             <p class="text-center">
-                <a class="btn h-btn-outline-success" href={{ path('stripe_checkout') }}> Commander</a>
+                <a class="btn h-btn-outline-success" href={{ path('order') }}> Commander</a>
             </p>
         </div>
     </div>

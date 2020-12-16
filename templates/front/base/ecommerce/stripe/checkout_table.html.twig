@@ -44,8 +44,8 @@
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="{{ APP_STRIPE_PK }}"
                             data-amount="{{ total }}"
-                            data-name="{{ 'cart.paiement'|trans() }}"
-                            data-description="{{ 'cart.stripe'|trans() }}"
+                            data-name="{{ 'paiement.label'|trans() }}"
+                            data-description="{{ 'paiement.stripe.checkout'|trans() }}"
                             data-image="{{ asset('/img/hermes.png') }}"
                             data-zip-code="true"
                             data-locale="auto">

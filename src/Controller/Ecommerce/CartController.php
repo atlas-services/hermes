@@ -6,10 +6,9 @@
  * Time: 10:28
  */
 
-namespace App\Controller\Cart;
+namespace App\Controller\Ecommerce;
 
-
-use App\Cart\CartClient;
+use App\Ecommerce\CartClient;
 use App\Entity\Product;
 use App\Menu\Page;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,7 +41,7 @@ class CartController extends AbstractController
         $array = $page->getActiveMenu('accueil','accueil');
         $array['products'] = $products;
         $array['total'] = $total;
-        return $this->render('front/base/cart/index.html.twig', $array);
+        return $this->render('front/base/ecommerce/cart/index.html.twig', $array);
 
     }
 
@@ -84,7 +83,7 @@ class CartController extends AbstractController
                 $nav_link_color = $config['nav_link_color'];
                 $products = $cartClient->getProducts();
                 $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig', ['nav_link_color' => $nav_link_color]);
-                $cart_html = $this->renderView('front/base/cart/table.twig', ['products' =>$products, 'total' =>$total]);
+                $cart_html = $this->renderView('front/base/ecommerce/cart/table.html.twig', ['products' =>$products, 'total' =>$total]);
             }
             $data['total'] = $total;
             $data['navbar_cart_html'] = $navbar_cart_html;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Stripe;
+namespace App\Ecommerce;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;

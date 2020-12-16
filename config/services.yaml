@@ -50,7 +50,7 @@ services:
         tags:
         - { name: 'doctrine.event_listener', event: 'postPersist', method: 'postPersist'}
 
-    App\Stripe\StripeClient:
-        class: App\Stripe\StripeClient
+    App\Ecommerce\StripeClient:
+        class: App\Ecommerce\StripeClient
         arguments: ['%stripe_secret_key%']
         autowire: true

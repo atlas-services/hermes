@@ -1,0 +1,42 @@
+{% set currency = 'eur' %}
+{% if app.user %}
+    {% set currency = app.user.currency %}
+{% endif %}
+<div id="checkout-table" class="col-lg-12 mx-auto  mt-5 pt-5 text-center">
+    <div class="col-xs-12">
+        <h1 class="checkout-header">{{ 'order.label'|trans() }}</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 mx-auto">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="col-xs-6 active">{{ 'cart.product'|trans() }}</th>
+                <th class="col-xs-3 active text-center">{{ 'cart.unit_price'|trans() }}</th>
+                <th class="col-xs-3 active text-center">{{ 'cart.quantity'|trans() }}</th>
+                <th class="col-xs-3 active text-center">{{ 'cart.price'|trans() }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cartproduct in products %}
+                <tr class="bg-white ">
+                    <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
+                    <td class="col-xs-3 align-middle">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
+                    <td class="col-xs-3 align-middle mx-auto">
+                        {{ cartproduct.quantity }}
+                    </td>
+                    <td id="price-{{ cartproduct.product.id }}" class="col-xs-3 align-middle">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
+                 </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr class="font-weight-bold">
+                <th class="col-xs-6 info ">Total</th>
+                <th class="col-xs-6 info">&nbsp;</th>
+                <th class="col-xs-6 info">&nbsp;</th>
+                <td class="col-xs-3 info checkout-total">{{ ((total)/100)|format_currency(currency) }}</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
