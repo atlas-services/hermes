@@ -2,19 +2,15 @@
 {% block title %}{{ 'order.label'|trans() }}{% endblock %}
 {% block content %}
     <div class="nav-space-checkout">
-    <div class="container">
-        {% for message in app.flashes('warning') %}
-            <div class="mt-5 alert alert-warning">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ message|raw }}
-            </div>
-        {% endfor %}
-        {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.label'|trans()} %}
-        {% include 'front/base/ecommerce/order/table.html.twig' %}
-        <p class="mt-5 text-center">
-            <a class="btn h-btn-outline-success" href={{ path('cart') }}> {{ 'order.update_cart'|trans }}</a>
-            <a class="btn h-btn-outline-success" href={{ path('stripe_checkout') }}> {{ 'paiement.stripe.checkout'|trans }}</a>
-        </p>
-    </div>
+        <div class="container">
+            {% for message in app.flashes('warning') %}
+                <div class="mt-5 alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+            {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.label'|trans()} %}
+            {% include 'front/base/ecommerce/order/table.html.twig' %}
+        </div>
     </div>
 {% endblock %}

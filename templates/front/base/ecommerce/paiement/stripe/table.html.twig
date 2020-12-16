@@ -39,6 +39,8 @@
                 <form action="{{ path('stripe_checkout') }}" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            value="{{ 'paiement.stripe.label'|trans()  }}"
+                            data-description="{{ 'paiement.stripe.label'|trans()  }}"
                             data-key="{{ APP_STRIPE_PK }}"
                             data-amount="{{ total }}"
                             data-name="{{ 'paiement.label'|trans() }}"
