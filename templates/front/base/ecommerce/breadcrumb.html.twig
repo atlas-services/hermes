@@ -2,7 +2,6 @@
 <div class="container" >
     <div class="row no-gutters slider-text align-items-center justify-content-center">
         <div class="col-md-12 pb-0 text-center">
-            {% dump(breadcrumb) %}
             <h1 class="breadcrumbs mt-3 mb-3">
                 <span>
                     <a class="mx-3 btn {{ (breadcrumb == 'cart.label'|trans() ) ? 'btn-outline-dark'  : 'h-btn-outline-success' }}" href={{ path('cart') }}>  {{ 'cart.label'|trans() }} </a>
