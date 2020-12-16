@@ -71,13 +71,7 @@ class StripeController extends AbstractController
         $array['APP_STRIPE_PK'] = $public_key;
         $array['products'] = $products;
         $array['total'] = $total;
-        return $this->render('front/base/ecommerce/stripe/checkout.html.twig', $array);
-
-        return $this->render('order/checkout.html.twig', array(
-            'products' => $products,
-            'total' => $total,
-            'cart' => $this->get('shopping_cart')
-        ));
+        return $this->render('front/base/ecommerce/paiement/stripe/index.html.twig', $array);
 
     }
 

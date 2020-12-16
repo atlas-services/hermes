@@ -10,10 +10,7 @@
             </div>
         {% endfor %}
         {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'paiement.label'|trans()} %}
-        {% include 'front/base/ecommerce/stripe/checkout_table.html.twig' %}
-        <p class="mt-5 text-center">
-            <a class="btn h-btn-outline-success" href={{ path('cart') }}> {{ 'order.update_cart'|trans }}</a>
-        </p>
+        {% include 'front/base/ecommerce/paiement/stripe/table.html.twig' %}
     </div>
     </div>
 {% endblock %}
