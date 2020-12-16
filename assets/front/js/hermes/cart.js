@@ -15,11 +15,25 @@ jQuery(document).ready(function () {
         $type = $(this).data('type');
         $url = "/panier";
         $message = '';
-        if($('#alert').length == 0){
-            $message = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
-                '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
-                '            Cet article a bien été <strong>ajouté à votre panier</strong>!.\n' +
-                '        </div>';
+        if($('#addArticleModale').length == 0){
+            // $message = '<div id="alert" class="col-lg-6 mx-auto mt-3 alert alert-success ">\n' +
+            //     '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+            //     '            Cet article a bien été <strong>ajouté à votre panier</strong>!.\n' +
+            //     '        </div>';
+
+            $message = '<div class="col-lg-12 mx-auto px-5 modal fade" id="addArticleModale" tabindex="-1" role="dialog" aria-labelledby="addArticleModaleLabel" aria-hidden="true">\n' +
+                '    <div class="modal-dialog col-lg-8 mw-100 " role="document">\n' +
+                '        <div class="modal-content col-lg-12">\n' +
+                '             <div class="modal-header">\n' +
+                '                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                '                    <span aria-hidden="true">&times;</span>\n' +
+                '                </button>\n' +
+                '            </div>\n' +
+                '            <h5 class="modal-title text-center my-5 " id="addArticleModaleLabel">Cet article a été <strong>ajouté à votre panier</strong>!</h5>\n' +
+                '        </div>\n' +
+                '    </div>\n' +
+                '</div>';
+
         }
 
         handleProductCart($url, $id, $quantity, $type , $message);
@@ -65,10 +79,15 @@ function handleProductCart($url, $id, $quantity,$type, $message) {
                 window.location.replace("/");
             }
             // message produit ajouté au panier
-            if('' != $message){
-                // document.getElementById($id).insertAdjacentHTML('afterend',$message);
-                document.getElementById('top').insertAdjacentHTML('afterend',$message);
-            }
+            // if('' != $message) {
+                if($('#addArticleModale').length == 0){
+                    document.getElementById('portfolio').insertAdjacentHTML('afterend', $message);
+                }
+                $('#addArticleModale').modal('show');
+                setTimeout(function(){
+                    $('#addArticleModale').modal('hide')
+                }, 1200);
+            // }
         }
     });
 
