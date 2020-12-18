@@ -38,7 +38,8 @@ class UserController extends AbstractController
         }
 
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $options['roles'] = $this->getRoles($user);
+        $form = $this->createForm(UserType::class, $user, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,11 +74,12 @@ class UserController extends AbstractController
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){
             $this->redirectToRoute('user_index');
         }
-        $options['disable_roles'] = true;
-        if($this->isGranted('ROLE_SUPER_ADMIN')){
-            $options['disable_roles'] = false;
+
+        if($user->idSuperAdmin() ){
+            $options['disable_roles'] = true;
         }
-        $form = $this->createForm(UserType::class, $user,$options);
+        $options['roles'] = $this->getRoles($user);
+        $form = $this->createForm(UserType::class, $user, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,5 +106,22 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
+    }
+
+    private function getRoles($user){
+        if($this->isGranted('ROLE_SUPER_ADMIN')){
+            foreach ($this->getUser()->getRoles() as $role){
+                $roles_super_admin[$role] = $role;
+            }
+            foreach ($user->getRoles() as $role){
+                $roles_user[$role] = $role;
+            }
+            $roles = array_merge($roles_super_admin, $roles_user);
+        }else{
+            foreach ($user->getRoles() as $role){
+                $roles[$role] = $role;
+            }
+        }
+        return $roles;
     }
 }
