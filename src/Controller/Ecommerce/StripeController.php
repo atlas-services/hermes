@@ -54,10 +54,10 @@ class StripeController extends AbstractController
 
             foreach ($products as $product) {
                 $stripeClient->createInvoiceItem(
-                    $product->getProduct()->getPrice() ,
-                    $product->getQuantity() ,
+                    $product['price'] ,
+                    $product['quantity'] ,
                     $user,
-                    $product->getName(),
+                    $product['product']->getName(),
                 );
             }
             $stripeClient->createInvoice($user, true);
