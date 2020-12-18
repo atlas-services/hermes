@@ -20,7 +20,7 @@ class UserType extends AbstractType
                 [
                     'multiple' => true,
                     'expanded' => true,
-                    'choices' => User::ROLES_AVAILABLES,
+                    'choices' => $options['roles'],
                     'disabled' => $options['disable_roles']
                 ]);
     }
@@ -29,7 +29,8 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'disable_roles' => true,
+            'disable_roles' => false,
+            'roles' => ['ROLE_USER'],
         ]);
     }
 }

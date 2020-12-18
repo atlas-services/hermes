@@ -1,10 +1,10 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}{{ 'global.new_user'|trans() }}{% endblock %}
+{% block title %}{{ 'user.new'|trans() }}{% endblock %}
 
 {% block content %}
     <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1>{{ 'global.new_user'|trans() }}</h1>
+    <h1>{{ 'user.new'|trans }}</h1>
 
     {{ include('admin/user/_form.html.twig') }}
 

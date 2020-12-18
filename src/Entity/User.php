@@ -14,12 +14,6 @@ class User implements UserInterface
 
     const ROLE_SUPER_ADMIN =  'ROLE_SUPER_ADMIN' ;
 
-    const ROLES_AVAILABLES =   [
-        'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN' ,
-        'ROLE_ADMIN' => 'ROLE_ADMIN' ,
-        'ROLE_USER'=> 'ROLE_USER',
-    ];
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

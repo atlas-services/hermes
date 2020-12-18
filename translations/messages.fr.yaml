@@ -204,9 +204,11 @@ user:
   reset_password: Cliquer sur ce lien pour réinitialiser Votre mot de passe
   send_email: Envoyer
   admin: Mon espace d'administration
+  profil: Modifier mon profil
   sign_in: Se connecter
   identification: Se connecter
   edit: Utilisateur
+  new: Nouvel utilisateur
   logout: Se déconnecter
 
 # Sheet
