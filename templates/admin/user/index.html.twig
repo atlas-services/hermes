@@ -7,11 +7,12 @@
 
     <table class="table">
         <thead>
-                <th>{{ 'global.firstname'|trans() }}</th>
-                <th>{{ 'global.lastname'|trans() }}</th>
-                <th>{{ 'global.email'|trans() }}</th>
-                <th>{{ 'global.actions'|trans() }}</th>
-            </tr>
+        <th>{{ 'user.firstname'|trans() }}</th>
+        <th>{{ 'user.lastname'|trans() }}</th>
+        <th>{{ 'user.email'|trans() }}</th>
+        <th>{{ 'user.roles'|trans() }}</th>
+        <th>{{ 'global.actions'|trans() }}</th>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
@@ -19,6 +20,7 @@
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
+                <td>{% for role in user.roles%} {{ role }} <br/>  {% endfor %}</td>
                 <td>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
