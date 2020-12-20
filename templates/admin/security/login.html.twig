@@ -28,9 +28,8 @@
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
             <div class="col-12 col-lg-5 mx-auto">
-                <h1 class="h3 mb-5 font-weight-normal h-text-success text-center">{{ 'user.new'|trans() }}</h1>
-                <form class="col-lg-12" method="post" action="{{ path('app_user_new') }}">
-
+                <h1 class="h3 mb-5 font-weight-normal h-text-success text-center">{{ 'user.create'|trans() }}</h1>
+                <form class="col-lg-12" method="post" action="{{ path('app_customer_new') }}">
                     <div class="col-lg-12 text-center">
                         <label for="inputEmail" class="sr-only">{{ 'user.firstname'|trans }}</label>
                         <input type="text" name="firstname" id="inputFirstname" class="col-lg-12 mx-auto form-control h-border-success"

@@ -85,6 +85,9 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
         $locale = $request->getLocale();
+        if(in_array('ROLE_CUSTOMER', $token->getUser()->getRoles())){
+            return new RedirectResponse("/$locale/customer");
+        }
         return new RedirectResponse("/$locale/admin");
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));

@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/{_locale}")
@@ -145,9 +146,9 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/user/new", name="app_user_new")
+     * @Route("/new", name="app_customer_new")
      */
-    public function user_new(Request $request)
+    public function customer_new(Request $request, TranslatorInterface $translator)
     {
 
         if ($request->isMethod('POST')) {
@@ -161,12 +162,13 @@ class SecurityController extends AbstractController
             /* @var $user User */
 
             if ($user !== null) {
-                $this->addFlash('info', 'Cet utilisateur existe déjà ');
+                $notification = $translator->trans('user.exist');
+                $this->addFlash('info', $notification);
                 return $this->redirectToRoute('app_login');
             }
 
             $user = new User();
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_CUSTOMER']);
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setEmail($email);
@@ -175,11 +177,10 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Votre compte utilsatzur a été créé');
-
-            return $this->redirectToRoute('admin_index');
+            $notification = $translator->trans('user.created');
+            $this->addFlash('notice', $notification);
+            return $this->redirectToRoute('customer_index');
         }else {
-
             return $this->render('admin/security/reset_password.html.twig', ['token' => $token]);
         }
 

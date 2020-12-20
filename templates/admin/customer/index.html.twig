@@ -1,0 +1,19 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block nav %}
+    <section id="section_top" class="container"></section>
+    {% include '/admin/customer/nav.html.twig' %}
+{% endblock nav %}
+
+{% block content %}
+    <section id="admin">
+        <p class="text-secondary lead">
+            {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
+        </p>
+        <p class="text-secondary lead">
+            {{ 'info.customer_presentation'|trans()|raw }}
+        </p>
+    </section>
+{% endblock content %}
+
+

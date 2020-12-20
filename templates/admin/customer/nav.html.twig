@@ -1,0 +1,57 @@
+<!-- Navigation -->
+{#<nav class="navbar navbar-expand-lg navbar-dark ftco-navbar-light fixed-top navbar-shrink" id="mainNav">#}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="navbar-brand  " href="{{ path('admin_index') }}">{{ 'global.admin'|trans() }}</a>
+        {% endif %}
+        {% for locale in locales %}
+            {% if locale == app.request.locale %}
+                {% set flag = 'app_fixed_flag_selected' %}
+            {% else %}
+                {% set flag = 'app_fixed_flag' %}
+            {% endif %}
+            <a class="mr-2" href="{{ path('change_locale', {'locale': locale}) }}"><img
+                        src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
+        {% endfor %}
+        <div class="navbar-header ">
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button"
+                    data-toggle="collapse" data-target="#navbarResponsive" aria-label="Toggle navigation"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="h-rounded-lg-09 nav navbar-nav ml-auto"
+                    style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">
+                    <li class=" nav-item dropdown">
+                        <a id="{{ 'User'|trans() }}" class="nav-link  page-scroll dropdown-toggle "
+                           role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           href="#">
+                            {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
+                            <a class="page-scroll nav-link "
+                               href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}} </a>
+                            <a class="page-scroll nav-link "
+                               href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </div>
+    <div id="chevron_down_div">
+        <h3 class="section-subheading text-right">
+            <a id="chevron_down" class="js-scroll-trigger" href="#section_bottom">
+                <i class="fa fa-chevron-circle-down"></i>
+            </a>
+        </h3>
+    </div>
+    <div id="chevron_up_div" style="display:none">
+        <h3 class="section-subheading text-muted">
+            <a id="chevron_up" class="js-scroll-trigger" href="#section_top">
+                <i class="fa fa-chevron-circle-up"></i></a>
+        </h3>
+    </div>
+</nav>
