@@ -32,7 +32,7 @@ class StripeController extends AbstractController
      */
     public function checkout(Request $request, Page $page, StripeClient $stripeClient, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
-        if(!$this->isGranted('ROLE_USER')){
+        if(!$this->isGranted('ROLE_CUSTOMER')){
             $notification = $translator->trans('cart.message_compte');
             $this->addFlash('warning', $notification);
         }

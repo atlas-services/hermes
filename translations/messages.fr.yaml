@@ -204,7 +204,6 @@ user:
   unknown: Email ou mot de passe Inconnu
   exist: Cet utilisateur existe déjà
   created: Votre compte client a été créé
-  create: Je créé mon compte
   forgot_password: Mot de passe oublié
   reset_password: Cliquer sur ce lien pour réinitialiser Votre mot de passe
   send_email: Envoyer
@@ -215,6 +214,7 @@ user:
   edit: Utilisateur
   new: Nouvel utilisateur
   logout: Se déconnecter
+  create: Je créé mon compte client
   devise: Devise
 
 # Sheet
@@ -343,7 +343,7 @@ ecommerce:
   label: Mes achats
 
 cart:
-  message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte utilisateur ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
+  message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon panier
   add: Ajouter
   product: Article(s)
