@@ -12,17 +12,27 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email')
-            ->add('password', 'Symfony\Component\Form\Extension\Core\Type\PasswordType')
-            ->add('roles', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                [
-                    'multiple' => true,
-                    'expanded' => true,
-                    'choices' => $options['roles'],
-                    'disabled' => $options['disable_roles']
-                ]);
+            ->add('firstname', null, [
+                'label' => 'user.firstname',
+            ])
+            ->add('lastname', null, [
+                'label' => 'user.lastname',
+            ])
+            ->add('email', null, [
+                'label' => 'user.email',
+            ])
+            ->add('password', 'Symfony\Component\Form\Extension\Core\Type\PasswordType', [
+                'label' => 'user.password',
+            ]);
+            $builder
+                ->add('roles', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                    [
+                        'multiple' => true,
+                        'expanded' => true,
+                        'choices' => $options['roles'],
+                        'disabled' => $options['disable_roles']
+                    ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

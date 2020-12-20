@@ -2,8 +2,9 @@
 {#<nav class="navbar navbar-expand-lg navbar-dark ftco-navbar-light fixed-top navbar-shrink" id="mainNav">#}
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand  " href="{{ path('admin_index') }}">Admin
-        </a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="navbar-brand  " href="{{ path('admin_index') }}">{{ 'global.admin'|trans() }}</a>
+        {% endif %}
         {% for locale in locales %}
             {% if locale == app.request.locale %}
                 {% set flag = 'app_fixed_flag_selected' %}
@@ -33,10 +34,6 @@
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
                              aria-expanded="false">
-{#                            {% if is_granted('ROLE_SUPER_ADMIN') %}#}
-{#                                <p><a class="text-info mx-3 "#}
-{#                                      href="{{ path('sheet_form_index') }}"> {{ 'sheet.list_form'|trans()|raw }}</a></p>#}
-{#                            {% endif %}#}
                             <p><a class="text-info mx-3 "
                                   href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
                             <p><a class="text-info mx-3"
@@ -107,7 +104,7 @@
                                   href="{{ path('config_index', {'type': 'form'}) }}"> {{ 'config.affiche_list_formulaire'|trans()|raw }}</a>
                             </p>
                         </div>
-
+                    </li>
                     <li class=" nav-item dropdown">
                         <a id="{{ 'User'|trans() }}" class="nav-link  page-scroll dropdown-toggle "
                            role="button"
@@ -120,7 +117,7 @@
                                href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}} </a>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 <a class="text-info mx-3"
-                                      href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a>
+                                   href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a>
                             {% endif %}
                             <a class="page-scroll nav-link "
                                href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
