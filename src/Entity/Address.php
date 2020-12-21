@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\IdTrait;
 use CommerceGuys\Addressing\AddressInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
@@ -10,6 +12,7 @@ use CommerceGuys\Addressing\AddressInterface;
 class Address implements AddressInterface
 
 {
+    use IdTrait;
     /**
      * Gets the two-letter country code.
      *
