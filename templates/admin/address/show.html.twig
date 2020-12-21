@@ -1,0 +1,34 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.show'|trans() }}{% endblock %}
+
+{% block nav %}
+    <section id="section_top" class="container"></section>
+    {% include '/admin/customer/nav.html.twig' %}
+{% endblock nav %}
+
+{% block content %}
+    <a href="{{ path('address_index', {'type': address.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>{{ 'global.show'|trans() }} {{ address.value }}</h1>
+
+    <table class="table">
+        <tbody>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <tr>
+                <th>{{ 'global.code'|trans() }}</th>
+                <td>{{ address.code }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>{{ 'global.value'|trans() }}</th>
+                <td>{{ address.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('address_index', {'type': address.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    <a href="{{ path('address_edit', {'id': address.id}) }}">edit</a>
+
+    {{ include('admin/address/_delete_form.html.twig') }}
+{% endblock %}

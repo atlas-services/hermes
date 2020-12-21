@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
 use CommerceGuys\Addressing\AddressInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +14,7 @@ class Address implements AddressInterface
 
 {
     use IdTrait;
+    use ActiveTrait;
     /**
      * Gets the two-letter country code.
      *
