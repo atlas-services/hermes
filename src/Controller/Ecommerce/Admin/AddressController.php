@@ -25,6 +25,9 @@ class AddressController extends AbstractController
     public function new(Request $request): Response
     {
         $address = new Address();
+        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
+            $address->setUser($this->getUser());
+        }
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
@@ -48,7 +51,7 @@ class AddressController extends AbstractController
     public function index(AddressRepository $addressRepository): Response
     {
 
-        $addresses = $addressRepository->findAll();
+        $addresses = $addressRepository->findByUser($this->getUser());
 
         return $this->render('admin/address/index.html.twig', [
             'addresses' => $addresses,
@@ -71,7 +74,10 @@ class AddressController extends AbstractController
      */
     public function edit(Request $request, Address $address): Response
     {
-//        dd($address);
+
+        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
+            $address->setUser($this->getUser());
+        }
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
@@ -92,8 +98,8 @@ class AddressController extends AbstractController
      */
     public function delete(Request $request, Address $address): Response
     {
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
-            $this->redirectToRoute('admin_index');
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            $this->redirectToRoute('address_index');
         }
 
         if ($this->isCsrfTokenValid('delete' . $address->getId(), $request->request->get('_token'))) {

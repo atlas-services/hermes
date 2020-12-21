@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\UserTrait;
 use CommerceGuys\Addressing\AddressInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,6 +17,17 @@ class Address implements AddressInterface
 {
     use IdTrait;
     use ActiveTrait;
+    use UserTrait;
+
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="adresses")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $user;
+
     /**
      * Gets the two-letter country code.
      * @ORM\Column(type="string", nullable=true)
