@@ -6,6 +6,7 @@ use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
 use CommerceGuys\Addressing\AddressInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
@@ -17,6 +18,8 @@ class Address implements AddressInterface
     use ActiveTrait;
     /**
      * Gets the two-letter country code.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=3)
      *
      * @return string
      */
@@ -26,11 +29,15 @@ class Address implements AddressInterface
      * Administration area
      *
      * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      */
     private $administrativeArea;
 
     /**
      * the locality (i.e city).
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -38,6 +45,8 @@ class Address implements AddressInterface
 
     /**
      * the dependent locality (i.e neighbourhood).
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -46,6 +55,8 @@ class Address implements AddressInterface
 
     /**
      *  the postal code.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=7)
      *
      * @var string
      */
@@ -54,6 +65,8 @@ class Address implements AddressInterface
 
     /**
      *   the sorting code.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -62,6 +75,8 @@ class Address implements AddressInterface
 
     /**
      *   the first line of address 1 block.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=200)
      *
      * @var string
      */
@@ -69,6 +84,8 @@ class Address implements AddressInterface
 
     /**
      *   the first line of address 2 block.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -77,6 +94,8 @@ class Address implements AddressInterface
 
     /**
      *   the first line of address 2 block.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -85,14 +104,18 @@ class Address implements AddressInterface
 
      /**
      * the given name (i.e first name).
-     *
-     * @var string
+      * @ORM\Column(type="string", nullable=true)
+      * @Assert\Length(max=100)
+      *
+      * @var string
      */
     private $givenName;
     
 
     /**
      * the additional name.
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -100,6 +123,8 @@ class Address implements AddressInterface
 
     /**
      * the family name (i.e last name).
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=100)
      *
      * @var string
      */
@@ -107,8 +132,10 @@ class Address implements AddressInterface
 
      /**
      * the locale
-     *
-     * @var string
+      * @ORM\Column(type="string", nullable=true)
+      * @Assert\Length(max=3)
+      *
+      * @var string
      */
     private $locale;
     
