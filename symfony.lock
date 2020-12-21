@@ -20,6 +20,9 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "commerceguys/addressing": {
+        "version": "1.x-dev"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

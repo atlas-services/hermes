@@ -17,6 +17,7 @@
         "behat/mink-extension": "^2.1@dev",
         "behat/mink-goutte-driver": "^1.2@dev",
         "behat/mink-selenium2-driver": "^1.4@dev",
+        "commerceguys/addressing": "1.x-dev",
         "doctrine/doctrine-migrations-bundle": "^3.0@dev",
         "doctrine/migrations": "^3.0@dev",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
