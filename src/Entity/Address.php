@@ -15,28 +15,28 @@ class Address implements AddressInterface
      *
      * @return string
      */
-    private $_countryCode;
+    private $countryCode;
 
     /**
      * Administration area
      *
      * @var string
      */
-    private $_administrativeArea;
+    private $administrativeArea;
 
     /**
      * the locality (i.e city).
      *
      * @var string
      */
-    private $_locality;
+    private $locality;
 
     /**
      * the dependent locality (i.e neighbourhood).
      *
      * @var string
      */
-    private $_dependentLocality;
+    private $dependentLocality;
 
 
     /**
@@ -44,7 +44,7 @@ class Address implements AddressInterface
      *
      * @var string
      */
-    private $_postalCode;
+    private $postalCode;
 
 
     /**
@@ -52,7 +52,7 @@ class Address implements AddressInterface
      *
      * @var string
      */
-    private $_sortingCode;
+    private $sortingCode;
 
 
     /**
@@ -60,14 +60,14 @@ class Address implements AddressInterface
      *
      * @var string
      */
-    private $_addressLine1;
+    private $addressLine1;
 
     /**
      *   the first line of address 2 block.
      *
      * @var string
      */
-    private $_addressLine2;
+    private $addressLine2;
 
 
     /**
@@ -75,7 +75,7 @@ class Address implements AddressInterface
      *
      * @var string
      */
-    private $_organization;
+    private $organization;
     
 
      /**
@@ -83,7 +83,7 @@ class Address implements AddressInterface
      *
      * @var string
      */
-    private $_givenName;
+    private $givenName;
     
 
     /**
@@ -91,180 +91,330 @@ class Address implements AddressInterface
      *
      * @var string
      */
-    private $_additionalName;
+    private $additionalName;
 
     /**
      * the family name (i.e last name).
      *
      * @var string
      */
-    private $_familyName;
+    private $familyName;
 
      /**
      * the locale
      *
      * @var string
      */
-    private $_locale;
+    private $locale;
     
-    
+     
 
     /**
-     * Gets the two-letter country code.
-     *
-     * This is a CLDR country code, since CLDR includes additional countries
-     * for addressing purposes, such as Canary Islands (IC).
-     *
-     * @return string The two-letter country code.
-     */
-    public function getCountryCode() 
+     * Get gets the two-letter country code.
+     */ 
+    public function getCountryCode()
     {
-
+        return $this->countryCode;
     }
 
     /**
-     * Gets the administrative area.
+     * Set gets the two-letter country code.
      *
-     * Called the "state" in the United States, "province" in France and Italy,
-     * "county" in Great Britain, "prefecture" in Japan, etc.
+     * @return  self
+     */ 
+    public function setCountryCode($countryCode)
+    {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get administration area
      *
-     * @return string The administrative area. A subdivision code if there
-     *                are predefined subdivision at this level.
-     */
+     * @return  string
+     */ 
     public function getAdministrativeArea()
     {
-
+        return $this->administrativeArea;
     }
 
     /**
-     * Gets the locality (i.e city).
+     * Set administration area
      *
-     * Some countries do not use this field; their address lines are sufficient
-     * to locate an address within a sub-administrative area.
+     * @param  string  $administrativeArea  Administration area
      *
-     * @return string The administrative area. A subdivision code if there
-     *                are predefined subdivision at this level.
-     */
+     * @return  self
+     */ 
+    public function setAdministrativeArea(string $administrativeArea)
+    {
+        $this->administrativeArea = $administrativeArea;
+
+        return $this;
+    }
+
+    /**
+     * Get the locality (i.e city).
+     *
+     * @return  string
+     */ 
     public function getLocality()
     {
-
+        return $this->locality;
     }
 
     /**
-     * Gets the dependent locality (i.e neighbourhood).
+     * Set the locality (i.e city).
      *
-     * When representing a double-dependent locality in Great Britain, includes
-     * both the double-dependent locality and the dependent locality,
-     * e.g. "Whaley, Langwith".
+     * @param  string  $locality  the locality (i.e city).
      *
-     * @return string The administrative area. A subdivision code if there
-     *                are predefined subdivision at this level.
-     */
+     * @return  self
+     */ 
+    public function setLocality(string $locality)
+    {
+        $this->locality = $locality;
+
+        return $this;
+    }
+
+    /**
+     * Get the dependent locality (i.e neighbourhood).
+     *
+     * @return  string
+     */ 
     public function getDependentLocality()
     {
-
+        return $this->dependentLocality;
     }
 
     /**
-     * Gets the postal code.
+     * Set the dependent locality (i.e neighbourhood).
      *
-     * The value is often alphanumeric.
+     * @param  string  $dependentLocality  the dependent locality (i.e neighbourhood).
      *
-     * @return string The postal code.
-     */
+     * @return  self
+     */ 
+    public function setDependentLocality(string $dependentLocality)
+    {
+        $this->dependentLocality = $dependentLocality;
+
+        return $this;
+    }
+
+    /**
+     * Get the postal code.
+     *
+     * @return  string
+     */ 
     public function getPostalCode()
     {
-
+        return $this->postalCode;
     }
 
     /**
-     * Gets the sorting code.
+     * Set the postal code.
      *
-     * For example, CEDEX in France.
+     * @param  string  $postalCode  the postal code.
      *
-     * @return string The sorting code.
-     */
+     * @return  self
+     */ 
+    public function setPostalCode(string $postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get the sorting code.
+     *
+     * @return  string
+     */ 
     public function getSortingCode()
     {
-
+        return $this->sortingCode;
     }
 
     /**
-     * Gets the first line of address block.
+     * Set the sorting code.
      *
-     * @return string The first line of the address block.
-     */
+     * @param  string  $sortingCode  the sorting code.
+     *
+     * @return  self
+     */ 
+    public function setSortingCode(string $sortingCode)
+    {
+        $this->sortingCode = $sortingCode;
+
+        return $this;
+    }
+
+    /**
+     * Get the first line of address 1 block.
+     *
+     * @return  string
+     */ 
     public function getAddressLine1()
     {
-
+        return $this->addressLine1;
     }
 
     /**
-     * Gets the second line of address block.
+     * Set the first line of address 1 block.
      *
-     * @return string The second line of the address block.
-     */
+     * @param  string  $addressLine1  the first line of address 1 block.
+     *
+     * @return  self
+     */ 
+    public function setAddressLine1(string $addressLine1)
+    {
+        $this->addressLine1 = $addressLine1;
+
+        return $this;
+    }
+
+    /**
+     * Get the first line of address 2 block.
+     *
+     * @return  string
+     */ 
     public function getAddressLine2()
     {
-
+        return $this->addressLine2;
     }
 
     /**
-     * Gets the organization.
+     * Set the first line of address 2 block.
      *
-     * @return string The organization.
-     */
+     * @param  string  $addressLine2  the first line of address 2 block.
+     *
+     * @return  self
+     */ 
+    public function setAddressLine2(string $addressLine2)
+    {
+        $this->addressLine2 = $addressLine2;
+
+        return $this;
+    }
+
+    /**
+     * Get the first line of address 2 block.
+     *
+     * @return  string
+     */ 
     public function getOrganization()
     {
-
+        return $this->organization;
     }
 
     /**
-     * Gets the given name (i.e first name).
+     * Set the first line of address 2 block.
      *
-     * @return string The given name.
-     */
+     * @param  string  $organization  the first line of address 2 block.
+     *
+     * @return  self
+     */ 
+    public function setOrganization(string $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get the given name (i.e first name).
+     *
+     * @return  string
+     */ 
     public function getGivenName()
     {
-
+        return $this->givenName;
     }
 
     /**
-     * Gets the additional name.
+     * Set the given name (i.e first name).
      *
-     * Can be used to hold a middle name, or a patronymic.
-     * If a remote API does not have an additional_name/middle_name parameter,
-     * append it to the given name.
+     * @param  string  $givenName  the given name (i.e first name).
      *
-     * @return string The additional name.
-     */
+     * @return  self
+     */ 
+    public function setGivenName(string $givenName)
+    {
+        $this->givenName = $givenName;
+
+        return $this;
+    }
+
+    /**
+     * Get the additional name.
+     *
+     * @return  string
+     */ 
     public function getAdditionalName()
     {
-
+        return $this->additionalName;
     }
 
     /**
-     * Gets the family name (i.e last name).
+     * Set the additional name.
      *
-     * @return string The family name.
-     */
+     * @param  string  $additionalName  the additional name.
+     *
+     * @return  self
+     */ 
+    public function setAdditionalName(string $additionalName)
+    {
+        $this->additionalName = $additionalName;
+
+        return $this;
+    }
+
+    /**
+     * Get the family name (i.e last name).
+     *
+     * @return  string
+     */ 
     public function getFamilyName()
     {
-
+        return $this->familyName;
     }
 
     /**
-     * Gets the locale.
+     * Set the family name (i.e last name).
      *
-     * Allows the initially-selected address format / subdivision translations
-     * to be selected and used the next time this address is modified.
+     * @param  string  $familyName  the family name (i.e last name).
      *
-     * @return string The locale.
-     */
-    public function getLocale()
+     * @return  self
+     */ 
+    public function setFamilyName(string $familyName)
     {
+        $this->familyName = $familyName;
 
+        return $this;
     }
 
+    /**
+     * Get the locale
+     *
+     * @return  string
+     */ 
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Set the locale
+     *
+     * @param  string  $locale  the locale
+     *
+     * @return  self
+     */ 
+    public function setLocale(string $locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
 }
 
