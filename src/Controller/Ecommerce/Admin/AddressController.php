@@ -27,6 +27,8 @@ class AddressController extends AbstractController
         $address = new Address();
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
+            $address->setFamilyName($this->getUser()->getLastname());
+            $address->setGivenName($this->getUser()->getFirstname());
         }
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
