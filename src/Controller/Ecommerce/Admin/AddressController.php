@@ -36,7 +36,7 @@ class AddressController extends AbstractController
             $entityManager->persist($address);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('address_index');
         }
 
         return $this->render('admin/address/new.html.twig', [
@@ -108,7 +108,7 @@ class AddressController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('address_index');
     }
 
     public function updateForm($menus,$listform,$listform_init)
