@@ -26,7 +26,6 @@ class AddressController extends AbstractController
     public function new(Request $request, AddressClient $addressClient): Response
     {
         $address_options = $addressClient->getAddress('fr-FR');
-        dd($address_options);
         $address = new Address();
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
