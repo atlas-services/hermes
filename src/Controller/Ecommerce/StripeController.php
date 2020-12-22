@@ -36,9 +36,12 @@ class StripeController extends AbstractController
             $notification = $translator->trans('cart.message_compte');
             $this->addFlash('warning', $notification);
         }
-
-        $products = $orderClient->handleCartProducts();
-        $total = $orderClient->getTotal();
+        // Creation order et orderlines
+        $orderClient->handleCartProducts($this->getUser());
+        // Récuperation commande
+        $products = $orderClient->getProducts($this->getUser());
+//        dd($products);
+        $total = $orderClient->getTotal(true);
 
         $public_key = $this->getParameter('stripe_public_key');
         if ($request->isMethod('POST')) {

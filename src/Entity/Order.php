@@ -1,0 +1,121 @@
+<?php
+
+namespace App\Entity;
+
+use App\Entity\Traits\IdTrait;
+use App\Entity\Traits\NameTrait;
+use App\Entity\Traits\UpdatedTrait;
+use App\Entity\Traits\UserTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service_locator;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\Table(name="orders")
+ */
+class Order
+{
+    use IdTrait;
+    use NameTrait;
+    use UserTrait;
+    use UpdatedTrait;
+
+    const STATUS_CART =  'CART' ;
+    const STATUS_ORDER =  'ORDER' ;
+    const STATUS_PAYED =  'PAYED' ;
+    const STATUS_ERROR =  'ERROR' ;
+    const STATUS_ALL =  [
+        self::STATUS_CART => self::STATUS_CART,
+        self::STATUS_ORDER => self::STATUS_ORDER,
+        self::STATUS_PAYED => self::STATUS_PAYED,
+        self::STATUS_ERROR => self::STATUS_ERROR,
+    ] ;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orders")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $user;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $status;
+
+    /**
+     * @var OrderLine[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderLine",  mappedBy="order",  cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="product_order")
+     */
+    protected $order_lines;
+
+    public function __construct()
+    {
+        $this->order_lines = new ArrayCollection();
+        $this->status = self::STATUS_CART;
+        $this->updatedAt = new \DateTime("NOW");
+    }
+
+    public function __toString(): ?string
+    {
+        if(!is_null($this->name)){
+            return $this->name;
+        }
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        if(in_array(self::STATUS_ALL, $status)){
+            $this->status = $status;
+        }
+    }
+
+    public function addOrderLine(?OrderLine ...$orderLines): void
+    {
+        foreach ($orderLines as $orderLine) {
+            if (!$this->order_lines->contains($orderLine)) {
+                if (0 != $orderLine->getQuantity()) {
+                    $this->order_lines->add($orderLine);
+                    $orderLine->setOrder($this);
+                }
+            }
+        }
+    }
+
+    public function removeOrderLine(OrderLine $orderLine): void
+    {
+        $this->order_lines->removeElement($orderLine);
+        $orderLine->setOrder(null);
+    }
+
+    public function getOrderLines(): ?Collection
+    {
+//        foreach ($this->order_lines as $orderLine){
+//            $this->removeOrderLine($orderLine);
+//        }
+        return $this->order_lines ;
+    }
+
+
+
+
+}

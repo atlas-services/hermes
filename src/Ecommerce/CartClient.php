@@ -2,9 +2,6 @@
 
 namespace App\Ecommerce;
 
-
-use App\Entity\Cart;
-use App\Entity\CartProduct;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;

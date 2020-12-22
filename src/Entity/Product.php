@@ -31,12 +31,12 @@ class Product
     protected $post;
 
     /**
-     * @var CartProduct
+     * @var OrderLine
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\CartProduct", inversedBy="product")
+     * @ORM\OneToOne(targetEntity="App\Entity\OrderLine", inversedBy="product")
      * @ORM\JoinColumn(nullable=true)
      */
-    protected $cart_product;
+    protected $order_product;
 
     public function __toString(): ?string
     {

@@ -80,12 +80,12 @@ class User implements UserInterface
     private $menus;
 
     /**
-     * @var Cart[]|ArrayCollection
+     * @var Order[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Cart", mappedBy="user",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="cart_user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="order_user")
      */
-    private $carts;
+    private $orders;
 
     /**
      * @var Address[]|ArrayCollection
@@ -112,7 +112,7 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
         $this->sections = new ArrayCollection();
         $this->menus = new ArrayCollection();
-        $this->carts = new ArrayCollection();
+        $this->orders = new ArrayCollection();
         $this->addresses = new ArrayCollection();
     }
 

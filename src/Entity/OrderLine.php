@@ -8,16 +8,16 @@ use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity()
- * @ORM\Table(name="cartProduct")
+ * @ORM\Entity(repositoryClass="App\Repository\OrderLineRepository")
+ * @ORM\Table(name="orderLine")
  */
-class CartProduct
+class OrderLine
 {
     use IdTrait;
 
     /**
      * @var Product
-     * @ORM\OneToOne(targetEntity="App\Entity\Product",mappedBy="cart_product")
+     * @ORM\OneToOne(targetEntity="App\Entity\Product",mappedBy="order_product")
      */
     protected $product;
 
@@ -29,12 +29,12 @@ class CartProduct
     protected $quantity;
 
     /**
-     * @var Cart
+     * @var Order
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Cart", inversedBy="cart_products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="order_products")
      * @ORM\JoinColumn(nullable=true)
      */
-    protected $cart;
+    protected $order;
 
     public function __toString(): ?string
     {
@@ -77,19 +77,19 @@ class CartProduct
     }
 
     /**
-     * @return Cart
+     * @return Order
      */
-    public function getCart(): Cart
+    public function getOrder(): Order
     {
-        return $this->cart;
+        return $this->order;
     }
 
     /**
-     * @param Cart $cart
+     * @param Order $order
      */
-    public function setCart(?Cart $cart): void
+    public function setOrder(?Order $order): void
     {
-        $this->cart = $cart;
+        $this->order = $order;
     }
 
     /**
