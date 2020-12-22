@@ -2,6 +2,7 @@
 
 namespace App\Controller\Ecommerce\Admin;
 
+use App\Ecommerce\AddressClient;
 use App\Entity\Address;
 use App\Entity\Menu;
 use App\Entity\Sheet;
@@ -22,8 +23,10 @@ class AddressController extends AbstractController
     /**
      * @Route("/new", name="address_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, AddressClient $addressClient): Response
     {
+        $address_options = $addressClient->getAddress('fr-FR');
+        dd($address_options);
         $address = new Address();
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
