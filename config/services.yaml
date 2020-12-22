@@ -54,3 +54,19 @@ services:
         class: App\Ecommerce\StripeClient
         arguments: ['%stripe_secret_key%']
         autowire: true
+
+    CommerceGuys\Addressing\Country\CountryRepository:
+        class: CommerceGuys\Addressing\Country\CountryRepository
+        autowire: true
+
+    CommerceGuys\Addressing\AddressFormat\AddressFormatRepository:
+        class: CommerceGuys\Addressing\AddressFormat\AddressFormatRepository
+        autowire: true
+
+    CommerceGuys\Addressing\Subdivision\SubdivisionRepository:
+        class: CommerceGuys\Addressing\Subdivision\SubdivisionRepository
+        autowire: true
+
+    App\Ecommerce\AddressClient:
+        class: App\Ecommerce\AddressClient
+        autowire: true

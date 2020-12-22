@@ -88,6 +88,14 @@ class User implements UserInterface
     private $carts;
 
     /**
+     * @var Address[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="address_user")
+     */
+    private $addresses;
+
+    /**
      * @var string le token qui servira lors de l'oubli de mot de passe
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -97,7 +105,7 @@ class User implements UserInterface
      * @var string
      * @ORM\Column(type="string", length=3, nullable=true)
      */
-    protected $currency = "eur";
+    protected $currency = "EUR";
 
     public function __construct()
     {
@@ -105,6 +113,7 @@ class User implements UserInterface
         $this->sections = new ArrayCollection();
         $this->menus = new ArrayCollection();
         $this->carts = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
     }
 
     public function __toString()

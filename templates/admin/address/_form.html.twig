@@ -1,0 +1,6 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{{ form_start(form) }}
+        {{ form_row(form) }}
+    <button class="btn btn-primary mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ button_label|default('global.update'|trans()) }} </button>
+{#    {{ form_widget(form._token) }}#}
+{{ form_end(form, {'render_rest': true}) }}

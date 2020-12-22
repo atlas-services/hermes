@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Ecommerce\Admin;
 
 use App\Entity\Sheet;
 use App\Entity\User;

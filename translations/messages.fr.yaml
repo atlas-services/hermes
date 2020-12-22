@@ -342,6 +342,15 @@ transparent:
 ecommerce:
   label: Mes achats
 
+
+address:
+  list: Mes addresses
+  label: Addresse
+  additionalName: Nom
+  addresse1: Addresse 1
+  addresse2: Addresse 2
+
+
 cart:
   message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon panier

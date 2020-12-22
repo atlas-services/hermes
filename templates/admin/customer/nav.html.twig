@@ -34,6 +34,8 @@
                         <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
                             <a class="page-scroll nav-link "
                                href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}} </a>
+                          <a class="page-scroll nav-link "
+                               href="{{ path('address_index') }}"><i class="fa fa-address-book"></i> {{ 'address.list'|trans()}} </a>
                             <a class="page-scroll nav-link "
                                href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
                         </div>
