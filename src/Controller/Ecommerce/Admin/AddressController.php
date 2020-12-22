@@ -6,7 +6,8 @@ use App\Ecommerce\AddressClient;
 use App\Entity\Address;
 use App\Entity\Menu;
 use App\Entity\Sheet;
-use App\Form\Admin\AddressType;
+use App\Form\Admin\Ecommerce\AddressType;
+use App\Form\Admin\Ecommerce\AddressFRType;
 use App\Repository\AddressRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,13 +27,21 @@ class AddressController extends AbstractController
     public function new(Request $request, AddressClient $addressClient): Response
     {
         $address_options = $addressClient->getAddress('fr-FR');
+       
         $address = new Address();
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
             $address->setFamilyName($this->getUser()->getLastname());
             $address->setGivenName($this->getUser()->getFirstname());
         }
-        $form = $this->createForm(AddressType::class, $address);
+        
+        
+        if ('fr' == $request->getLocale()) {
+            $form = $this->createForm(AddressFRType::class, $address);
+        } else {
+            $form = $this->createForm(AddressType::class, $address);
+        }
+       
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
