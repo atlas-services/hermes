@@ -24,8 +24,12 @@ class OrderController extends AbstractController
      */
     public function index(OrderRepository $orderRepository): Response
     {
-
-        $orders = $orderRepository->findByUser($this->getUser());
+        if($this->isGranted('ROLE_ADMIN')){
+            $orders = $orderRepository->findAll();
+        }
+        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
+            $orders = $orderRepository->findByUser($this->getUser());
+        }
 
         return $this->render('admin/order/index.html.twig', [
             'orders' => $orders,
@@ -68,19 +72,16 @@ class OrderController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="order_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="order_delete")
      */
     public function delete(Request $request, Order $order): Response
     {
-        if(!$this->isGranted('ROLE_CUSTOMER')){
+        if(!$this->isGranted('ROLE_ADMIN')){
             $this->redirectToRoute('order_index');
         }
-
-        if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($order);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($order);
+        $entityManager->flush();
 
         return $this->redirectToRoute('order_index');
     }

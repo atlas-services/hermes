@@ -1,1 +1,1 @@
-{{ include('admin/_delete_form.html.twig', {'objet': 'global.delete_content'|trans() ~ ' "'~ order.givenName ~ '" ?', 'action': path('order_delete', {'id': order.id}), 'csrf_token_delete': csrf_token('delete' ~ order.id) }) }}
+{{ include('admin/_delete_form.html.twig', {'objet': 'global.delete_content'|trans() ~ ' "'~ order.name ~ '" ?', 'action': path('order_delete', {'id': order.id}), 'csrf_token_delete': csrf_token('delete' ~ order.id) }) }}
