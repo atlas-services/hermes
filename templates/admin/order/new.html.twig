@@ -1,0 +1,18 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'order.label'|trans() }}{% endblock %}
+
+{% block nav %}
+    <section id="section_top" class="container"></section>
+    {% include '/admin/customer/nav.html.twig' %}
+{% endblock nav %}
+
+{% block content %}
+    <a href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1 class="text-success">{{ 'order.label'|trans() }}</h1>
+
+    {{ include('admin/order/_form.html.twig') }}
+
+    <a href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    </div>
+{% endblock %}

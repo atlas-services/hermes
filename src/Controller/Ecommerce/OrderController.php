@@ -52,11 +52,9 @@ class OrderController extends AbstractController
 
         // Mise à jour order et raz du panier
         $orderClient->handleCartProducts($this->getUser());
-
-        $orderClient->updateOrderStatus($this->getUser(), Order::STATUS_CART, Order::STATUS_ORDER);
 //        dump($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_CART));
-//        dump($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_WAITING));
-//        dd($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_ORDER));
+//        dump($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_ORDER));
+        $orderClient->updateOrderStatus($this->getUser(), Order::STATUS_CART, Order::STATUS_ORDER);
         // Récuperation commande
         $products = $orderClient->getProducts($this->getUser(),Order::STATUS_ORDER);
 

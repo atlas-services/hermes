@@ -1,0 +1,35 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.show'|trans() }}{% endblock %}
+
+{% block nav %}
+    <section id="section_top" class="container"></section>
+    {% include '/admin/customer/nav.html.twig' %}
+{% endblock nav %}
+
+{% block content %}
+    <a href="{{ path('order_index'}}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>{{ 'global.show'|trans() }} {{ order.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            {% if is_granted('ROLE_CUSTOMER') %}
+            <tr>
+                <th>{{ 'global.name'|trans() }}</th>
+                <td>{{ order.name }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>{{ 'global.status'|trans() }}</th>
+                <td>{{ order.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    <a href="{{ path('order_edit') }}">edit</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('admin/order/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

@@ -365,7 +365,10 @@ order:
   message_compte: Afin de préparer votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   message_exists: Vous avez des commandes en cours, n'oublier pas de les finaliser ou de les annuler.</a>
   update_cart: Modifier mon panier
+  list: Mes commandes
   label: Ma commande
+  name: Nom
+  status: Statut
   stripe: Stripe
   product: Articles(s)
   price: Prix

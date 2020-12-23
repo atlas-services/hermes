@@ -47,7 +47,7 @@ class OrderClient
             $this->entityManager->persist($order);
             $this->entityManager->flush();
             // empty cart
-            if( 1 != $this->countOrderByUserAndStatus($user, Order::STATUS_ORDER)){
+            if( 1 == $this->countOrderByUserAndStatus($user, Order::STATUS_CART) && 0 == $this->countOrderByUserAndStatus($user, Order::STATUS_ORDER)){
                 $this->cartClient->emptyCart();
             }
         }

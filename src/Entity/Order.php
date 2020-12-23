@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\UpdatedTrait;
@@ -18,6 +19,7 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service_l
 class Order
 {
     use IdTrait;
+    use ActiveTrait;
     use NameTrait;
     use UserTrait;
     use UpdatedTrait;
@@ -28,6 +30,11 @@ class Order
     const STATUS_PAYED =  'PAYED' ;
     const STATUS_CANCEL =  'CANCEL' ;
     const STATUS_ERROR =  'ERROR' ;
+
+    const STATUS_CHANGE =  [
+        self::STATUS_WAITING => self::STATUS_WAITING,
+        self::STATUS_CANCEL => self::STATUS_CANCEL,
+    ] ;
 
     const STATUS_ALL =  [
         self::STATUS_CART => self::STATUS_CART,
