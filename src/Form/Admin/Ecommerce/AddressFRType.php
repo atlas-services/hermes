@@ -21,14 +21,13 @@ class AddressFRType extends AbstractType
         
         $builder
         ->add('active')
-        
+
         ->add('additionalName', TextType::class,
                  array('label' => "* Nom de l'adresse",
                        'attr' => array('class' => "form-control",
                                     'data-validation-required-message' => "Merci de saisir le nom de l'adresse",
                                     'required' => true)))
 
-         
           
             ->add('addressLine1', TextType::class,
                 array('label' => "* Addresse",
