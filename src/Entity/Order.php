@@ -24,12 +24,17 @@ class Order
 
     const STATUS_CART =  'CART' ;
     const STATUS_ORDER =  'ORDER' ;
+    const STATUS_WAITING =  'WAITING' ;
     const STATUS_PAYED =  'PAYED' ;
+    const STATUS_CANCEL =  'CANCEL' ;
     const STATUS_ERROR =  'ERROR' ;
+
     const STATUS_ALL =  [
         self::STATUS_CART => self::STATUS_CART,
         self::STATUS_ORDER => self::STATUS_ORDER,
+        self::STATUS_WAITING => self::STATUS_WAITING,
         self::STATUS_PAYED => self::STATUS_PAYED,
+        self::STATUS_CANCEL => self::STATUS_CANCEL,
         self::STATUS_ERROR => self::STATUS_ERROR,
     ] ;
 
@@ -84,7 +89,7 @@ class Order
      */
     public function setStatus(string $status): void
     {
-        if(in_array(self::STATUS_ALL, $status)){
+        if(in_array($status,self::STATUS_ALL)){
             $this->status = $status;
         }
     }

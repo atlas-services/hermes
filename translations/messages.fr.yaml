@@ -352,7 +352,6 @@ address:
 
 
 cart:
-  message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon panier
   add: Ajouter
   product: Article(s)
@@ -363,6 +362,8 @@ cart:
   delete: Supprimer
 
 order:
+  message_compte: Afin de préparer votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
+  message_exists: Vous avez des commandes en cours, n'oublier pas de les finaliser ou de les annuler.</a>
   update_cart: Modifier mon panier
   label: Ma commande
   stripe: Stripe
@@ -370,9 +371,11 @@ order:
   price: Prix
   unit_price: Prix Unitaire
   quantity: Quantité
+  delivery_price: Frais de livraison
   total: Total
 
 paiement:
+  message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon paiement
   done: Paiement effectué!
   stripe:

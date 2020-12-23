@@ -33,7 +33,7 @@ class StripeController extends AbstractController
     public function checkout(Request $request, Page $page, StripeClient $stripeClient, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
         if(!$this->isGranted('ROLE_CUSTOMER')){
-            $notification = $translator->trans('cart.message_compte');
+            $notification = $translator->trans('paiement.message_compte');
             $this->addFlash('warning', $notification);
         }
         // Creation order et orderlines
