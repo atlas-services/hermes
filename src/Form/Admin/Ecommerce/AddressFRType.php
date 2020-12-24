@@ -51,9 +51,9 @@ class AddressFRType extends AbstractType
             ->add('locality', ChoiceType::class,
                 array('label' => "* Ville",
                 'choices' => array( 
-                    '0'=> 1,
-                    '1'=> 2,
-                    '2'=> 3
+                    'Paris' => 0,
+                    'Plaisir' => 1,
+                    'Clamart' => 2
                 ),
                 'placeholder' => 'Veuillez sélectionner la ville'
             ))
@@ -61,9 +61,9 @@ class AddressFRType extends AbstractType
             ->add('postalCode', ChoiceType::class,
                 array('label' => "* Code postal",
                     'choices' => array( 
-                        '0'=> 1,
-                        '1'=> 2,
-                        '2'=> 3
+                        '75008' => 0,
+                        '78370' => 1,
+                        '92000' => 2
                     ),
                     'placeholder' => 'Veuillez sélectionner le code postal'
                 ))
