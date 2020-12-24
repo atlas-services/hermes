@@ -38,6 +38,22 @@ class Product
      */
     protected $order_product;
 
+    /**
+     * @return OrderLine
+     */
+    public function getOrderProduct(): OrderLine
+    {
+        return $this->order_product;
+    }
+
+    /**
+     * @param OrderLine $order_product
+     */
+    public function setOrderProduct(OrderLine $order_product): void
+    {
+        $this->order_product = $order_product;
+    }
+
     public function __toString(): ?string
     {
         if(!is_null($this->name)){

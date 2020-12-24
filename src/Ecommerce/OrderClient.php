@@ -38,6 +38,12 @@ class OrderClient
         return false;
     }
 
+    public function getCurrentOrderByUser($user)
+    {
+        $order =  $this->entityManager->getRepository(Order::class)->findOneBy([ 'user'=> $user, 'status'=> Order::STATUS_CURRENT]);
+        return $order;
+    }
+
     public function updateOrderStatus($user, $status_from = Order::STATUS_CART, $status_to = Order::STATUS_ORDER)
     {
 
@@ -47,7 +53,8 @@ class OrderClient
             $this->entityManager->persist($order);
             $this->entityManager->flush();
             // empty cart
-            if( 1 == $this->countOrderByUserAndStatus($user, Order::STATUS_CART) && 0 == $this->countOrderByUserAndStatus($user, Order::STATUS_ORDER)){
+//            if( 1 == $this->countOrderByUserAndStatus($user, Order::STATUS_CART) && 0 == $this->countOrderByUserAndStatus($user, Order::STATUS_ORDER)){
+            if( $order->getStatus() == Order::STATUS_PAYED){
                 $this->cartClient->emptyCart();
             }
         }
@@ -60,34 +67,65 @@ class OrderClient
 
     public function getProducts($user, $status = Order::STATUS_CART)
     {
-        $order =  $this->entityManager->getRepository(Order::class)->findBy(['user'=> $user, 'status'=> $status]);
+        $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status]);
+//        dump($order);
+//        foreach($order->getOrderLines() as $orderLine){
+//            dump($orderLine);
+//        }
+
         $orderLines = $this->entityManager->getRepository(OrderLine::class)->findByOrder($order);
         return $orderLines;
     }
 
     public function handleCartProducts($user)
     {
-        $bLine=false;
-        if (!$this->hasOrderByUserAndStatus($user, Order::STATUS_CART)){
-            $order = new Order();
+        if(!is_null($user)) {
+            $order = $this->getCurrentOrderByUser($user);
+            // gestion order status CART
+//            if ($this->hasOrderByUserAndStatus($user, Order::STATUS_CART) ) {
+//                $order = $this->getCartOrderByUser($user);
+//                $this->updateOrderStatus($user, Order::STATUS_CART, Order::STATUS_ORDER);
+//            }
+
+            // création order et orderLines
+            $cartProducts = $this->cartClient->getProducts();
+            if(!is_null($order)){
+                $this->handleOrder($user, $order, $cartProducts,false);
+            }
+            if(is_null($order)){
+                $order = new Order();
+                $this->handleOrder($user, $order, $cartProducts,true);
+            }
+
+        }
+    }
+
+    public function handleOrder($user, $order, $cartProducts, $add)
+    {
+        if ($add) {
             $order->setStatus(Order::STATUS_CART);
-            if(!is_null($user)){
-                $order->setName('order-' . $user->getFirstname(). '-'.rand(1 , 9999));
-                $order->setUser($user);
-                foreach($this->cartClient->getProducts() as $cartProduct){
-                    $orderLine = new OrderLine();
-                    $orderLine->setProduct($cartProduct['product']);
-                    $orderLine->setQuantity($cartProduct['quantity']);
-                    $orderLine->setOrder($order);
-                    $this->entityManager->persist($orderLine);
-                    $bLine= true;
-                }
-                if($bLine){
-                    $this->entityManager->persist($order);
-                    $this->entityManager->flush();
-                }
+            $order->setName('order-' . $user->getFirstname() . '-' . rand(1, 9999));
+            $order->setUser($user);
+        }
+        if (!$add) {
+            $order->setStatus(Order::STATUS_ORDER);
+            foreach($order->getOrderLines() as $orderLine){
+                $order->removeOrderLine($orderLine);
+                $this->entityManager->remove($orderLine);
             }
         }
+        foreach($cartProducts as $cartProduct){
+            $orderLine = new OrderLine();
+            $orderLine->setProduct($cartProduct['product']);
+            $orderLine->setQuantity($cartProduct['quantity']);
+            $orderLine->setOrder($order);
+            $this->entityManager->persist($orderLine);
+            $order->addOrderLine($orderLine);
+        }
+
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
     }
 
     public function getTotal($bDelivery = false)

@@ -31,6 +31,11 @@ class Order
     const STATUS_CANCEL =  'CANCEL' ;
     const STATUS_ERROR =  'ERROR' ;
 
+    const STATUS_CURRENT =  [
+        self::STATUS_CART => self::STATUS_CART,
+        self::STATUS_ORDER => self::STATUS_ORDER,
+    ] ;
+
     const STATUS_CHANGE =  [
         self::STATUS_WAITING => self::STATUS_WAITING,
         self::STATUS_CANCEL => self::STATUS_CANCEL,

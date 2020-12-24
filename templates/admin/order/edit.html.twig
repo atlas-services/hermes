@@ -15,6 +15,9 @@
     {% if is_granted('ROLE_ADMIN') %}
         {{ include('admin/order/_delete_form.html.twig') }}
     {% endif %}
+    {% if is_granted('ROLE_CUSTOMER') %}
+        {{ include('admin/order/_delete_form.html.twig') }}
+    {% endif %}
 
     <a href="{{ path('order_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 

@@ -31,7 +31,7 @@ class OrderLine
     /**
      * @var Order
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="order_products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="order_lines")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $order;
