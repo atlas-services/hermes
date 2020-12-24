@@ -82,25 +82,22 @@ class OrderClient
         if(!is_null($user)) {
             $order = $this->getCurrentOrderByUser($user);
             // gestion order status CART
-//            if ($this->hasOrderByUserAndStatus($user, Order::STATUS_CART) ) {
-//                $order = $this->getCartOrderByUser($user);
-//                $this->updateOrderStatus($user, Order::STATUS_CART, Order::STATUS_ORDER);
-//            }
-
-            // création order et orderLines
+            // création order et orderLines "CART"
             $cartProducts = $this->cartClient->getProducts();
-            if(!is_null($order)){
-                $this->handleOrder($user, $order, $cartProducts,false);
-            }
             if(is_null($order)){
                 $order = new Order();
                 $this->handleOrder($user, $order, $cartProducts,true);
             }
-
+            // mise à jour order et orderLines "CART"
+            if(!is_null($order)){
+                if ($this->hasOrderByUserAndStatus($user, Order::STATUS_CART) ) {
+                    $this->handleOrder($user, $order, $cartProducts,false);
+                }
+            }
         }
     }
 
-    public function handleOrder($user, $order, $cartProducts, $add)
+    public function handleOrder($user, $order, $cartProducts, $add, $status = Order::STATUS_CART)
     {
         if ($add) {
             $order->setStatus(Order::STATUS_CART);
@@ -108,7 +105,7 @@ class OrderClient
             $order->setUser($user);
         }
         if (!$add) {
-            $order->setStatus(Order::STATUS_ORDER);
+            $order->setStatus($status);
             foreach($order->getOrderLines() as $orderLine){
                 $order->removeOrderLine($orderLine);
                 $this->entityManager->remove($orderLine);

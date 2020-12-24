@@ -10,6 +10,7 @@ namespace App\Controller\Ecommerce;
 
 
 use App\Ecommerce\OrderClient;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Menu\Page;
 use App\Ecommerce\StripeClient;
@@ -37,11 +38,14 @@ class StripeController extends AbstractController
             $this->addFlash('warning', $notification);
         }
         // Creation order et orderlines
-        $orderClient->handleCartProducts($this->getUser());
-        // Récuperation commande
-        $products = $orderClient->getProducts($this->getUser());
-//        dd($products);
-        $total = $orderClient->getTotal(true);
+
+//        $orderClient->updateOrderStatus($this->getUser(),Order::STATUS_CART, Order::STATUS_ORDER);
+        // Récuperation de la commande en cours
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        $products = $order->getOrderLines();
+        $bDelivery = true;
+        $delivery_price = $orderClient->getDeliveryPrice($bDelivery);
+        $total = $orderClient->getTotal($bDelivery);
 
         $public_key = $this->getParameter('stripe_public_key');
         if ($request->isMethod('POST')) {
@@ -72,6 +76,7 @@ class StripeController extends AbstractController
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['APP_STRIPE_PK'] = $public_key;
+        $array['delivery_price'] = $delivery_price;
         $array['products'] = $products;
         $array['total'] = $total;
         return $this->render('front/base/ecommerce/paiement/stripe/index.html.twig', $array);

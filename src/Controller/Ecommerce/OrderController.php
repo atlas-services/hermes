@@ -53,10 +53,9 @@ class OrderController extends AbstractController
         // Mise à jour order et raz du panier
         $orderClient->handleCartProducts($this->getUser());
 
-        // Récuperation commande en cours
+        // Récuperation de la commande en cours
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
         $products = $order->getOrderLines();
-
 
         $bDelivery = true;
         $delivery_price = $orderClient->getDeliveryPrice($bDelivery);

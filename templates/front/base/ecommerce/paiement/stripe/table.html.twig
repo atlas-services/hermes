@@ -7,21 +7,21 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="col-xs-6 active">{{ 'cart.product'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.unit_price'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.quantity'|trans() }}</th>
-                        <th class="col-xs-3 active text-center">{{ 'cart.price'|trans() }}</th>
+                        <th class="col-xs-6 active">{{ 'order.product'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'order.unit_price'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'order.quantity'|trans() }}</th>
+                        <th class="col-xs-3 active text-center">{{ 'order.price'|trans() }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for cartproduct in products %}
+                    {% for orderLine in products %}
                         <tr class="bg-white ">
-                            <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
-                            <td class="col-xs-3 align-middle">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
+                            <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(orderLine.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ orderLine.product.name }} </th>
+                            <td class="col-xs-3 align-middle">{{ ((orderLine.product.price)/100)|format_currency(currency) }}</td>
                             <td class="col-xs-3 align-middle mx-auto">
-                                {{ cartproduct.quantity }}
+                                {{ orderLine.quantity }}
                             </td>
-                            <td id="price-{{ cartproduct.product.id }}" class="col-xs-3 align-middle">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
+                            <td id="price-{{ orderLine.product.id }}" class="col-xs-3 align-middle">{{ ((orderLine.price)/100)|format_currency(currency) }}</td>
                          </tr>
                     {% endfor %}
                     </tbody>
