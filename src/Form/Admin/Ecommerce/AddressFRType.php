@@ -8,20 +8,26 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 
 class AddressFRType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $optionAddress = $options['optionAddress'];
+        $country = array_flip($optionAddress['countryList']);
+        
         $builder
         ->add('active')
+
         ->add('additionalName', TextType::class,
                  array('label' => "* Nom de l'adresse",
                        'attr' => array('class' => "form-control",
                                     'data-validation-required-message' => "Merci de saisir le nom de l'adresse",
                                     'required' => true)))
 
-         
           
             ->add('addressLine1', TextType::class,
                 array('label' => "* Addresse",
@@ -34,20 +40,33 @@ class AddressFRType extends AbstractType
                 array('label' => "Addresse suite",
                     'attr' => array('class' => "form-control")))
 
-           /* ->add('countryCode', ChoiceType::class,
-                array('label' => "* Pays", ChoiceType::class, 
-                'attr' => array(
-                    'placeholder'       => 'Pays',
-                )))*/
-    
-            ->add('locality', TextType::class,
-            array('label' => "* Ville",
-                'attr' => array('class' => "form-control", 'required' => true)))
+                    
+            ->add('countryCode', ChoiceType::class,
+                array('label' => "* Pays",
+                    'choices' => $country,
+                    'placeholder' => 'Veuillez sélectionner le pays'
+                ))
 
-            ->add('postalCode', TextType::class,
-            array('label' => "* Code postal",
-                'attr' => array('class' => "form-control", 'required' => true)))
+              
+            ->add('locality', ChoiceType::class,
+                array('label' => "* Ville",
+                'choices' => array( 
+                    'Paris' => 0,
+                    'Plaisir' => 1,
+                    'Clamart' => 2
+                ),
+                'placeholder' => 'Veuillez sélectionner la ville'
+            ))
 
+            ->add('postalCode', ChoiceType::class,
+                array('label' => "* Code postal",
+                    'choices' => array( 
+                        '75008' => 0,
+                        '78370' => 1,
+                        '92000' => 2
+                    ),
+                    'placeholder' => 'Veuillez sélectionner le code postal'
+                ))
          
                     
             ->add('familyName', TextType::class,
@@ -58,20 +77,19 @@ class AddressFRType extends AbstractType
             array('label' => "* Prénom",
                 'attr' => array('class' => "form-control", 'required' => true)))
 
-
             ->add('organization', TextType::class,
                 array('label' => "Organisation",
                     'attr' => array('class' => "form-control")))
-
-           
-
         ;
+
+       
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Address::class,
+            'optionAddress' => 0
         ]);
     }
 }

@@ -27,7 +27,7 @@ class AddressController extends AbstractController
     public function new(Request $request, AddressClient $addressClient): Response
     {
         $address_options = $addressClient->getAddress('fr-FR');
-       
+     
         $address = new Address();
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
@@ -35,11 +35,11 @@ class AddressController extends AbstractController
             $address->setGivenName($this->getUser()->getFirstname());
         }
         
-        
         if ('fr' == $request->getLocale()) {
-            $form = $this->createForm(AddressFRType::class, $address);
+            $form = $this->createForm(AddressFRType::class, $address, array('optionAddress' => $address_options));
+            
         } else {
-            $form = $this->createForm(AddressType::class, $address);
+            $form = $this->createForm(AddressType::class, $address, array('optionAddress'=> $address_options));
         }
        
         $form->handleRequest($request);
