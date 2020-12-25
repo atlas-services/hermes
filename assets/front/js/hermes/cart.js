@@ -86,7 +86,7 @@ function handleProductCart($url, $id, $quantity,$type, $message) {
                 $('#addArticleModale').modal('show');
                 setTimeout(function(){
                     $('#addArticleModale').modal('hide')
-                }, 1200);
+                }, 500);
             // }
         }
     });

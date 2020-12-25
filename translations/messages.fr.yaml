@@ -352,6 +352,7 @@ address:
 
 
 cart:
+  back: Reprendre mes achats
   label: Mon panier
   add: Ajouter
   product: Article(s)
@@ -375,12 +376,15 @@ order:
   price: Prix
   unit_price: Prix Unitaire
   quantity: Quantité
+  delivery: Livraison
+  paiement: Paiement
   delivery_price: Frais de livraison
   total: Total
 
 paiement:
   message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon paiement
+  send: Envoyer
   done: Paiement effectué!
   stripe:
     label: Stripe

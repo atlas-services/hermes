@@ -126,9 +126,6 @@ class Order
 
     public function getOrderLines(): ?Collection
     {
-//        foreach ($this->order_lines as $orderLine){
-//            $this->removeOrderLine($orderLine);
-//        }
         return $this->order_lines ;
     }
 

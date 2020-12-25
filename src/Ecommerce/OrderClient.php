@@ -22,6 +22,11 @@ class OrderClient
         $this->cartClient = $cartClient;
     }
 
+    public function getCartClient()
+    {
+        return $this->cartClient;
+    }
+
     public function countOrderByUserAndStatus($user, $status = Order::STATUS_CART)
     {
         $order =  $this->entityManager->getRepository(Order::class)->findBy([ 'user'=> $user, 'status'=> $status]);
@@ -41,6 +46,9 @@ class OrderClient
     public function getCurrentOrderByUser($user)
     {
         $order =  $this->entityManager->getRepository(Order::class)->findOneBy([ 'user'=> $user, 'status'=> Order::STATUS_CURRENT]);
+        if(is_null($order)){
+            return $this->cartClient->getCart();
+        }
         return $order;
     }
 
@@ -68,11 +76,6 @@ class OrderClient
     public function getProducts($user, $status = Order::STATUS_CART)
     {
         $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status]);
-//        dump($order);
-//        foreach($order->getOrderLines() as $orderLine){
-//            dump($orderLine);
-//        }
-
         $orderLines = $this->entityManager->getRepository(OrderLine::class)->findByOrder($order);
         return $orderLines;
     }

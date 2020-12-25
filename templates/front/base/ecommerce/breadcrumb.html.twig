@@ -1,19 +1,23 @@
 <!-- Breadcrumb -->
-<div class="container" >
-    <div class="row no-gutters slider-text align-items-center justify-content-center">
-        <div class="col-md-12 pb-0 text-center">
-            <h1 class="breadcrumbs mt-3 mb-3">
-                <span>
-                    <a class="mx-3 btn {{ (breadcrumb == 'cart.label'|trans() ) ? 'btn-outline-dark'  : 'h-btn-outline-success' }}" href={{ path('cart') }}>  {{ 'cart.label'|trans() }} </a>
-                </span>
-                <span>
-                    <a class="mx-3 btn {{ (breadcrumb == 'order.label'|trans() )  ? 'btn-outline-dark'  : 'h-btn-outline-success' }}"  href={{ path('order') }}>  {{ 'order.label'|trans() }} </a>
-                </span>
-                <span>
-                    <a class="mx-3 btn {{ (breadcrumb == 'paiement.label'|trans() ) ? 'btn-outline-dark'  : 'h-btn-outline-success' }}" href={{ path('stripe_checkout') }}>  {{ 'paiement.label'|trans() }} </a>
-                </span>
-            </h1>
-        </div>
-    </div>
+<div class="container mt-3" >
+    <nav aria-label="breadcrumb">
+        <ol style="background-color: {{ bgcolor }}" class="breadcrumb ">
+            <li class="breadcrumb-item pr-5 pl-5 py-3 {{ (breadcrumb == 'cart.label'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'cart.label'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('cart') }} >{{ 'cart.label'|trans() }}</a></li>
+            {%  if(app.user is null) %}
+                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'user.sign_in'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'cart.label'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('app_login') }} >{{ 'user.sign_in'|trans() }}</a></li>
+                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.delivery'|trans() }}</li>
+                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.paiement'|trans() }}</li>
+            {% endif %}
+            {%  if(app.user is not null) %}
+                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('order_delivery') }} >{{ 'order.delivery'|trans() }}</a></li>
+                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('order_paiement') }} >{{ 'order.paiement'|trans() }}</a></li>
+                 {%  if(order is defined ) %}
+                     {%  if('ORDER' == order.status) %}
+                          <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'paiement.label'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'paiement.label'|trans() )  ? 'aria-current="page"'  : '' }}><a href="{{ path('stripe_checkout') }}">{{ 'paiement.label'|trans() }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </ol>
+    </nav>
 </div>
 
