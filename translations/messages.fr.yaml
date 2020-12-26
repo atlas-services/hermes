@@ -376,6 +376,7 @@ order:
   price: Prix
   unit_price: Prix Unitaire
   quantity: Quantité
+  account: Mon compte
   delivery: Livraison
   paiement: Paiement
   delivery_price: Frais de livraison
