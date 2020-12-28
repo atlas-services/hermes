@@ -4,6 +4,12 @@
 {% endif %}
 <div id="checkout-table" class="col-lg-12 mx-auto  mt-5 text-center">
     <div class="col-xs-12 col-sm-12 mx-auto">
+        {% if order is defined %}
+            {% if order.delivery is not null %}
+                <h3>{{ 'order.delivery_method'|trans() }} : {{ order.delivery.deliveryMethod }}</h3>
+                <h3>{{ 'order.delivery_address'|trans() }} : {{ order.delivery.name }}</h3>
+            {% endif %}
+        {% endif %}
         <table class="table table-bordered">
             <thead>
             <tr>

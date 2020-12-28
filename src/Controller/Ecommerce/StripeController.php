@@ -37,10 +37,8 @@ class StripeController extends AbstractController
             $notification = $translator->trans('paiement.message_compte');
             $this->addFlash('warning', $notification);
         }
-        // Creation order et orderlines
 
-//        $orderClient->updateOrderStatus($this->getUser(),Order::STATUS_CART, Order::STATUS_ORDER);
-        // Récuperation de la commande en cours
+//  /    // Récuperation de la commande en cours
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
         $products = $order->getOrderLines();
         $delivery_price = $order->getDelivery()->getPrice();

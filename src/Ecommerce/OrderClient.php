@@ -23,81 +23,52 @@ class OrderClient
         $this->cartClient = $cartClient;
     }
 
+    public function getCartClient()
+    {
+        return $this->cartClient;
+    }
+
+    public function getCurrentOrderByUser($user)
+    {
+        $order =  $this->entityManager->getRepository(Order::class)->findOneBy([ 'user'=> $user, 'status'=> Order::STATUS_CURRENT]);
+        return $order;
+    }
+
     public function redirect($user)
     {
         $order = $this->getCurrentOrderByUser($user);
         $status = $order->getStatus();
         switch ($status) {
             case Order::STATUS_CART:
-                $route_name = 'cart_index';
+                $route_name = 'order_delivery';
                 break;
-            case Order::STATUS_ORDER:
-                $route_name = 'order';
+            case Order::STATUS_ORDER_PREPARE_DELIVERY:
+                $route_name = 'order_paiement';
                 break;
         }
 
         return $route_name;
     }
 
-    public function getCartClient()
-    {
-        return $this->cartClient;
-    }
-
-    public function countOrderByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-        $order =  $this->entityManager->getRepository(Order::class)->findBy([ 'user'=> $user, 'status'=> $status]);
-
-        return count($order);
-    }
-
-    public function hasOrderByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-        $order =  $this->entityManager->getRepository(Order::class)->findBy([ 'user'=> $user, 'status'=> $status]);
-        if(count($order) > 0){
-            return true;
-        }
-        return false;
-    }
-
-    public function getCurrentOrderByUser($user)
-    {
-        $order =  $this->entityManager->getRepository(Order::class)->findOneBy([ 'user'=> $user, 'status'=> Order::STATUS_CURRENT]);
-//        if(is_null($order)){
-//            return $this->cartClient->getCart();
-//        }
-        return $order;
-    }
-
-    public function updateOrderStatus($user, $status_from = Order::STATUS_CART, $status_to = Order::STATUS_ORDER)
+    /*
+     * @todo : delete?
+     */
+    public function updateOrderStatus($user, $status_from = Order::STATUS_CART, $status_to = Order::STATUS_ORDER_PREPARE_DELIVERY)
     {
 
         $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status_from]);
-        if(!is_null($order)){
+        if($order instanceof Order ){
             $order->setStatus($status_to);
             $this->entityManager->persist($order);
             $this->entityManager->flush();
             // empty cart
-//            if( 1 == $this->countOrderByUserAndStatus($user, Order::STATUS_CART) && 0 == $this->countOrderByUserAndStatus($user, Order::STATUS_ORDER)){
             if( $order->getStatus() == Order::STATUS_PAYED){
                 $this->cartClient->emptyCart();
             }
         }
     }
 
-    public function getOrdersByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-       return  $this->entityManager->getRepository(Order::class)->findBy(['user'=> $user, 'status'=> $status]);
-    }
-
-    public function getProducts($user, $status = Order::STATUS_CART)
-    {
-        $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status]);
-        $orderLines = $this->entityManager->getRepository(OrderLine::class)->findByOrder($order);
-        return $orderLines;
-    }
-
-    public function handleCartProducts($user)
+    public function handleCartProducts($user,$status = Order::STATUS_CART)
     {
         if(!is_null($user)) {
             $order = $this->getCurrentOrderByUser($user);
@@ -106,9 +77,8 @@ class OrderClient
             $cartProducts = $this->cartClient->getProducts();
             // mise à jour order et orderLines "CART"
             if($order instanceof Order){
-//                if ($this->hasOrderByUserAndStatus($user, Order::STATUS_CART) ) {
                 if (in_array($order->getStatus(), Order::STATUS_CURRENT) ) {
-                    $this->handleOrder($user, $order, $cartProducts,false);
+                    $this->handleOrder($user, $order, $cartProducts,false, $status);
                 }
             }
             if(is_null($order)){
@@ -154,11 +124,21 @@ class OrderClient
         if(Delivery::DELIVERY_EXPRESS ==  $delivery->getDeliveryMethod()){
             $delivery->setPrice(54321);
         }
+        if(is_null($delivery->getName())){
+            $delivery->setName($delivery->getDeliveryMethod() . '-' . $order->getId());
+        }
         $order->setDelivery($delivery);
         $order->setStatus(Order::STATUS_ORDER_PREPARE_DELIVERY);
         $this->entityManager->persist($order);
         $this->entityManager->flush();
 
+    }
+
+    public function getProducts($user, $status = Order::STATUS_CART)
+    {
+        $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status]);
+        $orderLines = $this->entityManager->getRepository(OrderLine::class)->findByOrder($order);
+        return $orderLines;
     }
 
     public function getTotal($user)
@@ -182,6 +162,9 @@ class OrderClient
 
     }
 
+    /*
+     * @todo : delete?
+     */
     public function updateOrdersStatusByUser($user, $status_from = Order::STATUS_ORDER, $status_to = Order::STATUS_WAITING)
     {
         $orders = $this->getOrdersByUserAndStatus($user,$status_from);
@@ -192,6 +175,9 @@ class OrderClient
         $this->entityManager->flush();
     }
 
+    /*
+     * @todo : delete?
+     */
     public function emptyOrderByUserAndStatus($user, $status = Order::STATUS_CART)
     {
         $orders = $this->getOrdersByUserAndStatus($user,$status);
@@ -199,6 +185,14 @@ class OrderClient
             $this->entityManager->remove($order);
         }
         $this->entityManager->flush();
+    }
+
+    /*
+     * @todo : delete?
+     */
+    public function getOrdersByUserAndStatus($user, $status = Order::STATUS_CART)
+    {
+        return  $this->entityManager->getRepository(Order::class)->findBy(['user'=> $user, 'status'=> $status]);
     }
 
     public function emptyCart()
