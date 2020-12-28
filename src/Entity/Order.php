@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
+use App\Entity\Traits\PriceTrait;
 use App\Entity\Traits\UpdatedTrait;
 use App\Entity\Traits\UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,10 +23,13 @@ class Order
     use ActiveTrait;
     use NameTrait;
     use UserTrait;
+    use PriceTrait;
     use UpdatedTrait;
 
     const STATUS_CART =  'CART' ;
     const STATUS_ORDER =  'ORDER' ;
+    const STATUS_ORDER_PREPARE_DELIVERY =  'ORDER_PREPARE_DELIVERY' ;
+    const STATUS_ORDER_PREPARE_PAIEMENT =  'ORDER_PREPARE_PAIEMENT' ;
     const STATUS_WAITING =  'WAITING' ;
     const STATUS_PAYED =  'PAYED' ;
     const STATUS_CANCEL =  'CANCEL' ;
@@ -34,6 +38,8 @@ class Order
     const STATUS_CURRENT =  [
         self::STATUS_CART => self::STATUS_CART,
         self::STATUS_ORDER => self::STATUS_ORDER,
+        self::STATUS_ORDER_PREPARE_DELIVERY => self::STATUS_ORDER_PREPARE_DELIVERY,
+        self::STATUS_ORDER_PREPARE_PAIEMENT => self::STATUS_ORDER_PREPARE_PAIEMENT,
     ] ;
 
     const STATUS_CHANGE =  [
@@ -44,6 +50,8 @@ class Order
     const STATUS_ALL =  [
         self::STATUS_CART => self::STATUS_CART,
         self::STATUS_ORDER => self::STATUS_ORDER,
+        self::STATUS_ORDER_PREPARE_DELIVERY => self::STATUS_ORDER_PREPARE_DELIVERY,
+        self::STATUS_ORDER_PREPARE_PAIEMENT => self::STATUS_ORDER_PREPARE_PAIEMENT,
         self::STATUS_WAITING => self::STATUS_WAITING,
         self::STATUS_PAYED => self::STATUS_PAYED,
         self::STATUS_CANCEL => self::STATUS_CANCEL,
@@ -72,6 +80,14 @@ class Order
      * @ORM\JoinTable(name="product_order")
      */
     protected $order_lines;
+
+    /**
+     * @var Delivery
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Delivery", inversedBy="orders",cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $delivery;
 
     public function __construct()
     {
@@ -129,7 +145,20 @@ class Order
         return $this->order_lines ;
     }
 
+    /**
+     * @return Delivery
+     */
+    public function getDelivery(): ?Delivery
+    {
+        return $this->delivery;
+    }
 
-
+    /**
+     * @param Delivery $delivery
+     */
+    public function setDelivery(Delivery $delivery): void
+    {
+        $this->delivery = $delivery;
+    }
 
 }

@@ -15,7 +15,7 @@ trait PriceTrait
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Length(max=5)
      */
-    protected $price = 1 ;
+    protected $price ;
 
     public function getPrice(): ?int
     {

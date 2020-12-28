@@ -3,6 +3,7 @@
 namespace App\Ecommerce;
 
 
+use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\OrderLine;
 use App\Entity\Product;
@@ -20,6 +21,22 @@ class OrderClient
     {
         $this->entityManager = $entityManager;
         $this->cartClient = $cartClient;
+    }
+
+    public function redirect($user)
+    {
+        $order = $this->getCurrentOrderByUser($user);
+        $status = $order->getStatus();
+        switch ($status) {
+            case Order::STATUS_CART:
+                $route_name = 'cart_index';
+                break;
+            case Order::STATUS_ORDER:
+                $route_name = 'order';
+                break;
+        }
+
+        return $route_name;
     }
 
     public function getCartClient()
@@ -46,9 +63,9 @@ class OrderClient
     public function getCurrentOrderByUser($user)
     {
         $order =  $this->entityManager->getRepository(Order::class)->findOneBy([ 'user'=> $user, 'status'=> Order::STATUS_CURRENT]);
-        if(is_null($order)){
-            return $this->cartClient->getCart();
-        }
+//        if(is_null($order)){
+//            return $this->cartClient->getCart();
+//        }
         return $order;
     }
 
@@ -87,15 +104,16 @@ class OrderClient
             // gestion order status CART
             // création order et orderLines "CART"
             $cartProducts = $this->cartClient->getProducts();
+            // mise à jour order et orderLines "CART"
+            if($order instanceof Order){
+//                if ($this->hasOrderByUserAndStatus($user, Order::STATUS_CART) ) {
+                if (in_array($order->getStatus(), Order::STATUS_CURRENT) ) {
+                    $this->handleOrder($user, $order, $cartProducts,false);
+                }
+            }
             if(is_null($order)){
                 $order = new Order();
                 $this->handleOrder($user, $order, $cartProducts,true);
-            }
-            // mise à jour order et orderLines "CART"
-            if(!is_null($order)){
-                if ($this->hasOrderByUserAndStatus($user, Order::STATUS_CART) ) {
-                    $this->handleOrder($user, $order, $cartProducts,false);
-                }
             }
         }
     }
@@ -128,27 +146,39 @@ class OrderClient
 
     }
 
-    public function getTotal($bDelivery = false)
+    public function handleDeliveryOrder($order, $delivery)
+    {
+        if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
+            $delivery->setPrice(12345);
+        }
+        if(Delivery::DELIVERY_EXPRESS ==  $delivery->getDeliveryMethod()){
+            $delivery->setPrice(54321);
+        }
+        $order->setDelivery($delivery);
+        $order->setStatus(Order::STATUS_ORDER_PREPARE_DELIVERY);
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
+    }
+
+    public function getTotal($user)
     {
         $total = 0;
+        $delivery_price = 0;
 
-        $delivery = $this->getDeliveryPrice($bDelivery);
+        $order = $this->getCurrentOrderByUser($user);
+
+        if($order instanceof Order){
+            if($order->getDelivery() instanceof Delivery){
+                $delivery_price = $order->getDelivery()->getPrice();
+            }
+        }
 
         $cart_total = $this->cartClient->getTotal();
 
-        $total = $cart_total + $delivery;
+        $total = $cart_total + $delivery_price;
 
         return $total;
-
-    }
-    
-    public function getDeliveryPrice($bDelivery = false)
-    {
-        $delivery = 0;
-        if(true == $bDelivery){
-            $delivery = 10000;
-        }
-        return $delivery;
 
     }
 

@@ -21,7 +21,7 @@ class CustomerController extends AbstractController
     {
         $referer = $request->headers->get('referer'); // get the referer
         if(false == strpos($referer, 'login')){
-            return $this->redirectToRoute('order_delivery');
+            return $this->redirectToRoute('order_account');
         }
         $array = [];
 

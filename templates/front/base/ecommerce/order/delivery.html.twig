@@ -10,6 +10,11 @@
                 </div>
             {% endfor %}
             {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.delivery'|trans()} %}
+            {% form_theme form 'admin/form/theme_posts.html.twig' %}
+            {{ form_start(form) }}
+            {{ form_row(form) }}
+                <button class="btn btn-primary mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ button_label|default('global.update'|trans()) }} </button>
+            {{ form_end(form, {'render_rest': true}) }}
             {% include 'front/base/ecommerce/order/table.html.twig' %}
         </div>
     </div>

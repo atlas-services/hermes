@@ -378,6 +378,7 @@ order:
   quantity: Quantité
   account: Mon compte
   delivery: Livraison
+  delivery_method: Mode de livraison
   paiement: Paiement
   delivery_price: Frais de livraison
   total: Total

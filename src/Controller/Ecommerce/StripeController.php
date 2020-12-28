@@ -43,9 +43,8 @@ class StripeController extends AbstractController
         // Récuperation de la commande en cours
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
         $products = $order->getOrderLines();
-        $bDelivery = true;
-        $delivery_price = $orderClient->getDeliveryPrice($bDelivery);
-        $total = $orderClient->getTotal($bDelivery);
+        $delivery_price = $order->getDelivery()->getPrice();
+        $total = $orderClient->getTotal($this->getUser());
 
         $public_key = $this->getParameter('stripe_public_key');
         if ($request->isMethod('POST')) {
