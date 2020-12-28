@@ -136,8 +136,7 @@ class OrderClient
 
     public function handlePaiementOrder($order)
     {
-
-        $order->setStatus(Order::STATUS_ORDER_PREPARE_PAIEMENT);
+        $order->setStatus(Order::STATUS_PAYED);
         $this->entityManager->persist($order);
         $this->entityManager->flush();
 
