@@ -13,9 +13,9 @@
             {% form_theme form 'admin/form/theme_posts.html.twig' %}
                 {{ form_start(form) }}
                 {{ form_row(form.deliveryMethod) }}
-            <div class="mx-auto text-center">
-                <button class="btn btn-primary mt-4 col-12 col-lg-2 mx-auto" type="submit"><i class="fa fa-address-book"></i> {{ 'order.delivery'|trans()}} </button>
-            </div>
+                <div class="mx-auto text-center">
+                    <button class="btn btn-primary mt-4 col-12 col-lg-2 mx-auto" type="submit"><i class="fa fa-address-book"></i> {{ 'order.delivery'|trans()}} </button>
+                </div>
             {{ form_widget(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
 {#            {% include 'front/base/ecommerce/order/table.html.twig' %}#}

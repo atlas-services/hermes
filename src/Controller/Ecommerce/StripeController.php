@@ -84,6 +84,8 @@ class StripeController extends AbstractController
             $orderClient->emptyCart();
             $notification = $translator->trans('paiement.done');
             $this->addFlash('success', $notification);
+
+            $orderClient->handlePaiementOrder($order);
             return $this->redirect('/');
         }
 

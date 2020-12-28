@@ -21,7 +21,7 @@
                 {{ message }}
             </div>
         {% endfor %}
-
+        {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.account'|trans()} %}
 {#        <h1 class="h3 mb-5 font-weight-normal h-text-success text-center">{{ 'user.admin'|trans() }}</h1>#}
         <div class="row col-12 col-lg-12  mx-auto">
             {% if error %}
@@ -97,8 +97,7 @@
                         {{ message|raw }}
                     </div>
                 {% endfor %}
-                {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.account'|trans()} %}
-                {% include 'front/base/ecommerce/order/table.html.twig' %}
+{#                {% include 'front/base/ecommerce/order/table.html.twig' %}#}
             </div>
         </div>
 

@@ -134,6 +134,15 @@ class OrderClient
 
     }
 
+    public function handlePaiementOrder($order)
+    {
+
+        $order->setStatus(Order::STATUS_ORDER_PREPARE_PAIEMENT);
+        $this->entityManager->persist($order);
+        $this->entityManager->flush();
+
+    }
+
     public function getProducts($user, $status = Order::STATUS_CART)
     {
         $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status]);
