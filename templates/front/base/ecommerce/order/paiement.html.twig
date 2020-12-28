@@ -10,6 +10,13 @@
                 </div>
             {% endfor %}
             {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.paiement'|trans()} %}
+            {% if order is defined %}
+                {% if order.delivery is not null %}
+                    <h3>{{ 'order.delivery_method'|trans() }} : {{ order.delivery.deliveryMethod }}</h3>
+                    <h3>{{ 'order.delivery_address'|trans() }} : {{ order.delivery.name }}</h3>
+                    <a class="btn h-btn-outline-success" href="{{ path('stripe_checkout') }}">{{ 'paiement.stripe.checkout'|trans() }}</a>
+                {% endif %}
+            {% endif %}
             {% include 'front/base/ecommerce/order/table.html.twig' %}
         </div>
     </div>

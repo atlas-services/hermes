@@ -89,7 +89,6 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         // Récuperation de la commande en cours
-        // @todo : gestion delivery form
 
         if ($form->isSubmitted() && $form->isValid()) {
             $delivery = $form->getData();
@@ -126,14 +125,10 @@ class OrderController extends AbstractController
         if(!$this->isGranted('ROLE_CUSTOMER')){
             return $this->redirectToRoute('cart');
         }
+
         if(0 == $orderClient->getTotal($this->getUser())){
             $orderClient->emptyCart();
             return $this->redirect('/');
-        }
-
-        if(!$this->isGranted('ROLE_CUSTOMER')){
-            $notification = $translator->trans('order.message_compte');
-            $this->addFlash('warning', $notification);
         }
 
         // Mise à jour order et raz du panier
@@ -147,58 +142,14 @@ class OrderController extends AbstractController
             $orderLines = $order->getOrderLines();
         }
 
-        $delivery_price = $order->getDelivery()->getPrice();
         $total = $orderClient->getTotal($this->getUser());
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['order'] = $order;
         $array['products'] = $orderLines ?? $products;
-        $array['delivery_price'] = $delivery_price;
         $array['total'] = $total;
         return $this->render('front/base/ecommerce/order/paiement.html.twig', $array);
 
     }
-
-//    /**
-//     * @Route({
-//     * "fr": "/ma/commande",
-//     * "en": "/my/order"
-//     * },
-//     * name="order", methods={"GET|POST"})
-//     */
-//    public function myorder(Request $request, Page $page, OrderClient $orderClient, TranslatorInterface $translator): Response
-//    {
-//
-//        if(0 == $orderClient->getTotal($this->getUser())){
-//            $orderClient->emptyCart();
-//            return $this->redirect('/');
-//        }
-//
-//        if(!$this->isGranted('ROLE_CUSTOMER')){
-//            $notification = $translator->trans('order.message_compte');
-//            $this->addFlash('warning', $notification);
-//        }
-//
-//        // Mise à jour order et raz du panier
-//        $orderClient->handleCartProducts($this->getUser());
-//
-//        // Récuperation de la commande en cours
-//        $order = $orderClient->getCurrentOrderByUser($this->getUser());
-//        if(is_object($order)){
-//            $orderLines = $order->getOrderLines();
-//        }else{
-//            $products = $orderClient->getCartClient()->getProducts();
-//        }
-//
-//        $total = $orderClient->getTotal($this->getUser());
-//
-//        $array = $page->getActiveMenu('accueil','accueil');
-//        $array['order'] = $order;
-//        $array['products'] = $orderLines ?? $products;
-//        $array['total'] = $total;
-//        return $this->render('front/base/ecommerce/order/index.html.twig', $array);
-//
-//    }
-
 
 }
