@@ -142,12 +142,14 @@ class OrderController extends AbstractController
             $orderLines = $order->getOrderLines();
         }
 
+        $stripe_public_key = $this->getParameter('stripe_public_key');
         $total = $orderClient->getTotal($this->getUser());
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['order'] = $order;
         $array['products'] = $orderLines ?? $products;
         $array['total'] = $total;
+        $array['APP_STRIPE_PK'] = $stripe_public_key;
         return $this->render('front/base/ecommerce/order/paiement.html.twig', $array);
 
     }

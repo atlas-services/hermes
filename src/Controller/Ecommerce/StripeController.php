@@ -39,9 +39,9 @@ class StripeController extends AbstractController
             $this->addFlash('warning', $notification);
         }
 
-//  /    // Récuperation de la commande en cours
-        // Mise à jour order et raz du panier
-        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_DELIVERY);
+        // Récuperation de la commande en cours
+        // Mise à jour order
+        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_PAIEMENT);
 
         // Récuperation de la commande en cours
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
@@ -72,13 +72,23 @@ class StripeController extends AbstractController
                 );
             }
             if($order->getDelivery() instanceof Delivery){
-                $delivery_name = $translator->trans('order.delivery_price') ;
-                $stripeClient->createInvoiceItem(
-                    $order->getDelivery()->getPrice() ,
-                    1 ,
-                    $user,
-                    $delivery_name . '('. $order->getDelivery()->getName() . ')',
-                );
+                if(0 != $order->getDelivery()->getPrice()){
+                    $delivery_name = $translator->trans('order.delivery_price') ;
+                    $stripeClient->createInvoiceItem(
+                        $order->getDelivery()->getPrice() ,
+                        1 ,
+                        $user,
+                        $delivery_name . '('. $order->getDelivery()->getName() . ')',
+                    );
+                }else{
+                    $delivery_name = $translator->trans('order.delivery_free') ;
+                    $stripeClient->createInvoiceItem(
+                        0 ,
+                        1 ,
+                        $user,
+                        $delivery_name ,
+                    );
+                }
             }
             $stripeClient->createInvoice($user, true);
             $orderClient->emptyCart();
@@ -88,14 +98,6 @@ class StripeController extends AbstractController
             $orderClient->handlePaiementOrder($order);
             return $this->redirect('/');
         }
-
-        $total = $orderClient->getTotal($this->getUser());
-        $array = $page->getActiveMenu('accueil','accueil');
-        $array['APP_STRIPE_PK'] = $public_key;
-        $array['order'] = $order;
-        $array['products'] = $orderLines ?? $products;
-        $array['total'] = $total;
-        return $this->render('front/base/ecommerce/paiement/stripe/index.html.twig', $array);
 
     }
 

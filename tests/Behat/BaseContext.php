@@ -35,6 +35,17 @@ class BaseContext extends MinkContext implements Context, SnippetAcceptingContex
     }
 
     /**
+     * @Given I am logged in as a customer
+     */
+    public function iAmLoggedInAsACustomer()
+    {
+        $this->visitPath('/mon/compte');
+        $this->fillField('email', 'customer@yopmail.com');
+        $this->fillField('password', 'toto');
+        $this->pressButton('Se connecter');
+    }
+
+    /**
      * Waits a while, for debugging.
      *
      * @param int $seconds
@@ -173,6 +184,18 @@ JS;
             }
         }
         else throw new Exception("File is not found at the given location");
+    }
+
+    /**
+     * @When /^I click on the link by id "([^"]*)"$/
+     */
+    public function iClickOnOnTheLinkById($linkId)
+    {
+        /** @var $row \Behat\Mink\Element\NodeElement */
+        $linkEl = $this->getSession()->getPage()->find('css', 'a#'.$linkId);
+        $href = $linkEl->getAttribute('href');
+        $linkEl->click();
+
     }
 
 }

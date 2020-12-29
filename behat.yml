@@ -40,6 +40,9 @@ default:
         post-error:
             paths:    [features/error/post ]
             contexts: [App\Tests\Behat\Admin\FeatureContext]
+        ecommerce-tunnel:
+            paths:    [features/front/ecommerce ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
     extensions:
         FriendsOfBehat\SymfonyExtension:
 #            bootstrap: features/bootstrap/bootstrap.php

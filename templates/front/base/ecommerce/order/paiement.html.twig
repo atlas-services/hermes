@@ -17,9 +17,7 @@
                 {% endif %}
             {% endif %}
             {% include 'front/base/ecommerce/order/table.html.twig' %}
-            <div class="mx-auto text-center">
-                <a class="btn h-btn-outline-success" href="{{ path('stripe_checkout') }}">{{ 'paiement.stripe.checkout'|trans() }}</a>
-            </div>
+            {% include 'front/base/ecommerce/paiement/checkout.html.twig' %}
         </div>
     </div>
 {% endblock %}
