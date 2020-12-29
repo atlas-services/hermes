@@ -8,6 +8,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\MinkExtension\Context\MinkContext;
+use Stripe\Exception\InvalidArgumentException;
 
 /**
  * This context class contains the definitions of the steps used by the demo
@@ -18,7 +19,12 @@ use Behat\MinkExtension\Context\MinkContext;
 class BaseContext extends MinkContext implements Context, SnippetAcceptingContext
 {
 
-    const CARDS = [1 => '42424242424242'];
+    const CARDS = [
+        'stripe_card_number' => '424242424242424242',
+        'stripe_mm_yy' => '1224',
+        'stripe_cvv' => '122',
+        'stripe_zip_code' => '94800',
+    ];
 
     private $content = [
         'content_pizzas' => "Content pizza",
@@ -42,7 +48,7 @@ class BaseContext extends MinkContext implements Context, SnippetAcceptingContex
     public function iAmLoggedInAsACustomer()
     {
         $this->visitPath('/mon/compte');
-        $this->fillField('email', 'customer@yopmail.com');
+        $this->fillField('email', 'customer_stripe@yopmail.com');
         $this->fillField('password', 'toto');
         $this->pressButton('Se connecter');
     }
@@ -205,36 +211,41 @@ JS;
      */
     public function iFillStripeCreditCardInformationsWithCard(int $card = 0)
     {
-//        $this->switchToIFrame('iframe[name^="__privateStripeFrame"]');
-//        $this->switchToIFrame('iframe[name^="stripe_checkout_app"]');
-        $this->switchToIFrame('iframe');
-        $this->fillField('cardnumber', self::CARDS[$card]);
+        $this->getSession()->getDriver()->switchToIFrame(0);
+        $page = $this->getSession()->getPage();
+        $stripeInputCardNumber = $page->findField('Numéro de carte'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputCardNumber->setValue(self::CARDS['stripe_card_number']);
+        $stripeInputMMAA = $page->findField('MM / AA'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputMMAA->setValue(self::CARDS['stripe_mm_yy']);
+        $stripeInputCVV = $page->findField('CVV'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputCVV->setValue(self::CARDS['stripe_cvv']);
+        $stripeInputZipCode = $page->findField('ZIP Code'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputZipCode->setValue(self::CARDS['stripe_zip_code']);
+
+        $stripeInputButton = $page->find('css', 'button');
+        $stripeInputButton->click();
+
+        // Switch Back to Main Window
+        $this->getSession()->getDriver()->switchToIFrame(null);
+
     }
 
-    /**
-     * @Given /^I switch to iframe "([^"]*)"$/
-     */
-    public function switchToIFrame(string $locator)
-    {
-        $found = false;
-        $selector = '/' === $locator[0] ? 'xpath' : 'css';
-        $iframes = $this->getSession()->getPage()->findAll($selector, $locator);
+    public function switchToIFrame($iframeSelector){
 
-        foreach ($iframes as $iframe) {
-            try {
-                if ($name = $iframe->getAttribute('name')) {
-                    $this->getSession()->getDriver()->switchToIFrame($name);
-                    $found = true;
-                    break;
-                }
-            } catch (Exception $e) {
-                //ignoring
-            }
+        $function = <<<JS
+            (function(){
+                 var iframe = document.querySelector("$iframeSelector");
+                 iframe.name = "stripe_checkout_app";
+            })()
+JS;
+        try{
+            $this->getSession()->executeScript($function);
+        }catch (Exception $e){
+            print_r($e->getMessage());
+            throw new \Exception("Element $iframeSelector was NOT found.".PHP_EOL . $e->getMessage());
         }
 
-        if (!$found) {
-            throw new InvalidArgumentExceptio(sprintf('Could not evaluate CSS Selector: "%s"', $locator));
-        }
+        $this->getSession()->getDriver()->switchToIFrame("stripe_checkout_app");
     }
 
 }
