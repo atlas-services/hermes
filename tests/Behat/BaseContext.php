@@ -18,6 +18,8 @@ use Behat\MinkExtension\Context\MinkContext;
 class BaseContext extends MinkContext implements Context, SnippetAcceptingContext
 {
 
+    const CARDS = [1 => '42424242424242'];
+
     private $content = [
         'content_pizzas' => "Content pizza",
         'content_glaces' => 'mon contenu glaces',
@@ -196,6 +198,43 @@ JS;
         $href = $linkEl->getAttribute('href');
         $linkEl->click();
 
+    }
+
+    /**
+     * @Then I fill stripe credit card informations with card :card
+     */
+    public function iFillStripeCreditCardInformationsWithCard(int $card = 0)
+    {
+//        $this->switchToIFrame('iframe[name^="__privateStripeFrame"]');
+//        $this->switchToIFrame('iframe[name^="stripe_checkout_app"]');
+        $this->switchToIFrame('iframe');
+        $this->fillField('cardnumber', self::CARDS[$card]);
+    }
+
+    /**
+     * @Given /^I switch to iframe "([^"]*)"$/
+     */
+    public function switchToIFrame(string $locator)
+    {
+        $found = false;
+        $selector = '/' === $locator[0] ? 'xpath' : 'css';
+        $iframes = $this->getSession()->getPage()->findAll($selector, $locator);
+
+        foreach ($iframes as $iframe) {
+            try {
+                if ($name = $iframe->getAttribute('name')) {
+                    $this->getSession()->getDriver()->switchToIFrame($name);
+                    $found = true;
+                    break;
+                }
+            } catch (Exception $e) {
+                //ignoring
+            }
+        }
+
+        if (!$found) {
+            throw new InvalidArgumentExceptio(sprintf('Could not evaluate CSS Selector: "%s"', $locator));
+        }
     }
 
 }

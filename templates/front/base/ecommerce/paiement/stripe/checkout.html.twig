@@ -1,1 +1,17 @@
-{% include 'front/base/ecommerce/paiement/stripe/checkout.html.twig' %}
+{% if is_granted('ROLE_CUSTOMER') and not is_granted('ROLE_ADMIN') %}
+        <form id="checkout-stripe" class="col-xs-12 col-sm-6 mx-auto" action="{{ path('stripe_checkout') }}" method="POST">
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-label="{{ 'paiement.stripe.checkout'|trans()  }}"
+                    data-email="{{ app.user.email }}"
+                    data-description="{{ 'paiement.stripe.label'|trans()  }}"
+                    data-key="{{ APP_STRIPE_PK }}"
+                    data-amount="{{ total }}"
+                    data-name="{{app.request.getSchemeAndHttpHost()}}"
+                    data-description="{{ 'paiement.stripe.checkout'|trans() }}"
+                    data-image="{{ asset('/img/hermes.png') }}"
+                    data-zip-code="true"
+                    data-locale="auto">
+            </script>
+        </form>
+{% endif %}
