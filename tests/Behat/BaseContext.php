@@ -144,34 +144,6 @@ JS;
 
     }
 
-    function replace_with_plus($str)
-    {
-        $str_array = explode ( "\n" , $str );
-
-        $len = count( $str_array );
-
-        $str_2 = '';
-        for($i = 0; $i < $len; $i ++)
-        {
-            $line = $str_array[$i];
-
-            if($i > 0 )
-            {
-                $str_2 .= "'";
-            }
-
-            $str_2 .= $line;
-
-            if($i < $len - 1  )
-            {
-                $str_2 .= "' + ";
-            }
-
-        }
-
-        return $str_2;
-    }
-
     /**
      * @Given /^I upload the image "([^"]*)"$/
      */
@@ -197,13 +169,74 @@ JS;
     /**
      * @When /^I click on the link by id "([^"]*)"$/
      */
-    public function iClickOnOnTheLinkById($linkId)
+    public function iClickOnTheLinkById($linkId)
     {
         /** @var $row \Behat\Mink\Element\NodeElement */
         $linkEl = $this->getSession()->getPage()->find('css', 'a#'.$linkId);
         $href = $linkEl->getAttribute('href');
         $linkEl->click();
 
+    }
+
+    /**
+     * @When I delete product list to my cart :list_product_ids
+     */
+    public function iDeleteProductListToMyCart($list_product_ids)
+    {
+        $this->iClickToTheFollowingLinkList($list_product_ids);
+    }
+
+    /**
+     * @When I add product list to my cart :list_product_ids
+     */
+    public function iAddProductListToMyCart($list_product_ids)
+    {
+        $this->iPressToTheFollowingButtonList($list_product_ids);
+    }
+
+    /**
+     * @When I update quantity list :list_quantity to my product list cart :list_product
+     */
+    public function iUpdateQuantityListToMyProductListCart($list_quantity,$list_product)
+    {
+        $this->iSetTheListValueToTheFollowingSelectedList($list_quantity,$list_product);
+    }
+
+    /**
+     * @When I press to the following button list :list_button
+     */
+    public function iPressToTheFollowingButtonList($list_button)
+    {
+        $buttons = explode(',',$list_button);
+        foreach ($buttons as $button) {
+            $this->pressButton($button);
+            $this->wait(2);
+        }
+    }
+
+    /**
+     * @When I click to the following link list :list_link
+     */
+    public function iClickToTheFollowingLinkList($list_link)
+    {
+        $links = explode(',',$list_link);
+        foreach ($links as $link) {
+            $this->iClickOnTheLinkById($link);
+            $this->wait(1);
+        }
+    }
+
+    /**
+     * @When I set the list value :list_value to the following selected list :list_selected
+     */
+    public function iSetTheListValueToTheFollowingSelectedList($list_value, $list_selected)
+    {
+        $option = explode(',',$list_value);
+        $selected = explode(',',$list_selected);
+        foreach ($selected as $key=>$select) {
+            $this->selectOption($select, $option[$key]);
+            $this->wait(1);
+        }
     }
 
     /**
@@ -228,24 +261,6 @@ JS;
         // Switch Back to Main Window
         $this->getSession()->getDriver()->switchToIFrame(null);
 
-    }
-
-    public function switchToIFrame($iframeSelector){
-
-        $function = <<<JS
-            (function(){
-                 var iframe = document.querySelector("$iframeSelector");
-                 iframe.name = "stripe_checkout_app";
-            })()
-JS;
-        try{
-            $this->getSession()->executeScript($function);
-        }catch (Exception $e){
-            print_r($e->getMessage());
-            throw new \Exception("Element $iframeSelector was NOT found.".PHP_EOL . $e->getMessage());
-        }
-
-        $this->getSession()->getDriver()->switchToIFrame("stripe_checkout_app");
     }
 
 }

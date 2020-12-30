@@ -41,7 +41,10 @@ default:
             paths:    [features/error/post ]
             contexts: [App\Tests\Behat\Admin\FeatureContext]
         ecommerce-tunnel:
-            paths:    [features/front/ecommerce ]
+            paths:    [features/front/ecommerce/tunnel ]
+            contexts: [App\Tests\Behat\Admin\FeatureContext]
+        ecommerce-cart:
+            paths:    [features/front/ecommerce/cart ]
             contexts: [App\Tests\Behat\Admin\FeatureContext]
     extensions:
         FriendsOfBehat\SymfonyExtension:

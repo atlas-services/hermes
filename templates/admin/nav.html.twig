@@ -42,6 +42,8 @@
                                   href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
                             <p><a class="text-info mx-3"
                                   href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
+                            <p><a class="text-info mx-3"
+                                  href="{{ path('product_index') }}"> {{ 'product.affiche_list'|trans()|raw }}</a></p>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 <p><a class="text-info mx-3"
                                       href="{{ path('remote_index') }}"> {{ 'remote.affiche_list'|trans()|raw }}</a></p>

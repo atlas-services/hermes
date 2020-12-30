@@ -291,6 +291,14 @@ post:
   content: Contenu
   image: Image du contenu (Taille maximale < 2 Mo)
 
+# Product
+product:
+  list: Produits
+  affiche_list: Produits
+  edit: Modifier le produit
+  add: Créer un produit
+  label: Produit
+
 # Section
 section:
   list: Pages
