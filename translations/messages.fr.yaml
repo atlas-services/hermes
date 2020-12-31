@@ -53,6 +53,7 @@ info:
   new_libelle_post: Ajoutez de nouveaux contenus
 
 global:
+  back_front: Retour au site web
   copyright: 2016 Tous droits réservés par
   created_by: Ce site a été conçu avec le CMS <a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
   about: A propos

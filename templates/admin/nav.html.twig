@@ -22,6 +22,11 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
+            <span class="mx-auto align-middle">
+                <a class="lead text-white" href="{{ path('sheet') }}">
+                    {{ 'global.back_front'|trans() }}
+                </a>
+            </span>
             {% if is_granted('ROLE_ADMIN') %}
                 <ul class="h-rounded-lg-09 nav navbar-nav ml-auto"
                     style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">

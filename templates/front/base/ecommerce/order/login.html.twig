@@ -2,7 +2,8 @@
 {% block title %}{{ 'user.sign_in'|trans() }}{% endblock %}
 
 {% block content %}
-    <section id="container" class="align-content-center col-lg-12 mx-auto" style="font-family:'Bai Jamjuree', sans-serif;">
+<div class="nav-space-checkout">
+    <div class="container">
         {% for message in app.flashes('notice') %}
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -101,5 +102,5 @@
             </div>
         </div>
 
-    </section>
+    </div>
 {% endblock %}

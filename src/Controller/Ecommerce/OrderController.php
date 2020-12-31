@@ -36,10 +36,13 @@ class OrderController extends AbstractController
      */
     public function myorder_account(Request $request,AuthenticationUtils $authenticationUtils, Page $page, CartClient $cartClient, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
+        $referer = $request->headers->get('referer'); // get the referer
         if($this->isGranted('ROLE_CUSTOMER')){
             // Mise à jour order et raz du panier
-            $orderClient->handleCartProducts($this->getUser());
-            return $this->redirectToRoute('order_delivery');
+            if(true == strpos($referer, 'compte')) {
+                $orderClient->handleCartProducts($this->getUser());
+                return $this->redirectToRoute('order_delivery');
+            }
         }
 
         // get the login error if there is one

@@ -9,6 +9,7 @@
                 <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.paiement'|trans() }}</li>
             {% endif %}
             {%  if(app.user is not null) %}
+                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 " id="order-account"  href={{ path('customer_index') }} >{{ app.user }}</a></li>
                 <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 " id="order-delivery"   href={{ path('order_delivery') }} >{{ 'order.delivery'|trans() }}</a></li>
                 <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 " id="order-paiement"   href={{ path('order_paiement') }} >{{ 'order.paiement'|trans() }}</a></li>
             {% endif %}
