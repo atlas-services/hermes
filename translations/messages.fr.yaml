@@ -53,6 +53,7 @@ info:
   new_libelle_post: Ajoutez de nouveaux contenus
 
 global:
+  back_front: Retour au site web
   copyright: 2016 Tous droits réservés par
   created_by: Ce site a été conçu avec le CMS <a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
   about: A propos
@@ -291,6 +292,14 @@ post:
   content: Contenu
   image: Image du contenu (Taille maximale < 2 Mo)
 
+# Product
+product:
+  list: Produits
+  affiche_list: Produits
+  edit: Modifier le produit
+  add: Créer un produit
+  label: Produit
+
 # Section
 section:
   list: Pages
@@ -379,8 +388,10 @@ order:
   account: Mon compte
   delivery: Livraison
   delivery_method: Mode de livraison
+  delivery_address: Adresse de livraison
   paiement: Paiement
   delivery_price: Frais de livraison
+  delivery_free: Frais de livraison offerts
   total: Total
 
 paiement:

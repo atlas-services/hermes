@@ -156,8 +156,8 @@ class SecurityController extends AbstractController
 
             $firstname = $request->request->get('firstname');
             $lastname = $request->request->get('lastname');
-            $email = $request->request->get('email');
-            $password = $request->request->get('password');
+            $email = $request->request->get('email_new');
+            $password = $request->request->get('password_new');
             $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
             /* @var $user User */
 

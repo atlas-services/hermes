@@ -27,7 +27,6 @@ class Order
     use UpdatedTrait;
 
     const STATUS_CART =  'CART' ;
-    const STATUS_ORDER =  'ORDER' ;
     const STATUS_ORDER_PREPARE_DELIVERY =  'ORDER_PREPARE_DELIVERY' ;
     const STATUS_ORDER_PREPARE_PAIEMENT =  'ORDER_PREPARE_PAIEMENT' ;
     const STATUS_WAITING =  'WAITING' ;
@@ -37,7 +36,6 @@ class Order
 
     const STATUS_CURRENT =  [
         self::STATUS_CART => self::STATUS_CART,
-        self::STATUS_ORDER => self::STATUS_ORDER,
         self::STATUS_ORDER_PREPARE_DELIVERY => self::STATUS_ORDER_PREPARE_DELIVERY,
         self::STATUS_ORDER_PREPARE_PAIEMENT => self::STATUS_ORDER_PREPARE_PAIEMENT,
     ] ;
@@ -49,7 +47,6 @@ class Order
 
     const STATUS_ALL =  [
         self::STATUS_CART => self::STATUS_CART,
-        self::STATUS_ORDER => self::STATUS_ORDER,
         self::STATUS_ORDER_PREPARE_DELIVERY => self::STATUS_ORDER_PREPARE_DELIVERY,
         self::STATUS_ORDER_PREPARE_PAIEMENT => self::STATUS_ORDER_PREPARE_PAIEMENT,
         self::STATUS_WAITING => self::STATUS_WAITING,

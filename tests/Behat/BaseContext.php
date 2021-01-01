@@ -8,6 +8,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\MinkExtension\Context\MinkContext;
+use Stripe\Exception\InvalidArgumentException;
 
 /**
  * This context class contains the definitions of the steps used by the demo
@@ -17,6 +18,13 @@ use Behat\MinkExtension\Context\MinkContext;
  */
 class BaseContext extends MinkContext implements Context, SnippetAcceptingContext
 {
+
+    const CARDS = [
+        'stripe_card_number' => '424242424242424242',
+        'stripe_mm_yy' => '1224',
+        'stripe_cvv' => '122',
+        'stripe_zip_code' => '94800',
+    ];
 
     private $content = [
         'content_pizzas' => "Content pizza",
@@ -31,6 +39,17 @@ class BaseContext extends MinkContext implements Context, SnippetAcceptingContex
         $this->visitPath('/login');
         $this->fillField('email', 'hermes@atlas-services.fr');
         $this->fillField('Password', 'hermeshermes');
+        $this->pressButton('Se connecter');
+    }
+
+    /**
+     * @Given I am logged in as a customer
+     */
+    public function iAmLoggedInAsACustomer()
+    {
+        $this->visitPath('/mon/compte');
+        $this->fillField('email', 'customer_stripe@yopmail.com');
+        $this->fillField('password', 'toto');
         $this->pressButton('Se connecter');
     }
 
@@ -125,34 +144,6 @@ JS;
 
     }
 
-    function replace_with_plus($str)
-    {
-        $str_array = explode ( "\n" , $str );
-
-        $len = count( $str_array );
-
-        $str_2 = '';
-        for($i = 0; $i < $len; $i ++)
-        {
-            $line = $str_array[$i];
-
-            if($i > 0 )
-            {
-                $str_2 .= "'";
-            }
-
-            $str_2 .= $line;
-
-            if($i < $len - 1  )
-            {
-                $str_2 .= "' + ";
-            }
-
-        }
-
-        return $str_2;
-    }
-
     /**
      * @Given /^I upload the image "([^"]*)"$/
      */
@@ -173,6 +164,103 @@ JS;
             }
         }
         else throw new Exception("File is not found at the given location");
+    }
+
+    /**
+     * @When /^I click on the link by id "([^"]*)"$/
+     */
+    public function iClickOnTheLinkById($linkId)
+    {
+        /** @var $row \Behat\Mink\Element\NodeElement */
+        $linkEl = $this->getSession()->getPage()->find('css', 'a#'.$linkId);
+        $href = $linkEl->getAttribute('href');
+        $linkEl->click();
+
+    }
+
+    /**
+     * @When I delete product list to my cart :list_product_ids
+     */
+    public function iDeleteProductListToMyCart($list_product_ids)
+    {
+        $this->iClickToTheFollowingLinkList($list_product_ids);
+    }
+
+    /**
+     * @When I add product list to my cart :list_product_ids
+     */
+    public function iAddProductListToMyCart($list_product_ids)
+    {
+        $this->iPressToTheFollowingButtonList($list_product_ids);
+    }
+
+    /**
+     * @When I update quantity list :list_quantity to my product list cart :list_product
+     */
+    public function iUpdateQuantityListToMyProductListCart($list_quantity,$list_product)
+    {
+        $this->iSetTheListValueToTheFollowingSelectedList($list_quantity,$list_product);
+    }
+
+    /**
+     * @When I press to the following button list :list_button
+     */
+    public function iPressToTheFollowingButtonList($list_button)
+    {
+        $buttons = explode(',',$list_button);
+        foreach ($buttons as $button) {
+            $this->pressButton($button);
+            $this->wait(2);
+        }
+    }
+
+    /**
+     * @When I click to the following link list :list_link
+     */
+    public function iClickToTheFollowingLinkList($list_link)
+    {
+        $links = explode(',',$list_link);
+        foreach ($links as $link) {
+            $this->iClickOnTheLinkById($link);
+            $this->wait(1);
+        }
+    }
+
+    /**
+     * @When I set the list value :list_value to the following selected list :list_selected
+     */
+    public function iSetTheListValueToTheFollowingSelectedList($list_value, $list_selected)
+    {
+        $option = explode(',',$list_value);
+        $selected = explode(',',$list_selected);
+        foreach ($selected as $key=>$select) {
+            $this->selectOption($select, $option[$key]);
+            $this->wait(1);
+        }
+    }
+
+    /**
+     * @Then I fill stripe credit card informations with card :card
+     */
+    public function iFillStripeCreditCardInformationsWithCard(int $card = 0)
+    {
+        $this->getSession()->getDriver()->switchToIFrame(0);
+        $page = $this->getSession()->getPage();
+        $stripeInputCardNumber = $page->findField('Numéro de carte'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputCardNumber->setValue(self::CARDS['stripe_card_number']);
+        $stripeInputMMAA = $page->findField('MM / AA'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputMMAA->setValue(self::CARDS['stripe_mm_yy']);
+        $stripeInputCVV = $page->findField('CVV'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputCVV->setValue(self::CARDS['stripe_cvv']);
+        $stripeInputZipCode = $page->findField('ZIP Code'); // where $field can be: 'Email, CVC, Card Number, MM / YY'
+        $stripeInputZipCode->setValue(self::CARDS['stripe_zip_code']);
+
+        $stripeInputButton = $page->find('css', 'button');
+        $stripeInputButton->click();
+
+        // Switch Back to Main Window
+        $this->getSession()->getDriver()->switchToIFrame(null);
+
     }
 
 }

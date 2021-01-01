@@ -98,6 +98,12 @@ behat-error-menu:
 behat-error-post:
 	clear && vendor/bin/behat --suite=post-error
 
+behat-ecommerce-cart:
+	clear && vendor/bin/behat --suite=ecommerce-cart
+
+behat-ecommerce-tunnel:
+	clear && vendor/bin/behat --suite=ecommerce-tunnel
+
 behat-total:
 	clear && vendor/bin/behat
 

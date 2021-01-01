@@ -10,6 +10,7 @@ namespace App\Controller\Ecommerce;
 
 
 use App\Ecommerce\OrderClient;
+use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Menu\Page;
@@ -37,14 +38,18 @@ class StripeController extends AbstractController
             $notification = $translator->trans('paiement.message_compte');
             $this->addFlash('warning', $notification);
         }
-        // Creation order et orderlines
 
-//        $orderClient->updateOrderStatus($this->getUser(),Order::STATUS_CART, Order::STATUS_ORDER);
+        // Récuperation de la commande en cours
+        // Mise à jour order
+        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_PAIEMENT);
+
         // Récuperation de la commande en cours
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
-        $products = $order->getOrderLines();
-        $delivery_price = $order->getDelivery()->getPrice();
-        $total = $orderClient->getTotal($this->getUser());
+        if(!$order instanceof Order){
+            return $this->redirectToRoute('cart');
+        }else{
+            $orderLines = $order->getOrderLines();
+        }
 
         $public_key = $this->getParameter('stripe_public_key');
         if ($request->isMethod('POST')) {
@@ -58,28 +63,41 @@ class StripeController extends AbstractController
             }
             // Get Products from cart
 
-            foreach ($products as $product) {
+            foreach ($orderLines as $product) {
                 $stripeClient->createInvoiceItem(
-                    $product['price'] ,
-                    $product['quantity'] ,
+                    $product->getPrice() ,
+                    $product->getQuantity() ,
                     $user,
-                    $product['product']->getName(),
+                    $product->getProduct()->getName(),
                 );
+            }
+            if($order->getDelivery() instanceof Delivery){
+                if(0 != $order->getDelivery()->getPrice()){
+                    $delivery_name = $translator->trans('order.delivery_price') ;
+                    $stripeClient->createInvoiceItem(
+                        $order->getDelivery()->getPrice() ,
+                        1 ,
+                        $user,
+                        $delivery_name . '('. $order->getDelivery()->getName() . ')',
+                    );
+                }else{
+                    $delivery_name = $translator->trans('order.delivery_free') ;
+                    $stripeClient->createInvoiceItem(
+                        0 ,
+                        1 ,
+                        $user,
+                        $delivery_name ,
+                    );
+                }
             }
             $stripeClient->createInvoice($user, true);
             $orderClient->emptyCart();
             $notification = $translator->trans('paiement.done');
             $this->addFlash('success', $notification);
+
+            $orderClient->handlePaiementOrder($order);
             return $this->redirect('/');
         }
-
-        $array = $page->getActiveMenu('accueil','accueil');
-        $array['APP_STRIPE_PK'] = $public_key;
-        $array['delivery_price'] = $delivery_price;
-        $array['order'] = $order;
-        $array['products'] = $products;
-        $array['total'] = $total;
-        return $this->render('front/base/ecommerce/paiement/stripe/index.html.twig', $array);
 
     }
 
