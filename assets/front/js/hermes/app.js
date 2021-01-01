@@ -42,6 +42,7 @@ import '../../../js/anime';
 import '../../../js/copy';
 import '../hermes/modale';
 import '../hermes/cart';
+import '../hermes/delivery';
 import '../hermes/stripe';
 import '../../../js/lazy';
 // import '../hermes/video';
