@@ -12,8 +12,14 @@
             {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.paiement'|trans()} %}
             {% if order is defined %}
                 {% if order.delivery is not null %}
-                    <h3>{{ 'order.delivery_method'|trans() }} : {{ order.delivery.deliveryMethod }}</h3>
-                    <h3>{{ 'order.delivery_address'|trans() }} : {{ order.delivery.name }}</h3>
+            <div class=" mt-3 pt-3 mx-auto px-0 text-justify" >
+            <h5>{{ 'order.delivery_method'|trans() }} : {{ order.delivery.deliveryMethod }}</h5>
+                    <h5>{{ 'order.delivery_address'|trans() }} : {{ order.delivery.address }} </h5>
+                    <h6> {{ order.delivery.address.addressLine1 }} : </h6>
+                    <h6> {{ order.delivery.address.addressLine2 }} : </h6>
+                    <h6> {{ order.delivery.address.postalCode }} : </h6>
+                    <h6> {{ order.delivery.address.countryCode }} : </h6>
+            </div>
                 {% endif %}
             {% endif %}
             {% include 'front/base/ecommerce/order/table.html.twig' %}

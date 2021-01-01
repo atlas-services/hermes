@@ -31,6 +31,13 @@ class Delivery
     const DELIVERY_EXPRESS =  'EXPRESS' ;
     const DELIVERY_ERROR =  'ERROR' ;
 
+    const DELIVERY_CHOICES =  [
+        self::DELIVERY_CC => self::DELIVERY_CC,
+        self::DELIVERY_RELAY => self::DELIVERY_RELAY,
+        self::DELIVERY_HOME => self::DELIVERY_HOME,
+        self::DELIVERY_EXPRESS => self::DELIVERY_EXPRESS,
+    ] ;
+
     const DELIVERY_ALL =  [
         self::DELIVERY_CC => self::DELIVERY_CC,
         self::DELIVERY_RELAY => self::DELIVERY_RELAY,
@@ -45,6 +52,13 @@ class Delivery
      * @ORM\Column(type="string", nullable=false)
      */
     protected $delivery_method;
+
+    /**
+     * @var Address
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Address",  inversedBy="deliverys")
+     */
+    protected $address;
 
     /**
      * @var Order[]|ArrayCollection
@@ -85,6 +99,16 @@ class Delivery
         if(in_array($delivery_method,self::DELIVERY_ALL)){
             $this->delivery_method = $delivery_method;
         }
+    }
+
+    public function setAddress(Address $address)
+    {
+        $this->address = $address ;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address ;
     }
 
     public function getOrders(): ?Collection

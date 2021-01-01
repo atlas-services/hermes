@@ -12,6 +12,7 @@ Readme: Readme
 form:
   label:
     delete: Supprimer
+    valider: Valider
 
 info:
   admin_presentation: Afin d'enrichir votre site, voici les différents liens qui vous permettront de

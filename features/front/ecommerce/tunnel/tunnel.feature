@@ -24,7 +24,7 @@ Feature: Tunnel
 #        tunnel delivery
         Then I should see "Mode de livraison"
         And I select "HOME" from "delivery_deliveryMethod"
-        And I press "Livraison"
+        And I press "Valider"
         And I scroll "paiement" into view
 #        tunnel paiement
 #        paiement.stripe.checkout

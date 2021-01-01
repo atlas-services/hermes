@@ -8,6 +8,8 @@ use App\Entity\Traits\DefaultInvoiceTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\UserTrait;
 use CommerceGuys\Addressing\AddressInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -154,8 +156,30 @@ class Address implements AddressInterface
       * @var string
      */
     private $locale;
-    
-     
+
+
+    /**
+     * @var Delivery[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Delivery",  mappedBy="address",  cascade={"persist", "remove"})
+     */
+    protected $deliverys;
+
+    public function __construct()
+    {
+        $this->deliverys = new ArrayCollection();
+    }
+
+    public function __toString(): ?string
+    {
+        if(!is_null($this->givenName)){
+            return $this->givenName;
+        }
+        if(!is_null($this->additionalName)){
+            return $this->additionalName;
+        }
+        return '';
+    }
 
     /**
      * Get gets the two-letter country code.
@@ -464,5 +488,11 @@ class Address implements AddressInterface
 
         return $this;
     }
+
+    public function getDeliverys(): ?Collection
+    {
+        return $this->deliverys ;
+    }
+
 }
 
