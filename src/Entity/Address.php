@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Traits\ActiveTrait;
+use App\Entity\Traits\DefaultDeliveryTrait;
+use App\Entity\Traits\DefaultInvoiceTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\UserTrait;
 use CommerceGuys\Addressing\AddressInterface;
@@ -18,6 +20,8 @@ class Address implements AddressInterface
     use IdTrait;
     use ActiveTrait;
     use UserTrait;
+    use DefaultDeliveryTrait;
+    use DefaultInvoiceTrait;
 
 
     /**

@@ -4,6 +4,7 @@ namespace App\Form\Admin\Ecommerce;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +22,11 @@ class AddressFRType extends AbstractType
         
         $builder
         ->add('active')
+        ->add('defaultDelivery', CheckboxType::class,
+        array('label' => "Adrresse livraison par défault"))
+
+        ->add('defaultInvoice',CheckboxType::class,
+        array('label' => "Adrresse facturation par défault"))
 
         ->add('additionalName', TextType::class,
                  array('label' => "* Nom de l'adresse",

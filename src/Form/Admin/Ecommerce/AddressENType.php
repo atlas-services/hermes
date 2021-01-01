@@ -13,6 +13,10 @@ class AddressENType extends AbstractType
     {
         $builder
             ->add('active')
+            ->add('defaultDelivery', CheckboxType::class,
+            array('label' => "Adrresse livraison par défault"))
+            ->add('defaultInvoice',CheckboxType::class,
+            array('label' => "Adrresse facturation par défault"))
             ->add('additionalName')
             ->add('addressLine1')
             ->add('addressLine2')

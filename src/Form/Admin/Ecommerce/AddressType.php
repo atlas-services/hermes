@@ -13,19 +13,17 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('active')
-            ->add('locale')
+            ->add('defaultDelivery')
+            ->add('defaultInvoice')
             ->add('additionalName')
             ->add('addressLine1')
             ->add('addressLine2')
-            ->add('administrativeArea')
             ->add('countryCode')
-            ->add('dependentLocality')
             ->add('familyName')
             ->add('givenName')
             ->add('locality')
             ->add('organization')
             ->add('postalCode')
-            ->add('sortingCode')
         ;
     }
 

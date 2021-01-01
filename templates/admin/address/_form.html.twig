@@ -5,6 +5,14 @@
         {{ form_label(form.active) }}
         {{ form_row(form.active) }}
     </div>
+     <div class="form-group">
+        {{ form_label(form.defaultDelivery) }}
+        {{ form_row(form.defaultDelivery, {'attr': {'placeholder': "Veuillez cocher si addresse de livraison"}}) }}
+    </div>
+     <div class="form-group">
+        {{ form_label(form.defaultInvoice) }}
+        {{ form_row(form.defaultInvoice, {'attr': {'placeholder': "Veuillez cocher si addresse de facturation"}}) }}
+    </div>
     <div class="form-group">
         {{ form_label(form.additionalName) }}
         {{ form_widget(form.additionalName, {'attr': {'class': 'form-control', 'placeholder': "Veuillez saisir un nom d'adresse"}}) }}
