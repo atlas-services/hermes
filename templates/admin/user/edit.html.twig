@@ -18,7 +18,7 @@
     <h1>{{ 'user.edit'|trans() }}</h1>
 
     {{ include('admin/user/_form.html.twig', {'button_label': 'global.update'|trans()}) }}
-    {% if form.roles is defined %}
+    {% if is_granted('ROLE_ADMIN') %}
         {{ include('admin/user/_delete_form.html.twig') }}
         <a href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     {% endif %}

@@ -177,7 +177,13 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $notification = $translator->trans('user.created');
+            $notification = $translator->trans('customer.created');
+            $referer = $request->headers->get('referer'); // get the referer
+            if(true == strpos($referer, 'compte')){
+                $notification .= $translator->trans('customer.resume_purchase');
+                $this->addFlash('notice', $notification);
+                return $this->redirectToRoute('order_account');
+            }
             $this->addFlash('notice', $notification);
             return $this->redirectToRoute('customer_index');
         }else {

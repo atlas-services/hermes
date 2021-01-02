@@ -353,13 +353,18 @@ ecommerce:
   label: Mes achats
 
 
+# Customer
+customer:
+  created: Votre compte client a été créé.
+  resume_purchase: Vous pouvez reprendre vos achats en vous identifiant.
+  sign_in: Connectez-vous
+
 address:
   list: Mes addresses
   label: Addresse
   additionalName: Nom
   addresse1: Addresse 1
   addresse2: Addresse 2
-
 
 cart:
   back: Reprendre mes achats
@@ -373,6 +378,7 @@ cart:
   delete: Supprimer
 
 order:
+  security: Commande sécurisée
   message_compte: Afin de préparer votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   message_exists: Vous avez des commandes en cours, n'oublier pas de les finaliser ou de les annuler.</a>
   update_cart: Modifier mon panier

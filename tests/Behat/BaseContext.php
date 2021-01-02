@@ -43,14 +43,31 @@ class BaseContext extends MinkContext implements Context, SnippetAcceptingContex
     }
 
     /**
-     * @Given I am logged in as a customer
+     * @Given I am logged in as a customer :new
      */
-    public function iAmLoggedInAsACustomer()
+    public function iAmLoggedInAsACustomer($new = null)
     {
+        $email = 'customer_stripe@yopmail.com';
+        if('new' == $new){
+            $email = 'customer_new_stripe@yopmail.com';
+        }
         $this->visitPath('/mon/compte');
-        $this->fillField('email', 'customer_stripe@yopmail.com');
+        $this->fillField('email', $email);
         $this->fillField('password', 'toto');
         $this->pressButton('Se connecter');
+    }
+
+    /**
+     * @Given I create my customer account
+     */
+    public function iCreateMyCustomerAccount()
+    {
+        $this->visitPath('/mon/compte');
+        $this->fillField('firstname', 'Neil');
+        $this->fillField('lastname', 'Young');
+        $this->fillField('email_new', 'customer_new_stripe@yopmail.com');
+        $this->fillField('password_new', 'toto');
+        $this->pressButton('Nouvel utilisateur');
     }
 
     /**
