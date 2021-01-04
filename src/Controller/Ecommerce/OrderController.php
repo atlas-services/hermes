@@ -157,4 +157,34 @@ class OrderController extends AbstractController
 
     }
 
+    /**
+     * @Route("/customer/delivery/delivery-method-select", name="customer_delivery_delivery_method_select")
+     */
+    public function getAddressSelect(Request $request, Page $page, OrderClient $orderClient, TranslatorInterface $translator)
+    {
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            return $this->redirectToRoute('cart');
+        }
+
+        if(0 == $orderClient->getTotal($this->getUser())){
+            $orderClient->emptyCart();
+            return $this->redirect('/');
+        }
+
+        //Delivery
+        $delivery = new Delivery();
+        $delivery->setDeliveryMethod($request->query->get('deliveryMethod'));
+        $options['user'] = $this->getUser();
+        $form = $this->createForm(DeliveryType::class, $delivery, $options);
+        // no field? Return an empty response
+        if (!$form->has('address')) {
+            return new Response(null, 204);
+        }
+
+        $array['form'] = $form->createView();
+
+        return $this->render('front/base/ecommerce/order/delivery_address.html.twig', $array);
+
+    }
+
 }

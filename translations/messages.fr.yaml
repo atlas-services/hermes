@@ -394,8 +394,10 @@ order:
   quantity: Quantité
   account: Mon compte
   delivery: Livraison
+  placeholder_delivery_method: Sélectionnez le mode de livraison
   delivery_method: Mode de livraison
   delivery_address: Adresse de livraison
+  placeholder_delivery_address: Sélectionnez une adresse de livraison
   paiement: Paiement
   delivery_price: Frais de livraison
   delivery_free: Frais de livraison offerts
