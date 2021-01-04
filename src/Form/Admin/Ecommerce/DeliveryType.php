@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class DeliveryType extends AbstractType
 {
@@ -21,11 +22,14 @@ class DeliveryType extends AbstractType
      * @var EntityManagerInterface
      */
     private $entityManager;
+    private $security;
     private $user;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Security $security)
     {
         $this->entityManager = $entityManager;
+        $this->security = $security;
+        $this->user = $this->security->getUser();
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -33,7 +37,6 @@ class DeliveryType extends AbstractType
         /** @var Delivery|null $article */
         $delivery = $options['data'] ?? null;
         $isEdit = $delivery && $delivery->getId();
-        $this->user = $options['user'];
 
         $builder
             ->add('name', null, [
@@ -88,8 +91,12 @@ class DeliveryType extends AbstractType
             $form->remove('address');
             return;
         }
-        $form->add('address', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+        $form->add('address', EntityType::class, [
+            'class' => Address::class,
             'placeholder' => 'order.placeholder_delivery_address',
+            'choice_label' => function ($address) {
+                return $address->__toString();
+            },
             'choices' => $choices,
             'required' => false,
         ]);
@@ -117,8 +124,8 @@ class DeliveryType extends AbstractType
                     break;
                 case Delivery::DELIVERY_HOME:
                 case Delivery::DELIVERY_EXPRESS:
-                    $addresses = $this->entityManager->getRepository(Address::class)->findByUser($this->user);
-                    $deliveryMethodNameChoices = $this->getAddressesChoices($addresses);
+                    $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByUser($this->user);
+//                    $deliveryMethodNameChoices = $this->getAddressesChoices($this->entityManager->getRepository(Address::class)->findByUser($this->user));
                     break;
             }
 
@@ -130,7 +137,7 @@ class DeliveryType extends AbstractType
     {
         $choices = [] ;
         foreach($addresses as $address){
-            $choices[$address->__toString()] = $address->__toString();
+            $choices[$address->__toString()] = $address;
         }
         return $choices;
 
