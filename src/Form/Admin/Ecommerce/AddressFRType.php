@@ -4,6 +4,8 @@ namespace App\Form\Admin\Ecommerce;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList as ChoiceListChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,8 +20,8 @@ class AddressFRType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $optionAddress = $options['optionAddress'];
-        $country = array_flip($optionAddress['countryList']);
         
+                          
         $builder
         ->add('active')
         ->add('defaultDelivery', CheckboxType::class,
@@ -44,25 +46,17 @@ class AddressFRType extends AbstractType
 
             ->add('addressLine2', TextType::class,
                 array('label' => "Addresse suite",
-                    'attr' => array('class' => "form-control")))
+                    'attr' => array('class' => "form-control",'required' => false)))
 
-                    
-            ->add('countryCode', ChoiceType::class,
+            ->add('countryCode',ChoiceType::class,
                 array('label' => "* Pays",
-                    'choices' => $country,
-                    'placeholder' => 'Veuillez sélectionner le pays'
-                ))
+                'attr' => array('class' => "form-control"),
+                'choices' => array(current($optionAddress) => key($optionAddress))))
 
               
-            ->add('locality', ChoiceType::class,
-                array('label' => "* Ville",
-                'choices' => array( 
-                    'Paris' => 0,
-                    'Plaisir' => 1,
-                    'Clamart' => 2
-                ),
-                'placeholder' => 'Veuillez sélectionner la ville'
-            ))
+            ->add('locality', TextType::class,
+                array('label' => "* Ville",'attr' => array('class' => "form-control")))
+
 
             ->add('postalCode', ChoiceType::class,
                 array('label' => "* Code postal",

@@ -2,18 +2,19 @@
 
 namespace App\Controller\Ecommerce\Admin;
 
-use App\Ecommerce\AddressClient;
-use App\Entity\Address;
 use App\Entity\Menu;
 use App\Entity\Sheet;
-use App\Form\Admin\Ecommerce\AddressType;
-use App\Form\Admin\Ecommerce\AddressFRType;
+use App\Entity\Address;
+use App\Ecommerce\AddressClient;
 use App\Repository\AddressRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\Admin\Ecommerce\AddressType;
+use App\Form\Admin\Ecommerce\Address1Type;
+use App\Form\Admin\Ecommerce\AddressFRType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/{_locale}/customer/addresse")
@@ -27,24 +28,39 @@ class AddressController extends AbstractController
     public function new(Request $request, AddressClient $addressClient): Response
     {
         $address_options = $addressClient->getAddress('fr-FR');
-     
+    
         $address = new Address();
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
             $address->setFamilyName($this->getUser()->getLastname());
             $address->setGivenName($this->getUser()->getFirstname());
         }
+      
+        $form = $this->createForm(Address1Type::class, $address, array('optionAddress' => $address_options));
         
-        if ('fr' == $request->getLocale()) {
-            $form = $this->createForm(AddressFRType::class, $address, array('optionAddress' => $address_options));
-            
-        } else {
-            $form = $this->createForm(AddressType::class, $address, array('optionAddress'=> $address_options));
-        }
-       
         $form->handleRequest($request);
+        
+        $form2 = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array()));
+        $form2->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $countryCode = $request->request->get('address1')['countryCode'];
+            $country = $address_options['countryList'];
+            $country = $country[$countryCode];
+           
+            $form2 = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array($countryCode => $country)));
+           
+
+            return $this->render('admin/address/new.html.twig', [
+                'address' => $address,
+                'form' => $form2->createView(),
+                'country' => array($countryCode =>  $country)
+            ]);
+            
+        }
+
+        
+        if ($form2->isSubmitted()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($address);
             $entityManager->flush();
@@ -52,11 +68,12 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('address_index');
         }
 
-        return $this->render('admin/address/new.html.twig', [
+        return $this->render('admin/address/new_1.html.twig', [
             'address' => $address,
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/", name="address_index", methods={"GET"})
