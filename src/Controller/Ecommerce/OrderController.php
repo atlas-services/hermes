@@ -174,8 +174,7 @@ class OrderController extends AbstractController
         //Delivery
         $delivery = new Delivery();
         $delivery->setDeliveryMethod($request->query->get('deliveryMethod'));
-        $options['user'] = $this->getUser();
-        $form = $this->createForm(DeliveryType::class, $delivery, $options);
+        $form = $this->createForm(DeliveryType::class, $delivery);
         // no field? Return an empty response
         if (!$form->has('address')) {
             return new Response(null, 204);

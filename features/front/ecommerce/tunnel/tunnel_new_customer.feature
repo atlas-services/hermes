@@ -29,7 +29,9 @@ Feature: Tunnel
         And I wait for 2 seconds
 #        tunnel delivery
         Then I should see "Mode de livraison"
-        And I select "HOME" from "delivery_deliveryMethod"
+        And I select "CLICK_AND_COLLECT" from "delivery_deliveryMethod"
+        And I wait for 1 seconds
+        And I select "Hermes, 1 rue Pascal, 94800 Villejuif" from "delivery_address"
         And I press "Valider"
         And I scroll "paiement" into view
 #        tunnel paiement

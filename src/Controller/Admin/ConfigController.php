@@ -2,11 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Address;
 use App\Entity\Config;
+use App\Entity\Delivery;
 use App\Entity\Menu;
 use App\Entity\Sheet;
 use App\Form\Admin\ConfigType;
 use App\Repository\ConfigRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,7 +78,7 @@ class ConfigController extends AbstractController
     /**
      * @Route("/{id}/edit", name="config_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Config $config): Response
+    public function edit(Request $request, Config $config, EntityManagerInterface $entityManager): Response
     {
         $configInit = clone $config;
         $directories= json_decode($this->getParameter('hermes_list_templates'),true);
@@ -95,6 +98,50 @@ class ConfigController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            if(strpos($config->getCode(), 'clic_and_collect_adresse')){
+                $addresses = $entityManager->getRepository(Address::class)->findByGivenName(Delivery::DELIVERY_CC);
+                if([] == $addresses || null == $addresses){
+                    $addresse = new Address();
+                    $addresse->setGivenName(Delivery::DELIVERY_CC);
+                }else{
+                    $addresse = $addresses[0];
+                    if(null == $addresse){
+                        $addresse = new Address();
+                        $addresse->setGivenName(Delivery::DELIVERY_CC);
+                    }
+                }
+                foreach($entityManager->getRepository(Config::class)->findByType('contact') as $address_cc){
+                    switch (true) {
+                        case strpos($address_cc->getCode(), 'additional_name'):
+                            $addresse->setAdditionalName($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'family_name'):
+                            $addresse->setFamilyName($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'organisation'):
+                            $addresse->setOrganization($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'address_line1'):
+                            $addresse->setAddressLine1($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'address_line2'):
+                            $addresse->setAddressLine2($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'locality'):
+                            $addresse->setLocality($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'postal_code'):
+                            $addresse->setPostalCode($address_cc->getValue());
+                            break;
+                        case strpos($address_cc->getCode(), 'country_code'):
+                            $addresse->setCountryCode($address_cc->getValue());
+                            break;
+                    }
+                }
+                $addresse->setUser($this->getUser());
+                $entityManager->persist($addresse);
+                $entityManager->flush();
+            }
 
             if('form' == $config->getCode()){
                 $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();

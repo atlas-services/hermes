@@ -3,6 +3,7 @@
 namespace App\Form\Admin\Ecommerce;
 
 use App\Entity\Address;
+use App\Entity\Config;
 use App\Entity\Delivery;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -112,12 +113,11 @@ class DeliveryType extends AbstractType
 
     private function getDeliveryMethodNameChoices(string $deliveryMethod)
     {
-        $CC =  ['Adresse1 CC' => 'Adresse1 CC'];
         $RE =  ['Adresse relais non prise en compte actuellement' => ''];
 
             switch ($deliveryMethod) {
                 case Delivery::DELIVERY_CC:
-                    $deliveryMethodNameChoices = $CC;
+                    $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByGivenName(Delivery::DELIVERY_CC);
                     break;
                 case Delivery::DELIVERY_RELAY:
                     $deliveryMethodNameChoices = $RE;
@@ -125,7 +125,6 @@ class DeliveryType extends AbstractType
                 case Delivery::DELIVERY_HOME:
                 case Delivery::DELIVERY_EXPRESS:
                     $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByUser($this->user);
-//                    $deliveryMethodNameChoices = $this->getAddressesChoices($this->entityManager->getRepository(Address::class)->findByUser($this->user));
                     break;
             }
 
@@ -133,13 +132,12 @@ class DeliveryType extends AbstractType
 
     }
 
-    private function getAddressesChoices($addresses)
+    private function getAddresseCCChoices()
     {
+        $adress_cc = $this->entityManager->getRepository(Address::class)->findByGivenName(Delivery::DELIVERY_CC);
         $choices = [] ;
-        foreach($addresses as $address){
-            $choices[$address->__toString()] = $address;
-        }
-        return $choices;
+
+        return [$addresse];
 
     }
 }
