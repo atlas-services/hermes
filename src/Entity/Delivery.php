@@ -33,7 +33,7 @@ class Delivery
 
     const DELIVERY_CHOICES =  [
         self::DELIVERY_CC => self::DELIVERY_CC,
-        self::DELIVERY_RELAY => self::DELIVERY_RELAY,
+//        self::DELIVERY_RELAY => self::DELIVERY_RELAY,
         self::DELIVERY_HOME => self::DELIVERY_HOME,
         self::DELIVERY_EXPRESS => self::DELIVERY_EXPRESS,
     ] ;
