@@ -109,10 +109,11 @@ class InitController extends AbstractController
     }
 
     private function addPage($libre){
+        $config = $this->getActiveConfig();
         $entityManager = $this->getDoctrine()->getManager();
         $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
         $slug = strtolower($template_libre);
-        $content = $this->render('admin/exemple/base/'.$template_libre.'.html.twig', [])->getContent();
+        $content = $this->render('admin/exemple/base/'.$template_libre.'.html.twig', $config)->getContent();
         try {
             $sheet = $this->getDoctrine()
                 ->getRepository(Sheet::class)
@@ -161,6 +162,25 @@ class InitController extends AbstractController
         $entityManager->flush();
         $this->addFlash('info', 'Page créée!');
         return $this->redirectToRoute('admin_index');
+    }
+
+    private function getActiveConfig()
+    {
+        /*
+         * On récupère la configuration du site.
+         */
+        $entityManager = $this->getDoctrine()->getManager();
+        $configuration = $entityManager->getRepository(Config::class)->findBy(['active' => true]);
+        foreach ($configuration as $conf) {
+            $config[$conf->getCode()] = $conf;
+            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
+                $config_simple[$conf->getCode()] = $conf->getValue();
+            }else{
+                $config_simple[$conf->getCode()] = $conf;
+            }
+        }
+
+        return $config_simple ;
     }
 
 
