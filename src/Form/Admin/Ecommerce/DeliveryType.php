@@ -99,7 +99,7 @@ class DeliveryType extends AbstractType
                 return $address->__toString();
             },
             'choices' => $choices,
-            'required' => false,
+            'required' => true,
         ]);
     }
 
