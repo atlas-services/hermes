@@ -19,6 +19,7 @@ $(document).ready(function() {
                 $addressTarget
                     .html(html)
                     .removeClass('d-none');
+                $("#delivery-button").removeClass('d-none');
 
                 // Form new address
                 var $addressNew = $('.js-address-new');
@@ -38,7 +39,10 @@ $(document).ready(function() {
                             // Replace the current field and show
                             $addressNew
                                 .html(html)
-                                .removeClass('d-none')
+                                .removeClass('d-none');
+                            $addressTarget.find('select').remove();
+                            $addressTarget.addClass('d-none');
+                            $("#delivery-button").addClass('d-none');
                         }
                     });
                 });

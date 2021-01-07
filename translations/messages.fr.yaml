@@ -394,6 +394,7 @@ order:
   quantity: Quantité
   account: Mon compte
   delivery: Livraison
+  add_delivery_address: <i class="fa fa-plus"></i> Ajouter une addresse de livraison
   placeholder_delivery_method: Sélectionnez le mode de livraison
   delivery_method: Mode de livraison
   delivery_address: Adresse de livraison

@@ -99,15 +99,15 @@ class ConfigController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             if(strpos($config->getCode(), 'clic_and_collect_adresse')){
-                $addresses = $entityManager->getRepository(Address::class)->findByGivenName(Delivery::DELIVERY_CC);
+                $addresses = $entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
                 if([] == $addresses || null == $addresses){
                     $addresse = new Address();
-                    $addresse->setGivenName(Delivery::DELIVERY_CC);
+                    $addresse->setAdditionalName(Delivery::DELIVERY_CC);
                 }else{
                     $addresse = $addresses[0];
                     if(null == $addresse){
                         $addresse = new Address();
-                        $addresse->setGivenName(Delivery::DELIVERY_CC);
+                        $addresse->setAdditionalName(Delivery::DELIVERY_CC);
                     }
                 }
                 foreach($entityManager->getRepository(Config::class)->findByType('contact') as $address_cc){

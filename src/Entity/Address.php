@@ -172,14 +172,14 @@ class Address implements AddressInterface
 
     public function __toString(): ?string
     {
-        if(!is_null($this->givenName)){
-            if(Delivery::DELIVERY_CC == $this->givenName){
+        if(!is_null($this->additionalName)){
+            if(Delivery::DELIVERY_CC == $this->additionalName){
                 return $this->organization . ', ' . $this->addressLine1 . ', '. $this->postalCode . ' '. $this->locality;
             }
-            return $this->givenName;
-        }
-        if(!is_null($this->additionalName)){
             return $this->additionalName;
+        }
+        if(!is_null($this->givenName)){
+            return $this->givenName . ' '. $this->familyName;
         }
         return '';
     }

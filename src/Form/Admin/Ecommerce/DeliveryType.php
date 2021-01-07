@@ -118,7 +118,7 @@ class DeliveryType extends AbstractType
 
             switch ($deliveryMethod) {
                 case Delivery::DELIVERY_CC:
-                    $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByGivenName(Delivery::DELIVERY_CC);
+                    $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
                     break;
                 case Delivery::DELIVERY_RELAY:
                     $deliveryMethodNameChoices = $RE;
@@ -135,7 +135,7 @@ class DeliveryType extends AbstractType
 
     private function getAddresseCCChoices()
     {
-        $adress_cc = $this->entityManager->getRepository(Address::class)->findByGivenName(Delivery::DELIVERY_CC);
+        $adress_cc = $this->entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
         $choices = [] ;
 
         return [$addresse];
