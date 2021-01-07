@@ -1,2 +1,3 @@
 {% form_theme form 'admin/form/theme_posts.html.twig' %}
 {{ form_row(form.address) }}
+<a href="#" id="js-address-button-new" class="js-address-button-new col-lg-4 mx-auto px-0 mt-5 btn h-btn-outline-success" data-address-new-url="{{ path('customer_delivery_address_new') }}" >{{ 'global.new'|trans() }}</a>

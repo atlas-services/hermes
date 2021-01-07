@@ -10,9 +10,11 @@ namespace App\Controller\Ecommerce;
 
 use App\Ecommerce\CartClient;
 use App\Ecommerce\OrderClient;
+use App\Entity\Address;
 use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\Admin\Ecommerce\AddressType;
 use App\Form\Admin\Ecommerce\DeliveryType;
 use App\Menu\Page;
 use App\Ecommerce\StripeClient;
@@ -160,7 +162,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/customer/delivery/delivery-method-select", name="customer_delivery_delivery_method_select")
      */
-    public function getAddressSelect(Request $request, Page $page, OrderClient $orderClient, TranslatorInterface $translator)
+    public function getAddressSelect(Request $request, OrderClient $orderClient, TranslatorInterface $translator)
     {
         if(!$this->isGranted('ROLE_CUSTOMER')){
             return $this->redirectToRoute('cart');
@@ -183,6 +185,43 @@ class OrderController extends AbstractController
         $array['form'] = $form->createView();
 
         return $this->render('front/base/ecommerce/order/delivery_address.html.twig', $array);
+
+    }
+
+    /**
+     * @Route("/customer/delivery/address-new", name="customer_delivery_address_new")
+     */
+    public function setNewAddress(Request $request, OrderClient $orderClient, TranslatorInterface $translator)
+    {
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            return $this->redirectToRoute('cart');
+        }
+
+        if(0 == $orderClient->getTotal($this->getUser())){
+            $orderClient->emptyCart();
+            return $this->redirect('/');
+        }
+
+        //Address
+        $address = new Address();
+        $address->setUser($this->getUser());
+        $address->setFamilyName($this->getUser()->getLastname());
+        $address->setGivenName($this->getUser()->getFirstname());
+        $form = $this->createForm(AddressType::class, $address);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($address);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('order_delivery');
+        }
+
+        $array['form'] = $form->createView();
+
+        return $this->render('front/base/ecommerce/order/address_form.html.twig', $array);
 
     }
 

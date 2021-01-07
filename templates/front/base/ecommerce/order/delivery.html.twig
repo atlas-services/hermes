@@ -12,8 +12,6 @@
             {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.delivery'|trans()} %}
             {% form_theme form 'admin/form/theme_posts.html.twig' %}
                 {{ form_start(form) }}
-{#                {{ form_row(form.deliveryMethod) }}#}
-{#                {{ form_row(form.address) }}#}
                 {{ form_row(form.deliveryMethod, {
                     attr: {
                         'data-specific-delivery-method-url': path('customer_delivery_delivery_method_select'),
@@ -30,6 +28,11 @@
                 </div>
             {{ form_widget(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
+            <div class="js-address-new">
+                {% if form_address is defined %}
+                    {% include 'front/base/ecommerce/order/address_form.html.twig' %}
+                {% endif %}
+            </div>
 {#            {% include 'front/base/ecommerce/order/table.html.twig' %}#}
         </div>
     </div>

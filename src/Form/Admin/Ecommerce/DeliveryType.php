@@ -94,6 +94,7 @@ class DeliveryType extends AbstractType
         }
         $form->add('address', EntityType::class, [
             'class' => Address::class,
+            'label' =>   'order.delivery_address',
             'placeholder' => 'order.placeholder_delivery_address',
             'choice_label' => function ($address) {
                 return $address->__toString();
