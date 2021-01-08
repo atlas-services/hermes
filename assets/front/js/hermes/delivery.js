@@ -21,31 +21,37 @@ $(document).ready(function() {
                     .removeClass('d-none');
                 $("#delivery-button").removeClass('d-none');
 
-                // Form new address
+                // clear Form new address
                 var $addressNew = $('.js-address-new');
-                $addressNew.addClass('d-none');
-
                 var $addressButtonNew = $('.js-address-button-new');
-                $addressButtonNew.click( function(e) {
-                    // e.preventDefault();
-                    $.ajax({
-                        url: $addressButtonNew.data('address-new-url'),
-                        success: function (html) {
-                            if (!html) {
-                                $addressNew.find('select').remove();
-                                $addressNew.addClass('d-none');
-                                return;
+
+                $addressButtonNew.addClass('d-none');
+                $addressNew.html('').removeClass('d-none');
+                // add Form new address
+                if('CLICK_AND_COLLECT' != $deliveryMethodSelect.val()){
+                    $addressButtonNew.removeClass('d-none');
+                    $addressNew.addClass('d-none');
+
+                    $addressButtonNew.click( function(e) {
+                        // e.preventDefault();
+                        $.ajax({
+                            url: $addressButtonNew.data('address-new-url'),
+                            success: function (html) {
+                                if (!html) {
+                                    $addressNew.find('select').remove();
+                                    $addressNew.addClass('d-none');
+                                    return;
+                                }
+                                // Replace the current field and show
+                                $addressNew
+                                    .html(html)
+                                    .removeClass('d-none');
+                                $("#delivery-button").addClass('d-none');
                             }
-                            // Replace the current field and show
-                            $addressNew
-                                .html(html)
-                                .removeClass('d-none');
-                            $addressTarget.find('select').remove();
-                            $addressTarget.addClass('d-none');
-                            $("#delivery-button").addClass('d-none');
-                        }
+                        });
                     });
-                });
+                }
+
             }
         });
     });
