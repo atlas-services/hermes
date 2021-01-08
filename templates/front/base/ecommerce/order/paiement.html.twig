@@ -13,12 +13,12 @@
             {% if order is defined %}
                 {% if order.delivery is not null %}
             <div class=" mt-3 pt-3 mx-auto px-0 text-justify" >
-            <h5>{{ 'order.delivery_method'|trans() }} : {{ order.delivery.deliveryMethod }}</h5>
-                    <h5>{{ 'order.delivery_address'|trans() }} : {{ order.delivery.address }} </h5>
-                    <h6> {{ order.delivery.address.addressLine1 }} : </h6>
-                    <h6> {{ order.delivery.address.addressLine2 }} : </h6>
-                    <h6> {{ order.delivery.address.postalCode }} : </h6>
-                    <h6> {{ order.delivery.address.countryCode }} : </h6>
+            <h5>{{ 'order.delivery_method'|trans() }} : {{ ('delivery.'~ order.delivery.deliveryMethod|lower)|trans() }}</h5>
+                <h5>
+                    {{ 'order.delivery_address'|trans() }} ({{ order.delivery.address }}) :
+                    {{ order.delivery.address.addressLine1 }}  {{ order.delivery.address.addressLine2 }}  {{ order.delivery.address.postalCode }}
+                    {{ order.delivery.address.locality }} {{ order.delivery.address.countryCode }}
+                </h5>
             </div>
                 {% endif %}
             {% endif %}

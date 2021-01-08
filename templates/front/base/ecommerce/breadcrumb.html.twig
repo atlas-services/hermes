@@ -15,8 +15,6 @@
             {% endif %}
         </ol>
     </nav>
-    {%  if(app.user is not null) %}
-          <h4 class="{{ content_color }}"> {{ 'order.security'|trans() }} <pan class="fa fa-lock"></pan></h4>
-    {% endif %}
+    {% include 'front/base/ecommerce/security.html.twig' %}
 </div>
 
