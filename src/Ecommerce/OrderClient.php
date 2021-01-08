@@ -121,7 +121,7 @@ class OrderClient
         if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
             $delivery->setPrice(12345);
         }
-        if(Delivery::DELIVERY_EXPRESS ==  $delivery->getDeliveryMethod()){
+        if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
             $delivery->setPrice(54321);
         }
         if(is_null($delivery->getName())){

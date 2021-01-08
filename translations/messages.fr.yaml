@@ -404,6 +404,13 @@ order:
   delivery_free: Frais de livraison offerts
   total: Total
 
+delivery:
+  click_and_collect: Click And Collect
+  home: A la maison - sous 8 jours
+  home_express: A la maison - sous 48h00
+  relay: Livraison en relais
+  error: Erreur
+
 paiement:
   message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon paiement

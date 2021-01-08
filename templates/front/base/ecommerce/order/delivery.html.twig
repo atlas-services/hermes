@@ -10,7 +10,7 @@
                 </div>
             {% endfor %}
             {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.delivery'|trans()} %}
-            {% form_theme form 'admin/form/theme_posts.html.twig' %}
+            {% form_theme form 'front/base/ecommerce/theme/theme1.html.twig' %}
                 {{ form_start(form) }}
                 {{ form_row(form.deliveryMethod, {
                     attr: {

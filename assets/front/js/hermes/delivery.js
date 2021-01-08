@@ -23,13 +23,16 @@ $(document).ready(function() {
                 // clear Form new address
                 var $addressNew = $('.js-address-new');
                 var $addressButtonNew = $('.js-address-button-new');
+                var $addressButtonOu = $('.js-address-button-ou');
 
                 $addressButtonNew.addClass('d-none');
+                $addressButtonOu.addClass('d-none');
                 $addressNew.addClass('d-none');
 
                 // add Form new address
                 if('CLICK_AND_COLLECT' != $deliveryMethodSelect.val()){
                     $addressButtonNew.removeClass('d-none');
+                    $addressButtonOu.removeClass('d-none');
                     $addressNew.addClass('d-none');
 
                     $addressButtonNew.click( function(e) {
@@ -53,9 +56,9 @@ $(document).ready(function() {
                     });
                 }
 
-                // handle select2
+                $("#delivery-button").removeClass('d-none');
 
-                // $("#delivery-button").removeClass('d-none');
+                // handle select2
                 $( ".select2").select2({
                     theme: "bootstrap",
                 });

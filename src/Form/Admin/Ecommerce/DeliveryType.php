@@ -124,7 +124,7 @@ class DeliveryType extends AbstractType
                     $deliveryMethodNameChoices = $RE;
                     break;
                 case Delivery::DELIVERY_HOME:
-                case Delivery::DELIVERY_EXPRESS:
+                case Delivery::DELIVERY_HOME_EXPRESS:
                     $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByUser($this->user);
                     break;
             }

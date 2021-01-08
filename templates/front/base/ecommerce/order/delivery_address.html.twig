@@ -1,3 +1,7 @@
-{% form_theme form 'admin/form/theme_posts.html.twig' %}
-<a href="#" id="js-address-button-new" class="js-address-button-new col-12 mx-auto px-0 mt-5 btn h-btn-outline-success" data-address-new-url="{{ path('customer_delivery_address_new') }}" >{{ 'order.add_delivery_address'|trans()|raw }}</a>
+{% form_theme form 'front/base/ecommerce/theme/theme1.html.twig' %}
+
 {{ form_row(form.address) }}
+<h4 class="col-12 text-center mt-3 js-address-button-ou"> Ou </h4>
+<a href="#"  class="js-address-button-new col-12 mt-2 btn h-btn-outline-success" data-address-new-url="{{ path('customer_delivery_address_new') }}" >{{ 'order.add_delivery_address'|trans()|raw }}</a>
+
+
