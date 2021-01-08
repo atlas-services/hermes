@@ -48,8 +48,7 @@ class DeliveryType extends AbstractType
                     'label' =>   'order.delivery_method',
                     'placeholder' => 'order.placeholder_delivery_method',
                     'choices' =>   Delivery::DELIVERY_CHOICES,
-                    'attr' => ['class' => 'select-delivery-method select2 custom-select select2 custom-select-lg mb-3']
-
+                    'attr' => ['class' => 'select-delivery-method form-control select2  mb-3']
                 ])
             ;
 
@@ -100,6 +99,7 @@ class DeliveryType extends AbstractType
                 return $address->__toString();
             },
             'choices' => $choices,
+            'attr' => ['class' => 'form-control select2 '],
             'required' => true,
         ]);
     }

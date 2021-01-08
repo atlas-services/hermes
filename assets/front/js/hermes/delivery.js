@@ -1,4 +1,4 @@
-
+import select from 'select2';
 $(document).ready(function() {
     var $deliveryMethodSelect = $('.js-delivery-form-method');
     var $addressTarget = $('.js-address-target');
@@ -19,14 +19,14 @@ $(document).ready(function() {
                 $addressTarget
                     .html(html)
                     .removeClass('d-none');
-                $("#delivery-button").removeClass('d-none');
 
                 // clear Form new address
                 var $addressNew = $('.js-address-new');
                 var $addressButtonNew = $('.js-address-button-new');
 
                 $addressButtonNew.addClass('d-none');
-                $addressNew.html('').removeClass('d-none');
+                $addressNew.addClass('d-none');
+
                 // add Form new address
                 if('CLICK_AND_COLLECT' != $deliveryMethodSelect.val()){
                     $addressButtonNew.removeClass('d-none');
@@ -47,10 +47,21 @@ $(document).ready(function() {
                                     .html(html)
                                     .removeClass('d-none');
                                 $("#delivery-button").addClass('d-none');
+                                $addressTarget.addClass('d-none');
                             }
                         });
                     });
                 }
+
+                // handle select2
+
+                // $("#delivery-button").removeClass('d-none');
+                $( ".select2").select2({
+                    theme: "bootstrap",
+                });
+                $('.select2-selection').css('margin-top', '12px');
+                $('.select2-selection').css('border-color', '#a4c52e');
+                $(".select2-results__option").css("background-color", "#123456");
 
             }
         });
