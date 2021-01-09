@@ -369,7 +369,7 @@ address:
 cart:
   back: Reprendre mes achats
   label: Mon panier
-  add: Ajouter
+  add: Ajouter au panier
   product: Article(s)
   price: Prix
   unit_price: Prix Unitaire
