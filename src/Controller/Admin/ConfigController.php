@@ -113,7 +113,7 @@ class ConfigController extends AbstractController
                 foreach($entityManager->getRepository(Config::class)->findByType('contact') as $address_cc){
                     switch (true) {
                         case strpos($address_cc->getCode(), 'additional_name'):
-                            $addresse->setAdditionalName($address_cc->getValue());
+                            $addresse->setAdditionalName(Delivery::DELIVERY_CC);
                             break;
                         case strpos($address_cc->getCode(), 'family_name'):
                             $addresse->setFamilyName($address_cc->getValue());

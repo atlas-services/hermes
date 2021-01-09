@@ -23,9 +23,12 @@ Feature: Tunnel
         And I am logged in as a customer ""
 #        tunnel delivery
         Then I should see "Mode de livraison"
-        And I select "HOME" from "delivery_deliveryMethod"
+        And I wait for 2 seconds
+#        And I select "A la maison - sous 8 jours" from "delivery_deliveryMethod"
+        And I fill in select2 input "#delivery_deliveryMethod" with value "A la maison - sous 8 jours" and select "A la maison - sous 8 jours"
         And I wait for 1 seconds
-        And I select "Adresse 1" from "delivery_address"
+        And I fill in select2 input "#delivery_address" with value "Adresse 1" and select "Adresse 1"
+#        And I select "Adresse 1" from "delivery_address"
         And I press "Valider"
         And I scroll "paiement" into view
 #        tunnel paiement
