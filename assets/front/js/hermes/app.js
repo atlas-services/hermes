@@ -48,4 +48,5 @@ import '../../../js/lazy';
 // import '../hermes/todo';
 import '../hammer.min';
 import '../carousel';
+import '../hermes/adress';
 

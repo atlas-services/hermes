@@ -1,0 +1,50 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{{ form_start(form, {'action': path('address_new'), 'method': 'POST'}) }}
+     
+    <div class="form-group">
+        {{ form_label(form.additionalName) }}
+        {{ form_widget(form.additionalName, {'attr': {'class': 'form-control', 'placeholder': "Veuillez saisir un nom d'adresse"}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.addressLine1) }}
+        {{ form_widget(form.addressLine1, {'attr': {'class': 'form-control', 'placeholder': "Veuillez saisir une adresse"}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.addressLine2) }}
+        {{ form_widget(form.addressLine2, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.countryCode) }}
+        {{ form_widget(form.countryCode, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.locality) }}
+        {{ form_widget(form.locality, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.postalCode) }}
+        {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.familyName) }}
+        {{ form_widget(form.familyName, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.givenName) }}
+        {{ form_widget(form.givenName, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.organization) }}
+        {{ form_widget(form.organization, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <button class="btn btn-primary mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ button_label|default('global.update'|trans()) }} </button>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

@@ -1,26 +1,7 @@
 {% form_theme form 'admin/form/theme_posts.html.twig' %}
-{{ form_start(form) }}
-    
-    <div class="form-group">
-        {{ form_label(form.active) }}
-        {{ form_row(form.active) }}
-    </div>
-
-     <div class="form-group">
-        {{ form_label(form.defaultDelivery) }}
-        {{ form_row(form.defaultDelivery, {'attr': {'placeholder': "Veuillez cocher si addresse de livraison"}}) }}
-    </div>
-     <div class="form-group">
-        {{ form_label(form.defaultInvoice) }}
-        {{ form_row(form.defaultInvoice, {'attr': {'placeholder': "Veuillez cocher si addresse de facturation"}}) }}
-    </div>
 
 
-    <div class="form-group">
-        {{ form_label(form.countryCode) }}
-        {{ form_widget(form.countryCode, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
+{{ form_start(form, {'action': path('address_edit', {'id': address.id}), 'method': 'POST'}) }}
     <div class="form-group">
         {{ form_label(form.additionalName) }}
         {{ form_widget(form.additionalName, {'attr': {'class': 'form-control', 'placeholder': "Veuillez saisir un nom d'adresse"}}) }}
@@ -35,16 +16,19 @@
         {{ form_widget(form.addressLine2, {'attr': {'class': 'form-control'}}) }}
     </div>
 
-    
+    <div class="form-group">
+        {{ form_label(form.countryCode) }}
+        {{ form_widget(form.countryCode, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
     <div class="form-group">
         {{ form_label(form.locality) }}
-        {{ form_widget(form.locality, {'attr': {'class': 'form-control','data-vicopo-val-ville':"#ville", 'autocomplete':'off'}}) }}
+        {{ form_widget(form.locality, {'attr': {'class': 'form-control'}}) }}
     </div>
 
     <div class="form-group">
         {{ form_label(form.postalCode) }}
-        {{ form_widget(form.postalCode, {'attr': {'class': 'form-control','data-vicopo-val-code-postal':"#code", 'autocomplete':'off'}}) }}
+        {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
     </div>
 
     <div class="form-group">
@@ -63,5 +47,5 @@
     </div>
 
     <button class="btn btn-primary mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ button_label|default('global.update'|trans()) }} </button>
-{#    {{ form_widget(form._token) }}#}
-{{ form_end(form, {'render_rest': true}) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

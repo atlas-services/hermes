@@ -1,0 +1,14 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'address.label'|trans() }}{% endblock %}
+
+{% block nav %}
+    <section id="section_top" class="container"></section>
+    {% include '/admin/customer/nav.html.twig' %}
+{% endblock nav %}
+
+{% block content %}
+
+    {{ include('admin/address/address_form_new.html.twig') }}
+
+{% endblock %}

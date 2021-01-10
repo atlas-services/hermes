@@ -1,0 +1,16 @@
+ {% form_theme form 'admin/form/theme_posts.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_row(form.countryCode, {
+                    attr: {
+                        'data-specific-adress-method-url': path('address_new'),
+                        'class': 'js-adress-form-method'
+                    }
+                }) }}
+                <div class="js-address-target">
+                    {%  if form.address is defined %}
+                        {{ form_row(form.address) }}
+                    {% endif %}
+                </div>
+            {{ form_widget(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+   

@@ -30,50 +30,51 @@ class AddressController extends AbstractController
         $address_options = $addressClient->getAddress('fr-FR');
     
         $address = new Address();
-        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
-            $address->setUser($this->getUser());
-            $address->setFamilyName($this->getUser()->getLastname());
-            $address->setGivenName($this->getUser()->getFirstname());
-        }
+        
       
         $form = $this->createForm(Address1Type::class, $address, array('optionAddress' => $address_options));
         
         $form->handleRequest($request);
-        
-        $form2 = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array()));
-        $form2->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) { 
-            $countryCode = $request->request->get('address1')['countryCode'];
+        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
+            $address->setUser($this->getUser()); 
+            $address->setFamilyName($this->getUser()->getLastname());
+            $address->setGivenName($this->getUser()->getFirstname());
+        }
+
+        if ($countryCode = $request->query->get("adressMethod")) { 
             $country = $address_options['countryList'];
-            $country = $country[$countryCode];
+            $countryName = $country[$countryCode];
            
-            $form2 = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array($countryCode => $country)));
-           
+            $form2 = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array($countryCode => $countryName)));
+            $form2->handleRequest($request);
 
-            return $this->render('admin/address/new.html.twig', [
+            return $this->render('admin/address/new_address.html.twig', [
                 'address' => $address,
                 'form' => $form2->createView(),
                 'country' => array($countryCode =>  $country)
             ]);
             
+        } else {
+            $form2 = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array('')));
+            $form2->handleRequest($request);
         }
-
-        
+       
         if ($form2->isSubmitted()) {
+            $address->setCountryCode($request->request->get('address_fr')['countryCode']);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($address);
             $entityManager->flush();
 
             return $this->redirectToRoute('address_index');
-        }
+        } 
 
-        return $this->render('admin/address/new_1.html.twig', [
+        return $this->render('admin/address/choice_country.html.twig', [
             'address' => $address,
             'form' => $form->createView(),
         ]);
     }
-
 
     /**
      * @Route("/", name="address_index", methods={"GET"})
@@ -102,13 +103,20 @@ class AddressController extends AbstractController
      * @Route("/{id}/edit", name="address_edit", methods={"GET","POST"})
      * @ParamConverter("address", class="App\Entity\Address")
      */
-    public function edit(Request $request, Address $address): Response
+    public function edit(Request $request, Address $address,AddressClient $addressClient): Response
     {
 
+       
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
         }
-        $form = $this->createForm(AddressType::class, $address);
+        $address_options = $addressClient->getAddress('fr-FR');
+        $country = $address_options['countryList'];
+
+        $countryCode = $address->getCountryCode();
+        $countryName = $country[$countryCode];
+       
+        $form = $this->createForm(AddressFRType::class, $address, array('optionAddress' => array($countryCode => $countryName)));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
