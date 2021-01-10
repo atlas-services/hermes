@@ -9,21 +9,21 @@
             </div>
             <div id="folio" class="row">
                 {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-                    <div class="col-md-{{ section.posts|list_length }} col-sm-{{ section.posts|list_length }} portfolio-item text-center">
+                    <div class="col-md-{{ section.posts|list_length }} col-sm-{{ section.posts|list_length }} portfolio-item text-center border h-border-success border-left-0 border-right-0 border-top-0">
                         {% if( section.template2 == '') %}
                             <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
-                         alt="{{ post.name }}">
+                                 alt="{{ post.name }}">
                         {% else %}
-                        {% if section.template2.code in ['modale1', 'modale3' ] %}
-                            <!-- Modale1  -->
+                            {% if section.template2.code in ['modale1', 'modale3' ] %}
+                                <!-- Modale1  -->
                                 <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
                                    data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                    data-target="#image-gallery">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content">
-                                        <i class="fa fa-plus fa-3x"></i>
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <i class="fa fa-plus fa-3x"></i>
+                                        </div>
                                     </div>
-                                </div>
                                     {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                                         <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                              alt="{{ post.name }}">
@@ -41,12 +41,12 @@
                                     {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                                         <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_folio2_filter') }}"
                                              alt="{{ post.name }}">
-                                      {% endif %}
+                                    {% endif %}
                                 </a>
                             {% endif %}
                         {% endif %}
-                        <div class="portfolio-caption">
-                            <h4>{{ post.name }}</h4>
+                        <div class="portfolio-caption pt-3 pb-1 ">
+                            <h6>{{ post.name }}</h6>
                         </div>
                     </div>
                 {% endfor %}
@@ -54,54 +54,51 @@
         {% endif %}
         {% if(section.remote is not null) %}
             <div id="folio" class="row">
-            {% for img , image in  section.remote.images %}
-                <div class="col-md-{{ section.remote.images|list_length }} col-sm-{{ section.remote.images|list_length }} portfolio-item text-center">
-                    {% if( section.template2 == '') %}
-                        <img class="img-fluid " src="{{ image }}"
-                             alt="{{ img }}">
-                    {% else %}
-                        {% if section.template2.code in ['modale1', 'modale3' ] %}
-                            <!-- Modale1  -->
-                            <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
-                               data-image ="{{ image }}"
-                               data-target="#image-gallery">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content">
-                                        <i class="fa fa-plus fa-3x"></i>
+                {% for img , image in  section.remote.images %}
+                    <div class="col-md-{{ section.remote.images|list_length }} col-sm-{{ section.remote.images|list_length }} portfolio-item text-center">
+                        {% if( section.template2 == '') %}
+                            <img class="img-fluid " src="{{ image }}"
+                                 alt="{{ img }}">
+                        {% else %}
+                            {% if section.template2.code in ['modale1', 'modale3' ] %}
+                                <!-- Modale1  -->
+                                <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
+                                   data-image ="{{ image }}"
+                                   data-target="#image-gallery">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <i class="fa fa-plus fa-3x"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                {% if image is not null %}
-                                    <img class="img-fluid " src="{{ image }}"
-                                         alt="{{ img }}">
-                                {% endif %}
-                            </a>
-                        {% endif %}
-                        {% if( 'modale2' ==  section.template2.code) %}
-                        <!-- Modale2  -->
-                            <a class="portfolio-link " data-toggle="modal" href="#portfolioModal{{ img }}">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content">
-                                        <i class="fa fa-plus fa-3x"></i>
+                                    {% if image is not null %}
+                                        <img class="img-fluid " src="{{ image }}"
+                                             alt="{{ img }}">
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                            {% if( 'modale2' ==  section.template2.code) %}
+                                <!-- Modale2  -->
+                                <a class="portfolio-link " data-toggle="modal" href="#portfolioModal{{ img }}">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <i class="fa fa-plus fa-3x"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                {% if(image is not null) %}
-                                    <img class="img-fluid " src="{{ image }}"  alt="{{ img }}" />
-                                {% endif %}
-                            </a>
+                                    {% if(image is not null) %}
+                                        <img class="img-fluid " src="{{ image }}"  alt="{{ img }}" />
+                                    {% endif %}
+                                </a>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>{{ image }}</h4>#}
-{#                    </div>#}
-                </div>
-            {% endfor %}
-        </div>
+                        {#                    <div class="portfolio-caption">#}
+                        {#                        <h4>{{ image }}</h4>#}
+                        {#                    </div>#}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
 </section>
 
 <!-- Modale -->
 {% include 'front/base/hermes/template/modale.html.twig' %}
-
-
-

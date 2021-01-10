@@ -21,19 +21,35 @@
                 {% set float_direction = 'float-right ml-lg-4 ml-3 mb-3' %}
             {% endif %}
 
-                <div class="col-lg-5 col-12 h-rounded-lg-04 pt-3 pl-lg-3 pr-lg-3 pb-2 pr-0 pl-0 {{ margin }} my-3 w-auto shadow-lg text-center" style="background-color: {{ card_bgcolor }};color: {{ card_color }};">
-                    <div class="text-left pb-3 col-12"  style="font-size: 0.875em;">
-                        <p class="text-justify col-12">
+            <div class="col-lg-5 col-12 h-rounded-lg-04 pt-3 pl-lg-3 pr-lg-3 pb-2 pr-0 pl-0 {{ margin }} my-3 w-auto shadow-lg text-center" style="background-color: {{ card_bgcolor }};color: {{ card_color }};">
+                <div class="text-left pb-3 col-12"  style="font-size: 0.875em;">
+                    <p class="text-justify col-12">
                         {% if vich_uploader_asset(post, 'imageFile') is not null %}
                             <img class="h-w-50 h-rounded-lg-3 {{ float_direction }}" alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}" />
                         {% endif %}
-                        {{ post.content|raw }}
-                        </p>
-                    </div>
+                        {% if section.template2.code in ['modale1', 'modale3' ] %}
+                            <!-- Modale1  -->
+                            <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                               data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                               data-target="#image-gallery">
+                                {{ post.content|striptags|u.truncate(600, '...')|raw }}
+                            </a>
+                        {% endif %}
+                        {% if( 'modale2' ==  section.template2.code) %}
+                            <!-- Modale2  -->
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                {{ post.content|striptags|u.truncate(550, '...')|raw }}
+                            </a>
+                        {% endif %}
+                    </p>
                 </div>
-                {% if loop.index is  even %}
-                    </div>
-                {% endif %}
+                {% include 'front/base/hermes/template/ecommerce/product1.html.twig' %}
+            </div>
+            {% if loop.index is  even %}
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 </section>
+<!-- Modale -->
+{% include 'front/base/hermes/template/modale.html.twig' %}
