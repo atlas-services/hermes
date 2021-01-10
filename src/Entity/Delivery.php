@@ -28,14 +28,27 @@ class Delivery
     const DELIVERY_CC =  'CLICK_AND_COLLECT' ;
     const DELIVERY_RELAY =  'RELAIS' ;
     const DELIVERY_HOME =  'HOME' ;
-    const DELIVERY_EXPRESS =  'EXPRESS' ;
+    const DELIVERY_HOME_EXPRESS =  'HOME_EXPRESS' ;
     const DELIVERY_ERROR =  'ERROR' ;
+
+    const DELIVERY_LABEL_CC =  'delivery.click_and_collect' ;
+    const DELIVERY_LABEL_RELAY =  'delivery.relay' ;
+    const DELIVERY_LABEL_HOME =  'delivery.home' ;
+    const DELIVERY_LABEL_HOME_EXPRESS =  'delivery.home_express' ;
+    const DELIVERY_LABEL_ERROR =  'delivery.error' ;
+
+    const DELIVERY_CHOICES =  [
+        self::DELIVERY_LABEL_CC => self::DELIVERY_CC,
+//        self::DELIVERY_RELAY => self::DELIVERY_RELAY,
+        self::DELIVERY_LABEL_HOME => self::DELIVERY_HOME,
+        self::DELIVERY_LABEL_HOME_EXPRESS => self::DELIVERY_HOME_EXPRESS,
+    ] ;
 
     const DELIVERY_ALL =  [
         self::DELIVERY_CC => self::DELIVERY_CC,
         self::DELIVERY_RELAY => self::DELIVERY_RELAY,
         self::DELIVERY_HOME => self::DELIVERY_HOME,
-        self::DELIVERY_EXPRESS => self::DELIVERY_EXPRESS,
+        self::DELIVERY_HOME_EXPRESS => self::DELIVERY_HOME_EXPRESS,
         self::DELIVERY_ERROR => self::DELIVERY_ERROR,
     ] ;
 
@@ -45,6 +58,13 @@ class Delivery
      * @ORM\Column(type="string", nullable=false)
      */
     protected $delivery_method;
+
+    /**
+     * @var Address
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Address",  inversedBy="deliverys")
+     */
+    protected $address;
 
     /**
      * @var Order[]|ArrayCollection
@@ -85,6 +105,16 @@ class Delivery
         if(in_array($delivery_method,self::DELIVERY_ALL)){
             $this->delivery_method = $delivery_method;
         }
+    }
+
+    public function setAddress(Address $address)
+    {
+        $this->address = $address ;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address ;
     }
 
     public function getOrders(): ?Collection

@@ -20,7 +20,7 @@
                             <th class="col-xs-4 align-middle cart-product-name text-left"> <img class="mr-3" src="{{ asset(vich_uploader_asset(cartproduct.product.post, 'imageFile'))|imagine_filter('app_thumb_paysage') }}" > {{ cartproduct.product.name }} </th>
                             <td class="col-xs-3 align-middle">{{ ((cartproduct.product.price)/100)|format_currency(currency) }}</td>
                             <td class="col-xs-3 align-middle mx-auto">
-                                <select class="product-quantity col-lg-6 mx-auto form-control browser-default custom-select " id="{{ cartproduct.product.id }}" data-type="update">
+                                <select class="product-quantity col-lg-6 mx-auto form-control browser-default custom-select " name="{{ 'select-product-' ~ cartproduct.product.id }}" id="{{ cartproduct.product.id }}" data-type="update">
                                     {% for i in 0..20 %}
                                         {% set selected= ''  %}
                                         {% if i == cartproduct.quantity  %}
@@ -31,7 +31,7 @@
                                 </select>
                             </td>
                             <td id="price-{{ cartproduct.product.id }}" class="col-xs-3 align-middle">{{ ((cartproduct.price)/100)|format_currency(currency) }}</td>
-                            <td class="col-xs-3 align-middle"><a href="{{ path('cart_delete', {'id': cartproduct.product.id}) }}"><i class="text-danger fa fa-trash"></i></a></td>
+                            <td class="col-xs-3 align-middle"><a id="{{ 'delete-product-' ~ cartproduct.product.id }}" href="{{ path('cart_delete', {'id': cartproduct.product.id}) }}"><i class="text-danger fa fa-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

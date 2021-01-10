@@ -10,9 +10,11 @@ namespace App\Controller\Ecommerce;
 
 use App\Ecommerce\CartClient;
 use App\Ecommerce\OrderClient;
+use App\Entity\Address;
 use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\Admin\Ecommerce\AddressType;
 use App\Form\Admin\Ecommerce\DeliveryType;
 use App\Menu\Page;
 use App\Ecommerce\StripeClient;
@@ -36,16 +38,13 @@ class OrderController extends AbstractController
      */
     public function myorder_account(Request $request,AuthenticationUtils $authenticationUtils, Page $page, CartClient $cartClient, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
+        $referer = $request->headers->get('referer'); // get the referer
         if($this->isGranted('ROLE_CUSTOMER')){
-//            if($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_ORDER) > 1){
-//                // Status ORDER to WAITING for old order with 'ORDER' status
-//                $orderClient->updateOrdersStatusByUser($this->getUser(), Order::STATUS_ORDER,  Order::STATUS_WAITING);
-//                $notification = $translator->trans('order.message_exists');
-//                $this->addFlash('warning', $notification);
-//            }
             // Mise à jour order et raz du panier
-            $orderClient->handleCartProducts($this->getUser());
-            return $this->redirectToRoute('order_delivery');
+            if(true == strpos($referer, 'compte')) {
+                $orderClient->handleCartProducts($this->getUser());
+                return $this->redirectToRoute('order_delivery');
+            }
         }
 
         // get the login error if there is one
@@ -53,7 +52,6 @@ class OrderController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         $account = ['last_username' => $lastUsername, 'error' => $error];
-
 
         // Récuperation du panier en cours
         $products = $cartClient->getProducts();
@@ -70,53 +68,6 @@ class OrderController extends AbstractController
         return $this->render('front/base/ecommerce/order/login.html.twig', $array);
 
     }
-    /**
-     * @Route({
-     * "fr": "/ma/commande",
-     * "en": "/my/order"
-     * },
-     * name="order", methods={"GET|POST"})
-     */
-    public function myorder(Request $request, Page $page, OrderClient $orderClient, TranslatorInterface $translator): Response
-    {
-
-        if(0 == $orderClient->getTotal($this->getUser())){
-            $orderClient->emptyCart();
-            return $this->redirect('/');
-        }
-
-        if(!$this->isGranted('ROLE_CUSTOMER')){
-            $notification = $translator->trans('order.message_compte');
-            $this->addFlash('warning', $notification);
-        }
-
-        if($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_ORDER) > 1){
-            // Status ORDER to WAITING for old order with 'ORDER' status
-            $orderClient->updateOrdersStatusByUser($this->getUser(), Order::STATUS_ORDER,  Order::STATUS_WAITING);
-            $notification = $translator->trans('order.message_exists');
-            $this->addFlash('warning', $notification);
-        }
-
-        // Mise à jour order et raz du panier
-        $orderClient->handleCartProducts($this->getUser());
-
-        // Récuperation de la commande en cours
-        $order = $orderClient->getCurrentOrderByUser($this->getUser());
-        if(is_object($order)){
-            $orderLines = $order->getOrderLines();
-        }else{
-            $products = $orderClient->getCartClient()->getProducts();
-        }
-
-        $total = $orderClient->getTotal($this->getUser());
-
-        $array = $page->getActiveMenu('accueil','accueil');
-        $array['order'] = $order;
-        $array['products'] = $orderLines ?? $products;
-        $array['total'] = $total;
-        return $this->render('front/base/ecommerce/order/index.html.twig', $array);
-
-    }
 
     /**
      * @Route({
@@ -127,6 +78,9 @@ class OrderController extends AbstractController
      */
     public function myorder_delivery(Request $request, Page $page, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            return $this->redirectToRoute('cart');
+        }
 
         if(0 == $orderClient->getTotal($this->getUser())){
             $orderClient->emptyCart();
@@ -140,11 +94,11 @@ class OrderController extends AbstractController
         $form->handleRequest($request);
 
         // Récuperation de la commande en cours
-        // @todo : gestion delivery form
 
         if ($form->isSubmitted() && $form->isValid()) {
             $delivery = $form->getData();
             $orderClient->handleDeliveryOrder($order, $delivery);
+            return $this->redirectToRoute('order_paiement');
         }
 
         if(!$order instanceof Order){
@@ -173,25 +127,17 @@ class OrderController extends AbstractController
     public function myorder_paiement(Request $request, Page $page, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
 
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            return $this->redirectToRoute('cart');
+        }
+
         if(0 == $orderClient->getTotal($this->getUser())){
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
 
-        if(!$this->isGranted('ROLE_CUSTOMER')){
-            $notification = $translator->trans('order.message_compte');
-            $this->addFlash('warning', $notification);
-        }
-
-        if($orderClient->countOrderByUserAndStatus($this->getUser(), Order::STATUS_ORDER) > 1){
-            // Status ORDER to WAITING for old order with 'ORDER' status
-            $orderClient->updateOrdersStatusByUser($this->getUser(), Order::STATUS_ORDER,  Order::STATUS_WAITING);
-            $notification = $translator->trans('order.message_exists');
-            $this->addFlash('warning', $notification);
-        }
-
         // Mise à jour order et raz du panier
-        $orderClient->handleCartProducts($this->getUser());
+        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_DELIVERY);
 
         // Récuperation de la commande en cours
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
@@ -201,15 +147,81 @@ class OrderController extends AbstractController
             $orderLines = $order->getOrderLines();
         }
 
-        $delivery_price = $order->getDelivery()->getPrice();
+        $stripe_public_key = $this->getParameter('stripe_public_key');
         $total = $orderClient->getTotal($this->getUser());
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['order'] = $order;
         $array['products'] = $orderLines ?? $products;
-        $array['delivery_price'] = $delivery_price;
         $array['total'] = $total;
+        $array['APP_STRIPE_PK'] = $stripe_public_key;
         return $this->render('front/base/ecommerce/order/paiement.html.twig', $array);
+
+    }
+
+    /**
+     * @Route("/customer/delivery/delivery-method-select", name="customer_delivery_delivery_method_select")
+     */
+    public function getAddressSelect(Request $request, OrderClient $orderClient, TranslatorInterface $translator)
+    {
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            return $this->redirectToRoute('cart');
+        }
+
+        if(0 == $orderClient->getTotal($this->getUser())){
+            $orderClient->emptyCart();
+            return $this->redirect('/');
+        }
+
+        //Delivery
+        $delivery = new Delivery();
+        $delivery->setDeliveryMethod($request->query->get('deliveryMethod'));
+        $form = $this->createForm(DeliveryType::class, $delivery);
+        // no field? Return an empty response
+        if (!$form->has('address')) {
+            return new Response(null, 204);
+        }
+
+        $array['form'] = $form->createView();
+
+        return $this->render('front/base/ecommerce/order/delivery_address.html.twig', $array);
+
+    }
+
+    /**
+     * @Route("/customer/delivery/address-new", name="customer_delivery_address_new")
+     */
+    public function setNewAddress(Request $request, OrderClient $orderClient, TranslatorInterface $translator)
+    {
+        if(!$this->isGranted('ROLE_CUSTOMER')){
+            return $this->redirectToRoute('cart');
+        }
+
+        if(0 == $orderClient->getTotal($this->getUser())){
+            $orderClient->emptyCart();
+            return $this->redirect('/');
+        }
+
+        //Address
+        $address = new Address();
+        $address->setUser($this->getUser());
+        $address->setFamilyName($this->getUser()->getLastname());
+        $address->setGivenName($this->getUser()->getFirstname());
+        $form = $this->createForm(AddressType::class, $address);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($address);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('order_delivery');
+        }
+
+        $array['form'] = $form->createView();
+
+        return $this->render('front/base/ecommerce/order/address_form.html.twig', $array);
 
     }
 

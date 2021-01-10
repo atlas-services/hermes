@@ -12,6 +12,7 @@ Readme: Readme
 form:
   label:
     delete: Supprimer
+    valider: Valider
 
 info:
   admin_presentation: Afin d'enrichir votre site, voici les différents liens qui vous permettront de
@@ -53,6 +54,7 @@ info:
   new_libelle_post: Ajoutez de nouveaux contenus
 
 global:
+  back_front: Retour au site web
   copyright: 2016 Tous droits réservés par
   created_by: Ce site a été conçu avec le CMS <a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
   about: A propos
@@ -291,6 +293,14 @@ post:
   content: Contenu
   image: Image du contenu (Taille maximale < 2 Mo)
 
+# Product
+product:
+  list: Produits
+  affiche_list: Produits
+  edit: Modifier le produit
+  add: Créer un produit
+  label: Produit
+
 # Section
 section:
   list: Pages
@@ -343,6 +353,12 @@ ecommerce:
   label: Mes achats
 
 
+# Customer
+customer:
+  created: Votre compte client a été créé.
+  resume_purchase: Vous pouvez reprendre vos achats en vous identifiant.
+  sign_in: Connectez-vous
+
 address:
   list: Mes addresses
   label: Addresse
@@ -350,11 +366,10 @@ address:
   addresse1: Addresse 1
   addresse2: Addresse 2
 
-
 cart:
   back: Reprendre mes achats
   label: Mon panier
-  add: Ajouter
+  add: Ajouter au panier
   product: Article(s)
   price: Prix
   unit_price: Prix Unitaire
@@ -363,6 +378,7 @@ cart:
   delete: Supprimer
 
 order:
+  security: Commande sécurisée
   message_compte: Afin de préparer votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   message_exists: Vous avez des commandes en cours, n'oublier pas de les finaliser ou de les annuler.</a>
   update_cart: Modifier mon panier
@@ -378,10 +394,22 @@ order:
   quantity: Quantité
   account: Mon compte
   delivery: Livraison
+  add_delivery_address: <i class="fa fa-plus"></i> Ajouter une addresse de livraison
+  placeholder_delivery_method: Sélectionnez le mode de livraison
   delivery_method: Mode de livraison
+  delivery_address: Adresse de livraison
+  placeholder_delivery_address: Sélectionnez une adresse de livraison
   paiement: Paiement
   delivery_price: Frais de livraison
+  delivery_free: Frais de livraison offerts
   total: Total
+
+delivery:
+  click_and_collect: Click And Collect
+  home: A la maison - sous 8 jours
+  home_express: A la maison - sous 48h00
+  relay: Livraison en relais
+  error: Erreur
 
 paiement:
   message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>

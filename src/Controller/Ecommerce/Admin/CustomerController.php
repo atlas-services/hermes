@@ -20,9 +20,10 @@ class CustomerController extends AbstractController
     public function index(Request $request): Response
     {
         $referer = $request->headers->get('referer'); // get the referer
-        if(false == strpos($referer, 'login')){
-            return $this->redirectToRoute('order_account');
+        if(strpos($referer, 'compte') > 0){
+                return $this->redirectToRoute('order_delivery');
         }
+
         $array = [];
 
         return $this->render('admin/customer/index.html.twig', $array);

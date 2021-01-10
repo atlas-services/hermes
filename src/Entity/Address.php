@@ -8,6 +8,8 @@ use App\Entity\Traits\DefaultInvoiceTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\UserTrait;
 use CommerceGuys\Addressing\AddressInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -154,8 +156,33 @@ class Address implements AddressInterface
       * @var string
      */
     private $locale;
-    
-     
+
+
+    /**
+     * @var Delivery[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Delivery",  mappedBy="address",  cascade={"persist", "remove"})
+     */
+    protected $deliverys;
+
+    public function __construct()
+    {
+        $this->deliverys = new ArrayCollection();
+    }
+
+    public function __toString(): ?string
+    {
+        if(!is_null($this->additionalName)){
+            if(Delivery::DELIVERY_CC == $this->additionalName){
+                return $this->organization . ', ' . $this->addressLine1 . ', '. $this->postalCode . ' '. $this->locality;
+            }
+            return $this->additionalName;
+        }
+        if(!is_null($this->givenName)){
+            return $this->givenName . ' '. $this->familyName;
+        }
+        return '';
+    }
 
     /**
      * Get gets the two-letter country code.
@@ -194,7 +221,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setAdministrativeArea(string $administrativeArea)
+    public function setAdministrativeArea(?string $administrativeArea)
     {
         $this->administrativeArea = $administrativeArea;
 
@@ -214,11 +241,11 @@ class Address implements AddressInterface
     /**
      * Set the locality (i.e city).
      *
-     * @param  string  $locality  the locality (i.e city).
+     * @param  ?string  $locality  the locality (i.e city).
      *
      * @return  self
      */ 
-    public function setLocality(string $locality)
+    public function setLocality(?string $locality)
     {
         $this->locality = $locality;
 
@@ -242,7 +269,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setDependentLocality(string $dependentLocality)
+    public function setDependentLocality(?string $dependentLocality)
     {
         $this->dependentLocality = $dependentLocality;
 
@@ -266,7 +293,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setPostalCode(string $postalCode)
+    public function setPostalCode(?string $postalCode)
     {
         $this->postalCode = $postalCode;
 
@@ -290,7 +317,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setSortingCode(string $sortingCode)
+    public function setSortingCode(?string $sortingCode)
     {
         $this->sortingCode = $sortingCode;
 
@@ -314,7 +341,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setAddressLine1(string $addressLine1)
+    public function setAddressLine1(?string $addressLine1)
     {
         $this->addressLine1 = $addressLine1;
 
@@ -338,7 +365,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setAddressLine2(string $addressLine2)
+    public function setAddressLine2(?string $addressLine2)
     {
         $this->addressLine2 = $addressLine2;
 
@@ -362,7 +389,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setOrganization(string $organization)
+    public function setOrganization(?string $organization)
     {
         $this->organization = $organization;
 
@@ -386,7 +413,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setGivenName(string $givenName)
+    public function setGivenName(?string $givenName)
     {
         $this->givenName = $givenName;
 
@@ -410,7 +437,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setAdditionalName(string $additionalName)
+    public function setAdditionalName(?string $additionalName)
     {
         $this->additionalName = $additionalName;
 
@@ -434,7 +461,7 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setFamilyName(string $familyName)
+    public function setFamilyName(?string $familyName)
     {
         $this->familyName = $familyName;
 
@@ -458,11 +485,17 @@ class Address implements AddressInterface
      *
      * @return  self
      */ 
-    public function setLocale(string $locale)
+    public function setLocale(?string $locale)
     {
         $this->locale = $locale;
 
         return $this;
     }
+
+    public function getDeliverys(): ?Collection
+    {
+        return $this->deliverys ;
+    }
+
 }
 

@@ -1,0 +1,41 @@
+{% use "bootstrap_4_horizontal_layout.html.twig" %}
+
+{% block form_label_class -%}
+    mt-3 px-0 col-lg-12 col-12 text-success
+{%- endblock form_label_class %}
+
+{#{% block checkbox_row -%}#}
+{#    {% set label_box = '' %}#}
+{#    {% set myclass = '' %}#}
+{#    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ myclass )|trim})} %}{{ block('attributes') }}{% endwith %}>#}{#--#}
+{#        <div class="{{ block('form_label_class') }}">{{ label_box }}</div>#}{#--#}
+{#        <div class="{{ block('form_group_class') }}">#}
+{#            {{- form_widget(form) -}}#}
+{#            {{- form_help(form) -}}#}
+{#        </div>#}{#--#}
+{#    </div>#}
+{#{%- endblock checkbox_row %}#}
+
+{% block form_row -%}
+    {% set myclass = 'form-group-row col-12 mx-auto px-0 ' %}
+    {%- if expanded is defined and expanded -%}
+    {{ block('fieldset_form_row') }}
+    {%- else -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ myclass ~ ((not compound or force_error|default(false)) and not valid ? ' is-invalid'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        <div class="{{ block('form_group_class') }}">
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_help(form) -}}
+        </div>
+</div>
+{%- endif -%}
+{%- endblock form_row %}
+
+{% block form_group_class -%}
+    {% set myclass = 'px-0 form-group-row col-12' %}
+   {{ myclass }}
+{%- endblock form_group_class %}

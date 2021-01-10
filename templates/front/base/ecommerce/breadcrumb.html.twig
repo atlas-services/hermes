@@ -1,23 +1,37 @@
 <!-- Breadcrumb -->
-<div class="container mt-3" >
+<div class=" mt-3" >
     <nav aria-label="breadcrumb">
         <ol style="background-color: {{ bgcolor }}" class="breadcrumb ">
-            <li class="breadcrumb-item pr-5 pl-5 py-3 {{ (breadcrumb == 'cart.label'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'cart.label'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('cart') }} >{{ 'cart.label'|trans() }}</a></li>
+            <li style="background-color: {{ (breadcrumb == 'cart.label'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto  py-3 {{ (breadcrumb == 'cart.label'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'cart.label'|trans() )  ? 'aria-current="page"'  : '' }}>
+                <a style="color: {{ (breadcrumb == 'cart.label'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center"  href={{ path('cart') }} >
+                    {{ 'cart.label'|trans() }}
+                </a>
+            </li>
             {%  if(app.user is null) %}
-                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('order_account') }} >{{ 'user.sign_in'|trans() }}</a></li>
-                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.delivery'|trans() }}</li>
-                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.paiement'|trans() }}</li>
+                <li style="background-color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <a style="color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-account"  href={{ path('order_account') }} >{{ 'customer.sign_in'|trans() }}</a></li>
+                <li class="breadcrumb-item col-lg-3 mx-auto py-3 text-secondary {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.delivery'|trans() }}</li>
+                <li class="breadcrumb-item col-lg-3 mx-auto py-3 text-secondary {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active '  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.paiement'|trans() }}</li>
             {% endif %}
             {%  if(app.user is not null) %}
-                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('order_delivery') }} >{{ 'order.delivery'|trans() }}</a></li>
-                <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}><a class="mx-3 "  href={{ path('order_paiement') }} >{{ 'order.paiement'|trans() }}</a></li>
-                 {%  if(order is defined ) %}
-                     {%  if('ORDER' == order.status) %}
-                          <li class="breadcrumb-item pr-5 pl-5  py-3 {{ (breadcrumb == 'paiement.label'|trans() )  ? 'active bg-danger'  : '' }}" {{ (breadcrumb == 'paiement.label'|trans() )  ? 'aria-current="page"'  : '' }}><a href="{{ path('stripe_checkout') }}">{{ 'paiement.label'|trans() }}</a></li>
-                    {% endif %}
-                {% endif %}
+                <li style="background-color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <a style="color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-account"  href={{ path('customer_index') }} >
+                        {{ app.user }}
+                    </a>
+                </li>
+                <li style="background-color: {{ (breadcrumb == 'order.delivery'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <a style="color: {{ (breadcrumb == 'order.delivery'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-delivery"   href={{ path('order_delivery') }} >
+                        {{ 'order.delivery'|trans() }}
+                    </a>
+                </li>
+                <li style="background-color: {{ (breadcrumb == 'order.paiement'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <a style="color: {{ (breadcrumb == 'order.paiement'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-paiement"   href={{ path('order_paiement') }} >
+                        {{ 'order.paiement'|trans() }}
+                    </a>
+                </li>
             {% endif %}
         </ol>
     </nav>
+    {% include 'front/base/ecommerce/security.html.twig' %}
 </div>
 

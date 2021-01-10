@@ -27,9 +27,23 @@
                         {% if vich_uploader_asset(post, 'imageFile') is not null %}
                             <img class="h-w-50 h-rounded-lg-3 {{ float_direction }}" alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}" />
                         {% endif %}
-                        {{ post.content|raw }}
+                        {% if section.template2.code in ['modale1', 'modale3' ] %}
+                            <!-- Modale1  -->
+                            <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                               data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                               data-target="#image-gallery">
+                                {{ post.content|striptags|u.truncate(600, '...')|raw }}
+                            </a>
+                        {% endif %}
+                        {% if( 'modale2' ==  section.template2.code) %}
+                            <!-- Modale2  -->
+                            <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                {{ post.content|striptags|u.truncate(550, '...')|raw }}
+                            </a>
+                        {% endif %}
                         </p>
                     </div>
+                    {% include 'front/base/hermes/template/ecommerce/product1.html.twig' %}
                 </div>
                 {% if loop.index is  even %}
                     </div>
@@ -37,3 +51,5 @@
         {% endfor %}
     </div>
 </section>
+<!-- Modale -->
+{% include 'front/base/hermes/template/modale.html.twig' %}

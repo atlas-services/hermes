@@ -36,6 +36,7 @@
                                  {{ post.content|striptags|u.truncate(maxlengthname, '...')|raw }}
                              </p>
                         </div>
+                        {% include 'front/base/hermes/template/ecommerce/product1.html.twig' %}
                     </div>
                 {% endif %}
             {% endfor %}

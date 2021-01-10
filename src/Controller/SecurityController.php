@@ -156,8 +156,8 @@ class SecurityController extends AbstractController
 
             $firstname = $request->request->get('firstname');
             $lastname = $request->request->get('lastname');
-            $email = $request->request->get('email');
-            $password = $request->request->get('password');
+            $email = $request->request->get('email_new');
+            $password = $request->request->get('password_new');
             $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
             /* @var $user User */
 
@@ -177,7 +177,13 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $notification = $translator->trans('user.created');
+            $notification = $translator->trans('customer.created');
+            $referer = $request->headers->get('referer'); // get the referer
+            if(true == strpos($referer, 'compte')){
+                $notification .= $translator->trans('customer.resume_purchase');
+                $this->addFlash('notice', $notification);
+                return $this->redirectToRoute('order_account');
+            }
             $this->addFlash('notice', $notification);
             return $this->redirectToRoute('customer_index');
         }else {
