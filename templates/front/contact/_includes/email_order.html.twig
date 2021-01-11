@@ -1,0 +1,16 @@
+{% extends "front/base/base_email.html.twig" %}
+
+{% block title %}{{ 'order.label'|trans() }}{% endblock %}
+
+{% block content %}
+    <section >
+        <div class="container col-lg-12 text-center center" style="background-color: #ffffff ;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="section-heading text-formatted-green ">Votre commande</h2>
+                    {% include 'front/base/ecommerce/order/table.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
