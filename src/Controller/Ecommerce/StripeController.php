@@ -103,6 +103,7 @@ class StripeController extends AbstractController
             // send Email with order pdf
             $config = $page->getActiveConfig();
             $context = [
+                'order' => $order,
                 'products' => $orderLines,
                 'total' => $order->getPrice(),
             ];
