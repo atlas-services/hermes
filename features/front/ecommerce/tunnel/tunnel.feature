@@ -37,5 +37,6 @@ Feature: Tunnel
         And I press "Règler avec Stripe"
         And I wait for 2 seconds
         And I fill stripe credit card informations with card 1
-        And I wait for 10 seconds
+        And I wait for 30 seconds
         Then I should see "Paiement effectué!"
+        Then I should see "Vous allez recevoir un email récapitulatif de votre commande."

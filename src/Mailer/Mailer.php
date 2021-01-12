@@ -11,25 +11,25 @@ namespace App\Mailer;
 use App\Entity\Contact;
 use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Order;
-use Knp\Snappy\Pdf;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 class Mailer
 {
     protected $mailer;
     protected $emailLogger;
-    protected $pdf;
+    protected $translator;
 
-    public function __construct(MailerInterface $mailer, LoggerInterface $emailLogger, Pdf $pdf)
+    public function __construct(MailerInterface $mailer, LoggerInterface $emailLogger, TranslatorInterface $translator)
     {
         $this->mailer = $mailer;
         $this->emailLogger = $emailLogger;
-        $this->pdf = $pdf;
+        $this->translator = $translator;
     }
 
     public function send(ContactInterface $contact, $to, $subject, $template, $context)
@@ -58,7 +58,7 @@ class Mailer
                 $email->addTo(new Address($addTo));
             }
             $this->mailer->send($email);
-            $notification = "Votre message a bien été envoyé.";
+            $notification = $this->translator->trans('email.send');
             $return = [
                 'type' => 'notice',
                 'message' => $notification
@@ -72,7 +72,7 @@ class Mailer
             ];
             $this->emailLogger->info($notification, $logContext);
         } catch (\Exception $e) {
-            $notification = "Votre message n'a pu être envoyé.";
+            $notification = $this->translator->trans('email.error_send');
             $logContext = [
                 'exception' => $e->getMessage(),
                 'statut' => 'ko',
@@ -111,7 +111,7 @@ class Mailer
                 $email->attach($pdf, sprintf('commande-du-%s.pdf', date('Y-m-d')));
             }
             $this->mailer->send($email);
-            $notification = "Vous allez recevoir un mail récapitulatif de votre commande.";
+            $notification = $this->translator->trans('email.order.send');
             $return = [
                 'type' => 'notice',
                 'message' => $notification
@@ -123,7 +123,7 @@ class Mailer
             ];
             $this->emailLogger->info($notification, $logContext);
         } catch (\Exception $e) {
-            $notification = "Votre message n'a pu être envoyé.";
+            $notification = $this->translator->trans('email.error_send');
             $logContext = [
                 'exception' => $e->getMessage(),
                 'statut' => 'ko',
