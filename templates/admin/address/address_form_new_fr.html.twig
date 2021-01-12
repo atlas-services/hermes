@@ -23,11 +23,23 @@
     <div class="form-group">
         {{ form_label(form.postalCode) }}
         {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
+        <ul style="list-style: none;">
+            <li data-vicopo="#address_fr_postalCode">
+                <strong data-vicopo-code-postal></strong>
+                <span data-vicopo-ville></span>
+            </li>
+        </ul>
     </div>
 
      <div class="form-group">
         {{ form_label(form.locality) }}
         {{ form_widget(form.locality, {'attr': {'class': 'form-control'}}) }}
+        <ul style="list-style: none;">
+            <li data-vicopo="#address_fr_locality">
+                <strong data-vicopo-code-postal></strong>
+                <span data-vicopo-ville></span>
+            </li>
+        </ul>
     </div>
 
     <div class="form-group">

@@ -1,14 +1,9 @@
-{% extends '/admin/base.html.twig' %}
-
-{% block title %}{{ 'address.label'|trans() }}{% endblock %}
-
-{% block nav %}
-    <section id="section_top" class="container"></section>
-    {% include '/admin/customer/nav.html.twig' %}
-{% endblock nav %}
-
 {% block content %}
 
+  {% if (form.countryCode.vars['choices']['0'].value) == 'FR' %}
+    {{ include('admin/address/address_form_new_fr.html.twig') }}
+  {% else %}
     {{ include('admin/address/address_form_new.html.twig') }}
+  {% endif %}
 
 {% endblock %}

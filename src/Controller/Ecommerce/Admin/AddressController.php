@@ -8,7 +8,7 @@ use App\Entity\Address;
 use App\Ecommerce\AddressClient;
 use App\Repository\AddressRepository;
 use App\Form\Admin\Ecommerce\AddressType;
-use App\Form\Admin\Ecommerce\Address1Type;
+use App\Form\Admin\Ecommerce\CountryType;
 use App\Form\Admin\Ecommerce\AddressFRType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +31,7 @@ class AddressController extends AbstractController
     
         $address = new Address();
         
-      
-        $form = $this->createForm(Address1Type::class, $address, array('optionAddress' => $address_options));
+        $form = $this->createForm(CountryType::class, $address, array('optionAddress' => $address_options));
         
         $form->handleRequest($request);
 
@@ -42,7 +41,7 @@ class AddressController extends AbstractController
             $address->setGivenName($this->getUser()->getFirstname());
         }
 
-        if ($countryCode = $request->query->get("adressMethod")) { 
+        if ($countryCode = $request->request->get("adressMethod")) { 
             $country = $address_options['countryList'];
             $countryName = $country[$countryCode];
            
@@ -105,11 +104,10 @@ class AddressController extends AbstractController
      */
     public function edit(Request $request, Address $address,AddressClient $addressClient): Response
     {
-
-       
         if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
             $address->setUser($this->getUser());
         }
+
         $address_options = $addressClient->getAddress('fr-FR');
         $country = $address_options['countryList'];
 

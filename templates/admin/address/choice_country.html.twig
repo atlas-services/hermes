@@ -18,10 +18,13 @@
 {% endblock %}
 
 {% block javascript %}
-
+{{ encore_entry_script_tags('hermes_front') }}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://vicopo.selfbuild.fr/api.js"></script>
+
 <script type="text/javascript"> 
 $(document).ready(function() {
+   
     var $adressMethodSelect = $('.js-adress-form-method');
     var $addressTarget = $('.js-address-target');
     var $addressNew = $('.js-address-new');
@@ -29,6 +32,7 @@ $(document).ready(function() {
     $adressMethodSelect.on('change', function(e) { 
         $.ajax({
             url: $adressMethodSelect.data('specific-adress-method-url'),
+            type : 'POST',
             data: {
                 adressMethod: $adressMethodSelect.val()
             },
@@ -64,18 +68,45 @@ $(document).ready(function() {
                                     $addressNew.find('select').remove();
                                     $addressNew.addClass('d-none');
                                     return;
-                                } else {
-                                    html = html.find('.container'); 
-                                }
+                                } 
                                 // Replace the current field and show
                                 $addressNew
-                                    .html(html)
+                                    .html(html.find('form'))
                                     .removeClass('d-none');
                                 $("#adress-button").addClass('d-none');
                             }
                         });
                     });
-               // }
+                   
+                  if ($adressMethodSelect.val() == 'FR') {
+                    $('#address_fr_locality').keypress(function (e) {
+                        if(e.keyCode == 13) {
+                            var $ville = $(this);
+                            $.vicopo($ville.val(), function (input, cities) { console.log('ifvicopo');
+                            if(input == $ville.val() && cities[0]) {
+                                $ville.val(cities[0].city).vicopoTargets().vicopoClean();
+                                $('#address_fr_postalCode').val(cities[0].code)
+                            }
+                            });
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    });
+
+                    $('#address_fr_postalCode').keypress(function (e) {
+                        if(e.keyCode == 13) {
+                            var $ville = $(this);
+                            $.vicopo($ville.val(), function (input, cities) { console.log('ifvicopo');
+                            if(input == $ville.val() && cities[0]) {
+                                $ville.val(cities[0].code).vicopoTargets().vicopoClean();
+                                $('#address_fr_locality').val(cities[0].city)
+                            }
+                            });
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                     });
+                }
 
             }
         });
