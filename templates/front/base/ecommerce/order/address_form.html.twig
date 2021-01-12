@@ -1,5 +1,5 @@
-{% form_theme form 'admin/form/theme_posts.html.twig' %}
-{{ form_start(form, {'action': path('address_new'), 'method': 'POST'}) }}
+{% form_theme form 'front/base/ecommerce/theme/theme1.html.twig' %}
+{{ form_start(form, {'action': path('customer_delivery_address_new'), 'method': 'POST'}) }}
      
     <div class="form-group">
         {{ form_label(form.additionalName) }}
@@ -17,7 +17,7 @@
 
     <div class="form-group">
         {{ form_label(form.countryCode) }}
-        {{ form_widget(form.countryCode, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.countryCode, {'attr': {'class': 'form-control select2'}}) }}
     </div>
 
     <div class="form-group">
@@ -27,7 +27,7 @@
 
     <div class="form-group">
         {{ form_label(form.postalCode) }}
-        {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.postalCode, {'attr': {'class': 'form-control select2'}}) }}
     </div>
 
     <div class="form-group">
