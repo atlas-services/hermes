@@ -13,14 +13,18 @@ use App\Ecommerce\OrderClient;
 use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Mailer\Mailer;
 use App\Menu\Page;
 use App\Ecommerce\StripeClient;
+use Knp\Snappy\Pdf;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface;
+use Twig\Environment;
 
 class StripeController extends AbstractController
 {
@@ -32,7 +36,7 @@ class StripeController extends AbstractController
      * },
      *     name="stripe_checkout", methods={"GET|POST"})
      */
-    public function checkout(Request $request, Page $page, StripeClient $stripeClient, OrderClient $orderClient, TranslatorInterface $translator): Response
+    public function checkout(Request $request, Page $page, StripeClient $stripeClient, OrderClient $orderClient, TranslatorInterface $translator, Mailer $mailer,Environment $twig, EntrypointLookupInterface $entrypointLookup, Pdf $pdf): Response
     {
         if(!$this->isGranted('ROLE_CUSTOMER')){
             $notification = $translator->trans('paiement.message_compte');
@@ -96,6 +100,21 @@ class StripeController extends AbstractController
             $this->addFlash('success', $notification);
 
             $orderClient->handlePaiementOrder($order);
+
+            // send Email with order pdf
+            $config = $page->getActiveConfig();
+            $context = [
+                'order' => $order,
+                'products' => $orderLines,
+                'total' => $order->getPrice(),
+            ];
+            $context = array_merge($context, $config);
+            $template = 'front/contact/_includes/email_order.html.twig';
+            $entrypointLookup->reset();
+            $html = $twig->render('front/base/ecommerce/order/delivery_pdf.html.twig', $context);
+            $pdf = $pdf->getOutputFromHtml($html);
+            $return = $mailer->sendOrder($this->getUser()->getUsername(), $this->getUser()->getEmail(), 'Commande', $template, $context,$pdf);
+            $this->addFlash($return['type'], $return['message']);
             return $this->redirect('/');
         }
 

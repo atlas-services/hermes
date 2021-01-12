@@ -22,6 +22,7 @@
         "doctrine/migrations": "^3.0@dev",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "helios-ag/fm-elfinder-bundle": "^10.0",
+        "knplabs/knp-snappy-bundle": "dev-master",
         "liip/imagine-bundle": "^2.0@dev",
         "select2/select2": "dev-master",
         "sensio/framework-extra-bundle": "^5.2",

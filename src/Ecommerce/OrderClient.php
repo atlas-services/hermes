@@ -166,6 +166,10 @@ class OrderClient
 
         $total = $cart_total + $delivery_price;
 
+        if($order instanceof Order) {
+            $order->setPrice($total);
+        }
+
         return $total;
 
     }

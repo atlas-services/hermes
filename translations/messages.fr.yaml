@@ -419,3 +419,9 @@ paiement:
   stripe:
     label: Stripe
     checkout: Règler avec Stripe
+
+email:
+  send: Votre message a bien été envoyé.
+  error_send: Votre message n'a pu être envoyé.
+  order:
+    send: Vous allez recevoir un email récapitulatif de votre commande.
