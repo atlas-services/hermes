@@ -13,7 +13,7 @@
         <div class="row col-2">
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
-                    <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename}}" class="w-100 mx-auto">
+                    <img src="{{ absolute_url(asset(vich_uploader_asset(logo, 'imageFile')))}}"  alt="{{ logo.filename}}">
                 {% endif %}
             {% endif %}
         </div>

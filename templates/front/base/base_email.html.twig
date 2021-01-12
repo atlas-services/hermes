@@ -18,11 +18,12 @@
                         {% if logo.filename is not null %}
                         {% if 'logo.png' == logo.filename  %}
                             <a href="{{ url('sheet') }}">
-                                <img src="{{ email.image('@images/Config/logo.png') }}" class="logo" alt="SpaceBar Logo">
-                                <svg class="app_logo" viewBox="0 0 100 100"
-                                     xmlns="http://www.w3.org/2000/svg"
-                                     xmlns:xlink="http://www.w3.org/1999/xlink">
-                                </svg>
+{#                                <img src="{{ email.image('@images/Config/logo.png') }}" class="logo" alt="SpaceBar Logo">#}
+                                {% if logo.filename is defined %}
+                                    {% if logo.filename is not null %}
+                                        <img src="{{ absolute_url(asset(vich_uploader_asset(logo, 'imageFile')))}}"  alt="{{ logo.filename}}">
+                                    {% endif %}
+                                {% endif %}
                             </a>
                         {% endif %}
                         {% else %}
