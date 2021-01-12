@@ -12,6 +12,7 @@
             {% include 'front/base/ecommerce/breadcrumb.html.twig' with {'breadcrumb': 'order.paiement'|trans()} %}
             {% if order is defined %}
                 {% if order.delivery is not null %}
+                    {% include 'front/base/ecommerce/paiement/checkout.html.twig' %}
             <div class=" mt-3 pt-3 mx-auto px-0 text-justify" >
             <h5>{{ 'order.delivery_method'|trans() }} : {{ ('delivery.'~ order.delivery.deliveryMethod|lower)|trans() }}</h5>
                 <h5>
