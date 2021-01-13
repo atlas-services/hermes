@@ -409,6 +409,7 @@ delivery:
   home: A la maison - sous 8 jours
   home_express: A la maison - sous 48h00
   relay: Livraison en relais
+  valid: Valider l'adresse de livraison
   error: Erreur
 
 paiement:

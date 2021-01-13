@@ -91,17 +91,36 @@ class DeliveryType extends AbstractType
             $form->remove('address');
             return;
         }
-        $form->add('address', EntityType::class, [
-            'class' => Address::class,
-            'label' =>   'order.delivery_address',
-            'placeholder' => 'order.placeholder_delivery_address',
-            'choice_label' => function ($address) {
-                return $address->__toString();
-            },
-            'choices' => $choices,
-            'attr' => ['class' => 'form-control select2 '],
-            'required' => true,
-        ]);
+        // 1 seule addresse click and collect
+        if (Delivery::DELIVERY_CC == $deliveryMethod &&  1 === count($choices)) {
+            $form->add('address', EntityType::class, [
+                'class' => Address::class,
+                'label' =>   'order.delivery_address',
+                'placeholder' => 'order.placeholder_delivery_address',
+                'choice_label' => function ($address) {
+                    return $address->__toString();
+                },
+                'choices' => $choices,
+                'data' => $choices[0],
+                'attr' => ['class' => 'form-control select2 '],
+                'required' => true,
+            ]);
+        }
+        if (1 < count($choices)) {
+            $data =  $this->getDefaultDeliveryAddressNameChoices($deliveryMethod);
+            $form->add('address', EntityType::class, [
+                'class' => Address::class,
+                'label' => 'order.delivery_address',
+                'placeholder' => 'order.placeholder_delivery_address',
+                'choice_label' => function ($address) {
+                    return $address->__toString();
+                },
+                'data'=> $data,
+                'choices' => $choices,
+                'attr' => ['class' => 'form-control select2 '],
+                'required' => true,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -132,6 +151,30 @@ class DeliveryType extends AbstractType
             return $deliveryAddressNameChoices;
 
     }
+
+
+    private function getDefaultDeliveryAddressNameChoices(string $deliveryMethod)
+    {
+        switch ($deliveryMethod) {
+            case Delivery::DELIVERY_CC:
+                $defaultDeliveryAddressNameChoices = $this->entityManager->getRepository(Address::class)->findOneBy([
+                    'additionalName' => Delivery::DELIVERY_CC,
+                    'defaultDelivery' => 1 ,
+                ]);
+                break;
+            case Delivery::DELIVERY_HOME:
+            case Delivery::DELIVERY_HOME_EXPRESS:
+                $defaultDeliveryAddressNameChoices = $this->entityManager->getRepository(Address::class)->findOneBy([
+                    'user' => $this->user,
+                    'defaultDelivery' => 1 ,
+                ]);
+                break;
+        }
+
+        return $defaultDeliveryAddressNameChoices;
+
+    }
+
 
     private function getDeliveryMethodChoices()
     {

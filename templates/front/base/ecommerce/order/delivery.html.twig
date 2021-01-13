@@ -24,9 +24,13 @@
                     {% endif %}
                 </div>
                 <div class="mx-auto text-center">
-                    <button id="delivery-button" class="btn btn-primary mt-4 col-12 col-lg-2 mx-auto" type="submit"><i class="fa fa-address-book"></i> {{ 'form.label.valider'|trans()}} </button>
+                    <button id="delivery-button" class="btn h-btn-outline-success mt-4 col-12 col-lg-2 mx-auto" type="submit"><i class="fa fa-address-book"></i> {{ 'delivery.valid'|trans()}} </button>
                 </div>
-            {{ form_widget(form._token) }}
+            <h4 class="col-12 text-center mt-3 js-address-button-ou"> Ou </h4>
+            <div class="mx-auto text-center">
+                <a href="#"  class="js-address-button-new col-12 col-lg-2 mt-2 btn h-btn-outline-success" data-address-new-url="{{ path('customer_delivery_address_new') }}" >{{ 'order.add_delivery_address'|trans()|raw }}</a>
+            </div>
+                {{ form_widget(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
             <div class="js-address-new">
                 {% if form_address is defined %}
