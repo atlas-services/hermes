@@ -49,6 +49,7 @@
         "fontsource-oswald": "^3.0.3",
         "fontsource-snowburst-one": "^3.0.3",
         "fontsource-sofia": "^3.0.3",
+        "foundation-emails": "^2.3.1",
         "fs": "0.0.1-security",
         "googleapis": "^49.0.0",
         "gpupo-npm-dev": "^1.1.0",

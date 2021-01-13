@@ -2,7 +2,8 @@ twig:
     paths:
         # point this wherever your images live
         '%kernel.project_dir%/public/%env(APP_PATH_CONTENT_IMAGES)%': images
-        '%kernel.project_dir%/assets/inline/css': css
+#        '%kernel.project_dir%/assets/inline/css': css
+        '%kernel.project_dir%/assets/css/inline': inline
         '%kernel.project_dir%/public/build': build
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'

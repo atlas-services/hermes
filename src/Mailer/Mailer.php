@@ -113,7 +113,7 @@ class Mailer
             $this->mailer->send($email);
             $notification = $this->translator->trans('email.order.send');
             $return = [
-                'type' => 'notice',
+                'type' => 'success',
                 'message' => $notification
             ];
             $logContext = [

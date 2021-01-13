@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-{% block head %}
-    {% include 'front/base/hermes/head.html.twig' %}
-{% endblock head %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-{% apply inline_css(source( '@css/app.css')) %}
-{#<body style=" background: url('{{ background_image ?? '' }}'); {{ background_image_style ?? '' }} background-color: {{ bgcolor ?? 'white' }}">#}
-<body style="background-color: #f2f3f4">
+        {% set config_favicon = favicon ?? logo  %}
+        {% if(config_favicon.filename is null) %}
+            {% set favicon = asset('favicon.ico')  %}
+        {% else %}
+            {% set favicon = asset(vich_uploader_asset(config_favicon, 'imageFile'))   %}
+        {% endif %}
 
-    <div class="content container col-lg-{{ container_width|col_lg()}} text-center center" style="background-color: #ffffff ;">
-        {% block body %}
-            {% block nav %}
-        <div class="col-lg-{{ container_width|col_lg()}} text-center center" style="background-color: #ffffff ;" >
-                <a class="navbar-brand js-scroll-trigger center" href="{{ path('sheet') }}">
-                    {% if logo.filename is defined %}
-                        {% if logo.filename is not null %}
-                        {% if 'logo.png' == logo.filename  %}
-                            <a href="{{ url('sheet') }}">
-{#                                <img src="{{ email.image('@images/Config/logo.png') }}" class="logo" alt="SpaceBar Logo">#}
-                                {% if logo.filename is defined %}
-                                    {% if logo.filename is not null %}
+        <link rel="icon" href="{{ favicon}}" />
+
+        <title>{{ title.name ?? ''}}</title>
+
+    </head>
+
+    {% apply inline_css(source( '@inline/email.scss')) %}
+        <body>
+            <div class="content container col-lg-{{ container_width|col_lg()}} text-center center" >
+                {% block body %}
+                    {% block nav %}
+                        {% if logo.filename is defined %}
+                            {% if logo.filename is not null %}
+                                <div class="col-lg-{{ container_width|col_lg()}} text-center center">
+                                    <a class="navbar-brand js-scroll-trigger center" href="{{ absolute_url(path('sheet')) }}">
                                         <img src="{{ absolute_url(asset(vich_uploader_asset(logo, 'imageFile')))}}"  alt="{{ logo.filename}}">
-                                    {% endif %}
-                                {% endif %}
-                            </a>
+                                    </a>
+                                </div>
+                                <hr class="order">
+                            {% endif %}
                         {% endif %}
-                        {% else %}
-                            {{ logo ?? "Accueil" }}
-                        {% endif %}
-                    {% else %}
-                        {{ logo ?? "Accueil" }}
-                    {% endif %}
-                </a>
+                    {% endblock nav %}
+
+                    {% block content %}
+                    {% endblock content %}
+                {% endblock body %}
             </div>
 
-            {% endblock nav %}
-
-            {% block content %}
-            {% endblock content %}
-
-        {% endblock body %}
-
-    </div>
-
-
-    {% block footer %}
-        {% include 'front/base/footer.html.twig' %}
-    {% endblock footer %}
-
-    {% block javascript %}
-    {% endblock javascript %}
-
-</body>
-{% endapply %}
+            {% block footer %}
+                {% include 'front/base/footer.html.twig' %}
+            {% endblock footer %}
+        </body>
+    {% endapply %}
 </html>
