@@ -2,6 +2,7 @@
 
 namespace App\Controller\Ecommerce\Admin;
 
+use App\Entity\Delivery;
 use App\Entity\Menu;
 use App\Entity\Sheet;
 use App\Entity\Address;
@@ -35,10 +36,17 @@ class AddressController extends AbstractController
         
         $form->handleRequest($request);
 
-        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
+        if($this->isGranted('ROLE_CUSTOMER') ){
             $address->setUser($this->getUser()); 
             $address->setFamilyName($this->getUser()->getLastname());
             $address->setGivenName($this->getUser()->getFirstname());
+        }
+
+        if($this->isGranted('ROLE_ADMIN')){
+            $address->setUser($this->getUser());
+            $address->setFamilyName($this->getUser()->getLastname());
+            $address->setGivenName($this->getUser()->getFirstname());
+            $address->setAdditionalName(Delivery::DELIVERY_CC);
         }
 
         if ($countryCode = $request->request->get("adressMethod")) { 
@@ -104,8 +112,12 @@ class AddressController extends AbstractController
      */
     public function edit(Request $request, Address $address,AddressClient $addressClient): Response
     {
-        if($this->isGranted('ROLE_CUSTOMER') and !$this->isGranted('ROLE_ADMIN')){
+        if($this->isGranted('ROLE_CUSTOMER')){
             $address->setUser($this->getUser());
+        }
+        if($this->isGranted('ROLE_ADMIN')){
+            $address->setUser($this->getUser());
+            $address->setAdditionalName(Delivery::DELIVERY_CC);
         }
 
         $address_options = $addressClient->getAddress('fr-FR');

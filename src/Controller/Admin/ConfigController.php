@@ -98,50 +98,6 @@ class ConfigController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            if(strpos($config->getCode(), 'clic_and_collect_adresse')){
-                $addresses = $entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
-                if([] == $addresses || null == $addresses){
-                    $addresse = new Address();
-                    $addresse->setAdditionalName(Delivery::DELIVERY_CC);
-                }else{
-                    $addresse = $addresses[0];
-                    if(null == $addresse){
-                        $addresse = new Address();
-                        $addresse->setAdditionalName(Delivery::DELIVERY_CC);
-                    }
-                }
-                foreach($entityManager->getRepository(Config::class)->findByType('contact') as $address_cc){
-                    switch (true) {
-                        case strpos($address_cc->getCode(), 'additional_name'):
-                            $addresse->setAdditionalName(Delivery::DELIVERY_CC);
-                            break;
-                        case strpos($address_cc->getCode(), 'family_name'):
-                            $addresse->setFamilyName($address_cc->getValue());
-                            break;
-                        case strpos($address_cc->getCode(), 'organisation'):
-                            $addresse->setOrganization($address_cc->getValue());
-                            break;
-                        case strpos($address_cc->getCode(), 'address_line1'):
-                            $addresse->setAddressLine1($address_cc->getValue());
-                            break;
-                        case strpos($address_cc->getCode(), 'address_line2'):
-                            $addresse->setAddressLine2($address_cc->getValue());
-                            break;
-                        case strpos($address_cc->getCode(), 'locality'):
-                            $addresse->setLocality($address_cc->getValue());
-                            break;
-                        case strpos($address_cc->getCode(), 'postal_code'):
-                            $addresse->setPostalCode($address_cc->getValue());
-                            break;
-                        case strpos($address_cc->getCode(), 'country_code'):
-                            $addresse->setCountryCode($address_cc->getValue());
-                            break;
-                    }
-                }
-                $addresse->setUser($this->getUser());
-                $entityManager->persist($addresse);
-                $entityManager->flush();
-            }
 
             if('form' == $config->getCode()){
                 $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();
