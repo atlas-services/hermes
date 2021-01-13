@@ -21,7 +21,7 @@
     </head>
 
     {% apply inline_css(source( '@inline/email.scss')) %}
-        <body>
+        <body class="iframe">
             <div class="content container col-lg-{{ container_width|col_lg()}} text-center center" >
                 {% block body %}
                     {% block nav %}

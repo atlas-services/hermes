@@ -24,22 +24,22 @@
                     <td id="price-{{ orderLine.product.id }}" class="col-xs-3 align-middle">{{ ((orderLine.price)/100)|format_currency(currency) }}</td>
                  </tr>
             {% endfor %}
-            </tbody>
-            <tfoot>
             {% if order.delivery is defined %}
                 {% if order is defined %}
                     {% if order.delivery.price is defined %}
-                        <tr class="font-weight-bold">
-                            <th class="col-xs-6 info ">{{ 'order.delivery_price'|trans() }}</th>
+                        <tr class="font-weight-bold ">
+                            <th class="col-xs-6 info text-left ">{{ 'order.delivery_price'|trans() }}</th>
                             <th class="col-xs-6 info">&nbsp;</th>
                             <th class="col-xs-6 info">&nbsp;</th>
                             <td class="col-xs-3 info ">{{ ((order.delivery.price)/100)|format_currency(currency) }}</td>
-                         </tr>
+                        </tr>
                     {% endif %}
                 {% endif %}
             {% endif %}
+            </tbody>
+            <tfoot>
             <tr class="font-weight-bold">
-                <th class="col-xs-6 info ">Total</th>
+                <th class="col-xs-6 info text-left ">Total</th>
                 <th class="col-xs-6 info">&nbsp;</th>
                 <th class="col-xs-6 info">&nbsp;</th>
                 <td class="col-xs-3 info checkout-total">{{ ((total)/100)|format_currency(currency) }}</td>

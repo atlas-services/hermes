@@ -1,10 +1,11 @@
 @import "~foundation-emails/dist/foundation-emails.css";
-@import "~bootstrap";
-body {
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body, body.iframe {
   margin: 0;
   padding: 0;
   background-color: #cccccc;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
 }
 
 .container {
@@ -47,10 +48,26 @@ hr.order {
   text-align: right;
 }
 
-table.button a {
-  background-color: #264459;
+table,tr {
+  border-style: inset;
+  border-collapse: #eeeeee;
+  border-
+  margin-top: 30px;
 }
-table.button table td {
-  background-color: #264459;
-  border: 2px solid #264459;
+
+table, tr {
+  width: 100%;
+}
+
+td, th {
+  max-width: 30%;
+}
+
+tr th.checkout-total {
+  max-width: 100%;
+}
+
+tfoot {
+  display: table;
+  margin-top: 40px;
 }
