@@ -62,6 +62,9 @@ doctrine-re-init:
 # 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 
+behat-re-init:
+	rm ../data/db/behatstripe.sqlite  2> /dev/null || true && cp ../data/db/behatstripe_init.sqlite ../data/db/behatstripe.sqlite
+
 behat-login:
 	clear && vendor/bin/behat --suite=login
 
@@ -101,7 +104,7 @@ behat-error-post:
 behat-ecommerce-cart:
 	clear && vendor/bin/behat --suite=ecommerce-cart
 
-behat-ecommerce-tunnel:
+behat-ecommerce-tunnel: behat-re-init
 	clear && vendor/bin/behat --suite=ecommerce-tunnel
 
 behat-total:

@@ -11,6 +11,7 @@ Feature: Tunnel
     @javascript
     Scenario: Add products to my cart, create my custommer account and new order, then pay my order
         Given I am on "/"
+        And I wait for 1 seconds
         And I add product list to my cart "add-product-1,add-product-4"
 #        2 products added to the cart
         Then I should see "2"
@@ -35,7 +36,8 @@ Feature: Tunnel
         And I fill in select2 input "#delivery_deliveryMethod" with value "Click And Collect" and select "Click And Collect"
         And I wait for 1 seconds
         And I fill in select2 input "#delivery_address" with value "Hermes, 1 rue Pascal, 94800 Villejuif" and select "Hermes, 1 rue Pascal, 94800 Villejuif"
-        And I press "Valider"
+        And I wait for 1 seconds
+        And I press "Valider l'adresse de livraison"
         And I scroll "paiement" into view
 #        tunnel paiement
 #        paiement.stripe.checkout
@@ -43,6 +45,6 @@ Feature: Tunnel
         And I press "Règler avec Stripe"
         And I wait for 2 seconds
         And I fill stripe credit card informations with card 1
-        And I wait for 20 seconds
+        And I wait for 12 seconds
         Then I should see "Paiement effectué!"
         Then I should see "Vous allez recevoir un email récapitulatif de votre commande."
