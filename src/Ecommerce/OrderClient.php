@@ -226,10 +226,9 @@ class OrderClient
     public function save($file,$order, $project_dir)
     {
         $user = $order->getUser();
-        $order_dir = $project_dir.'/data/'.$user->getId();
+        $order_dir = $project_dir.'/public/data/orders/'.$user->getId();
         $this->filesystem->mkdir($order_dir);
-        $this->filesystem->mkdir($order_dir);
-        $this->filesystem->dumpFile(sprintf($order_dir.'/'. $order->getId().'commande-du-%s.pdf', date('Y-m-d')), $file);
+        $this->filesystem->dumpFile(sprintf($order_dir.'/order-%s.pdf', $order->getId()), $file);
     }
 
 
