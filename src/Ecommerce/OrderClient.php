@@ -10,17 +10,20 @@ use App\Entity\Product;
 use App\Entity\User;
 use App\Repository\OrderLineRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OrderClient
 {
     private $entityManager;
     private $cartClient;
+    private $filesystem;
 
-    public function __construct(EntityManagerInterface $entityManager, CartClient $cartClient)
+    public function __construct(EntityManagerInterface $entityManager, CartClient $cartClient, Filesystem $filesystem)
     {
         $this->entityManager = $entityManager;
         $this->cartClient = $cartClient;
+        $this->filesystem = $filesystem;
     }
 
     public function getCartClient()
@@ -218,6 +221,15 @@ class OrderClient
         if( $user instanceof User){
             $this->getOrder()->setUser($user);
         }
+    }
+
+    public function save($file,$order, $project_dir)
+    {
+        $user = $order->getUser();
+        $order_dir = $project_dir.'/data/'.$user->getId();
+        $this->filesystem->mkdir($order_dir);
+        $this->filesystem->mkdir($order_dir);
+        $this->filesystem->dumpFile(sprintf($order_dir.'/'. $order->getId().'commande-du-%s.pdf', date('Y-m-d')), $file);
     }
 
 
