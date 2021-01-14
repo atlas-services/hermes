@@ -298,3 +298,7 @@ parameters:
         form:
           summary: Formulaires
           value: contact
+      ecommerce:
+        ecommerce_delivery_free_amount:
+          summary: Montant au dela duquel la livraison est offerte
+          value: 0

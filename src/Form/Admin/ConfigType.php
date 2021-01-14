@@ -218,8 +218,9 @@ class ConfigType extends AbstractBaseType
             'value_choices' => null,
             'type_image' => false,
             'type_choices' => [
-                'générale' => 'site',
                 'contact' => 'contact',
+                'ecommerce' => 'ecommerce',
+                'générale' => 'site',
                 'image' => 'image',
                 'menu' => 'nav',
                 'contenu' => 'content',

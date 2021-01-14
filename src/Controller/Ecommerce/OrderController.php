@@ -87,6 +87,8 @@ class OrderController extends AbstractController
             return $this->redirect('/');
         }
 
+        $array = $page->getActiveMenu('accueil','accueil');
+
         $orderClient->handleCartProducts($this->getUser());
         $order = $orderClient->getCurrentOrderByUser($this->getUser());
 
@@ -97,7 +99,7 @@ class OrderController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $delivery = $form->getData();
-            $orderClient->handleDeliveryOrder($order, $delivery);
+            $orderClient->handleDeliveryOrder($order, $delivery, $array['ecommerce_delivery_free_amount']);
             return $this->redirectToRoute('order_paiement');
         }
 
@@ -109,7 +111,6 @@ class OrderController extends AbstractController
 
         $total = $orderClient->getTotal($this->getUser());
 
-        $array = $page->getActiveMenu('accueil','accueil');
         $array['order'] = $order;
         $array['form'] = $form->createView();
         $array['products'] = $orderLines ;
@@ -136,6 +137,8 @@ class OrderController extends AbstractController
             return $this->redirect('/');
         }
 
+        $array = $page->getActiveMenu('accueil','accueil');
+
         // Mise à jour order et raz du panier
         $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_DELIVERY);
 
@@ -150,7 +153,6 @@ class OrderController extends AbstractController
         $stripe_public_key = $this->getParameter('stripe_public_key');
         $total = $orderClient->getTotal($this->getUser());
 
-        $array = $page->getActiveMenu('accueil','accueil');
         $array['order'] = $order;
         $array['products'] = $orderLines ?? $products;
         $array['total'] = $total;
