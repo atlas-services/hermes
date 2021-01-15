@@ -113,7 +113,7 @@ class DeliveryType extends AbstractType
                 'label' => 'order.delivery_address',
                 'placeholder' => 'order.placeholder_delivery_address',
                 'choice_label' => function ($address) {
-                    return $address->__toString();
+                    return $address->getFullAddress();
                 },
                 'data'=> $data,
                 'choices' => $choices,
