@@ -16,6 +16,9 @@
     <title>{{ title.name ?? ''}}</title>
 
     {% block stylesheets %}
+        {% if 'none' == nav_bar  %}
+            {% set nav_bar = 'base' %}
+        {% endif %}
         {{ encore_entry_link_tags('hermes_nav_'~ nav_bar) }}
         {{ encore_entry_link_tags('hermes_' ~ template) }}
         <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
