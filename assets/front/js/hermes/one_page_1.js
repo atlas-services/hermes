@@ -19,7 +19,7 @@ $(function () {
     $('.preloader').delay(500).fadeOut(500);
 
     if (undefined === $(".navbar .navbar-brand img").attr("width")) {
-        $(".navbar .navbar-brand img").attr("width", '150px');
+        $(".navbar .navbar-brand img").attr("width", '110rem');
     }
     //===== Sticky
     var $src_logo1 = $('#hidden_logo1').val();
