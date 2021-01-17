@@ -43,6 +43,7 @@
         "eslint": "^7.17.0",
         "ev-emitter": "^1.1.1",
         "eyeglass-font-stacks": "^0.1.8",
+        "fileloader": "^2.0.0",
         "font-awesome": "^4.7.0",
         "fontsource-alfa-slab-one": "^3.0.9",
         "fontsource-bai-jamjuree": "^3.0.9",
