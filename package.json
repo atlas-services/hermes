@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.2",
+        "@symfony/webpack-encore": "^0.33.0",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
         "webpack-notifier": "^1.6.0"
@@ -42,6 +42,7 @@
         "dialog": "^0.3.1",
         "ev-emitter": "^1.1.1",
         "eyeglass-font-stacks": "^0.1.8",
+        "fileloader": "^2.0.0",
         "font-awesome": "^4.7.0",
         "fontsource-alfa-slab-one": "^3.0.9",
         "fontsource-bai-jamjuree": "^3.0.9",
