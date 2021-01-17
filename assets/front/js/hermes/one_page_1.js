@@ -2,6 +2,7 @@ import '../../css/bootstrap/animate.css';
 import '../../css/bootstrap/one_page_1_default.css';
 import '../../css/bootstrap/one_page_1.css';
 
+import 'bootstrap';
 import 'jquery.easing';
 import '../../../js/scroll';
 import 'waypoints/lib/jquery.waypoints.min';
@@ -18,7 +19,7 @@ $(function () {
     $('.preloader').delay(500).fadeOut(500);
 
     if (undefined === $(".navbar .navbar-brand img").attr("width")) {
-        $(".navbar .navbar-brand img").attr("width", '150px');
+        $(".navbar .navbar-brand img").attr("height", '70rem');
     }
     //===== Sticky
     var $src_logo1 = $('#hidden_logo1').val();

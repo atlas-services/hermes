@@ -10,7 +10,9 @@ import AOS from 'aos';
 !(function($) {
     "use strict";
     AOS.init();
-    $('.owl-carousel').owlCarousel();
+    if ($('.owl-carousel')[0]) {
+        $('.owl-carousel').owlCarousel();
+    }
     // $('.venobox').venobox();
 
     // Smooth scroll for the navigation menu and links with .scrollto classes
@@ -182,49 +184,55 @@ import AOS from 'aos';
     });
 
     // Testimonials carousel (uses the Owl Carousel library)
-    $(".testimonials-carousel").owlCarousel({
-        autoplay: true,
-        dots: true,
-        loop: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            900: {
-                items: 3
+    if ($('.testimonials-carousel')[0]) {
+        $(".testimonials-carousel").owlCarousel({
+            autoplay: true,
+            dots: true,
+            loop: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                900: {
+                    items: 3
+                }
             }
-        }
-    });
+        });
+    }
 
     // Gallery carousel (uses the Owl Carousel library)
-    $(".gallery-carousel").owlCarousel({
-        autoplay: true,
-        dots: true,
-        loop: true,
-        center: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 3
-            },
-            992: {
-                items: 4
-            },
-            1200: {
-                items: 5
+    if ($('.gallery-carousel')[0]) {
+        $(".gallery-carousel").owlCarousel({
+            autoplay: true,
+            dots: true,
+            loop: true,
+            center: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 3
+                },
+                992: {
+                    items: 4
+                },
+                1200: {
+                    items: 5
+                }
             }
-        }
-    });
+        });
+    }
 
     // Initiate venobox lightbox
-    $(document).ready(function() {
-        $('.venobox').venobox();
-    });
+    if ($('.venobox')[0]) {
+        $(document).ready(function () {
+            $('.venobox').venobox();
+        });
+    }
 
     // Init AOS
     function aos_init() {
