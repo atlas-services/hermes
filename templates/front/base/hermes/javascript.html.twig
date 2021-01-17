@@ -1,4 +1,7 @@
 {{ encore_entry_script_tags('hermes_react' ) }}
 {{ encore_entry_script_tags('hermes_' ~ template ) }}
+{% if 'none' == nav_bar  %}
+    {% set nav_bar = 'base' %}
+{% endif %}
 {{ encore_entry_script_tags('hermes_nav_'~ nav_bar) }}
 
