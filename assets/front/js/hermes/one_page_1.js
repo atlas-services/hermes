@@ -2,6 +2,7 @@ import '../../css/bootstrap/animate.css';
 import '../../css/bootstrap/one_page_1_default.css';
 import '../../css/bootstrap/one_page_1.css';
 
+import 'bootstrap';
 import 'jquery.easing';
 import '../../../js/scroll';
 import 'waypoints/lib/jquery.waypoints.min';
