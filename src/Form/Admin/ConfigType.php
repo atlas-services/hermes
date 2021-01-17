@@ -110,6 +110,7 @@ class ConfigType extends AbstractBaseType
                         'base' => 'base',
                         'left' => 'left',
                         'full' => 'full',
+                        'none' => 'none',
                     ];
                     break;
                 // nav_bar
