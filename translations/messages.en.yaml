@@ -282,3 +282,5 @@ formulaire:
 form_adress:
   additionalName_placeholder: Please enter an address name
   addressLine1_placeholder: Please enter an address
+  defaultDelivery: Default delivery address
+  defaultInvoice: Default billing address

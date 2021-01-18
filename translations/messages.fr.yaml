@@ -430,3 +430,5 @@ email:
 form_adress:
   additionalName_placeholder: Veuillez saisir un nom d'adresse
   addressLine1_placeholder: Veuillez saisir une adresse
+  defaultDelivery: Adresse livraison par défault
+  defaultInvoice: Adresse facturation par défault
