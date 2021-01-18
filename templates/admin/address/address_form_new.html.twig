@@ -3,11 +3,11 @@
 {{ form_start(form, {'action': path('address_new'), 'method': 'POST'}) }}
     <div class="form-group">
         {{ form_label(form.additionalName) }}
-        {{ form_widget(form.additionalName, {'attr': {'class': 'form-control', 'placeholder': 'additionalName_placeholder'|trans() }}) }}
+        {{ form_widget(form.additionalName, {'attr': {'class': 'form-control', 'placeholder': 'form_adress.additionalName_placeholder' }}) }}
     </div>
     <div class="form-group">
         {{ form_label(form.addressLine1) }}
-        {{ form_widget(form.addressLine1, {'attr': {'class': 'form-control', 'placeholder': 'addressLine1_placeholder'|trans() }}) }}
+        {{ form_widget(form.addressLine1, {'attr': {'class': 'form-control', 'placeholder': 'form_adress.addressLine1_placeholder'}}) }}
     </div>
 
     <div class="form-group">
