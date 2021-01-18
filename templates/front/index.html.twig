@@ -49,12 +49,6 @@
                     {{ message }}
                 </div>
             {% endfor %}
-            {% for message in app.flashes('info') %}
-                <div class="text-center alert alert-warning">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    {{ message }}
-                </div>
-            {% endfor %}
             <div id="top" class="hide" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
                 {% if(section.remote is not null) %}
