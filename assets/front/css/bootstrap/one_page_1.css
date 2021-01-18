@@ -802,7 +802,7 @@ p {
 .header-hermes-image {
   padding-top: 45px; }
   .header-hermes-image img {
-    max-width: 650px; }
+    max-width: 1200px; }
     @media (max-width: 767px) {
       .header-hermes-image img {
         max-width: 100%; } }
