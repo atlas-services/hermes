@@ -7,7 +7,8 @@
     var header = document.getElementById("mainNav");
 
 // Get the offset position of the navbar
-    if(null != header){
+
+//     if(null != header){
 
         var sticky = header.offsetTop;
 
@@ -35,6 +36,6 @@
             }
         }
 
-    }
+    // }
 
 })(jQuery); // End of use strict
