@@ -1,11 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { render } from 'react-dom';
+import TooglerIconApp from './HermesReactTooglerIcon';
 
-// const el = React.createElement('h2', null, 'Lift History!');
-const el = React.createElement(
-    'h1',
-    null,
-    'Hermes react!!! ',
-    React.createElement('span', null, '❤️')
-);
-ReactDom.render(el, document.getElementById('hermes-app'));
+render(<TooglerIconApp />, document.getElementById('toggler-icon-app'));

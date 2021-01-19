@@ -1,7 +1,9 @@
 {
     "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
         "@symfony/webpack-encore": "^0.33.0",
         "core-js": "^3.0.0",
+        "eslint-plugin-react": "^7.22.0",
         "regenerator-runtime": "^0.13.2",
         "webpack-notifier": "^1.6.0"
     },
