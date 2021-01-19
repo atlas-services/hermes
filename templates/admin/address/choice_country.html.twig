@@ -82,7 +82,7 @@ $(document).ready(function() {
                     $('#address_fr_locality').keypress(function (e) {
                         if(e.keyCode == 13) {
                             var $ville = $(this);
-                            $.vicopo($ville.val(), function (input, cities) { console.log('ifvicopo');
+                            $.vicopo($ville.val(), function (input, cities) { 
                             if(input == $ville.val() && cities[0]) {
                                 $ville.val(cities[0].city).vicopoTargets().vicopoClean();
                                 $('#address_fr_postalCode').val(cities[0].code)
@@ -96,7 +96,7 @@ $(document).ready(function() {
                     $('#address_fr_postalCode').keypress(function (e) {
                         if(e.keyCode == 13) {
                             var $ville = $(this);
-                            $.vicopo($ville.val(), function (input, cities) { console.log('ifvicopo');
+                            $.vicopo($ville.val(), function (input, cities) { 
                             if(input == $ville.val() && cities[0]) {
                                 $ville.val(cities[0].code).vicopoTargets().vicopoClean();
                                 $('#address_fr_locality').val(cities[0].city)

@@ -427,3 +427,10 @@ email:
   error_send: Votre message n'a pu être envoyé.
   order:
     send: Vous allez recevoir un email récapitulatif de votre commande.
+
+######### Adress ############
+form_adress:
+  additionalName_placeholder: Veuillez saisir un nom d'adresse
+  addressLine1_placeholder: Veuillez saisir une adresse
+  defaultDelivery: Adresse livraison par défault
+  defaultInvoice: Adresse facturation par défault
