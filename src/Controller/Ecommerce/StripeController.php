@@ -16,7 +16,9 @@ use App\Entity\Product;
 use App\Mailer\Mailer;
 use App\Menu\Page;
 use App\Ecommerce\StripeClient;
+use GuzzleHttp\Psr7\UploadedFile;
 use Knp\Snappy\Pdf;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -113,11 +115,15 @@ class StripeController extends AbstractController
             $entrypointLookup->reset();
             $html = $twig->render('front/base/ecommerce/order/delivery_pdf.html.twig', $context);
             $pdf = $pdf->getOutputFromHtml($html);
+            $orderClient->save($pdf,$order, $this->getParameter('kernel.project_dir'));
+
             $return = $mailer->sendOrder($this->getUser()->getUsername(), $this->getUser()->getEmail(), 'Commande', $template, $context,$pdf);
             $this->addFlash($return['type'], $return['message']);
             return $this->redirect('/');
         }
 
     }
+
+
 
 }

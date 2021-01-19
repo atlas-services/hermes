@@ -10,17 +10,20 @@ use App\Entity\Product;
 use App\Entity\User;
 use App\Repository\OrderLineRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OrderClient
 {
     private $entityManager;
     private $cartClient;
+    private $filesystem;
 
-    public function __construct(EntityManagerInterface $entityManager, CartClient $cartClient)
+    public function __construct(EntityManagerInterface $entityManager, CartClient $cartClient, Filesystem $filesystem)
     {
         $this->entityManager = $entityManager;
         $this->cartClient = $cartClient;
+        $this->filesystem = $filesystem;
     }
 
     public function getCartClient()
@@ -116,14 +119,11 @@ class OrderClient
 
     }
 
-    public function handleDeliveryOrder($order, $delivery)
+    public function handleDeliveryOrder($order, $delivery, $ecommerce_delivery_free_amount=0)
     {
-        if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
-            $delivery->setPrice(12345);
-        }
-        if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
-            $delivery->setPrice(54321);
-        }
+
+        $this->updateDeliveryPrice($delivery, $ecommerce_delivery_free_amount);
+
         if(is_null($delivery->getName())){
             $delivery->setName($delivery->getDeliveryMethod() . '-' . $order->getId());
         }
@@ -132,6 +132,26 @@ class OrderClient
         $this->entityManager->persist($order);
         $this->entityManager->flush();
 
+    }
+
+    public function updateDeliveryPrice($delivery, $ecommerce_delivery_free_amount=0)
+    {
+        $delivery_free = false;
+        if(0 != $ecommerce_delivery_free_amount){
+            $cart_total = $this->cartClient->getTotal();
+            if($cart_total >= $ecommerce_delivery_free_amount){
+                $delivery_free = true;
+            }
+        }
+
+        if(!$delivery_free){
+            if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
+                $delivery->setPrice(12345);
+            }
+            if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
+                $delivery->setPrice(54321);
+            }
+        }
     }
 
     public function handlePaiementOrder($order)
@@ -218,6 +238,14 @@ class OrderClient
         if( $user instanceof User){
             $this->getOrder()->setUser($user);
         }
+    }
+
+    public function save($file,$order, $project_dir)
+    {
+        $user = $order->getUser();
+        $order_dir = $project_dir.'/public/data/orders/'.$user->getId();
+        $this->filesystem->mkdir($order_dir);
+        $this->filesystem->dumpFile(sprintf($order_dir.'/order-%s.pdf', $order->getId()), $file);
     }
 
 

@@ -4,6 +4,7 @@ import '../../css/bootstrap/aos.css';
 import '../../css/venobox.css';
 import '../../css/isotope.css'
 
+import 'bootstrap';
 import 'jquery.easing';
 /*import '../../../js/scroll';*/
 import 'waypoints/lib/jquery.waypoints.min';

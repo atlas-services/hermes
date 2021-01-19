@@ -15,9 +15,12 @@ class StripeClient
     }
     public function createCustomer(User $user, $paymentToken)
     {
+
         $customer = \Stripe\Customer::create([
+            'preferred_locales'=> $user->getPreferedLocales(),
             'email' => $user->getEmail() ,
             'name' => $user->getFirstname(). ' ' .  $user->getFirstname(),
+//            'invoice_prefix' => strtoupper('INV'.substr($user->getLastname(),0, 3).$user->getId()),
             'source' => $paymentToken,
         ]);
         $user->setStripeCustomerId($customer->id);

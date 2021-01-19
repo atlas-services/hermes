@@ -25,10 +25,17 @@ class AddressFRType extends AbstractType
         $builder
         ->add('active')
         ->add('defaultDelivery', CheckboxType::class,
+<<<<<<< HEAD
         array('label' => 'form_adress.defaultDelivery'))
 
         ->add('defaultInvoice',CheckboxType::class,
         array('label' => 'form_adress.defaultInvoice'))
+=======
+        array('label' => "Addresse livraison par défault", 'required' => false))
+
+        ->add('defaultInvoice',CheckboxType::class,
+        array('label' => "Adrresse facturation par défault",'required' => false))
+>>>>>>> dev-stripe
 
         ->add('additionalName', TextType::class,
                  array('label' => "* Nom de l'adresse",

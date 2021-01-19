@@ -51,6 +51,9 @@ $(document).ready(function() {
                                     .removeClass('d-none');
                                 $("#delivery-button").addClass('d-none');
                                 $addressTarget.addClass('d-none');
+
+                                $addressButtonNew.addClass('d-none');
+                                $addressButtonOu.addClass('d-none');
                             }
                         });
                     });

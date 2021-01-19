@@ -1,22 +1,10 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{{ 'order.delivery'|trans() }}</title>
-    </head>
-{% apply inline_css(source( '@css/pdf.css')) %}
-    <body>
+{% extends "front/base/base_email.html.twig" %}
+
+{% block title %}Email contact{% endblock %}
+
+{% block content %}
+<section >
     <div class="container">
-        <div class="row col-2">
-            {% if logo.filename is defined %}
-                {% if logo.filename is not null %}
-                    <img src="{{ absolute_url(asset(vich_uploader_asset(logo, 'imageFile')))}}"  alt="{{ logo.filename}}">
-                {% endif %}
-            {% endif %}
-        </div>
         <div class="row bg-dark">
             <div class="col-sm-12">
                 <h1 class="h-bg-success mb-5 mt-5">{{ 'order.label'|trans() }} {{ order.name }} du {{ order.updatedAt|date('d M Y') }}</h1>
@@ -28,10 +16,10 @@
                         {{ order.delivery.address.locality }} {{ order.delivery.address.countryCode }}
                     </h5>
                 </div>
+                <hr class="order">
                 {% include 'front/base/ecommerce/order/table.html.twig' %}
             </div>
         </div>
     </div>
-    </body>
-{% endapply %}
-</html>
+</section>
+{% endblock %}

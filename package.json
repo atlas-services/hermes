@@ -1,8 +1,9 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.2",
+        "@symfony/webpack-encore": "^0.33.0",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^10.0.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -42,6 +43,7 @@
         "dialog": "^0.3.1",
         "ev-emitter": "^1.1.1",
         "eyeglass-font-stacks": "^0.1.8",
+        "fileloader": "^2.0.0",
         "font-awesome": "^4.7.0",
         "fontsource-alfa-slab-one": "^3.0.9",
         "fontsource-bai-jamjuree": "^3.0.9",
@@ -49,6 +51,7 @@
         "fontsource-oswald": "^3.0.3",
         "fontsource-snowburst-one": "^3.0.3",
         "fontsource-sofia": "^3.0.3",
+        "foundation-emails": "^2.3.1",
         "fs": "0.0.1-security",
         "googleapis": "^49.0.0",
         "gpupo-npm-dev": "^1.1.0",

@@ -107,6 +107,12 @@ class User implements UserInterface
      */
     protected $currency = "EUR";
 
+    /**
+     * @var array
+     * @ORM\Column(type="array", nullable=true)
+     */
+    protected $preferred_locales = ['fr-FR','en-EN'];
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -368,5 +374,16 @@ class User implements UserInterface
     {
         $this->currency = $currency;
     }
+    /**
+     * @return array
+     */
+    public function getPreferedLocales(): array
+    {
+        if(null == $this->preferred_locales){
+            return ['fr-FR','en-EN'];
+        }
+        return $this->preferred_locales;
+    }
+
 
 }

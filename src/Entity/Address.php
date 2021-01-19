@@ -184,6 +184,25 @@ class Address implements AddressInterface
         return '';
     }
 
+
+    public function getFullAddress(): ?string
+    {
+        if(!is_null($this->additionalName)){
+            $full_address = $this->additionalName . ' - ';
+        }
+        if(!is_null($this->organization)){
+            $full_address .= $this->organization . ', ' ;
+            $full_address .= $this->givenName . ' ' ;
+            $full_address .= $this->familyName . ' ' ;
+            $full_address .= $this->addressLine1 . ' ' ;
+            $full_address .= $this->addressLine2 . ' ' ;
+            $full_address .= $this->postalCode . ', ' ;
+            $full_address .= $this->countryCode . ' ' ;
+        }
+
+        return $full_address;
+    }
+
     /**
      * Get gets the two-letter country code.
      */ 

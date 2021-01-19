@@ -191,33 +191,6 @@ parameters:
         contact_width:
           summary: Largeur de la page contact (en %)
           value: '100%'
-        contact_clic_and_collect_adresse_given_name :
-          summary: Click and Collect - nom
-          value: 'CLICK_AND_COLLECT'
-        contact_clic_and_collect_adresse_additional_name :
-          summary: Click and Collect - nom additionnel
-          value: ~
-        contact_clic_and_collect_adresse_family_name :
-          summary: Click and Collect - nom de famille
-          value: ~
-        contact_clic_and_collect_adresse_organisation :
-          summary: Click and Collect - organisation
-          value: ~
-        contact_clic_and_collect_adresse_address_line1 :
-          summary: Click and Collect - addresse Line1
-          value: ~
-        contact_clic_and_collect_adresse_address_line2 :
-          summary: Click and Collect - addresse Line2
-          value: ~
-        contact_clic_and_collect_adresse_locality:
-          summary: Click and Collect - ville
-          value: ~
-        contact_clic_and_collect_adresse_postal_code:
-          summary: Click and Collect - Code postal
-          value: ~
-        contact_clic_and_collect_adresse_country_code:
-          summary: Click and Collect - code pays
-          value: FR
       nav:
         nav_bar:
           summary: selection de la barre de menu
@@ -325,3 +298,7 @@ parameters:
         form:
           summary: Formulaires
           value: contact
+      ecommerce:
+        ecommerce_delivery_free_amount:
+          summary: Montant au dela duquel la livraison est offerte
+          value: 0

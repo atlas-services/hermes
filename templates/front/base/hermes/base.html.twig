@@ -49,7 +49,7 @@
                 {% endif %}
                 <input type="hidden" id="hidden_logo1" value="{{ asset_logo1 ?? '' }}">
                 <input type="hidden" id="hidden_logo2" value="{{ asset_logo2 ?? asset_logo1 ?? '' }}">
-                {% if 'one_page_' not in template  %}
+                {% if 'none' != nav_bar  %}
                     {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
                 {% endif %}
             {% endblock nav %}

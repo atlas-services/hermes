@@ -34,6 +34,9 @@
                     <td>{{ order.status }}</td>
                     <td>
                         <a href="{{ path('order_edit', {'id': order.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                        {% if is_granted('ROLE_CUSTOMER') %}
+                            <a href="{{ asset('data/orders/'~ app.user.id ~ '/order-' ~ order.id ~ '.pdf') }}"  rel="noopener noreferrer" target="_blank"><i class="fa fa-2x fa-file-pdf-o"></i></a>
+                        {% endif %}
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('order_delete', {'id': order.id, 'csrf_token_delete': csrf_token('delete' ~ order.id)  }) }}">{{ 'action.delete'|trans()|raw }}</a>
                         {% endif %}

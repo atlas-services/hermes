@@ -47,7 +47,7 @@ class DeliveryType extends AbstractType
                 [
                     'label' =>   'order.delivery_method',
                     'placeholder' => 'order.placeholder_delivery_method',
-                    'choices' =>   Delivery::DELIVERY_CHOICES,
+                    'choices' =>   $this->getDeliveryMethodChoices(),
                     'attr' => ['class' => 'select-delivery-method form-control select2  mb-3']
                 ])
             ;
@@ -86,22 +86,41 @@ class DeliveryType extends AbstractType
             $form->remove('address');
             return;
         }
-        $choices = $this->getDeliveryMethodNameChoices($deliveryMethod);
+        $choices = $this->getAddressNameChoices($deliveryMethod);
         if (null === $choices) {
             $form->remove('address');
             return;
         }
-        $form->add('address', EntityType::class, [
-            'class' => Address::class,
-            'label' =>   'order.delivery_address',
-            'placeholder' => 'order.placeholder_delivery_address',
-            'choice_label' => function ($address) {
-                return $address->__toString();
-            },
-            'choices' => $choices,
-            'attr' => ['class' => 'form-control select2 '],
-            'required' => true,
-        ]);
+        // 1 seule addresse click and collect
+        if (Delivery::DELIVERY_CC == $deliveryMethod &&  1 === count($choices)) {
+            $form->add('address', EntityType::class, [
+                'class' => Address::class,
+                'label' =>   'order.delivery_address',
+                'placeholder' => 'order.placeholder_delivery_address',
+                'choice_label' => function ($address) {
+                    return $address->__toString();
+                },
+                'choices' => $choices,
+                'data' => $choices[0],
+                'attr' => ['class' => 'form-control select2 '],
+                'required' => true,
+            ]);
+        }
+        if (1 < count($choices)) {
+            $data =  $this->getDefaultDeliveryAddressNameChoices($deliveryMethod);
+            $form->add('address', EntityType::class, [
+                'class' => Address::class,
+                'label' => 'order.delivery_address',
+                'placeholder' => 'order.placeholder_delivery_address',
+                'choice_label' => function ($address) {
+                    return $address->getFullAddress();
+                },
+                'data'=> $data,
+                'choices' => $choices,
+                'attr' => ['class' => 'form-control select2 '],
+                'required' => true,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -112,33 +131,63 @@ class DeliveryType extends AbstractType
         ]);
     }
 
-    private function getDeliveryMethodNameChoices(string $deliveryMethod)
+    private function getAddressNameChoices(string $deliveryMethod)
     {
         $RE =  ['Adresse relais non prise en compte actuellement' => ''];
 
             switch ($deliveryMethod) {
                 case Delivery::DELIVERY_CC:
-                    $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
+                    $deliveryAddressNameChoices = $this->entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
                     break;
                 case Delivery::DELIVERY_RELAY:
-                    $deliveryMethodNameChoices = $RE;
+                    $deliveryAddressNameChoices = $RE;
                     break;
                 case Delivery::DELIVERY_HOME:
                 case Delivery::DELIVERY_HOME_EXPRESS:
-                    $deliveryMethodNameChoices = $this->entityManager->getRepository(Address::class)->findByUser($this->user);
+                    $deliveryAddressNameChoices = $this->entityManager->getRepository(Address::class)->findByUser($this->user);
                     break;
             }
 
-            return $deliveryMethodNameChoices;
+            return $deliveryAddressNameChoices;
 
     }
 
-    private function getAddresseCCChoices()
+
+    private function getDefaultDeliveryAddressNameChoices(string $deliveryMethod)
     {
-        $adress_cc = $this->entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
+        switch ($deliveryMethod) {
+            case Delivery::DELIVERY_CC:
+                $defaultDeliveryAddressNameChoices = $this->entityManager->getRepository(Address::class)->findOneBy([
+                    'additionalName' => Delivery::DELIVERY_CC,
+                    'defaultDelivery' => 1 ,
+                ]);
+                break;
+            case Delivery::DELIVERY_HOME:
+            case Delivery::DELIVERY_HOME_EXPRESS:
+                $defaultDeliveryAddressNameChoices = $this->entityManager->getRepository(Address::class)->findOneBy([
+                    'user' => $this->user,
+                    'defaultDelivery' => 1 ,
+                ]);
+                break;
+        }
+
+        return $defaultDeliveryAddressNameChoices;
+
+    }
+
+
+    private function getDeliveryMethodChoices()
+    {
+        $address_cc = $this->entityManager->getRepository(Address::class)->findByAdditionalName(Delivery::DELIVERY_CC);
         $choices = [] ;
-
-        return [$addresse];
-
+        if(empty($address_cc)){
+        foreach(Delivery::DELIVERY_CHOICES as $key=>$value){
+                if($value != Delivery::DELIVERY_CC){
+                    $choices[$key] = $value;
+                }
+            }
+        return $choices;
+        }
+        return Delivery::DELIVERY_CHOICES;
     }
 }

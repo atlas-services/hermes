@@ -78,6 +78,9 @@
                                   href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
                             </p>
                             <p><a class="text-info mx-3"
+                                  href="{{ path('config_index', {'type': 'ecommerce'}) }}"> {{ 'config.affiche_list_ecommerce'|trans()|raw }}</a>
+                            </p>
+                            <p><a class="text-info mx-3"
                                   href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
                             </p>
                             <p><a class="text-info mx-3"
@@ -132,6 +135,8 @@
                             {% endif %}
                             <a class="page-scroll nav-link "
                                href="{{ path('order_index') }}"><i class="fa fa-first-order"></i> {{ 'order.all'|trans()}} </a>
+                            <a class="page-scroll nav-link "
+                               href="{{ path('address_index') }}"><i class="fa fa-address-book"></i> {{ 'address.list'|trans()}} </a>
                             <a class="page-scroll nav-link "
                                href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
                         </div>

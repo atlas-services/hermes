@@ -168,6 +168,7 @@ config:
   affiche_list_formulaire: Configuration des formulaires
   affiche_list_undefined: Configuration non définie
   affiche_list_isotope: Configuration isotope
+  affiche_list_ecommerce: Configuration du ecommerce
 
 temoignage:
   affiche_list: Livre d'or
@@ -409,6 +410,7 @@ delivery:
   home: A la maison - sous 8 jours
   home_express: A la maison - sous 48h00
   relay: Livraison en relais
+  valid: Valider l'adresse de livraison
   error: Erreur
 
 paiement:
