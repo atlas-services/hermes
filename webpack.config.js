@@ -24,6 +24,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+     .addEntry('hermes_react', './assets/js/hermes_react.js')
      .addStyleEntry('email', './assets/css/inline/email.scss')
      .addStyleEntry('hermes_pdf', './assets/css/pdf.css')
      .addEntry('hermes_admin', './assets/admin/js/app.js')
@@ -73,7 +74,7 @@ Encore
     .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
+    .enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
 
 ;
