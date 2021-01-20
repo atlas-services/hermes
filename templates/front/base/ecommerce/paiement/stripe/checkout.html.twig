@@ -1,5 +1,5 @@
 {% if is_granted('ROLE_CUSTOMER') and not is_granted('ROLE_ADMIN') %}
-        <form id="checkout-stripe" class="col-xs-12 col-sm-6 mx-auto" action="{{ path('stripe_checkout') }}" method="POST">
+        <form id="checkout-stripe" class="col-xs-12 col-sm-6 mx-auto text-center" action="{{ path('stripe_checkout') }}" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-label=" {{ 'paiement.stripe.checkout'|trans()  }}"
