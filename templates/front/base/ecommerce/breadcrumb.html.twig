@@ -32,6 +32,12 @@
             {% endif %}
         </ol>
     </nav>
+    <div id="delivery-free"
+         class="col-lg-12 mx-auto mt-5 text-center"
+         data-delivery-free="{{ (0 == order.delivery.price )  ? 'free':'not free' }}"
+    >
+
+    </div>
     {% include 'front/base/ecommerce/security.html.twig' %}
 </div>
 

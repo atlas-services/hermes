@@ -9,6 +9,7 @@
 namespace App\Controller\Ecommerce;
 
 use App\Ecommerce\CartClient;
+use App\Ecommerce\OrderClient;
 use App\Entity\Product;
 use App\Menu\Page;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,17 +29,21 @@ class CartController extends AbstractController
      * },
      * name="cart", methods={"GET|POST"})
      */
-    public function mycart(Request $request, Page $page, CartClient $cartClient, TranslatorInterface $translator): Response
+    public function mycart(Request $request, Page $page, CartClient $cartClient, OrderClient $orderClient, TranslatorInterface $translator): Response
     {
         if(0 == $cartClient->getTotal()){
             $cartClient->emptyCart();
             return $this->redirect('/');
         }
 
+        // Récuperation de la commande en cours
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();
 
         $array = $page->getActiveMenu('accueil','accueil');
+        $array['order'] = $order;
         $array['products'] = $products;
         $array['total'] = $total;
         return $this->render('front/base/ecommerce/cart/index.html.twig', $array);
