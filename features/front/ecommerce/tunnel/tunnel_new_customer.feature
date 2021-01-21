@@ -42,7 +42,7 @@ Feature: Tunnel
 #        tunnel paiement
 #        paiement.stripe.checkout
         And I wait for 1 seconds
-        And I press "Règler avec Stripe"
+        And I press "Carte bancaire"
         And I wait for 2 seconds
         And I fill stripe credit card informations with card 1
         And I wait for 12 seconds

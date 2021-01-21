@@ -106,7 +106,7 @@ class DeliveryType extends AbstractType
                 'required' => true,
             ]);
         }
-        if (1 < count($choices)) {
+        if (0 < count($choices)) {
             $data =  $this->getDefaultDeliveryAddressNameChoices($deliveryMethod);
             $form->add('address', EntityType::class, [
                 'class' => Address::class,
