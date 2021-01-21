@@ -63,6 +63,7 @@ class OrderController extends AbstractController
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['products'] = $orderLines ?? $products;
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts($this->getUser()) > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
         $array= array_merge($array, $account);
         return $this->render('front/base/ecommerce/order/login.html.twig', $array);
@@ -110,10 +111,11 @@ class OrderController extends AbstractController
         }
 
         $total = $orderClient->getTotal($this->getUser());
-
+        $total_products = $orderClient->getTotalProducts($this->getUser());
         $array['order'] = $order;
         $array['form'] = $form->createView();
         $array['products'] = $orderLines ;
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts($this->getUser()) > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
         return $this->render('front/base/ecommerce/order/delivery.html.twig', $array);
 
@@ -155,6 +157,7 @@ class OrderController extends AbstractController
 
         $array['order'] = $order;
         $array['products'] = $orderLines ?? $products;
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts($this->getUser()) > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
         $array['APP_STRIPE_PK'] = $stripe_public_key;
         return $this->render('front/base/ecommerce/order/paiement.html.twig', $array);

@@ -4,12 +4,13 @@ import TooglerIconApp from './HermesReactTooglerIcon';
 import DeliveryFreeMessage from './HermesReactDeliveryFreeMessage';
 
 // nav button responsive
-if(document.getElementById('toggler-icon-app')) {
-    render( < TooglerIconApp / >, document.getElementById('toggler-icon-app'));
+const togglerIcon = document.getElementById('react-toggler-icon')
+if(togglerIcon) {
+    render( <TooglerIconApp />, togglerIcon);
 }
 
-//delivry free message
-const deliveryFree = document.getElementById('delivery-free');
+//delivery free message
+const deliveryFree = document.getElementById('react-delivery-free');
 if(deliveryFree){
     render(<DeliveryFreeMessage
             {...(deliveryFree.dataset)}

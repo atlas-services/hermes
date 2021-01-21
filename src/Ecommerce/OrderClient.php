@@ -194,6 +194,14 @@ class OrderClient
 
     }
 
+    public function getTotalProducts($user)
+    {
+        $total = 0;
+
+        return $this->cartClient->getTotal();
+
+    }
+
     /*
      * @todo : delete?
      */

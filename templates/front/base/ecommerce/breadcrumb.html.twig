@@ -32,9 +32,12 @@
             {% endif %}
         </ol>
     </nav>
-    <div id="delivery-free"
+    <div id="react-delivery-free"
          class="col-lg-12 mx-auto mt-5 text-center"
-         data-delivery-free="{{ (0 == order.delivery.price )  ? 'free':'not free' }}"
+         data-delivery-free="{{ delivery.free ?? '0' }}"
+         data-delivery-free-message="{{ 'delivery.free'|trans()}}"
+         data-delivery-free-limit="{{ (ecommerce_delivery_free_amount/100) }}"
+         data-delivery-free-from="{{ 'delivery.free_limit'|trans() ~ (ecommerce_delivery_free_amount/100)|format_currency(app.user.currency ?? 'EUR')  }}"
     >
 
     </div>

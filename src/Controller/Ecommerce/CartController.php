@@ -46,6 +46,7 @@ class CartController extends AbstractController
         $array['order'] = $order;
         $array['products'] = $products;
         $array['total'] = $total;
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $total > $array['ecommerce_delivery_free_amount']);
         return $this->render('front/base/ecommerce/cart/index.html.twig', $array);
 
     }

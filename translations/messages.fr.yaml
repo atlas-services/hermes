@@ -411,6 +411,8 @@ delivery:
   home_express: A la maison - sous 48h00
   relay: Livraison en relais
   valid: Valider l'adresse de livraison
+  free_limit: 'Livraison offerte pour tout achat supérieur à '
+  free: Livraison offerte!
   error: Erreur
 
 paiement:
