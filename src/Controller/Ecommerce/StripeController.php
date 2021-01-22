@@ -47,10 +47,11 @@ class StripeController extends AbstractController
 
         // Récuperation de la commande en cours
         // Mise à jour order
-        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_PAIEMENT);
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        $orderClient->handleCartProducts($order, Order::STATUS_ORDER_PREPARE_PAIEMENT);
 
         // Récuperation de la commande en cours
-        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+
         if(!$order instanceof Order){
             return $this->redirectToRoute('cart');
         }else{

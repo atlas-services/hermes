@@ -37,13 +37,15 @@ class CartController extends AbstractController
         }
 
         // Récuperation de la commande en cours
-        $order = $orderClient->getCurrentOrderByUser($this->getUser());
 
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();
 
         $array = $page->getActiveMenu('accueil','accueil');
-        $array['order'] = $order;
+        if($this->getUser()){
+            $order = $orderClient->getCurrentOrderByUser($this->getUser());
+            $array['order'] = $order;
+        }
         $array['products'] = $products;
         $array['total'] = $total;
         $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $total > $array['ecommerce_delivery_free_amount']);

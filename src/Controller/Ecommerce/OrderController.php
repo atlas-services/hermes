@@ -42,10 +42,12 @@ class OrderController extends AbstractController
         if($this->isGranted('ROLE_CUSTOMER')){
             // Mise à jour order et raz du panier
             if(true == strpos($referer, 'compte')) {
-                $orderClient->handleCartProducts($this->getUser());
+                $order = $orderClient->getCurrentOrderByUser($this->getUser());
+                $orderClient->handleCartProducts($order);
                 return $this->redirectToRoute('order_delivery');
             }
         }
+        $array = $page->getActiveMenu('accueil','accueil');
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -57,13 +59,12 @@ class OrderController extends AbstractController
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();
 
-        $array = $page->getActiveMenu('accueil','accueil');
         $array['products'] = $products;
         $array['total'] = $total;
 
         $array = $page->getActiveMenu('accueil','accueil');
         $array['products'] = $orderLines ?? $products;
-        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts($this->getUser()) > $array['ecommerce_delivery_free_amount']);
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts() > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
         $array= array_merge($array, $account);
         return $this->render('front/base/ecommerce/order/login.html.twig', $array);
@@ -83,15 +84,16 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('cart');
         }
 
-        if(0 == $orderClient->getTotal($this->getUser())){
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        if(0 == $orderClient->getTotal($order)){
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
 
         $array = $page->getActiveMenu('accueil','accueil');
 
-        $orderClient->handleCartProducts($this->getUser());
-        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+
+        $orderClient->handleCartProducts($order);
 
         $form = $this->createForm(DeliveryType::class);
         $form->handleRequest($request);
@@ -110,12 +112,12 @@ class OrderController extends AbstractController
             $orderLines = $order->getOrderLines();
         }
 
-        $total = $orderClient->getTotal($this->getUser());
-        $total_products = $orderClient->getTotalProducts($this->getUser());
+        $total = $orderClient->getTotal($order);
+        $total_products = $orderClient->getTotalProducts();
         $array['order'] = $order;
         $array['form'] = $form->createView();
         $array['products'] = $orderLines ;
-        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts($this->getUser()) > $array['ecommerce_delivery_free_amount']);
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts() > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
         return $this->render('front/base/ecommerce/order/delivery.html.twig', $array);
 
@@ -134,18 +136,19 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('cart');
         }
 
-        if(0 == $orderClient->getTotal($this->getUser())){
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        if(0 == $orderClient->getTotal($order)){
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
 
         $array = $page->getActiveMenu('accueil','accueil');
 
+
         // Mise à jour order et raz du panier
-        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_DELIVERY);
+        $orderClient->handleCartProducts($order, Order::STATUS_ORDER_PREPARE_DELIVERY);
 
         // Récuperation de la commande en cours
-        $order = $orderClient->getCurrentOrderByUser($this->getUser());
         if(!$order instanceof Order){
             return $this->redirectToRoute('cart');
         }else{
@@ -153,11 +156,11 @@ class OrderController extends AbstractController
         }
 
         $stripe_public_key = $this->getParameter('stripe_public_key');
-        $total = $orderClient->getTotal($this->getUser());
+        $total = $orderClient->getTotal($order);
 
         $array['order'] = $order;
         $array['products'] = $orderLines ?? $products;
-        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts($this->getUser()) > $array['ecommerce_delivery_free_amount']);
+        $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts() > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
         $array['APP_STRIPE_PK'] = $stripe_public_key;
         return $this->render('front/base/ecommerce/order/paiement.html.twig', $array);
@@ -173,7 +176,8 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('cart');
         }
 
-        if(0 == $orderClient->getTotal($this->getUser())){
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        if(0 == $orderClient->getTotal($order)){
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
@@ -202,7 +206,8 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('cart');
         }
 
-        if(0 == $orderClient->getTotal($this->getUser())){
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        if(0 == $orderClient->getTotal($order)){
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
