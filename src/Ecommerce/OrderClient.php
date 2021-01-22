@@ -53,24 +53,6 @@ class OrderClient
         return $route_name;
     }
 
-    /*
-     * @todo : delete?
-     */
-    public function updateOrderStatus($user, $status_from = Order::STATUS_CART, $status_to = Order::STATUS_ORDER_PREPARE_DELIVERY)
-    {
-
-        $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status_from]);
-        if($order instanceof Order ){
-            $order->setStatus($status_to);
-            $this->entityManager->persist($order);
-            $this->entityManager->flush();
-            // empty cart
-            if( $order->getStatus() == Order::STATUS_PAYED){
-                $this->cartClient->emptyCart();
-            }
-        }
-    }
-
     public function handleCartProducts($user,$status = Order::STATUS_CART)
     {
         if(!is_null($user)) {
@@ -202,44 +184,10 @@ class OrderClient
 
     }
 
-    /*
-     * @todo : delete?
-     */
-    public function updateOrdersStatusByUser($user, $status_from = Order::STATUS_ORDER, $status_to = Order::STATUS_WAITING)
-    {
-        $orders = $this->getOrdersByUserAndStatus($user,$status_from);
-        foreach ($orders as $order){
-            $order->setStatus($status_to);
-            $this->entityManager->persist($order);
-        }
-        $this->entityManager->flush();
-    }
-
-    /*
-     * @todo : delete?
-     */
-    public function emptyOrderByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-        $orders = $this->getOrdersByUserAndStatus($user,$status);
-        foreach ($orders as $order){
-            $this->entityManager->remove($order);
-        }
-        $this->entityManager->flush();
-    }
-
-    /*
-     * @todo : delete?
-     */
-    public function getOrdersByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-        return  $this->entityManager->getRepository(Order::class)->findBy(['user'=> $user, 'status'=> $status]);
-    }
-
     public function emptyCart()
     {
         $this->cartClient->emptyCart();
     }
-
 
     public function addCustomer(?User $user)
     {
