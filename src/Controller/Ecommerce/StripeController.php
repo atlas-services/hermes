@@ -102,7 +102,7 @@ class StripeController extends AbstractController
             $notification = $translator->trans('paiement.done');
             $this->addFlash('success', $notification);
 
-            $orderClient->handlePaiementOrder($order);
+            $orderClient->handleOrderPaiement($order);
 
             // send Email with order pdf
             $config = $page->getActiveConfig();

@@ -58,11 +58,6 @@ class OrderController extends AbstractController
         // Récuperation du panier en cours
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();
-
-        $array['products'] = $products;
-        $array['total'] = $total;
-
-        $array = $page->getActiveMenu('accueil','accueil');
         $array['products'] = $orderLines ?? $products;
         $array['delivery']['free'] = ($array['ecommerce_delivery_free_amount'] != 0 && $orderClient->getTotalProducts() > $array['ecommerce_delivery_free_amount']);
         $array['total'] = $total;
@@ -92,8 +87,8 @@ class OrderController extends AbstractController
 
         $array = $page->getActiveMenu('accueil','accueil');
 
-
         $orderClient->handleCartProducts($order);
+        $orderClient->handleOrderDelivery($order, $order->getDelivery(), $array['ecommerce_delivery_free_amount']);
 
         $form = $this->createForm(DeliveryType::class);
         $form->handleRequest($request);
@@ -102,7 +97,7 @@ class OrderController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $delivery = $form->getData();
-            $orderClient->handleDeliveryOrder($order, $delivery, $array['ecommerce_delivery_free_amount']);
+            $orderClient->handleOrderDelivery($order, $delivery, $array['ecommerce_delivery_free_amount']);
             return $this->redirectToRoute('order_paiement');
         }
 
@@ -147,7 +142,7 @@ class OrderController extends AbstractController
 
         // Mise à jour order et raz du panier
         $orderClient->handleCartProducts($order, Order::STATUS_ORDER_PREPARE_DELIVERY);
-
+        $orderClient->handleOrderDelivery($order, $order->getDelivery(), $array['ecommerce_delivery_free_amount']);
         // Récuperation de la commande en cours
         if(!$order instanceof Order){
             return $this->redirectToRoute('cart');

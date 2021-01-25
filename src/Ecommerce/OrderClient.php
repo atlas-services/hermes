@@ -51,12 +51,12 @@ class OrderClient
             $cartProducts = $this->cartClient->getProducts();
             // mise à jour order et orderLines "CART"
             if (in_array($order->getStatus(), Order::STATUS_CURRENT) ) {
-                $this->handleOrder($order, $cartProducts, $status);
+                $this->handleOrderProducts($order, $cartProducts, $status);
             }
         }
     }
 
-    public function handleOrder($order, $cartProducts, $status = Order::STATUS_CART)
+    public function handleOrderProducts($order, $cartProducts, $status = Order::STATUS_CART)
     {
         $order->setStatus($status);
         foreach($order->getOrderLines() as $orderLine){
@@ -77,18 +77,20 @@ class OrderClient
 
     }
 
-    public function handleDeliveryOrder($order, $delivery, $ecommerce_delivery_free_amount=0)
+    public function handleOrderDelivery($order, $delivery, $ecommerce_delivery_free_amount=0)
     {
 
-        $this->updateDeliveryPrice($delivery, $ecommerce_delivery_free_amount);
+        if($delivery) {
+            $this->updateDeliveryPrice($delivery, $ecommerce_delivery_free_amount);
 
-        if(is_null($delivery->getName())){
-            $delivery->setName($delivery->getDeliveryMethod() . '-' . $order->getId());
+            if(is_null($delivery->getName())){
+                $delivery->setName($delivery->getDeliveryMethod() . '-' . $order->getId());
+            }
+            $order->setDelivery($delivery);
+            $order->setStatus(Order::STATUS_ORDER_PREPARE_DELIVERY);
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();
         }
-        $order->setDelivery($delivery);
-        $order->setStatus(Order::STATUS_ORDER_PREPARE_DELIVERY);
-        $this->entityManager->persist($order);
-        $this->entityManager->flush();
 
     }
 
@@ -99,20 +101,23 @@ class OrderClient
             $cart_total = $this->cartClient->getTotal();
             if($cart_total >= $ecommerce_delivery_free_amount){
                 $delivery_free = true;
+                $delivery->setPrice(0);
             }
         }
 
         if(!$delivery_free){
-            if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
-                $delivery->setPrice(12345);
-            }
-            if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
-                $delivery->setPrice(54321);
+            if($delivery){
+                if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
+                    $delivery->setPrice(12345);
+                }
+                if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
+                    $delivery->setPrice(54321);
+                }
             }
         }
     }
 
-    public function handlePaiementOrder($order)
+    public function handleOrderPaiement($order)
     {
         $order->setStatus(Order::STATUS_PAYED);
         $this->entityManager->persist($order);

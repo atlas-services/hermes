@@ -187,17 +187,20 @@ class Address implements AddressInterface
 
     public function getFullAddress(): ?string
     {
+        $full_address =  '';
         if(!is_null($this->additionalName)){
-            $full_address = $this->additionalName . ' - ';
+            if(Delivery::DELIVERY_CC != $this->additionalName){
+                $full_address = trim($this->additionalName) . ' - ';
+            }
         }
         if(!is_null($this->organization)){
-            $full_address .= $this->organization . ', ' ;
-            $full_address .= $this->givenName . ' ' ;
-            $full_address .= $this->familyName . ' ' ;
-            $full_address .= $this->addressLine1 . ' ' ;
-            $full_address .= $this->addressLine2 . ' ' ;
-            $full_address .= $this->postalCode . ', ' ;
-            $full_address .= $this->countryCode . ' ' ;
+            $full_address .= trim($this->organization) . ', ' ;
+            $full_address .= trim($this->givenName) . ' ' ;
+            $full_address .= trim($this->familyName) . ' ' ;
+            $full_address .= trim($this->addressLine1) . ' ' ;
+            $full_address .= trim($this->addressLine2) . ' ' ;
+            $full_address .= trim($this->postalCode) . ', ' ;
+            $full_address .= trim($this->countryCode);
         }
 
         return $full_address;

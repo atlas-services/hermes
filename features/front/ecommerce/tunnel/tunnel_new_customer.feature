@@ -34,10 +34,11 @@ Feature: Tunnel
 #        And I wait for 1 seconds
 #        And I select "Hermes, 1 rue Pascal, 94800 Villejuif" from "delivery_address"
         And I fill in select2 input "#delivery_deliveryMethod" with value "Click And Collect" and select "Click And Collect"
-        And I wait for 1 seconds
-        And I fill in select2 input "#delivery_address" with value "Hermes, 1 rue Pascal, 94800 Villejuif" and select "Hermes, 1 rue Pascal, 94800 Villejuif"
-        And I wait for 1 seconds
+        And I wait for 2 seconds
+        And I fill in select2 input "#delivery_address" with value "Hermes, 1 rue Pascal rdc 94800, FR" and select "Hermes, 1 rue Pascal rdc 94800, FR"
+        And I wait for 5 seconds
         And I press "Valider l'adresse de livraison"
+        And I wait for 3 seconds
         And I scroll "paiement" into view
 #        tunnel paiement
 #        paiement.stripe.checkout

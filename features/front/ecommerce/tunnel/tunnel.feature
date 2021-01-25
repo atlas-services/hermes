@@ -29,7 +29,7 @@ Feature: Tunnel
         And I fill in select2 input "#delivery_deliveryMethod" with value "A la maison - sous 8 jours" and select "A la maison - sous 8 jours"
         And I wait for 10 seconds
         And I fill in select2 input "#delivery_address" with value "Adresse 1 - JDOR, Toto Cutugno 20 bis rue machin Porte droite 94800, FR" and select "Adresse 1 - JDOR, Toto Cutugno 20 bis rue machin Porte droite 94800, FR"
-        And I wait for 10 seconds
+        And I wait for 5 seconds
 #        And I select "Adresse 1" from "delivery_address"
         And I press "Valider l'adresse de livraison"
         And I wait for 3 seconds
