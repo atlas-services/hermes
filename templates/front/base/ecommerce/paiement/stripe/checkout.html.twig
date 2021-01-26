@@ -1,6 +1,7 @@
 {% if is_granted('ROLE_CUSTOMER') and not is_granted('ROLE_ADMIN') %}
-        <form id="checkout-stripe" class="col-xs-12 col-sm-6 mx-auto text-center" action="{{ path('stripe_checkout') }}" method="POST">
-                {% include 'front/base/ecommerce/security.html.twig' with {'breadcrumb': 'order.paiement'|trans()} %}
+        <form id="checkout-stripe" class="col-lg-12 col-xs-12 col-sm-6 mx-auto text-center" action="{{ path('stripe_checkout') }}" method="POST">
+            <h6 style="color: {{ content_color ?? '#000000' }}" class="text-center">
+            {% include 'front/base/ecommerce/security.html.twig' with {'breadcrumb': 'order.paiement'|trans()} %}
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-label=" {{ 'paiement.stripe.checkout'|trans()  }}"
@@ -14,5 +15,6 @@
                     data-zip-code="true"
                     data-locale="auto">
             </script>
+            </h6>
         </form>
 {% endif %}
