@@ -29,12 +29,14 @@
                                         </a>
                                     {% endif %}
                                 {% endif %}
-                                <h6 style="word-break: break-all;">
+                                <h6 class="mt-3 mb-1" style="word-break: break-all;">
                                     {{ post.name|striptags|u.truncate(maxlengthname, '...') }}
                                 </h6>
-                                <p style="word-break: break-all;" class="h-font-size-09">
-                                    {{ post.content|striptags|u.truncate(maxlengthname, '...')|raw }}
-                                </p>
+                                {% if post.product is null %}
+                                    <p style="word-break: break-all;" class="h-font-size-09">
+                                        {{ post.content|striptags|u.truncate(maxlengthname, '...')|raw }}
+                                    </p>
+                                {% endif %}
                             </div>
                             {% include 'front/base/hermes/template/ecommerce/product1.html.twig' %}
                         </div>
