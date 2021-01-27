@@ -19,3 +19,55 @@
     <a href="{{ path('address_index', {'type': address.type ?? 'undefined'}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
 {% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('hermes_front') }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://vicopo.selfbuild.fr/api.js"></script>
+
+<script type="text/javascript"> 
+    $(document).ready(function() {
+        var $country = $('#address_fr_countryCode');
+
+        if ($country .val() == 'FR') {
+           
+            $('#address_fr_locality').keypress(function (e) {
+                $('ul.vicopo-ville').css('display', 'block');
+
+                if(e.keyCode == 13) {
+                    var $ville = $(this);
+                    $.vicopo($ville.val(), function (input, cities) { 
+                    if(input == $ville.val() && cities[0]) {
+                        $ville.val(cities[0].city).vicopoTargets().vicopoClean();
+                        $('#address_fr_postalCode').val(cities[0].code)
+                    }
+                    $('ul.vicopo-ville').css('display', 'none');
+                    $('ul.vicopo-code').css('display', 'none');
+                    });
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+
+            $('#address_fr_postalCode').keypress(function (e) {
+                $('ul.vicopo-code').css('display', 'block');
+
+                if(e.keyCode == 13) {
+                    var $ville = $(this);
+                    $.vicopo($ville.val(), function (input, cities) { 
+                    if(input == $ville.val() && cities[0]) {
+                        $ville.val(cities[0].code).vicopoTargets().vicopoClean();
+                        $('#address_fr_locality').val(cities[0].city)
+                    }
+                    $('ul.vicopo-ville').css('display', 'none');
+                    $('ul.vicopo-code').css('display', 'none');
+                    }); 
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+        }
+    });
+
+</script>
+{% endblock %}

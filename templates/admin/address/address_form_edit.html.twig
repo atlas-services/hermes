@@ -25,16 +25,30 @@
         {{ form_widget(form.countryCode, {'attr': {'class': 'form-control'}}) }}
     </div>
 
-    <div class="form-group">
-        {{ form_label(form.locality) }}
-        {{ form_widget(form.locality, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
+     <div class="form-group">
         {{ form_label(form.postalCode) }}
         {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
+
+        <ul class="vicopo-code" style="list-style: none;display: none;">
+            <li data-vicopo="#address_fr_postalCode">
+                <strong data-vicopo-code-postal></strong>
+                <span data-vicopo-ville></span>
+            </li>
+        </ul>
     </div>
 
+     <div class="form-group">
+        {{ form_label(form.locality) }}
+        {{ form_widget(form.locality, {'attr': {'class': 'form-control'}}) }}
+
+        <ul class="vicopo-ville" style="list-style: none;display: none;">
+            <li data-vicopo="#address_fr_locality">
+                <strong data-vicopo-code-postal></strong>
+                <span data-vicopo-ville></span>
+            </li>
+        </ul>
+    </div>
+    
     <div class="form-group">
         {{ form_label(form.familyName) }}
         {{ form_widget(form.familyName, {'attr': {'class': 'form-control'}}) }}
@@ -51,5 +65,6 @@
     </div>
 
     <button class="btn btn-primary mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ button_label|default('global.update'|trans()) }} </button>
+
 {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
