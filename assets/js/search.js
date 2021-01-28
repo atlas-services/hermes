@@ -1,6 +1,8 @@
 /*
 search
  */
+import $ from 'jquery';
+const jQuery = $;
 var duration = 400;
 var easing = "swing";
 $('#search_icon').on("mouseover", e => {

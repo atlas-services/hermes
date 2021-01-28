@@ -1,3 +1,6 @@
+import $ from 'jquery';
+const jQuery = $;
+
 ;(function ($, window, document) {
     'use strict';
     var $slider = $('#carousel'),hammer = new Hammer($slider.get(0));

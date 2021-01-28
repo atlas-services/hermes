@@ -1,3 +1,5 @@
+import $ from 'jquery';
+const jQuery = $;
 let modalId = $('#image-gallery');
 
 $(document)

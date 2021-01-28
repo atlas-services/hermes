@@ -1,4 +1,10 @@
+import $ from 'jquery';
+const jQuery = $;
+
 var $activePost;
+var $activeSection;
+var $activeMenu;
+var $activeSheet;
 var $id;
 var $url;
 

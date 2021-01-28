@@ -4,6 +4,8 @@ import '../../css/bootstrap/aos.css';
 import '../../css/venobox.css';
 import '../../css/isotope.css'
 
+import $ from 'jquery';
+const jQuery = $;
 import 'bootstrap';
 import 'jquery.easing';
 /*import '../../../js/scroll';*/
