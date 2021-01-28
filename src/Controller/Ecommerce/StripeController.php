@@ -47,10 +47,11 @@ class StripeController extends AbstractController
 
         // Récuperation de la commande en cours
         // Mise à jour order
-        $orderClient->handleCartProducts($this->getUser(), Order::STATUS_ORDER_PREPARE_PAIEMENT);
+        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+        $orderClient->handleCartProducts($order, Order::STATUS_ORDER_PREPARE_PAIEMENT);
 
         // Récuperation de la commande en cours
-        $order = $orderClient->getCurrentOrderByUser($this->getUser());
+
         if(!$order instanceof Order){
             return $this->redirectToRoute('cart');
         }else{
@@ -101,7 +102,7 @@ class StripeController extends AbstractController
             $notification = $translator->trans('paiement.done');
             $this->addFlash('success', $notification);
 
-            $orderClient->handlePaiementOrder($order);
+            $orderClient->handleOrderPaiement($order);
 
             // send Email with order pdf
             $config = $page->getActiveConfig();

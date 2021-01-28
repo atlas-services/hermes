@@ -34,76 +34,34 @@ class OrderClient
     public function getCurrentOrderByUser($user)
     {
         $order =  $this->entityManager->getRepository(Order::class)->findOneBy([ 'user'=> $user, 'status'=> Order::STATUS_CURRENT]);
+        if(is_null($order)){
+            $order = new Order();
+            $order->setStatus(Order::STATUS_CART);
+            $order->setUser($user);
+            $order->setName('order-' . $user->getFirstname() . '-' . rand(1, 9999));
+        }
         return $order;
     }
 
-    public function redirect($user)
-    {
-        $order = $this->getCurrentOrderByUser($user);
-        $status = $order->getStatus();
-        switch ($status) {
-            case Order::STATUS_CART:
-                $route_name = 'order_delivery';
-                break;
-            case Order::STATUS_ORDER_PREPARE_DELIVERY:
-                $route_name = 'order_paiement';
-                break;
-        }
-
-        return $route_name;
-    }
-
-    /*
-     * @todo : delete?
-     */
-    public function updateOrderStatus($user, $status_from = Order::STATUS_CART, $status_to = Order::STATUS_ORDER_PREPARE_DELIVERY)
+    public function handleCartProducts(Order $order, $status = Order::STATUS_CART)
     {
 
-        $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status_from]);
-        if($order instanceof Order ){
-            $order->setStatus($status_to);
-            $this->entityManager->persist($order);
-            $this->entityManager->flush();
-            // empty cart
-            if( $order->getStatus() == Order::STATUS_PAYED){
-                $this->cartClient->emptyCart();
-            }
-        }
-    }
-
-    public function handleCartProducts($user,$status = Order::STATUS_CART)
-    {
-        if(!is_null($user)) {
-            $order = $this->getCurrentOrderByUser($user);
+        if(!is_null($order)) {
             // gestion order status CART
-            // création order et orderLines "CART"
             $cartProducts = $this->cartClient->getProducts();
             // mise à jour order et orderLines "CART"
-            if($order instanceof Order){
-                if (in_array($order->getStatus(), Order::STATUS_CURRENT) ) {
-                    $this->handleOrder($user, $order, $cartProducts,false, $status);
-                }
-            }
-            if(is_null($order)){
-                $order = new Order();
-                $this->handleOrder($user, $order, $cartProducts,true);
+            if (in_array($order->getStatus(), Order::STATUS_CURRENT) ) {
+                $this->handleOrderProducts($order, $cartProducts, $status);
             }
         }
     }
 
-    public function handleOrder($user, $order, $cartProducts, $add, $status = Order::STATUS_CART)
+    public function handleOrderProducts($order, $cartProducts, $status = Order::STATUS_CART)
     {
-        if ($add) {
-            $order->setStatus(Order::STATUS_CART);
-            $order->setName('order-' . $user->getFirstname() . '-' . rand(1, 9999));
-            $order->setUser($user);
-        }
-        if (!$add) {
-            $order->setStatus($status);
-            foreach($order->getOrderLines() as $orderLine){
-                $order->removeOrderLine($orderLine);
-                $this->entityManager->remove($orderLine);
-            }
+        $order->setStatus($status);
+        foreach($order->getOrderLines() as $orderLine){
+            $order->removeOrderLine($orderLine);
+            $this->entityManager->remove($orderLine);
         }
         foreach($cartProducts as $cartProduct){
             $orderLine = new OrderLine();
@@ -119,18 +77,20 @@ class OrderClient
 
     }
 
-    public function handleDeliveryOrder($order, $delivery, $ecommerce_delivery_free_amount=0)
+    public function handleOrderDelivery($order, $delivery, $ecommerce_delivery_free_amount=0)
     {
 
-        $this->updateDeliveryPrice($delivery, $ecommerce_delivery_free_amount);
+        if($delivery) {
+            $this->updateDeliveryPrice($delivery, $ecommerce_delivery_free_amount);
 
-        if(is_null($delivery->getName())){
-            $delivery->setName($delivery->getDeliveryMethod() . '-' . $order->getId());
+            if(is_null($delivery->getName())){
+                $delivery->setName($delivery->getDeliveryMethod() . '-' . $order->getId());
+            }
+            $order->setDelivery($delivery);
+            $order->setStatus(Order::STATUS_ORDER_PREPARE_DELIVERY);
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();
         }
-        $order->setDelivery($delivery);
-        $order->setStatus(Order::STATUS_ORDER_PREPARE_DELIVERY);
-        $this->entityManager->persist($order);
-        $this->entityManager->flush();
 
     }
 
@@ -141,20 +101,23 @@ class OrderClient
             $cart_total = $this->cartClient->getTotal();
             if($cart_total >= $ecommerce_delivery_free_amount){
                 $delivery_free = true;
+                $delivery->setPrice(0);
             }
         }
 
         if(!$delivery_free){
-            if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
-                $delivery->setPrice(12345);
-            }
-            if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
-                $delivery->setPrice(54321);
+            if($delivery){
+                if(Delivery::DELIVERY_HOME ==  $delivery->getDeliveryMethod()){
+                    $delivery->setPrice(12345);
+                }
+                if(Delivery::DELIVERY_HOME_EXPRESS ==  $delivery->getDeliveryMethod()){
+                    $delivery->setPrice(54321);
+                }
             }
         }
     }
 
-    public function handlePaiementOrder($order)
+    public function handleOrderPaiement($order)
     {
         $order->setStatus(Order::STATUS_PAYED);
         $this->entityManager->persist($order);
@@ -162,24 +125,12 @@ class OrderClient
 
     }
 
-    public function getProducts($user, $status = Order::STATUS_CART)
-    {
-        $order =  $this->entityManager->getRepository(Order::class)->findOneBy(['user'=> $user, 'status'=> $status]);
-        $orderLines = $this->entityManager->getRepository(OrderLine::class)->findByOrder($order);
-        return $orderLines;
-    }
-
-    public function getTotal($user)
+    public function getTotal(Order $order)
     {
         $total = 0;
         $delivery_price = 0;
-
-        $order = $this->getCurrentOrderByUser($user);
-
-        if($order instanceof Order){
-            if($order->getDelivery() instanceof Delivery){
-                $delivery_price = $order->getDelivery()->getPrice();
-            }
+        if($order->getDelivery() instanceof Delivery){
+            $delivery_price = $order->getDelivery()->getPrice();
         }
 
         $cart_total = $this->cartClient->getTotal();
@@ -194,50 +145,17 @@ class OrderClient
 
     }
 
-    /*
-     * @todo : delete?
-     */
-    public function updateOrdersStatusByUser($user, $status_from = Order::STATUS_ORDER, $status_to = Order::STATUS_WAITING)
+    public function getTotalProducts()
     {
-        $orders = $this->getOrdersByUserAndStatus($user,$status_from);
-        foreach ($orders as $order){
-            $order->setStatus($status_to);
-            $this->entityManager->persist($order);
-        }
-        $this->entityManager->flush();
-    }
+        $total = 0;
 
-    /*
-     * @todo : delete?
-     */
-    public function emptyOrderByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-        $orders = $this->getOrdersByUserAndStatus($user,$status);
-        foreach ($orders as $order){
-            $this->entityManager->remove($order);
-        }
-        $this->entityManager->flush();
-    }
+        return $this->cartClient->getTotal();
 
-    /*
-     * @todo : delete?
-     */
-    public function getOrdersByUserAndStatus($user, $status = Order::STATUS_CART)
-    {
-        return  $this->entityManager->getRepository(Order::class)->findBy(['user'=> $user, 'status'=> $status]);
     }
 
     public function emptyCart()
     {
         $this->cartClient->emptyCart();
-    }
-
-
-    public function addCustomer(?User $user)
-    {
-        if( $user instanceof User){
-            $this->getOrder()->setUser($user);
-        }
     }
 
     public function save($file,$order, $project_dir)
@@ -247,6 +165,5 @@ class OrderClient
         $this->filesystem->mkdir($order_dir);
         $this->filesystem->dumpFile(sprintf($order_dir.'/order-%s.pdf', $order->getId()), $file);
     }
-
 
 }

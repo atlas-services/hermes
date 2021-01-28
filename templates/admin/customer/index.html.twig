@@ -6,7 +6,7 @@
 {% endblock nav %}
 
 {% block content %}
-    <section id="admin">
+    <section id="admin" class="text-center">
         <p class="text-secondary lead">
             {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
         </p>
@@ -14,7 +14,7 @@
             {{ 'info.customer_presentation'|trans()|raw }}
         </p>
         {% if app.session.has('cart') %}
-        <p class="h-bg-success lead col-lg-3 rounded py-4 text-center">
+        <p class="h-bg-success lead col-lg-3 rounded py-4 mx-auto">
                 {% include 'admin/customer/back_purchase.html.twig' %}
         </p>
         {% endif %}

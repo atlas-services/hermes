@@ -1,4 +1,5 @@
 {%  if(app.user is not null) %}
-      <h4 class="{{ content_color }}"> {{ 'order.security'|trans() }} <pan class="fa fa-lock"></pan></h4>
+            {{ (breadcrumb == 'order.paiement'|trans() )  ? 'paiement.security'|trans()  : 'order.security'|trans() }}
+            <span class="fa fa-lock pr-3"></span>
 {% endif %}
 

@@ -72,13 +72,6 @@ class CartClient
         return $total;
     }
 
-    public function addCustomer(?User $user)
-    {
-        if( $user instanceof User){
-            $this->getCart()->setUser($user);
-        }
-    }
-
     public function emptyCart()
     {
         $this->session->remove('cart');

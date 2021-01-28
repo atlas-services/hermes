@@ -411,16 +411,19 @@ delivery:
   home_express: A la maison - sous 48h00
   relay: Livraison en relais
   valid: Valider l'adresse de livraison
+  free_limit: 'Livraison offerte pour tout achat supérieur à '
+  free: Livraison offerte!
   error: Erreur
 
 paiement:
+  security: Effectuez votre règlement en toute sécurité
   message_compte: Afin de finaliser votre commande, vous devez vous connecter avec votre compte client ou en créer un <a href='/fr/login' target='_blank'>Mon compte</a>
   label: Mon paiement
   send: Envoyer
   done: Paiement effectué!
   stripe:
     label: Stripe
-    checkout: Règler avec Stripe
+    checkout: Carte bancaire
 
 email:
   send: Votre message a bien été envoyé.

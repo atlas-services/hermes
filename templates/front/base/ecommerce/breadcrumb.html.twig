@@ -2,36 +2,74 @@
 <div class=" mt-3" >
     <nav aria-label="breadcrumb">
         <ol style="background-color: {{ bgcolor }}" class="breadcrumb ">
-            <li style="background-color: {{ (breadcrumb == 'cart.label'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto  py-3 {{ (breadcrumb == 'cart.label'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'cart.label'|trans() )  ? 'aria-current="page"'  : '' }}>
+            <li style="background-color: {{ (breadcrumb == 'cart.label'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item rounded-pill col-lg-3 mx-auto  py-3 {{ (breadcrumb == 'cart.label'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'cart.label'|trans() )  ? 'aria-current="page"'  : '' }}>
                 <a style="color: {{ (breadcrumb == 'cart.label'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center"  href={{ path('cart') }} >
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+                    </svg>
                     {{ 'cart.label'|trans() }}
                 </a>
             </li>
             {%  if(app.user is null) %}
-                <li style="background-color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}>
-                    <a style="color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-account"  href={{ path('order_account') }} >{{ 'customer.sign_in'|trans() }}</a></li>
-                <li class="breadcrumb-item col-lg-3 mx-auto py-3 text-secondary {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.delivery'|trans() }}</li>
-                <li class="breadcrumb-item col-lg-3 mx-auto py-3 text-secondary {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active '  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>{{ 'order.paiement'|trans() }}</li>
+                <li style="background-color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item rounded-pill col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <a style="color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-account"  href={{ path('order_account') }} >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"></path>
+                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
+                        </svg>
+                        {{ 'customer.sign_in'|trans() }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item rounded-pill col-lg-3 mx-auto py-3 text-secondary {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <div class="col-12  text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg>
+                    {{ 'order.delivery'|trans() }}
+                    </div>
+                </li>
+                <li class="breadcrumb-item rounded-pill col-lg-3 mx-auto py-3 text-secondary {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active '  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>
+                    <div class="col-12  text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                        <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                        </svg>
+                        {{ 'order.paiement'|trans() }}
+                    </div>
+                </li>
             {% endif %}
             {%  if(app.user is not null) %}
-                <li style="background-color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}>
+                <li style="background-color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item rounded-pill col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.account'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.account'|trans() )  ? 'aria-current="page"'  : '' }}>
                     <a style="color: {{ (breadcrumb == 'order.account'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-account"  href={{ path('customer_index') }} >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"></path>
+                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"></path>
+                        </svg>
                         {{ app.user }}
                     </a>
                 </li>
-                <li style="background-color: {{ (breadcrumb == 'order.delivery'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>
+                <li style="background-color: {{ (breadcrumb == 'order.delivery'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item rounded-pill col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.delivery'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.delivery'|trans() )  ? 'aria-current="page"'  : '' }}>
                     <a style="color: {{ (breadcrumb == 'order.delivery'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-delivery"   href={{ path('order_delivery') }} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                            <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                        </svg>
                         {{ 'order.delivery'|trans() }}
                     </a>
                 </li>
-                <li style="background-color: {{ (breadcrumb == 'order.paiement'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>
+                <li style="background-color: {{ (breadcrumb == 'order.paiement'|trans() )  ? nav_bgcolor  : '' }}" class="breadcrumb-item rounded-pill col-lg-3 mx-auto   py-3 {{ (breadcrumb == 'order.paiement'|trans() )  ? 'active'  : '' }}" {{ (breadcrumb == 'order.paiement'|trans() )  ? 'aria-current="page"'  : '' }}>
                     <a style="color: {{ (breadcrumb == 'order.paiement'|trans() )  ? nav_link_color  : content_color }}" class="col-12  text-center" id="order-paiement"   href={{ path('order_paiement') }} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                        </svg>
                         {{ 'order.paiement'|trans() }}
                     </a>
                 </li>
             {% endif %}
         </ol>
     </nav>
-    {% include 'front/base/ecommerce/security.html.twig' %}
+{#    {% include 'front/base/ecommerce/security.html.twig' %}#}
 </div>
 
