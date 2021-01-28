@@ -73,7 +73,13 @@ Encore
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     .enableReactPreset()
-    //.addEntry('admin', './assets/js/admin.js')
+    .configureBabel((babelConfig) => {
+        if (Encore.isProduction()) {
+            babelConfig.plugins.push(
+                'transform-react-remove-prop-types'
+            );
+        }
+    })
 
 ;
 var config = Encore.getWebpackConfig();
