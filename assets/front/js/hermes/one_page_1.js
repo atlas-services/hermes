@@ -2,6 +2,8 @@ import '../../css/bootstrap/animate.css';
 import '../../css/bootstrap/one_page_1_default.css';
 import '../../css/bootstrap/one_page_1.css';
 
+import $ from 'jquery';
+const jQuery = $;
 import 'bootstrap';
 import 'jquery.easing';
 import '../../../js/scroll';
@@ -9,6 +11,8 @@ import 'waypoints/lib/jquery.waypoints.min';
 import 'counterup/jquery.counterup.min';
 import 'particles.js';
 import { WOW } from 'wowjs';
+import AOS  from 'aos';
+import 'owl.carousel';
 
 $(function () {
 
@@ -110,6 +114,8 @@ $(function () {
     //=====  WOW active
 
     new WOW().init();
+
+    AOS.init();
 
 
     //=====  particles
@@ -337,6 +343,13 @@ $(function () {
         "retina_detect": !0
     });
 
+    // Testimonials carousel (uses the Owl Carousel library)
+    $(".testimonials-carousel").owlCarousel({
+        autoplay: true,
+        dots: true,
+        loop: true,
+        items: 1
+    });
 
 
 

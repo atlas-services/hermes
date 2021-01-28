@@ -1,3 +1,5 @@
+import $ from 'jquery';
+const jQuery = $;
 $('img.lazy').Lazy({
         // effect
         effect: 'fadeIn',

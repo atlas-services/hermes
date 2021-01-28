@@ -1,3 +1,5 @@
+import $ from 'jquery';
+const jQuery = $;
 (function($) {
     "use strict"; // Start of use strict
 

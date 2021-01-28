@@ -1,3 +1,6 @@
+import $ from 'jquery';
+const jQuery = $;
+
 var $collectionHolder;
 
 // setup an "add a tag" link

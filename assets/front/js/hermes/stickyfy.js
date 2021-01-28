@@ -1,3 +1,5 @@
+import $ from 'jquery';
+const jQuery = $;
 (function($) {
 
     // When the user scrolls the page, execute stickyfy
