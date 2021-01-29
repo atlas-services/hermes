@@ -2,6 +2,10 @@
 {% block content %}
 {{ form_start(form, {'action': path('address_new'), 'method': 'POST'}) }}
     <div class="form-group">
+        <br>
+        {{ form_widget(form.defaultDelivery) }}
+    </div>
+    <div class="form-group">
         {{ form_label(form.additionalName) }}
         {{ form_widget(form.additionalName, {'attr': {'class': 'form-control', 'placeholder': 'form_adress.additionalName_placeholder' }}) }}
     </div>

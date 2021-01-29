@@ -45,7 +45,7 @@ class AddressFRType extends AbstractType
 
         ->add('addressLine2', TextType::class,
             array('label' => "Addresse suite",
-                'attr' => array('class' => "form-control",'required' => false)))
+                'attr' => array('required' => false)))
 
         ->add('countryCode',ChoiceType::class,
             array('label' => "* Pays",
