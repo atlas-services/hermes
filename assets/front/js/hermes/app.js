@@ -46,6 +46,8 @@ import '../hermes/modale';
 import '../hermes/cart';
 import '../hermes/delivery';
 import '../hermes/stripe';
+import '../hermes/wow';
+import '../hermes/aos';
 import '../../../js/lazy';
 // import '../hermes/video';
 // import '../hermes/todo';

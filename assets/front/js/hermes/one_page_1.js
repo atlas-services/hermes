@@ -10,9 +10,9 @@ import '../../../js/scroll';
 import 'waypoints/lib/jquery.waypoints.min';
 import 'counterup/jquery.counterup.min';
 import 'particles.js';
-import { WOW } from 'wowjs';
-import AOS  from 'aos';
 import 'owl.carousel';
+import './wow';
+import './aos';
 
 $(function () {
 
@@ -109,14 +109,6 @@ $(function () {
             scrollTop: 0,
         }, 1500);
     });
-
-
-    //=====  WOW active
-
-    new WOW().init();
-
-    AOS.init();
-
 
     //=====  particles
 
