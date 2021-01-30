@@ -41,6 +41,8 @@ import '../../../js/search';
 import '../../../js/anime';
 import '../../../js/copy';
 import '../hermes/modale';
+import '../hermes/wow';
+import '../hermes/aos';
 import '../../../js/lazy';
 // import '../hermes/video';
 // import '../hermes/todo';
