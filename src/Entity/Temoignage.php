@@ -15,7 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\TemoignageRepository")
  * @ORM\Table(name="temoignage")
  */
-class Temoignage implements ContactInterface
+class Temoignage implements ContactInterface, \JsonSerializable
+
 {
     use IdTrait;
     use ActiveTrait;
@@ -23,5 +24,15 @@ class Temoignage implements ContactInterface
     use NameTrait;
     use EmailTrait;
     use ContentTrait;
+
+    public function jsonSerialize()
+    {
+        return
+            [
+                'id'   => $this->getId(),
+                'name' => $this->getName(),
+                'comment' => $this->getContent(),
+            ];
+    }
 
 }

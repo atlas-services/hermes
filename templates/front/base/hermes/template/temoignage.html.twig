@@ -13,23 +13,28 @@
         </div>
         <div class="mt-5 mb-5 row">
             <div class="col-lg-12 col-12 pl-0 text-center">
+                {% if 'none' == nav_bar  %}
+                    <p><a class="js-scroll-trigger main-btn wow fadeInUp rounded-pill" data-wow-delay="0.8s" data-wow-duration="1.0s" href="{{ path('sheet') }}">Retour sur le site</a></p>
+                {% else %}
                 <h3 style="color:#8f2160;font-family:'Merriweather';font-style: italic;">Témoignages</h3>
+                {% endif %}
             </div>
         </div>
-        {% for temoignage in livredor %}
-        <div class="mt-5 row">
-            <div class="col-lg-12 col-12 pl-0 text-left">
-                <h3 style="color:#8f2160;font-family:'Merriweather';font-style: italic;">{{ temoignage.name }}</h3>
+        {% if 'none' != nav_bar  %}
+            {% for temoignage in livredor %}
+            <div class="mt-5 row">
+                <div class="col-lg-12 col-12 pl-0 text-left">
+                    <h3 style="color:#8f2160;font-family:'Merriweather';font-style: italic;">{{ temoignage.name }}</h3>
+                </div>
+                <div class="col-lg-12 col-12 pl-0 text-left">
+                    <blockquote style="color:#7c7c7c;font-family:'Roboto Condensed',serif;font-size:16px;text-align: justify;">
+                       {{ temoignage.content|nl2br }}
+                    </blockquote>
+                </div>
             </div>
-            <div class="col-lg-12 col-12 pl-0 text-left">
-                <blockquote style="color:#7c7c7c;font-family:'Roboto Condensed',serif;font-size:16px;text-align: justify;">
-                   {{ temoignage.content|nl2br }}
-                </blockquote>
-            </div>
-        </div>
-        {% endfor %}
-
-        <hr>
+            {% endfor %}
+            <hr>
+        {% endif %}
 
         <div class="mt-5 mb-5 row">
             <div class="col-lg-12 col-12 pl-0 text-center">

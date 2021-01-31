@@ -1160,7 +1160,7 @@ section {
 --------------------------------------------------------------*/
 .testimonials .testimonial-item {
     box-sizing: content-box;
-    min-height: 320px;
+    min-height: 200px;
 }
 
 .testimonials .testimonial-item .testimonial-img {
