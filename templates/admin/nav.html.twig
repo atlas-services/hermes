@@ -46,14 +46,16 @@
                                 <p><a class="text-info mx-3"
                                       href="{{ path('remote_index') }}"> {{ 'remote.affiche_list'|trans()|raw }}</a></p>
                             {% endif %}
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                {% if(config.value is defined) %}
-                                    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}
-                                        <p><a class="text-info mx-3"
-                                              href="{{ path('temoignage_index') }}"> {{ 'temoignage.affiche_list'|trans()|raw }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+{#                                {% if(config.value is defined) %}#}
+{#                                    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}#}
+                                        <p>
+                                            <a class="text-info mx-3" href="{{ path('temoignage_index') }}">
+                                                {{ 'temoignage.affiche_list'|trans()|raw }}
+                                            </a>
                                         </p>
-                                    {% endif %}
-                                {% endif %}
+{#                                    {% endif %}#}
+{#                                {% endif %}#}
                             {% endif %}
                         </div>
                     </li>

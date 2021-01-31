@@ -158,26 +158,10 @@ class FrontController extends AbstractController
             }
         }
 
-/*
- * @todo cache remote sauf si sheet, menu section sont modifiés ?
- */
-//        $cache = $page->getCacheMenu($sheet, $slug);
-//        if(!empty($cache)){
-//                    // The callable will only be executed on a cache miss.
-//                $response = $frontCache->get($cache['front_cache'], function (ItemInterface $item) use($page, $sheet, $slug, $route) {
-//
-//                    $array = $page->getActiveMenu($sheet, $slug, $route);
-//                    $cached_response = $this->render('front/index.html.twig', $array);
-//
-//
-//                    return $cached_response ;
-//                });
-//
-//                return $response;
-//        }
-
-
         $array = $page->getActiveMenu($sheet, $slug,$route);
+        $entityManager = $this->getDoctrine()->getManager();
+        $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
+        $array[ContactInterface::LIVREDOR] = json_encode($livredor, JSON_HEX_APOS|JSON_HEX_QUOT);
 
         return $this->render('front/index.html.twig', $array);
     }
