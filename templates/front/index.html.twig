@@ -70,7 +70,9 @@
     {% if('contact' == app.request.attributes.get('_route')) %}
         {% include 'front/base/' ~ directory ~'/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}
     {% endif %}
-    <div  id="react-data-testimony"  data-testimonys='{{ livredor }}' ></div>
+    {% if livredor is defined %}
+        <div  id="react-data-testimony"  data-testimonys='{{ livredor|json_encode|raw }}' ></div>
+    {% endif %}
 {% endblock content %}
 
 
