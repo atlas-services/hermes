@@ -1,0 +1,12 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.new_blockpost'|trans() }}{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <a href="{{ path('blockpost_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    {{ include('admin/blockpost/_form.html.twig') }}
+
+    <a href="{{ path('blockpost_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+{% endblock %}

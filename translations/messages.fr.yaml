@@ -58,6 +58,7 @@ global:
   about: A propos
   hello: Bonjour
   admin: Admin
+  blocks: Mes blocks de contenus
   dashboard: Mon Tableau de Bord
   breadcrumb: 'Vous êtes ici : '
   new_content: Nouveau contenu
@@ -301,6 +302,33 @@ section:
   add_post: Ajouter un contenu
   all: All
   all_text: Toutes les pages
+
+
+# Blockpost
+blockpost:
+  list: Contenu
+  affiche_list: Contenu des Blocks
+  edit: Modifier le block
+  add: Créer un contenu de block
+  posts: Contenus
+  label: Contenu du Block
+  name: Block
+  add_post: Ajouter un contenu
+  all: All
+  all_text: Tous les contenus des blocks
+
+# Block
+block:
+  list: Block
+  affiche_list: Blocks
+  edit: Modifier le block
+  add: Créer un block
+  posts: Contenus
+  label: Blocks
+  name: Block
+  add_post: Ajouter un contenu
+  all: All
+  all_text: Tous les blocks
 ##########################
 ###### Front  ############
 ##########################

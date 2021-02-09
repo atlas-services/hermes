@@ -8,8 +8,10 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Block;
 use App\Entity\Contact;
 use App\Entity\Interfaces\ContactInterface;
+use App\Entity\Section;
 use App\Entity\Temoignage;
 use App\Form\ContactType;
 use App\Form\Admin\TemoignageType;
@@ -161,6 +163,9 @@ class FrontController extends AbstractController
         $array = $page->getActiveMenu($sheet, $slug,$route);
         $entityManager = $this->getDoctrine()->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
+        $blocks = $entityManager->getRepository(Block::class)->getBlocks();
+        $array['blocks'] = $blocks;
+
         $array[ContactInterface::LIVREDOR] = $livredor;
 
         return $this->render('front/index.html.twig', $array);

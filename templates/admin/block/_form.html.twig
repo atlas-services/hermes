@@ -1,0 +1,10 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+
+{{ form_start(form) }}
+    {{ form_row(form.active) }}
+    {{ form_row(form.name) }}
+    {% if( app.request.attributes.get('_route') in ['block_blockpost_new_menu','block_new', 'block_edit']) %}
+        {{ form_row(form.save) }}
+    {% endif %}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

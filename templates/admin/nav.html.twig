@@ -26,6 +26,21 @@
                 <ul class="h-rounded-lg-09 nav navbar-nav ml-auto"
                     style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">
                     <li class=" nav-item dropdown ">
+                        <a id="{{ 'global.blocks'|trans() }}"
+                           class="nav-link  page-scroll dropdown-toggle " role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           href="#">
+                            {{ 'global.blocks'|trans()|raw }}
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"
+                             aria-expanded="false">
+                            <p><a class="text-info mx-3 "
+                                  href="{{ path('block_index') }}"> {{ 'block.affiche_list'|trans()|raw }}</a></p>
+                            <p><a class="text-info mx-3"
+                                  href="{{ path('blockpost_index') }}"> {{ 'blockpost.affiche_list'|trans()|raw }}</a></p>
+                        </div>
+                    </li>
+                    <li class=" nav-item dropdown ">
                         <a id="{{ 'global.dashboard'|trans() }}"
                            class="nav-link  page-scroll dropdown-toggle " role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

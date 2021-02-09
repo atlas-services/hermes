@@ -1,0 +1,27 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}block{% endblock %}
+
+{% block content %}
+    <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1>block</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'global.active'|trans() }}</th>
+                <td>{{ block.active ? 'global.active'|trans()|raw : 'global.inactive'|trans()|raw }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'global.name'|trans() }}</th>
+                <td>{{ block.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('block_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    <a href="{{ path('block_edit', {'block': block.id}) }}">edit</a>
+
+    {{ include('admin/block/_delete_form.html.twig') }}
+{% endblock %}
