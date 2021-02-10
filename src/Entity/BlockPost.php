@@ -99,8 +99,12 @@ class BlockPost extends AbstractContent implements \JsonSerializable
     public function jsonSerialize()
     {
         $public = 'public';
-        $pos = strpos($this->getImageFile()->getPathname(), $public ) + strlen($public);
-        $src = substr($this->getImageFile()->getPathname(), $pos );
+        $src = '';
+        if(!is_null($this->getImageFile())){
+            $pos = strpos($this->getImageFile()->getPathname(), $public ) + strlen($public);
+            $src = substr($this->getImageFile()->getPathname(), $pos );
+        }
+
         return
             [
                 'id'   => $this->getId(),
