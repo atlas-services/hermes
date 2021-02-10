@@ -73,6 +73,10 @@
     {% if livredor is defined %}
         <div  id="react-data-testimony"  data-testimonys='{{ livredor|json_encode|raw }}' ></div>
     {% endif %}
+    <div  id="react-data-block"  data-nbblock={{ blocks|length }} ></div>
+    {% for key, block in blocks  %}
+        <div  id="react-data-{{ key }}"  data-{{ key }}='{{ block|json_encode|raw }}' ></div>
+    {% endfor   %}
 {% endblock content %}
 
 

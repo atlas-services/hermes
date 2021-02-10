@@ -1,0 +1,24 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{{ form_start(form) }}
+{#    {% if form.block is defined %}#}
+{#        <h4 id="{{ form.vars.value.block.name }}" class="text-success"> {{ 'block.name'|trans() }}#}
+{#            : {{ form.vars.value.block.name }}</h4>#}
+{#    {% endif %}#}
+    {{ form_row(form.active) }}
+    {% if form.block is defined %}
+        {{ form_row(form.block) }}
+    {% endif %}
+    {% if form.imageFile is defined %}
+        {{ form_row(form.imageFile) }}
+    {% endif %}
+    {% if vich_uploader_asset(form.vars.data, 'imageFile') is not null %}
+        <tr>
+            <td><img  src="{{ asset(vich_uploader_asset(form.vars.data, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
+        </tr>
+    {% endif  %}
+    {{ form_row(form.name) }}
+    {{ form_row(form.position) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.save) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

@@ -14,7 +14,7 @@ var $newLinkLi = $('<li class="list-unstyled btn btn-primary"></li>').append($ad
 
 jQuery(document).ready(function () {
     // Switch active post
-    $activePost = $('.post-active');
+    var $activePost = $('.post-active');
     $activePost.on('click', function (e) {
         // active/desactive
         $id = $(this).attr('id');
@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
         switchActive($url, $id);
     });
     // Switch active page (section)
-    $activeSection = $('.section-active');
+    var $activeSection = $('.section-active');
     $activeSection.on('click', function (e) {
         // active/desactive
         $id = $(this).attr('id');
@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
         switchActive($url, $id);
     });
     // Switch active sous-menu (menu)
-    $activeMenu = $('.menu-active');
+    var $activeMenu = $('.menu-active');
     $activeMenu.on('click', function (e) {
         // active/desactive
         $id = $(this).attr('id');
@@ -38,7 +38,7 @@ jQuery(document).ready(function () {
         switchActive($url, $id);
     });
     // Switch active menu (sheet)
-    $activeSheet = $('.sheet-active');
+    var $activeSheet = $('.sheet-active');
     $activeSheet.on('click', function (e) {
         // active/desactive
         $id = $(this).attr('id');
@@ -46,11 +46,27 @@ jQuery(document).ready(function () {
         switchActive($url, $id);
     });
     // Switch active temoignage
-    $activeMenu = $('.temoignage-active');
+    var $activeMenu = $('.temoignage-active');
     $activeMenu.on('click', function (e) {
         // active/desactive
         $id = $(this).attr('id');
         $url = "/fr/admin/ajax/switch/temoignage";
+        switchActive($url, $id);
+    });
+    // Switch active blockpost
+    var $activeBlockPost = $('.blockpost-active');
+    $activeBlockPost.on('click', function (e) {
+        // active/desactive
+        $id = $(this).attr('id');
+        $url = "/fr/admin/ajax/switch/blockpost";
+        switchActive($url, $id);
+    });
+    // Switch active block
+    var $activeBlock = $('.block-active');
+    $activeBlock.on('click', function (e) {
+        // active/desactive
+        $id = $(this).attr('id');
+        $url = "/fr/admin/ajax/switch/block";
         switchActive($url, $id);
     });
 });

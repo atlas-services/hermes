@@ -1,0 +1,5 @@
+{% if block is not null %}
+    {% if block.id is not null %}
+        {{ include('admin/_delete_form.html.twig', {'objet': 'global.delete_block'|trans() ~ ' "'~ block.name ~ '" ?', 'action': path('block_delete', {'id': block.id}), 'csrf_token_delete': csrf_token('delete' ~ block.id) }) }}
+    {% endif %}
+{% endif %}

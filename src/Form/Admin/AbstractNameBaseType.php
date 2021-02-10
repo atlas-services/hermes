@@ -30,7 +30,7 @@ abstract class AbstractNameBaseType extends AbstractType
                         'data-toggle' => 'tooltip',
                         'data-placement'=> 'left',
                         'data-html' => 'true',
-                        'title'=> $options['tooltip']
+//                        'title'=> $options['title']
                     ]
                 ]);
         };
@@ -80,6 +80,7 @@ abstract class AbstractNameBaseType extends AbstractType
             'saveAndAddLabel' => 'menu.update_next',
             'saveAndAddPost' => false,
             'saveAndAddSectionPost' => false,
+            'saveAndAddPost' => false,
         ]);
     }
 }

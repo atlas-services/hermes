@@ -1,0 +1,43 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'blockpost.list'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1>{{ 'blockpost.list'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ 'global.active'|trans() }}</th>
+            <th>{{ 'block.name'|trans() }}</th>
+            <th>{{ 'global.name'|trans() }}</th>
+            <th>{{ 'global.position'|trans() }}</th>
+            <th>{{ 'global.actions'|trans() }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for blockpost in blockposts|sort((a, b) =>a.block.name <=> b.block.name) |sort((a, b) =>a.position <=> b.position) %}
+            <tr>
+                <td>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="blockpost-active custom-control-input" id="{{ blockpost.id }}"  {{ blockpost.isActive ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ blockpost.id }}"></label>
+                    </div>
+                </td>
+                <td>{{ blockpost.block.name }}</td>
+                <td>{{ blockpost.name }}</td>
+                <td>{{ blockpost.position }}</td>
+                <td>
+                    <a href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a type="button" class="btn h-bg-success text-white" id="blockpost-add" href="{{ path('blockpost_new') }}">{{ 'global.new_content'|trans() }}</a>
+{% endblock %}

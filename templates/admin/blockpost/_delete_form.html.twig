@@ -1,0 +1,1 @@
+{{ include('admin/_delete_form.html.twig', {'objet': 'global.delete_content'|trans() ~ ' "'~ blockpost.name ~ '" ?', 'action': path('blockpost_delete', {'id': blockpost.id}), 'csrf_token_delete': csrf_token('delete' ~ blockpost.id) }) }}
