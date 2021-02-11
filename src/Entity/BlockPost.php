@@ -109,7 +109,8 @@ class BlockPost extends AbstractContent implements \JsonSerializable
             [
                 'id'   => $this->getId(),
                 'name' => $this->getName(),
-                'comment' => strip_tags($this->getContent()),
+                'content' => strip_tags($this->getContent()),
+                'html_content' => $this->getContent(),
                 'src' => $src,
             ];
     }

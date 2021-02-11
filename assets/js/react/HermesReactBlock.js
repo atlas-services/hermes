@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DOMPurify from 'dompurify'
 
 export default class BlockApp extends Component {
 
@@ -19,7 +20,7 @@ export default class BlockApp extends Component {
                 <div className="services-icon"><img height="180px" alt={data.name} className={imgClass} src={data.src} /></div>
                 <div className="services-content mt-30">
                 <h4 className="services-title"><a href="#">{data.name}</a></h4>
-                {data.comment}
+                <div className="content" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(data.html_content)}}></div>
                 </div>
                 </div>
                 </div>
