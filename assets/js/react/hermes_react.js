@@ -25,15 +25,16 @@ const blocks = document.getElementById('react-data-block');
 if(blocks){
     const nbBlock = document.getElementById('react-data-block').dataset.nbblock;
     for (var i = 1; i <= nbBlock; i++){
-        const idBlock = 'react-block' + i;
-        const idDataBlock = 'react-data-block' + i;
-        const datasetBlock = 'block' + i;
-
+        const key = 'key-' + i;
+        const idDataBlock = 'react-data-' + i;
+        const keyBlock = document.getElementById(idDataBlock).dataset[key];
+        const idBlock = 'react-' + keyBlock;
         const block = document.getElementById(idBlock);
-        const imgClass = block.dataset.imgclass;
-        const dataBlock = document.getElementById(idBlock);
-        const dataBlocks =  JSON.parse(document.getElementById(idDataBlock).dataset[datasetBlock]);
         if(block) {
+            const datasetBlock = i;
+            const imgClass = block.dataset.imgclass;
+            const dataBlock = document.getElementById(idBlock);
+            const dataBlocks =  JSON.parse(document.getElementById(idDataBlock).dataset[datasetBlock]);
             if(dataBlock) {
                 render( <BlockApp datas={dataBlocks} imgClass={imgClass}
                 />, block);

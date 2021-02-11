@@ -25,8 +25,6 @@ class BlockRepository extends ServiceEntityRepository
     public function getBlocks(){
         $blocks = $this->createQueryBuilder('s')
             ->where('s.active = 1')
-            ->andWhere('s.name LIKE :name')
-            ->setParameter('name', 'block%')
             ->getQuery()
             ->getResult()
         ;
