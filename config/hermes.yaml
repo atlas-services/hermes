@@ -106,6 +106,9 @@ parameters:
           summary: logo
           value: ~
           image: ~
+        affiche_logo_top:
+          summary: Position du logo
+          value: true
         accueil:
           summary: image d'accueil du site
           value: ~

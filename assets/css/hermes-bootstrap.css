@@ -277,11 +277,11 @@ polices && size
 }
 
 .h-lato{
-    font-family: Impact, fantasy;
+    font-family: Lato, sans-serif;
 }
 
 .h-oswald{
-    font-family: Lato;
+    font-family: Oswald;
 }
 
 .h-palatino{
@@ -304,49 +304,70 @@ polices && size
 font-size
  */
 
-.h-font-size-08{
-    font-size: 0.8em;
-}
-.h-font-size-09{
-    font-size: 0.9em;
-}
-.h-font-size-1{
-    font-size: 1.0em;
-}
-.h-font-size-11{
-    font-size: 1.1em;
-}
-.h-font-size-12{
-    font-size: 1.2em;
-}
-.h-font-size-13{
-    font-size: 1.3em;
-}
-.h-font-size-14{
-    font-size: 1.4em;
-}
-.h-font-size-15{
-    font-size: 1.5em;
-}
-.h-font-size-16{
-    font-size: 1.6em;
-}
-.h-font-size-17{
-    font-size: 1.7em;
-}
-.h-font-size-18{
-    font-size: 1.8em;
-}
-.h-font-size-19{
-    font-size: 1.9em;
+@media (max-width: 600px) {
+    .h-font-size-14, .h-font-size-15,.h-font-size-16 {
+        font-size: 1.1em;
+    }
 }
 
-.h-font-size-2{
-    font-size: 2.0em ;
-}
+@media (min-width: 600px) {
 
-.h-font-size-3{
-    font-size: 3.0em;
+    .h-font-size-08 {
+        font-size: 0.8em;
+    }
+
+    .h-font-size-09 {
+        font-size: 0.9em;
+    }
+
+    .h-font-size-1 {
+        font-size: 1.0em;
+    }
+
+    .h-font-size-11 {
+        font-size: 1.1em;
+    }
+
+    .h-font-size-12 {
+        font-size: 1.2em;
+    }
+
+    .h-font-size-13 {
+        font-size: 1.3em;
+    }
+
+    .h-font-size-14 {
+        font-size: 1.4em;
+    }
+
+    .h-font-size-15 {
+        font-size: 1.5em;
+    }
+
+    .h-font-size-16 {
+        font-size: 1.6em;
+    }
+
+    .h-font-size-17 {
+        font-size: 1.7em;
+    }
+
+    .h-font-size-18 {
+        font-size: 1.8em;
+    }
+
+    .h-font-size-19 {
+        font-size: 1.9em;
+    }
+
+    .h-font-size-2 {
+        font-size: 2.0em;
+    }
+
+    .h-font-size-3 {
+        font-size: 3.0em;
+    }
+
 }
 
 /*
