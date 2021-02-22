@@ -22,7 +22,7 @@
                 {% if logo.filename is defined %}
                     {% if logo.filename is not null %}
                         {% if affiche_logo_top == true %}
-                        <a class="navbar-brand js-scroll-trigger ml-0 mr-0 " href="{{ path('sheet') }}">
+                        <a class="navbar-brand js-scroll-trigger mt-3 ml-0 mr-0 d-none d-sm-block " href="{{ path('sheet') }}">
                             <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 mx-auto app_logo">
                         </a>
                         {% endif %}
@@ -44,13 +44,16 @@
 
 <nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
     <div class="col-lg-{{ nav_container_width|col_lg() - nboffset }} {{ offset ?? ''}} container border-0 " style="background-color: {{nav_bgcolor}};">
+        <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet') }}">
+            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-2 pl-4 mx-auto app_logo">
+        </a>
         <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive" style="height:{{ nav_height }};">
             <ul class="nav navbar-nav  h-font-size-12 " style="background-color: {{ nav_menu_bgcolor }}">
                 {% if logo.filename is defined %}
                     {% if logo.filename is not null %}
                         {% if affiche_logo_top != true %}
                             <li class="nav-item hidden left mr-5 pr-5"  >
-                                <a href="{{ path('sheet') }}">
+                                <a class=" d-none  d-sm-block " href="{{ path('sheet') }}">
                                     <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="h-75 mx-auto">
                                 </a>
                             </li>
@@ -97,7 +100,7 @@
             </ul>
         </div>
     </div>
-    <div class="navbar-header page-scroll right">
+    <div class="navbar-header page-scroll left">
         <button  type="button" class="navbar-toggle navbar-toggler collapsed" style="background-color: transparent" data-toggle="collapse" data-target="#navbarResponsive">
             <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
             <span class="fa-2x  close-icon py-1" style="color: {{ nav_header_color ?? 'transparent' }}">x</span>

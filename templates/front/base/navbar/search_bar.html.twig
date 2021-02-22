@@ -1,20 +1,29 @@
-{% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
-        <div class="row col-lg-2 mx-auto px-0 col-12 float-right " >
-            <div class="col-lg-2 py-1">
-                <i id="search_icon" class='fa fa-search fa-2x' style="color:{{ nav_link_color }}"></i>
+{% if affiche_search == true %}
+    {% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
+            <div class="row col-lg-2 mx-auto px-0 col-12 float-right " >
+                <div class="col-lg-2 py-1">
+                    <i id="search_icon" class='fa fa-search fa-2x' style="color:{{ nav_link_color }}"></i>
+                </div>
+                <div class="col-lg-10">
+                    <form action="{{ path('search_content') }}">
+                    <div class="input-group ">
+                        <input id="search_bar"
+                               type="text"
+                               name="q"
+                               class="border-0 form-control "
+                               placeholder="{{ 'global.search'|trans() }}"
+                               style="visibility: hidden"
+                        >
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="col-lg-10">
-                <form action="{{ path('search_content') }}">
-                <div class="input-group ">
-                    <input id="search_bar"
-                           type="text"
-                           name="q"
-                           class="border-0 form-control "
-                           placeholder="{{ 'global.search'|trans() }}"
-                           style="visibility: hidden"
-                    >
-                    </div>
-                </form>
-            </div>
-        </div>
+    {% endif %}
+{% endif %}
+{% if affiche_search != true %}
+<div class="row d-block d-sm-none " >
+    <div class=" py-1">
+        <br/>
+    </div>
+</div>
 {% endif %}
