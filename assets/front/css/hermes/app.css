@@ -45,6 +45,11 @@ Content
 /*    margin-right: auto;*/
 /*}*/
 
+html{
+    position: relative;
+    min-height: 100%;
+}
+
 .form-group{
     width: 350px; /* 100%; /* 1050px; */
 }
@@ -165,4 +170,20 @@ zoom img
     transform: scale(1.7);
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
+}
+
+
+@media (min-width: 767px) {
+    .footer{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+@media (min-width: 767px) {
+    .footer{
+        bottom: 0;
+        width: 100%;
+    }
 }
