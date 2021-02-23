@@ -1,6 +1,14 @@
 /*
     fonts
  */
+// import '@fontsource/raleway';
+import "fontsource-alfa-slab-one";
+import "fontsource-bai-jamjuree";
+import "fontsource-lato";
+import "fontsource-oswald";
+import "@fontsource/raleway";
+import "fontsource-snowburst-one";
+import "fontsource-sofia";
 import '../../css/roboto-condensed.css';
 import '../../css/merryweather.css';
 

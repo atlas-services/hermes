@@ -288,6 +288,11 @@ polices && size
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 }
 
+.h-raleway{
+    font-family: font Raleway, sans-serif ;
+    font-weight: 400;
+}
+
 .h-snowburstOne{
     font-family: 'Snowburst One', sans-serif;
 }
@@ -298,6 +303,22 @@ polices && size
 
 .h-verdana{
     font-family: Verdana;
+}
+
+/*
+font-weight
+ */
+
+
+.h-fw-bolder{
+    font-weight: 900;
+}
+.h-fw-bold{
+    font-weight: 700;
+}
+
+.h-fw-lighter{
+    font-weight: 100;
 }
 
 /*

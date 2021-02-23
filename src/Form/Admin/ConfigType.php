@@ -154,6 +154,14 @@ class ConfigType extends AbstractBaseType
                         'false' => false ,
                     ];
                     break;
+                // affiche_search
+                case 'affiche_search':
+                    $choice = true;
+                    $options = [
+                        'true'  => true,
+                        'false' => false ,
+                    ];
+                    break;
                 // affiche_footer
                 case 'footer_affiche':
                     $choice = true;
