@@ -250,6 +250,12 @@ parameters:
         content_color:
           summary: Couleur du contenu
           value: '#000000'
+        content_link_color:
+          summary: Couleur des liens du contenu
+          value: '#000000'
+        content_link_hover_color:
+          summary: Couleur des liens au survol du contenu
+          value: '#ffffff'
         content_container_width:
           summary: Largeur du contenu affiché (en %)
           value: '100%'

@@ -60,6 +60,7 @@
                         {% endif %}
                     {% endif %}
                 {% endif %}
+                <hr class="d-block  d-sm-none w-100 bg-white">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}
                     {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
@@ -71,10 +72,10 @@
                         {% set active = 'active' %}
                     {% endif %}
                     {% if('active' == active) %}
-                        <li class="nav-item {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ nav_bgcolor_active }};  "  >
+                        <li class="nav-item pl-2 mb-2 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ nav_bgcolor_active }};  "  >
                         {% set colorlink =  nav_color_active  %}
                     {% else %}
-                        <li class="nav-item {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}" >
+                        <li class="nav-item pl-2 mb-3 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}" >
                         {% set colorlink =  nav_link_color  %}
                     {% endif %}
                         <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="remove-nav-link js-scroll {{ dropdowntoggle }}  " role="button"  data-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
@@ -88,7 +89,7 @@
 {#                                {% for menu_name, menu in listmenu|sort((a, b) => a.position <=> b.position) %}#}
                                 {% for menu_name, menu in listmenu %}
                                     {% if menu.slug is defined  %}
-                                        <li class="nav-item  mb-2 mr-2 {{ nav_link_border_bottom }}" >
+                                        <li class="nav-item  mb-3 mr-2 {{ nav_link_border_bottom }}" >
                                             <a style="color: {{ nav_link_color }}"  class="page-scroll pl-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
                                         </li>
                                     {% endif %}
@@ -96,6 +97,7 @@
                             </ul>
                         {% endif %}
                     </li>
+                    <hr class="d-block  d-sm-none w-100 bg-white">
                 {% endfor %}
                 {% include 'front/base/navbar/user.html.twig' %}
                 {% if(app.session.get('cart')) %}
