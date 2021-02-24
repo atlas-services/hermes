@@ -173,6 +173,7 @@ zoom img
 }
 
 
+
 @media (min-width: 767px) {
     .footer{
         position: absolute;
@@ -181,7 +182,7 @@ zoom img
     }
 }
 
-@media (min-width: 767px) {
+@media (max-width: 767px) {
     .footer{
         bottom: 0;
         width: 100%;
