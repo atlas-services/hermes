@@ -13,7 +13,7 @@
                                 {% else %}
                                     {% if section.template2.code in ['modale1', 'modale3' ] %}
                                         <!-- Modale1  -->
-                                        <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}" data-toggle="modal"
+                                         <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}" data-toggle="modal"
                                            data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                            data-target="#image-gallery">
                                             <img alt="{{ post.filename }}" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}" />
@@ -21,7 +21,7 @@
                                     {% endif %}
                                     {% if( 'modale2' ==  section.template2.code) %}
                                         <!-- Modale2  -->
-                                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                         <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
                                             <img alt="{{ post.filename }}" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}" />
                                         </a>
                                     {% endif %}
@@ -42,7 +42,7 @@
                             {% else %}
                                 {% if section.template2.code in ['modale1', 'modale3' ] %}
                                     <!-- Modale1  -->
-                                    <a class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
                                        data-image ="{{ image }}"
                                        data-target="#image-gallery">
                                         <img id="{{ loop.index }}" alt="{{ image }}" class="img-fluid img-thumbnail" src="{{ image}}"  />
@@ -50,7 +50,7 @@
                                 {% endif %}
                                 {% if( 'modale2' ==  section.template2.code) %}
                                     <!-- Modale2  -->
-                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ img }}">
                                         <img id="{{ loop.index }}" alt="{{ image }}" class="img-fluid img-thumbnail" src="{{ image}}"  />
                                     </a>
                                 {% endif %}

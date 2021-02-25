@@ -10,10 +10,10 @@
         <h5 class="mt-5 text-center col-12 col-lg-12 mx-auto px-0" style="color:{{ content_color }}" >
                 {{ 'global.search_result_in'|trans() }}
         {% if post.section is defined %}
-                <a href="{{ path('sheet', {'sheet': post.section.menu.sheet.slug , 'slug': post.section.menu.slug}) }}"> {{ post.section.menu.name }}</a></h5>
+                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" href="{{ path('sheet', {'sheet': post.section.menu.sheet.slug , 'slug': post.section.menu.slug}) }}"> {{ post.section.menu.name }}</a></h5>
         {% endif %}
         {% if 'Temoignage' in post|get_class() %}
-                <a href="{{ path(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE')) }}"> {{ constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE') }}</a></h5>
+                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" href="{{ path(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE')) }}"> {{ constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE') }}</a></h5>
         {% endif %}
          <section id="{{ post.name }}" class="section_content pb-0  px-0 col-lg-{{ container_width|col_lg()}} col-12" style="background-color:{{ content_bgcolor }}">
                  <div class="container col-lg-{{ content_container_width|col_lg() }}" >

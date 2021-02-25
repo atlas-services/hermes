@@ -17,7 +17,7 @@
                             {% else %}
                                 {% if section.template2.code in ['modale1', 'modale3' ] %}
                                     <!-- Modale1  -->
-                                    <a class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
                                        data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                        data-target="#image-gallery">
                                         <span class="staggering">
@@ -27,7 +27,7 @@
                                 {% endif %}
                                 {% if( 'modale2' ==  section.template2.code) %}
                                     <!-- Modale2  -->
-                                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
                                         <span class="staggering">
                                             <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"/>
                                         </span>
@@ -50,7 +50,7 @@
                             {% else %}
                                 {% if section.template2.code in ['modale1', 'modale3' ] %}
                                     <!-- Modale1  -->
-                                    <a class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
                                        data-image ="{{ image }}"
                                        data-target="#image-gallery">
                                         <span class="staggering">
@@ -61,7 +61,7 @@
                                 {% endif %}
                                 {% if( 'modale2' ==  section.template2.code) %}
                                     <!-- Modale2  -->
-                                    <a class="portfolio-link  mx-0 px-0" data-toggle="modal" href="#portfolioModal{{ img }}">
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link  mx-0 px-0" data-toggle="modal" href="#portfolioModal{{ img }}">
                                         <span class="staggering">
                                             <img class="stagge" style="width: 300px;height:200px;object-fit:cover" src="{{ image }}"/>
                                         </span>
