@@ -24,7 +24,7 @@
                 </div>
                 {% if vich_uploader_asset(post, 'imageFile') is not null %}
                     <div class="col-lg-10 col-12 text-center mx-auto h-position-absolute h-bottom-10 " >
-                        <a class="col-lg-12 col-12 btn h-w-40 btn-outline-danger h-rounded-lg-4 pt-2 pb-2 "
+                         <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="col-lg-12 col-12 btn h-w-40 btn-outline-danger h-rounded-lg-4 pt-2 pb-2 "
                            href="{{ asset(vich_uploader_asset(post, 'imageFile')) }}"
                            rel="noopener noreferrer" target="_blank">Télécharger</a>
                     </div>

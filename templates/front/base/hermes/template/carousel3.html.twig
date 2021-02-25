@@ -15,8 +15,8 @@
 
             <!--Controls-->
             <div class="controls-top mb-3 text-center">
-                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
             </div>
             <!--/.Controls-->
                 <!--Slides-->
@@ -47,7 +47,7 @@
 {#                                            {% if section.template2.code in ['modale1', 'modale3' ] %}#}
                                         {% if section.template2.code in ['modale1', 'modale3' ] %}
                                             <!-- Modale1  -->
-                                            <a class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                                             <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
                                                data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                                data-target="#image-gallery">
                                                 {{ post.name }}
@@ -55,7 +55,7 @@
                                             {% endif %}
                                             {% if( 'modale2' ==  section.template2.code) %}
                                             <!-- Modale2  -->
-                                            <a class="portfolio-link"  data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                             <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link"  data-toggle="modal" href="#portfolioModal{{ post.id }}">
                                                 {{ post.name }}
                                             </a>
                                             {% endif %}
