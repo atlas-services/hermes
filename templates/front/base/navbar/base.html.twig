@@ -28,7 +28,7 @@
                         {% endif %}
                     {% else %}
                         {% if affiche_img_hermes == true %}
-                            <img src="../{{ asset('img/hermes.png') }}"  alt="{{ logo.filename }}" class="app_logo">
+                            <img src="../{{ asset('img/hermes.png') }}"  alt="Hermes" class="app_logo">
                         {% else %}
                             <div class="d-block d-sm-none bg-transparent"> &nbsp; </div>
                         {% endif %}
@@ -44,9 +44,13 @@
 
 <nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
     <div class="col-lg-{{ nav_container_width|col_lg() - nboffset }} {{ offset ?? ''}} container border-0 " style="background-color: {{nav_bgcolor}};">
-        <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet') }}">
-            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-2 pl-4 mx-auto app_logo">
-        </a>
+        {% if logo.filename is defined %}
+            {% if logo.filename is not null %}
+                <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet') }}">
+                    <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-2 pl-4 mx-auto app_logo">
+                </a>
+            {% endif %}
+        {% endif %}
         <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive" style="height:{{ nav_height }};">
             <ul class="nav navbar-nav  h-font-size-12 " style="background-color: {{ nav_menu_bgcolor }}">
                 {% if logo.filename is defined %}
