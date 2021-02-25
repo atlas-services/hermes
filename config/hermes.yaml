@@ -85,9 +85,9 @@ parameters:
         name: Carte de présentation avec photo
     config:
       site:
-        directory:
-          summary: Choix du template général d'affichage (agency ou merlin)
-          value: hermes
+#        directory:
+#          summary: Choix du template général d'affichage (agency ou merlin)
+#          value: hermes
         template:
           summary: Choix du template général d'affichage
           value: front

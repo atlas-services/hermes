@@ -31,7 +31,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     {% block head %}
-        {% include 'front/base/'~ directory ~'/head.html.twig' %}
+        {% include 'front/base/hermes/head.html.twig' %}
     {% endblock head %}
 {#    <body style="background: url({{ url ?? '' }}) no-repeat center center ;background-size: cover; background-color: {{ bgcolor.value ?? 'white' }}">#}
     {% set bgstyle1 = "background-color: rgba(0, 0, 0, 0);background-position-x: 0%;background-position-y: 0%;background-repeat: repeat;background-attachment: scroll;
@@ -64,7 +64,7 @@
             {% endif %}
         {% endblock footer %}
         {% block javascript %}
-            {% include 'front/base/'~ directory ~'/javascript.html.twig' %}
+            {% include 'front/base/hermes/javascript.html.twig' %}
         {% endblock javascript %}
     </body>
 </html>
