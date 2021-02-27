@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Config;
+use App\Entity\Config\Config;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

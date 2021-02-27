@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Menu;
-use App\Entity\Sheet;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Sheet;
 use App\Repository\Traits\BaseRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;

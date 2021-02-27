@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
-use App\Entity\User;
+use App\Entity\Hermes\User;
 
 trait UserTrait
 {

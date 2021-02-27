@@ -8,11 +8,12 @@
 
 namespace App\Controller\Front;
 
-use App\Entity\Block;
-use App\Entity\Contact;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Block;
+use App\Entity\Hermes\Contact;
 use App\Entity\Interfaces\ContactInterface;
-use App\Entity\Section;
-use App\Entity\Temoignage;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Temoignage;
 use App\Form\ContactType;
 use App\Form\Admin\TemoignageType;
 use App\Mailer\Mailer;
@@ -43,13 +44,14 @@ class FrontController extends AbstractController
         $refererPathInfo = Request::create($referer)->getPathInfo();
         $refererPathInfo = str_replace($request->getScriptName(), '', $refererPathInfo);
         $routeInfos = $router->match($refererPathInfo);
+        $configuration = $entityManager->getRepository(Config::class, 'config')->findBy(['active' => true]);
         if(ContactInterface::CONTACT == $routeInfos['_route'] || ContactInterface::LIVREDOR_ROUTE == $routeInfos['_route']){
             $route = $routeInfos['_route'];
-            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
+            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
         }else{
             $sheet = $routeInfos['sheet'];
             $slug = $routeInfos['slug'];
-            $array = $page->getActiveMenu($sheet, $slug);
+            $array = $page->getActiveMenu($configuration, $sheet, $slug);
         }
 
         $q = $request->query->get('q');
@@ -79,8 +81,9 @@ class FrontController extends AbstractController
     public function form(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $route = $request->attributes->get('_route');
+        $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         if (ContactInterface::LIVREDOR_ROUTE == $route) {
-            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
+            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
             $entity = new Temoignage();
             $form = $this->createForm(TemoignageType::class, $entity,
                 array(
@@ -92,7 +95,7 @@ class FrontController extends AbstractController
             $array[ContactInterface::LIVREDOR] = $livredor;
         }
         if (ContactInterface::CONTACT == $route) {
-            $array = $page->getActiveMenu(ContactInterface::CONTACT, ContactInterface::CONTACT,$route);
+            $array = $page->getActiveMenu($configuration, ContactInterface::CONTACT, ContactInterface::CONTACT,$route);
             $entity = new Contact();
             $form = $this->createForm(ContactType::class, $entity,
                 array(
@@ -159,8 +162,8 @@ class FrontController extends AbstractController
                 return $this->redirectToRoute('slug', ['slug' => $slug]);
             }
         }
-
-        $array = $page->getActiveMenu($sheet, $slug,$route);
+        $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        $array = $page->getActiveMenu($configuration, $sheet, $slug,$route);
         $entityManager = $this->getDoctrine()->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
         $blocks = $entityManager->getRepository(Block::class)->getBlocks();

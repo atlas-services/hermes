@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\BlockPost;
-use App\Entity\Block;
+use App\Entity\Hermes\BlockPost;
+use App\Entity\Hermes\Block;
 use App\Form\Admin\BlockPostType;
 use App\Form\Admin\BlockType;
 use App\Repository\BlockRepository;
@@ -112,7 +112,7 @@ class BlockController extends AbstractController
 
     /**
      * @Route("/block/edit/{block}", name="block_edit", methods={"GET","POST"})
-     * @ParamConverter("block",class="App\Entity\Block", options={"mapping": {"block": "id"}})
+     * @ParamConverter("block",class="App\Entity\Hermes\Block", options={"mapping": {"block": "id"}})
      */
     public function edit(Request $request, Block $block): Response
     {

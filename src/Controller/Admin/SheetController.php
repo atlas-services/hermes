@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Config;
-use App\Entity\Sheet;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Sheet;
 use App\Form\Admin\SheetType;
 use App\Repository\SheetRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -27,7 +27,7 @@ class SheetController extends AbstractController
     {
         $route = $request->attributes->get('_route');
         $sheets = $sheetRepository->findAll();
-        $config_form = $this->getDoctrine()->getManager()->getRepository(Config::class)->findOneBy(['active'=> true, 'code'=>'form']);
+        $config_form = $this->getDoctrine()->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'form']);
 
         if('sheet_index' == $route){
             return $this->render('admin/sheet/index.html.twig', [
@@ -88,7 +88,7 @@ class SheetController extends AbstractController
 
     /**
      * @Route("/page/edit/{sheet}", name="sheet_edit", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Sheet", options={"mapping": {"sheet": "slug"}})
+     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
     public function edit(Request $request, CacheInterface $backCache, Sheet $sheet): Response
     {

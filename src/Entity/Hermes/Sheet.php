@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\CodeTrait;
@@ -51,7 +51,7 @@ class Sheet
     /**
      * @var Menu[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Menu", mappedBy="sheet",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Menu", mappedBy="sheet",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="menu_sheet")
      */
     private $menus;

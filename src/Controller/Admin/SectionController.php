@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Post;
-use App\Entity\Section;
-use App\Entity\Menu;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Menu;
 //use App\Form\SectionType;
 use App\Form\Admin\PostType;
 use App\Form\Admin\SectionTemplateType;
@@ -46,7 +46,7 @@ class SectionController extends AbstractController
 
     /**
      * @Route("/menu/{menu}/nouveau-modele/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
-     * @ParamConverter("menu",class="App\Entity\Menu", options={"mapping": {"menu": "slug"}})
+     * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
     public function SectionPostNewMenu(Request $request, ?Menu $menu): Response
     {
@@ -121,7 +121,7 @@ class SectionController extends AbstractController
 
     /**
      * @Route("/modele/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
-     * @ParamConverter("section",class="App\Entity\Section", options={"mapping": {"section": "id"}})
+     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
     public function edit(Request $request, Section $section, $config = 1): Response
     {

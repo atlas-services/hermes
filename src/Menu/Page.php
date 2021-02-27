@@ -4,11 +4,11 @@
 namespace App\Menu;
 
 
-use App\Entity\Config;
-use App\Entity\Menu;
-use App\Entity\Section;
-use App\Entity\Sheet;
-use App\Entity\Temoignage;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Sheet;
+use App\Entity\Hermes\Temoignage;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Page
@@ -20,12 +20,12 @@ class Page
         $this->entityManager = $entityManager;
     }
 
-    public function getActiveMenu($sheet, $slug, $route = null)
+    public function getActiveMenu($configuration,$sheet, $slug, $route = null)
     {
         /*
          * On récupère la configuration du site.
          */
-        $config = $this->getActiveConfig();
+        $config = $this->getActiveConfig($configuration);
 //        dd($config);
 
         /*
@@ -91,13 +91,12 @@ class Page
         return $menus;
     }
 
-    public function getActiveConfig()
+    public function getActiveConfig($configuration)
     {
         /*
          * On récupère la configuration du site.
          */
-        $configuration = $this->entityManager->getRepository(Config::class)->findBy(['active' => true]);
-        foreach ($configuration as $conf) {
+         foreach ($configuration as $conf) {
             $config[$conf->getCode()] = $conf;
             if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
                 $config_simple[$conf->getCode()] = $conf->getValue();

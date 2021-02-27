@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 
 use App\Entity\Traits\ActiveTrait;
@@ -50,7 +50,7 @@ class Menu
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="menus")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="menus")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
@@ -58,7 +58,7 @@ class Menu
     /**
      * @var Sheet
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Sheet", inversedBy="menus")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Sheet", inversedBy="menus")
      * @ORM\JoinColumn(nullable=true)
      */
     private $sheet;
@@ -66,7 +66,7 @@ class Menu
     /**
      * @var Section[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Section", mappedBy="menu",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="menu",  cascade={"persist", "remove"})
      */
     protected $sections;
 

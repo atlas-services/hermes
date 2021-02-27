@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Interfaces\ContactInterface;
-use App\Entity\Sheet;
+use App\Entity\Hermes\Sheet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

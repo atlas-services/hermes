@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
+use App\Entity\AbstractContent;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\PublishedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -49,7 +50,7 @@ class BlockPost extends AbstractContent implements \JsonSerializable
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
@@ -57,7 +58,7 @@ class BlockPost extends AbstractContent implements \JsonSerializable
     /**
      * @var Block
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Block", inversedBy="blockPosts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Block", inversedBy="blockPosts")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $block;

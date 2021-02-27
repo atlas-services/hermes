@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
-use App\Entity\Template;
+use App\Entity\Hermes\Template;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 

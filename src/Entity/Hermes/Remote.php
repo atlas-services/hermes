@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
@@ -74,7 +74,7 @@ class Remote
     /**
      * @var Section[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Section", mappedBy="remote",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="remote",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="section_remote")
      */
     private $sections;

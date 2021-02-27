@@ -2,12 +2,12 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Menu;
-use App\Entity\Post;
-use App\Entity\Remote;
-use App\Entity\Section;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Remote;
+use App\Entity\Hermes\Section;
 
-use App\Entity\Template;
+use App\Entity\Hermes\Template;
 use App\Repository\TemplateRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;

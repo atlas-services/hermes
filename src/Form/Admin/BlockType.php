@@ -2,10 +2,10 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Block;
+use App\Entity\Hermes\Block;
 
-use App\Entity\BlockPost;
-use App\Entity\Template;
+use App\Entity\Hermes\BlockPost;
+use App\Entity\Hermes\Template;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

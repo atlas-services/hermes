@@ -96,7 +96,8 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "ckeditor:install": "symfony-cmd",
             "elfinder:install": "symfony-cmd",
-            "d:s:u --force": "symfony-cmd",
+            "d:s:u --em=default --force --complete ": "symfony-cmd",
+            "d:s:u --em=config --force --complete ": "symfony-cmd",
             "hermes:db-update": "symfony-cmd"
         },
         "post-install-cmd": [

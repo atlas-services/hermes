@@ -8,8 +8,8 @@
 
 namespace App\Upload\Namer;
 
-use App\Entity\Config;
-use App\Entity\Post;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Post;
 use Psr\Log\LoggerInterface;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;

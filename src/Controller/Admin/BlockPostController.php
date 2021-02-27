@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\BlockPost;
-use App\Entity\Block;
+use App\Entity\Hermes\BlockPost;
+use App\Entity\Hermes\Block;
 use App\Form\Admin\BlockPostType;
 use App\Repository\BlockPostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

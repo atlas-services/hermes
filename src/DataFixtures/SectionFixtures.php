@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Post;
-use App\Entity\Section;
-use App\Entity\Sheet;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Sheet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

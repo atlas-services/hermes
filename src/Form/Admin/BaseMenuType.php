@@ -2,10 +2,10 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Menu;
+use App\Entity\Hermes\Menu;
 
-use App\Entity\Section;
-use App\Entity\Sheet;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Sheet;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

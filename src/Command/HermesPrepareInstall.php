@@ -92,7 +92,6 @@ class HermesPrepareInstall extends Command
         foreach ($path as $dir){
             if(!strpos($dir, '.' ) && '..' != $dir){
                 $add_dir .= '/'.$dir;
-                dump($add_dir);
                 $this->filesystem->mkdir($base.$add_dir);
                 $created[] = $base.$add_dir;
             }

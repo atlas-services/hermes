@@ -23,7 +23,7 @@ class PrevisualisationController extends FrontController
      */
     public function previsualisation(Request $request, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
-        $array = $page->getActiveMenu($sheet,$slug);
+        $array = $page->getActiveMenu($configuration, $sheet,$slug);
 
         return $this->render('front/index.html.twig', $array);
     }

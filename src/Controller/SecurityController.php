@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
-use App\Entity\User;
+use App\Entity\Hermes\Contact;
+use App\Entity\Hermes\User;
 use App\Mailer\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

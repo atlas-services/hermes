@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Menu;
-use App\Entity\Post;
-use App\Entity\Section;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
 use App\Form\Admin\PostType;
 use App\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -35,7 +35,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/nouveau-contenu/modele/{section}", name="post_new_section", methods={"GET","POST"})
-     * @ParamConverter("section", class="App\Entity\Section")
+     * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
     public function postNewSection(Request $request, ?Section $section, PostRepository $postRepository): Response
     {
@@ -115,8 +115,8 @@ class PostController extends AbstractController
 
     /**
      * @Route("/menu/{menu}/contenu/{id}/{post}", name="post_edit", methods={"GET","POST"}, requirements={"post"=".+"})
-     * @ParamConverter("post",class="App\Entity\Post", options={"mapping": {"post": "name"}})
-     * @ParamConverter("menu",class="App\Entity\Menu", options={"mapping": {"menu": "slug"}})
+     * @ParamConverter("post",class="App\Entity\Hermes\Post", options={"mapping": {"post": "name"}})
+     * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
     public function edit(Request $request,$id, Post $post, Menu $menu, PostRepository $postRepository): Response
     {

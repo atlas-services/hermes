@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
+use App\Entity\Hermes\User;
 use App\Form\Admin\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

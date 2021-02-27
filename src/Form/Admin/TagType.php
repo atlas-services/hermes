@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Tag;
+use App\Entity\Hermes\Tag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;

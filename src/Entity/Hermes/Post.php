@@ -9,8 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
+use App\Entity\AbstractContent;
+use App\Entity\Hermes\User;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\PublishedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -49,7 +51,7 @@ class Post extends AbstractContent
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
@@ -57,7 +59,7 @@ class Post extends AbstractContent
     /**
      * @var Tag[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="posts",  cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Hermes\Tag", inversedBy="posts",  cascade={"persist"})
      * @ORM\JoinTable(name="post_tag")
      * @Assert\Count(max="40", maxMessage="post.too_many_tags")
      */
@@ -66,7 +68,7 @@ class Post extends AbstractContent
     /**
      * @var Section
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Section", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Section", inversedBy="posts")
      * @ORM\JoinColumn(nullable=true)
      */
     private $section;
