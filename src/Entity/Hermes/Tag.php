@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,7 +24,7 @@ class Tag
     use NameTrait;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Post", mappedBy="tags", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Hermes\Post", mappedBy="tags", cascade={"persist"})
      * @ORM\JoinTable(name="post_tag")
      */
     private $posts;

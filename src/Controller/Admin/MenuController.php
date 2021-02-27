@@ -2,10 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Menu;
-use App\Entity\Post;
-use App\Entity\Section;
-use App\Entity\Sheet;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Sheet;
 use App\Form\Admin\BaseMenuType;
 use App\Form\Admin\MenuType;
 use App\Form\Admin\PostType;
@@ -43,8 +43,8 @@ class MenuController extends AbstractController
 
     /**
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu", name="menu_section_post_new_sheet", methods={"GET","POST"})
-//     * @ParamConverter("sheet", class="App\Entity\Sheet")
-     * @ParamConverter("sheet",class="App\Entity\Sheet", options={"mapping": {"sheet": "slug"}})
+//     * @ParamConverter("sheet", class="App\Entity\Hermes\Sheet")
+     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
     public function menuSectionPostNewSheet(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository): Response
     {
@@ -107,8 +107,8 @@ class MenuController extends AbstractController
 
     /**
      * @Route("/page/{sheet}/menu/{menu}", name="menu_edit", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Sheet", options={"mapping": {"sheet": "slug"}})
-     * @ParamConverter("menu",class="App\Entity\Menu", options={"mapping": {"menu": "slug"}})
+     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
+     * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
     public function edit(Request $request, CacheInterface $backCache,Sheet $sheet, Menu $menu, MenuRepository $menuRepository): Response
     {
@@ -142,7 +142,7 @@ class MenuController extends AbstractController
 
     /**
      * @Route("/menu/{id}/modele/{section}", name="menu_section_edit", methods={"GET","POST"})
-     * @ParamConverter("section", class="App\Entity\Section")
+     * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
     public function editSection(Request $request, Menu $menu, ?Section $section): Response
     {

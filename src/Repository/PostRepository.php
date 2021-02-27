@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Section;
-use App\Entity\Post;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Post;
 use App\Repository\Traits\BaseRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;

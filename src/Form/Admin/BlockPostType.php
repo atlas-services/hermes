@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\BlockPost;
+use App\Entity\Hermes\BlockPost;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -23,7 +23,7 @@ class BlockPostType extends AbstractNameBaseType
             $builder
                 ->add('block', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                     'required' => false,
-                    'class' => 'App\Entity\Block',
+                    'class' => 'App\Entity\Hermes\Block',
                     'choice_label' => 'name',
                     'label_format' => 'block',
                     'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']

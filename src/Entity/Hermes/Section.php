@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
@@ -53,7 +53,7 @@ class Section
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="sections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="sections")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
@@ -61,7 +61,7 @@ class Section
     /**
      * @var Posts[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Post",  mappedBy="section",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Post",  mappedBy="section",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="post_section")
      */
     protected $posts;
@@ -69,7 +69,7 @@ class Section
     /**
      * @var Template
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Template", inversedBy="sections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Template", inversedBy="sections")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $template;
@@ -100,7 +100,7 @@ class Section
     /**
      * @var Template
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Template", inversedBy="sections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Template", inversedBy="sections")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $template2;
@@ -116,13 +116,13 @@ class Section
     /**
      * @var Remote
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Remote", inversedBy="sections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Remote", inversedBy="sections")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $remote;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Menu", inversedBy="sections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Menu", inversedBy="sections")
      * @ORM\JoinColumn(
      *      name="menu",
      *      referencedColumnName="id",

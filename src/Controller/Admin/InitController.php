@@ -2,13 +2,13 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Config;
-use App\Entity\Menu;
-use App\Entity\Post;
-use App\Entity\Section;
-use App\Entity\Sheet;
-use App\Entity\Template;
-use App\Entity\User;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Sheet;
+use App\Entity\Hermes\Template;
+use App\Entity\Hermes\User;
 use App\Form\Admin\ConfigType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,13 +31,15 @@ class InitController extends AbstractController
                 ->getRepository(User::class)
                 ->findAll();
             $dbconfig = $this->getDoctrine()
-                ->getRepository(Config::class)
+                ->getRepository(Config::class, 'config')
                 ->findAll();
             $dbtemplate = $this->getDoctrine()
                 ->getRepository(Template::class)
                 ->findAll();
             $this->addConfig($configurations, $dbuser, $dbconfig,$dbtemplate);
         }catch (\Exception $e){
+            echo $e->getMessage();
+            echo $e->getTraceAsString();
 
         }
         return $this->redirectToRoute('admin_index');
@@ -57,6 +59,7 @@ class InitController extends AbstractController
 
     private function addConfig($configurations, $dbuser,$dbconfig,$dbtemplate){
         $entityManager = $this->getDoctrine()->getManager();
+        $entityManagerConfig = $this->getDoctrine()->getManager('config');
         $dbuseremail = array_column($dbuser, 'email');
         $dbconfigcode = array_column($dbconfig, 'code');
         $dbtemplatecode = array_column($dbtemplate, 'code');
@@ -88,11 +91,12 @@ class InitController extends AbstractController
                             $config->setCode($code);
                             $config->setSummary($conf['summary']);
                             $config->setValue($conf['value']);
-                            $entityManager->persist($config);
+                            $entityManagerConfig->persist($config);
                         }
                     }
                 }
             }
+
             if('template' == $key){
                 foreach ($value as $code=>$conf){
                     if(!in_array($code, $dbtemplatecode)){
@@ -106,6 +110,7 @@ class InitController extends AbstractController
             }
         }
         $entityManager->flush();
+        $entityManagerConfig->flush();
     }
 
     private function addPage($libre){
@@ -169,8 +174,8 @@ class InitController extends AbstractController
         /*
          * On récupère la configuration du site.
          */
-        $entityManager = $this->getDoctrine()->getManager();
-        $configuration = $entityManager->getRepository(Config::class)->findBy(['active' => true]);
+        $entityManager = $this->getDoctrine()->getManager('config');
+        $configuration = $entityManager->getRepository(Config::class, 'config')->findBy(['active' => true]);
         foreach ($configuration as $conf) {
             $config[$conf->getCode()] = $conf;
             if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){

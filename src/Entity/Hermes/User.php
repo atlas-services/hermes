@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\StripeCustomerTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -58,7 +58,7 @@ class User implements UserInterface
     /**
      * @var Post[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Post", mappedBy="user",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="post_user")
      */
     private $posts;
@@ -66,7 +66,7 @@ class User implements UserInterface
     /**
      * @var Section[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Section", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="user",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="section_user")
      */
     private $sections;
@@ -74,7 +74,7 @@ class User implements UserInterface
     /**
      * @var Menu[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Menu", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Menu", mappedBy="user",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="menu_user")
      */
     private $menus;

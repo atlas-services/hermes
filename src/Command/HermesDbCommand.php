@@ -1,9 +1,9 @@
 <?php
 namespace App\Command;
 
-use App\Entity\Config;
-use App\Entity\Template;
-use App\Entity\User;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Template;
+use App\Entity\Hermes\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,11 +16,12 @@ class HermesDbCommand extends Command
     protected static $defaultName = 'hermes:db-update';
 
     protected $configurations;
+    protected $emConfig;
 
     public function __construct(EntityManagerInterface $em, ContainerInterface $container)
     {
         $this->em = $em;
-
+        $this->emConfig = $container->get('doctrine')->getManager('config');
         $this->configurations = $container->getParameter('init');
 
         parent::__construct();
@@ -41,7 +42,7 @@ class HermesDbCommand extends Command
             $dbuser = $this->em
                 ->getRepository(User::class)
                 ->findAll();
-            $dbconfig = $this->em
+            $dbconfig = $this->emConfig
                 ->getRepository(Config::class)
                 ->findAll();
             $dbtemplate = $this->em
@@ -49,7 +50,8 @@ class HermesDbCommand extends Command
                 ->findAll();
             $this->newConfig($this->configurations, $dbuser, $dbconfig,$dbtemplate);
         }catch (\Exception $e){
-
+            echo $e->getMessage();
+            echo $e->getTraceAsString();
         }
 
 
@@ -99,7 +101,7 @@ class HermesDbCommand extends Command
                             $config->setCode($code);
                             $config->setSummary($conf['summary']);
                             $config->setValue($conf['value']);
-                            $this->em->persist($config);
+                            $this->emConfig->persist($config);
                         }
                     }
                 }
@@ -117,5 +119,6 @@ class HermesDbCommand extends Command
             }
         }
         $this->em->flush();
+        $this->emConfig->flush();
     }
 }

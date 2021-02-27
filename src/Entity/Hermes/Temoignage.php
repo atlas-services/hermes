@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Traits\ActiveTrait;

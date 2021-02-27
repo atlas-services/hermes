@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
+use App\Entity\AbstractContent;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\PublishedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,11 +25,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
- *     fields={"section", "name"},
+ *     fields={"block", "name"},
  *     errorPath="name",
  *     message="post.exists"
  * )
- * @ORM\Table(name="post")
+ * @ORM\Table(name="block_post")
  *
  * Defines the properties of the Post entity to represent the blog posts.
  *
@@ -42,44 +43,25 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  * @Vich\Uploadable
  */
-class Post extends AbstractContent
+class BlockPost extends AbstractContent implements \JsonSerializable
 {
     use PositionTrait;
     use PublishedTrait;
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Product",mappedBy="post")
-     */
-    protected $product;
-
-    /**
-     * @var Tag[]|ArrayCollection
+     * @var Block
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="posts",  cascade={"persist"})
-     * @ORM\JoinTable(name="post_tag")
-     * @Assert\Count(max="40", maxMessage="post.too_many_tags")
-     */
-    private $tags;
-
-    /**
-     * @var Section
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Section", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Block", inversedBy="blockPosts")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $section;
-
-    public function __construct()
-    {
-        $this->tags = new ArrayCollection();
-    }
+    protected $block;
 
     public function __toString(): ?string
     {
@@ -105,49 +87,33 @@ class Post extends AbstractContent
         $this->user = $user;
     }
 
-    public function addTag(?Tag ...$tags): void
+    public function getBlock()
     {
-        foreach ($tags as $tag) {
-            if (!$this->tags->contains($tag)) {
-                $this->tags->add($tag);
-            }
+        return $this->block;
+    }
+
+    public function setBlock(?Block $block): void
+    {
+        $this->block = $block;
+    }
+
+    public function jsonSerialize()
+    {
+        $public = 'public';
+        $src = '';
+        if(!is_null($this->getImageFile())){
+            $pos = strpos($this->getImageFile()->getPathname(), $public ) + strlen($public);
+            $src = substr($this->getImageFile()->getPathname(), $pos );
         }
-    }
 
-    public function removeTag(Tag $tag): void
-    {
-        $this->tags->removeElement($tag);
-    }
-
-    public function getTags(): ?Collection
-    {
-        return $this->tags;
-    }
-
-    public function getSection()
-    {
-        return $this->section;
-    }
-
-    public function setSection(?Section $section): void
-    {
-        $this->section = $section;
-    }
-
-    /**
-     * @return Product
-     */
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param Product $product
-     */
-    public function setProduct(?Product $product): void
-    {
-        $this->product = $product;
+        return
+            [
+                'id'   => $this->getId(),
+                'name' => $this->getName(),
+                'content' => strip_tags($this->getContent()),
+                'html_content' => $this->getContent(),
+                'src' => $src,
+            ];
     }
 
 }

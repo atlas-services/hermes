@@ -8,7 +8,7 @@
 
 namespace App\EventListener;
 
-use App\Entity\User;
+use App\Entity\Hermes\User;
 //use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Event\LifecycleEventArgs;

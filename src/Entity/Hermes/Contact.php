@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Interfaces\ContactInterface;
 use Symfony\Component\Validator\Constraints as Assert;

@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 
-use App\Entity\Config;
+use App\Entity\Config\Config;
 use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Template;
 use Doctrine\Bundle\FixturesBundle\Fixture;

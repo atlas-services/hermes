@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Temoignage;
+use App\Entity\Hermes\Temoignage;
 use App\Form\Admin\TemoignageType;
 use App\Repository\TemoignageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

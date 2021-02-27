@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Menu;
+use App\Entity\Hermes\Menu;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

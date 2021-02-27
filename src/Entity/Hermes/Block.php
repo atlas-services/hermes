@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
@@ -50,7 +50,7 @@ class Block
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="blocks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="blocks")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
@@ -58,7 +58,7 @@ class Block
     /**
      * @var BlockPosts[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\BlockPost",  mappedBy="block",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\BlockPost",  mappedBy="block",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="blockpost_block")
      */
     protected $blockPosts;

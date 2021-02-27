@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Sheet;
 use App\Entity\Address;
 use App\Entity\Config;
 use App\Entity\Delivery;
@@ -36,7 +39,7 @@ class ConfigController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager('config');
             $entityManager->persist($config);
             $entityManager->flush();
 
@@ -52,8 +55,16 @@ class ConfigController extends AbstractController
     /**
      * @Route("/{type}", name="config_index", methods={"GET"})
      */
-    public function index(ConfigRepository$configRepository, $type): Response
+    public function index( $type): Response
     {
+        $configuration = $this->getDoctrine()
+            ->getRepository(Config::class, 'config')->createQueryBuilder('c')
+            ->where('c.type = :type')
+            ->setParameter('type', $type)
+            ->orderBy('c.code', 'ASC')            ->getQuery()
+            ->getResult();
+        $configRepository = $this->getDoctrine()->getRepository(Config::class, 'config');
+
         if('undefined'== $type){
             $type=null;
         }
@@ -97,7 +108,7 @@ class ConfigController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()->getManager('config')->flush();
 
             if('form' == $config->getCode()){
                 $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();
@@ -126,7 +137,7 @@ class ConfigController extends AbstractController
         }
 
         if ($this->isCsrfTokenValid('delete' . $config->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager('config');
             $entityManager->remove($config);
             $entityManager->flush();
         }

@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Template;
+use App\Entity\Hermes\Template;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

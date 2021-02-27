@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\CodeTrait;
@@ -36,7 +36,7 @@ class Template
     /**
      * @var Section[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Section", mappedBy="template",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="template",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="section_template")
      */
     private $sections;

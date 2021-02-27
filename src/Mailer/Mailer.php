@@ -8,7 +8,7 @@
 
 namespace App\Mailer;
 
-use App\Entity\Contact;
+use App\Entity\Hermes\Contact;
 use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Order;
 use Psr\Log\LoggerInterface;

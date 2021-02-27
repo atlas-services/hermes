@@ -2,9 +2,9 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Section;
+use App\Entity\Hermes\Section;
 
-use App\Entity\Template;
+use App\Entity\Hermes\Template;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

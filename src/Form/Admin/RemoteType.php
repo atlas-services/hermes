@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Remote;
+use App\Entity\Hermes\Remote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Sheet;
+use App\Entity\Hermes\Sheet;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

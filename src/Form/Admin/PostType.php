@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Post;
+use App\Entity\Hermes\Post;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -23,7 +23,7 @@ class PostType extends AbstractNameBaseType
             $builder
                 ->add('section', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                     'required' => false,
-                    'class' => 'App\Entity\Section',
+                    'class' => 'App\Entity\Hermes\Section',
                     'choice_label' => 'template',
                     'label_format' => 'section.template',
                     'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
