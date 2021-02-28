@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
@@ -62,14 +62,14 @@ class Delivery
     /**
      * @var Address
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Address",  inversedBy="deliverys")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Address",  inversedBy="deliverys")
      */
     protected $address;
 
     /**
      * @var Order[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Order",  mappedBy="delivery",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Order",  mappedBy="delivery",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="delivery_order")
      */
     protected $orders;

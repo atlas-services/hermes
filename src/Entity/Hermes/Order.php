@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\IdTrait;
@@ -58,7 +58,7 @@ class Order
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="orders")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
@@ -73,7 +73,7 @@ class Order
     /**
      * @var OrderLine[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderLine",  mappedBy="order",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\OrderLine",  mappedBy="order",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="product_order")
      */
     protected $order_lines;
@@ -81,7 +81,7 @@ class Order
     /**
      * @var Delivery
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Delivery", inversedBy="orders",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Delivery", inversedBy="orders",cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     protected $delivery;

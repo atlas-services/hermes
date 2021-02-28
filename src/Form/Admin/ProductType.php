@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Product;
+use App\Entity\Hermes\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +19,7 @@ class ProductType extends AbstractType
             ->add('summary')
             ->add('post', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'required' => false,
-                'class' => 'App\Entity\Post',
+                'class' => 'App\Entity\Hermes\Post',
                 'choice_label' => 'name',
 //                    'label_format' => 'section.template',
                 'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']

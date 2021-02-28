@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\CodeTrait;
@@ -26,14 +26,14 @@ class Product
     use UpdatedTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Post",inversedBy="product")
+     * @ORM\OneToOne(targetEntity="App\Entity\Hermes\Post",inversedBy="product")
      */
     protected $post;
 
     /**
      * @var OrderLine
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\OrderLine", inversedBy="product")
+     * @ORM\OneToOne(targetEntity="App\Entity\Hermes\OrderLine", inversedBy="product")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $order_product;

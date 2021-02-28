@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin\Ecommerce;
 
-use App\Entity\Address;
+use App\Entity\Hermes\Address;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

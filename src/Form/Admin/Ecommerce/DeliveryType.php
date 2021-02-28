@@ -2,9 +2,9 @@
 
 namespace App\Form\Admin\Ecommerce;
 
-use App\Entity\Address;
+use App\Entity\Hermes\Address;
 use App\Entity\Config;
-use App\Entity\Delivery;
+use App\Entity\Hermes\Delivery;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

@@ -2,7 +2,7 @@
 
 namespace App\Ecommerce;
 
-use App\Entity\User;
+use App\Entity\Hermes\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 class StripeClient

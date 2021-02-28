@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Delivery;
+use App\Entity\Hermes\Delivery;
 use App\Repository\Traits\BaseRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;

@@ -10,7 +10,8 @@ namespace App\Controller\Ecommerce;
 
 use App\Ecommerce\CartClient;
 use App\Ecommerce\OrderClient;
-use App\Entity\Product;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Product;
 use App\Menu\Page;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,8 +41,8 @@ class CartController extends AbstractController
 
         $products = $cartClient->getProducts();
         $total = $cartClient->getTotal();
-
-        $array = $page->getActiveMenu('accueil','accueil');
+        $configuration = $this->getDoctrine()->getManager('config')->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        $array = $page->getActiveMenu($configuration, 'accueil','accueil');
         if($this->getUser()){
             $order = $orderClient->getCurrentOrderByUser($this->getUser());
             $array['order'] = $order;
@@ -87,7 +88,8 @@ class CartController extends AbstractController
                 $navbar_cart_html = '';
                 $cart_html= '';
             }else{
-                $config = $page->getActiveConfig();
+                $configuration = $this->getDoctrine()->getManager('config')->getRepository(Config::class, 'config')->findBy(['active' => true]);
+                $config = $page->getActiveConfig($configuration);
                 $nav_link_color = $config['nav_link_color'];
                 $products = $cartClient->getProducts();
                 $navbar_cart_html= $this->renderView('front/base/navbar/cart.html.twig', ['nav_link_color' => $nav_link_color]);

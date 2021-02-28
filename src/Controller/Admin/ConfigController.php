@@ -2,14 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Hermes\Address;
 use App\Entity\Config\Config;
+use App\Entity\Hermes\Delivery;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
-use App\Entity\Address;
-use App\Entity\Config;
-use App\Entity\Delivery;
-use App\Entity\Menu;
-use App\Entity\Sheet;
 use App\Form\Admin\ConfigType;
 use App\Repository\ConfigRepository;
 use Doctrine\ORM\EntityManagerInterface;

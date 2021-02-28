@@ -3,11 +3,11 @@
 namespace App\Ecommerce;
 
 
-use App\Entity\Delivery;
-use App\Entity\Order;
-use App\Entity\OrderLine;
-use App\Entity\Product;
-use App\Entity\User;
+use App\Entity\Hermes\Delivery;
+use App\Entity\Hermes\Order;
+use App\Entity\Hermes\OrderLine;
+use App\Entity\Hermes\Product;
+use App\Entity\Hermes\User;
 use App\Repository\OrderLineRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;

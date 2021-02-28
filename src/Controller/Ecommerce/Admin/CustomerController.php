@@ -3,7 +3,7 @@
 namespace App\Controller\Ecommerce\Admin;
 
 use App\Entity\Sheet;
-use App\Entity\User;
+use App\Entity\Hermes\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

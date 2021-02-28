@@ -2,10 +2,10 @@
 
 namespace App\Controller\Ecommerce\Admin;
 
-use App\Entity\Delivery;
+use App\Entity\Hermes\Delivery;
 use App\Entity\Menu;
 use App\Entity\Sheet;
-use App\Entity\Address;
+use App\Entity\Hermes\Address;
 use App\Ecommerce\AddressClient;
 use App\Repository\AddressRepository;
 use App\Form\Admin\Ecommerce\AddressType;
@@ -108,7 +108,7 @@ class AddressController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="address_edit", methods={"GET","POST"})
-     * @ParamConverter("address", class="App\Entity\Address")
+     * @ParamConverter("address", class="App\Entity\Hermes\Address")
      */
     public function edit(Request $request, Address $address,AddressClient $addressClient): Response
     {

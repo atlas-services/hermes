@@ -2,7 +2,7 @@
 
 namespace App\Controller\Ecommerce\Admin;
 
-use App\Entity\Order;
+use App\Entity\Hermes\Order;
 use App\Entity\Menu;
 use App\Entity\Sheet;
 use App\Form\Admin\Ecommerce\OrderType;
@@ -48,7 +48,7 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="order_edit", methods={"GET","POST"})
-     * @ParamConverter("order", class="App\Entity\Order")
+     * @ParamConverter("order", class="App\Entity\Hermes\Order")
      */
     public function edit(Request $request, Order $order): Response
     {

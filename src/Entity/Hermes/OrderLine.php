@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +17,7 @@ class OrderLine
 
     /**
      * @var Product
-     * @ORM\OneToOne(targetEntity="App\Entity\Product",mappedBy="order_product")
+     * @ORM\OneToOne(targetEntity="App\Entity\Hermes\Product",mappedBy="order_product")
      */
     protected $product;
 
@@ -31,7 +31,7 @@ class OrderLine
     /**
      * @var Order
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="order_lines")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Order", inversedBy="order_lines")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $order;

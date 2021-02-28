@@ -2,7 +2,7 @@
 
 namespace App\Form\Admin\Ecommerce;
 
-use App\Entity\Address;
+use App\Entity\Hermes\Address;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

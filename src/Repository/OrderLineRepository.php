@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\OrderLine;
+use App\Entity\Hermes\OrderLine;
 use App\Repository\Traits\BaseRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;

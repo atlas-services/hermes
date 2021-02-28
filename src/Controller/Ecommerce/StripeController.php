@@ -10,9 +10,10 @@ namespace App\Controller\Ecommerce;
 
 
 use App\Ecommerce\OrderClient;
-use App\Entity\Delivery;
-use App\Entity\Order;
-use App\Entity\Product;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Delivery;
+use App\Entity\Hermes\Order;
+use App\Entity\Hermes\Product;
 use App\Mailer\Mailer;
 use App\Menu\Page;
 use App\Ecommerce\StripeClient;
@@ -105,7 +106,8 @@ class StripeController extends AbstractController
             $orderClient->handleOrderPaiement($order);
 
             // send Email with order pdf
-            $config = $page->getActiveConfig();
+            $configuration = $this->getDoctrine()->getManager('config')->getRepository(Config::class, 'config')->findBy(['active' => true]);
+            $config = $page->getActiveConfig($configuration);
             $context = [
                 'order' => $order,
                 'products' => $orderLines,

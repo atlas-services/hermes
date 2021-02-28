@@ -10,10 +10,11 @@ namespace App\Controller\Ecommerce;
 
 use App\Ecommerce\CartClient;
 use App\Ecommerce\OrderClient;
-use App\Entity\Address;
-use App\Entity\Delivery;
-use App\Entity\Order;
-use App\Entity\Product;
+use App\Entity\Config\Config;
+use App\Entity\Hermes\Address;
+use App\Entity\Hermes\Delivery;
+use App\Entity\Hermes\Order;
+use App\Entity\Hermes\Product;
 use App\Form\Admin\Ecommerce\AddressType;
 use App\Form\Admin\Ecommerce\DeliveryType;
 use App\Menu\Page;
@@ -47,7 +48,8 @@ class OrderController extends AbstractController
                 return $this->redirectToRoute('order_delivery');
             }
         }
-        $array = $page->getActiveMenu('accueil','accueil');
+        $configuration = $this->getDoctrine()->getManager('config')->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        $array = $page->getActiveMenu($configuration,'accueil','accueil');
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -84,8 +86,8 @@ class OrderController extends AbstractController
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
-
-        $array = $page->getActiveMenu('accueil','accueil');
+        $configuration = $this->getDoctrine()->getManager('config')->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        $array = $page->getActiveMenu($configuration,'accueil','accueil');
 
         $orderClient->handleCartProducts($order);
         $orderClient->handleOrderDelivery($order, $order->getDelivery(), $array['ecommerce_delivery_free_amount']);
@@ -136,8 +138,8 @@ class OrderController extends AbstractController
             $orderClient->emptyCart();
             return $this->redirect('/');
         }
-
-        $array = $page->getActiveMenu('accueil','accueil');
+        $configuration = $this->getDoctrine()->getManager('config')->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        $array = $page->getActiveMenu($configuration,'accueil','accueil');
 
 
         // Mise à jour order et raz du panier

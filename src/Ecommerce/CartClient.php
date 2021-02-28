@@ -2,8 +2,8 @@
 
 namespace App\Ecommerce;
 
-use App\Entity\Product;
-use App\Entity\User;
+use App\Entity\Hermes\Product;
+use App\Entity\Hermes\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 

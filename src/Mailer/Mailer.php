@@ -10,7 +10,7 @@ namespace App\Mailer;
 
 use App\Entity\Hermes\Contact;
 use App\Entity\Interfaces\ContactInterface;
-use App\Entity\Order;
+use App\Entity\Hermes\Order;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;

@@ -37,6 +37,7 @@
             {% endif %}
     </div>
 </nav>
+{% set nboffset, offset  = 0, '' %}
 {% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
     {% set nboffset = 10 - nav_container_width|col_lg() %}
     {% set offset = 'offset-lg' ~ nboffset %}

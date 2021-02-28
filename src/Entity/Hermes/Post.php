@@ -57,7 +57,7 @@ class Post extends AbstractContent
     protected $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Product",mappedBy="post")
+     * @ORM\OneToOne(targetEntity="App\Entity\Hermes\Product",mappedBy="post")
      */
     protected $product;
 

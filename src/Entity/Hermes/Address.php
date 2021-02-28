@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Hermes;
 
 use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\DefaultDeliveryTrait;
@@ -29,7 +29,7 @@ class Address implements AddressInterface
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="adresses")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="adresses")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $user;
@@ -161,7 +161,7 @@ class Address implements AddressInterface
     /**
      * @var Delivery[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Delivery",  mappedBy="address",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Delivery",  mappedBy="address",  cascade={"persist", "remove"})
      */
     protected $deliverys;
 

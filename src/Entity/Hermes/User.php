@@ -82,7 +82,7 @@ class User implements UserInterface
     /**
      * @var Order[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Order", mappedBy="user",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="order_user")
      */
     private $orders;
@@ -90,7 +90,7 @@ class User implements UserInterface
     /**
      * @var Address[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="user",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Address", mappedBy="user",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="address_user")
      */
     private $addresses;
