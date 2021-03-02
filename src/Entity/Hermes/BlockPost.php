@@ -12,6 +12,7 @@
 namespace App\Entity\Hermes;
 
 use App\Entity\AbstractContent;
+use App\Entity\Hermes\User;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\PublishedTrait;
 use Doctrine\Common\Collections\ArrayCollection;
