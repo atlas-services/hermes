@@ -13,6 +13,7 @@ const jQuery = $;
 //     if(null != header){
 
         var sticky = header.offsetTop;
+        var footer = document.getElementById("footer");
 
         // Add the sticky class to the header when you reach its scroll position. Remove "sticky-top" when you leave the scroll position
         function stickyfy() {
@@ -32,8 +33,11 @@ const jQuery = $;
                 // var stickyHeight =  $('.sticky').height() ;
                 // var stickySectionContentPaddingTop = stickyHeight + sectionContentPaddingTop + 50;
                 // $(".section_content").eq(0).css("padding-top", stickySectionContentPaddingTop + 'px');
+                $(".footer").css("position", 'relative');
+
             } else {
                 header.classList.remove("sticky-top");
+                $(".footer").css("position", 'absolute');
                 // $(".section_content").eq(0).css("padding-top", sectionContentPaddingTop + "px");
             }
         }
