@@ -45,18 +45,34 @@ Content
 /*    margin-right: auto;*/
 /*}*/
 
-html{
-    position: relative;
-    min-height: 100%;
+/*html{*/
+/*    position: relative;*/
+/*    min-height: 100%;*/
+/*}*/
+html {
+    height: 100%;
+    box-sizing: border-box;
 }
 
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 0rem;
+    min-height: 100%;
+}
 .form-group{
     width: 350px; /* 100%; /* 1050px; */
 }
 
 .content {
     /*min-height: calc(100vh - 105px);*/
-    min-height: calc(100vh - 110px);
+    /*min-height: calc(100vh - 110px);*/
 }
 
 .vl {
@@ -174,17 +190,28 @@ zoom img
 
 
 
-@media (min-width: 767px) {
-    .footer{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-}
+/*@media (min-width: 767px) {*/
+/*    .footer{*/
+/*        position: absolute;*/
+/*        bottom: 0;*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 767px) {
-    .footer{
-        bottom: 0;
-        width: 100%;
-    }
+/*@media (max-width: 767px) {*/
+/*    .footer{*/
+/*        bottom: 0;*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/
+
+.footer {
+    /*position: relative;*/
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
 }

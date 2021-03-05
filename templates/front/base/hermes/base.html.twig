@@ -57,7 +57,7 @@
                 {% block content %}
                 {% endblock content %}
             </div>
-        {% endblock body %}
+
         {% block footer %}
             {% if footer_affiche == 1 %}
                 {% include 'front/base/footer.html.twig' %}
@@ -66,5 +66,6 @@
         {% block javascript %}
             {% include 'front/base/hermes/javascript.html.twig' %}
         {% endblock javascript %}
+        {% endblock body %}
     </body>
 </html>
