@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlockPostController extends AbstractController
 {
     /**
-     * @Route("/blockcontenu/", name="blockpost_index", methods={"GET"})
+     * @Route("/block/contenu/", name="blockpost_index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -33,7 +33,7 @@ class BlockPostController extends AbstractController
     }
 
      /**
-     * @Route("/nouveau-contenu", name="blockpost_new", methods={"GET","POST"})
+     * @Route("/block/nouveau-contenu", name="blockpost_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -57,7 +57,7 @@ class BlockPostController extends AbstractController
     }
 
     /**
-     * @Route("/contenu/{id}", name="blockpost_show", methods={"GET"})
+     * @Route("/block/contenu/{id}", name="blockpost_show", methods={"GET"})
      */
     public function show(BlockPost $post): Response
     {
@@ -68,7 +68,7 @@ class BlockPostController extends AbstractController
     }
 
     /**
-     * @Route("/block/block-contenu/{id}", name="blockpost_edit", methods={"GET","POST"}, requirements={"blockpost"=".+"})
+     * @Route("/block/contenu/{id}", name="blockpost_edit", methods={"GET","POST"}, requirements={"blockpost"=".+"})
      */
     public function edit(Request $request,$id, BlockPostRepository $postRepository): Response
     {
@@ -105,7 +105,8 @@ class BlockPostController extends AbstractController
     }
 
     /**
-     * @Route("/contenu/{id}", name="blockpost_delete", methods={"DELETE"})
+     * @Route("/block/contenu/{id}", name="blockpost_delete", methods={"DELETE"})
+     * @ParamConverter("post",class="App\Entity\Hermes\BlockPost", options={"mapping": {"blockpost": "post"}})
      */
     public function delete(Request $request, BlockPost $post): Response
     {

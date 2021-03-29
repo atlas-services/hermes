@@ -220,7 +220,7 @@ class Section
     /**
      * @return int
      */
-    public function getTemplateWidth(): int
+    public function getTemplateWidth(): ?int
     {
         if( '' == $this->template_width){
             return '100';
@@ -231,7 +231,7 @@ class Section
     /**
      * @param int $template_width
      */
-    public function setTemplateWidth(int $template_width): void
+    public function setTemplateWidth(?int $template_width): void
     {
         $this->template_width = $template_width;
     }
@@ -239,7 +239,7 @@ class Section
     /**
      * @return int
      */
-    public function getTemplateNbCol(): int
+    public function getTemplateNbCol(): ?int
     {
         if( '' == $this->template_nb_col){
             return 4 ;
@@ -250,7 +250,7 @@ class Section
     /**
      * @param int $template_nb_col
      */
-    public function setTemplateNbCol(int $template_nb_col): void
+    public function setTemplateNbCol(?int $template_nb_col): void
     {
         $this->template_nb_col = $template_nb_col;
     }
@@ -258,7 +258,7 @@ class Section
     /**
      * @return string
      */
-    public function getTemplateImageFilter(): string
+    public function getTemplateImageFilter(): ?string
     {
         if( '' == $this->template_image_filter){
             return 'bd_154' ;
@@ -269,7 +269,7 @@ class Section
     /**
      * @param string $template_image_filter
      */
-    public function setTemplateImageFilter(string $template_image_filter): void
+    public function setTemplateImageFilter(?string $template_image_filter): void
     {
         $this->template_image_filter = $template_image_filter;
     }
@@ -288,7 +288,7 @@ class Section
     /**
      * @param int $template2_width
      */
-    public function setTemplate2Width(int $template2_width=100): void
+    public function setTemplate2Width(?int $template2_width=100): void
     {
         $this->template2_width = $template2_width;
     }

@@ -10,8 +10,16 @@ const jQuery = $;
 
         if (modeleselect == "Libre") {
             $('.vich-image').hide();
+            $('#section_template_templateImageFilter').parent().parent().children().hide();
+            $('#section_template_remote').parent().parent().children().hide();
+            $('#section_template_template2').parent().parent().children().hide();
+            $('#section_template_template2Width').parent().parent().children().hide();
         } else {
             $('.vich-image').show();
+            $('#section_template_templateImageFilter').parent().parent().children().show();
+            $('#section_template_remote').parent().parent().children().show();
+            $('#section_template_template2').parent().parent().children().show();
+            $('#section_template_template2Width').parent().parent().children().show();
         }
         // Nb col et filter seulement pour le slide multi-image
         if (modeleselect == "Carousel par groupe") {
@@ -23,25 +31,25 @@ const jQuery = $;
         }
     });
 
-    if ($('#libre').length > 0) {
-        $('.vich-image').parent().parent().children().hide();
-    } else {
-        var modeleselect = $("[id$=template]  option:selected").eq(0);
-        if (modeleselect.text() != "Libre") {
-            $('.vich-image').parent().parent().children().show();
-        } else {
-            $('.vich-image').parent().parent().children().hide();
-        }
-        var idmodele = '#' + $("[id$=template]").eq(0).prop('id');
-        $(idmodele).change(function () {
-            var modeleselect = $("[id$=template] option:selected").text();
-            if (modeleselect != "Libre") {
-                $('.vich-image').parent().parent().children().show();
-            } else {
-                $('.vich-image').parent().parent().children().hide();
-            }
-        });
-    }
+    // if ($('#libre').length > 0) {
+    //     $('.vich-image').parent().parent().children().hide();
+    // } else {
+    //     var modeleselect = $("[id$=template]  option:selected").eq(0);
+    //     if (modeleselect.text() != "Libre") {
+    //         $('.vich-image').parent().parent().children().show();
+    //     } else {
+    //         $('.vich-image').parent().parent().children().hide();
+    //     }
+    //     var idmodele = '#' + $("[id$=template]").eq(0).prop('id');
+    //     $(idmodele).change(function () {
+    //         var modeleselect = $("[id$=template] option:selected").text();
+    //         if (modeleselect != "Libre") {
+    //             $('.vich-image').parent().parent().children().show();
+    //         } else {
+    //             $('.vich-image').parent().parent().children().hide();
+    //         }
+    //     });
+    // }
 
     // afficher/cacher la saisie de la couleur si transparent n'est pas séle ctionné
     var config_transparent = $("#config_transparent");
