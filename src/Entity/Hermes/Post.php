@@ -15,6 +15,7 @@ use App\Entity\AbstractContent;
 use App\Entity\Hermes\User;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\PublishedTrait;
+use App\Entity\Traits\UrlTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -47,6 +48,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Post extends AbstractContent
 {
     use PositionTrait;
+    use UrlTrait;
     use PublishedTrait;
     /**
      * @var User

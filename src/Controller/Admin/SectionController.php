@@ -10,7 +10,6 @@ use App\Form\Admin\PostType;
 use App\Form\Admin\SectionTemplateType;
 use App\Form\Admin\SectionType;
 use App\Repository\SectionRepository;
-use PHPUnit\Runner\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,8 +55,9 @@ class SectionController extends AbstractController
         $section->setMenu($menu);
         $section->setName($menu->getName().rand(0,9999));
         $options['menu'] = false;
-        $options['position'] = false;
+        $options['position'] = true;
         $options['content'] = true;
+        $options['url'] = true;
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
         $form->handleRequest($request);
 

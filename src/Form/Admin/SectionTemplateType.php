@@ -159,6 +159,7 @@ class SectionTemplateType extends AbstractType
             'save_visibility' => true,
             'remote_pictures' => true,
             'content' => true,
+            'url' => true,
             'menu' => false,
             'config' => null,
             'template_width'=>  [
@@ -182,7 +183,7 @@ class SectionTemplateType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
                 'label' => false,
-                'entry_options' => ['label' => false, 'active' => false, 'position' => false, 'name' => true, 'content' => true, 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
+                'entry_options' => ['label' => false, 'active' => false, 'position' => false, 'name' => true, 'content' => true, 'url' => true, 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
             ],
             'full_template' => true,
             'name_constraints' => [],

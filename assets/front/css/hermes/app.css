@@ -159,24 +159,6 @@ Menu
     padding-right: 0px;
 }
 
-
-/*
-reveal js
- */
-
-.reveal .controls{
-    position: absolute;
-    bottom: 30%;
-}
-
-/*
-resolve conflict between bootstrap and reveal js
- */
-
-[hidden] {
-    display: inherit !important;
-}
-
 /*
 zoom img
  */
@@ -204,6 +186,69 @@ zoom img
 /*        width: 100%;*/
 /*    }*/
 /*}*/
+
+/*
+ videos with image (youtube...))
+ */
+.youtube-container {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.youtube-player {
+    display: block;
+    margin: 20px auto;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: hand;
+    cursor: pointer;
+    display: block;
+    background-color: transparent;
+}
+
+img.youtube-thumbnail {
+    bottom: 0;
+    display: block;
+    left: 0;
+    margin: auto;
+    max-width: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: auto;
+}
+
+div.youtube-play-btn {
+    height: 72px;
+    width: 72px;
+    left: 50%;
+    top: 50%;
+    margin-left: -36px;
+    margin-top: -36px;
+    position: absolute;
+    background: url("https://freepngimg.com/thumb/categories/1398.png")
+    no-repeat center center;
+    background-size: 72px 72px;
+}
+
+.youtube-iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/*
+footer
+ */
 
 .footer {
     /*position: relative;*/

@@ -58,7 +58,7 @@ parameters:
       folio1:
         summary: Folio classique
         code: folio1
-        name: Folio classique avec
+        name: Folio classique
       folio2:
         summary: Folio effet survol (+)
         code: folio2
@@ -75,6 +75,10 @@ parameters:
         summary: Folio serré
         code: folio5
         name:  Folio serré
+      folio_video1:
+          summary: Folio video classique
+          code: folio_video1
+          name: Folio video classique
       card1:
         summary: Cartes affichée par 2 avec fichier à télécharger
         code: card1
@@ -85,9 +89,6 @@ parameters:
         name: Carte de présentation avec photo
     config:
       site:
-#        directory:
-#          summary: Choix du template général d'affichage (agency ou merlin)
-#          value: hermes
         template:
           summary: Choix du template général d'affichage
           value: front

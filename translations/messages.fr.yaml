@@ -95,6 +95,7 @@ global:
   sheet: Menu
   section: Section
   post: Contenu
+  url: Url de la vidéo
   menu: Sous Menu
   template: Affichage
   position: Position

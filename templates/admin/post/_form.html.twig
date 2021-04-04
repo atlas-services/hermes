@@ -30,6 +30,9 @@
         </tr>
     {% endif  %}
     {{ form_row(form.name) }}
+    {% if form.url is defined %}
+        {{ form_row(form.url) }}
+    {% endif %}
     {{ form_row(form.content) }}
     {% if form.section is not defined %}
 {#    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">#}
