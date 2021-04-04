@@ -124,6 +124,7 @@ class PostController extends AbstractController
         $post = $postRepository->findOneById($id);
         $options = ['section'=> false];
         $options = ['image_file'=> true];
+        $options['url'] = true;
         $options['saveAndAddSectionPost'] = true;
         $form = $this->createForm(PostType::class, $post,$options );
         $form->handleRequest($request);

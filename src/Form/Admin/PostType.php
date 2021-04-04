@@ -36,6 +36,13 @@ class PostType extends AbstractNameBaseType
                     'label' => 'global.position',
                 ]);
         }
+        if ($options['url']) {
+            $builder
+                ->add('url', 'Symfony\Component\Form\Extension\Core\Type\UrlType', [
+                    'required' => false,
+                    'label' => 'global.url',
+                ]);
+        }
         if ($options['image_file']) {
             $builder
                 ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
@@ -83,6 +90,7 @@ class PostType extends AbstractNameBaseType
             'active' => true,
             'section' => false,
             'position' => true,
+            'url' => true,
             'name' => true,
             'name_required'=> false,
             'name_constraints'=> new NotBlank(['message'=> 'error_message.post.name']),

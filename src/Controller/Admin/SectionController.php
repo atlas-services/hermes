@@ -57,6 +57,7 @@ class SectionController extends AbstractController
         $options['menu'] = false;
         $options['position'] = true;
         $options['content'] = true;
+        $options['url'] = true;
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
         $form->handleRequest($request);
 

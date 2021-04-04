@@ -6,28 +6,40 @@ const jQuery = $;
 
     // afficher l'upload d'image uniquement si le modèle est différent de 'libre'
     $('.select2').on("select2:select", function(e) {
-        var modeleselect =  $(this).find(':selected').text();
+        if('section_template_template' == $(this).attr('id')){
 
-        if (modeleselect == "Libre") {
-            $('.vich-image').hide();
-            $('#section_template_templateImageFilter').parent().parent().children().hide();
-            $('#section_template_remote').parent().parent().children().hide();
-            $('#section_template_template2').parent().parent().children().hide();
-            $('#section_template_template2Width').parent().parent().children().hide();
-        } else {
-            $('.vich-image').show();
-            $('#section_template_templateImageFilter').parent().parent().children().show();
-            $('#section_template_remote').parent().parent().children().show();
-            $('#section_template_template2').parent().parent().children().show();
-            $('#section_template_template2Width').parent().parent().children().show();
-        }
-        // Nb col et filter seulement pour le slide multi-image
-        if (modeleselect == "Carousel par groupe") {
-            $('.templateNbCol').parent().parent().children().show();
-            // $('.templateImageFilter').parent().parent().children().show();
-        } else {
-            $('.templateNbCol').parent().parent().children().hide();
-            // $('.templateImageFilter').parent().parent().children().hide();
+            var modeleselect =  $(this).find(':selected').text();
+
+            if (modeleselect == "Libre" ) {
+                $('.vich-image').hide();
+                $('#section_template_templateImageFilter').parent().parent().children().hide();
+                $('#section_template_remote').parent().parent().children().hide();
+                $('#section_template_template2').parent().parent().children().hide();
+                $('#section_template_template2Width').parent().parent().children().hide();
+            } else {
+                $('.vich-image').show();
+                $('#section_template_templateImageFilter').parent().parent().children().show();
+                $('#section_template_remote').parent().parent().children().show();
+                $('#section_template_template2').parent().parent().children().show();
+                $('#section_template_template2Width').parent().parent().children().show();
+            }
+            if (modeleselect == "Folio video classique") {
+                $('#section_template_remote').parent().parent().children().hide();
+                $('#section_template_template2').parent().parent().children().hide();
+                $('#section_template_template2Width').parent().parent().children().hide();
+            }
+            // Nb col et filter seulement pour le slide multi-image
+            if (modeleselect == "Carousel par groupe") {
+                $('.templateNbCol').parent().parent().children().show();
+                // $('.templateImageFilter').parent().parent().children().show();
+            } else {
+                $('.templateNbCol').parent().parent().children().hide();
+                // $('.templateImageFilter').parent().parent().children().hide();
+            }
+
+            if (modeleselect == "Folio video classique") {
+                $('#section_template_content').parent().parent().children().hide();
+            }
         }
     });
 
