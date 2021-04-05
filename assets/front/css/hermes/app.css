@@ -159,6 +159,10 @@ Menu
     padding-right: 0px;
 }
 
+#section_bottom{
+    padding: 0px;
+}
+
 /*
 zoom img
  */
@@ -250,13 +254,13 @@ div.youtube-play-btn {
 footer
  */
 
-.footer {
-    /*position: relative;*/
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #efefef;
-    text-align: center;
-}
+/*.footer {*/
+/*    !*position: relative;*!*/
+/*    position: absolute;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    left: 0;*/
+/*    padding: 1rem;*/
+/*    background-color: #efefef;*/
+/*    text-align: center;*/
+/*}*/
