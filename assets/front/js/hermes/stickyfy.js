@@ -7,13 +7,34 @@ const jQuery = $;
 
 // Get the header
     var header = document.getElementById("mainNav");
+    var sticky = header.offsetTop;
+
+    window.onload = function() {footerify()};
+
+    function footerify() {
+
+        var offsetTop = $('footer').offset().top;
+        var innerHeight = window.innerHeight;
+        var outerHeight = window.outerHeight;
+
+        var diff1 = outerHeight - innerHeight;
+        var diff2 = innerHeight - offsetTop;
+        var diff = diff1 - diff2 ;
+
+        if (diff > 0) {
+            $("footer").css("position", 'relative');
+        }else{
+            $("footer").css("position", 'absolute');
+            $("footer").css("bottom", 0);
+        }
+    }
 
 // Get the offset position of the navbar
 
 //     if(null != header){
 
-        var sticky = header.offsetTop;
-        var footer = document.getElementById("footer");
+        // var sticky = header.offsetTop;
+        // var footer = document.getElementById("footer");
 
         // Add the sticky class to the header when you reach its scroll position. Remove "sticky-top" when you leave the scroll position
         function stickyfy() {

@@ -53,7 +53,11 @@
                     {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
                 {% endif %}
             {% endblock nav %}
-            <div class="content">
+            {% set nb = 0 %}
+            {% if  (vich_uploader_asset(logo, 'imageFile')) %}
+                {% set nb = 4 %}
+            {% endif %}
+            <div class="content pt-lg-0 mt-lg-0 pt-{{ nb }} mt-{{ nb }}">
                 {% block content %}
                 {% endblock content %}
             </div>
