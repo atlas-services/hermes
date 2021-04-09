@@ -31,7 +31,7 @@
                         {% if 'color' in config.code  %}
                             <span class="mt-0 mr-1" style="width:20px;height:10px;border:1px solid ;background-color:{{ config.value }}" >&nbsp; &nbsp; &nbsp; </span>
                         {% endif %}
-                        {{ config.value }}
+                        {{ config.value }}{{ 'width' in config.code  ? '/12' : '' }}
                     </td>
                     <td>
                         {% if vich_uploader_asset(config, 'imageFile') is not null %}

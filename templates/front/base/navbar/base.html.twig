@@ -1,4 +1,4 @@
-<nav style="max-width: 100%; background-color: {{ nav_bgcolor  }}; font-family: {{ nav_font_family }}" id="logo" class="center navbar navbar-expand-lg navbar-dark" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+<nav style=" background-color: {{ nav_bgcolor  }}; font-family: {{ nav_font_family }}" id="logo" class="center navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
     <div class="container-fluid justify-content-center">
             {% set affiche_logo = false %}
             {% if('accueil' ==  app.request.attributes.get('sheet')|lower and 'accueil' ==  app.request.attributes.get('slug')|lower) %}
@@ -42,7 +42,7 @@
     {% set offset = 'offset-lg' ~ nboffset %}
 {% endif %}
 
-<nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+<nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
     <div class="col-lg-{{ nav_container_width|col_lg() - nboffset }} {{ offset ?? ''}} container border-0 " style="background-color: {{nav_bgcolor}};">
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}
