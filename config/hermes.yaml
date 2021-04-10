@@ -131,8 +131,8 @@ parameters:
           summary: Font
           value: "'Bai Jamjuree', sans-serif"
         container_width:
-          summary: Largeur du contenu affiché (en %)
-          value: '100%'
+          summary: Largeur du contenu affiché ( max = 12)
+          value: 12
         chevron:
           summary: Style chevron
           value: ~
@@ -196,8 +196,8 @@ parameters:
           summary: Couleur des textes la page contact
           value: '#ffffff'
         contact_width:
-          summary: Largeur de la page contact (en %)
-          value: '100%'
+          summary: Largeur de la page contact (max = 12)
+          value: 12
       nav:
         nav_bar:
           summary: selection de la barre de menu
@@ -239,8 +239,8 @@ parameters:
             summary: Font
             value: "'Bai Jamjuree', sans-serif"
         nav_container_width:
-          summary: Largeur du menu (en %)
-          value: '100%'
+          summary: Largeur du menu (max= 12)
+          value: 12
         nav_espacement:
           summary: "Espacement entre les éléments du menu(valeurs possibles : 1 - 2 - 3 - 4 - 5)"
           value: 3
@@ -258,19 +258,19 @@ parameters:
           summary: Couleur des liens au survol du contenu
           value: '#ffffff'
         content_container_width:
-          summary: Largeur du contenu affiché (en %)
-          value: '100%'
+          summary: Largeur du contenu affiché (max= 12)
+          value: 12
       folio:
         folio_container_width:
-          summary: Largeur du folio affiché (en %)
-          value: '60%'
+          summary: Largeur du folio affiché (max= 12)
+          value: 8
       carousel:
         carousel_container_width:
-          summary: Largeur du carousel affiché (en %)
-          value: '60%'
+          summary: Largeur du carousel affiché (max= 12)
+          value: 8
         carousel_multiple_container_width:
-          summary: Largeur du carousel multi images affiché (en %)
-          value: '80%'
+          summary: Largeur du carousel multi images affiché (max= 12)
+          value: 9
       modale:
         modale_bgcolor:
           summary: Couleur de fond des modales
@@ -279,8 +279,8 @@ parameters:
           summary: Couleur des modales et du bouton
           value: '#ffffff'
         modale_container_width:
-          summary: Largeur du modales affiché (en %)
-          value: '50%'
+          summary: Largeur du modales affiché (max= 12)
+          value: 6
       card:
         card_bgcolor:
           summary: Couleur de fond des cards
@@ -289,8 +289,8 @@ parameters:
           summary: Couleur des cards et du bouton
           value: '#ffffff'
         card_container_width:
-          summary: Largeur du cards affiché (en %)
-          value: '80%'
+          summary: Largeur du cards affiché (max= 12)
+          value: 9
       footer:
         footer_affiche:
           summary: Affichage du footer
@@ -302,8 +302,8 @@ parameters:
           summary: Couleur du texte du footer
           value: '#000000'
         footer_container_width:
-          summary: Largeur du footer (en %)
-          value: '100%'
+          summary: Largeur du footer (max= 12)
+          value: 12
         footer_about:
           summary: texte du footer about
           value: ~

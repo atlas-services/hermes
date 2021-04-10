@@ -39,38 +39,40 @@ class AppExtension extends AbstractExtension
 
     public function colLg($prct)
     {
+        return intval($prct);
+
         $collg = 12;
 
-        switch ($prct) {
-            case '10%':
-                $collg = 2;
-                break;
-            case '20%':
-                $collg = 4;
-                break;
-            case '30%':
-                $collg = 4;
-                break;
-            case '40%':
-                $collg = 5;
-                break;
-            case '50%':
-                $collg = 6;
-                break;
-            case '60%':
-                $collg = 8;
-                break;
-            case '70%':
-                $collg = 10;
-                break;
-            case '80%':
-                $collg = 10;
-                break;
-            case '90%':
-                $collg = 11;
-            case '100%':
-                $collg = 12;
-        }
+//        switch ($prct) {
+//            case '10%':
+//                $collg = 2;
+//                break;
+//            case '20%':
+//                $collg = 4;
+//                break;
+//            case '30%':
+//                $collg = 4;
+//                break;
+//            case '40%':
+//                $collg = 5;
+//                break;
+//            case '50%':
+//                $collg = 6;
+//                break;
+//            case '60%':
+//                $collg = 8;
+//                break;
+//            case '70%':
+//                $collg = 10;
+//                break;
+//            case '80%':
+//                $collg = 10;
+//                break;
+//            case '90%':
+//                $collg = 11;
+//            case '100%':
+//                $collg = 12;
+//        }
 
         return $collg;
     }

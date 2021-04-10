@@ -1,5 +1,5 @@
 <div class="sidebar" style=" background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}">
-    <nav style="max-width: 100%; background-color: transparent" id="logo" class="center navbar navbar-expand-lg navbar-dark" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+    <nav style="background-color: transparent" id="logo" class="center navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
         <div class="container-fluid justify-content-center" style="background-color: transparent">
             {% set affiche_logo = false %}
                   {% if logo.filename is defined %}
@@ -17,7 +17,7 @@
     {#    <div><i class="fa fa-close" onclick="$('.sidebar').css('width', '200px');"></i></div>#}
     </nav>
 
-    <nav style=" background-color:{{ nav_bgcolor }}; max-width: 100%" class="navbar navbar-expand-lg navbar-dark " id="mainSideNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+    <nav style=" background-color:{{ nav_bgcolor }}; " class="navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0" id="mainSideNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
         <div class="container border-0" style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}">
             <div class="navbar-header page-scroll">
                  <button type="button" class="navbar-toggle navbar-toggler collapsed" style="background-color: {{ nav_header_bgcolor ?? 'transparent' }}" data-toggle="collapse" data-target="#navbarResponsive">

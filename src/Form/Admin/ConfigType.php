@@ -63,30 +63,44 @@ class ConfigType extends AbstractBaseType
                 '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
                 'Verdana' => 'Verdana',
             ];
-            $options_pct = [
-                '10%' => '10%',
-                '20%' => '20%',
-                '30%' => '30%',
-                '40%' => '40%',
-                '50%' => '50%',
-                '60%' => '60%',
-                '70%' => '70%',
-                '80%' => '80%',
-                '90%' => '90%',
-                '100%' => '100%',
+            $options_cols = [
+                '1/12' => '1',
+                '2/12' => '2',
+                '3/12' => '3',
+                '4/12' => '4',
+                '5/12' => '5',
+                '6/12' => '6',
+                '7/12' => '7',
+                '8/12' => '8',
+                '9/12' => '9',
+                '10/12' => '10',
+                '11/12' => '11',
+                '12/12' => '12',
             ];
-            $options_pct_value = [
-                '10%' => '10',
-                '20%' => '20',
-                '30%' => '30',
-                '40%' => '40',
-                '50%' => '50',
-                '60%' => '60',
-                '70%' => '70',
-                '80%' => '80',
-                '90%' => '90%',
-                '100%' => '100',
-            ];
+//            $options_pct = [
+//                '10%' => '10%',
+//                '20%' => '20%',
+//                '30%' => '30%',
+//                '40%' => '40%',
+//                '50%' => '50%',
+//                '60%' => '60%',
+//                '70%' => '70%',
+//                '80%' => '80%',
+//                '90%' => '90%',
+//                '100%' => '100%',
+//            ];
+//            $options_pct_value = [
+//                '10%' => '10',
+//                '20%' => '20',
+//                '30%' => '30',
+//                '40%' => '40',
+//                '50%' => '50',
+//                '60%' => '60',
+//                '70%' => '70',
+//                '80%' => '80',
+//                '90%' => '90%',
+//                '100%' => '100',
+//            ];
             $options_template_value = [
                 'one_page_1' => 'one_page_1',
                 'one_page_2' => 'one_page_2',
@@ -96,7 +110,7 @@ class ConfigType extends AbstractBaseType
                 // accueil
                 case 'accueil':
                     $choice = true;
-                    $options = $options_pct_value;
+                    $options = $options_cols;
                     break;
                 // accueil
                 case 'template':
@@ -193,7 +207,7 @@ class ConfigType extends AbstractBaseType
                     if ('width' == $code || strpos($code, 'width')) {
                         $form->add('value', ChoiceType::class, [
                             'required' => false,
-                            'choices' =>   $options_pct,
+                            'choices' =>   $options_cols,
                             'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                         ]);
                     }else{
