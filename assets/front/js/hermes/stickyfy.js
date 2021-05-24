@@ -25,41 +25,26 @@ const jQuery = $;
             $("footer").css("position", 'relative');
         }else{
             $("footer").css("position", 'absolute');
-            $("footer").css("bottom", 0);
+            $("footer").css("bottom", '0');
+            $("footer").css("left", '50%');
+            $("footer").css("transform", 'translate(-50%, 0%)');
         }
     }
 
 // Get the offset position of the navbar
 
 //     if(null != header){
-
-        // var sticky = header.offsetTop;
-        // var footer = document.getElementById("footer");
-
+    
         // Add the sticky class to the header when you reach its scroll position. Remove "sticky-top" when you leave the scroll position
         function stickyfy() {
-            // var sectionContentPaddingTop = 20 ;
-            // var sectionContentPaddingTop = 0 ;
-            // var navBarHeight =  $('.navbar').height() ;
-            // var navBarSectionContentPaddingTop = navBarHeight + sectionContentPaddingTop;
-            // if (navBarSectionContentPaddingTop > sticky) {
-            //     $(".footer").css("margin-top", 0 + 'px');
-            //     $(".section_content").last().css("padding-bottom", sectionContentPaddingTop + 'px');
-            // }
             if (window.pageYOffset > sticky) {
-                // if ($("#mainNav").offset().top > 0) {
                 header.classList.add("sticky-top");
                 var bgcolor = $('#mainNav').data('navBgcolorShrink');
                 $(".sticky .container ul").css("background-color", bgcolor);
-                // var stickyHeight =  $('.sticky').height() ;
-                // var stickySectionContentPaddingTop = stickyHeight + sectionContentPaddingTop + 50;
-                // $(".section_content").eq(0).css("padding-top", stickySectionContentPaddingTop + 'px');
                 $(".footer").css("position", 'relative');
-
             } else {
                 header.classList.remove("sticky-top");
                 $(".footer").css("position", 'absolute');
-                // $(".section_content").eq(0).css("padding-top", sectionContentPaddingTop + "px");
             }
         }
 
