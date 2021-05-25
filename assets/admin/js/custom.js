@@ -6,10 +6,34 @@ const jQuery = $;
 
     // afficher l'upload d'image uniquement si le modèle est différent de 'libre'
     $('.select2').on("select2:select", function(e) {
+        var modeleselect =  $(this).find(':selected').text();
+        if('menu_sections_0_template' == $(this).attr('id')){
+            if (modeleselect == "Libre" ) {
+                // $('.vich-image').hide();
+                $('.templateNbCol').parent().parent().children().hide();
+                $('#menu_sections_0_templateImageFilter').parent().parent().children().hide();
+                $('#menu_sections_0_remote').parent().parent().children().hide();
+                $('#menu_sections_0_template2').parent().parent().children().hide();
+                $('#menu_sections_0_template2Width').parent().parent().children().hide();
+            } else {
+                // $('.vich-image').show();
+                $('#menu_sections_0_templateImageFilter').parent().parent().children().show();
+                $('#menu_sections_0_remote').parent().parent().children().show();
+                $('#menu_sections_0_template2').parent().parent().children().show();
+                $('#menu_sections_0_template2Width').parent().parent().children().show();
+            }
+            if (modeleselect == "Folio video classique") {
+                $('#menu_sections_0_posts_0_url').parent().parent().show();
+                $('#cke_menu_sections_0_posts_0_content').parent().parent().hide();
+                $('#menu_sections_0_remote').parent().parent().hide();
+                $('#menu_sections_0_template2').parent().parent().hide();
+                $('#menu_sections_0_template2Width').parent().parent().hide();
+            }else {
+                $('#menu_sections_0_posts_0_url').parent().parent().hide();
+                $('#cke_menu_sections_0_posts_0_content').parent().parent().show();
+            }
+        }
         if('section_template_template' == $(this).attr('id')){
-
-            var modeleselect =  $(this).find(':selected').text();
-
             if (modeleselect == "Libre" ) {
                 $('.vich-image').hide();
                 $('#section_template_templateImageFilter').parent().parent().children().hide();
@@ -27,6 +51,8 @@ const jQuery = $;
                 $('#section_template_remote').parent().parent().children().hide();
                 $('#section_template_template2').parent().parent().children().hide();
                 $('#section_template_template2Width').parent().parent().children().hide();
+                $('#section_template_content').parent().parent().children().hide();
+                $('#section_template_post_url').parent().parent().children().show();
             }
             // Nb col et filter seulement pour le slide multi-image
             if (modeleselect == "Carousel par groupe") {
@@ -35,10 +61,6 @@ const jQuery = $;
             } else {
                 $('.templateNbCol').parent().parent().children().hide();
                 // $('.templateImageFilter').parent().parent().children().hide();
-            }
-
-            if (modeleselect == "Folio video classique") {
-                $('#section_template_content').parent().parent().children().hide();
             }
         }
     });

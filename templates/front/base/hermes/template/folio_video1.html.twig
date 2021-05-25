@@ -15,7 +15,7 @@
                                         <!-- Modale1  -->
                                         <div class="d-block mb-4 h-100 thumbnail youtube-container">
                                             <h4>{{ post.name }}</h4>
-                                            <div class="img-fluid img-thumbnail youtube-player" data-id="{{ post.idUrl }}" data-thumbnail="{{ asset(vich_uploader_asset(post, 'imageFile'))}}"></div>
+                                            <div class="img-fluid img-thumbnail youtube-player" data-url="{{ post.url }}" data-id="{{ post.idUrl }}" data-thumbnail="{{ asset(vich_uploader_asset(post, 'imageFile'))}}"></div>
                                         </div>
 
 {#                                        <div class="youtube-container">#}

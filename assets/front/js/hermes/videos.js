@@ -16,6 +16,7 @@ function getVideos() {
     for (var n = 0; n < v.length; n++) {
         var p = document.createElement("div");
         var id = v[n].getAttribute("data-id");
+        var url = v[n].getAttribute("data-url");
 
         var placeholder = v[n].hasAttribute("data-thumbnail")
             ? v[n].getAttribute("data-thumbnail")
@@ -27,7 +28,8 @@ function getVideos() {
         v[n].appendChild(p);
         p.addEventListener("click", function () {
             var parent = this.parentNode;
-            createIframe(parent, parent.getAttribute("data-id"));
+            //createIframe(parent, parent.getAttribute("data-id"));
+            createIframeByUrl(parent, parent.getAttribute("data-url"));
         });
     }
 }
@@ -68,6 +70,22 @@ function createIframe(v, id) {
         "src",
         "//www.youtube.com/embed/" +
         id +
+        "?autoplay=1&color=white&autohide=2&modestbranding=1&border=0&wmode=opaque&enablejsapi=1&showinfo=0&rel=0"
+    );
+    iframe.setAttribute("frameborder", "0");
+    iframe.setAttribute("class", "youtube-iframe");
+    v.firstChild.replaceWith(iframe);
+}
+
+/**
+ * Create and load iframe in Youtube container
+ **/
+function createIframeByUrl(v, url) {
+    var iframe = document.createElement("iframe");
+    console.log(v);
+    iframe.setAttribute(
+        "src",
+        url +
         "?autoplay=1&color=white&autohide=2&modestbranding=1&border=0&wmode=opaque&enablejsapi=1&showinfo=0&rel=0"
     );
     iframe.setAttribute("frameborder", "0");
