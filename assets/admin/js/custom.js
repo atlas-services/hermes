@@ -33,6 +33,7 @@ const jQuery = $;
                 $('#cke_menu_sections_0_posts_0_content').parent().parent().show();
             }
         }
+
         if('section_template_template' == $(this).attr('id')){
             if (modeleselect == "Libre" ) {
                 $('.vich-image').hide();
@@ -40,6 +41,7 @@ const jQuery = $;
                 $('#section_template_remote').parent().parent().children().hide();
                 $('#section_template_template2').parent().parent().children().hide();
                 $('#section_template_template2Width').parent().parent().children().hide();
+                $('#section_template_posts_0_url').parent().parent().children().hide();
             } else {
                 $('.vich-image').show();
                 $('#section_template_templateImageFilter').parent().parent().children().show();
@@ -52,7 +54,7 @@ const jQuery = $;
                 $('#section_template_template2').parent().parent().children().hide();
                 $('#section_template_template2Width').parent().parent().children().hide();
                 $('#section_template_content').parent().parent().children().hide();
-                $('#section_template_post_url').parent().parent().children().show();
+                $('#section_template_posts_0_url').parent().parent().children().show();
             }
             // Nb col et filter seulement pour le slide multi-image
             if (modeleselect == "Carousel par groupe") {
