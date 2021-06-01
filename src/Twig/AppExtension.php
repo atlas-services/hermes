@@ -12,6 +12,8 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('list_length', [$this, 'listLength']),
+            new TwigFilter('max_post_length', [$this, 'maxPostLength']),
+            new TwigFilter('space_length', [$this, 'spaceLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
             new TwigFilter('col_nb_char', [$this, 'colNbChar']),
             new TwigFilter('get_class', 'get_class'),
@@ -37,8 +39,43 @@ class AppExtension extends AbstractExtension
         return $list_length;
     }
 
-    public function colLg($prct)
+    public function maxPostLength($posts)
     {
+        $length = 0;
+        foreach ($posts as $post){
+            if(strlen($post->getName()) > $length){
+                $length = strlen($post->getName());
+            }
+        }
+        return $length;
+
+    }
+
+    public function spaceLength($post, $max)
+    {
+        $space = '';
+        $nbWhite = $max - strlen($post->getName()) ;
+        for ($i=0; $i <= $nbWhite ; $i++){
+            $space .= '&nbsp; ' ;
+        }
+        return $space;
+
+    }
+
+    public function colLg($prct,$section = null)
+    {
+        if(!is_null($section)){
+            if(null == $section->getTemplateNbCol()){
+                return intval($prct);
+            }else{
+                try {
+                    return intval(12/$section->getTemplateNbCol());
+                }catch(\Exception $e)
+                {
+                    return intval(12);
+                }
+            }
+        }
         return intval($prct);
 
         $collg = 12;

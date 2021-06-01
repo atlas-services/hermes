@@ -43,7 +43,7 @@ function createCustomThumbail(url) {
     return (
         '<img class="youtube-thumbnail" src="' +
         url +
-        '" alt="Youtube Preview" /><div class="youtube-play-btn"></div>'
+        '" alt="Preview" /><div class="youtube-play-btn"></div>'
     );
 }
 
@@ -56,7 +56,7 @@ function createThumbail(id) {
     return (
         '<img class="youtube-thumbnail" src="//i.ytimg.com/vi_webp/' +
         id +
-        '/maxresdefault.webp" alt="Youtube Preview"><div class="youtube-play-btn"></div>'
+        '/maxresdefault.webp" alt="Preview"><div class="youtube-play-btn"></div>'
     );
 }
 
