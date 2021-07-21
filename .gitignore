@@ -38,6 +38,7 @@ public/uploads/
 /public/build/
 npm-debug.log
 yarn-error.log
+yarn.lock
 ###< symfony/webpack-encore-bundle ###
 
 ###> friends-of-behat/symfony-extension ###

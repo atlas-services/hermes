@@ -10,6 +10,7 @@ hermes-install:
 	yarn install
 	composer install
 	bin/console d:s:u --force
+	bin/console d:s:u --force --em=config
 	bin/console hermes:db-update
 	bin/console cache:clear
 
@@ -18,6 +19,7 @@ doctrine-init:
 	bin/console doctrine:cache:clear-query
 	bin/console doctrine:cache:clear-result
 	bin/console d:s:u --force
+	bin/console d:s:u --force --em=config
 	bin/console hermes:db-update
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
@@ -33,6 +35,7 @@ init-test:
 	bin/console doctrine:cache:clear-result
 	bin/console doctrine:database:drop --force
 	bin/console d:s:u --force
+	bin/console d:s:u --force --em=config
 	bin/console hermes:db-update
 	bin/console ckeditor:install --clear=skip
 	bin/console elfinder:install
@@ -45,6 +48,7 @@ init-prod:
 	bin/console doctrine:cache:clear-query
 	bin/console doctrine:cache:clear-result
 	bin/console d:s:u --force
+	bin/console d:s:u --force --em=config
 	bin/console hermes:db-update
 	bin/console ckeditor:install --clear=skip
 	bin/console elfinder:install
@@ -58,6 +62,7 @@ doctrine-re-init:
 	bin/console doctrine:database:drop --force
 	bin/console doctrine:database:create
 	bin/console d:s:u --force
+	bin/console d:s:u --force --em=config
 	bin/console hermes:db-update
 # 	rm -r var/cache/* var/log/* 2> /dev/null || true
 

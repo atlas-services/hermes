@@ -104,6 +104,7 @@ class ConfigType extends AbstractBaseType
             $options_template_value = [
                 'one_page_1' => 'one_page_1',
                 'one_page_2' => 'one_page_2',
+                'one_page_3' => 'one_page_3',
                 'front' => 'front',
             ];
             switch ($code) {
