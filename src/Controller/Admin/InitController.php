@@ -146,6 +146,7 @@ class InitController extends AbstractController
                 $section = new Section();
                 $section->setName('section-'.str_replace(' ', '-', $libre));
                 $section->setPosition(1);
+                $section->setTemplateWidth(12);
                 $section->setMenu($menu);
                 $section->setTemplate($template);
                 // add Post
