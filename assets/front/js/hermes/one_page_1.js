@@ -6,13 +6,13 @@ import $ from 'jquery';
 const jQuery = $;
 import 'bootstrap';
 import 'jquery.easing';
-import '../../../js/scroll';
+import '../../../commun/js/scroll';
 import 'waypoints/lib/jquery.waypoints.min';
 import 'counterup/jquery.counterup.min';
 import 'particles.js';
 import 'owl.carousel';
-import './wow';
-import './aos';
+import '../bootstrap/wow';
+import '../bootstrap/aos';
 
 $(function () {
 

@@ -1,7 +1,7 @@
 /*
     css
  */
-import '../../../css/base.css';
+import '../../../commun/css/base.css';
 import '../../css/navbar/left.css';
 
 // $('.dropdown-toggle').click(function () {

@@ -1,8 +1,8 @@
 /*
     css
  */
-import '../../css/base.css';
-import '../../css/anime.css';
+import '../../commun/css/base.css';
+import '../../commun/css/anime.css';
 import '../css/navbar.css';
 import '../css/portfolio.css';
 import '../css/app.css';
@@ -20,10 +20,10 @@ import 'jquery.easing';
 /*
 hermes js
  */
-import './../../js/scroll';
-import './../../js/chevron';
-import './../../js/menu';
-import './../../js/anime';
+import '../../commun/js/scroll';
+import '../../commun/js/chevron';
+import '../../commun/js/menu';
+import '../../commun/js/anime';
 import './exemples';
 import './custom';
 import './select2';

@@ -9,17 +9,17 @@ import "fontsource-oswald";
 import "@fontsource/raleway";
 import "fontsource-snowburst-one";
 import "fontsource-sofia";
-import '../../css/roboto-condensed.css';
-import '../../css/merryweather.css';
+import '../../css/bootstrap/roboto-condensed.css';
+import '../../css/bootstrap/merryweather.css';
 
 /*
     css
  */
-import '../../css/portfolio.css';
-import '../../css/timeline.css';
+import '../../css/bootstrap/portfolio.css';
+import '../../css/bootstrap/timeline.css';
 import '../../css/hermes/app.css';
-import '../../css/isotope.css';
-import '../../css/carousel.css';
+import '../../css/bootstrap/isotope.css';
+import '../../css/bootstrap/carousel.css';
 import '../../css/bootstrap/site-footer.css';
 import '../../css/bootstrap/video.css';
 import '../../css/bootstrap/gallery.css';
@@ -41,20 +41,20 @@ import 'jquery-lazy';
 import 'owl.carousel';
 import 'jquery-waypoints/waypoints.min';
 import 'jquery.counterup';
-import '../../../js/scroll';
-import '../../../js/scrollspy';
-import '../../../js/chevron';
-import '../../../js/menu';
-import '../../../js/search';
-import '../../../js/anime';
-import '../../../js/copy';
-import '../hermes/modale';
-import '../hermes/wow';
-import '../hermes/videos';
+import '../../../commun/js/scroll';
+import '../../../commun/js/scrollspy';
+import '../../../commun/js/chevron';
+import '../../../commun/js/menu';
+import '../../../commun/js/search';
+import '../../../commun/js/anime';
+import '../../../commun/js/copy';
+import '../bootstrap/modale';
+import '../bootstrap/wow';
+import '../bootstrap/videos';
 // import '../hermes/aos';
-import '../../../js/lazy';
+import '../../../commun/js/lazy';
 // import '../hermes/video';
 // import '../hermes/todo';
-import '../hammer.min';
-import '../carousel';
+import '../bootstrap/hammer.min';
+import '../bootstrap/carousel';
 

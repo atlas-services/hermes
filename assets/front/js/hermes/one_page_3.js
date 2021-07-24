@@ -7,7 +7,7 @@ import $ from 'jquery';
 const jQuery = $;
 import 'bootstrap';
 import 'jquery.easing';
-import '../../../js/scroll';
+import '../../../commun/js/scroll';
 import { WOW } from 'wowjs';
 import 'owl.carousel';
 
