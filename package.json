@@ -19,7 +19,9 @@
     "dependencies": {
         "@fontsource/raleway": "^4.2.1",
         "@icon/icofont": "^1.0.1-alpha.1",
+        "@popperjs/core": "^2.9.2",
         "@rollup/plugin-commonjs": "^16.0.0",
+        "@types/react-scrollspy": "^3.3.4",
         "accordion": "^3.0.2",
         "anim": "0.0.1",
         "animate": "^1.0.0",
@@ -29,7 +31,7 @@
         "aos": "^3.0.0-beta.6",
         "babel-loader": "^8.0.0-beta.6",
         "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-        "bootstrap": "^4.5.0",
+        "bootstrap": "^5.0.2",
         "bootstrap-dialog": "^1.34.6",
         "bootstrap-icons": "^1.0.0",
         "bootstrap-select": "^1.13.18",

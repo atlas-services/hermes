@@ -19,25 +19,25 @@
         {% if sections|length > 0 %}
             {% for message in app.flashes('success') %}
                 <div class="text-center alert alert-success">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                     {{ message }}
                 </div>
             {% endfor %}
             {% for message in app.flashes('notice') %}
                 <div class="text-center alert alert-info">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                     {{ message }}
                 </div>
             {% endfor %}
             {% for message in app.flashes('danger') %}
                 <div class="text-center alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                     {{ message }}
                 </div>
             {% endfor %}
             {% for message in app.flashes('warning') %}
                 <div class="text-center alert alert-warning">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                     {{ message }}
                 </div>
             {% endfor %}

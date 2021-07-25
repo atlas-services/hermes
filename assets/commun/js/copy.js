@@ -23,7 +23,7 @@ const jQuery = $;
             if (typeof copyHTML === 'string') {
                 copy(copyHTML); // innerHtml
                 var text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
-                    '            <a href="#" class="hidden close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+                    '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
                     '            Le code html du template a bien été <strong>copié</strong>!.\n' +
                     '        </div>';
                 document.getElementById('copy').insertAdjacentHTML('afterend',text_alert);

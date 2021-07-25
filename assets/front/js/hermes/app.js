@@ -42,7 +42,7 @@ import 'owl.carousel';
 import 'jquery-waypoints/waypoints.min';
 import 'jquery.counterup';
 import '../../../commun/js/scroll';
-import '../../../commun/js/scrollspy';
+// import '../../../commun/js/scrollspy';
 import '../../../commun/js/chevron';
 import '../../../commun/js/menu';
 import '../../../commun/js/search';

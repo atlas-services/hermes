@@ -16,7 +16,7 @@
         {% endfor %}
         <div class="navbar-header ">
             <button class="navbar-toggler navbar-toggler-right collapsed" type="button"
-                    data-toggle="collapse" data-target="#navbarResponsive" aria-label="Toggle navigation"
+                    data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-label="Toggle navigation"
                     aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
             </button>
@@ -28,7 +28,7 @@
                     <li class=" nav-item dropdown ">
                         <a id="{{ 'global.blocks'|trans() }}"
                            class="nav-link  page-scroll dropdown-toggle " role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.blocks'|trans()|raw }}
                         </a>
@@ -43,7 +43,7 @@
                     <li class=" nav-item dropdown ">
                         <a id="{{ 'global.dashboard'|trans() }}"
                            class="nav-link  page-scroll dropdown-toggle " role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.dashboard'|trans()|raw }}
                         </a>
@@ -78,7 +78,7 @@
                     <li class=" nav-item dropdown">
                         <a id="{{ 'config.label'|trans() }}"
                            class="nav-link  page-scroll dropdown-toggle " role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'config.list'|trans()|raw }}
                         </a>
@@ -125,7 +125,7 @@
                     <li class=" nav-item dropdown">
                         <a id="{{ 'User'|trans() }}" class="nav-link  page-scroll dropdown-toggle "
                            role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
                         </a>

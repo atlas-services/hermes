@@ -27,6 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class FrontController extends AbstractController
 {
@@ -38,13 +39,13 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function search(Request $request, PostRepository $postRepository, TemoignageRepository $temoignageRepository, RouterInterface $router, Page $page)
+    public function search(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, TemoignageRepository $temoignageRepository, RouterInterface $router, Page $page)
     {
         $referer = $request->headers->get('referer');
         $refererPathInfo = Request::create($referer)->getPathInfo();
         $refererPathInfo = str_replace($request->getScriptName(), '', $refererPathInfo);
         $routeInfos = $router->match($refererPathInfo);
-        $configuration = $entityManager->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        $configuration = $this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         if(ContactInterface::CONTACT == $routeInfos['_route'] || ContactInterface::LIVREDOR_ROUTE == $routeInfos['_route']){
             $route = $routeInfos['_route'];
             $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);

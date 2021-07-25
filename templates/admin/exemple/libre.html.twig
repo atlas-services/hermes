@@ -1,5 +1,5 @@
 <button id="modal-exemple" class="btn btn-info">
-<a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
     {#    <div class="portfolio-hover">#}
     {#        <div class="portfolio-hover-content">#}
     <h6>{{ 'global.exemple_libre'|trans()|raw }}</h6>
@@ -11,7 +11,7 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div class="close-modal" data-bs-dismiss="modal">
                 <div class="lr">
                     <div class="rl"></div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <a id="modal-exemple-image" class="btn btn-info" data-toggle="collapse" href="#collapseImage" role="button" aria-expanded="false" aria-controls="collapseImage">
+                                <a id="modal-exemple-image" class="btn btn-info" data-bs-toggle="collapse" href="#collapseImage" role="button" aria-expanded="false" aria-controls="collapseImage">
                                     Exemples de présentation Image à copier
                                 </a>
                             </h5>
@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <a id="modal-exemple-gallerie" class="btn btn-info" data-toggle="collapse" href="#collapseGallerie" role="button" aria-expanded="false" aria-controls="collapseGallerie">
+                                <a id="modal-exemple-gallerie" class="btn btn-info" data-bs-toggle="collapse" href="#collapseGallerie" role="button" aria-expanded="false" aria-controls="collapseGallerie">
                                     Exemples de présentation gallerie à copier
                                 </a>
                             </h5>
@@ -51,7 +51,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <a id="modal-exemple-atlas" class="btn btn-info" data-toggle="collapse" href="#collapseAtlas" role="button" aria-expanded="false" aria-controls="collapseAtlas">
+                                <a id="modal-exemple-atlas" class="btn btn-info" data-bs-toggle="collapse" href="#collapseAtlas" role="button" aria-expanded="false" aria-controls="collapseAtlas">
                                     Exemples de présentation Atlas à copier
                                 </a>
                             </h5>
@@ -64,7 +64,7 @@
 {#                    <div class="card">#}
 {#                        <div class="card-header" id="headingOne">#}
 {#                            <h5 class="mb-0">#}
-{#                                <a id="modal-exemple-jazzevenement" class="btn btn-info" data-toggle="collapse" href="#collapseJazzevenement" role="button" aria-expanded="false" aria-controls="collapseJazzevenement">#}
+{#                                <a id="modal-exemple-jazzevenement" class="btn btn-info" data-bs-toggle="collapse" href="#collapseJazzevenement" role="button" aria-expanded="false" aria-controls="collapseJazzevenement">#}
 {#                                    Exemples de présentation Jazzevenement à copier#}
 {#                                </a>#}
 {#                            </h5>#}
@@ -78,7 +78,7 @@
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
-                            <a id="modal-exemple-texte" class="btn btn-info" data-toggle="collapse" href="#collapseTexte" role="button" aria-expanded="false" aria-controls="collapseTexte">
+                            <a id="modal-exemple-texte" class="btn btn-info" data-bs-toggle="collapse" href="#collapseTexte" role="button" aria-expanded="false" aria-controls="collapseTexte">
                                 Exemples de présentation de texte à copier
                             </a>
                         </h5>
@@ -91,7 +91,7 @@
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
-                            <a id="modal-exemple-texte-cuisine" class="btn btn-info" data-toggle="collapse" href="#collapseTexteCuisine" role="button" aria-expanded="false" aria-controls="collapseTexteCuisine">
+                            <a id="modal-exemple-texte-cuisine" class="btn btn-info" data-bs-toggle="collapse" href="#collapseTexteCuisine" role="button" aria-expanded="false" aria-controls="collapseTexteCuisine">
                                 Exemples de présentation de recette de cuisine à copier
                             </a>
                         </h5>
@@ -104,7 +104,7 @@
 {#                <div class="card">#}
 {#                    <div class="card-header" id="headingTwo">#}
 {#                        <h5 class="mb-0">#}
-{#                            <a id="modal-exemple-video" class="btn btn-info" data-toggle="collapse" href="#collapseVideo" role="button" aria-expanded="true" aria-controls="collapseVideo">#}
+{#                            <a id="modal-exemple-video" class="btn btn-info" data-bs-toggle="collapse" href="#collapseVideo" role="button" aria-expanded="true" aria-controls="collapseVideo">#}
 {#                                Exemples de présentation de vidéo à copier#}
 {#                            </a>#}
 {#                        </h5>#}
@@ -117,13 +117,13 @@
             </div>
 
             <div class="row center">
-                <button class="btn btn-info" data-dismiss="modal" type="button">
+                <button class="btn btn-info" data-bs-dismiss="modal" type="button">
                     <i class="fas fa-times"></i>
                     {{ 'general.close'|trans() }}
                 </button>
                 <!-- Button trigger modal -->
-                <input id="copyinfo" type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#copyModal" />
-                <input id="copyinfohtml" type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#copyModalHtml" />
+                <input id="copyinfo" type="hidden" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#copyModal" />
+                <input id="copyinfohtml" type="hidden" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#copyModalHtml" />
 {#                        {{ 'global.copy_done'|trans()|raw }}#}
 {#                </input>#}
             </div>
@@ -138,7 +138,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-success" id="copyModalLabel">{{ 'global.copy_done'|trans()|raw }}</h5>
-                <button id="close" type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
+                <button id="close" type="button" class="close" data-bs-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -146,7 +146,7 @@
                 <p class="text-success">{{ 'global.copy_texte'|trans()|raw }}</p>
             </div>
             <div class="modal-footer center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'general.close'|trans() }}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'general.close'|trans() }}</button>
             </div>
         </div>
     </div>
@@ -157,7 +157,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-success" id="copyModalHtmlLabel">{{ 'global.copy_done'|trans()|raw }}</h5>
-                <button id="close" type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
+                <button id="close" type="button" class="close" data-bs-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -165,7 +165,7 @@
                 <p class="text-success">{{ 'global.copy_html'|trans()|raw }}</p>
             </div>
             <div class="modal-footer center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'general.close'|trans() }}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'general.close'|trans() }}</button>
             </div>
         </div>
     </div>

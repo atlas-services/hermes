@@ -5,12 +5,12 @@
              aria-hidden="true">
             <div class="modal-dialog mx-auto mw-100" >
                 <div class="modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }} col-12  mx-auto px-0" style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
-                    <div class="close-modal" data-dismiss="modal">
+                    <div class="close-modal" data-bs-dismiss="modal">
                         <div class="lr"  style="background-color: {{ modale_color }}">
                             <div class="rl" style="background-color: {{ modale_color }}"></div>
                         </div>
                     </div>
-                    <div class="col-12  mx-auto px-0 ">
+                    <div class="col-12 col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }} mx-auto px-0 ">
                         <div class="row col-12  mx-auto px-0">
                             <div class="col-12  mx-auto px-0">
                                 <div class="modal-body col-12col-12  mx-auto px-0">
@@ -37,7 +37,7 @@
              aria-hidden="true">
             <div class="modal-dialog mx-auto mw-100" >
                 <div class="modal-content col-lg-{{ modale_container_width|col_lg() }} col-12  mx-auto px-0" style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
-                    <div class="close-modal" data-dismiss="modal">
+                    <div class="close-modal" data-bs-dismiss="modal">
                         <div class="lr"  style="background-color: {{ modale_color }}">
                             <div class="rl" style="background-color: {{ modale_color }}"></div>
                         </div>

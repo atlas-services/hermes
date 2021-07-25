@@ -20,7 +20,7 @@
     <nav style=" background-color:{{ nav_bgcolor }}; " class="navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0" id="mainSideNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
         <div class="container border-0" style="max-width: {{  nav_container_width }}; background-color: {{nav_bgcolor}}">
             <div class="navbar-header page-scroll">
-                 <button type="button" class="navbar-toggle navbar-toggler collapsed" style="background-color: {{ nav_header_bgcolor ?? 'transparent' }}" data-toggle="collapse" data-target="#navbarResponsive">
+                 <button type="button" class="navbar-toggle navbar-toggler collapsed" style="background-color: {{ nav_header_bgcolor ?? 'transparent' }}" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
                     <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="fa fa-bars"  style="color: {{ nav_header_color ?? 'transparent' }}"></i>
                     <span class="close-icon py-1" style="color: {{ nav_header_color ?? 'transparent' }}">✖</span>
                 </button>
@@ -42,7 +42,7 @@
                         {% else %}
                             <li class="nav-item {{ active }} {{ dropdown }} " >
                         {% endif %}
-                            <a style="color: {{ nav_link_color }}" id="{{ sheet_name }}" class="nav-link js-scroll {{ dropdowntoggle }} " role="button"  data-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
+                            <a style="color: {{ nav_link_color }}" id="{{ sheet_name }}" class="nav-link js-scroll {{ dropdowntoggle }} " role="button"  data-bs-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
                                href={{ href }}>{{ sheet_name }}
                             </a>
                             {% if (listmenu.name is not defined and (listmenu|keys|length > 1 or sheet_name|lower != listmenu|keys.0|lower)) %}

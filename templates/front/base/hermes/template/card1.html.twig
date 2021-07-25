@@ -6,7 +6,7 @@
         {% set posts = section.posts %}
     {% endif %}
 
-    <div class="col-lg-{{ card_container_width|col_lg() }} col-12 mx-auto pl-0 pr-0">
+    <div class="col-lg-{{ (section.templateWidth ?? card_container_width)|col_lg()  }}  col-12 mx-auto pl-0 pr-0">
         {% for post in posts|sort((a, b) => a.position <=> b.position) %}
             {% if loop.index is odd %}
                 <div class="row col-lg-12 col-12 mx-auto">

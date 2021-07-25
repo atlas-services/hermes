@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-info btn-lg">
-<a type="button" class="portfolio-link text-info" data-toggle="modal" href="#infoModal">
+<a type="button" class="portfolio-link text-info" data-bs-toggle="modal" href="#infoModal">
     <h6>{{ 'global.info'|trans()|raw }}</h6>
 </a>
 </button>
@@ -7,7 +7,7 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div class="close-modal" data-bs-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
 
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
-                            <a class="btn btn-info" data-toggle="collapse" href="#collapseTexte" role="button" aria-expanded="false" aria-controls="collapseTexte">
+                            <a class="btn btn-info" data-bs-toggle="collapse" href="#collapseTexte" role="button" aria-expanded="false" aria-controls="collapseTexte">
                                 {{ 'global.new_rapid_sheet'|trans()|raw }}
                             </a>
                         </h5>
@@ -33,7 +33,7 @@
                 <div class="card">
                     <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
-                            <a class="btn btn-info" data-toggle="collapse" href="#collapseVideo" role="button" aria-expanded="true" aria-controls="collapseVideo">
+                            <a class="btn btn-info" data-bs-toggle="collapse" href="#collapseVideo" role="button" aria-expanded="true" aria-controls="collapseVideo">
                                 <i class="fa fa-save"> </i><i class="fa fa-plus"></i> {{ 'sheet.update_next'|trans()|raw}}
                             </a>
                         </h5>
@@ -46,12 +46,12 @@
             </div>
 
             <div class="row center">
-                <button class="btn btn-info" data-dismiss="modal" type="button">
+                <button class="btn btn-info" data-bs-dismiss="modal" type="button">
                     <i class="fas fa-times"></i>
                     {{ 'general.close'|trans() }}
                 </button>
                 <!-- Button trigger modal -->
-                <input id="copyinfo" type="hidden" class="btn btn-info" data-toggle="modal" data-target="#copyModal" />
+                <input id="copyinfo" type="hidden" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#copyModal" />
 {#                        {{ 'global.copy_done'|trans()|raw }}#}
 {#                </input>#}
             </div>
@@ -66,7 +66,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-success" id="copyModalLabel">{{ 'global.copy_done'|trans()|raw }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="{{ 'general.close'|trans() }}">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -74,7 +74,7 @@
                 <p class="text-success">{{ 'global.copy_texte'|trans()|raw }}</p>
             </div>
             <div class="modal-footer center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'general.close'|trans() }}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'general.close'|trans() }}</button>
             </div>
         </div>
     </div>

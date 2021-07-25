@@ -26,22 +26,24 @@
                     <p class="text-justify col-12 h-font-size-14">
                         {% if vich_uploader_asset(post, 'imageFile') is not null %}
                             <img class="h-w-50 h-rounded-lg-3 {{ float_direction }}" alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}" />
-                        {% endif %}
-                        {% if section.template2.code in ['modale1', 'modale3' ] %}
+                        {% if section.template2.code is defined %}
+                            {% if section.template2.code in ['modale1', 'modale3' ] %}
                             <!-- Modale1  -->
                             <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'"
-                               class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                               class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-bs-toggle="modal"
                                data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
-                               data-target="#image-gallery">
+                               data-bs-target="#image-gallery">
                                 {{ post.content|striptags|u.truncate(600, '...')|raw }}
                             </a>
                         {% endif %}
                         {% if( 'modale2' ==  section.template2.code) %}
                             <!-- Modale2  -->
                             <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'"
-                               class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                               class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
                                 {{ post.content|striptags|u.truncate(550, '...')|raw }}
                             </a>
+                        {% endif %}
+                        {% endif %}
                         {% endif %}
                     </p>
                 </div>

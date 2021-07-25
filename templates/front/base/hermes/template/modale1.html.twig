@@ -4,14 +4,15 @@
         <div class="modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
             <div class="modal-header border-0">
                 <h4 class="modal-title" id="image-gallery-title"></h4>
-                <button type="button" class="close"  style="color: {{ modale_color }}" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                </button>
+{#                <button type="button" class="close"  style="color: {{ modale_color }}" data-bs-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>#}
+{#                </button>#}
+                <button type="button" class="btn-close" style="background-color: {{ modale_color }}" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="col-lg-12 mx-auto px-0" >
+            <div class="col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }} col-12 mx-auto px-0" >
                 <h4 class="text-center mt-4" id="post-name-gallery-image"> </h4>
                 </h4>
             <div class="modal-body row col-12  mx-auto px-0">
-                <div class="my-3 mx-auto px-0">
+                <div class="text-center my-3 mx-auto px-0">
                 <button type="button" class="btn btn-secondary float-left mr-2" id="show-previous-image"><i class="fa fa-arrow-left"></i>
                 </button>
 
