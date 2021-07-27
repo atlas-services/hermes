@@ -29,8 +29,8 @@ import '../../css/bootstrap/anime.css';
 /*
     js
  */
-import $ from 'jquery';
-const jQuery = $;
+// import $ from 'jquery';
+// const jQuery = $;
 import 'bootstrap';
 import 'accordion';
 import 'collapse';
@@ -44,7 +44,7 @@ import 'jquery.counterup';
 import '../../../commun/js/scroll';
 // import '../../../commun/js/scrollspy';
 import '../../../commun/js/chevron';
-import '../../../commun/js/menu';
+// import '../../../commun/js/menu';
 import '../../../commun/js/search';
 import '../../../commun/js/anime';
 import '../../../commun/js/copy';

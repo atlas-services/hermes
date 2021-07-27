@@ -1,5 +1,5 @@
 <!-- Section card -->
-<section id="{{ section.name }}" class="section_content pb-0  px-0">
+<section id="{{ section.name }}" class="section_content col-12 col-lg-{{ (section.templateWidth ?? card_container_width)|col_lg()  }}  pb-0  px-0">
     {% if('previsualidation_sheet' == app.request.get('_route')) %}
         {% set posts = section.getPrevisualisationPosts %}
     {% else %}
