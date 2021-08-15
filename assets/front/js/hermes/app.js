@@ -24,14 +24,15 @@ import '../../css/bootstrap/site-footer.css';
 import '../../css/bootstrap/video.css';
 import '../../css/bootstrap/gallery.css';
 import '../../css/bootstrap/anime.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import '../../css/bootstrap/todo.css';
 
 /*
     js
  */
-// import $ from 'jquery';
-// const jQuery = $;
-import 'bootstrap';
+import $ from 'jquery';
+const jQuery = $;
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'accordion';
 import 'collapse';
 import 'carousel';
