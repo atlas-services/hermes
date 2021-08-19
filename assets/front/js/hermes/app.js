@@ -30,22 +30,22 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 /*
     js
  */
-import $ from 'jquery';
-const jQuery = $;
+// import $ from 'jquery';
+// const jQuery = $;
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'accordion';
 import 'collapse';
 import 'carousel';
 import 'bootstrap-slider';
-import 'jquery.easing';
-import 'jquery-lazy';
+// import 'jquery.easing';
+// import 'jquery-lazy';
 import 'owl.carousel';
-import 'jquery-waypoints/waypoints.min';
-import 'jquery.counterup';
-import '../../../commun/js/scroll';
+// import 'jquery-waypoints/waypoints.min';
+// import 'jquery.counterup';
+// import '../../../commun/js/scroll';
 // import '../../../commun/js/scrollspy';
-import '../../../commun/js/chevron';
-// import '../../../commun/js/menu';
+import '../../../commun/js/js-chevron';
+import '../../../commun/js/js-menu'; // @todo
 import '../../../commun/js/search';
 import '../../../commun/js/anime';
 import '../../../commun/js/copy';
@@ -53,9 +53,9 @@ import '../bootstrap/modale';
 import '../bootstrap/wow';
 import '../bootstrap/videos';
 // import '../hermes/aos';
-import '../../../commun/js/lazy';
+// import '../../../commun/js/lazy';
 // import '../hermes/video';
 // import '../hermes/todo';
-import '../bootstrap/hammer.min';
-import '../bootstrap/carousel';
+// import '../bootstrap/hammer.min';
+// import '../bootstrap/carousel';
 

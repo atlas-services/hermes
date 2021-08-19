@@ -84,10 +84,12 @@ Install node modules
 
     yarn install  
       
-Start Server
+Start Server on a terminal
 
-    symfony:server:start  
+    symfony server:start  
        
-Start webpack
+Start webpack on a second terminal
 
-    yarn encore dev (--watch)
+    yarn encore dev --watch
+    or
+    yarn encore dev 

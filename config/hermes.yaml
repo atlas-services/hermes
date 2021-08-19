@@ -5,6 +5,7 @@ parameters:
   hermes_list_templates: '%env(APP_LIST_TEMPLATES)%'
   hermes_list_type_image: '%env(APP_LIST_TYPE_IMAGE)%'
   hermes_database_dir: '%env(DATABASE_URL)%'
+  hermes_database_config_dir: '%env(DATABASE_CONFIG_URL)%'
   hermes_path_content_image: '%env(APP_PATH_CONTENT_IMAGES)%'
   hermes_path_content_image_post: '%env(APP_PATH_CONTENT_IMAGES_POSTS)%'
   hermes_path_cache_image: '%env(APP_PATH_CACHE_IMAGES)%'

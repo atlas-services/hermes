@@ -75,11 +75,12 @@
                     {% if (sheet_slug == app.request.get('_route')) %}
                         {% set active = 'active' %}
                     {% endif %}
+                    {% set idDropdown =  dropdown ~ loop.index  %}
                     {% if('active' == active) %}
-                        <li class="nav-item px-2 mb-2 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ nav_bgcolor_active }};  "  >
+                        <li id="{{ idDropdown }}" class="nav-item px-2 mb-2 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ nav_bgcolor_active }};  "  >
                         {% set colorlink =  nav_color_active  %}
                     {% else %}
-                        <li class="nav-item px-2 mb-3 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}" >
+                        <li id="{{ idDropdown }}"  class="nav-item px-2 mb-3 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}" >
                         {% set colorlink =  nav_link_color  %}
                     {% endif %}
                         <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="remove-nav-link js-scroll {{ dropdowntoggle }}  " role="button"  data-bs-toggle="{{ dropdown }}"  aria-haspopup="true" aria-expanded="false"
