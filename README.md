@@ -93,3 +93,10 @@ Start webpack on a second terminal
     yarn encore dev --watch
     or
     yarn encore dev 
+
+Admin interface
+
+    http://127.0.0.1:8000/fr/admin/
+    Admin User :
+    Login : firstname.lastname@yopmail.com
+    Password : firstname

@@ -11,7 +11,7 @@
             {% else %}
                 {% set flag = 'app_fixed_flag' %}
             {% endif %}
-            <a class="mr-2" href="{{ path('change_locale', {'locale': locale}) }}"><img
+            <a class="mr-2 px-1" href="{{ path('change_locale', {'locale': locale}) }}"><img
                         src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
         {% endfor %}
         <div class="navbar-header ">
@@ -21,7 +21,7 @@
                 <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
             </button>
         </div>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse px-5 mx-5" id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
                 <ul class="h-rounded-lg-09 nav navbar-nav ml-auto"
                     style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">
