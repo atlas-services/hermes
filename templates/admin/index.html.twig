@@ -22,140 +22,88 @@
                 {{ 'info.begin'|trans()|raw }} <br/>
             </h5>
 
-            <div class="row col-lg-12 mx-auto">
-            <p class="col-lg-12 text-center">
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample0" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_0'|trans()|raw }}</button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_1'|trans()|raw }}</button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_2'|trans()|raw }}</button>
-            </p>
-            </div>
-            <div class="row col-lg-12">
-                <div class="col-lg-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample0">
-                        <div class="card card-body">
-                            <p>{{ 'info.new_libelle_sheet_0'|trans()|raw }}</p>
-                            <p>{{ 'info.generate_step_p1'|trans()|raw }}  </p>
-                            <li class="list-unstyled">{{ 'info.generate_step_li1'|trans()|raw }} <a class="btn h-bg-success py-0 px-2 " href="{{ path('add_page', {'libre': 'Vin d\'honneur'}) }}"><i class="fa fa-plus-circle "></i> Vin-d-honneur</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li2'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Qui sommes-nous'}) }}"><i class="fa fa-plus-circle "></i> Qui sommes nous</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li3'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'La ruée vers l\'or'}) }}"><i class="fa fa-plus-circle "></i> Ruée vers l'or</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li4'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Le chat de Nazca'}) }}"><i class="fa fa-plus-circle "></i> Le chat de nazca</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li5'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Gallerie'}) }}"><i class="fa fa-plus-circle "></i> Gallerie</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li6'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Présentation'}) }}"><i class="fa fa-plus-circle "></i> Présentation</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li7'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Présentation-image-de-fond'}) }}"><i class="fa fa-plus-circle "></i> Présentation avec image de fond</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li8'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Fiche'}) }}"><i class="fa fa-plus-circle "></i> Fiche</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li9'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'One page 1'}) }}"><i class="fa fa-plus-circle "></i> One page 1</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li10'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'One page 2'}) }}"><i class="fa fa-plus-circle "></i> One page 2</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li11'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Cordonnerie'}) }}"><i class="fa fa-plus-circle "></i> Cordonnerie</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li12'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'bollystreet'}) }}"><i class="fa fa-plus-circle "></i> Bollystreet</a> </li>
+            <div class="row pt-5 pb-4">
+                <div class="col-md-4 "><img class="img-fluid pb-1 mx-auto d-block w-50" src="/images/hermes/template/ficheVetement.png" />
+                    <p class="mx-auto col-sm-6 col-md-10 col-lg-8"><a href="{{ path('add_page', {'libre': 'ficheVetement'}) }}" >Fiche Vêtement</a></p>
+                </div>
 
-                        </div>
-                    </div>
+                <div class="col-md-4 "><img class="img-fluid pb-1 mx-auto d-block w-50" src="/images/hermes/template/imageModal.png" />
+                    <p class="mx-auto col-sm-6 col-md-10 col-lg-8"><a href="{{ path('add_page', {'libre': 'imageModal'}) }}" >images Modal</a></p>
                 </div>
-                <div class="col-lg-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="card card-body">
-                            <p>{{ 'info.first_step_p1'|trans()|raw }}</p>
-                            <li class="list-unstyled">{{ 'info.first_step_li1'|trans()|raw }} <a href="{{ path('sheet_index') }}">"{{ 'global.menu_entete'|trans }}"</a></li>
-                            <li class="list-unstyled">{{ 'info.first_step_li2'|trans()|raw }} <a href="{{ path('sheet_new') }}">"{{ 'global.new'|trans }}"</a></li>
-                            <li class="list-unstyled">{{ 'info.first_step_li3'|trans()|raw }} <span class="h-bg-success text-white rounded h-font-size-1 p-2 "><i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i> {{ 'global.add_menu_post'|trans }}</span></li>
-                            <p class="mt-2">{{ 'info.first_step_p2'|trans()|raw }}</p>
-                            <p>{{ 'info.first_step_next'|trans()|raw }} <span class="h-bg-success text-white rounded h-font-size-1 p-2">{{ 'info.new_libelle_sheet_2'|trans()|raw }}</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample2">
-                        <div class="card card-body">
-                            <p>{{ 'info.second_step_p1'|trans()|raw }}</p>
-                            <li class="list-unstyled">{{ 'info.second_step_li1'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li2'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li3'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li4'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li5'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li6'|trans()|raw }}</li>
-                            <p class="mt-2">{{ 'info.second_step_p2'|trans()|raw }}</p>
-                          </div>
-                    </div>
+
+                <div class="col-md-4 "><img class="img-fluid pb-1 mx-auto d-block w-50" src="/images/hermes/template/vin-d-honneur.png" />
+                    <p class="mx-auto col-sm-6 col-md-10 col-lg-8"><a href="{{ path('add_page', {'libre': 'Vin d\'honneur'}) }}" >Vin d'honneur</a></p>
                 </div>
             </div>
 
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item">#}
-{#                    {% include '/admin/info/index.html.twig' %}#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('sheet_new') }}"> {{ 'global.new_rapid_sheet'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <h5 class="mt-lg-4 text-secondary lead">#}
-{#                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"#}
-{#                     xmlns="http://www.w3.org/2000/svg">#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                </svg>#}
-{#                {{ 'global.update_libelle'|trans()|raw }}#}
-{#            </h5>#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item">#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info" href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info" href="{{ path('section_index') }}"> {{ 'section.list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <h5 class="mt-lg-4 text-secondary lead">#}
-{#                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"#}
-{#                     xmlns="http://www.w3.org/2000/svg">#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                </svg>#}
-{#                {{ 'global.config_site'|trans()|raw }}#}
-{#            </h5>#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item">#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'form'}) }}"> {{ 'config.affiche_list_formulaire'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                </li>#}
-{#            </ul>#}
+            <div class="row pt-5 pb-4">
+                <div class="col-md-4"><img class="img-fluid pb-1 mx-auto d-block w-50" src="/images/hermes/template/chatNazca.png" />
+                    <p class="mx-auto col-sm-6 col-md-10 col-lg-8"><a href="{{ path('add_page', {'libre': 'Le chat de Nazca'}) }}">Chat de Nazca</a></p>
+                </div>
+
+            </div>
+
+
+{#            <div class="row col-lg-12 mx-auto">#}
+{#                <p class="col-lg-12 text-center">#}
+{#                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample0" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_0'|trans()|raw }}</button>#}
+{#                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_1'|trans()|raw }}</button>#}
+{#                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_2'|trans()|raw }}</button>#}
+{#                </p>#}
+{#            </div>#}
+{#            <div class="row col-lg-12">#}
+{#                <div class="col-lg-12">#}
+{#                    <div class="collapse multi-collapse" id="multiCollapseExample0">#}
+{#                        <div class="card card-body">#}
+{#                            <p>{{ 'info.new_libelle_sheet_0'|trans()|raw }}</p>#}
+{#                            <p>{{ 'info.generate_step_p1'|trans()|raw }}  </p>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li1'|trans()|raw }} <a class="btn h-bg-success py-0 px-2 " href="{{ path('add_page', {'libre': 'FicheVetement'}) }}"><i class="fa fa-plus-circle "></i>Fiche Vêtement</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li1'|trans()|raw }} <a class="btn h-bg-success py-0 px-2 " href="{{ path('add_page', {'libre': 'Vin d\'honneur'}) }}"><i class="fa fa-plus-circle "></i> Vin-d-honneur</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li2'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Qui sommes-nous'}) }}"><i class="fa fa-plus-circle "></i> Qui sommes nous</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li3'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'La ruée vers l\'or'}) }}"><i class="fa fa-plus-circle "></i> Ruée vers l'or</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li4'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Le chat de Nazca'}) }}"><i class="fa fa-plus-circle "></i> Le chat de nazca</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li5'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Gallerie'}) }}"><i class="fa fa-plus-circle "></i> Gallerie</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li6'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Présentation'}) }}"><i class="fa fa-plus-circle "></i> Présentation</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li7'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Présentation-image-de-fond'}) }}"><i class="fa fa-plus-circle "></i> Présentation avec image de fond</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li8'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Fiche'}) }}"><i class="fa fa-plus-circle "></i> Fiche</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li9'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'One page 1'}) }}"><i class="fa fa-plus-circle "></i> One page 1</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li10'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'One page 2'}) }}"><i class="fa fa-plus-circle "></i> One page 2</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li11'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Cordonnerie'}) }}"><i class="fa fa-plus-circle "></i> Cordonnerie</a> </li>#}
+{#                            <li class="list-unstyled">{{ 'info.generate_step_li12'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'bollystreet'}) }}"><i class="fa fa-plus-circle "></i> Bollystreet</a> </li>#}
+
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-12">#}
+{#                    <div class="collapse multi-collapse" id="multiCollapseExample1">#}
+{#                        <div class="card card-body">#}
+{#                            <p>{{ 'info.first_step_p1'|trans()|raw }}</p>#}
+{#                            <li class="list-unstyled">{{ 'info.first_step_li1'|trans()|raw }} <a href="{{ path('sheet_index') }}">"{{ 'global.menu_entete'|trans }}"</a></li>#}
+{#                            <li class="list-unstyled">{{ 'info.first_step_li2'|trans()|raw }} <a href="{{ path('sheet_new') }}">"{{ 'global.new'|trans }}"</a></li>#}
+{#                            <li class="list-unstyled">{{ 'info.first_step_li3'|trans()|raw }} <span class="h-bg-success text-white rounded h-font-size-1 p-2 "><i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i> {{ 'global.add_menu_post'|trans }}</span></li>#}
+{#                            <p class="mt-2">{{ 'info.first_step_p2'|trans()|raw }}</p>#}
+{#                            <p>{{ 'info.first_step_next'|trans()|raw }} <span class="h-bg-success text-white rounded h-font-size-1 p-2">{{ 'info.new_libelle_sheet_2'|trans()|raw }}</span></p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-12">#}
+{#                    <div class="collapse multi-collapse" id="multiCollapseExample2">#}
+{#                        <div class="card card-body">#}
+{#                            <p>{{ 'info.second_step_p1'|trans()|raw }}</p>#}
+{#                            <li class="list-unstyled">{{ 'info.second_step_li1'|trans()|raw }}</li>#}
+{#                            <li class="list-unstyled">{{ 'info.second_step_li2'|trans()|raw }}</li>#}
+{#                            <li class="list-unstyled">{{ 'info.second_step_li3'|trans()|raw }}</li>#}
+{#                            <li class="list-unstyled">{{ 'info.second_step_li4'|trans()|raw }}</li>#}
+{#                            <li class="list-unstyled">{{ 'info.second_step_li5'|trans()|raw }}</li>#}
+{#                            <li class="list-unstyled">{{ 'info.second_step_li6'|trans()|raw }}</li>#}
+{#                            <p class="mt-2">{{ 'info.second_step_p2'|trans()|raw }}</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+
         </div>
     </section>
 
 {% endblock content %}
-
-
