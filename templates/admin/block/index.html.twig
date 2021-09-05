@@ -16,8 +16,8 @@
         {% for block in blocks|sort((a, b) => a.name <=> b.name) %}
             <tr class="{{ block.id }}">
                 <td>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="block-active custom-control-input" id="{{ block.id }}"  {{ block.isActive ? 'checked': '' }} >
+                    <div class="form-check form-switch form-switch-sm">
+                        <input type="checkbox" class="block-active form-check-input" id="{{ block.id }}"  {{ block.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ block.id }}"></label>
                     </div>
                 </td>
@@ -25,7 +25,7 @@
                 <td>
                     {%  for blockpost in block.blockposts|sort((a, b) => a.position <=> b.position) %}
                         <li class="list-unstyled">
-                            <a class="text-warning h5" href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ blockpost.name }}</a>
+                            <a class=" hms-color1 h5" href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ blockpost.name }}</a>
                         </li>
                     {%  endfor %}
                 </td>

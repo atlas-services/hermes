@@ -3,7 +3,7 @@
 {% block title %}{{ 'post.list'|trans() }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'post.list'|trans() }}</h1>
+    <h1 class="text-secondary">{{ 'post.list'|trans() }}</h1>
 
     <table class="table">
         <thead>
@@ -25,8 +25,8 @@
 {#        {% for post in posts|sort((a, b) => a.position <=> b.position)  %}#}
             <tr>
                 <td>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="post-active custom-control-input" id="{{ post.id }}"  {{ post.isActive ? 'checked': '' }} >
+                    <div class="form-check form-switch form-switch-sm">
+                        <input type="checkbox" class="post-active form-check-input" id="{{ post.id }}"  {{ post.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ post.id }}"></label>
                     </div>
                 </td>

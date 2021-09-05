@@ -4,7 +4,7 @@
 
 {% block content %}
     <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1>{{ 'user.new'|trans }}</h1>
+    <h1 class="text-secondary">{{ 'user.new'|trans }}</h1>
 
     {{ include('admin/user/_form.html.twig') }}
 

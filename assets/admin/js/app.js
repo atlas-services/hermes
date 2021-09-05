@@ -3,7 +3,7 @@
  */
 import '../../commun/css/base.css';
 import '../../commun/css/anime.css';
-import '../css/navbar.css';
+// import '../css/navbar.css';
 import '../css/portfolio.css';
 import '../css/app.css';
 /*

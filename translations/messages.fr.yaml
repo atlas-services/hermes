@@ -73,7 +73,7 @@ global:
   menu_entete: Menus
   actions: Actions
   show: Voir
-  preview: <i class="fa fa-2x fa-eye" aria-hidden="true"></i>
+  preview: <i class="hms-color1 fa fa-2x fa-eye" aria-hidden="true"></i>
   edit: <i class="fa fa-edit"></i>
   new: Créer
   delete: <i class="fa fa-trash"></i>
@@ -136,13 +136,13 @@ global:
     category: Catégorie
 
 action:
-  edit: <i class="fa fa-2x fa-edit"></i>
-  config: <i class="fa fa-2x fa-cogs"></i>
-  add: <i class="fa fa-2x fa-plus-circle"></i>
-  add_diff: <i class="fa fa-2x fa-plus-circle" style="color:green"></i>
-  show: <i class="fa fa-2x fa-show"></i>
+  edit: <i class="hms-color1 fa fa-2x fa-edit"></i>
+  config: <i class="hms-color1 fa fa-2x fa-cogs"></i>
+  add: <i class="hms-color1 fa fa-2x fa-plus-circle"></i>
+  add_diff: <i class="hms-color1 fa fa-2x fa-plus-circle" ></i>
+  show: <i class="hms-color1 fa fa-2x fa-show"></i>
   delete: <i class="fa fa-3x fa-trash"></i>
-  preview: <i class="fa fa-2x fa-eye" aria-hidden="true"></i>
+  preview: <i class="hms-color1 fa fa-2x fa-eye" aria-hidden="true"></i>
 
 
 

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h1>{{ 'sheet.list'|trans() }}</h1>
+    <h1 class="text-secondary">{{ 'sheet.list'|trans() }}</h1>
 
     <table class="table">
         <thead>
@@ -19,8 +19,8 @@
             {% if(sheet.name not in config.value ) %}
                 <tr>
                     <td>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="sheet-active custom-control-input" id="{{ sheet.id }}"  {{ sheet.isActive ? 'checked': '' }} >
+                        <div class="form-check form-switch form-switch-sm">
+                            <input type="checkbox" class="sheet-active form-check-input" id="{{ sheet.id }}"  {{ sheet.isActive ? 'checked': '' }} >
                             <label class="custom-control-label" for="{{ sheet.id }}"></label>
                         </div>
                     </td>

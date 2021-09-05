@@ -1,9 +1,10 @@
 <!-- Navigation -->
 {#<nav class="navbar navbar-expand-lg navbar-dark ftco-navbar-light fixed-top navbar-shrink" id="mainNav">#}
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg fixed-top py-0 bg-white shadow-lg" id="mainNav">
     <div class="container">
         {% if is_granted('ROLE_ADMIN') %}
-            <a class="navbar-brand  " href="{{ path('admin_index') }}">{{ 'global.admin'|trans() }}</a>
+            <img class="h-25" src="{{ asset('img/hermes.png') }}" alt="admin Hermes">
+            <a class="h1 hms-color1 text-decoration-none  h-bay-jamjuree px-md-4" href="{{ path('admin_index') }}">{{ 'global.admin'|trans() }}</a>
         {% endif %}
         {% for locale in locales %}
             {% if locale == app.request.locale %}
@@ -23,49 +24,50 @@
         </div>
         <div class="collapse navbar-collapse px-5 mx-5" id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
-                <ul class="h-rounded-lg-09 nav navbar-nav ml-auto"
-                    style="background-color: {{ config.nav_li_bgcolor.value ?? '#225577' }}">
-                    <li class=" nav-item dropdown ">
+                <ul class="nav navbar-nav mx-auto">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li class="dropdown px-md-4">
                         <a id="{{ 'global.blocks'|trans() }}"
-                           class="nav-link  page-scroll dropdown-toggle " role="button"
+                           class=" hms-color1 text-decoration-none pr-md-4 page-scroll dropdown-toggle " role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.blocks'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"
+                        <div class="dropdown-menu w-100 hms-bg-color1" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"
                              aria-expanded="false">
-                            <p><a class="text-info mx-3 "
+                            <p><a class="link-light text-decoration-none mx-3 "
                                   href="{{ path('block_index') }}"> {{ 'block.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('blockpost_index') }}"> {{ 'blockpost.affiche_list'|trans()|raw }}</a></p>
                         </div>
                     </li>
-                    <li class=" nav-item dropdown ">
+                    {% endif %}
+                    <li class="dropdown px-md-4">
                         <a id="{{ 'global.dashboard'|trans() }}"
-                           class="nav-link  page-scroll dropdown-toggle " role="button"
+                           class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.dashboard'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
+                        <div class="dropdown-menu w-100 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
                              aria-expanded="false">
-                            <p><a class="text-info mx-3 "
+                            <p><a class="link-light text-decoration-none mx-3 "
                                   href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info  mx-3"
+                            <p><a class="link-light text-decoration-none  mx-3"
                                   href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <p><a class="text-info mx-3"
+                                <p><a class="link-light text-decoration-none mx-3"
                                       href="{{ path('remote_index') }}"> {{ 'remote.affiche_list'|trans()|raw }}</a></p>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
 {#                                {% if(config.value is defined) %}#}
 {#                                    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}#}
                                         <p>
-                                            <a class="text-info mx-3" href="{{ path('temoignage_index') }}">
+                                            <a class="link-light text-decoration-none mx-3" href="{{ path('temoignage_index') }}">
                                                 {{ 'temoignage.affiche_list'|trans()|raw }}
                                             </a>
                                         </p>
@@ -75,69 +77,75 @@
                         </div>
                     </li>
 
-                    <li class=" nav-item dropdown">
+                    <li class="dropdown px-md-4">
                         <a id="{{ 'config.label'|trans() }}"
-                           class="nav-link  page-scroll dropdown-toggle " role="button"
+                           class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'config.list'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu bg-dark " style="min-width: 17rem;"
+                        <div class="dropdown-menu w-100 hms-bg-color1" style="min-width: 17rem;"
                              aria-labelledby="{{ 'global.dashboard'|trans()|raw }}" aria-expanded="false">
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'contact'}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'folio'}) }}"> {{ 'config.affiche_list_folio'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'carousel'}) }}"> {{ 'config.affiche_list_carousel'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'modale'}) }}"> {{ 'config.affiche_list_modale'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'card'}) }}"> {{ 'config.affiche_list_card'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'network'}) }}"> {{ 'config.affiche_list_network'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>
                             </p>
-                            <p><a class="text-info mx-3"
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'form'}) }}"> {{ 'config.affiche_list_formulaire'|trans()|raw }}</a>
                             </p>
                         </div>
                     </li>
-                    <li class=" nav-item dropdown">
-                        <a id="{{ 'User'|trans() }}" class="nav-link  page-scroll dropdown-toggle "
+                    <li class="dropdown px-md-4">
+                        <a id="{{ 'User'|trans() }}" class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle "
                            role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
                         </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
-                            <a class="page-scroll nav-link "
+                        <div class="dropdown-menu w-100 hms-bg-color1" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
+                            <p>
+                            <a class="link-light text-decoration-none mx-3 "
                                href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}} </a>
+                            </p>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <a class="text-info mx-3"
+                            <p>
+                            <a class="link-light text-decoration-none mx-3"
                                    href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a>
+                            </p>
                             {% endif %}
-                            <a class="page-scroll nav-link "
+                            <p>
+                            <a class="page-scroll link-light text-decoration-none mx-3 "
                                href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
+                            </p>
                         </div>
                     </li>
                 </ul>
@@ -146,14 +154,14 @@
     </div>
     <div id="chevron_down_div">
         <h3 class="section-subheading text-right">
-            <a id="chevron_down" class="js-scroll-trigger" href="#section_bottom">
+            <a id="chevron_down" class="js-scroll-trigger hms-color1" href="#section_bottom">
                 <i class="fa fa-chevron-circle-down"></i>
             </a>
         </h3>
     </div>
     <div id="chevron_up_div" style="display:none">
         <h3 class="section-subheading text-muted">
-            <a id="chevron_up" class="js-scroll-trigger" href="#section_top">
+            <a id="chevron_up" class="js-scroll-trigger hms-color1" href="#section_top">
                 <i class="fa fa-chevron-circle-up"></i></a>
         </h3>
     </div>

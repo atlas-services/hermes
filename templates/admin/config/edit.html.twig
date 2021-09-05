@@ -4,7 +4,7 @@
 
 {% block content %}
     <a href="{{ path('config_index', {'type': config.type ?? 'undefined'}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1 class="text-success">{{ 'config.label'|trans() }}</h1>
+    <h1 class="text-secondary">{{ 'config.label'|trans() }}</h1>
 
     {{ include('admin/config/_form.html.twig', {'button_label': 'global.update'|trans()}) }}
     {% if is_granted('ROLE_SUPER_ADMIN') %}

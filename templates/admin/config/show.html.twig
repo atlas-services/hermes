@@ -4,7 +4,7 @@
 
 {% block content %}
     <a href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1>{{ 'global.show'|trans() }} {{ config.value }}</h1>
+    <h1 class="text-secondary">{{ 'global.show'|trans() }} {{ config.value }}</h1>
 
     <table class="table">
         <tbody>

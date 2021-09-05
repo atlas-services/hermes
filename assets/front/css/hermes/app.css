@@ -1,4 +1,6 @@
 :root {
+    --color-hermes1: #89c3a5;
+    --color-hermes2: #e18611;
     --color-white: #fff;
     --color-grey1: #eee;
     --color-grey2: #d3d3d3;
@@ -24,7 +26,7 @@
     /*
     vert/noir
      */
-    --color-base-chevron: var(--color-yellow);
+    --color-base-chevron: var(--color-hermes1);
     --color-base1-front: var(--color-green4);
     --color-base1-back: var(--color-black);
     /*
@@ -83,10 +85,10 @@ body {
 }
 
 a {
-    color: var(--color-yellow);
+    color: var(--color-hermes1);
 }
 a:hover {
-    color: var(--color-white);
+    color: var(--color-hermes2);
     text-decoration: none;
 }
 

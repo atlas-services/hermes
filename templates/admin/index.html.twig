@@ -1,14 +1,14 @@
 {% extends '/admin/base.html.twig' %}
 
 {% block content %}
-    <section id="admin">
-        <p class="text-secondary lead">
+    <section class="mt-md-1">
+        <p class="text-secondary lead mt-md-3">
             {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
         </p>
         <p class="text-secondary lead">
             {{ 'info.admin_presentation'|trans()|raw }}
         </p>
-        <div class="mt-lg-3">
+        <div class="mt-lg-2">
             <h5 class="mt-lg-4 text-secondary lead">
                 <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">

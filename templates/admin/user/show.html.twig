@@ -4,7 +4,7 @@
 
 {% block content %}
     <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1>{{ 'user.show'|trans() }} {{ user.name }}</h1>
+    <h1 class="text-secondary">{{ 'user.show'|trans() }} {{ user.name }}</h1>
 
     <table class="table">
         <tbody>
