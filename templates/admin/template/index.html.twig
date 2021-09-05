@@ -25,7 +25,7 @@
                 <td>{{ template.name }}</td>
                 <td>{{ template.summary }}</td>
                 <td>
-                    <a href="{{ path('template_edit', {'id': template.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('template_edit', {'id': template.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}

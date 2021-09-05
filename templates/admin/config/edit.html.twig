@@ -3,7 +3,7 @@
 {% block title %} {{ 'global.edit'|trans()|raw }}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('config_index', {'type': config.type ?? 'undefined'}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('config_index', {'type': config.type ?? 'undefined'}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">{{ 'config.label'|trans() }}</h1>
 
     {{ include('admin/config/_form.html.twig', {'button_label': 'global.update'|trans()}) }}
@@ -11,6 +11,6 @@
         {{ include('admin/config/_delete_form.html.twig') }}
     {% endif %}
 
-    <a href="{{ path('config_index', {'type': config.type ?? 'undefined'}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('config_index', {'type': config.type ?? 'undefined'}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
 {% endblock %}

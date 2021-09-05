@@ -28,7 +28,7 @@
                 <td>{{ blockpost.name }}</td>
                 <td>{{ blockpost.position }}</td>
                 <td>
-                    <a href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}

@@ -22,7 +22,7 @@
                 <td>{{ user.email }}</td>
                 <td>{% for role in user.roles%} {{ role }} <br/>  {% endfor %}</td>
                 <td>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('user_edit', {'id': user.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}

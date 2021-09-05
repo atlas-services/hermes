@@ -3,7 +3,7 @@
 {% block title %}{{ 'global.show'|trans() }}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">{{ 'global.show'|trans() }} {{ config.value }}</h1>
 
     <table class="table">
@@ -21,9 +21,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('config_index', {'type': config.type}) }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
-    <a href="{{ path('config_edit', {'id': config.id}) }}">edit</a>
+    <a class="hms-color1" href="{{ path('config_edit', {'id': config.id}) }}">edit</a>
 
     {{ include('admin/config/_delete_form.html.twig') }}
 {% endblock %}

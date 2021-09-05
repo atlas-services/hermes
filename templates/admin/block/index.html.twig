@@ -30,7 +30,7 @@
                     {%  endfor %}
                 </td>
                 <td>
-                    <a href="{{ path('block_edit', {'block': block.id  }) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('block_edit', {'block': block.id  }) }}">{{ 'action.edit'|trans()|raw }}</a>
                   </td>
             </tr>
         {% else %}

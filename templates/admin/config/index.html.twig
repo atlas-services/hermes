@@ -38,8 +38,8 @@
                         <img style="max-height: 100px;" src="{{ asset(vich_uploader_asset(config, 'imageFile')) }}" /></td>
                     {% endif %}
                     <td>
-                        <a href="{{ path('config_show', {'id': config.id}) }}">{{ 'action.show'|trans()|raw }}</a>
-                        <a href="{{ path('config_edit', {'id': config.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                        <a class="hms-color1" href="{{ path('config_show', {'id': config.id}) }}">{{ 'action.show'|trans()|raw }}</a>
+                        <a class="hms-color1" href="{{ path('config_edit', {'id': config.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                     </td>
                 </tr>
         {% else %}
