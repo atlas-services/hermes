@@ -50,6 +50,6 @@
         </tbody>
     </table>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <a  class="btn h-bg-success text-white" href="{{ path('config_new') }}">{{ 'global.new'|trans() }}</a>
+        <a  class="btn btn-outline-secondary hms-bg-color1 text-white" href="{{ path('config_new') }}">{{ 'global.new'|trans() }}</a>
     {% endif %}
 {% endblock %}

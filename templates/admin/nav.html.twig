@@ -33,7 +33,7 @@
                            href="#">
                             {{ 'global.blocks'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu w-100 hms-bg-color1" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"
+                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"
                              aria-expanded="false">
                             <p><a class="link-light text-decoration-none mx-3 "
                                   href="{{ path('block_index') }}"> {{ 'block.affiche_list'|trans()|raw }}</a></p>
@@ -49,7 +49,7 @@
                            href="#">
                             {{ 'global.dashboard'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu w-100 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
+                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
                              aria-expanded="false">
                             <p><a class="link-light text-decoration-none mx-3 "
                                   href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
@@ -84,7 +84,7 @@
                            href="#">
                             {{ 'config.list'|trans()|raw }}
                         </a>
-                        <div class="dropdown-menu w-100 hms-bg-color1" style="min-width: 17rem;"
+                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" style="min-width: 17rem;"
                              aria-labelledby="{{ 'global.dashboard'|trans()|raw }}" aria-expanded="false">
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
@@ -131,7 +131,7 @@
                            href="#">
                             {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
                         </a>
-                        <div class="dropdown-menu w-100 hms-bg-color1" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
+                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
                             <p>
                             <a class="link-light text-decoration-none mx-3 "
                                href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}} </a>

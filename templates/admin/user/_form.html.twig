@@ -8,6 +8,6 @@
     {% if form.roles is defined %}
         {{ form_row(form.roles) }}
     {% endif %}
-<button class="btn btn-primary mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ 'global.update'|trans() }} </button>
+<button class="btn btn-outline-secondary hms-bg-color1 mt-4 col-12 col-lg-2" type="submit"><i class="fa fa-save"></i> {{ 'global.update'|trans() }} </button>
 {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

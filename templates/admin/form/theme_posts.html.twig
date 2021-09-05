@@ -24,7 +24,7 @@
 {% block form_label -%}
     {{- parent() -}}
     {% if 'content' == form.vars.name   %}
-            <a type="button" class="btn h-bg-success text-white " href="http://hermes.atlas-services.fr/hermes/guide-utilisateur#template_libre" target="_blank" >
+            <a type="button" class="btn btn-outline-secondary hms-bg-color1 text-white " href="http://hermes.atlas-services.fr/hermes/guide-utilisateur#template_libre" target="_blank" >
                 <h6><i class="fa fa-info-circle"></i> {{ 'info.guide'|trans() }}
                 </h6>
             </a>
@@ -60,7 +60,7 @@
 
 
 {% block button_widget -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ml-3 btn mt-4 col-12 col-lg-4')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' btn btn-outline-secondary hms-bg-color1 ml-3 mt-4 col-12 col-lg-2')|trim}) %}
     {% if label is empty -%}
         {%- if label_format is not empty -%}
             {% set label = label_format|replace({
