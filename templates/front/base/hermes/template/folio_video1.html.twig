@@ -1,7 +1,7 @@
 <!-- Portfolio Grid -->
 {#<section id="{{ section.name ~ section.template.name }}" class="portfolio bg-light page-section" >#}
 {% set max_length = section.posts|max_post_length %}
-<section id="portfolio" class="section_content pb-0  mx-auto px-0" style="background-color:{{ content_bgcolor }}">
+<section id="portfolio" class="pb-0  mx-auto px-0" style="background-color:{{ content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0" >
         {% if(section.remote is null) %}
             <div id="folio"  class="row ">
