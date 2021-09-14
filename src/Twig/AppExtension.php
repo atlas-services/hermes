@@ -15,9 +15,45 @@ class AppExtension extends AbstractExtension
             new TwigFilter('max_post_length', [$this, 'maxPostLength']),
             new TwigFilter('space_length', [$this, 'spaceLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
+            new TwigFilter('nb_col', [$this, 'nbCol']),
             new TwigFilter('col_nb_char', [$this, 'colNbChar']),
             new TwigFilter('get_class', 'get_class'),
         ];
+    }
+
+    public function nbCol($nbCol)
+    {
+        $col= 12;
+        switch ($nbCol) {
+            case 1 :
+                $col = 12;
+                break;
+            case 2 :
+                $col = 6;
+                break;
+            case 3 :
+                $col = 4;
+                break;
+            case 4 :
+                $col = 3;
+                break;
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                $col = 2;
+                break;
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+                $col = 1;
+                break;
+
+           }
+
+        return $col;
+
     }
 
     public function listLength($posts)
