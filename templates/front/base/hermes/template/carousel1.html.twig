@@ -29,7 +29,7 @@
                     {% endif %}
                     <div class="carousel-item  col-12 px-0 {{ active }}">
                         {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                        <img style="max-height: 850px;" class="d-block w-100" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                        <img class="d-block w-100" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                              alt="{{ post.name }}">
                         {% endif %}
                         <div class="carousel-caption">

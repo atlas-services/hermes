@@ -5,7 +5,7 @@
 {%  endif %}
 <section id="portfolio" class="pb-0  mx-auto" style="background-color:{{ content_bgcolor }}">
     <div class="container col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0">
-        <div class="row mx-auto" id="folio">
+        <div class="row mx-auto pb-2 pb-lg-5" id="folio">
             {% if(section.remote is null) %}
                 <div id="staggering" class="{{ staggering_px ?? '' }}">
                     {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
@@ -30,40 +30,6 @@
                                      <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
                                         <span class="staggering">
                                             <img class="stagge"   src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"/>
-                                        </span>
-                                    </a>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
-            {% if(section.remote is not null) %}
-                <div id="staggering"  class="{{ staggering_px ?? '' }} mx-lg-0 mx-auto px-lg-0 px-2" >
-                    {% for img, image in  section.remote.images %}
-                        {% if image is not null %}
-                            {% if( section.template2 == '') %}
-                                <span class="staggering">
-                                        <img class="d-none d-sm-block stagge" style="width: 300px;height:200px;object-fit:cover"   src="{{ image }}" />
-                                        <img class="d-block d-sm-none stagge mx-auto"   src="{{ image }}" />
-                                </span>
-                            {% else %}
-                                {% if section.template2.code in ['modale1', 'modale3' ] %}
-                                    <!-- Modale1  -->
-                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-bs-toggle="modal"
-                                       data-image ="{{ image }}"
-                                       data-bs-target="#image-gallery">
-                                        <span class="staggering">
-                                            <img class="d-none d-sm-block stagge"  style="width: 298px;height:200px;object-fit:cover"  src="{{ image }}"/>
-                                            <img class="d-block d-sm-none stagge mx-auto"   src="{{ image }}"/>
-                                        </span>
-                                    </a>
-                                {% endif %}
-                                {% if( 'modale2' ==  section.template2.code) %}
-                                    <!-- Modale2  -->
-                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link  mx-0 px-0" data-bs-toggle="modal" href="#portfolioModal{{ img }}">
-                                        <span class="staggering">
-                                            <img class="stagge" style="width: 300px;height:200px;object-fit:cover" src="{{ image }}"/>
                                         </span>
                                     </a>
                                 {% endif %}
