@@ -1,14 +1,11 @@
 <!-- Portfolio Grid -->
-{% set staggering_px = 'pl-0' %}
-{% if(40 == section.templateWidth) %}
-    {% set staggering_px = 'pl-5 ml-5' %}
-{%  endif %}
+
 <section id="portfolio" class="pb-0  mx-auto" style="background-color:{{ content_bgcolor }}">
-    <div class="container col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0">
+    <div class="container col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}">
         <div class="row mx-auto pb-2 pb-lg-5" id="folio">
-            {% if(section.remote is null) %}
-                <div id="staggering" class="{{ staggering_px ?? '' }}">
+                <div id="staggering" class="{{ staggering_px ?? '' }}  px-2">
                     {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+                    <div class="col-md-{{ section.templateNbCol|nb_col }} col-sm-{{ section.templateNbCol|nb_col }} col-12" >
                         {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                             {% if( section.template2 == '') %}
                                 <span class="staggering">
@@ -35,9 +32,9 @@
                                 {% endif %}
                             {% endif %}
                         {% endif %}
+                        </div>
                     {% endfor %}
                 </div>
-            {% endif %}
         </div>
     </div>
 </section>
