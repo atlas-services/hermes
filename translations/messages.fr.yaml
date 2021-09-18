@@ -14,9 +14,14 @@ form:
     delete: Supprimer
 
 info:
-  admin_presentation: Afin d'enrichir votre site, voici les différents liens qui vous permettront de
-    créer des pages rapidement, puis de gérer plus finement les menus, les sous-menus et les contenus que vous avez créés.
-  begin: Pour bien débuter
+  admin_presentation1: 'Hermes vous permet de créer toutes sortes de pages responsives, uniquement à partir de ses 2 types de templates et de sa configuration: '
+  admin_sous_presentation11: 'Les templates de type "Libre" vous permettent de créer des contenus comme vous le souhaitez.'
+  admin_sous_presentation12: 'Les templates de type "Liste" sont particulièrement adaptés pour afficher vos listes d''images, d''articles, de livres, de concerts... : les affichges correspondants seront au choix, des portfolios, des carousels ou des cartes.'
+  admin_sous_presentation13: 'La configuration vous permet de modifier l''aspect de vos pages, la largeur du contenu, les couleurs ou image de fond...'
+  begin1: 'Bien entendu, la plupart du temps, vos pages seront une combinaison et/ou une succession des 2 types de templates.'
+  begin2: 'Hermes étant basé sur Bootstrap, vous pourrez aussi créer vos propres templates de type "Libre" et les utiliser ici'
+  begin3: 'Avant de commencer, ci-dessous un aperçu des templates "Libre" proposés par Hermes.'
+  begin4: 'Ils vous permettront de créer rapidement des pages afin de ne pas partir d''une page blanche'
   guide: Guide utilisateur
   new_rapid_post: Nouveau contenu
   new_rapid_sheet: <i class="fa fa-plus"></i> Nouvelles pages
