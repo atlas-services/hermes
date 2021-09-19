@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Sheet;
 use App\Form\Admin\SheetType;
+use App\Form\Admin\Libre\SheetLibreType;
 use App\Repository\SheetRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,6 +72,32 @@ class SheetController extends AbstractController
         }
 
         return $this->render('admin/sheet/new.html.twig', [
+            'sheet' => $sheet,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/nouvelle-page_libre", name="sheet_new_libre", methods={"GET","POST"})
+     */
+    public function newLibre(Request $request,SheetRepository $sheetRepository): Response
+    {
+        $position_sheet = $sheetRepository->getMaxPosition();
+        $sheet = new Sheet();
+        $sheet->setPosition($position_sheet);
+        $form = $this->createForm(SheetLibreType::class, $sheet,['saveLibre' => true]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($sheet);
+            $entityManager->flush();
+            if ($form->get('saveLibre')->isClicked()) {
+                return $this->redirectToRoute('menu_section_post_new_sheet_libre', ['sheet'=> $sheet->getSlug()]);
+            }
+        }
+
+        return $this->render('admin/sheet/new_libre.html.twig', [
             'sheet' => $sheet,
             'form' => $form->createView(),
         ]);

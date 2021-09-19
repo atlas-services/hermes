@@ -22,7 +22,7 @@
                 <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
             </button>
         </div>
-        <div class="collapse navbar-collapse px-5 mx-5" id="navbarResponsive">
+        <div class="collapse navbar-collapse px-3 " id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
                 <ul class="nav navbar-nav mx-auto">
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -42,6 +42,19 @@
                         </div>
                     </li>
                     {% endif %}
+                    <li class="dropdown px-md-4">
+                        <a id="{{ 'global.speed_dashboard'|trans() }}"
+                           class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           href="#">
+                            {{ 'global.speed_dashboard'|trans()|raw }}
+                        </a>
+                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
+                             aria-expanded="false">
+                            <p><a class="link-light text-decoration-none mx-3 "
+                                  href="{{ path('sheet_new_libre') }}"> {{ 'global.new_post_libre'|trans()|raw }}</a></p>
+                        </div>
+                    </li>
                     <li class="dropdown px-md-4">
                         <a id="{{ 'global.dashboard'|trans() }}"
                            class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
