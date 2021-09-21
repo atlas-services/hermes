@@ -16,7 +16,7 @@ form:
 info:
   admin_presentation1: 'Hermes vous permet de créer toutes sortes de pages responsives, uniquement à partir de ses 2 types de templates et de sa configuration: '
   admin_sous_presentation11: 'Les templates de type "Libre" vous permettent de créer des contenus comme vous le souhaitez.'
-  admin_sous_presentation12: 'Les templates de type "Liste" sont particulièrement adaptés pour afficher vos listes d''images, d''articles, de livres, de concerts... : les affichges correspondants seront au choix, des portfolios, des carousels ou des cartes.'
+  admin_sous_presentation12: 'Les templates de type "Liste" sont particulièrement adaptés pour afficher vos listes d''images, d''articles, de livres, de concerts... : les affichages correspondants seront au choix, des portfolios, des carousels ou des cartes.'
   admin_sous_presentation13: 'La configuration vous permet de modifier l''aspect de vos pages, la largeur du contenu, les couleurs ou image de fond...'
   begin1: 'Bien entendu, la plupart du temps, vos pages seront une combinaison et/ou une succession des 2 types de templates.'
   begin2: 'Hermes étant basé sur Bootstrap, vous pourrez aussi créer vos propres templates de type "Libre" et les utiliser ici'
@@ -26,20 +26,6 @@ info:
   new_rapid_post: Nouveau contenu
   new_rapid_sheet: <i class="fa fa-plus"></i> Nouvelles pages
   new_libelle_sheet_0: Créer une page Web en 1 click à partir d'un de nos template!
-  generate_step_p1: Choisissez un des modèles de template que vous souhaiter générer puis cliquer sur le bouton de création des la page.
-  generate_step_li1: "<a href='http://hermes.atlas-services.fr/hermes/template-1' target='_blank' > Voir le Template 1  </a> puis créer la page  en cliquant sur ce lien :"
-  generate_step_li2: "<a href='http://hermes.atlas-services.fr/hermes/template-2' target='_blank' > Voir le Template 2  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li3: "<a href='http://hermes.atlas-services.fr/hermes/template-3' target='_blank' > Voir le Template 3  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li4: "<a href='http://hermes.atlas-services.fr/hermes/template-4' target='_blank' > Voir le Template 4  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li5: "<a href='http://hermes.atlas-services.fr/hermes/template-5' target='_blank' > Voir le Template 5  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li6: "<a href='http://hermes.atlas-services.fr/hermes/template-6' target='_blank' > Voir le Template 6  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li7: "<a href='http://hermes.atlas-services.fr/hermes/template-7' target='_blank' > Voir le Template 7  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li8: "<a href='http://hermes.atlas-services.fr/hermes/template-8' target='_blank' > Voir le Template 8  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li9: "<a href='http://hermes.atlas-services.fr/hermes/template-9' target='_blank' > Voir le Template 9  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li10: "<a href='http://hermes.atlas-services.fr/hermes/template-10' target='_blank' > Voir le Template 10  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li11: "<a href='http://hermes.atlas-services.fr/hermes/template-11' target='_blank' > Voir le Template 11  </a> puis créer la page en cliquant sur ce lien :"
-  generate_step_li12: "<a href='http://hermes.atlas-services.fr/hermes/template-12' target='_blank' > Voir le Template 12  </a> puis créer la page en cliquant sur ce lien :"
-
   new_libelle_sheet_1: Créer une page - partie 1.
   first_step_p1: La première étape consiste à créer un menu.Nous allons créér ici un Menu "<b>Mariage</b>"
   first_step_li1: Aller sur le menu "Mon Tableau de Bord" et sélectionner
@@ -65,6 +51,7 @@ global:
   hello: Bonjour
   admin: Admin
   blocks: Mes blocks de contenus
+  speed_dashboard: Création rapide
   dashboard: Mon Tableau de Bord
   breadcrumb: 'Vous êtes ici : '
   new_content: Nouveau contenu
@@ -73,6 +60,8 @@ global:
   inactive: Inactif
   new_page: Menus
   new_post: Nouveau contenu dans le menu
+  new_post_libre: Contenu Libre
+  new_post_liste: Nouveau contenu "Liste"
   new_menu_post: Ajout d'un menu avec un contenu
   add_menu_post: Ajouter un contenu
   menu_entete: Menus
