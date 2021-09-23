@@ -5,7 +5,9 @@
         <h4 id="{{ form.vars.value.section.template.name }}" class="text-success"> {{ 'section.template_show'|trans() }}
             : {{ form.vars.value.section.template.name }}</h4>
     {% endif %}
-    {{ form_row(form.active) }}
+    {% if form.active is defined %}
+        {{ form_row(form.active) }}
+    {% endif %}
     {% if form.startPublishedAt is defined %}
         {{ form_row(form.startPublishedAt) }}
     {% endif %}
@@ -30,7 +32,9 @@
     {% if form.url is defined %}
         {{ form_row(form.url) }}
     {% endif %}
-    {{ form_row(form.content) }}
+    {% if form.content is defined %}
+        {{ form_row(form.content) }}
+    {% endif %}
     {% if form.section is not defined %}
 {#    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">#}
 {#        {% for tag in form.tags %}#}
@@ -39,6 +43,9 @@
 {#            </li>#}
 {#        {% endfor %}#}
 {#    </ul>#}
+        {% if( app.request.attributes.get('_route') in [ 'post_new_section_liste']) %}
+            {{ form_row(form.saveAndAddPost) }}
+        {% endif %}
     {% endif %}
     {% if( app.request.attributes.get('_route') in ['post_new_section', 'post_edit']) %}
         {{ form_row(form.saveAndAddPost) }}

@@ -34,6 +34,56 @@ class PostController extends AbstractController
     }
 
     /**
+     * @Route("/nouveau-contenu/modele/{section}/liste", name="post_new_section_liste", methods={"GET","POST"})
+     * @ParamConverter("section", class="App\Entity\Hermes\Section")
+     */
+    public function postNewSectionListe(Request $request, ?Section $section, PostRepository $postRepository): Response
+    {
+        $numpost = count($section->getPosts()) + 1;
+        $post = new Post();
+        $post->setName($section->getMenu()->getName().' '.$numpost);
+        $post->setSection($section);
+        $options['section'] = false;
+        $options['active'] = false;
+        $options['position'] = false;
+        $options['url'] = false;
+        $options['content'] = false;
+        $options['startPublishedAt'] = false;
+        $options['endPublishedAt'] = false;
+        $options['saveAndAddSectionPost'] = true;
+        $form = $this->createForm(PostType::class, $post, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $position = $postRepository->getMaxPosition($section);
+            $post->setPosition($position);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+            if ($form->get('saveAndAddPost')->isClicked()) {
+                $section = $post->getSection();
+                return $this->redirectToRoute('post_new_section_liste', ['section'=> $section->getId()]);
+            }
+            if ($form->get('saveAndAddSectionPost')->isClicked()) {
+                $section = $post->getSection();
+                $menu = $section->getMenu();
+                return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
+            }
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            return $this->redirectToRoute('menu_index');
+        }
+
+        return $this->render('admin/post/new.html.twig', [
+            'form' => $form->createView(),
+            'menu' => $section->getMenu() ?? '',
+            'post' => $post ?? ''
+        ]);
+    }
+
+
+    /**
      * @Route("/nouveau-contenu/modele/{section}", name="post_new_section", methods={"GET","POST"})
      * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
@@ -76,7 +126,6 @@ class PostController extends AbstractController
             'post' => $post ?? ''
         ]);
     }
-
 
     /**
      * @Route("/nouveau-contenu", name="post_new", methods={"GET","POST"})

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Form\Admin;
+namespace App\Form\Admin\Liste;
 
 use App\Entity\Hermes\Post;
+use App\Form\Admin\AbstractNameBaseType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -12,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\GroupSequence;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PostType extends AbstractNameBaseType
+class PostListeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,13 +31,19 @@ class PostType extends AbstractNameBaseType
                     'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                 ]);
         }
-        if ($options['position']) {
-            $builder
-                ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
-                    'required' => false,
-                    'label' => 'global.position',
-                ]);
-        }
+        $builder
+            ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            'constraints' => $options['name_constraints'],
+            'required' => false, //$options['name_required'],
+            'label' => $options['label_name'],
+            'attr'=> ['class' => 'mb-3'],
+            'label_attr'=> [
+                'data-bs-toggle' => 'tooltip',
+                'data-placement'=> 'left',
+                'data-html' => 'true',
+    //                        'title'=> $options['title']
+            ]
+        ]);
         if ($options['url']) {
             $builder
                 ->add('url', 'Symfony\Component\Form\Extension\Core\Type\UrlType', [
@@ -61,30 +69,6 @@ class PostType extends AbstractNameBaseType
                 'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']
             ]);
         }
-        $builder->add('tags', CollectionType::class, [
-            'entry_type' => TagType::class,
-            'entry_options' => ['label' => false],
-            'allow_add' => true,
-            'allow_delete' => true,
-        ]);
-        if ($options['startPublishedAt']) {
-            $builder->add('startPublishedAt', DateType::class, [
-                'required' => false,
-                'label_format' => 'global.startPublishedAt',
-                'widget' => 'single_text',
-                // this is actually the default format for single_text
-                'format' => 'yyyy-MM-dd',
-            ]);
-        }
-        if ($options['endPublishedAt']) {
-            $builder->add('endPublishedAt', DateType::class, [
-                'required' => false,
-                'label_format' => 'global.endPublishedAt',
-                'widget' => 'single_text',
-                // this is actually the default format for single_text
-                'format' => 'yyyy-MM-dd',
-            ]);
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -93,36 +77,15 @@ class PostType extends AbstractNameBaseType
             'data_class' => Post::class,
             'active' => true,
             'section' => false,
-            'position' => true,
             'url' => true,
             'name' => true,
-            'startPublishedAt' => true,
-            'endPublishedAt' => true,
-            'name_required'=> false,
             'name_constraints'=> new NotBlank(['message'=> 'error_message.post.name']),
             'content' => true,
-            'validation_groups' => function (FormInterface $form) {
-                $data = $form->getData();
-                $template = $data->getSection()->getTemplate();
-                if ('libre' == $template->getCode() || 'libre_code' == $template->getCode()) {
-                    return ['Default','content'];
-                }else{
-                    $remote = $data->getSection()->getRemote();
-                    if(is_null($remote)){
-                        if( !$data->getImageFile() && !$data->getFileName()){
-                            return ['Default', 'image'];
-                        }
-                    }
-                }
-                return ['Default'];
-            },
             'image_file' => true,
-            'save_visibility' => true,
             'save' => true,
             'saveAndAdd' => true,
             'saveAndAddLabel' => 'menu.update_next',
-            'saveAndAddPost' => true,
-            'saveAndAddSectionPost' => false,
+            'saveListe' => false,
         ]);
     }
 }

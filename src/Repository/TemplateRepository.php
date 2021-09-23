@@ -80,4 +80,16 @@ class TemplateRepository extends ServiceEntityRepository
         return $result;
     }
 
+
+    public function getQbTemplateListe()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.code = :libre ' )
+            ->setParameter('libre',  'folio1' )
+        ;
+
+        return $qb;
+    }
+
+
 }
