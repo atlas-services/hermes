@@ -118,8 +118,8 @@ class InitController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
         $slug = strtolower($template_libre);
-//        $content = $this->render('admin/exemple/base/'.$template_libre.'.html.twig', $config)->getContent();
-        $content = $this->render('admin/exemple/base/'.$template_libre.'/index.html.twig', $config)->getContent();
+//        $content = $this->render('admin/hermes/template-libre/'.$template_libre.'.html.twig', $config)->getContent();
+        $content = $this->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config)->getContent();
         try {
             $sheet = $this->getDoctrine()
                 ->getRepository(Sheet::class)
