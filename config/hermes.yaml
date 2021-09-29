@@ -88,6 +88,38 @@ parameters:
         summary: Carte de présentation avec photo
         code: card2
         name: Carte de présentation avec photo
+      hms-1:
+        summary: A la carte
+        code: hms-1
+        name: Template à la carte
+      hms-2:
+        summary: Vêtement
+        code: hms-2
+        name: Template vêtement
+      hms-3:
+        summary: Video
+        code: hms-3
+        name: Template video
+      hms-4:
+        summary: Présentation liste
+        code: hms-4
+        name: Template liste
+      hms-5:
+        summary: Image serrée
+        code: hms-5
+        name: Template serré
+      hms-6:
+        summary: forme Modal
+        code: hms-6
+        name: Template modal
+      hms-7:
+        summary: Image
+        code: hms-7
+        name: Template image
+      hms-8:
+        summary: Présentation
+        code: hms-8
+        name: Template Présentation
     config:
       site:
         template:
