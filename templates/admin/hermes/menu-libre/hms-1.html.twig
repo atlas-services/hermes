@@ -1,0 +1,11 @@
+<nav id="{{ titre }}" class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3">
+    <div class="container-fluid px-2 px-lg-5"><a class="navbar-brand" href="/"><img alt="" class="w-50" src="{{ asset('img/hermes.png') }}" /></a><button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarColor03" data-bs-toggle="collapse" type="button"></button>
+        <div class="collapse navbar-collapse" id="menu-hms-1">
+            <ul class="navbar-nav ms-auto">
+                {% for template in templates %}
+                    <li class="nav-item"><a class="nav-link active" href="#{{ template }}">{{ template }} </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,36 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{{ form_start(form) }}
+
+<ul class="templates" data-index="{{ form.templates|length > 0 ? form.templates|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.templates.vars.prototype)|e('html_attr') }}"></ul>
+    {% for template in form.templates %}
+    <li class="list-unstyled">{{ form_row(template.code) }}</li>
+    {% endfor %}
+</ul>
+<button type="button" class="btn btn-dark add_item_link" data-collection-holder-class="templates">Add a template</button>
+
+
+{{ form_row(form.save) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
+<script>
+    const addFormToCollection = (e) => {
+        const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+        const item = document.createElement('li');
+
+        item.innerHTML = collectionHolder
+            .dataset
+            .prototype
+            .replace(
+                /__name__/g,
+                collectionHolder.dataset.index
+            );
+
+        collectionHolder.appendChild(item);
+
+        collectionHolder.dataset.index++;
+    };
+    document
+        .querySelectorAll('.add_item_link')
+        .forEach(btn => btn.addEventListener("click", addFormToCollection));
+</script>

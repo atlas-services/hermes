@@ -92,4 +92,15 @@ class TemplateRepository extends ServiceEntityRepository
     }
 
 
+    public function getQbTemplateLibreHms()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.code like :libre ' )
+            ->setParameter('libre',  '%hms-%' )
+        ;
+
+        return $qb;
+    }
+
+
 }
