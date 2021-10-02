@@ -22,9 +22,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class LibreController extends AbstractController
 {
     /**
-     * @Route("/hms-libre/{libre}", name="add_page_hms_libre", methods={"GET|POST"})
+     * @Route("/hms-libre/", name="add_page_hms_libre", methods={"GET|POST"})
      */
-    public function newPageHmsLibre(Request $request, $libre): Response
+    public function newPageHmsLibre(Request $request): Response
     {
 
         $form = $this->createForm(TemplateLibreHmsCollectionType::class );
@@ -33,10 +33,11 @@ class LibreController extends AbstractController
         if ($form->isSubmitted() ) {
             if ( $form->isValid()) {
                 $templates = $request->request->get("template_libre_hms_collection")['templates'];
-                foreach ($templates as $template){
-                    $libres[] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getCode();
+                foreach ($templates as $key => $template){
+                    $libres[$key]['code'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getCode();
+                    $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getName();
+                    $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
                 }
-
                 $this->addPageHmsLibre($libres);
                 return $this->redirectToRoute('admin_index');
             }
@@ -55,8 +56,8 @@ class LibreController extends AbstractController
 
         $content = "";
         foreach ($libres as $template ){
-            $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $template)));
-            $content .= $this->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template])->getContent();
+            $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $template['code'])));
+            $content .= $this->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre])->getContent();
             $content .= $this->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config)->getContent();
         }
         $menu_libre = $this->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres])->getContent();
@@ -132,7 +133,6 @@ class LibreController extends AbstractController
                 $config_simple[$conf->getCode()] = $conf;
             }
         }
-
         return $config_simple ;
     }
 

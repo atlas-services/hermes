@@ -122,10 +122,10 @@ class ConfigType extends AbstractBaseType
                 case 'nav_bar':
                     $choice = true;
                     $options = [
+                        'one page' => 'one page',
                         'base' => 'base',
                         'left' => 'left',
                         'full' => 'full',
-                        'none' => 'none',
                     ];
                     break;
                 // nav_bar

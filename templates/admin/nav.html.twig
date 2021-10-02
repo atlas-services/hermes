@@ -4,7 +4,7 @@
     <div class="container">
         {% if is_granted('ROLE_ADMIN') %}
             <img class="h-25" src="{{ asset('img/hermes.png') }}" alt="admin Hermes">
-            <a class="h1 hms-color1 text-decoration-none  h-bay-jamjuree px-md-4" href="{{ path('admin_index') }}">{{ 'global.admin'|trans() }}</a>
+            <a class="h6 hms-color1 text-decoration-none  h-bay-jamjuree px-md-2" href="{{ path('admin_index') }}">{{ 'global.admin'|trans() }} </a>
         {% endif %}
         {% for locale in locales %}
             {% if locale == app.request.locale %}
@@ -24,6 +24,7 @@
         </div>
         <div class="collapse navbar-collapse px-3 " id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
+                <p class="h6 hms-color1 ">{{  nav_bar ??  '' }}</p>
                 <ul class="nav navbar-nav mx-auto">
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="dropdown px-md-4">
@@ -51,6 +52,9 @@
                         </a>
                         <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
                              aria-expanded="false">
+                            <p>
+                                <a class="link-light text-decoration-none mx-3 " href="{{ path('add_page_hms_libre') }}"> {{ 'global.new_post_libre_one_page'|trans()|raw }}</a>
+                            </p>
                             <p>
                                 <a class="link-light text-decoration-none mx-3 " href="{{ path('sheet_new_libre') }}"> {{ 'global.new_post_libre'|trans()|raw }}</a>
                             </p>

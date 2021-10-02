@@ -13,7 +13,7 @@
         </div>
         <div class="mt-5 mb-5 row">
             <div class="col-lg-12 col-12 pl-0 text-center">
-                {% if 'none' == nav_bar  %}
+                {% if 'one page' == nav_bar  %}
                     <p> <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="js-scroll-trigger main-btn wow fadeInUp rounded-pill" data-wow-delay="0.8s" data-wow-duration="1.0s" href="{{ path('sheet') }}">Retour sur le site</a></p>
                 {% else %}
                 <h3 style="color:#8f2160;font-family:'Merriweather';font-style: italic;">Témoignages</h3>

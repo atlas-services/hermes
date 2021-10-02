@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse" id="menu-hms-1">
             <ul class="navbar-nav ms-auto">
                 {% for template in templates %}
-                    <li class="nav-item"><a class="nav-link active" href="#{{ template }}">{{ template }} </a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#{{ template.code }}">{{ template.name }} </a></li>
                 {% endfor %}
             </ul>
         </div>

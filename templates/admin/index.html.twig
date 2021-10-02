@@ -1,6 +1,7 @@
 {% extends '/admin/base.html.twig' %}
 
 {% block content %}
+    {% dump(nav_bar) %}
     <section class="mt-4 mt-md-1">
         <p class="text-secondary lead mt-md-3">
             {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
@@ -77,7 +78,7 @@
             <div class="row pt-2 pt-md-5 pb-md-4 pb-1">
                 {% for key , value  in mytemplates %}
                     <div class="col-md-6 px-1 px-md-5 "><img class="img-fluid pb-1 w-100" src="{{  value.mysrc }}" />
-                        <p><a class="text-decoration-none link-dark link-info:hover" href="{{  value.myhref }}" >{{  value.mytitle ?? ' NC' }}</a></p>
+                        <p>{{  value.mytitle ?? ' NC' }}</p>
                     </div>
                 {% endfor %}
             </div>
