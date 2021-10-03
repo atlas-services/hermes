@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin")
  */
-class SectionController extends AbstractController
+class SectionController extends AbstractAdminController
 {
     /**
      * @Route("/modele/", name="section_index", methods={"GET"})
@@ -36,10 +36,13 @@ class SectionController extends AbstractController
             ->findAll()
         ;
 
-        return $this->render('admin/section/index.html.twig', [
+        $array = [
             'sections' => $sections,
             'menus' => $menus,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/index.html.twig', $array );
     }
 
 
@@ -78,10 +81,13 @@ class SectionController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/section/new.html.twig', [
+        $array = [
             'form' => $form->createView(),
             'menu' => $section->getMenu() ?? ''
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/new.html.twig', $array);
     }
 
     /**
@@ -103,10 +109,13 @@ class SectionController extends AbstractController
             return $this->redirectToRoute('section_index');
         }
 
-        return $this->render('admin/section/new.html.twig', [
+        $array = [
             'section' => $section,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/new.html.twig', $array);
     }
 
     /**
@@ -114,9 +123,12 @@ class SectionController extends AbstractController
      */
     public function show(Section $section): Response
     {
-        return $this->render('admin/section/show.html.twig', [
+        $array = [
             'section' => $section,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/show.html.twig', $array);
     }
 
     /**
@@ -163,10 +175,13 @@ class SectionController extends AbstractController
             return $this->redirectToRoute('section_index');
         }
 
-        return $this->render('admin/section/edit.html.twig', [
+        $array = [
             'section' => $section,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/edit.html.twig', $array);
     }
 
     /**

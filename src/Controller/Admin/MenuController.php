@@ -26,7 +26,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 /**
  * @Route("/{_locale}/admin")
  */
-class MenuController extends AbstractController
+class MenuController extends AbstractAdminController
 {
     /**
      * @Route("/menu/", name="menu_index", methods={"GET"})
@@ -37,9 +37,11 @@ class MenuController extends AbstractController
             ->getRepository(Menu::class)
             ->findAll();
 
-        return $this->render('admin/menu/index.html.twig', [
+        $array = [
             'menus' => $menus,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/menu/index.html.twig', $array);
     }
 
     /**
@@ -88,10 +90,13 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/menu/new_libre.html.twig', [
+        $array = [
             'menu' => $menu,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new_libre.html.twig', $array);
     }
 
 
@@ -145,10 +150,13 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/menu/new_liste.html.twig', [
+        $array = [
             'menu' => $menu,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new_liste.html.twig', $array);
     }
 
 
@@ -199,11 +207,13 @@ class MenuController extends AbstractController
             }
             return $this->redirectToRoute('menu_index');
         }
-
-        return $this->render('admin/menu/new.html.twig', [
+        $array = [
             'menu' => $menu,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new.html.twig', $array);
     }
 
     /**
@@ -211,9 +221,11 @@ class MenuController extends AbstractController
      */
     public function show(Menu $menu): Response
     {
-        return $this->render('admin/menu/show.html.twig', [
+        $array = [
             'menu' => $menu,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/menu/show.html.twig', $array);
     }
 
     /**
@@ -245,10 +257,13 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/menu/edit.html.twig', [
+        $array = [
             'menu' => $menu,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/edit.html.twig', $array);
     }
 
     /**
@@ -278,10 +293,13 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/section/edit.html.twig', [
+        $array = [
             'section' => $section,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/edit.html.twig', $array);
     }
 
 

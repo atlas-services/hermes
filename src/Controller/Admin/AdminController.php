@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin")
  */
-class AdminController extends AbstractController
+class AdminController extends AbstractAdminController
 {
     /**
      * @Route("/", name="admin_index", methods={"GET"})
@@ -29,9 +29,9 @@ class AdminController extends AbstractController
             }
             $listSheets .= $sheet->getName() . $ponctuation;
         }
-        $configuration = $this->getActiveConfig();
 
-        $array = array_merge(['sheets'=> $listSheets], $configuration);
+        $array = ['sheets'=> $listSheets];
+        $array = $this->mergeActiveConfig($array);
 
         return $this->render('admin/index.html.twig', $array);
     }
@@ -43,26 +43,9 @@ class AdminController extends AbstractController
     {
 
         $array = [];
+        $array = $this->mergeActiveConfig($array);
 
         return $this->render('admin/presentation.html.twig', $array);
-    }
-
-    private function getActiveConfig()
-    {
-        /*
-         * On récupère la configuration du site.
-         */
-        $entityManager = $this->getDoctrine()->getManager('config');
-        $configuration = $entityManager->getRepository(Config::class, 'config')->findBy(['active' => true]);
-        foreach ($configuration as $conf) {
-            $config[$conf->getCode()] = $conf;
-            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
-                $config_simple[$conf->getCode()] = $conf->getValue();
-            }else{
-                $config_simple[$conf->getCode()] = $conf;
-            }
-        }
-        return $config_simple ;
     }
 
 }

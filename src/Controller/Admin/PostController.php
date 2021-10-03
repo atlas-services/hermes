@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin")
  */
-class PostController extends AbstractController
+class PostController extends AbstractAdminController
 {
     /**
      * @Route("/contenu/", name="post_index", methods={"GET"})
@@ -28,9 +28,12 @@ class PostController extends AbstractController
             ->getRepository(Post::class)
             ->findAll();
 
-        return $this->render('admin/post/index.html.twig', [
+        $array = [
             'posts' => $posts,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/index.html.twig', $array);
     }
 
     /**
@@ -75,11 +78,14 @@ class PostController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/post/new.html.twig', [
+        $array = [
             'form' => $form->createView(),
             'menu' => $section->getMenu() ?? '',
             'post' => $post ?? ''
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/new.html.twig', $array);
     }
 
 
@@ -120,11 +126,14 @@ class PostController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/post/new.html.twig', [
+        $array = [
             'form' => $form->createView(),
             'menu' => $section->getMenu() ?? '',
             'post' => $post ?? ''
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/new.html.twig', $array);
     }
 
     /**
@@ -145,10 +154,13 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('admin/post/new.html.twig', [
+        $array = [
             'post' => $post,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/new.html.twig', $array);
     }
 
     /**
@@ -157,9 +169,12 @@ class PostController extends AbstractController
     public function show(Post $post): Response
     {
 
-        return $this->render('admin/post/show.html.twig', [
+        $array = [
             'post' => $post,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/show.html.twig', $array);
     }
 
     /**
@@ -196,10 +211,13 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('admin/post/edit.html.twig', [
+        $array = [
             'post' => $post,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/edit.html.twig', $array);
     }
 
     /**

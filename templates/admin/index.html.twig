@@ -1,7 +1,6 @@
 {% extends '/admin/base.html.twig' %}
 
 {% block content %}
-    {% dump(nav_bar) %}
     <section class="mt-4 mt-md-1">
         <p class="text-secondary lead mt-md-3">
             {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},

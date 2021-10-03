@@ -340,7 +340,7 @@ parameters:
         footer_about:
           summary: texte du footer about
           value: ~
-      form:
-        form:
+      forms:
+        forms:
           summary: Formulaires
           value: contact

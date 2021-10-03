@@ -19,7 +19,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 /**
  * @Route("/{_locale}/admin")
  */
-class SheetController extends AbstractController
+class SheetController extends AbstractAdminController
 {
     /**
      * @Route("/page/", name="sheet_index", methods={"GET"})
@@ -29,24 +29,21 @@ class SheetController extends AbstractController
     {
         $route = $request->attributes->get('_route');
         $sheets = $sheetRepository->findAll();
-        $config_form = $this->getDoctrine()->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'form']);
+        $config_form = $this->getDoctrine()->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'forms']);
 
-        if('sheet_index' == $route){
-            return $this->render('admin/sheet/index.html.twig', [
-                'sheets' => $sheets,
-                'config' => $config_form,
-            ]);
-        }
-        if('sheet_form_index' == $route){
-            return $this->render('admin/sheet/form.html.twig', [
-                'sheets' => $sheets,
-                'config' => $config_form,
-            ]);
-        }
-        return $this->render('admin/sheet/index.html.twig', [
+        $array = [
             'sheets' => $sheets,
             'config' => $config_form,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        if('sheet_index' == $route){
+            return $this->render('admin/sheet/index.html.twig', $array);
+        }
+        if('sheet_form_index' == $route){
+            return $this->render('admin/sheet/form.html.twig', $array);
+        }
+        return $this->render('admin/sheet/index.html.twig', $array);
     }
 
     /**
@@ -72,10 +69,13 @@ class SheetController extends AbstractController
             }
         }
 
-        return $this->render('admin/sheet/new.html.twig', [
+        $array = [
             'sheet' => $sheet,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/new.html.twig', $array);
     }
 
     /**
@@ -98,10 +98,12 @@ class SheetController extends AbstractController
             }
         }
 
-        return $this->render('admin/sheet/new_libre.html.twig', [
+        $array = [
             'sheet' => $sheet,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/sheet/new_libre.html.twig', $array);
     }
 
     /**
@@ -124,10 +126,13 @@ class SheetController extends AbstractController
             }
         }
 
-        return $this->render('admin/sheet/new_liste.html.twig', [
+        $array = [
             'sheet' => $sheet,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/new_liste.html.twig', $array);
     }
 
     /**
@@ -135,9 +140,12 @@ class SheetController extends AbstractController
      */
     public function show(Sheet $sheet): Response
     {
-        return $this->render('admin/sheet/show.html.twig', [
+        $array = [
             'sheet' => $sheet,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/show.html.twig', $array);
     }
 
     /**
@@ -168,10 +176,13 @@ class SheetController extends AbstractController
             return $this->redirectToRoute('sheet_index');
         }
 
-        return $this->render('admin/sheet/edit.html.twig', [
+        $array = [
             'sheet' => $sheet,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/edit.html.twig', $array);
     }
 
     /**

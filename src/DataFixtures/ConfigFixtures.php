@@ -25,7 +25,7 @@ class ConfigFixtures extends Fixture implements FixtureGroupInterface
          */
         $item = new Config();
         $item->setActive(true);
-        $item->setCode('form');
+        $item->setCode('forms');
         $item->setValue('');
         $item->setSummary("Liste des formulaires(séparés par une virgule");
 

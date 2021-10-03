@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin/add/libre")
  */
-class LibreController extends AbstractController
+class LibreController extends AbstractAdminController
 {
     /**
      * @Route("/hms-libre/", name="add_page_hms_libre", methods={"GET|POST"})
@@ -43,9 +43,12 @@ class LibreController extends AbstractController
             }
         }
 
-        return $this->render('admin/menu/new_libre_hms.html.twig', [
+        $array = [
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new_libre_hms.html.twig', $array);
 
     }
 
@@ -117,24 +120,5 @@ class LibreController extends AbstractController
         $this->addFlash('info', 'Page créée!');
         return $this->redirectToRoute('admin_index');
     }
-
-    private function getActiveConfig()
-    {
-        /*
-         * On récupère la configuration du site.
-         */
-        $entityManager = $this->getDoctrine()->getManager('config');
-        $configuration = $entityManager->getRepository(Config::class, 'config')->findBy(['active' => true]);
-        foreach ($configuration as $conf) {
-            $config[$conf->getCode()] = $conf;
-            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
-                $config_simple[$conf->getCode()] = $conf->getValue();
-            }else{
-                $config_simple[$conf->getCode()] = $conf;
-            }
-        }
-        return $config_simple ;
-    }
-
 
 }
