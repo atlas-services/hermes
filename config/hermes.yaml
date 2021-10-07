@@ -120,6 +120,19 @@ parameters:
         summary: Présentation
         code: hms-8
         name: Template Présentation
+      hms-9:
+        summary: Page d'accueil
+        code: hms-9
+        name: Page d'accueil
+      hms-10:
+        summary: Description
+        code: hms-10
+        name: Template Description
+      hms-11:
+        summary: Fonctionnalité
+        code: hms-11
+        name: Template Fonctionnalité
+
     config:
       site:
         template:
