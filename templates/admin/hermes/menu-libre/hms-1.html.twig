@@ -1,6 +1,10 @@
 <nav id="{{ titre }}" class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3">
-    <div class="container-fluid px-2 px-lg-5"><a class="navbar-brand" href="#"><img alt="" class="w-50" src="{{ asset('img/hermes.png') }}" /></a><button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-icon" data-bs-target="#navbarColor03" data-bs-toggle="collapse" type="button"></button>
-<div class="collapse navbar-collapse" id="navbarColor03">
+    <div class="container-fluid px-2 px-lg-5">
+    <a class="navbar-brand" href="#">    <img alt="" class="w-50" src="{{ asset('img/hermes.png') }}" /></a>
+    <button id="navbar-toggler-button" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-icon" data-bs-target="#navbarColor03" data-bs-toggle="collapse" type="button">
+        <span id="navbar-toggler-span" class="d-none">X</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav  my-2 my-lg-0 ms-auto">
                 {% for template in templates %}
                     <li class="nav-item"><a class="nav-link active" href="#{{ template.code }}">{{ template.name }} </a></li>
