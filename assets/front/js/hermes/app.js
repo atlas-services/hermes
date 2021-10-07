@@ -45,6 +45,7 @@ import 'owl.carousel';
 // import '../../../commun/js/scroll';
 // import '../../../commun/js/scrollspy';
 import '../../../commun/js/js-chevron';
+import '../../../commun/js/js-responsive-button';
 import '../../../commun/js/js-menu'; // @todo
 import '../../../commun/js/search';
 import '../../../commun/js/anime';
@@ -58,4 +59,3 @@ import '../bootstrap/videos';
 // import '../hermes/todo';
 // import '../bootstrap/hammer.min';
 // import '../bootstrap/carousel';
-
