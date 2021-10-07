@@ -38,7 +38,8 @@ class LibreController extends AbstractAdminController
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getName();
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
                 }
-                $this->addPageHmsLibre($libres);
+                //$this->addPageHmsLibre($libres);
+                $this->addOnePageLibre($libres);
                 return $this->redirectToRoute('admin_index');
             }
         }
@@ -55,6 +56,7 @@ class LibreController extends AbstractAdminController
     private function addPageHmsLibre($libres){
 
         $config = $this->getActiveConfig();
+        $emConfig = $this->getDoctrine()->getManager('config');
         $entityManager = $this->getDoctrine()->getManager();
 
         $content = "";
@@ -71,6 +73,11 @@ class LibreController extends AbstractAdminController
         $slug = strtolower($libre);
 
         try {
+            $config_nav_bar =  $this->getDoctrine()
+                ->getRepository(Config::class)
+                ->findOneBy(['code'=> 'nav_bar']);
+            $config_nav_bar->setValue('one page');
+
             $sheet = $this->getDoctrine()
                 ->getRepository(Sheet::class)
                 ->findBy(['code'=> 'new_sheet'.$libre]);
@@ -110,6 +117,7 @@ class LibreController extends AbstractAdminController
                 $entityManager->persist($menu);
                 $entityManager->persist($section);
                 $entityManager->persist($post);
+                $emConfig->persist($config_nav_bar);
             }
 
         }catch (\Exception $e){
@@ -117,8 +125,105 @@ class LibreController extends AbstractAdminController
             return $this->redirectToRoute('admin_index');
         }
         $entityManager->flush();
+        $emConfig->flush();
         $this->addFlash('info', 'Page créée!');
         return $this->redirectToRoute('admin_index');
+    }
+
+    private function addOnePageLibre($libres){
+        $config = $this->getActiveConfig();
+        $emConfig = $this->getDoctrine()->getManager('config');
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $libre = 'one-page';
+        $slug = strtolower($libre);
+
+        try {
+            $config_nav_bar =  $this->getDoctrine()
+                ->getRepository(Config::class)
+                ->findOneBy(['code'=> 'nav_bar']);
+            $config_nav_bar->setValue('one page');
+
+            $sheet = $this->getDoctrine()
+                ->getRepository(Sheet::class)
+                ->findBy(['code'=> 'new_sheet'.$libre]);
+            if(!$sheet){
+                // add sheet
+                $sheet = new Sheet();
+                $sheet->setCode($libre);
+                $sheet->setName($libre);
+                $sheet->setPosition(1);
+                $sheet->setSummary('Menu '.$libre);
+                $sheet->setSlug($slug);
+                // add menu
+                $menu = new Menu();
+                $menu->setCode($libre);
+                $menu->setName($libre);
+                $menu->setPosition(1);
+                $menu->setSlug($slug);
+                $menu->setSheet($sheet);
+
+                $entityManager->persist($sheet);
+                $entityManager->persist($menu);
+
+                // add section
+                $template = $this->getDoctrine()
+                    ->getRepository(Template::class)
+                    ->findOneBy(['code'=> 'libre']);
+                $content = "";
+                foreach ($libres as $key => $template_libre ){
+                    $position = $key +1;
+                    $section = new Section();
+                    $section->setName('section-'.str_replace(' ', '-', $libre.$position));
+                    $section->setPosition($position);
+                    $section->setTemplateWidth(12);
+                    $section->setMenu($menu);
+                    $section->setTemplate($template);
+                    // add Post
+                    $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $template_libre['code'])));
+                    $content = $this->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre])->getContent();
+                    $content .= $this->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config)->getContent();
+
+                    $post = new Post();
+                    $post->setName($libre.$position);
+                    $post->setPosition($position);
+                    $post->setSection($section);
+                    $post->setContent($content);
+
+                    $entityManager->persist($section);
+                    $entityManager->persist($post);
+                }
+
+                $section = new Section();
+                $section->setName('section-'.str_replace(' ', '-', "menu-".$libre));
+                $section->setPosition(0);
+                $section->setTemplateWidth(12);
+                $section->setMenu($menu);
+                $section->setTemplate($template);
+
+                // add Post
+                $menu_libre = $this->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres])->getContent();       $content = $this->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre])->getContent();
+                $post = new Post();
+                $post->setName("menu-".$libre);
+                $post->setPosition(0);
+                $post->setSection($section);
+                $post->setContent($menu_libre);
+
+                $entityManager->persist($section);
+                $entityManager->persist($post);
+
+                $emConfig->persist($config_nav_bar);
+            }
+
+        }catch (\Exception $e){
+            $this->addFlash('warning', $e->getMessage());
+            return $this->redirectToRoute('admin_index');
+        }
+        $entityManager->flush();
+        $emConfig->flush();
+        $this->addFlash('info', 'Page créée!');
+        return $this->redirectToRoute('admin_index');
+
     }
 
 }
