@@ -132,6 +132,18 @@ parameters:
         summary: Fonctionnalité
         code: hms-11
         name: Template Fonctionnalité
+      hms-12:
+        summary: Entête-1
+        code: hms-12
+        name: Entête-1
+      hms-13:
+        summary: Entête-2
+        code: hms-13
+        name: Entête-2
+      hms-14:
+        summary: Entête-3
+        code: hms-14
+        name: Entête-3
 
     config:
       site:
