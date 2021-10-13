@@ -124,6 +124,10 @@ parameters:
         summary: Page d'accueil
         code: hms-9
         name: Page d'accueil
+      hms-15:
+        summary: Page d'accueil-2
+        code: hms-15
+        name: Page d'accueil-2
       hms-10:
         summary: Description
         code: hms-10
