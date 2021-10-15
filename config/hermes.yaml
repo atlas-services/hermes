@@ -120,6 +120,14 @@ parameters:
         summary: Présentation
         code: hms-8
         name: Template Présentation
+      hms-16:
+        summary: Présentation Image
+        code: hms-16
+        name: Présentation Image
+      hms-17:
+        summary: Présentation Image V2
+        code: hms-17
+        name: Présentation Image V2
       hms-9:
         summary: Page d'accueil
         code: hms-9
