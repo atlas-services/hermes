@@ -121,9 +121,9 @@ parameters:
         code: hms-8
         name: Template Présentation
       hms-9:
-        summary: Page d'accueil
+        summary: Page d'accueil 1
         code: hms-9
-        name: Page d'accueil
+        name: Page d'accueil 1
       hms-10:
         summary: Description
         code: hms-10
@@ -144,6 +144,10 @@ parameters:
         summary: Entête-3
         code: hms-14
         name: Entête-3
+      hms-15:
+        summary: Page d'accueil 2
+        code: hms-14
+        name: Page d'accueil 2
 
     config:
       site:
