@@ -15,9 +15,14 @@ class TemplateLibreHmsCollectionType extends AbstractType
 
         $builder
             ->add('templates',CollectionType::class, [
+                'label_attr' => [
+                    'class' => 'list-unstyled'
+                ],
+                'label' => 'Aout de templates',
                 'entry_type' => TemplateLibreHmsType::class,
                 'entry_options' => ['label' => false, ],
-                 'allow_add' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
             ])
             ->add('save', SubmitType::class, [

@@ -59,9 +59,10 @@ doctrine-re-init:
 	bin/console doctrine:cache:clear-metadata
 	bin/console doctrine:cache:clear-query
 	bin/console doctrine:cache:clear-result
-	bin/console doctrine:database:drop --force
+	bin/console doctrine:database:drop --force --connection=default
+	bin/console doctrine:database:drop --force --connection=config
 	bin/console doctrine:database:create
-	bin/console d:s:u --force
+	bin/console d:s:u --force --em=default
 	bin/console d:s:u --force --em=config
 	bin/console hermes:db-update
 # 	rm -r var/cache/* var/log/* 2> /dev/null || true

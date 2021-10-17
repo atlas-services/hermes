@@ -1,22 +1,51 @@
 {% form_theme form 'admin/form/theme_posts.html.twig' %}
 {{ form_start(form) }}
 
-<ul class="templates" data-index="{{ form.templates|length > 0 ? form.templates|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.templates.vars.prototype)|e('html_attr') }}"></ul>
+<ul class="templates" data-index="{{ form.templates|length > 0 ? form.templates|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.templates.vars.prototype)|e('html_attr') }}" data-remove=" {{ 'global.remove_menu_post'|trans }}"></ul>
     {% for template in form.templates %}
-    <li class="list-unstyled">{{ form_row(template.code) }}</li>
+        <li class="list-unstyled">{{ form_row(template.code) }}</li>
     {% endfor %}
 </ul>
-<button type="button" class="btn btn-dark add_item_link" data-collection-holder-class="templates">{{ 'global.add_menu_post'|trans }}</button>
+<button type="button" class=" btn-primary btn btn-outline-secondary hms-bg-color1 add_item_link" data-collection-holder-class="templates"><span class="fa fa-plus-circle"></span> {{ 'global.add_menu_post'|trans }}</button>
 
 
 {{ form_row(form.save) }}
 {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
 <script>
+
+    const templates = document.querySelectorAll('ul.templates');
+
+    const addTagFormDeleteLink = (templateFormLi) => {
+        const removeFormButton = document.createElement('button');
+        removeFormButton.classList.add('my-md-3');
+        removeFormButton.classList.add('btn');
+        removeFormButton.classList.add('btn-danger');
+        removeFormButton.classList.add('fa');
+        removeFormButton.classList.add('fa-trash');
+        removeFormButton.innerText = document.querySelector('ul.templates').dataset.remove;
+
+        templateFormLi.append(removeFormButton);
+
+        removeFormButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            // remove the li for the tag form
+            templateFormLi.remove();
+        });
+    }
+
     const addFormToCollection = (e) => {
         const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
         const item = document.createElement('li');
+        item.classList.add('border');
+        item.classList.add('h-border-success');
+        item.classList.add('rounded');
+        item.classList.add('col-md-6');
+        item.classList.add('px-4');
+        item.classList.add('mx-4');
+        item.classList.add('my-4');
+        item.classList.add('list-unstyled');
 
         item.innerHTML = collectionHolder
             .dataset
@@ -29,6 +58,8 @@
         collectionHolder.appendChild(item);
 
         collectionHolder.dataset.index++;
+
+        addTagFormDeleteLink(item);
     };
     document
         .querySelectorAll('.add_item_link')

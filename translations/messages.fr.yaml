@@ -65,6 +65,7 @@ global:
   new_post_liste: Page Liste
   new_menu_post: Ajout d'un menu avec un contenu
   add_menu_post: Ajouter un contenu
+  remove_menu_post: Supprimer ce contenu
   menu_entete: Menus
   actions: Actions
   show: Voir

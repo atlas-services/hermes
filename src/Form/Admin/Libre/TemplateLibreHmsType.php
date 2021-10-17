@@ -18,6 +18,10 @@ class TemplateLibreHmsType extends AbstractType
         $builder
             ->add('code', EntityType::class,
                 [
+                    'label_attr' => [
+                        'class' => 'col-md-6'
+                    ],
+                    'label' => 'Template',
                     'class'=> Template::class,
                     'query_builder' => function (TemplateRepository $er) use ($options) {
                         return $er->getQbTemplateLibreHms();
