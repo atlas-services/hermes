@@ -18,7 +18,7 @@ class TemplateLibreHmsCollectionType extends AbstractType
                 'label_attr' => [
                     'class' => 'list-unstyled'
                 ],
-                'label' => 'Aout de templates',
+                'label' => 'Ajout de templates',
                 'entry_type' => TemplateLibreHmsType::class,
                 'entry_options' => ['label' => false, ],
                 'allow_add' => true,

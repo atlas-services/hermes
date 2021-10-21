@@ -24,7 +24,7 @@ class LibreController extends AbstractAdminController
     /**
      * @Route("/hms-libre/", name="add_page_hms_libre", methods={"GET|POST"})
      */
-    public function newPageHmsLibre(Request $request): Response
+    public function onePageHmsLibre(Request $request): Response
     {
 
         $form = $this->createForm(TemplateLibreHmsCollectionType::class );
@@ -39,7 +39,7 @@ class LibreController extends AbstractAdminController
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
                 }
                 //$this->addPageHmsLibre($libres);
-                $this->addOnePageLibre($libres);
+                $this->addOnePageHmsLibre($libres);
                 return $this->redirectToRoute('admin_index');
             }
         }
@@ -130,7 +130,7 @@ class LibreController extends AbstractAdminController
         return $this->redirectToRoute('admin_index');
     }
 
-    private function addOnePageLibre($libres){
+    private function addOnePageHmsLibre($libres){
         $config = $this->getActiveConfig();
         $emConfig = $this->getDoctrine()->getManager('config');
         $entityManager = $this->getDoctrine()->getManager();
@@ -144,17 +144,20 @@ class LibreController extends AbstractAdminController
                 ->findOneBy(['code'=> 'nav_bar']);
             $config_nav_bar->setValue('one page');
 
+            $sheet_code = 'new_sheet'.$libre;
             $sheet = $this->getDoctrine()
                 ->getRepository(Sheet::class)
-                ->findBy(['code'=> 'new_sheet'.$libre]);
-            if(!$sheet){
+                ->findOneBy(['code'=> $sheet_code]);
+            if(is_null($sheet)) {
+
                 // add sheet
                 $sheet = new Sheet();
-                $sheet->setCode($libre);
+                $sheet->setCode($sheet_code);
                 $sheet->setName($libre);
                 $sheet->setPosition(1);
-                $sheet->setSummary('Menu '.$libre);
+                $sheet->setSummary('Menu ' . $libre);
                 $sheet->setSlug($slug);
+
                 // add menu
                 $menu = new Menu();
                 $menu->setCode($libre);
@@ -165,14 +168,19 @@ class LibreController extends AbstractAdminController
 
                 $entityManager->persist($sheet);
                 $entityManager->persist($menu);
+            }else{
+                $menu = $this->getDoctrine()
+                    ->getRepository(Menu::class)
+                    ->findOneBy(['code'=> $libre]);
+            }
 
-                // add section
                 $template = $this->getDoctrine()
                     ->getRepository(Template::class)
                     ->findOneBy(['code'=> 'libre']);
                 $content = "";
                 foreach ($libres as $key => $template_libre ){
                     $position = $key +1;
+                    // add section
                     $section = new Section();
                     $section->setName('section-'.str_replace(' ', '-', $libre.$position));
                     $section->setPosition($position);
@@ -194,26 +202,32 @@ class LibreController extends AbstractAdminController
                     $entityManager->persist($post);
                 }
 
-                $section = new Section();
-                $section->setName('section-'.str_replace(' ', '-', "menu-".$libre));
-                $section->setPosition(0);
-                $section->setTemplateWidth(12);
-                $section->setMenu($menu);
-                $section->setTemplate($template);
+                $section_name = 'section-'.str_replace(' ', '-', "menu-".$libre);
+                $onePageSection = $this->getDoctrine()
+                ->getRepository(Section::class)
+                ->findOneBy(['name'=> $section_name]);
+                if(is_null($onePageSection)){
+                    $section = new Section();
+                    $section->setName($section_name);
+                    $section->setPosition(0);
+                    $section->setTemplateWidth(12);
+                    $section->setMenu($menu);
+                    $section->setTemplate($template);
 
-                // add Post
-                $menu_libre = $this->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres])->getContent();       $content = $this->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre])->getContent();
-                $post = new Post();
-                $post->setName("menu-".$libre);
-                $post->setPosition(0);
-                $post->setSection($section);
-                $post->setContent($menu_libre);
 
-                $entityManager->persist($section);
-                $entityManager->persist($post);
+                    // add Post
+                    $menu_libre = $this->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres])->getContent();       $content = $this->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre])->getContent();
+                    $post = new Post();
+                    $post->setName("menu-".$libre);
+                    $post->setPosition(0);
+                    $post->setSection($section);
+                    $post->setContent($menu_libre);
 
+                    $entityManager->persist($section);
+                    $entityManager->persist($post);
+                }
                 $emConfig->persist($config_nav_bar);
-            }
+//            }
 
         }catch (\Exception $e){
             $this->addFlash('warning', $e->getMessage());
