@@ -6,7 +6,8 @@ var items = document.querySelectorAll('.nav-link, li:not(.dropdown)');
 
 document.querySelector('.navbar-toggler').addEventListener('click', function(event) {
 
-    // openCloseNavbarButton();
+    openCloseNavbarButton();
+
 });
 
 var i;
@@ -20,15 +21,14 @@ for (i = 0; i < items.length; i++) {
 
 
 function openCloseNavbarButton(){
-
-    if(croix.classList.contains("d-none") == true){
-      // on cache les 3 barres et on affiche la croix
-      barres.classList.remove("navbar-toggler-icon");
-      croix.classList.remove("d-none");
-      }else{
-        // on affiche les 3 barres et on cache la croix
+    var menu_height = parseInt(menu.style.height);
+    console.log(menu_height);
+    if(menu_height > 0){
+        barres.classList.remove("navbar-toggler-icon");
+        croix.classList.remove("d-none");
+    }else{
         barres.classList.add("navbar-toggler-icon");
         croix.classList.add("d-none");
-      }
+    }
 
 }
