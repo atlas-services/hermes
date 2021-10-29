@@ -2,12 +2,11 @@
 var barres = document.querySelector('#navbar-toggler-button');
 var croix = document.querySelector('#navbar-toggler-span');
 var menu = document.querySelector('#navbarSupportedContent');
-var items = document.querySelectorAll('.nav-link, :not(.dropdown)');
+var items = document.querySelectorAll('.nav-link, li:not(.dropdown)');
 
-document.querySelector('.navbar-toggler').addEventListener('click', function(e) {
+document.querySelector('.navbar-toggler').addEventListener('click', function(event) {
 
-  // openCloseNavbarButton();
-
+    // openCloseNavbarButton();
 });
 
 var i;
