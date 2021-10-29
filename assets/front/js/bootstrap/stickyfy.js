@@ -7,9 +7,10 @@ const jQuery = $;
 
 // Get the header
     var header = document.getElementById("mainNav");
-    var sticky = header.offsetTop;
-
-    window.onload = function() {footerify()};
+    if(header != null) {
+        var sticky = header.offsetTop;
+        window.onload = function() {footerify()};
+    }
 
     function footerify() {
 
@@ -37,14 +38,16 @@ const jQuery = $;
     
         // Add the sticky class to the header when you reach its scroll position. Remove "sticky-top" when you leave the scroll position
         function stickyfy() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky-top");
-                var bgcolor = $('#mainNav').data('navBgcolorShrink');
-                $(".sticky .container ul").css("background-color", bgcolor);
-                $(".footer").css("position", 'relative');
-            } else {
-                header.classList.remove("sticky-top");
-                $(".footer").css("position", 'absolute');
+            if(header != null){
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky-top");
+                    var bgcolor = $('#mainNav').data('navBgcolorShrink');
+                    $(".sticky .container ul").css("background-color", bgcolor);
+                    $(".footer").css("position", 'relative');
+                } else {
+                    header.classList.remove("sticky-top");
+                    $(".footer").css("position", 'absolute');
+                }
             }
         }
 
