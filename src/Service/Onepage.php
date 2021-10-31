@@ -46,6 +46,10 @@ class Onepage
             $sheet = $this->em
                 ->getRepository(Sheet::class)
                 ->findOneBy(['code'=> $sheet_code]);
+            $template = $this->em
+                ->getRepository(Template::class)
+                ->findOneBy(['code'=> 'libre']);
+
             if(is_null($sheet)) {
 
                 // add sheet
@@ -56,38 +60,44 @@ class Onepage
                 $sheet->setSummary('Menu ' . $libre);
                 $sheet->setSlug($slug);
 
-            // add menu
-            $menu = new Menu();
-            $menu->setCode($libre);
-            $menu->setName($libre);
-            $menu->setPosition(1);
-            $menu->setSlug($slug);
-            $menu->setSheet($sheet);
+                // add menu
+                $menu = new Menu();
+                $menu->setCode($libre);
+                $menu->setName($libre);
+                $menu->setPosition(1);
+                $menu->setSlug($slug);
+                $menu->setSheet($sheet);
+
+                // add section
+                $section = new Section();
+                $section->setName('section-'.str_replace(' ', '-', $libre));
+                $section->setPosition(1);
+                $section->setTemplateWidth(12);
+                $section->setMenu($menu);
+                $section->setTemplate($template);
 
             $this->em->persist($sheet);
             $this->em->persist($menu);
-        }else{
-            $menu = $this->em
-                ->getRepository(Menu::class)
-                ->findOneBy(['code'=> $libre]);
-        }
+            $this->em->persist($section);
+            }else{
+                $menu = $this->em
+                    ->getRepository(Menu::class)
+                    ->findOneBy(['code'=> $libre]);
+                $section = $this->em
+                    ->getRepository(Section::class)
+                    ->findOneBy(['name'=> 'section-'.str_replace(' ', '-', $libre)]);
+            }
 
-        $template = $this->em
-            ->getRepository(Template::class)
-            ->findOneBy(['code'=> 'libre']);
+
         $nbposts = count($this->em
             ->getRepository(Post::class)
             ->findAll());
+            if(0 == $nbposts){
+                $nbposts = 1;
+            }
         $content = "";
         foreach ($libres as $key => $template_libre ){
             $position = $key + $nbposts ;
-            // add section
-            $section = new Section();
-            $section->setName('section-'.str_replace(' ', '-', $libre.$position));
-            $section->setPosition($position);
-            $section->setTemplateWidth(12);
-            $section->setMenu($menu);
-            $section->setTemplate($template);
             // add Post
             $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $template_libre['code'])));
             $content = $this->twig->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre]);
@@ -99,7 +109,6 @@ class Onepage
             $post->setSection($section);
             $post->setContent($content);
 
-            $this->em->persist($section);
             $this->em->persist($post);
         }
 
@@ -115,9 +124,8 @@ class Onepage
             $section->setMenu($menu);
             $section->setTemplate($template);
 
-
             // add Post
-            $menu_libre = $this->twig->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres]);       $content = $this->twig->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre]);
+            $menu_libre = $this->twig->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres]);
             $post = new Post();
             $post->setName("menu-".$libre);
             $post->setPosition(0);
