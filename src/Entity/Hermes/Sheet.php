@@ -38,6 +38,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Sheet
 {
+    const ONE_PAGE = 'one-page';
+    const ONE_PAGE_LIBELLE = 'one page';
+
     use IdTrait;
     use ActiveTrait;
     use CodeTrait;
