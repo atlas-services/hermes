@@ -34,52 +34,53 @@ class Onepage
 
     public function addOnePageHmsLibre($config_manager, $config, $libres){
 
-        $libre = Sheet::ONE_PAGE;
-        $slug = strtolower($libre);
+        $onepage = Sheet::ONE_PAGE;
+        $slug = strtolower($onepage);
 
         try {
-            $config_nav_bar =  $config_manager
-                ->getRepository(Config::class, 'config')
-                ->findOneBy(['code'=> 'nav_bar']);
-            $config_nav_bar->setValue(Sheet::ONE_PAGE_LIBELLE);
-            $sheet_code = 'new_sheet'.$libre;
-            $sheet = $this->em
-                ->getRepository(Sheet::class)
-                ->findOneBy(['code'=> $sheet_code]);
             $template = $this->em
                 ->getRepository(Template::class)
                 ->findOneBy(['code'=> 'libre']);
 
-            if(is_null($sheet)) {
+            $config_nav_bar =  $config_manager
+                ->getRepository(Config::class, 'config')
+                ->findOneBy(['code'=> 'nav_bar']);
+            $config_nav_bar->setValue(Sheet::ONE_PAGE_LIBELLE);
+            $config_manager->persist($config_nav_bar);
 
+             $sheet = $this->em
+                ->getRepository(Sheet::class)
+                ->findOneBy(['code'=> $onepage]);
+
+            if(is_null($sheet)) {
                 // add sheet
                 $sheet = new Sheet();
-                $sheet->setCode($sheet_code);
-                $sheet->setName($libre);
+                $sheet->setCode($onepage);
+                $sheet->setName($onepage);
                 $sheet->setPosition(1);
-                $sheet->setSummary('Menu ' . $libre);
+                $sheet->setSummary('Menu ' . $onepage);
                 $sheet->setSlug($slug);
 
                 // add menu
                 $menu = new Menu();
-                $menu->setCode($libre);
-                $menu->setName($libre);
+                $menu->setCode($onepage);
+                $menu->setName($onepage);
                 $menu->setPosition(1);
                 $menu->setSlug($slug);
                 $menu->setSheet($sheet);
 
-            $this->em->persist($sheet);
-            $this->em->persist($menu);
-//            $this->em->persist($section);
-            }else{
+                $this->em->persist($sheet);
+                $this->em->persist($menu);
+            }
+            else{
                 $menu = $this->em
                     ->getRepository(Menu::class)
-                    ->findOneBy(['code'=> $libre]);
+                    ->findOneBy(['code'=> $onepage]);
             }
 
             // add section
             $num_section = $this->getOnepageSectionNumber($menu);
-            $section_name = 'section-'.str_replace(' ', '-', $libre).'-'.$num_section;
+            $section_name = 'section-'.str_replace(' ', '-', $onepage).'-'.$num_section;
             $section = new Section();
             $section->setName($section_name);
             $section->setPosition($num_section);
@@ -89,13 +90,7 @@ class Onepage
             $this->em->persist($section);
 
             // add Posts
-            $nbposts = count($this->em
-                ->getRepository(Post::class)
-                ->findAll());
-                if(0 == $nbposts){
-                    $nbposts = 1;
-                }
-            $content = "";
+            $nbposts = $this->getOnepagePostNumber();
             foreach ($libres as $key => $template_libre ){
                 $position = $key + $nbposts ;
                 // add Post
@@ -104,7 +99,7 @@ class Onepage
                 $content .= $this->twig->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config);
 
                 $post = new Post();
-                $post->setName($libre.$position);
+                $post->setName($onepage.$position);
                 $post->setPosition($position);
                 $post->setSection($section);
                 $post->setContent($content);
@@ -112,7 +107,7 @@ class Onepage
                 $this->em->persist($post);
             }
 
-            $section_menu_name = 'section-'.str_replace(' ', '-', "menu-".$libre);
+            $section_menu_name = 'section-'.str_replace(' ', '-', "menu-".$onepage);
             $onePageSection = $this->em
                 ->getRepository(Section::class)
                 ->findOneBy(['name'=> $section_menu_name]);
@@ -127,7 +122,7 @@ class Onepage
                 // add Post
                 $menu_libre = $this->twig->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres]);
                 $post = new Post();
-                $post->setName("menu-".$libre);
+                $post->setName("menu-".$onepage);
                 $post->setPosition(0);
                 $post->setSection($section);
                 $post->setContent($menu_libre);
@@ -135,7 +130,6 @@ class Onepage
                 $this->em->persist($section);
                 $this->em->persist($post);
             }
-            $config_manager->persist($config_nav_bar);
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
         }
@@ -147,11 +141,21 @@ class Onepage
     }
 
     private function getOnepageSectionNumber($menu){
-        $sections = $menu->getSections();
-        if(0 == count($sections)){
+        $nbsections = count($menu->getSections());
+        if(0 == $nbsections){
             return 1;
         }
-        return count($sections);
+        return $nbsections;
+    }
+
+    private function getOnepagePostNumber(){
+        $nbposts = count($this->em
+            ->getRepository(Post::class)
+            ->findAll());
+        if(0 == $nbposts){
+            return 1;
+        }
+        return $nbposts;
     }
 
     public function getActiveConfig($config_manager)
