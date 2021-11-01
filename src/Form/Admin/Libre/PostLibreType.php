@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,16 +22,6 @@ class PostLibreType extends AbstractType
         $options['label_name']= 'post.name';
         $options['tooltip']= 'Nom du post';
         parent::buildForm($builder, $options);
-        if ($options['section']) {
-            $builder
-                ->add('section', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                    'required' => false,
-                    'class' => 'App\Entity\Hermes\Section',
-                    'choice_label' => 'template',
-                    'label_format' => 'section.template',
-                    'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
-                ]);
-        }
         $builder
             ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
             'constraints' => $options['name_constraints'],
@@ -44,13 +35,6 @@ class PostLibreType extends AbstractType
     //                        'title'=> $options['title']
             ]
         ]);
-        if ($options['url']) {
-            $builder
-                ->add('url', 'Symfony\Component\Form\Extension\Core\Type\UrlType', [
-                    'required' => false,
-                    'label' => 'global.url',
-                ]);
-        }
         if ($options['image_file']) {
             $builder
                 ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
@@ -69,6 +53,12 @@ class PostLibreType extends AbstractType
                 'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']
             ]);
         }
+        $builder
+            ->add('save', SubmitType::class, [
+                'icon_before' => '<i class="fa fa-save"></i>',
+                'label_html' => true,
+                'label' => 'global.update'
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

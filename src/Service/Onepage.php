@@ -40,7 +40,7 @@ class Onepage
         try {
             $template = $this->em
                 ->getRepository(Template::class)
-                ->findOneBy(['code'=> 'libre']);
+                ->findOneBy(['code'=> Template::TEMPLATE_LIBRE]);
 
             $config_nav_bar =  $config_manager
                 ->getRepository(Config::class, 'config')
@@ -137,6 +137,73 @@ class Onepage
         $this->em->flush();
         $config_manager->flush();
         return ['info' => 'Page créée'];
+
+    }
+
+    public function getPostOnePage($type= Template::TEMPLATE_LIBRE){
+
+        $onepage = Sheet::ONE_PAGE;
+        $slug = strtolower($onepage);
+
+        try {
+            $template = $this->em
+                ->getRepository(Template::class)
+                ->findOneBy(['code'=> $type]);
+
+             $sheet = $this->em
+                ->getRepository(Sheet::class)
+                ->findOneBy(['code'=> $onepage]);
+
+            if(is_null($sheet)) {
+                // add sheet
+                $sheet = new Sheet();
+                $sheet->setCode($onepage);
+                $sheet->setName($onepage);
+                $sheet->setPosition(1);
+                $sheet->setSummary('Menu ' . $onepage);
+                $sheet->setSlug($slug);
+
+                // add menu
+                $menu = new Menu();
+                $menu->setCode($onepage);
+                $menu->setName($onepage);
+                $menu->setPosition(1);
+                $menu->setSlug($slug);
+                $menu->setSheet($sheet);
+
+                $this->em->persist($sheet);
+                $this->em->persist($menu);
+            }
+            else{
+                $menu = $this->em
+                    ->getRepository(Menu::class)
+                    ->findOneBy(['code'=> $onepage]);
+            }
+
+            // add section
+            $num_section = $this->getOnepageSectionNumber($menu);
+            $section_name = 'section-'.str_replace(' ', '-', $onepage).'-'.$num_section;
+            $section = new Section();
+            $section->setName($section_name);
+            $section->setPosition($num_section);
+            $section->setTemplateWidth(12);
+            $section->setMenu($menu);
+            $section->setTemplate($template);
+
+            $this->em->persist($menu);
+
+            // ne pas persister post!
+            $position = 1;
+            $post = new Post();
+            $post->setName($onepage.$position);
+            $post->setPosition($position);
+            $post->setSection($section);
+
+        }catch (\Exception $e){
+            return ['warning' => $e->getMessage()];
+        }
+
+        return $post ;
 
     }
 

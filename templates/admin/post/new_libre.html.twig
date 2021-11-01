@@ -1,0 +1,12 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.new_post'|trans() }}{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+    {{ include('admin/post/_form_libre.html.twig') }}
+
+    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+{% endblock %}
