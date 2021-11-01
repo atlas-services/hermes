@@ -68,75 +68,74 @@ class Onepage
                 $menu->setSlug($slug);
                 $menu->setSheet($sheet);
 
-                // add section
-                $section = new Section();
-                $section->setName('section-'.str_replace(' ', '-', $libre));
-                $section->setPosition(1);
-                $section->setTemplateWidth(12);
-                $section->setMenu($menu);
-                $section->setTemplate($template);
-
             $this->em->persist($sheet);
             $this->em->persist($menu);
-            $this->em->persist($section);
+//            $this->em->persist($section);
             }else{
                 $menu = $this->em
                     ->getRepository(Menu::class)
                     ->findOneBy(['code'=> $libre]);
-                $section = $this->em
-                    ->getRepository(Section::class)
-                    ->findOneBy(['name'=> 'section-'.str_replace(' ', '-', $libre)]);
             }
 
-
-        $nbposts = count($this->em
-            ->getRepository(Post::class)
-            ->findAll());
-            if(0 == $nbposts){
-                $nbposts = 1;
-            }
-        $content = "";
-        foreach ($libres as $key => $template_libre ){
-            $position = $key + $nbposts ;
-            // add Post
-            $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $template_libre['code'])));
-            $content = $this->twig->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre]);
-            $content .= $this->twig->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config);
-
-            $post = new Post();
-            $post->setName($libre.$position);
-            $post->setPosition($position);
-            $post->setSection($section);
-            $post->setContent($content);
-
-            $this->em->persist($post);
-        }
-
-        $section_name = 'section-'.str_replace(' ', '-', "menu-".$libre);
-        $onePageSection = $this->em
-            ->getRepository(Section::class)
-            ->findOneBy(['name'=> $section_name]);
-        if(is_null($onePageSection)){
+            // add section
+            $num_section = $this->getOnepageSectionNumber($menu);
+            $section_name = 'section-'.str_replace(' ', '-', $libre).'-'.$num_section;
             $section = new Section();
             $section->setName($section_name);
-            $section->setPosition(0);
+            $section->setPosition($num_section);
             $section->setTemplateWidth(12);
             $section->setMenu($menu);
             $section->setTemplate($template);
-
-            // add Post
-            $menu_libre = $this->twig->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres]);
-            $post = new Post();
-            $post->setName("menu-".$libre);
-            $post->setPosition(0);
-            $post->setSection($section);
-            $post->setContent($menu_libre);
-
             $this->em->persist($section);
-            $this->em->persist($post);
-        }
-        $config_manager->persist($config_nav_bar);
 
+            // add Posts
+            $nbposts = count($this->em
+                ->getRepository(Post::class)
+                ->findAll());
+                if(0 == $nbposts){
+                    $nbposts = 1;
+                }
+            $content = "";
+            foreach ($libres as $key => $template_libre ){
+                $position = $key + $nbposts ;
+                // add Post
+                $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $template_libre['code'])));
+                $content = $this->twig->render('admin/hermes/menu-libre/href.html.twig', ['template' => $template_libre]);
+                $content .= $this->twig->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config);
+
+                $post = new Post();
+                $post->setName($libre.$position);
+                $post->setPosition($position);
+                $post->setSection($section);
+                $post->setContent($content);
+
+                $this->em->persist($post);
+            }
+
+            $section_menu_name = 'section-'.str_replace(' ', '-', "menu-".$libre);
+            $onePageSection = $this->em
+                ->getRepository(Section::class)
+                ->findOneBy(['name'=> $section_menu_name]);
+            if(is_null($onePageSection)){
+                $section = new Section();
+                $section->setName($section_menu_name);
+                $section->setPosition(0);
+                $section->setTemplateWidth(12);
+                $section->setMenu($menu);
+                $section->setTemplate($template);
+
+                // add Post
+                $menu_libre = $this->twig->render('admin/hermes/menu-libre/hms-1.html.twig', ['titre' => 'libre', 'templates' => $libres]);
+                $post = new Post();
+                $post->setName("menu-".$libre);
+                $post->setPosition(0);
+                $post->setSection($section);
+                $post->setContent($menu_libre);
+
+                $this->em->persist($section);
+                $this->em->persist($post);
+            }
+            $config_manager->persist($config_nav_bar);
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
         }
@@ -145,6 +144,14 @@ class Onepage
         $config_manager->flush();
         return ['info' => 'Page créée'];
 
+    }
+
+    private function getOnepageSectionNumber($menu){
+        $sections = $menu->getSections();
+        if(0 == count($sections)){
+            return 1;
+        }
+        return count($sections);
     }
 
     public function getActiveConfig($config_manager)

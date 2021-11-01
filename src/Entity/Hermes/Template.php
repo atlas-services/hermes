@@ -27,6 +27,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Template
 {
+    const TEMPLATE_LIBRE = 'libre';
+    const TEMPLATE_LISTE = 'folio1';
+
     use IdTrait;
     use ActiveTrait;
     use CodeTrait;
