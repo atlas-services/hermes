@@ -21,6 +21,8 @@ class LibreController extends AbstractAdminController
      */
     public function onePageHmsLibre(Request $request, Onepage $onepage): Response
     {
+        $config_manager = $this->getDoctrine()->getManager('config');
+        $onepage-> setOnePageConfig($config_manager);
 
         $form = $this->createForm(TemplateLibreHmsCollectionType::class );
         $form->handleRequest($request);
@@ -34,7 +36,7 @@ class LibreController extends AbstractAdminController
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
                 }
                 $configuration = $this->getActiveConfig();
-                $message = $onepage->addOnePageHmsLibre($this->getDoctrine()->getManager('config'), $configuration, $libres);
+                $message = $onepage->addOnePageHmsLibre($config_manager, $configuration, $libres);
                 $this->addFlash(array_keys($message)[0], $message[array_keys($message)[0]]);
                 return $this->redirectToRoute('admin_index');
             }
@@ -54,8 +56,7 @@ class LibreController extends AbstractAdminController
      */
     public function onePageLibre(Request $request, Onepage $onepage): Response
     {
-
-        $post = $onepage->getPostOnePage(Template::TEMPLATE_LIBRE);
+        $post = $onepage->getOnePagePostLibre(Template::TEMPLATE_LIBRE);
 
         $form = $this->createForm(PostLibreType::class, $post);
         $form->handleRequest($request);
