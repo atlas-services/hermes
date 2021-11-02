@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,6 +70,21 @@ class PostListeType extends AbstractType
                 'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']
             ]);
         }
+        $builder->add('save', SubmitType::class, [
+                'icon_before' => '<i class="fa fa-save"></i>',
+                'label_html' => true,
+                'label' => 'global.update'
+            ])
+            ->add('saveListe', SubmitType::class, [
+                'icon_before' => '<i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i>',
+                'label_html' => true,
+                'label' =>  'global.new_post_liste'
+            ])
+            ->add('saveAndAddPost', SubmitType::class, [
+                'icon_before' => '<i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i>',
+                'label_html' => true,
+                'label' =>  'global.update_next'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

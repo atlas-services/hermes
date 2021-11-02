@@ -93,7 +93,7 @@ class Onepage
 
     }
 
-    public function getOnePagePostLibre($type= Template::TEMPLATE_LIBRE){
+    public function getOnePagePostByTemplateType($type= Template::TEMPLATE_LIBRE){
 
         try{
             $onepage = Sheet::ONE_PAGE;

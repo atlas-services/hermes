@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Hermes\Template;
 use App\Form\Admin\Libre\PostLibreType;
+use App\Form\Admin\Liste\PostListeType;
 use App\Service\Onepage;
 use App\Form\Admin\Libre\TemplateLibreHmsCollectionType;
 use App\Form\Admin\Libre\MenuLibreType;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LibreController extends AbstractAdminController
 {
     /**
-     * @Route("/one-page/hms-libre/", name="add_page_hms_libre", methods={"GET|POST"})
+     * @Route("/one-page/hms-libre/", name="add_onepage_libre_hms", methods={"GET|POST"})
      */
     public function onePageHmsLibre(Request $request, Onepage $onepage): Response
     {
@@ -56,7 +57,7 @@ class LibreController extends AbstractAdminController
      */
     public function onePageLibre(Request $request, Onepage $onepage): Response
     {
-        $post = $onepage->getOnePagePostLibre(Template::TEMPLATE_LIBRE);
+        $post = $onepage->getOnePagePostByTemplateType(Template::TEMPLATE_LIBRE);
 
         $form = $this->createForm(PostLibreType::class, $post);
         $form->handleRequest($request);
@@ -81,5 +82,45 @@ class LibreController extends AbstractAdminController
 
         return $this->render('admin/post/new_libre.html.twig', $array);
     }
+
+    /**
+     * @Route("/one-page/liste", name="add_onepage_liste", methods={"GET","POST"})
+     */
+    public function onePageListe(Request $request, Onepage $onepage): Response
+    {
+
+        $post = $onepage->getOnePagePostByTemplateType(Template::TEMPLATE_LISTE);
+        $section = $post->getSection();
+        $menu = $section->getMenu();
+
+        $options['saveAndAdd'] = true;
+        $form = $this->createForm(PostListeType::class, $post, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            if ($form->get('saveListe')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            if ($form->get('saveAndAddPost')->isClicked()) {
+//                return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
+                return $this->redirectToRoute('post_new_section_liste', ['section'=> $section->getId()]);
+            }
+            return $this->redirectToRoute('menu_index');
+        }
+
+        $array = [
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/new_liste.html.twig', $array);
+    }
+
 
 }
