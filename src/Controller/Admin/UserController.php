@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin/user")
  */
-class UserController extends AbstractController
+class UserController extends AbstractAdminController
 {
     /**
      * @Route("/", name="user_index", methods={"GET"})
@@ -23,9 +23,11 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('admin/user/index.html.twig', [
+        $array = [
             'users' => $users,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/user/index.html.twig', $array);
     }
 
     /**
@@ -49,11 +51,12 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('user_index');
         }
-
-        return $this->render('admin/user/new.html.twig', [
+        $array = [
             'user' => $user,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/user/new.html.twig', $array);
     }
 
     /**
@@ -88,10 +91,13 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('admin/user/edit.html.twig', [
+        $array = [
             'user' => $user,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/user/edit.html.twig', $array);
     }
 
     /**

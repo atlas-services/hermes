@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin/config")
  */
-class ConfigController extends AbstractController
+class ConfigController extends AbstractAdminController
 {
 
 
@@ -40,10 +40,13 @@ class ConfigController extends AbstractController
             return $this->redirectToRoute('admin_index');
         }
 
-        return $this->render('admin/config/new.html.twig', [
+        $array = [
             'config' => $config,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/config/new.html.twig', $array);
     }
 
     /**
@@ -64,10 +67,11 @@ class ConfigController extends AbstractController
         }
 
         $config = $configRepository->getConfigByTypeOrderByCode($type);
-
-        return $this->render('admin/config/index.html.twig', [
+        $array = [
             'configs' => $config,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/config/index.html.twig', $array);
     }
 
     /**
@@ -75,9 +79,11 @@ class ConfigController extends AbstractController
      */
     public function show(Config $config): Response
     {
-        return $this->render('admin/config/show.html.twig', [
+        $array = [
             'config' => $config,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/config/show.html.twig', $array);
     }
 
     /**
@@ -114,11 +120,12 @@ class ConfigController extends AbstractController
 
             return $this->redirectToRoute('admin_index');
         }
-
-        return $this->render('admin/config/edit.html.twig', [
+        $array = [
             'config' => $config,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/config/edit.html.twig', $array);
     }
 
     /**
