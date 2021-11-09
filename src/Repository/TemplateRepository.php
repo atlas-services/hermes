@@ -59,16 +59,48 @@ class TemplateRepository extends ServiceEntityRepository
         ;
         return $qb;
     }
+
+    public function getQbTemplateLibre()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.code = :libre ' )
+            ->setParameter('libre',  'libre' )
+        ;
+
+        return $qb;
+    }
+
     public function getTemplateLibre()
     {
-        $result = $this->getQbTemplates()
-            ->where('s.code = :libre ' )
-            ->setParameter('libre',  'libre ' )
+        $result = $this->getQbTemplateLibre()
             ->getQuery()
             ->getOneOrNullResult()
         ;
 
         return $result;
     }
+
+
+    public function getQbTemplateListe()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.code = :libre ' )
+            ->setParameter('libre',  'folio1' )
+        ;
+
+        return $qb;
+    }
+
+
+    public function getQbTemplateLibreHms()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.code like :libre ' )
+            ->setParameter('libre',  '%hms-%' )
+        ;
+
+        return $qb;
+    }
+
 
 }

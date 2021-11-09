@@ -33,7 +33,7 @@ class ActiveFormListener
         // if this listener only applies to certain entity types,
         // add some code to check the entity type as early as possible
 
-            if ('form' == $config->getCode()) {
+            if ('forms' == $config->getCode()) {
                 if(ContactInterface::CONTACT == $config->getValue()){
                     $form = $config->getValue();
 //                    $entityManager = $args->getObjectManager();

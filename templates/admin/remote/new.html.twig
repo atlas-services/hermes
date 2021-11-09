@@ -3,9 +3,9 @@
 {% block title %}{{ 'global.remote'|trans() }}{% endblock %}
 
 {% block content %}
-    <h1>Create new remote</h1>
+    <h1 class="text-secondary">Create new remote</h1>
 
     {{ include('admin/remote/_form.html.twig') }}
 
-    <a href="{{ path('remote_index') }}">back to list</a>
+    <a class="hms-color1" href="{{ path('remote_index') }}">back to list</a>
 {% endblock %}

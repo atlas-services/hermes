@@ -107,7 +107,7 @@ class ConfigController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager('config')->flush();
 
-            if('form' == $config->getCode()){
+            if('forms' == $config->getCode()){
                 $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();
                 // Ajouter les formulaires configurés
 

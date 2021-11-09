@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Sheet;
 use App\Form\Admin\SheetType;
+use App\Form\Admin\Libre\SheetLibreType;
+use App\Form\Admin\Liste\SheetListeType;
 use App\Repository\SheetRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +19,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 /**
  * @Route("/{_locale}/admin")
  */
-class SheetController extends AbstractController
+class SheetController extends AbstractAdminController
 {
     /**
      * @Route("/page/", name="sheet_index", methods={"GET"})
@@ -27,24 +29,21 @@ class SheetController extends AbstractController
     {
         $route = $request->attributes->get('_route');
         $sheets = $sheetRepository->findAll();
-        $config_form = $this->getDoctrine()->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'form']);
+        $config_form = $this->getDoctrine()->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'forms']);
 
-        if('sheet_index' == $route){
-            return $this->render('admin/sheet/index.html.twig', [
-                'sheets' => $sheets,
-                'config' => $config_form,
-            ]);
-        }
-        if('sheet_form_index' == $route){
-            return $this->render('admin/sheet/form.html.twig', [
-                'sheets' => $sheets,
-                'config' => $config_form,
-            ]);
-        }
-        return $this->render('admin/sheet/index.html.twig', [
+        $array = [
             'sheets' => $sheets,
             'config' => $config_form,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        if('sheet_index' == $route){
+            return $this->render('admin/sheet/index.html.twig', $array);
+        }
+        if('sheet_form_index' == $route){
+            return $this->render('admin/sheet/form.html.twig', $array);
+        }
+        return $this->render('admin/sheet/index.html.twig', $array);
     }
 
     /**
@@ -70,10 +69,70 @@ class SheetController extends AbstractController
             }
         }
 
-        return $this->render('admin/sheet/new.html.twig', [
+        $array = [
             'sheet' => $sheet,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/new.html.twig', $array);
+    }
+
+    /**
+     * @Route("/nouvelle-page_libre", name="sheet_new_libre", methods={"GET","POST"})
+     */
+    public function newLibre(Request $request,SheetRepository $sheetRepository): Response
+    {
+        $position_sheet = $sheetRepository->getMaxPosition();
+        $sheet = new Sheet();
+        $sheet->setPosition($position_sheet);
+        $form = $this->createForm(SheetLibreType::class, $sheet,['saveLibre' => true]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($sheet);
+            $entityManager->flush();
+            if ($form->get('saveLibre')->isClicked()) {
+                return $this->redirectToRoute('menu_section_post_new_sheet_libre', ['sheet'=> $sheet->getSlug()]);
+            }
+        }
+
+        $array = [
+            'sheet' => $sheet,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/sheet/new_libre.html.twig', $array);
+    }
+
+    /**
+     * @Route("/nouvelle-page_liste", name="sheet_new_liste", methods={"GET","POST"})
+     */
+    public function newListe(Request $request,SheetRepository $sheetRepository): Response
+    {
+        $position_sheet = $sheetRepository->getMaxPosition();
+        $sheet = new Sheet();
+        $sheet->setPosition($position_sheet);
+        $form = $this->createForm(SheetListeType::class, $sheet,['saveListe' => true]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($sheet);
+            $entityManager->flush();
+            if ($form->get('saveListe')->isClicked()) {
+                return $this->redirectToRoute('menu_section_post_new_sheet_liste', ['sheet'=> $sheet->getSlug()]);
+            }
+        }
+
+        $array = [
+            'sheet' => $sheet,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/new_liste.html.twig', $array);
     }
 
     /**
@@ -81,9 +140,12 @@ class SheetController extends AbstractController
      */
     public function show(Sheet $sheet): Response
     {
-        return $this->render('admin/sheet/show.html.twig', [
+        $array = [
             'sheet' => $sheet,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/show.html.twig', $array);
     }
 
     /**
@@ -114,10 +176,13 @@ class SheetController extends AbstractController
             return $this->redirectToRoute('sheet_index');
         }
 
-        return $this->render('admin/sheet/edit.html.twig', [
+        $array = [
             'sheet' => $sheet,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/edit.html.twig', $array);
     }
 
     /**

@@ -41,8 +41,8 @@ class Page
         /*
          * @TODO simplification config
          */
-        if (isset($config['form'])) {
-            $menus = $this->getActiveForm($menus, $config['form']);
+        if (isset($config['forms'])) {
+            $menus = $this->getActiveForm($menus, $config['forms']);
         }
 
         $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug);

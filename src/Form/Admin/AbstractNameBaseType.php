@@ -27,7 +27,7 @@ abstract class AbstractNameBaseType extends AbstractType
                     'label' => $options['label_name'],
                     'attr'=> ['class' => 'mb-3'],
                     'label_attr'=> [
-                        'data-toggle' => 'tooltip',
+                        'data-bs-toggle' => 'tooltip',
                         'data-placement'=> 'left',
                         'data-html' => 'true',
 //                        'title'=> $options['title']

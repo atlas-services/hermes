@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="row mb-2">
-    <h1 class="col-lg-3">{{ 'menu.list'|trans() }}</h1>
+    <h1 class="text-secondary">{{ 'menu.list'|trans() }}</h1>
         <select class="mt-4 select2 bg-primary" id="select_page" >
             <option value="{{ 'menu.all'|trans() }}" >{{ 'menu.all_text'|trans() }}</option>
             {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
@@ -27,8 +27,8 @@
         {% for menu in menus|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.sheet.name <=> b.sheet.name) %}
             <tr class="{{ menu.id }}" >
                 <td>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="menu-active custom-control-input" id="{{ menu.id }}"  {{ menu.isActive ? 'checked': '' }} >
+                    <div class="form-check form-switch form-switch-sm">
+                        <input type="checkbox" class="menu-active form-check-input" id="{{ menu.id }}"  {{ menu.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ menu.id }}"></label>
                     </div>
                 </td>
@@ -60,5 +60,5 @@
         </tbody>
     </table>
 
-    <a type="button" class="btn h-bg-success text-white " id="menu-add" href="{{ path('menu_section_post_new_sheet', {'sheet': 'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
+    <a type="button" class="btn btn-outline-secondary hms-bg-color1 text-white " id="menu-add" href="{{ path('menu_section_post_new_sheet', {'sheet': 'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Hermes\Post;
+use App\Form\Traits\ImageFileTrait;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostType extends AbstractNameBaseType
 {
+    use ImageFileTrait;
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $options['label_name']= 'post.name';
@@ -45,12 +47,7 @@ class PostType extends AbstractNameBaseType
         }
         if ($options['image_file']) {
             $builder
-                ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
-                    'required' => false,
-                    'label' => 'global.image',
-                    'translation_domain'=> 'messages',
-                    'download_uri' => false,
-                ]);
+                ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', $this->getImafileOptions());
         }
         if ($options['content']) {
         $builder
@@ -67,31 +64,24 @@ class PostType extends AbstractNameBaseType
             'allow_add' => true,
             'allow_delete' => true,
         ]);
-        $builder->add('startPublishedAt', DateType::class, [
-            'required'=> false,
-            'label_format' => 'global.startPublishedAt',
-            'widget' => 'single_text',
-            // this is actually the default format for single_text
-            'format' => 'yyyy-MM-dd',
-        ]);
-        $builder->add('endPublishedAt', DateType::class, [
-            'required'=> false,
-            'label_format' => 'global.endPublishedAt',
-            'widget' => 'single_text',
-            // this is actually the default format for single_text
-            'format' => 'yyyy-MM-dd',
-        ]);
-
-
-            $builder
-                ->add('product', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                    'required' => false,
-                    'class' => 'App\Entity\Hermes\Product',
-                    'choice_label' => 'name',
-//                    'label_format' => 'section.template',
-                    'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
-                ]);
-
+        if ($options['startPublishedAt']) {
+            $builder->add('startPublishedAt', DateType::class, [
+                'required' => false,
+                'label_format' => 'global.startPublishedAt',
+                'widget' => 'single_text',
+                // this is actually the default format for single_text
+                'format' => 'yyyy-MM-dd',
+            ]);
+        }
+        if ($options['endPublishedAt']) {
+            $builder->add('endPublishedAt', DateType::class, [
+                'required' => false,
+                'label_format' => 'global.endPublishedAt',
+                'widget' => 'single_text',
+                // this is actually the default format for single_text
+                'format' => 'yyyy-MM-dd',
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -103,6 +93,8 @@ class PostType extends AbstractNameBaseType
             'position' => true,
             'url' => true,
             'name' => true,
+            'startPublishedAt' => true,
+            'endPublishedAt' => true,
             'name_required'=> false,
             'name_constraints'=> new NotBlank(['message'=> 'error_message.post.name']),
             'content' => true,

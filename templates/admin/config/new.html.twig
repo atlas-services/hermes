@@ -3,11 +3,11 @@
 {% block title %}{{ 'config.label'|trans() }}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-success">{{ 'config.label'|trans() }}</h1>
 
     {{ include('admin/config/_form.html.twig') }}
 
-    <a href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     </div>
 {% endblock %}

@@ -28,12 +28,6 @@ class ConfigType extends AbstractBaseType
                     'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
                 ]);
         }
-//            else{
-//                $builder
-//                    ->add('value',TextType::class, [
-//                        'required'   => false,
-//                    ] );
-//            }
         $builder
             ->add('summary');
         if ($options['type_image']) {
@@ -77,33 +71,10 @@ class ConfigType extends AbstractBaseType
                 '11/12' => '11',
                 '12/12' => '12',
             ];
-//            $options_pct = [
-//                '10%' => '10%',
-//                '20%' => '20%',
-//                '30%' => '30%',
-//                '40%' => '40%',
-//                '50%' => '50%',
-//                '60%' => '60%',
-//                '70%' => '70%',
-//                '80%' => '80%',
-//                '90%' => '90%',
-//                '100%' => '100%',
-//            ];
-//            $options_pct_value = [
-//                '10%' => '10',
-//                '20%' => '20',
-//                '30%' => '30',
-//                '40%' => '40',
-//                '50%' => '50',
-//                '60%' => '60',
-//                '70%' => '70',
-//                '80%' => '80',
-//                '90%' => '90%',
-//                '100%' => '100',
-//            ];
             $options_template_value = [
                 'one_page_1' => 'one_page_1',
                 'one_page_2' => 'one_page_2',
+                'one_page_3' => 'one_page_3',
                 'front' => 'front',
             ];
             switch ($code) {
@@ -121,10 +92,10 @@ class ConfigType extends AbstractBaseType
                 case 'nav_bar':
                     $choice = true;
                     $options = [
+                        'one page' => 'one page',
                         'base' => 'base',
                         'left' => 'left',
                         'full' => 'full',
-                        'none' => 'none',
                     ];
                     break;
                 // nav_bar
@@ -154,28 +125,10 @@ class ConfigType extends AbstractBaseType
                     break;
                 // affiche_img_hermes
                 case 'affiche_img_hermes':
-                    $choice = true;
-                    $options = [
-                        'true'  => true,
-                        'false' => false ,
-                    ];
-                    break;
                 // affiche_logo_top
                 case 'affiche_logo_top':
-                    $choice = true;
-                    $options = [
-                        'true'  => true,
-                        'false' => false ,
-                    ];
-                    break;
                 // affiche_search
                 case 'affiche_search':
-                    $choice = true;
-                    $options = [
-                        'true'  => true,
-                        'false' => false ,
-                    ];
-                    break;
                 // affiche_footer
                 case 'footer_affiche':
                     $choice = true;
@@ -184,6 +137,7 @@ class ConfigType extends AbstractBaseType
                         'false' => false ,
                     ];
                     break;
+
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
@@ -261,7 +215,7 @@ class ConfigType extends AbstractBaseType
                 'modale' => 'modale',
                 'footer' => 'footer',
                 'réseaux sociaux' => 'network',
-                'formulaires' => 'form',
+                'formulaires' => 'forms',
                 'nd' => null,
             ],
             'nav_bar_choices' => [

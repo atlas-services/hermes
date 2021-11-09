@@ -24,16 +24,15 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-     .addEntry('hermes_react', './assets/js/react/hermes_react.js')
-     .addStyleEntry('email', './assets/css/inline/email.scss')
-     .addStyleEntry('hermes_pdf', './assets/css/pdf.css')
+     .addEntry('hermes_react', './assets/commun/js/react/hermes_react.js')
      .addEntry('hermes_admin', './assets/admin/js/app.js')
      .addEntry('hermes_front', './assets/front/js/hermes/app.js')
      .addEntry('hermes_one_page_1', './assets/front/js/hermes/app_one_page_1.js')
      .addEntry('hermes_one_page_2', './assets/front/js/hermes/app_one_page_2.js')
-     .addEntry('hermes_nav_base', './assets/front/js/hermes/nav_base.js')
-     .addEntry('hermes_nav_left', './assets/front/js/hermes/nav_left.js')
-     .addEntry('hermes_nav_full', './assets/front/js/hermes/nav_full.js')
+     .addEntry('hermes_one_page_3', './assets/front/js/hermes/app_one_page_3.js')
+     .addEntry('hermes_nav_base', './assets/front/js/navbar/nav_base.js')
+     .addEntry('hermes_nav_left', './assets/front/js/navbar/nav_left.js')
+     .addEntry('hermes_nav_full', './assets/front/js/navbar/nav_full.js')
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

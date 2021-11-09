@@ -5,6 +5,7 @@ parameters:
   hermes_list_templates: '%env(APP_LIST_TEMPLATES)%'
   hermes_list_type_image: '%env(APP_LIST_TYPE_IMAGE)%'
   hermes_database_dir: '%env(DATABASE_URL)%'
+  hermes_database_config_dir: '%env(DATABASE_CONFIG_URL)%'
   hermes_path_content_image: '%env(APP_PATH_CONTENT_IMAGES)%'
   hermes_path_content_image_post: '%env(APP_PATH_CONTENT_IMAGES_POSTS)%'
   hermes_path_cache_image: '%env(APP_PATH_CACHE_IMAGES)%'
@@ -72,9 +73,9 @@ parameters:
         code: folio4
         name:  Folio serré
       folio5:
-        summary: Folio serré
+        summary: Folio gallery 2
         code: folio5
-        name:  Folio serré
+        name:  Folio gallery 2
       folio_video1:
           summary: Folio video classique
           code: folio_video1
@@ -87,6 +88,75 @@ parameters:
         summary: Carte de présentation avec photo
         code: card2
         name: Carte de présentation avec photo
+      hms-1:
+        summary: A la carte
+        code: hms-1
+        name: Template à la carte
+      hms-2:
+        summary: Vêtement
+        code: hms-2
+        name: Template vêtement
+      hms-3:
+        summary: Video
+        code: hms-3
+        name: Template video
+      hms-4:
+        summary: Présentation liste
+        code: hms-4
+        name: Template liste
+      hms-5:
+        summary: Image serrée
+        code: hms-5
+        name: Template serré
+      hms-6:
+        summary: forme Modal
+        code: hms-6
+        name: Template modal
+      hms-7:
+        summary: Image
+        code: hms-7
+        name: Template image
+      hms-8:
+        summary: Présentation
+        code: hms-8
+        name: Template Présentation
+      hms-16:
+        summary: Présentation Image
+        code: hms-16
+        name: Présentation Image
+      hms-17:
+        summary: Présentation Image V2
+        code: hms-17
+        name: Présentation Image V2
+      hms-9:
+        summary: Page d'accueil
+        code: hms-9
+        name: Page d'accueil
+      hms-15:
+        summary: Page d'accueil-2
+        code: hms-15
+        name: Page d'accueil-2
+      hms-10:
+        summary: Description
+        code: hms-10
+        name: Template Description
+      hms-11:
+        summary: Fonctionnalité
+        code: hms-11
+        name: Template Fonctionnalité
+      hms-12:
+        summary: Entête-1
+        code: hms-12
+        name: Entête-1
+      hms-13:
+        summary: Entête-2
+        code: hms-13
+        name: Entête-2
+      hms-14:
+        summary: Entête-3
+        code: hms-14
+        name: Entête-3
+
     config:
       site:
         template:
@@ -307,11 +377,7 @@ parameters:
         footer_about:
           summary: texte du footer about
           value: ~
-      form:
-        form:
+      forms:
+        forms:
           summary: Formulaires
           value: contact
-      ecommerce:
-        ecommerce_delivery_free_amount:
-          summary: Montant au dela duquel la livraison est offerte
-          value: 0

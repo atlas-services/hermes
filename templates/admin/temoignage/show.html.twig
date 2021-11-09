@@ -3,8 +3,8 @@
 {% block title %}{{ 'temoignage.show'|trans() }}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1>{{ 'temoignage.show'|trans() }} {{ temoignage.name }}</h1>
+    <a class="hms-color1" href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1 class="text-secondary">{{ 'temoignage.show'|trans() }} {{ temoignage.name }}</h1>
 
     <table class="table">
         <tbody>
@@ -27,9 +27,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
-    <a href="{{ path('temoignage_edit', {'id': temoignage.id }) }}">edit</a>
+    <a class="hms-color1" href="{{ path('temoignage_edit', {'id': temoignage.id }) }}">edit</a>
 
     {{ include('admin/temoignage/_delete_form.html.twig') }}
 {% endblock %}

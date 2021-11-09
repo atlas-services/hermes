@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin/add")
  */
-class InitController extends AbstractController
+class InitController extends AbstractAdminController
 {
     /**
      * @Route("/config/", name="add_config", methods={"GET"})
@@ -118,7 +118,8 @@ class InitController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
         $slug = strtolower($template_libre);
-        $content = $this->render('admin/exemple/base/'.$template_libre.'.html.twig', $config)->getContent();
+//        $content = $this->render('admin/hermes/template-libre/'.$template_libre.'.html.twig', $config)->getContent();
+        $content = $this->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config)->getContent();
         try {
             $sheet = $this->getDoctrine()
                 ->getRepository(Sheet::class)
@@ -145,6 +146,7 @@ class InitController extends AbstractController
                 $section = new Section();
                 $section->setName('section-'.str_replace(' ', '-', $libre));
                 $section->setPosition(1);
+                $section->setTemplateWidth(12);
                 $section->setMenu($menu);
                 $section->setTemplate($template);
                 // add Post
@@ -168,25 +170,5 @@ class InitController extends AbstractController
         $this->addFlash('info', 'Page créée!');
         return $this->redirectToRoute('admin_index');
     }
-
-    private function getActiveConfig()
-    {
-        /*
-         * On récupère la configuration du site.
-         */
-        $entityManager = $this->getDoctrine()->getManager('config');
-        $configuration = $entityManager->getRepository(Config::class, 'config')->findBy(['active' => true]);
-        foreach ($configuration as $conf) {
-            $config[$conf->getCode()] = $conf;
-            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
-                $config_simple[$conf->getCode()] = $conf->getValue();
-            }else{
-                $config_simple[$conf->getCode()] = $conf;
-            }
-        }
-
-        return $config_simple ;
-    }
-
 
 }

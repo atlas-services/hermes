@@ -3,9 +3,9 @@
 {% block title %}{{ 'global.template'|trans() }}{% endblock %}
 
 {% block content %}
-    <h1>Create new Template</h1>
+    <h1 class="text-secondary">Create new Template</h1>
 
     {{ include('admin/template/_form.html.twig') }}
 
-    <a href="{{ path('template_index') }}">back to list</a>
+    <a class="hms-color1" href="{{ path('template_index') }}">back to list</a>
 {% endblock %}

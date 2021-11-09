@@ -69,6 +69,9 @@ class HermesPrepareInstall extends Command
             $this->hermes_database_dir = explode('/',$data );
             // add uploaded file directories
             $creat1 = $this->addDir($this->hermes_database_dir, $base);
+            $data_config = substr($this->container->getParameter('hermes_database_config_dir'), $pos);
+            $this->hermes_database_config_dir = explode('/',$data_config );
+            $creat1_config = $this->addDir($this->hermes_database_config_dir, $base);
             $this->hermes_path_content_image = explode('/',$this->container->getParameter('hermes_path_content_image') );
             $creat2 = $this->addDir($this->hermes_path_content_image,$public);
             $this->hermes_path_content_image_post = explode('/',$this->container->getParameter('hermes_path_content_image_post'));
@@ -79,10 +82,9 @@ class HermesPrepareInstall extends Command
             echo "An error occurred while creating your directories at ".$exception->getPath();
         }
 
-        $created = array_merge($creat1,$creat2,$creat3, $creat4);
+        $created = array_merge($creat1, $creat1_config, $creat2, $creat3, $creat4);
 
         return $created;
-
 
     }
 

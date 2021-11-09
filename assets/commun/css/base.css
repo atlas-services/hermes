@@ -1,0 +1,18 @@
+@import "../../../node_modules/bootstrap";
+@import "../../../node_modules/font-awesome";
+@import "../../../node_modules/fontsource-oswald";
+@import "../../../node_modules/fontsource-bai-jamjuree";
+@import '../../../node_modules/fontsource-sofia';
+@import '../../../node_modules/fontsource-snowburst-one';
+@import '../../../node_modules/fontsource-alfa-slab-one';
+@import '../../../node_modules/fontsource-lato';
+@import "hermes-bootstrap.css";
+@import "../../../node_modules/select2/dist/css/select2.css";
+@import "../../../node_modules/select2-theme-bootstrap4/dist/select2-bootstrap.css";
+
+@import "../../../node_modules/@icon/icofont/icofont.css";
+@import "../../../node_modules/boxicons/css/boxicons.min.css";
+@import "../../../node_modules/animate.css";
+@import "../../../node_modules/venobox/venobox/venobox.min.css";
+@import "../../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css";
+@import "../../../node_modules/aos/dist/aos.css";

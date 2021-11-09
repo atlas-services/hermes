@@ -9,58 +9,53 @@ import "fontsource-oswald";
 import "@fontsource/raleway";
 import "fontsource-snowburst-one";
 import "fontsource-sofia";
-import '../../css/roboto-condensed.css';
-import '../../css/merryweather.css';
+import '../../css/bootstrap/roboto-condensed.css';
+import '../../css/bootstrap/merryweather.css';
 
 /*
     css
  */
-import '../../css/portfolio.css';
-import '../../css/timeline.css';
+import '../../css/bootstrap/portfolio.css';
+import '../../css/bootstrap/timeline.css';
 import '../../css/hermes/app.css';
-import '../../css/isotope.css';
-import '../../css/carousel.css';
+import '../../css/bootstrap/isotope.css';
+import '../../css/bootstrap/carousel.css';
 import '../../css/bootstrap/site-footer.css';
 import '../../css/bootstrap/video.css';
 import '../../css/bootstrap/gallery.css';
 import '../../css/bootstrap/anime.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import '../../css/bootstrap/todo.css';
 
 /*
     js
  */
-import $ from 'jquery';
-const jQuery = $;
-import 'bootstrap';
+// import $ from 'jquery';
+// const jQuery = $;
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'accordion';
 import 'collapse';
 import 'carousel';
 import 'bootstrap-slider';
-import 'jquery.easing';
-import 'jquery-lazy';
+// import 'jquery.easing';
+// import 'jquery-lazy';
 import 'owl.carousel';
-import 'jquery-waypoints/waypoints.min';
-import 'jquery.counterup';
-import 'select2';
-import '../../../js/scroll';
-import '../../../js/scrollspy';
-import '../../../js/chevron';
-import '../../../js/menu';
-import '../../../js/search';
-import '../../../js/anime';
-import '../../../js/copy';
-import '../../../js/select2';
-import '../hermes/modale';
-import '../hermes/cart';
-import '../hermes/delivery';
-import '../hermes/stripe';
-import '../hermes/wow';
-import '../hermes/videos';
+// import 'jquery-waypoints/waypoints.min';
+// import 'jquery.counterup';
+// import '../../../commun/js/scroll';
+// import '../../../commun/js/scrollspy';
+import '../../../commun/js/js-chevron';
+import '../../../commun/js/js-responsive-button';
+import '../../../commun/js/js-menu'; // @todo
+import '../../../commun/js/search';
+import '../../../commun/js/anime';
+import '../../../commun/js/copy';
+import '../bootstrap/modale';
+import '../bootstrap/wow';
+import '../bootstrap/videos';
 // import '../hermes/aos';
-import '../../../js/lazy';
+// import '../../../commun/js/lazy';
 // import '../hermes/video';
 // import '../hermes/todo';
-import '../hammer.min';
-import '../carousel';
-import '../hermes/adress';
-
+// import '../bootstrap/hammer.min';
+// import '../bootstrap/carousel';

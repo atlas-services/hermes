@@ -1,0 +1,19 @@
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+{{ form_start(form) }}
+{% if( app.request.attributes.get('_route') in ['menu_section_post_new_sheet_liste']) %}
+    {% for form_section in form.sections  %}
+        {{ form_row(form_section.template) }}
+        {% for form_posts in form_section  %}
+            {% if( 'posts' == form_posts.vars.name) %}
+                {% for form_post in form_posts %}
+                    {{ form_row(form_post.name) }}
+                    {{ form_row(form_post.imageFile) }}
+                {% endfor  %}
+            {% endif  %}
+        {% endfor  %}
+    {% endfor  %}
+{% endif %}
+{{ form_row(form.save) }}
+{{ form_row(form.saveAndAddPost) }}
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

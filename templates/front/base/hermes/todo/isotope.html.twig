@@ -1,5 +1,5 @@
 <!-- Section Libre -->
-<section id="{{ section.name }}" class="section_content px-0">
+<section id="{{ section.name }}" class="px-0">
     {% if('previsualidation_sheet' == app.request.get('_route')) %}
         {% set posts = section.getPrevisualisationPosts %}
     {% else %}
@@ -36,7 +36,7 @@
                 <div style="color: {{ isotope_color }}"   class="col-12 element-item {{ listtag }} rounded  " data-category="{{ post.name }}" style=" background-color: {{ isotope_bgcolor }} ">
                     <h5 class="name text-center">{{ post.name }}</h5>
                     {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
                             {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                                 <img class="center col-12"
                                      src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_isotope_filter') }}"
@@ -56,7 +56,7 @@
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
+                <div class="close-modal" data-bs-dismiss="modal">
                     <div class="lr">
                         <div class="rl"></div>
                     </div>
@@ -77,7 +77,7 @@
                     </div>
                     {{ post.content|raw }}
                     <div class="row center">
-                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <button class="btn btn-primary" data-bs-dismiss="modal" type="button">
                             <i class="fas fa-times"></i>
                             {{ 'general.close'|trans() }}
                         </button>

@@ -1,5 +1,5 @@
 <!-- Contact Section -->
-<section id="section_contact" class="section_content pb-0  px-0 container col-lg-{{ container_width|col_lg() }} col-12 text-center" >
+<section id="section_contact" class="pb-0  px-0 container col-lg-{{ container_width|col_lg() }} col-12 text-center" >
     <div class="container col-lg-{{ content_container_width|col_lg() }} " >
         <div class="row">
             <div class="col-lg-12 col-12 text-center">
@@ -13,7 +13,7 @@
         </div>
         <div class="mt-5 mb-5 row">
             <div class="col-lg-12 col-12 pl-0 text-center">
-                {% if 'none' == nav_bar  %}
+                {% if 'one page' == nav_bar  %}
                     <p> <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="js-scroll-trigger main-btn wow fadeInUp rounded-pill" data-wow-delay="0.8s" data-wow-duration="1.0s" href="{{ path('sheet') }}">Retour sur le site</a></p>
                 {% else %}
                 <h3 style="color:#8f2160;font-family:'Merriweather';font-style: italic;">Témoignages</h3>

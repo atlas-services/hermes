@@ -27,17 +27,17 @@
 {% endblock head %}
 
 <body class="h-palatino">
-<div class="content">
+<div class="content container mt-5 pt-5 shadow-sm shadow-lg">
     {% block body %}
         {% block nav %}
             <section id="section_top" class="container"></section>
             {% include '/admin/nav.html.twig' %}
         {% endblock nav %}
-    <div class="container"  style="background-color: {{ bgcolor }}">
+{#    <div class="container" >#}
         {% block content %}
             {% include '/admin/breadcrumb.html.twig' %}
         {% endblock content %}
-    </div>
+{#    </div>#}
         <section id="section_bottom"></section>
     {% endblock body %}
 </div>

@@ -1,23 +1,46 @@
+
 <!-- Portfolio Grid -->
-<section id="portfolio" class="section_content pb-0  px-0" style="background-color:{{ content_bgcolor }}">
-    <div class="container col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}">
-        <div class="row ml-5" id="folio">
-        <div id="staggering">
-            {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                    <span class="staggering">
-                        <img class="stagge" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_150') }}"/>
-                    </span>
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
+
+{% set maxlengthname = folio_container_width|col_nb_char() %}
+{% set maxlengthcontent = 35 %}
+
+<section id="portfolio" class="pb-0  px-0" style="background-color:{{ content_bgcolor }}">
+    <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}" >
+            <div id="folio" class="row mx-auto px-0">
+                {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+                    {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                        <div class="column mx-auto px-0 ">
+                            <div class="content_gallery text-center">
+                                {% if( section.template2 == '') %}
+                                    <img alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}" />
+                                {% else %}
+                                    {% if section.template2.code in ['modale1', 'modale3' ] %}
+                                        <!-- Modale1  -->
+                                        <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-bs-toggle="modal"
+                                           data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                                           data-bs-target="#image-gallery">
+                                            <img alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}" />
+                                        </a>
+                                    {% endif %}
+                                    {% if( 'modale2' ==  section.template2.code) %}
+                                        <!-- Modale2  -->
+                                        <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                            <img alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}" />
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                                <h6>
+                                    {{ post.name|striptags|u.truncate(maxlengthname, '...') }}
+                                </h6>
+                                <p>
+                                    {{ post.content|striptags|u.truncate(maxlengthname, '...')|raw }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
     </div>
 </section>
-
 <!-- Modale -->
-{% include 'front/base/hermes/template/modale2.html.twig' %}
-
-
-
-
+{% include 'front/base/hermes/template/modale.html.twig' %}

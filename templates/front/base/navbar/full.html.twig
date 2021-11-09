@@ -24,7 +24,7 @@
                 <li class="nav__list-item {{ active }} {{ dropdown }} " >
                 {% set colorlink =  nav_link_color  %}
             {% endif %}
-                <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="js-scroll {{ dropdowntoggle }} " role="button"  data-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
+                <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="js-scroll {{ dropdowntoggle }} " role="button"  data-bs-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
                    href={{ href }}>{{ sheet_name }}
                 </a>
                 {% if (listmenu.name is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}

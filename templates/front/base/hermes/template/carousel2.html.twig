@@ -1,5 +1,5 @@
 <!-- Section carousel -->
-<section id="{{ section.name }}" class="section_content pb-0  px-0">
+<section id="{{ section.name }}" class="pb-0  px-0">
     {% if('previsualidation_sheet' == app.request.get('_route')) %}
         {% set posts = section.getPrevisualisationPosts %}
     {% else %}
@@ -8,7 +8,7 @@
 
     <div class="container col-12 col-lg-{{ (section.templateWidth ?? carousel_container_width)|col_lg()  }}" style="background-color:{{ content_bgcolor }}" >
             <!--Carousel Wrapper-->
-            <div id="carousel-fade" class="carousel slide carousel-fade" data-ride="carousel">
+            <div id="carousel-fade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <!--Indicators-->
                 <ol class="carousel-indicators">
                     {% for key, post in posts|sort((a, b) => a.position <=> b.position) %}
@@ -16,7 +16,7 @@
                         {% if 0 == key %}
                             {% set active = 'active' %}
                         {% endif %}
-                        <li data-target="#carousel-fade" data-slide-to="{{ key }}" class="{{ active }}"></li>
+                        <li data-bs-target="#carousel-fade" data-bs-slide-to="{{ key }}" class="{{ active }}"></li>
                     {% endfor %}
                 </ol>
                 <!--/.Indicators-->
@@ -29,7 +29,7 @@
                         {% endif %}
                         <div class="carousel-item  col-12 px-0 {{ active }}">
                             {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                            <img style="max-height: 850px;" class="d-block w-100 " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                            <img class="d-block w-100 " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                  alt="{{ post.name }}">
                             {% endif %}
                             <div class="carousel-caption">
@@ -39,15 +39,15 @@
                                 {% else %}
                                     {% if section.template2.code in ['modale1', 'modale3' ] %}
                                         <!-- Modale1  -->
-                                         <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                                         <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-bs-toggle="modal"
                                            data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
-                                           data-target="#image-gallery">
+                                           data-bs-target="#image-gallery">
                                             {{ post.name }}
                                         </a>
                                     {% endif %}
                                     {% if( 'modale2' ==  section.template2.code) %}
                                     <!-- Modale2  -->
-                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                     <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
                                         {{ post.name }}
                                     </a>
                                     {% endif %}
@@ -59,11 +59,11 @@
                 </div>
                 <!--/.Slides-->
                 <!--Controls-->
-                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="carousel-control-prev" href="#carousel-fade" role="button" data-slide="prev">
+                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="carousel-control-prev" href="#carousel-fade" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="carousel-control-next" href="#carousel-fade" role="button" data-slide="next">
+                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="carousel-control-next" href="#carousel-fade" role="button" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>

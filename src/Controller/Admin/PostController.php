@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin")
  */
-class PostController extends AbstractController
+class PostController extends AbstractAdminController
 {
     /**
      * @Route("/contenu/", name="post_index", methods={"GET"})
@@ -28,10 +28,66 @@ class PostController extends AbstractController
             ->getRepository(Post::class)
             ->findAll();
 
-        return $this->render('admin/post/index.html.twig', [
+        $array = [
             'posts' => $posts,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/index.html.twig', $array);
     }
+
+    /**
+     * @Route("/nouveau-contenu/modele/{section}/liste", name="post_new_section_liste", methods={"GET","POST"})
+     * @ParamConverter("section", class="App\Entity\Hermes\Section")
+     */
+    public function postNewSectionListe(Request $request, ?Section $section, PostRepository $postRepository): Response
+    {
+        $numpost = count($section->getPosts()) + 1;
+        $post = new Post();
+        $post->setName($section->getMenu()->getName().' '.$numpost);
+        $post->setSection($section);
+        $options['section'] = false;
+        $options['active'] = false;
+        $options['position'] = false;
+        $options['url'] = false;
+        $options['content'] = false;
+        $options['startPublishedAt'] = false;
+        $options['endPublishedAt'] = false;
+        $options['saveAndAddSectionPost'] = true;
+        $form = $this->createForm(PostType::class, $post, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $position = $postRepository->getMaxPosition($section);
+            $post->setPosition($position);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+            if ($form->get('saveAndAddPost')->isClicked()) {
+                $section = $post->getSection();
+                return $this->redirectToRoute('post_new_section_liste', ['section'=> $section->getId()]);
+            }
+            if ($form->get('saveAndAddSectionPost')->isClicked()) {
+                $section = $post->getSection();
+                $menu = $section->getMenu();
+                return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
+            }
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            return $this->redirectToRoute('menu_index');
+        }
+
+        $array = [
+            'form' => $form->createView(),
+            'menu' => $section->getMenu() ?? '',
+            'post' => $post ?? ''
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/new.html.twig', $array);
+    }
+
 
     /**
      * @Route("/nouveau-contenu/modele/{section}", name="post_new_section", methods={"GET","POST"})
@@ -70,13 +126,15 @@ class PostController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/post/new.html.twig', [
+        $array = [
             'form' => $form->createView(),
             'menu' => $section->getMenu() ?? '',
             'post' => $post ?? ''
-        ]);
-    }
+        ];
+        $array = $this->mergeActiveConfig($array);
 
+        return $this->render('admin/post/new.html.twig', $array);
+    }
 
     /**
      * @Route("/nouveau-contenu", name="post_new", methods={"GET","POST"})
@@ -96,10 +154,13 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('admin/post/new.html.twig', [
+        $array = [
             'post' => $post,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/new.html.twig', $array);
     }
 
     /**
@@ -108,9 +169,12 @@ class PostController extends AbstractController
     public function show(Post $post): Response
     {
 
-        return $this->render('admin/post/show.html.twig', [
+        $array = [
             'post' => $post,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/show.html.twig', $array);
     }
 
     /**
@@ -147,10 +211,13 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('admin/post/edit.html.twig', [
+        $array = [
             'post' => $post,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/edit.html.twig', $array);
     }
 
     /**

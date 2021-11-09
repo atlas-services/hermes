@@ -3,7 +3,7 @@
 {% block title %}{{ 'sheet.list'|trans() }}{% endblock %}
 
 {% block content %}
-    <h1>remote index</h1>
+    <h1 class="text-secondary">remote index</h1>
 
     <table class="table">
         <thead>
@@ -27,7 +27,7 @@
                 <td>{{ remote.directory }}</td>
                 <td>{{ remote.updatedAt|date() }}</td>
                 <td>
-                    <a href="{{ path('remote_edit', {'id': remote.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('remote_edit', {'id': remote.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}

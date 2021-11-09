@@ -1,24 +1,23 @@
 <!-- Portfolio Grid -->
 {#<section id="{{ section.name ~ section.template.name }}" class="portfolio bg-light page-section" >#}
-<section id="portfolio" class="section_content pb-0  px-0" style="background-color:{{ content_bgcolor }}">
+<section id="portfolio" class="pb-0  px-0" style="background-color:{{ content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}" >
-        {% if(section.remote is null) %}
             <div class="row">
                 <div class="col-lg-12 col-12 text-center">
                 </div>
             </div>
             <div id="folio" class="row">
                 {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-                    <div class="col-md-{{ section.posts|list_length }} col-sm-{{ section.posts|list_length }} portfolio-item text-center border h-border-success border-left-0 border-right-0 border-top-0">
+                    <div class="col-md-{{ section.templateNbCol|nb_col }} col-lg-{{ section.templateNbCol|nb_col }} portfolio-item text-center border h-border-success border-left-0 border-right-0 border-top-0">
                         {% if( section.template2 == '') %}
                             <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                  alt="{{ post.name }}">
                         {% else %}
                             {% if section.template2.code in ['modale1', 'modale3' ] %}
                                 <!-- Modale1  -->
-                                 <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-toggle="modal"
+                                 <a class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}"  data-bs-toggle="modal"
                                    data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
-                                   data-target="#image-gallery">
+                                   data-bs-target="#image-gallery">
                                     <div style="background-color:{{ content_link_color }}; " onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='0'"
                                          class="portfolio-hover">
                                         <div class="portfolio-hover-content">
@@ -33,7 +32,7 @@
                             {% endif %}
                             {% if( 'modale2' ==  section.template2.code) %}
                                 <!-- Modale2  -->
-                                 <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ post.id }}">
+                                 <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
                                     <div style="background-color:{{ content_link_color }}; " onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='0'"
                                          class="portfolio-hover">
                                         <div class="portfolio-hover-content">
@@ -54,52 +53,6 @@
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
-        {% if(section.remote is not null) %}
-            <div id="folio" class="row">
-                {% for img , image in  section.remote.images %}
-                    <div class="col-md-{{ section.remote.images|list_length }} col-sm-{{ section.remote.images|list_length }} portfolio-item text-center">
-                        {% if( section.template2 == '') %}
-                            <img class="img-fluid " src="{{ image }}"
-                                 alt="{{ img }}">
-                        {% else %}
-                            {% if section.template2.code in ['modale1', 'modale3' ] %}
-                                <!-- Modale1  -->
-                                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="d-block mb-4 thumbnail portfolio-link" href="#" data-image-id="" data-name="{{ post.name ?? '' }}" data-content="{{ post.content ?? '' }}"  data-toggle="modal"
-                                   data-image ="{{ image }}"
-                                   data-target="#image-gallery">
-                                    <div class="portfolio-hover">
-                                        <div class="portfolio-hover-content">
-                                            <i class="fa fa-plus fa-3x"></i>
-                                        </div>
-                                    </div>
-                                    {% if image is not null %}
-                                        <img class="img-fluid " src="{{ image }}"
-                                             alt="{{ img }}">
-                                    {% endif %}
-                                </a>
-                            {% endif %}
-                            {% if( 'modale2' ==  section.template2.code) %}
-                                <!-- Modale2  -->
-                                 <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link " data-toggle="modal" href="#portfolioModal{{ img }}">
-                                    <div class="portfolio-hover">
-                                        <div class="portfolio-hover-content">
-                                            <i class="fa fa-plus fa-3x"></i>
-                                        </div>
-                                    </div>
-                                    {% if(image is not null) %}
-                                        <img class="img-fluid " src="{{ image }}"  alt="{{ img }}" />
-                                    {% endif %}
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                        {#                    <div class="portfolio-caption">#}
-                        {#                        <h4>{{ image }}</h4>#}
-                        {#                    </div>#}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
     </div>
 </section>
 

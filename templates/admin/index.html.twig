@@ -1,160 +1,88 @@
 {% extends '/admin/base.html.twig' %}
 
 {% block content %}
-    <section id="admin">
-        <p class="text-secondary lead">
+    <section class="mt-4 mt-md-1">
+        <p class="text-secondary lead mt-md-3">
             {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
         </p>
         <p class="text-secondary lead">
-            {{ 'info.admin_presentation'|trans()|raw }}
+            {{ 'info.admin_presentation1'|trans()|raw }}
         </p>
-        <div class="mt-lg-3">
-            <h5 class="mt-lg-4 text-secondary lead">
-                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"
-                          clip-rule="evenodd"/>
-                    <path fill-rule="evenodd"
-                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"
-                          clip-rule="evenodd"/>
-                </svg>
-                {{ 'info.begin'|trans()|raw }} <br/>
-            </h5>
+        <ul class="text-secondary lead">
+            <li class="" style="list-style-type: circle !important ; ">{{ 'info.admin_sous_presentation11'|trans()|raw }}</li>
+            <li style="list-style-type: circle !important; ">{{ 'info.admin_sous_presentation12'|trans()|raw }}</li>
+            <li style="list-style-type: circle !important; ">{{ 'info.admin_sous_presentation13'|trans()|raw }}</li>
+        </ul>
+        <div class="mt-lg-2">
+            <p class="mt-lg-4 text-secondary lead "><i class="fa fa-info-circle"></i> {{  'info.begin1'|trans()|raw }} </p>
+            <p class="mt-lg-4 text-secondary lead"><i class="fa fa-info-circle"></i> {{  'info.begin2'|trans()|raw }} </p>
+            <p class="mt-lg-4 text-secondary lead">{{ 'info.begin3'|trans()|raw }} </p>
+            <p class="mt-lg-4 text-secondary lead">{{ 'info.begin4'|trans()|raw }} </p>
+        </h5>
 
-            <div class="row col-lg-12 mx-auto">
-            <p class="col-lg-12 text-center">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample0" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_0'|trans()|raw }}</button>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_1'|trans()|raw }}</button>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">{{ 'info.new_libelle_sheet_2'|trans()|raw }}</button>
-            </p>
+            {% set mytemplates = {
+                '0': {
+                    'mysrc': '/img/hermes/template/image-2.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-2'}),
+                    'mytitle': 'hms-2',
+                },
+                '1': {
+                    'mysrc': '/img/hermes/template/image-4.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-4'}),
+                    'mytitle': 'hms-4'
+                },
+                '2': {
+                    'mysrc': '/img/hermes/template/image-3.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-3'}),
+                    'mytitle': 'hms-3'
+                },
+                '3': {
+                    'mysrc': '/img/hermes/template/image-7.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-7'}),
+                    'mytitle': 'hms-7'
+                },
+                '4': {
+                    'mysrc': '/img/hermes/template/image-6.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-6'}),
+                    'mytitle': 'hms-6'
+                },
+                '5': {
+                    'mysrc': '/img/hermes/template/image-5.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-5'}),
+                    'mytitle': 'hms-5'
+                },
+                '6': {
+                    'mysrc': '/img/hermes/template/chatNazca.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'Le chat de Nazca'}),
+                    'mytitle': 'Chat de Nazca'
+                },
+                '7': {
+                    'mysrc': '/img/hermes/template/ruee-vers-l-or.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'la-ruee-vers-l-or'}),
+                    'mytitle': 'La ruée vers l\'or'
+                },
+                '8': {
+                    'mysrc': '/img/hermes/template/image-1.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-1'}),
+                    'mytitle': 'hms-1'
+                },
+                '9': {
+                    'mysrc': '/img/hermes/template/image-8.png',
+                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-8'}),
+                    'mytitle': 'hms-8'
+                },
+            }
+            %}
+
+            <div class="row pt-2 pt-md-5 pb-md-4 pb-1">
+                {% for key , value  in mytemplates %}
+                    <div class="col-md-6 px-1 px-md-5 "><img class="img-fluid pb-1 w-100" src="{{  value.mysrc }}" />
+                        <p>{{  value.mytitle ?? ' NC' }}</p>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="row col-lg-12">
-                <div class="col-lg-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample0">
-                        <div class="card card-body">
-                            <p>{{ 'info.new_libelle_sheet_0'|trans()|raw }}</p>
-                            <p>{{ 'info.generate_step_p1'|trans()|raw }}  </p>
-                            <li class="list-unstyled">{{ 'info.generate_step_li1'|trans()|raw }} <a class="btn h-bg-success py-0 px-2 " href="{{ path('add_page', {'libre': 'Vin d\'honneur'}) }}"><i class="fa fa-plus-circle "></i> Vin-d-honneur</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li2'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Qui sommes-nous'}) }}"><i class="fa fa-plus-circle "></i> Qui sommes nous</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li3'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'La ruée vers l\'or'}) }}"><i class="fa fa-plus-circle "></i> Ruée vers l'or</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li4'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Le chat de Nazca'}) }}"><i class="fa fa-plus-circle "></i> Le chat de nazca</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li5'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Gallerie'}) }}"><i class="fa fa-plus-circle "></i> Gallerie</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li6'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Présentation'}) }}"><i class="fa fa-plus-circle "></i> Présentation</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li7'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Présentation-image-de-fond'}) }}"><i class="fa fa-plus-circle "></i> Présentation avec image de fond</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li8'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Fiche'}) }}"><i class="fa fa-plus-circle "></i> Fiche</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li9'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'One page 1'}) }}"><i class="fa fa-plus-circle "></i> One page 1</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li10'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'One page 2'}) }}"><i class="fa fa-plus-circle "></i> One page 2</a> </li>
-                            <li class="list-unstyled">{{ 'info.generate_step_li11'|trans()|raw }} <a class="btn h-bg-success py-0 px-2" href="{{ path('add_page', {'libre': 'Cordonnerie'}) }}"><i class="fa fa-plus-circle "></i> Cordonnerie</a> </li>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="card card-body">
-                            <p>{{ 'info.first_step_p1'|trans()|raw }}</p>
-                            <li class="list-unstyled">{{ 'info.first_step_li1'|trans()|raw }} <a href="{{ path('sheet_index') }}">"{{ 'global.menu_entete'|trans }}"</a></li>
-                            <li class="list-unstyled">{{ 'info.first_step_li2'|trans()|raw }} <a href="{{ path('sheet_new') }}">"{{ 'global.new'|trans }}"</a></li>
-                            <li class="list-unstyled">{{ 'info.first_step_li3'|trans()|raw }} <span class="h-bg-success text-white rounded h-font-size-1 p-2 "><i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i> {{ 'global.add_menu_post'|trans }}</span></li>
-                            <p class="mt-2">{{ 'info.first_step_p2'|trans()|raw }}</p>
-                            <p>{{ 'info.first_step_next'|trans()|raw }} <span class="h-bg-success text-white rounded h-font-size-1 p-2">{{ 'info.new_libelle_sheet_2'|trans()|raw }}</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="collapse multi-collapse" id="multiCollapseExample2">
-                        <div class="card card-body">
-                            <p>{{ 'info.second_step_p1'|trans()|raw }}</p>
-                            <li class="list-unstyled">{{ 'info.second_step_li1'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li2'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li3'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li4'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li5'|trans()|raw }}</li>
-                            <li class="list-unstyled">{{ 'info.second_step_li6'|trans()|raw }}</li>
-                            <p class="mt-2">{{ 'info.second_step_p2'|trans()|raw }}</p>
-                          </div>
-                    </div>
-                </div>
-            </div>
-
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item">#}
-{#                    {% include '/admin/info/index.html.twig' %}#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('sheet_new') }}"> {{ 'global.new_rapid_sheet'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <h5 class="mt-lg-4 text-secondary lead">#}
-{#                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"#}
-{#                     xmlns="http://www.w3.org/2000/svg">#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                </svg>#}
-{#                {{ 'global.update_libelle'|trans()|raw }}#}
-{#            </h5>#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item">#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info" href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info" href="{{ path('section_index') }}"> {{ 'section.list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <h5 class="mt-lg-4 text-secondary lead">#}
-{#                <svg class="bi bi-arrow-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"#}
-{#                     xmlns="http://www.w3.org/2000/svg">#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M10.146 4.646a.5.5 0 01.708 0l3 3a.5.5 0 010 .708l-3 3a.5.5 0 01-.708-.708L12.793 8l-2.647-2.646a.5.5 0 010-.708z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                    <path fill-rule="evenodd"#}
-{#                          d="M6 8a.5.5 0 01.5-.5H13a.5.5 0 010 1H6.5A.5.5 0 016 8zm-2.5 6a.5.5 0 01-.5-.5v-11a.5.5 0 011 0v11a.5.5 0 01-.5.5z"#}
-{#                          clip-rule="evenodd"/>#}
-{#                </svg>#}
-{#                {{ 'global.config_site'|trans()|raw }}#}
-{#            </h5>#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item">#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                    <button type="button" class="btn btn-primary btn-lg">#}
-{#                        <a class="text-info"#}
-{#                           href="{{ path('config_index', {'type': 'form'}) }}"> {{ 'config.affiche_list_formulaire'|trans()|raw }}</a>#}
-{#                    </button>#}
-{#                </li>#}
-{#            </ul>#}
         </div>
     </section>
 
 {% endblock content %}
-
-

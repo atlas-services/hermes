@@ -16,7 +16,7 @@
     <title>{{ title.name ?? ''}}</title>
 
     {% block stylesheets %}
-        {% if 'none' == nav_bar  %}
+        {% if 'one page' == nav_bar  %}
             {% set nav_bar = 'base' %}
         {% endif %}
         {{ encore_entry_link_tags('hermes_nav_'~ nav_bar) }}

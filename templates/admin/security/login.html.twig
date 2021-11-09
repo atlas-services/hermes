@@ -1,93 +1,69 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}{{ 'user.sign_in'|trans() }}{% endblock %}
+{% block title %}Admin Log in{% endblock %}
 
 {% block content %}
-    <section id="container" class="align-content-center col-lg-12 mx-auto" style="font-family:'Bai Jamjuree', sans-serif;">
+    <section id="container" class="align-content-center" style="font-family:'Bai Jamjuree', sans-serif;">
         {% for message in app.flashes('notice') %}
             <div class="alert alert-success">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                 {{ message }}
             </div>
         {% endfor %}
         {% for message in app.flashes('danger') %}
             <div class="alert alert-danger">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                 {{ message }}
             </div>
         {% endfor %}
         {% for message in app.flashes('warning') %}
             <div class="alert alert-warning">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
                 {{ message }}
             </div>
         {% endfor %}
-        <h1 class="h3 mb-5 font-weight-normal h-text-success text-center">{{ 'user.admin'|trans() }}</h1>
-        <div class="row col-12 col-lg-12  mx-auto">
+        <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-            <div class="col-12 col-lg-5 mx-auto">
-                <h1 class="h3 mb-5 font-weight-normal h-text-success text-center">{{ 'user.create'|trans() }}</h1>
-                <form class="col-lg-12" method="post" action="{{ path('app_customer_new') }}">
-                    <div class="col-lg-12 text-center">
-                        <label for="inputEmail" class="sr-only">{{ 'user.firstname'|trans }}</label>
-                        <input type="text" name="firstname" id="inputFirstname" class="col-lg-12 mx-auto form-control h-border-success"
-                               placeholder="{{ 'user.firstname'|trans() }}" required autofocus>
-                        <br>
-                        <label for="inputEmail" class="sr-only">{{ 'user.lastname'|trans }}</label>
-                        <input type="text" name="lastname" id="inputLastname" class="col-lg-12 mx-auto form-control h-border-success"
-                               placeholder="{{ 'user.lastname'|trans() }}" required autofocus>
-                        <br>
-                        <label for="inputEmail" class="sr-only">Email</label>
-                        <input type="email" value="{{ last_username }}" name="email_new" id="inputEmail" class="col-lg-12 mx-auto form-control h-border-success"
-                               placeholder="{{ 'user.email'|trans() }}" required autofocus>
-                        <br>
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" name="password_new" id="inputPassword" class="col-lg-12 mx-auto  form-control h-border-success"
-                               placeholder="{{ 'user.password'|trans() }}" required>
-                        <br>
-                        <br>
-                        <button class="mx-auto btn h-w-30 h-btn-outline-success h-rounded-lg-4 btn-xl mt-3" type="submit">
-                            {{ 'user.new'|trans() }}
-                        </button>
+
+            {% if app.user %}
+            <div class="checkbox mb-3">You are logged in as {{ app.user.username }}, <a class="hms-color1" href="{{ path('app_logout') }}">Logout</a>
+                {% endif %}
+                <div class="col-md-4 mx-auto mt-md-5 pt-md-5 text-center">
+                    <h1 class="h3 mb-3 font-weight-normal h-text-success">{{ 'user.admin'|trans() }}</h1>
+                    <label for="inputEmail" class="sr-only">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="col-lg-4 mx-auto form-control h-border-success"
+                           placeholder="{{ 'user.email'|trans() }}" required autofocus>
+                    <br>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="col-lg-4 mx-auto  form-control h-border-success"
+                           placeholder="{{ 'user.password'|trans() }}" required>
+                    <br>
+                    <br>
+                    <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}" >
+                    <button class="col-md-4 mx-auto btn h-btn-outline-success h-rounded-lg-4 btn-xl mt-3" type="submit">
+                        {{ 'user.sign_in'|trans() }}
+                    </button>
+
+                    <div class="col-md-12 mx-auto mt-5">
+                        <a class="h-text-success text-decoration-none " id="forgotten_password"
+                           href="{{ path('app_forgotten_password') }}">{{ 'user.forgot_password'|trans() }}</a>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div class="col-12 col-lg-5 mx-auto">
-                <form class="col-lg-12" method="post">
-                    <h1 class="h3 mb-5 font-weight-normal h-text-success text-center">{{ 'user.identification'|trans() }}</h1>
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
+                {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
 
-                    {% if app.user %}
-                    <div class="checkbox mb-3">You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                        {% endif %}
-                        <div class="col-lg-12 text-center">
-                            <label for="inputEmail" class="sr-only">Email</label>
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="col-lg-12 mx-auto form-control h-border-success"
-                                   placeholder="{{ 'user.email'|trans() }}" required autofocus>
-                            <br>
-                            <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" name="password" id="inputPassword" class="col-lg-12 mx-auto  form-control h-border-success"
-                                   placeholder="{{ 'user.password'|trans() }}" required>
-                            <br>
-                            <br>
-                            <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}" >
-                            <button class="mx-auto btn h-w-30 h-btn-outline-success h-rounded-lg-4 btn-xl mt-3" type="submit">
-                                {{ 'user.sign_in'|trans() }}
-                            </button>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                #}
 
-                            <div class="col-lg-12 mx-auto mt-5">
-                                <a class="h-text-success text-decoration-none " id="forgotten_password"
-                                   href="{{ path('app_forgotten_password') }}">{{ 'user.forgot_password'|trans() }}</a>
-                            </div>
-                        </div>
-                </form>
-            </div>
-        </div>
-
+{#                <button class="btn btn-lg btn-primary" type="submit">#}
+        </form>
     </section>
 {% endblock %}

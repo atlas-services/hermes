@@ -8,11 +8,12 @@ use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Sheet;
 use App\Form\Admin\BaseMenuType;
 use App\Form\Admin\MenuType;
-use App\Form\Admin\PostType;
-use App\Form\Admin\SectionTemplateType;
+use App\Form\Admin\Libre\MenuLibreType;
+use App\Form\Admin\Liste\MenuListeType;
 use App\Form\Admin\SectionType;
 use App\Repository\MenuRepository;
 use App\Repository\PostRepository;
+use App\Repository\TemplateRepository;
 use PHPUnit\Runner\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 /**
  * @Route("/{_locale}/admin")
  */
-class MenuController extends AbstractController
+class MenuController extends AbstractAdminController
 {
     /**
      * @Route("/menu/", name="menu_index", methods={"GET"})
@@ -36,14 +37,132 @@ class MenuController extends AbstractController
             ->getRepository(Menu::class)
             ->findAll();
 
-        return $this->render('admin/menu/index.html.twig', [
+        $array = [
             'menus' => $menus,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/menu/index.html.twig', $array);
     }
 
     /**
+     * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-libre", name="menu_section_post_new_sheet_libre", methods={"GET","POST"})
+     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
+     */
+    public function menuSectionPostNewSheetLibre(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
+    {
+
+        $menu = new Menu();
+        if(isset($sheet)){
+            $menu->setName('page '. $sheet->getName());
+        }
+        $section= new Section();
+
+        $template = $templateRepository->findOneBy(['code' => 'libre']);
+        $section->setTemplate($template);
+        $options['saveLibre'] = true;
+
+        $post = new Post();
+        $post->setName('contenu '. $menu->getName());
+        $position_post = $postRepository->getMaxPosition($section);
+        $post->setPosition($position_post);
+        $section->addPost($post);
+        $menu->addSection($section);
+        $options['sheet'] = true;
+        if(!is_null($sheet)) {
+            $menu->setSheet($sheet);
+            $options['sheet'] = false;
+        }
+        $form = $this->createForm(MenuLibreType::class, $menu,$options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $position_menu = $menuRepository->getMaxPosition($sheet);
+            $menu->setPosition($position_menu);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($menu);
+            $entityManager->flush();
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            if ($form->get('saveLibre')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            return $this->redirectToRoute('menu_index');
+        }
+
+        $array = [
+            'menu' => $menu,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new_libre.html.twig', $array);
+    }
+
+
+    /**
+     * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-liste", name="menu_section_post_new_sheet_liste", methods={"GET","POST"})
+     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
+     */
+    public function menuSectionPostNewSheetListe(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
+    {
+
+        $menu = new Menu();
+        if(isset($sheet)){
+            $menu->setName( $sheet->getName());
+        }
+        $section= new Section();
+
+        $template = $templateRepository->findOneBy(['code' => 'folio1']);
+        $section->setTemplate($template);
+        $options['saveListe'] = true;
+
+        $post = new Post();
+        $post->setName('contenu '. $menu->getName());
+        $position_post = $postRepository->getMaxPosition($section);
+        $post->setPosition($position_post);
+        $section->addPost($post);
+        $menu->addSection($section);
+        $options['sheet'] = true;
+        if(!is_null($sheet)) {
+            $menu->setSheet($sheet);
+            $options['sheet'] = false;
+        }
+        $form = $this->createForm(MenuListeType::class, $menu,$options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $position_menu = $menuRepository->getMaxPosition($sheet);
+            $menu->setPosition($position_menu);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($menu);
+            $entityManager->flush();
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            if ($form->get('saveListe')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            if ($form->get('saveAndAddPost')->isClicked()) {
+                $section= $menu->getSections()[0];
+                return $this->redirectToRoute('post_new_section_liste', ['section'=> $section->getId()]);
+            }
+            return $this->redirectToRoute('menu_index');
+        }
+
+        $array = [
+            'menu' => $menu,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new_liste.html.twig', $array);
+    }
+
+
+
+    /**
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu", name="menu_section_post_new_sheet", methods={"GET","POST"})
-//     * @ParamConverter("sheet", class="App\Entity\Hermes\Sheet")
      * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
     public function menuSectionPostNewSheet(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository): Response
@@ -88,11 +207,13 @@ class MenuController extends AbstractController
             }
             return $this->redirectToRoute('menu_index');
         }
-
-        return $this->render('admin/menu/new.html.twig', [
+        $array = [
             'menu' => $menu,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new.html.twig', $array);
     }
 
     /**
@@ -100,9 +221,11 @@ class MenuController extends AbstractController
      */
     public function show(Menu $menu): Response
     {
-        return $this->render('admin/menu/show.html.twig', [
+        $array = [
             'menu' => $menu,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/menu/show.html.twig', $array);
     }
 
     /**
@@ -134,10 +257,13 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/menu/edit.html.twig', [
+        $array = [
             'menu' => $menu,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/edit.html.twig', $array);
     }
 
     /**
@@ -167,10 +293,13 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menu_index');
         }
 
-        return $this->render('admin/section/edit.html.twig', [
+        $array = [
             'section' => $section,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/edit.html.twig', $array);
     }
 
 

@@ -3,8 +3,8 @@
 {% block title %}{{ 'user.show'|trans() }}{% endblock %}
 
 {% block content %}
-    <a href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1>{{ 'user.show'|trans() }} {{ user.name }}</h1>
+    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1 class="text-secondary">{{ 'user.show'|trans() }} {{ user.name }}</h1>
 
     <table class="table">
         <tbody>
@@ -23,9 +23,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="hms-color1" href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+    <a class="hms-color1" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 
     {{ include('admin/user/_delete_form.html.twig') }}
 {% endblock %}

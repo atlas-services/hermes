@@ -1,8 +1,8 @@
 import '../../css/bootstrap/animate.css';
 import '../../css/bootstrap/one_page_2.css';
 import '../../css/bootstrap/aos.css';
-import '../../css/venobox.css';
-import '../../css/isotope.css'
+import '../../css/bootstrap/venobox.css';
+import '../../css/bootstrap/isotope.css'
 
 import $ from 'jquery';
 const jQuery = $;

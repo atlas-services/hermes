@@ -3,7 +3,7 @@
 {% block title %}{{ 'blockpost.list'|trans() }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'blockpost.list'|trans() }}</h1>
+    <h1 class="text-secondary">{{ 'blockpost.list'|trans() }}</h1>
 
     <table class="table">
         <thead>
@@ -19,8 +19,8 @@
         {% for blockpost in blockposts|sort((a, b) =>a.block.name <=> b.block.name) |sort((a, b) =>a.position <=> b.position) %}
             <tr>
                 <td>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="blockpost-active custom-control-input" id="{{ blockpost.id }}"  {{ blockpost.isActive ? 'checked': '' }} >
+                    <div class="form-check form-switch form-switch-sm">
+                        <input type="checkbox" class="blockpost-active form-check-input" id="{{ blockpost.id }}"  {{ blockpost.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ blockpost.id }}"></label>
                     </div>
                 </td>
@@ -28,7 +28,7 @@
                 <td>{{ blockpost.name }}</td>
                 <td>{{ blockpost.position }}</td>
                 <td>
-                    <a href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('blockpost_edit', {'id': blockpost.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a type="button" class="btn h-bg-success text-white" id="blockpost-add" href="{{ path('blockpost_new') }}">{{ 'global.new_content'|trans() }}</a>
+    <a type="button" class="btn btn-outline-secondary hms-bg-color1 text-white" id="blockpost-add" href="{{ path('blockpost_new') }}">{{ 'global.new_content'|trans() }}</a>
 {% endblock %}
