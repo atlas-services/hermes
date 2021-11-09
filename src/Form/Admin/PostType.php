@@ -3,6 +3,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Hermes\Post;
+use App\Form\Traits\ImageFileTrait;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostType extends AbstractNameBaseType
 {
+    use ImageFileTrait;
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $options['label_name']= 'post.name';
@@ -45,12 +47,7 @@ class PostType extends AbstractNameBaseType
         }
         if ($options['image_file']) {
             $builder
-                ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
-                    'required' => false,
-                    'label' => 'global.image',
-                    'translation_domain'=> 'messages',
-                    'download_uri' => false,
-                ]);
+                ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', $this->getImafileOptions());
         }
         if ($options['content']) {
         $builder

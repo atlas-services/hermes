@@ -1,6 +1,12 @@
 <!-- Navigation -->
 {#<nav class="navbar navbar-expand-lg navbar-dark ftco-navbar-light fixed-top navbar-shrink" id="mainNav">#}
-<nav class="navbar navbar-expand-lg fixed-top py-0 bg-white shadow-lg" id="mainNav">
+{% set bgcolor = 'bg-white' %}
+{%  if nav_bar is defined %}
+    {%  if nav_bar ==  'one page' %}
+        {% set bgcolor = 'bg-dark' %}
+    {% endif %}
+{% endif %}
+<nav class="navbar navbar-expand-lg fixed-top py-0 {{ bgcolor }} shadow-lg" id="mainNav">
     <div class="container">
         {% if is_granted('ROLE_ADMIN') %}
             <img class="h-25" src="{{ asset('img/hermes.png') }}" alt="admin Hermes">
@@ -24,7 +30,6 @@
         </div>
         <div class="collapse navbar-collapse px-3 " id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
-                <p class="h6 hms-color1 ">{{  nav_bar ??  '' }}</p>
                 <ul class="nav navbar-nav mx-auto">
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="dropdown px-md-4">

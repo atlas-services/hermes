@@ -2,7 +2,7 @@
 {{ form_start(form) }}
 
 <h4 class="col-lg-12 mx-auto mt-4 py-2 rounded h-bg-success text-center text-white"> Templates Hermes </h4>
-<ul class="templates px-0" data-index="{{ form.templates|length > 0 ? form.templates|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.templates.vars.prototype)|e('html_attr') }}" data-remove=" {{ 'global.remove_menu_post'|trans }}"></ul>
+<ul class="templates px-0" data-index="{{ form.templates|length > 0 ? form.templates|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.templates.vars.prototype)|e('html_attr') }}" data-remove=" {#{ 'global.remove_menu_post'|trans }#}"></ul>
     {% for template in form.templates %}
         <li class="list-unstyled">{{ form_row(template.code) }}</li>
     {% endfor %}
@@ -19,6 +19,8 @@
 
     const addTagFormDeleteLink = (templateFormLi) => {
         const removeFormButton = document.createElement('button');
+        removeFormButton.classList.add('col-lg-2');
+        removeFormButton.classList.add('py-md-2');
         removeFormButton.classList.add('my-md-3');
         removeFormButton.classList.add('btn');
         removeFormButton.classList.add('btn-danger');
@@ -42,7 +44,8 @@
         item.classList.add('border');
         item.classList.add('h-border-success');
         item.classList.add('rounded');
-        item.classList.add('col-md-6');
+        item.classList.add('col-md-12');
+        item.classList.add('text-center');
         item.classList.add('px-4');
         item.classList.add('my-4');
         item.classList.add('list-unstyled');

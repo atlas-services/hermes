@@ -4,7 +4,7 @@
     {% if form.position is defined %}
         {{ form_row(form.position) }}
     {% endif %}
-
+    {{ form_row(form.name) }}
     {% if form.imageFile is defined %}
         {{ form_row(form.imageFile) }}
     {% endif %}
@@ -13,7 +13,6 @@
             <td><img  src="{{ asset(vich_uploader_asset(form.vars.data, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
         </tr>
     {% endif  %}
-    {{ form_row(form.name) }}
     {% if form.url is defined %}
         {{ form_row(form.url) }}
     {% endif %}
