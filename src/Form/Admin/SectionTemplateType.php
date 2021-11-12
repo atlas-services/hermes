@@ -4,7 +4,6 @@ namespace App\Form\Admin;
 
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Post;
-use App\Entity\Hermes\Remote;
 use App\Entity\Hermes\Section;
 
 use App\Entity\Hermes\Template;
@@ -34,15 +33,6 @@ class SectionTemplateType extends AbstractType
                 $builder
                     ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
                         'required' => false,
-                        'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
-                    ]);
-            }
-            if ($options['remote_pictures']) {
-                $builder
-                    ->add('remote', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                        'class' => Remote::class,
-                        'required' => false,
-                        'placeholder' => '-- pas d\'image distante --',
                         'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                     ]);
             }
@@ -157,7 +147,6 @@ class SectionTemplateType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Section::class,
             'save_visibility' => true,
-            'remote_pictures' => true,
             'content' => true,
             'url' => true,
             'menu' => false,
@@ -194,13 +183,6 @@ class SectionTemplateType extends AbstractType
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
                 $image_valid = true;
-                if (is_null($data->getRemote())) {
-                    $image_valid = true;
-                } else {
-                    if (is_null($data->getRemote()->getUrl())) {
-                        $image_valid = false;
-                    }
-                }
                 if (!$image_valid) {
                     foreach ($data->getPosts() as $post) {
                         if (!$post->getImageFile() && !$post->getFileName()) {

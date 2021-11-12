@@ -58,7 +58,7 @@ class MenuType extends AbstractNameBaseType
                 'by_reference' => false,
                 'allow_delete' => true,
                 'label'=> false,
-                'entry_options' => ['label' => false, 'save_visibility'=> false, 'full_template' => $options['full_template'], 'remote_pictures'=>true],
+                'entry_options' => ['label' => false, 'save_visibility'=> false, 'full_template' => $options['full_template']],
             ])
         ;
 
