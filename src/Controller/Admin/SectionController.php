@@ -151,7 +151,6 @@ class SectionController extends AbstractAdminController
         ];
 
         // On peut gérer les images remote ici => true
-        $options['remote_pictures'] = true;
         $options['config'] = boolval($config);
 
         $form = $this->createForm(SectionTemplateType::class, $section, $options);

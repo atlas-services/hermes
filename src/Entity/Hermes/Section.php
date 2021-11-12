@@ -16,7 +16,6 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\TemplateTrait;
-use App\Entity\Traits\RemoteTrait;
 use App\Entity\Traits\UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -45,7 +44,6 @@ class Section
     use ActiveTrait;
     use IdTrait;
     use TemplateTrait;
-    use RemoteTrait;
     use PositionTrait;
     use NameTrait;
     use UserTrait;
@@ -112,14 +110,6 @@ class Section
      * @Assert\Length(max=3)
      */
     protected $template2_width;
-
-    /**
-     * @var Remote
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Remote", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $remote;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Menu", inversedBy="sections")
