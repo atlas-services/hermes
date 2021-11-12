@@ -3,11 +3,11 @@
 {% block title %}{{ 'user.new'|trans() }}{% endblock %}
 
 {% block content %}
-    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">{{ 'user.new'|trans }}</h1>
 
     {{ include('admin/user/_form.html.twig') }}
 
-    <a class="hms-color1" href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     </div>
 {% endblock %}
