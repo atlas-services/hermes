@@ -6,7 +6,7 @@
         {% set posts = section.posts %}
     {% endif %}
 
-    <div class="container col-12 col-lg-{{ (section.templateWidth ?? carousel_container_width)|col_lg()  }}" style="background-color:{{ content_bgcolor }}" >
+    <div class="container col-12 col-lg-{{ (section.templateWidth ?? carousel_container_width)|col_lg()  }}" style="background-color:{{ section.templateBgColor ?? content_bgcolor }}" >
             <!--Carousel Wrapper-->
             <div id="carousel-fade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <!--Indicators-->
