@@ -81,6 +81,14 @@ class Section
     protected $template_width;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=7)
+     */
+    protected $template_bgcolor;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer", nullable=true)
@@ -224,6 +232,25 @@ class Section
     public function setTemplateWidth(?int $template_width): void
     {
         $this->template_width = $template_width;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplateBgcolor(): ?string
+    {
+        if( null == $this->template_bgcolor){
+            return '#FFFFFF';
+        }
+        return $this->template_bgcolor;
+    }
+
+    /**
+     * @param string $template_bgcolor
+     */
+    public function setTemplateBgcolor(?string $template_bgcolor): void
+    {
+        $this->template_bgcolor = $template_bgcolor;
     }
 
     /**

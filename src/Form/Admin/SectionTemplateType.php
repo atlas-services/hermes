@@ -10,6 +10,10 @@ use App\Entity\Hermes\Template;
 use App\Repository\TemplateRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,13 +35,13 @@ class SectionTemplateType extends AbstractType
         if (true === $options['config'] || null  === $options['config']) {
             if ($options['position']) {
                 $builder
-                    ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
+                    ->add('position', NumberType::class, [
                         'required' => false,
                         'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                     ]);
             }
             $builder
-                ->add('template', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                ->add('template', EntityType::class, [
                     'class' => Template::class,
                     'query_builder' => function (TemplateRepository $er) use ($options) {
                         if ($options['full_template']) {
@@ -47,12 +51,15 @@ class SectionTemplateType extends AbstractType
                     },
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                 ])
-                ->add('templateWidth', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                ->add('templateWidth', ChoiceType::class, [
                     'choices' => $options['template_width'],
                     'required' => false,
                     'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
                 ])
-                ->add('templateNbCol', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                ->add('templateBgcolor', ColorType::class, [
+                    'required' => false,
+                ])
+                ->add('templateNbCol', ChoiceType::class, [
                     'choices' => [
                         '1' => '1',
                         '2' => '2',
@@ -64,7 +71,7 @@ class SectionTemplateType extends AbstractType
                     'required' => false,
                     'attr' => ['class' => 'templateNbCol select2 custom-select custom-select-lg mb-3 '],
                 ])
-                ->add('templateImageFilter', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                ->add('templateImageFilter', ChoiceType::class, [
                     'choices' => [
                         'Format Bd 154' => 'bd_154',
                         'Format Bd 309' => 'bd_309',
@@ -77,21 +84,21 @@ class SectionTemplateType extends AbstractType
                     'required' => false,
                     'attr' => ['class' => 'templateImageFilter select2 custom-select custom-select-lg mb-3 '],
                 ])
-                ->add('template2', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                ->add('template2', EntityType::class, [
                     'class' => Template::class,
                     'query_builder' => function (TemplateRepository $er) use ($options) {
                         return $er->getQbTemplate2();
                     },
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                 ])
-                ->add('template2Width', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                ->add('template2Width', ChoiceType::class, [
                     'choices' => $options['template_width'],
                     'required' => false,
                     'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
                 ]);
             if ($options['menu']) {
                 $builder
-                    ->add('menu', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    ->add('menu', EntityType::class, [
                         'class' => Menu::class,
                         'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                     ]);

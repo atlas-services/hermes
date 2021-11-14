@@ -4,16 +4,14 @@
 {{ form_start(form) }}
     {% if form.position is defined %}
         {{ form_row(form.position) }}
-
-    {% if form.remote is defined %}
-{#        {{ form_row(form.remote) }}#}
-    {% endif %}
-    {{ form_row(form.template) }}
-    {{ form_row(form.templateWidth) }}
-    {{ form_row(form.templateNbCol) }}
-    {{ form_row(form.templateImageFilter) }}
-    {{ form_row(form.template2) }}
-    {{ form_row(form.template2Width) }}
+        {{ form_row(form.template) }}
+        {{ form_row(form.templateBgcolor) }}
+        {{ form.vars.data.templateBgcolor }}
+        {{ form_row(form.templateWidth) }}
+        {{ form_row(form.templateNbCol) }}
+        {{ form_row(form.templateImageFilter) }}
+        {{ form_row(form.template2) }}
+        {{ form_row(form.template2Width) }}
     {% endif %}
 
     {% if form.posts is defined %}
