@@ -184,6 +184,7 @@ class PostController extends AbstractAdminController
      */
     public function edit(Request $request,$id, Post $post, Menu $menu, PostRepository $postRepository): Response
     {
+        $referer = (string) $request->headers->get('referer');
 //        Le post'est pas unique pour un name donné, aussi il faut le récupérer avec l'id
         $post = $postRepository->findOneById($id);
         $options = ['section'=> false];
@@ -206,8 +207,9 @@ class PostController extends AbstractAdminController
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
             }
             if ($form->get('save')->isClicked()) {
-
+                return $this->redirectToRoute('section_index');
             }
+
             return $this->redirectToRoute('post_index');
         }
 
