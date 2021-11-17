@@ -16,7 +16,7 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
+            <tr class="align-middle">
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
@@ -26,7 +26,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
             </tr>
         {% endfor %}

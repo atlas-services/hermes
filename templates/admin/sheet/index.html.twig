@@ -17,9 +17,9 @@
         <tbody>
         {% for sheet in sheets|sort((a, b) => a.position <=> b.position)  %}
             {% if(sheet.name not in config.value ) %}
-                <tr>
+                <tr class="align-middle">
                     <td>
-                        <div class="form-check form-switch form-switch-sm">
+                        <div class="form-check form-switch form-switch-sm my-0">
                             <input type="checkbox" class="sheet-active form-check-input" id="{{ sheet.id }}"  {{ sheet.isActive ? 'checked': '' }} >
                             <label class="custom-control-label" for="{{ sheet.id }}"></label>
                         </div>
@@ -36,7 +36,7 @@
                 </tr>
             {% endif %}
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
             </tr>
 

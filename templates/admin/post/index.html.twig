@@ -7,7 +7,7 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="align-middle">
                 <th>{{ 'global.active'|trans() }}</th>
                 <th>{{ 'global.sheet'|trans() }}</th>
                 <th>{{ 'global.menu'|trans() }}</th>
@@ -23,9 +23,9 @@
         <tbody>
         {% for post in posts|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.section.menu.name <=> b.section.menu.name) |sort((a, b) =>a.section.menu.sheet.name <=> b.section.menu.sheet.name)  %}
 {#        {% for post in posts|sort((a, b) => a.position <=> b.position)  %}#}
-            <tr>
+            <tr class="align-middle">
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="post-active form-check-input" id="{{ post.id }}"  {{ post.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ post.id }}"></label>
                     </div>
@@ -48,7 +48,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="10">{{ 'global.no_record'|trans()|raw }}</td>
             </tr>
         {% endfor %}

@@ -9,10 +9,13 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Front\FrontController;
+use App\Controller\Admin\AbstractAdminController;
+use App\Entity\Hermes\Sheet;
 use App\Menu\Page;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-class PrevisualisationController extends FrontController
+
+class PrevisualisationController extends AbstractAdminController
 {
     /**
      * @Route(
@@ -23,9 +26,12 @@ class PrevisualisationController extends FrontController
      */
     public function previsualisation(Request $request, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
-        $array = $page->getActiveMenu($configuration, $sheet,$slug);
-
+        $array = [];
+        $array = $this->mergeActiveConfig($array);
+        if( Sheet::ONE_PAGE_LIBELLE == $array['nav_bar']){
+            return $this->redirect('/');
+        }
         return $this->render('front/index.html.twig', $array);
     }
 
-}
+};

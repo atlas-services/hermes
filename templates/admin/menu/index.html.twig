@@ -25,9 +25,9 @@
         </thead>
         <tbody>
         {% for menu in menus|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.sheet.name <=> b.sheet.name) %}
-            <tr class="{{ menu.id }}" >
+            <tr class="align-middle {{ menu.id }}" >
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="menu-active form-check-input" id="{{ menu.id }}"  {{ menu.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ menu.id }}"></label>
                     </div>
@@ -53,7 +53,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="7">{{ 'global.no_record'|trans() }}</td>
             </tr>
         {% endfor %}
