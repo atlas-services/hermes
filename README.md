@@ -87,6 +87,9 @@ Install node modules
 Start Server on a terminal
 
     symfony server:start  
+    or
+    cd ~/public_html
+    php -S 127.0.0.1:8000
        
 Start webpack on a second terminal
 
