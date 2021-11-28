@@ -48,3 +48,7 @@ services:
         autowire: true
         tags:
         - { name: 'doctrine.event_listener', event: 'postPersist', method: 'postPersist'}
+
+    App\Service\Onepage:
+#        autowire: true
+        arguments: ['@doctrine.orm.default_entity_manager', '@doctrine.orm.config_entity_manager', '@twig']

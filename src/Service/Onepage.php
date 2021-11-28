@@ -24,20 +24,23 @@ class Onepage
 {
 
     private $em ;
+    private $em_config ;
     private $twig ;
 
-    public function __construct(EntityManagerInterface $em, Environment $twig)
+    public function __construct(EntityManagerInterface $em, EntityManagerInterface $em_config, Environment $twig)
     {
         $this->em = $em;
+        $this->em_config = $em_config;
         $this->twig = $twig;
     }
 
-    public function addOnePageHmsLibre($config_manager, $config, $libres){
+    public function addOnePageHmsLibre($libres){
 
+        $config = $this->getActiveConfig();
         try {
             $onepage = Sheet::ONE_PAGE;
 
-            $this->setOnePageConfig($config_manager);
+            $this->setOnePageConfig();
             $section = $this->prepareOnepageSection(Template::TEMPLATE_LIBRE);
             $template = $section->getTemplate();
             $menu = $section->getMenu();
@@ -192,23 +195,23 @@ class Onepage
         return $nbposts;
     }
 
-    public function setOnePageConfig($config_manager){
-        $config_nav_bar =  $config_manager
+    public function setOnePageConfig(){
+        $config_nav_bar =  $this->em_config
             ->getRepository(Config::class, 'config')
             ->findOneBy(['code'=> 'nav_bar']);
         $config_nav_bar->setValue(Sheet::ONE_PAGE_LIBELLE);
-        $config_manager->persist($config_nav_bar);
-        $config_manager->flush();
+        $this->em_config->persist($config_nav_bar);
+        $this->em_config->flush();
 
 
     }
 
-    public function getActiveConfig($config_manager)
+    public function getActiveConfig()
     {
         /*
          * On récupère la configuration du site.
          */
-        $configuration = $config_manager->getRepository(Config::class, 'Config')->findBy(['active' => true]);
+        $configuration = $this->em_config->getRepository(Config::class, 'Config')->findBy(['active' => true]);
         foreach ($configuration as $conf) {
             $config[$conf->getCode()] = $conf;
             if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){

@@ -30,7 +30,7 @@
             {% if app.user %}
             <div class="checkbox mb-3">You are logged in as {{ app.user.username }}, <a class="hms-color1" href="{{ path('app_logout') }}">Logout</a>
                 {% endif %}
-                <div class="col-md-4 mx-auto mt-md-5 pt-md-5 text-center">
+                <div class="col-md-4 mx-auto mt-md-5 py-md-5 px-5 border border-secondary rounded-3 text-center">
                     <h1 class="h3 mb-3 font-weight-normal h-text-success">{{ 'user.admin'|trans() }}</h1>
                     <label for="inputEmail" class="sr-only">Email</label>
                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="col-lg-4 mx-auto form-control h-border-success"

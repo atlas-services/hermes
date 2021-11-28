@@ -22,8 +22,7 @@ class OnePageController extends AbstractAdminController
      */
     public function onePageHmsLibre(Request $request, Onepage $onepage): Response
     {
-        $config_manager = $this->getDoctrine()->getManager('config');
-        $onepage-> setOnePageConfig($config_manager);
+        $onepage-> setOnePageConfig();
 
         $form = $this->createForm(TemplateLibreHmsCollectionType::class );
         $form->handleRequest($request);
@@ -36,8 +35,8 @@ class OnePageController extends AbstractAdminController
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getName();
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
                 }
-                $configuration = $this->getActiveConfig();
-                $message = $onepage->addOnePageHmsLibre($config_manager, $configuration, $libres);
+
+                $message = $onepage->addOnePageHmsLibre($libres);
                 $this->addFlash(array_keys($message)[0], $message[array_keys($message)[0]]);
                 return $this->redirectToRoute('admin_index');
             }
@@ -120,6 +119,29 @@ class OnePageController extends AbstractAdminController
         $array = $this->mergeActiveConfig($array);
 
         return $this->render('admin/post/new_liste.html.twig', $array);
+    }
+
+    /**
+     * @Route("/show/libre-hms/", name="show_onepage_libre_hms", methods={"GET|POST"})
+     */
+    public function showOnePageHmsLibre(Request $request, Onepage $onepage): Response
+    {
+        $configurations = $this->getParameter('init');
+
+        foreach ($configurations as $key=>$value){
+            if('template' == $key ){
+                foreach ($value as $code => $template){
+                    if( 'hms-' == substr($code, 0, 4) ){
+                        $array['sections'][] = $template;
+                    }
+                }
+            }
+        }
+
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/show_libre_hms.html.twig', $array);
+
     }
 
 
