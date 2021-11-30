@@ -124,7 +124,7 @@ class OnePageController extends AbstractAdminController
     /**
      * @Route("/show/libre-hms/", name="show_onepage_libre_hms", methods={"GET|POST"})
      */
-    public function showOnePageHmsLibre(Request $request, Onepage $onepage): Response
+    public function showOnePageHmsLibre(Request $request): Response
     {
         $configurations = $this->getParameter('init');
 
