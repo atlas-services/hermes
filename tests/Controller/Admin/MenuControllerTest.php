@@ -1,89 +1,125 @@
 <?php
-namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+namespace Tests\Controller\Admin;
+
 use Symfony\Component\Translation\TranslatorInterface;
+use Tests\Controller\AbstractBaseControllerTest;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class MenuControllerTest extends WebTestCase
+class MenuControllerTest extends AbstractBaseControllerTest
 {
-	protected $translator;
 
-	protected $client;
-
-    protected function setUp()
+    public function testLogin()
     {
-        $this->client = static::createClient();
+        $client = self::$client;
 
-    	$this->translator = $this->getTranslator();
-    }
+        $client->request('GET', '/fr/admin/');
 
-
-    public function testLogin( )
-    {
-       $this->login();
-
-       $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
 
     }
-
 
     public function testAddSheetAndMenu( )
     {
-    	$this->login();
+        $client = self::$client;
+        $translator = self::$translator;
 
-        // add sheet
-        $crawler = $this->client->request('GET', '/admin/sheet/new');
+        $this->prepareMenu();
 
-        $saveAndAdd = $this->translator->trans('sheet.update_next');
+        $this->assertResponseIsSuccessful();
+
+        $crawler = $this->preparePageMenu();
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertStringContainsString( 'Je crée une nouvelle page.', $client->getResponse());
+
+        // add Content
+
+        $this->addContent($crawler);
+
+        $this->assertResponseIsSuccessful();
+
+
+//        //add menu
+//        $crawler = $client->request('GET', '/fr/admin/menu/new');
+//        $save = $translator->trans('global.update');
+//        dd($save);
+//
+//        $form_menu = $crawler->selectButton($save)->form();
+//
+//        $form_menu["menu[name]"] = 'Menu1';
+//        $form_menu["menu[section[name]"] = 'Post1';
+//        $form_menu["menu[post[name]"] = 'Post1';
+//
+//	      $crawler = $client->submit($form_sheet);
+//
+//        $this->assertResponseIsSuccessful();
+    }
+
+    protected function prepareMenu( )
+    {
+        $client = self::$client;
+
+        $client->request('GET', '/fr/admin/page/');
+
+        self::$client = $client;
+
+    }
+
+    protected function preparePageMenu( )
+    {
+        $client = self::$client;
+        $translator = self::$translator;
+
+        $new_sheet = $translator->trans('global.new');
+
+        $crawler = $client->clickLink($new_sheet);
+
+        $saveAndAdd = $translator->trans('sheet.update_next');
 
         $form_sheet = $crawler->selectButton($saveAndAdd)->form();
 
         $form_sheet["sheet[name]"] = 'Page test menu';
 
-	$crawler = $this->client->submit($form_sheet);
+        $crawler = $client->submit($form_sheet);
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-        
-        //add menu
-        $crawler = $this->client->request('GET', '/admin/menu/new');
-        $save = $this->translator->trans('global.update');
+        self::$client = $client;
 
-        $form_menu = $crawler->selectButton($save)->form();
-        
-        $form_menu["menu[name]"] = 'Menu1';
-        $form_menu["menu[section[name]"] = 'Post1';
-        $form_menu["menu[post[name]"] = 'Post1';
-
-        
-        
-	$crawler = $this->client->submit($form_sheet);
-
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-    }
-
-
-    private function login( )
-    {
-        $crawler = $this->client->request('GET', '/login');
-
-        $form_login = $crawler->selectButton('Se connecter')->form();
-        $form_login['email'] = 'tayebc@yahoo.fr';
-        $form_login['password'] = 'atlasatlas';
-
-        $this->client->submit($form_login);
+        return $crawler;
 
     }
 
-
-    private function getTranslator()
+    protected function addContent($crawler)
     {
-        self::bootKernel();
+        $client = self::$client;
+        $translator = self::$translator;
 
-        // returns the real and unchanged service container
-        $container = self::$kernel->getContainer();
+        $imd_dir = realpath(__DIR__.'/../../../public/img/hermes/test/list/');
+        $files = scandir($imd_dir);
+        unset($files[0]);
+        unset($files[1]);
+        $files = (array_values($files));
 
+        foreach ($files as $file){
 
-        return  self::$container->get('translator');
+        }
 
-	}
+        // add Content
+        $saveAndAddPost = $translator->trans('menu.update_next');
+
+        $form_content = $crawler->selectButton($saveAndAddPost)->form();
+
+        $form_content["menu[sections][0][template]"] = 8 ; // 'Folio Classique';
+        $form_content["menu[sections][0][posts][0][content]"]= 'test post0 folio classique' ; // 'Folio Classique';
+
+        $uploadedFile = new UploadedFile(
+            realpath(__DIR__.'/../../../public/img/hermes/test/list/1.jpg'),
+        '1.jpg'
+        );
+        $form_content["menu[sections][0][posts][0][imageFile][file]"]= $uploadedFile ; // 'Folio Classique';
+
+        $client->submit($form_content);
+
+    }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Behat\Admin;
+namespace Tests\Behat\Admin;
 
-use App\Tests\Behat\BaseContext;
+use Tests\Behat\BaseContext;
 
 /**
  * This context class contains the definitions of the steps used by the demo

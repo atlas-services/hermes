@@ -209,6 +209,9 @@
             "config/routes/liip_imagine.yaml"
         ]
     },
+    "liip/test-fixtures-bundle": {
+        "version": "1.10.1"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -314,9 +317,6 @@
         "files": [
             "config/packages/dev/debug.yaml"
         ]
-    },
-    "symfony/debug-pack": {
-        "version": "v1.0.7"
     },
     "symfony/dependency-injection": {
         "version": "v4.3.3"
@@ -444,9 +444,6 @@
     "symfony/options-resolver": {
         "version": "v4.3.3"
     },
-    "symfony/orm-pack": {
-        "version": "v1.0.6"
-    },
     "symfony/phpunit-bridge": {
         "version": "4.3",
         "recipe": {
@@ -489,9 +486,6 @@
     },
     "symfony/process": {
         "version": "v4.3.3"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.4"
     },
     "symfony/property-access": {
         "version": "v4.3.3"
@@ -544,9 +538,6 @@
     "symfony/serializer": {
         "version": "v4.3.3"
     },
-    "symfony/serializer-pack": {
-        "version": "v1.0.2"
-    },
     "symfony/service-contracts": {
         "version": "v1.1.5"
     },
@@ -558,9 +549,6 @@
     },
     "symfony/templating": {
         "version": "5.1.x-dev"
-    },
-    "symfony/test-pack": {
-        "version": "v1.0.6"
     },
     "symfony/translation": {
         "version": "3.3",
