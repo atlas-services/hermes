@@ -9,7 +9,7 @@
             <div id="folio" class="row mx-auto px-0">
                 {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                     {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                        <div class="column mx-auto px-0 ">
+                        <div class="col-md-{{ section.templateNbCol|nb_col }} col-lg-{{ section.templateNbCol|nb_col }}  mx-auto px-0 ">
                             <div class="content_gallery text-center">
                                 {% if( section.template2 == '') %}
                                     <img alt="" class="img-fluid img-thumbnail" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}" />

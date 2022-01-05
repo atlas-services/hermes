@@ -18,7 +18,7 @@
             {% else %}
                 {% set flag = 'app_fixed_flag' %}
             {% endif %}
-            <a class="mr-2 px-1" href="{{ path('change_locale', {'locale': locale}) }}"><img
+            <a class="mr-2 px-1 text-decoration-none" href="{{ path('change_locale', {'locale': locale}) }}"><img
                         src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
         {% endfor %}
         <div class="navbar-header ">
