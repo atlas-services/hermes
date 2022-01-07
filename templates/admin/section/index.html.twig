@@ -50,9 +50,10 @@
                     <a class="hms-color1" href="{{ path('section_edit', {'section': section.id, 'config': 1 }) }}">{{ 'action.config'|trans()|raw }}</a>
                     <a class="hms-color1" href="{{ path('section_edit', {'section': section.id , 'config': 0 }) }}">{{ 'action.edit'|trans()|raw }}</a>
                     <a class="hms-color1" href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
-                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}
-                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
-                    {% endif %}
+{#                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}#}
+{#                        <a target="_blank" class="hms-color1" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>#}
+{#                    {% endif %}#}
+                    <a class="hms-color1" href="{{ path('section_copy', {'section': section.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}

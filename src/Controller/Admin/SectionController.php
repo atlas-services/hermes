@@ -7,9 +7,11 @@ use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Menu;
 //use App\Form\SectionType;
 use App\Form\Admin\PostType;
+use App\Form\Admin\SectionCopyType;
 use App\Form\Admin\SectionTemplateType;
 use App\Form\Admin\SectionType;
 use App\Repository\SectionRepository;
+use App\Service\Copy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -209,6 +211,40 @@ class SectionController extends AbstractAdminController
         }
 
         return new Response('This is not ajax!', 400);
+    }
+
+
+    /**
+     * @Route("/modele/copy/{section}", name="section_copy", methods={"GET","POST"})
+     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
+     */
+    public function copy(Request $request, Section $section, Copy $copy): Response
+    {
+        $form = $this->createForm(SectionCopyType::class, $section);
+        $fromSection = clone $section;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('move')->isClicked()) {
+                $copy->copySection($section, $fromSection, false);
+                return $this->redirectToRoute('section_index');
+            }
+            if ($form->get('copy')->isClicked()) {
+                $copy->copySection($section, $fromSection, true);
+                return $this->redirectToRoute('section_index');
+            }
+
+            return $this->redirectToRoute('section_index');
+        }
+
+        $array = [
+            'section' => $section,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/copy.html.twig', $array);
     }
 
 

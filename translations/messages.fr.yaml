@@ -122,7 +122,7 @@ global:
   exemple_libre: <i class="fa fa-info-circle"></i> Exemples de contenu -- à copier <i class="fa fa-info-circle"></i>
   info: Info -Aide
   fa_info_couleur: <i class="fa fa-info-circle"></i> Cliquez ici pour sélectionner un code couleur (copier la valeur de "Nom de la couleur")
-  copy: <i class="fas fa-copy"></i>
+  copy: Copier
   copy_done: Copie effectuée!
   copy_texte: Vous pouvez désormais coller le texte copié en effectuant un "Ctrl v" dans la champ contenu.
   copy_html: Vous pouvez désormais coller le code html copié en effectuant un "Ctrl v" dans le champ contenu.
@@ -140,7 +140,10 @@ action:
   add: <i class="hms-color1 btn btn-outline-success fa fa-plus-circle"></i>
   add_diff: <i class="hms-color1 btn btn-outline-success fa fa-plus-circle" ></i>
   show: <i class="hms-color1 btn btn-outline-success fa fa-eye"></i>
-  delete: <i class="fa fa-3x fa-trash"></i>
+  delete: <i class="hms-color1 btn btn-outline-success fa fa-3x fa-trash"></i>
+  copy-1: <i class="hms-color1 btn btn-outline-success fa fa-1x fa-copy"></i>
+  copy-2: <i class="hms-color1 btn btn-outline-success fa fa-2x fa-copy"></i>
+  copy-3: <i class="hms-color1 btn btn-outline-success fa fa-3x fa-copy"></i>
   preview: <i class="hms-color1 btn btn-outline-success fa fa-eye" aria-hidden="true"></i>
 
 
@@ -294,6 +297,8 @@ section:
   affiche_list: Pages
   edit: Modifier le menu
   add: Créer une section
+  copy: Copier la section
+  move: Déplacer la section
   posts: Contenus
   label: Sections
   template_show: Template
