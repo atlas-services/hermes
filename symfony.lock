@@ -212,6 +212,9 @@
     "liip/test-fixtures-bundle": {
         "version": "1.10.1"
     },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -648,6 +651,9 @@
         "version": "3.x-dev"
     },
     "twig/extra-bundle": {
+        "version": "3.x-dev"
+    },
+    "twig/inky-extra": {
         "version": "3.x-dev"
     },
     "twig/intl-extra": {
