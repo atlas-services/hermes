@@ -2,14 +2,14 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SectionCopyType extends AbstractNameBaseType
+class PostCopyType extends AbstractNameBaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,10 +19,10 @@ class SectionCopyType extends AbstractNameBaseType
         $options['name'] = false;
         parent::buildForm($builder, $options);
         $builder
-            ->add('menu', EntityType::class, [
+            ->add('section', EntityType::class, [
                 'required' => false,
-                'class' => Menu::class,
-                'label_format' => 'section.menu_target',
+                'class' => Section::class,
+                'label_format' => 'post.section_target',
                 'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3'],
             ])
         ;
@@ -30,21 +30,20 @@ class SectionCopyType extends AbstractNameBaseType
             ->add('move', SubmitType::class, [
                 'icon_before' => '<i class="fa fa-save"></i>',
                 'label_html' => true,
-                'label' => 'section.move'
+                'label' => 'post.move'
             ]);
         $builder
             ->add('copy', SubmitType::class, [
                 'icon_before' => '<i class="fa fa-copy"></i>',
                 'label_html' => true,
-                'label' => 'section.copy'
+                'label' => 'post.copy'
             ]);
     }
-
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Section::class,
+            'data_class' => Post::class,
             'save' => false,
             'saveAndAdd' => false,
             'saveAndAddPost' => false,

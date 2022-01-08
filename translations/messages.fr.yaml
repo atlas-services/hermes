@@ -282,9 +282,12 @@ post:
   affiche_list: Contenus
   edit: Modifier le contenu
   add: Créer un contenu
+  copy: Copier le contenu
+  move: Déplacer le contenu
   label: Contenus
   sheet: Page du contenu
   section: Section du contenu
+  section_target: Sélectionner la section où sera copié votre contenu
   tags: Tags
   user: Créateur du contenu
   name: Nom
@@ -305,6 +308,7 @@ section:
   template: Template
   name: Section
   menu: Menu
+  menu_target: Sélectionner le menu où sera copié votre section
   add_post: Ajouter un contenu
   all: All
   all_text: Toutes les pages

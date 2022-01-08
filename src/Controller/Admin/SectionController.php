@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SectionController extends AbstractAdminController
 {
     /**
-     * @Route("/modele/", name="section_index", methods={"GET"})
+     * @Route("/section/", name="section_index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -49,7 +49,7 @@ class SectionController extends AbstractAdminController
 
 
     /**
-     * @Route("/menu/{menu}/nouveau-modele/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
+     * @Route("/menu/{menu}/nouvelle-section/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
      * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
     public function SectionPostNewMenu(Request $request, ?Menu $menu): Response
@@ -93,7 +93,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/nouveau-modele", name="section_new", methods={"GET","POST"})
+     * @Route("/nouvelle-section", name="section_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -121,7 +121,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/modele/{id}", name="section_show", methods={"GET"})
+     * @Route("/section/{id}", name="section_show", methods={"GET"})
      */
     public function show(Section $section): Response
     {
@@ -134,7 +134,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/modele/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
+     * @Route("/section/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
     public function edit(Request $request, Section $section, $config = 1): Response
@@ -186,7 +186,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/modele/{id}", name="section_delete", methods={"DELETE"})
+     * @Route("/section/{id}", name="section_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Section $section): Response
     {
@@ -215,7 +215,7 @@ class SectionController extends AbstractAdminController
 
 
     /**
-     * @Route("/modele/copy/{section}", name="section_copy", methods={"GET","POST"})
+     * @Route("/section/copy/{section}", name="section_copy", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
     public function copy(Request $request, Section $section, Copy $copy): Response

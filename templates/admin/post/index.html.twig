@@ -40,11 +40,12 @@
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a class="hms-color1" href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
-                    {% set sheet_slug = post.section.menu.sheet.slug ?? null %}
-                    {% set menu_slug = post.section.menu.slug ?? null %}
-                    {% if (sheet_slug is not null and menu_slug is not null)  %}
-                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': sheet_slug, 'slug': menu_slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
-                    {% endif %}
+                    <a class="hms-color1" href="{{ path('post_copy', {'post': post.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
+{#                    {% set sheet_slug = post.section.menu.sheet.slug ?? null %}#}
+{#                    {% set menu_slug = post.section.menu.slug ?? null %}#}
+{#                    {% if (sheet_slug is not null and menu_slug is not null)  %}#}
+{#                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': sheet_slug, 'slug': menu_slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>#}
+{#                    {% endif %}#}
                 </td>
             </tr>
         {% else %}

@@ -8,12 +8,9 @@
 
 namespace App\Service;
 
-use App\Entity\Config\Config;
-use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
-use App\Entity\Hermes\Sheet;
-use App\Entity\Hermes\Template;
+
 
 use Doctrine\ORM\EntityManagerInterface;
 use Twig\Environment;
@@ -30,7 +27,7 @@ class Copy
         $this->em = $em;
     }
 
-    public function copySection($section, $fromSection, $copy = false){
+    public function copySection(Section $section, Section $fromSection, $copy = false){
 
         try {
             $this->em->persist($section);
@@ -52,15 +49,18 @@ class Copy
         }
 
     }
-    public function copyPost($post, $to){
+
+    public function copyPost(Post $post, Post $fromPost, $copy = false){
 
         try {
-            $newPost = clone $post;
-            $newPost->setSection($to);
             $this->em->persist($post);
 
+            if($copy){
+                $this->em->persist($fromPost);
+            }
+
             $this->em->flush();
-            return ['info' => 'Page créée'];
+            return ['info' => 'Post copié'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
