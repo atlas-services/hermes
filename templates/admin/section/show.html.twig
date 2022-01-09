@@ -3,7 +3,7 @@
 {% block title %}Section{% endblock %}
 
 {% block content %}
-    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">Section</h1>
 
     <table class="table">
@@ -23,7 +23,7 @@
         </tbody>
     </table>
 
-    <a class="hms-color1" href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
 {#    <a class="hms-color1" href="{{ path('section_edit', {'section': section.name}) }}">edit</a>#}
     <a class="hms-color1" href="{{ path('section_edit', {'section': section.id}) }}">edit</a>

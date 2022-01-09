@@ -7,9 +7,11 @@ use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Menu;
 //use App\Form\SectionType;
 use App\Form\Admin\PostType;
+use App\Form\Admin\SectionCopyType;
 use App\Form\Admin\SectionTemplateType;
 use App\Form\Admin\SectionType;
 use App\Repository\SectionRepository;
+use App\Service\Copy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SectionController extends AbstractAdminController
 {
     /**
-     * @Route("/modele/", name="section_index", methods={"GET"})
+     * @Route("/section/", name="section_index", methods={"GET"})
      */
     public function index(): Response
     {
@@ -47,7 +49,7 @@ class SectionController extends AbstractAdminController
 
 
     /**
-     * @Route("/menu/{menu}/nouveau-modele/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
+     * @Route("/menu/{menu}/nouvelle-section/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
      * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
     public function SectionPostNewMenu(Request $request, ?Menu $menu): Response
@@ -91,7 +93,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/nouveau-modele", name="section_new", methods={"GET","POST"})
+     * @Route("/nouvelle-section", name="section_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -119,7 +121,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/modele/{id}", name="section_show", methods={"GET"})
+     * @Route("/section/{id}", name="section_show", methods={"GET"})
      */
     public function show(Section $section): Response
     {
@@ -132,7 +134,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/modele/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
+     * @Route("/section/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
     public function edit(Request $request, Section $section, $config = 1): Response
@@ -151,7 +153,6 @@ class SectionController extends AbstractAdminController
         ];
 
         // On peut gérer les images remote ici => true
-        $options['remote_pictures'] = true;
         $options['config'] = boolval($config);
 
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
@@ -185,7 +186,7 @@ class SectionController extends AbstractAdminController
     }
 
     /**
-     * @Route("/modele/{id}", name="section_delete", methods={"DELETE"})
+     * @Route("/section/{id}", name="section_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Section $section): Response
     {
@@ -210,6 +211,40 @@ class SectionController extends AbstractAdminController
         }
 
         return new Response('This is not ajax!', 400);
+    }
+
+
+    /**
+     * @Route("/section/copy/{section}", name="section_copy", methods={"GET","POST"})
+     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
+     */
+    public function copy(Request $request, Section $section, Copy $copy): Response
+    {
+        $form = $this->createForm(SectionCopyType::class, $section);
+        $fromSection = clone $section;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('move')->isClicked()) {
+                $copy->copySection($section, $fromSection, false);
+                return $this->redirectToRoute('section_index');
+            }
+            if ($form->get('copy')->isClicked()) {
+                $copy->copySection($section, $fromSection, true);
+                return $this->redirectToRoute('section_index');
+            }
+
+            return $this->redirectToRoute('section_index');
+        }
+
+        $array = [
+            'section' => $section,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/copy.html.twig', $array);
     }
 
 

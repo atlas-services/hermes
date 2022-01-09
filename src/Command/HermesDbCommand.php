@@ -4,6 +4,7 @@ namespace App\Command;
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Template;
 use App\Entity\Hermes\User;
+use App\Service\Onepage;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,11 +18,13 @@ class HermesDbCommand extends Command
 
     protected $configurations;
     protected $emConfig;
+    protected $onepage;
 
-    public function __construct(EntityManagerInterface $em, ContainerInterface $container)
+    public function __construct(EntityManagerInterface $em, ContainerInterface $container, Onepage $onepage)
     {
         $this->em = $em;
         $this->emConfig = $container->get('doctrine')->getManager('config');
+        $this->onepage = $onepage;
         $this->configurations = $container->getParameter('init');
 
         parent::__construct();

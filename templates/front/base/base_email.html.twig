@@ -1,50 +1,25 @@
-<!DOCTYPE html>
+{% apply inky_to_html|inline_css(source( '@inline/foundation-emails.css'),source( '@inline/emails.css')) %}
+<!doctype html>
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    {% set config_favicon = favicon ?? logo  %}
-    {% if(config_favicon.filename is null) %}
-        {% set favicon = asset('favicon.ico')  %}
-    {% else %}
-        {% set favicon = asset(vich_uploader_asset(config_favicon, 'imageFile'))   %}
-    {% endif %}
-
-    <link rel="icon" href="{{ favicon}}" />
-
-    <title>{{ title.name ?? ''}}</title>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Email Contact">
+    <meta name="author" content="CMS Hermes">
 </head>
 
-{% apply inline_css(source( '@inline/emails.scss')) %}
-    <body class="iframe">
-    <div class="content container col-lg-{{ container_width|col_lg()}} text-center center" >
-        {% block body %}
-            {% block nav %}
-                {% if logo.filename is defined %}
-                    {% if logo.filename is not null %}
-                        <div class="col-lg-{{ container_width|col_lg()}} text-center center">
-                            <a class="navbar-brand js-scroll-trigger center" href="{{ absolute_url(path('sheet')) }}">
-                                <img src="{{ absolute_url(asset(vich_uploader_asset(logo, 'imageFile')))}}"  alt="{{ logo.filename}}">
-                            </a>
-                        </div>
-                        <hr class="order">
-                    {% endif %}
-                {% endif %}
-            {% endblock nav %}
 
+{#    <body class="iframe">#}
+    <body>
+        {% block body %}
             {% block content %}
             {% endblock content %}
         {% endblock body %}
-    </div>
 
     {% block footer %}
         {% include 'front/base/footer.html.twig' %}
     {% endblock footer %}
     </body>
-{% endapply %}
 </html>
+{% endapply %}

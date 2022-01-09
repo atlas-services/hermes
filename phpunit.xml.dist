@@ -5,29 +5,25 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.5/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="config/bootstrap.php"
+         bootstrap="tests/bootstrap.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="APP_ENV" value="test" force="true" />
-        <server name="SHELL_VERBOSITY" value="-1" />
-        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="6.5" />
-        <server name="SERVER_NAME" value="127.0.0.1" />
-        <server name="SERVER_ADDR" value="127.0.0.1" />
-        <server name="SERVER_PORT" value="8000" />
-
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="APP_ENV" value="test" force="true" />
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
     </php>
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>src</directory>
+            <directory>./src</directory>
         </whitelist>
     </filter>
 

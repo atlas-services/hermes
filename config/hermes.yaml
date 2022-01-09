@@ -89,73 +89,73 @@ parameters:
         code: card2
         name: Carte de présentation avec photo
       hms-1:
-        summary: A la carte
+        summary: Entête-1
         code: hms-1
-        name: Template à la carte
+        name: Entête-1
       hms-2:
-        summary: Vêtement
+        summary: Entête-2
         code: hms-2
-        name: Template vêtement
+        name: Entête-2
       hms-3:
-        summary: Video
+        summary: Entête-3
         code: hms-3
-        name: Template video
+        name: Entête-3
       hms-4:
-        summary: Présentation liste
+        summary: A la carte
         code: hms-4
-        name: Template liste
+        name: Template à la carte
       hms-5:
-        summary: Image serrée
+        summary: Vêtement
         code: hms-5
-        name: Template serré
+        name: Template vêtement
       hms-6:
-        summary: forme Modal
+        summary: Video
         code: hms-6
-        name: Template modal
+        name: Template video
       hms-7:
-        summary: Image
+        summary: Présentation liste
         code: hms-7
-        name: Template image
+        name: Template liste
       hms-8:
-        summary: Présentation
+        summary: Image serrée
         code: hms-8
-        name: Template Présentation
-      hms-16:
-        summary: Présentation Image
-        code: hms-16
-        name: Présentation Image
-      hms-17:
-        summary: Présentation Image V2
-        code: hms-17
-        name: Présentation Image V2
+        name: Template serré
       hms-9:
-        summary: Page d'accueil
+        summary: forme Modal
         code: hms-9
+        name: Template modal
+      hms-10:
+        summary: Image
+        code: hms-10
+        name: Template image
+      hms-11:
+        summary: Présentation
+        code: hms-11
+        name: Template Présentation
+      hms-12:
+        summary: Présentation Hermes
+        code: hms-12
+        name: Présentation Hermes
+      hms-13:
+        summary: Présentation Image
+        code: hms-13
+        name: Présentation Image
+      hms-14:
+        summary: Page d'accueil
+        code: hms-14
         name: Page d'accueil
       hms-15:
-        summary: Page d'accueil-2
+        summary: Présentation Image V2
         code: hms-15
-        name: Page d'accueil-2
-      hms-10:
-        summary: Description
-        code: hms-10
-        name: Template Description
-      hms-11:
-        summary: Fonctionnalité
-        code: hms-11
-        name: Template Fonctionnalité
-      hms-12:
-        summary: Entête-1
-        code: hms-12
-        name: Entête-1
-      hms-13:
-        summary: Entête-2
-        code: hms-13
-        name: Entête-2
-      hms-14:
-        summary: Entête-3
-        code: hms-14
-        name: Entête-3
+        name: Présentation Image V2
+      hms-16:
+        summary: Présentation Image V3
+        code: hms-16
+        name: Présentation Image V3
+      hms-17:
+        summary: Page d'accueil Hermes
+        code: hms-17
+        name: Page d'accueil Hermes
 
     config:
       site:
@@ -174,7 +174,7 @@ parameters:
           value: ~
           image: ~
         logo:
-          summary: logo
+          summary: Image du logo (Value fixe la marge verticale)
           value: ~
           image: ~
         affiche_logo_top:
@@ -314,6 +314,9 @@ parameters:
         nav_espacement:
           summary: "Espacement entre les éléments du menu(valeurs possibles : 1 - 2 - 3 - 4 - 5)"
           value: 3
+        nav_offset:
+          summary: "Espacement gauche du menu"
+          value: 0
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu

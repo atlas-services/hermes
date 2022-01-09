@@ -1,0 +1,23 @@
+{% extends '/admin/base.html.twig' %}
+
+{% form_theme form 'admin/form/theme_posts.html.twig' %}
+
+{% block title %}{{ 'section.move'|trans() }}{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <a class="btn h-btn-outline-success"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    {{ form_start(form) }}
+    {{ form_row(form.menu) }}
+    {{ form_row(form.move) }}
+    {{ form_row(form.copy) }}
+
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+    {{ include('admin/section/_delete_form.html.twig') }}
+
+    <a class="btn h-btn-outline-success"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
+{% endblock %}
+
+

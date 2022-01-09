@@ -3,7 +3,7 @@
 {% block title %}{{ 'sheet.show'|trans() }}{% endblock %}
 
 {% block content %}
-    <a class="hms-color1" href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">{{ 'sheet.show'|trans() }} {{ sheet.name }}</h1>
 
     <table class="table">
@@ -23,7 +23,7 @@
         </tbody>
     </table>
 
-    <a class="hms-color1" href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     <a class="hms-color1" href="{{ path('sheet_edit', {'id': sheet.id}) }}">edit</a>
 

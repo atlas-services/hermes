@@ -5,7 +5,7 @@
 {% block content %}
     <table class="table">
         <thead>
-            <tr>
+            <tr class="align-middle">
                 <th>{{ 'global.active'|trans() }}</th>
                 <th>{{ 'global.name'|trans() }}</th>
                 <th>{{ 'blockpost.list'|trans() }}</th>
@@ -14,9 +14,9 @@
         </thead>
         <tbody>
         {% for block in blocks|sort((a, b) => a.name <=> b.name) %}
-            <tr class="{{ block.id }}">
+            <tr class="align-middle {{ block.id }}">
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="block-active form-check-input" id="{{ block.id }}"  {{ block.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ block.id }}"></label>
                     </div>
@@ -34,7 +34,7 @@
                   </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="7">{{ 'global.no_record'|trans()|raw }}</td>
             </tr>
         {% endfor %}

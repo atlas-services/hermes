@@ -158,9 +158,6 @@ class Page
 //            }
 //            //cache section
             foreach ($menu->getSections() as $section){
-                if(!is_null($section->getRemote())){
-                    $cache['front_cache'] =  'front_cache_remote_'.$sheet.$slug.$section->getRemote()->getUpdatedAt()->format('Y-m-d-H-i-s');
-                }
 //                // cache Posts
 //                foreach ($section->getPosts() as $post){
 //                    if(!is_null($post->getUpdatedAt())) {

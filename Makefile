@@ -23,6 +23,21 @@ doctrine-init:
 	bin/console hermes:db-update
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
+phpunit-test:
+	rm -r data/test.sqlite data/config/test.sqlite 2> /dev/null || true
+	bin/console doctrine:cache:clear-metadata
+	bin/console doctrine:cache:clear-query
+	bin/console doctrine:cache:clear-result
+	bin/console doctrine:database:drop --force --connection=default --env=test
+	bin/console doctrine:database:drop --force --connection=config --env=test
+	bin/console doctrine:database:create --env=test
+	bin/console d:s:u --force --em=default --env=test
+	bin/console d:s:u --force --em=config --env=test
+	bin/console hermes:db-update --env=test
+	rm -r var/cache/* var/log/* 2> /dev/null || true
+	vendor/bin/phpunit -c phpunit.xml.dist tests/Controller/Admin/MenuControllerTest.php
+	doctrine-init
+
 init-test:
 	cp .env.test .env
 	composer install

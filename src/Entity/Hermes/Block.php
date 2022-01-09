@@ -16,7 +16,6 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\TemplateTrait;
-use App\Entity\Traits\RemoteTrait;
 use App\Entity\Traits\UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

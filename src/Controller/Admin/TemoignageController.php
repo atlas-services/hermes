@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin")
  */
-class TemoignageController extends AbstractController
+class TemoignageController extends AbstractAdminController
 {
     /**
      * @Route("/temoignage/", name="temoignage_index", methods={"GET"})
@@ -24,10 +24,12 @@ class TemoignageController extends AbstractController
         $temoignages = $this->getDoctrine()
             ->getRepository(Temoignage::class)
             ->findAll();
-
-        return $this->render('admin/temoignage/index.html.twig', [
+        $array = [
             'temoignages' => $temoignages,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/temoignage/index.html.twig', $array);
     }
 
     /**

@@ -16,9 +16,9 @@
         </thead>
         <tbody>
         {% for temoignage in temoignages|sort((a, b) =>a.position <=> b.position) %}
-            <tr>
+            <tr class="align-middle">
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="temoignage-active form-check-input" id="{{ temoignage.id }}"  {{ temoignage.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ temoignage.id }}"></label>
                     </div>
@@ -31,7 +31,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="7">{{ 'global.no_record'|trans() }}</td>
             </tr>
         {% endfor %}

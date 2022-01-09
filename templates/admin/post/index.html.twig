@@ -7,7 +7,7 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="align-middle">
                 <th>{{ 'global.active'|trans() }}</th>
                 <th>{{ 'global.sheet'|trans() }}</th>
                 <th>{{ 'global.menu'|trans() }}</th>
@@ -23,9 +23,9 @@
         <tbody>
         {% for post in posts|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.section.menu.name <=> b.section.menu.name) |sort((a, b) =>a.section.menu.sheet.name <=> b.section.menu.sheet.name)  %}
 {#        {% for post in posts|sort((a, b) => a.position <=> b.position)  %}#}
-            <tr>
+            <tr class="align-middle">
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="post-active form-check-input" id="{{ post.id }}"  {{ post.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ post.id }}"></label>
                     </div>
@@ -40,15 +40,16 @@
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a class="hms-color1" href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
-                    {% set sheet_slug = post.section.menu.sheet.slug ?? null %}
-                    {% set menu_slug = post.section.menu.slug ?? null %}
-                    {% if (sheet_slug is not null and menu_slug is not null)  %}
-                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': sheet_slug, 'slug': menu_slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
-                    {% endif %}
+                    <a class="hms-color1" href="{{ path('post_copy', {'post': post.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
+{#                    {% set sheet_slug = post.section.menu.sheet.slug ?? null %}#}
+{#                    {% set menu_slug = post.section.menu.slug ?? null %}#}
+{#                    {% if (sheet_slug is not null and menu_slug is not null)  %}#}
+{#                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': sheet_slug, 'slug': menu_slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>#}
+{#                    {% endif %}#}
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="10">{{ 'global.no_record'|trans()|raw }}</td>
             </tr>
         {% endfor %}

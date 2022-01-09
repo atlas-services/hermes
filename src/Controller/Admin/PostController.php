@@ -5,10 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
+use App\Form\Admin\PostCopyType;
 use App\Form\Admin\PostType;
 use App\Repository\PostRepository;
+use App\Service\Copy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,7 @@ class PostController extends AbstractAdminController
     }
 
     /**
-     * @Route("/nouveau-contenu/modele/{section}/liste", name="post_new_section_liste", methods={"GET","POST"})
+     * @Route("/nouveau-contenu/section/{section}/liste", name="post_new_section_liste", methods={"GET","POST"})
      * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
     public function postNewSectionListe(Request $request, ?Section $section, PostRepository $postRepository): Response
@@ -90,7 +91,7 @@ class PostController extends AbstractAdminController
 
 
     /**
-     * @Route("/nouveau-contenu/modele/{section}", name="post_new_section", methods={"GET","POST"})
+     * @Route("/nouveau-contenu/section/{section}", name="post_new_section", methods={"GET","POST"})
      * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
     public function postNewSection(Request $request, ?Section $section, PostRepository $postRepository): Response
@@ -184,6 +185,7 @@ class PostController extends AbstractAdminController
      */
     public function edit(Request $request,$id, Post $post, Menu $menu, PostRepository $postRepository): Response
     {
+        $referer = (string) $request->headers->get('referer');
 //        Le post'est pas unique pour un name donné, aussi il faut le récupérer avec l'id
         $post = $postRepository->findOneById($id);
         $options = ['section'=> false];
@@ -206,8 +208,9 @@ class PostController extends AbstractAdminController
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
             }
             if ($form->get('save')->isClicked()) {
-
+                return $this->redirectToRoute('section_index');
             }
+
             return $this->redirectToRoute('post_index');
         }
 
@@ -247,5 +250,41 @@ class PostController extends AbstractAdminController
 
         return new Response('This is not ajax!', 400);
     }
+
+
+
+    /**
+     * @Route("/contenu/copy/{post}", name="post_copy", methods={"GET","POST"})
+     * @ParamConverter("post",class="App\Entity\Hermes\Post", options={"mapping": {"post": "id"}})
+     */
+    public function copy(Request $request, Post $post, Copy $copy): Response
+    {
+        $form = $this->createForm(PostCopyType::class, $post);
+        $fromPost = clone $post;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('move')->isClicked()) {
+                $copy->copyPost($post, $fromPost, false);
+                return $this->redirectToRoute('post_index');
+            }
+            if ($form->get('copy')->isClicked()) {
+                $copy->copyPost($post, $fromPost, true);
+                return $this->redirectToRoute('post_index');
+            }
+
+            return $this->redirectToRoute('post_index');
+        }
+
+        $array = [
+            'post' => $post,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/post/copy.html.twig', $array);
+    }
+
 
 }

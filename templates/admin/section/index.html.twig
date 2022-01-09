@@ -27,9 +27,9 @@
         </thead>
         <tbody>
         {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
-            <tr class="{{ section.menu.id }}">
+            <tr class="align-middle {{ section.menu.id }}">
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="section-active form-check-input" id="{{ section.id }}"  {{ section.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ section.id }}"></label>
                     </div>
@@ -50,13 +50,14 @@
                     <a class="hms-color1" href="{{ path('section_edit', {'section': section.id, 'config': 1 }) }}">{{ 'action.config'|trans()|raw }}</a>
                     <a class="hms-color1" href="{{ path('section_edit', {'section': section.id , 'config': 0 }) }}">{{ 'action.edit'|trans()|raw }}</a>
                     <a class="hms-color1" href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
-                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}
-                        <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
-                    {% endif %}
+{#                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}#}
+{#                        <a target="_blank" class="hms-color1" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>#}
+{#                    {% endif %}#}
+                    <a class="hms-color1" href="{{ path('section_copy', {'section': section.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="7">{{ 'global.no_record'|trans()|raw }}</td>
             </tr>
         {% endfor %}

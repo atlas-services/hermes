@@ -19,7 +19,7 @@
         {% for blockpost in blockposts|sort((a, b) =>a.block.name <=> b.block.name) |sort((a, b) =>a.position <=> b.position) %}
             <tr>
                 <td>
-                    <div class="form-check form-switch form-switch-sm">
+                    <div class="form-check form-switch form-switch-sm my-0">
                         <input type="checkbox" class="blockpost-active form-check-input" id="{{ blockpost.id }}"  {{ blockpost.isActive ? 'checked': '' }} >
                         <label class="custom-control-label" for="{{ blockpost.id }}"></label>
                     </div>

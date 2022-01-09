@@ -20,67 +20,8 @@
             <p class="mt-lg-4 text-secondary lead">{{ 'info.begin4'|trans()|raw }} </p>
         </h5>
 
-            {% set mytemplates = {
-                '0': {
-                    'mysrc': '/img/hermes/template/image-2.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-2'}),
-                    'mytitle': 'hms-2',
-                },
-                '1': {
-                    'mysrc': '/img/hermes/template/image-4.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-4'}),
-                    'mytitle': 'hms-4'
-                },
-                '2': {
-                    'mysrc': '/img/hermes/template/image-3.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-3'}),
-                    'mytitle': 'hms-3'
-                },
-                '3': {
-                    'mysrc': '/img/hermes/template/image-7.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-7'}),
-                    'mytitle': 'hms-7'
-                },
-                '4': {
-                    'mysrc': '/img/hermes/template/image-6.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-6'}),
-                    'mytitle': 'hms-6'
-                },
-                '5': {
-                    'mysrc': '/img/hermes/template/image-5.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-5'}),
-                    'mytitle': 'hms-5'
-                },
-                '6': {
-                    'mysrc': '/img/hermes/template/chatNazca.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'Le chat de Nazca'}),
-                    'mytitle': 'Chat de Nazca'
-                },
-                '7': {
-                    'mysrc': '/img/hermes/template/ruee-vers-l-or.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'la-ruee-vers-l-or'}),
-                    'mytitle': 'La ruée vers l\'or'
-                },
-                '8': {
-                    'mysrc': '/img/hermes/template/image-1.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-1'}),
-                    'mytitle': 'hms-1'
-                },
-                '9': {
-                    'mysrc': '/img/hermes/template/image-8.png',
-                    'myhref': path('add_onepage_libre_hms', {'libre': 'hms-8'}),
-                    'mytitle': 'hms-8'
-                },
-            }
-            %}
-
-            <div class="row pt-2 pt-md-5 pb-md-4 pb-1">
-                {% for key , value  in mytemplates %}
-                    <div class="col-md-6 px-1 px-md-5 "><img class="img-fluid pb-1 w-100" src="{{  value.mysrc }}" />
-                        <p>{{  value.mytitle ?? ' NC' }}</p>
-                    </div>
-                {% endfor %}
-            </div>
+            <h2 class="mt-3 text-dark text-center">Nos templates libres Hermes</h2>
+            {% include 'admin/hermes/template-libre/show_liste_hms.html.twig' %}
 
         </div>
     </section>

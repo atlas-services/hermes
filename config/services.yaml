@@ -70,3 +70,7 @@ services:
     App\Ecommerce\AddressClient:
         class: App\Ecommerce\AddressClient
         autowire: true
+
+    App\Service\Onepage:
+#        autowire: true
+        arguments: ['@doctrine.orm.default_entity_manager', '@doctrine.orm.config_entity_manager', '@twig']

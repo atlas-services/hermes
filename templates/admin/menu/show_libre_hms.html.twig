@@ -1,0 +1,10 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'menu.show'|trans() }}{% endblock %}
+{% block px %}
+    <div class="content container-fluid mt-5 pt-5 mx-0 px-0 shadow-sm shadow-lg">
+{% endblock %}
+{% block content %}
+    <h2 class="mt-5 text-dark text-center">Nos templates libres Hermes</h2>
+    {% include 'admin/hermes/template-libre/show_liste_hms.html.twig' %}
+{% endblock %}

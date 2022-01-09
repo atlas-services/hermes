@@ -33,6 +33,18 @@ class AdminController extends AbstractAdminController
         $array = ['sheets'=> $listSheets];
         $array = $this->mergeActiveConfig($array);
 
+        $configurations = $this->getParameter('init');
+
+        foreach ($configurations as $key=>$value){
+            if('template' == $key ){
+                foreach ($value as $code => $template){
+                    if( 'hms-' == substr($code, 0, 4) ){
+                        $array['sections'][] = $template;
+                    }
+                }
+            }
+        }
+
         return $this->render('admin/index.html.twig', $array);
     }
 

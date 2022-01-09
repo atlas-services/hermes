@@ -7,7 +7,7 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="align-middle">
                 <th>Id</th>
                 <th>Active</th>
                 <th>Code</th>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         {% for template in templates %}
-            <tr>
+            <tr class="align-middle">
                 <td>{{ template.id }}</td>
                 <td>{{ template.active ? 'Yes' : 'No' }}</td>
                 <td>{{ template.code }}</td>
@@ -29,7 +29,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="align-middle">
                 <td colspan="6">{{ 'global.no_record'|trans() }}</td>
             </tr>
         {% endfor %}

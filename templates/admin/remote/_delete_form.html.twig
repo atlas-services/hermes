@@ -1,1 +1,0 @@
-{{ include('admin/_delete_form.html.twig', {'objet': 'global.delete_content'|trans() ~ ' "'~ remote.name ~ '" ?', 'action': path('remote_delete', {'id': remote.id}), 'csrf_token_delete': csrf_token('delete' ~ remote.id) }) }}

@@ -104,11 +104,8 @@ class PostType extends AbstractNameBaseType
                 if ('libre' == $template->getCode() || 'libre_code' == $template->getCode()) {
                     return ['Default','content'];
                 }else{
-                    $remote = $data->getSection()->getRemote();
-                    if(is_null($remote)){
-                        if( !$data->getImageFile() && !$data->getFileName()){
-                            return ['Default', 'image'];
-                        }
+                    if( !$data->getImageFile() && !$data->getFileName()){
+                        return ['Default', 'image'];
                     }
                 }
                 return ['Default'];

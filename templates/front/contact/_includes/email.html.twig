@@ -1,25 +1,88 @@
 {% extends "front/base/base_email.html.twig" %}
 
-{% block title %}Email contact{% endblock %}
-
 {% block content %}
-    <section >
-        <div class="container col-lg-{{ container_width|col_lg() }} text-center center" >
-            <div class="row ml-5">
-                <div class="col-lg-12 ml-5">
-                    <h2 class="section-heading text-formatted-green">Demande de contact</h2>
-                    <h3 class="section-subheading text-muted">Nom : </h3><div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.name }}</p></div>
-                    <h3 class="section-subheading text-muted">Téléphone :</h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.telephone ?? 'NC' }}</p></div>
-                    <h3 class="section-subheading text-muted">Email :</h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4"><a href="mailto:{{ contact_form.email }}">{{ contact_form.email }} </a></p></div>
-                    {% if contact_form.message is defined %}
-                    <h3 class="section-subheading text-muted">Message : </h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.message|nl2br }}</p></div>
-                    {% endif %}
-                    {% if contact_form.content is defined %}
-                    <h3 class="section-subheading text-muted">Message : </h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.content|nl2br }}</p></div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </section>
+{#    <section >#}
+{#        <div class="container-fluid mx-auto col-lg-{{ container_width|col_lg() }} text-center bg-white text-info" >#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12">#}
+{#                    <h2 class="text-success ">Demande de contact</h2>#}
+{#                    <h3 class="text-muted">Nom : </h3><div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.name }}</p></div>#}
+{#                    <h3 class="section-subheading text-muted">Téléphone :</h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.telephone ?? 'NC' }}</p></div>#}
+{#                    <h3 class="section-subheading text-muted">Email :</h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4"><a href="mailto:{{ contact_form.email }}">{{ contact_form.email }} </a></p></div>#}
+{#                    {% if contact_form.message is defined %}#}
+{#                    <h3 class="section-subheading text-muted">Message : </h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.message|nl2br }}</p></div>#}
+{#                    {% endif %}#}
+{#                    {% if contact_form.content is defined %}#}
+{#                    <h3 class="section-subheading text-muted">Message : </h3> <div class="text-success pl-4 ml-4"><p class="text-success pl-4 ml-4">{{ contact_form.content|nl2br }}</p></div>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <spacer size="105"></spacer>
+    <container>
+        <row class="header">
+            <columns>
+                    <img src="{{ email.image('@images/hermes.png') }}" class="logo" alt="Logo">
+            </columns>
+        </row>
+        <row>
+            <columns>
+                <spacer size="35"></spacer>
+                <h1>
+                    <center>
+                        Demande de contact
+                    </center>
+                </h1>
+                <spacer size="10"></spacer>
+            </columns>
+        </row>
+        <spacer size="30"></spacer>
+        <row>
+            <columns>
+                Nom
+            </columns>
+            <columns>
+                    <strong>{{ contact_form.name }}</strong>.
+            </columns>
+        </row>
+        <row>
+            <columns>
+                Téléphone
+            </columns>
+            <columns>
+                    <strong>{{ contact_form.telephone }}</strong>.
+            </columns>
+        </row>
+        <row>
+            <columns>
+                Email
+            </columns>
+            <columns>
+                    <strong><a href="mailto:{{ contact_form.email }}">{{ contact_form.email }}</a></strong>
+            </columns>
+        </row>
+        <row>
+            <columns>
+                Message
+            </columns>
+            <columns>
+                    <strong>{{ contact_form.message|nl2br }}</strong>.
+            </columns>
+        </row>
+        <row class="bottom">
+            <columns>
+                <center>
+                    <spacer size="20"></spacer>
+                    <div>
+                        Envoyé avec ❤️!
+                    </div>
+                </center>
+            </columns>
+        </row>
+    </container>
 {% endblock %}
+
+{#{% block javascript %}#}
+{#{% endblock  %}#}
 

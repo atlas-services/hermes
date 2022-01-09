@@ -1,7 +1,7 @@
 <!-- Portfolio Grid -->
 
-<section id="portfolio" class="pb-0  mx-auto" style="background-color:{{ content_bgcolor }}">
-    <div class="container col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}">
+<section id="portfolio" class="pb-0  mx-auto" style="background-color:{{ section.templateBgColor ?? content_bgcolor }}">
+    <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }}">
         <div class="row mx-auto pb-2 pb-lg-5" id="folio">
                 <div id="staggering" class="{{ staggering_px ?? '' }}  px-2">
                     {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}

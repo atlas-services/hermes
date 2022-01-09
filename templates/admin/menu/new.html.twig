@@ -4,10 +4,10 @@
 
 {% block content %}
     {{ parent() }}
-    <a class="hms-color1" href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     {{ include('admin/menu/_form.html.twig') }}
 
-    <a class="hms-color1" href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     </div>
 {% endblock %}

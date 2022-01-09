@@ -4,12 +4,12 @@
 
 {% block content %}
     {{ parent() }}
-    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     {{ include('admin/post/_form.html.twig', {'button_label': 'global.update'|trans()}) }}
 
     {{ include('admin/post/_delete_form.html.twig') }}
 
-    <a class="hms-color1" href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
 {% endblock %}

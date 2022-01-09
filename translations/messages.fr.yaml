@@ -70,7 +70,7 @@ global:
   menu_entete: Menus
   actions: Actions
   show: Voir
-  preview: <i class="hms-color1 fa fa-2x fa-eye" aria-hidden="true"></i>
+  preview: <i class="hms-color1 btn btn-outline-success fa fa-eye" aria-hidden="true"></i>
   edit: <i class="fa fa-edit"></i>
   new: Créer
   delete: <i class="fa fa-trash"></i>
@@ -122,7 +122,7 @@ global:
   exemple_libre: <i class="fa fa-info-circle"></i> Exemples de contenu -- à copier <i class="fa fa-info-circle"></i>
   info: Info -Aide
   fa_info_couleur: <i class="fa fa-info-circle"></i> Cliquez ici pour sélectionner un code couleur (copier la valeur de "Nom de la couleur")
-  copy: <i class="fas fa-copy"></i>
+  copy: Copier
   copy_done: Copie effectuée!
   copy_texte: Vous pouvez désormais coller le texte copié en effectuant un "Ctrl v" dans la champ contenu.
   copy_html: Vous pouvez désormais coller le code html copié en effectuant un "Ctrl v" dans le champ contenu.
@@ -135,13 +135,16 @@ global:
     category: Catégorie
 
 action:
-  edit: <i class="hms-color1 fa fa-2x fa-edit"></i>
-  config: <i class="hms-color1 fa fa-2x fa-cogs"></i>
-  add: <i class="hms-color1 fa fa-2x fa-plus-circle"></i>
-  add_diff: <i class="hms-color1 fa fa-2x fa-plus-circle" ></i>
-  show: <i class="hms-color1 fa fa-2x fa-show"></i>
-  delete: <i class="fa fa-3x fa-trash"></i>
-  preview: <i class="hms-color1 fa fa-2x fa-eye" aria-hidden="true"></i>
+  edit: <i class="hms-color1 btn btn-outline-success fa fa-edit"></i>
+  config: <i class="hms-color1 btn btn-outline-success fa fa-cogs"></i>
+  add: <i class="hms-color1 btn btn-outline-success fa fa-plus-circle"></i>
+  add_diff: <i class="hms-color1 btn btn-outline-success fa fa-plus-circle" ></i>
+  show: <i class="hms-color1 btn btn-outline-success fa fa-eye"></i>
+  delete: <i class="hms-color1 btn btn-outline-success fa fa-3x fa-trash"></i>
+  copy-1: <i class="hms-color1 btn btn-outline-success fa fa-1x fa-copy"></i>
+  copy-2: <i class="hms-color1 btn btn-outline-success fa fa-2x fa-copy"></i>
+  copy-3: <i class="hms-color1 btn btn-outline-success fa fa-3x fa-copy"></i>
+  preview: <i class="hms-color1 btn btn-outline-success fa fa-eye" aria-hidden="true"></i>
 
 
 
@@ -279,9 +282,12 @@ post:
   affiche_list: Contenus
   edit: Modifier le contenu
   add: Créer un contenu
+  copy: Copier le contenu
+  move: Déplacer le contenu
   label: Contenus
   sheet: Page du contenu
   section: Section du contenu
+  section_target: Sélectionner la section où sera copié votre contenu
   tags: Tags
   user: Créateur du contenu
   name: Nom
@@ -294,12 +300,15 @@ section:
   affiche_list: Pages
   edit: Modifier le menu
   add: Créer une section
+  copy: Copier la section
+  move: Déplacer la section
   posts: Contenus
   label: Sections
   template_show: Template
   template: Template
   name: Section
   menu: Menu
+  menu_target: Sélectionner le menu où sera copié votre section
   add_post: Ajouter un contenu
   all: All
   all_text: Toutes les pages

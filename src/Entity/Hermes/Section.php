@@ -16,7 +16,6 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\TemplateTrait;
-use App\Entity\Traits\RemoteTrait;
 use App\Entity\Traits\UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -45,7 +44,6 @@ class Section
     use ActiveTrait;
     use IdTrait;
     use TemplateTrait;
-    use RemoteTrait;
     use PositionTrait;
     use NameTrait;
     use UserTrait;
@@ -83,6 +81,14 @@ class Section
     protected $template_width;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(max=7)
+     */
+    protected $template_bgcolor;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer", nullable=true)
@@ -112,14 +118,6 @@ class Section
      * @Assert\Length(max=3)
      */
     protected $template2_width;
-
-    /**
-     * @var Remote
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Remote", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $remote;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Menu", inversedBy="sections")
@@ -234,6 +232,25 @@ class Section
     public function setTemplateWidth(?int $template_width): void
     {
         $this->template_width = $template_width;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplateBgcolor(): ?string
+    {
+        if( null == $this->template_bgcolor){
+            return '#FFFFFF';
+        }
+        return $this->template_bgcolor;
+    }
+
+    /**
+     * @param string $template_bgcolor
+     */
+    public function setTemplateBgcolor(?string $template_bgcolor): void
+    {
+        $this->template_bgcolor = $template_bgcolor;
     }
 
     /**
