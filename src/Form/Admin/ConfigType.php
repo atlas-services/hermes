@@ -71,6 +71,15 @@ class ConfigType extends AbstractBaseType
                 '11/12' => '11',
                 '12/12' => '12',
             ];
+            $options_offset = [
+                '0/12' => '0',
+                '1/12' => '1',
+                '2/12' => '2',
+                '3/12' => '3',
+                '4/12' => '4',
+                '5/12' => '5',
+                '6/12' => '6',
+            ];
             $options_template_value = [
                 'one_page_1' => 'one_page_1',
                 'one_page_2' => 'one_page_2',
@@ -137,7 +146,11 @@ class ConfigType extends AbstractBaseType
                         'false' => false ,
                     ];
                     break;
-
+                // nav_offset
+                case 'nav_offset':
+                    $choice = true;
+                    $options = $options_offset;
+                    break;
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [

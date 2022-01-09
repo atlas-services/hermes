@@ -16,8 +16,9 @@ class AppExtension extends AbstractExtension
             new TwigFilter('space_length', [$this, 'spaceLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
             new TwigFilter('nb_col', [$this, 'nbCol']),
+            new TwigFilter('change_px', [$this, 'changePx']),
             new TwigFilter('col_nb_char', [$this, 'colNbChar']),
-            new TwigFilter('get_class', 'get_class'),
+            new TwigFilter('get_class', 'getClass'),
         ];
     }
 
@@ -116,37 +117,6 @@ class AppExtension extends AbstractExtension
 
         $collg = 12;
 
-//        switch ($prct) {
-//            case '10%':
-//                $collg = 2;
-//                break;
-//            case '20%':
-//                $collg = 4;
-//                break;
-//            case '30%':
-//                $collg = 4;
-//                break;
-//            case '40%':
-//                $collg = 5;
-//                break;
-//            case '50%':
-//                $collg = 6;
-//                break;
-//            case '60%':
-//                $collg = 8;
-//                break;
-//            case '70%':
-//                $collg = 10;
-//                break;
-//            case '80%':
-//                $collg = 10;
-//                break;
-//            case '90%':
-//                $collg = 11;
-//            case '100%':
-//                $collg = 12;
-//        }
-
         return $collg;
     }
 
@@ -162,11 +132,7 @@ class AppExtension extends AbstractExtension
                 $nbchar = 20;
                 break;
             case '30%':
-                $nbchar = 25;
-                break;
             case '40%':
-                $nbchar = 25;
-                break;
             case '50%':
                 $nbchar = 25;
                 break;
@@ -193,8 +159,22 @@ class AppExtension extends AbstractExtension
         return 'class_twig_extension';
     }
 
-    public function get_class($object)
+    public function getClass($object)
     {
         return (new \ReflectionClass($object))->getShortName();
+    }
+
+    public function changePx($value, $diff)
+    {
+        if(strpos($value, 'px') > 0){
+            $value = str_replace('px', '', $value);
+            if(strpos($diff, 'px') > 0){
+                $diff = str_replace('px', '', $diff);
+            }
+            $value = $value - $diff;
+            $value = $value.'px';
+        }
+
+        return $value;
     }
 }

@@ -174,7 +174,7 @@ parameters:
           value: ~
           image: ~
         logo:
-          summary: logo
+          summary: Image du logo (Value fixe la marge verticale)
           value: ~
           image: ~
         affiche_logo_top:
@@ -314,6 +314,9 @@ parameters:
         nav_espacement:
           summary: "Espacement entre les éléments du menu(valeurs possibles : 1 - 2 - 3 - 4 - 5)"
           value: 3
+        nav_offset:
+          summary: "Espacement gauche du menu"
+          value: 0
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu

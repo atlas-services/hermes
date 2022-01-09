@@ -37,33 +37,42 @@
             {% endif %}
     </div>
 </nav>
-{% set nboffset = 10 - nav_container_width|col_lg() %}
+
+{% set justify_content_center = 'justify-content-center' %}
 {% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
-    {% set offset = 'offset-lg' ~ nboffset %}
+    {% set offset = 12 - nav_offset %}
+    {% set col_offset = 'col-lg-' ~ offset ~ ' ' ~ 'offset-lg-'~ nav_offset %}
+{% endif %}
+{% if nav_offset == 0 %}
+    {% set col_offset = '' %}
+{% endif %}
+{% if logo.filename is not null %}
+    {% set justify_content_center = '' %}
+    {% set col_offset = 'col-lg-' ~ offset %}
 {% endif %}
 
 <nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
-    <div class="col-lg-{{ nav_container_width|col_lg() - nboffset }} {{ offset ?? ''}} container border-0 " style="background-color: {{nav_bgcolor}};">
+    <div class="col-lg-{{ nav_container_width|col_lg()   }}  container-fluid border-0 " style="background-color: {{nav_bgcolor}};">
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}
-                <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet') }}">
-                    <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-2 pl-4 mx-auto app_logo">
-                </a>
+                {% if affiche_logo_top == true %}
+                    <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet') }}">
+                        <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
+                    </a>
+                {% endif %}
             {% endif %}
         {% endif %}
-        <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive" style="height:{{ nav_height }};">
-            <ul class="nav navbar-nav  h-font-size-12 " style="background-color: {{ nav_menu_bgcolor }}">
-                {% if logo.filename is defined %}
-                    {% if logo.filename is not null %}
-                        {% if affiche_logo_top != true %}
-                            <li class="nav-item hidden left mr-5 pr-5"  >
-                                <a class=" d-none  d-sm-block " href="{{ path('sheet') }}">
-                                    <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="h-75 mx-auto">
-                                </a>
-                            </li>
-                        {% endif %}
+        <div class="collapse navbar-collapse {{ justify_content_center }}" id="navbarResponsive" style="height:{{ nav_height }};">
+            {% if logo.filename is defined %}
+                {% if logo.filename is not null %}
+                    {% if affiche_logo_top != true %}
+                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('sheet') }}">
+                                <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                            </a>
                     {% endif %}
                 {% endif %}
+            {% endif %}
+            <ul class="nav navbar-nav  h-font-size-12 {{ col_offset  ?? ''}}" style="background-color: {{ nav_menu_bgcolor }}">
                 <hr class="d-block  d-sm-none w-100 bg-white">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}
@@ -77,10 +86,10 @@
                     {% endif %}
                     {% set idDropdown =  dropdown ~ loop.index  %}
                     {% if('active' == active) %}
-                        <li id="{{ idDropdown }}" class="nav-item px-2 my-2 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ nav_bgcolor_active }};  "  >
+                        <li id="{{ idDropdown }}" class="nav-item px-2 my-auto {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ nav_bgcolor_active }};  "  >
                         {% set colorlink =  nav_color_active  %}
                     {% else %}
-                        <li id="{{ idDropdown }}"  class="nav-item px-2 my-2 {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}" >
+                        <li id="{{ idDropdown }}"  class="nav-item px-2 my-auto {{ active }} {{ dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}" >
                         {% set colorlink =  nav_link_color  %}
                     {% endif %}
                         <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="text-decoration-none remove-nav-link js-scroll {{ dropdowntoggle }}  " role="button"  data-bs-toggle="{{ dropdown }}"  aria-haspopup="true" aria-expanded="false"
