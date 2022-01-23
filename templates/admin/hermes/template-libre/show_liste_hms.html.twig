@@ -9,7 +9,10 @@
         Template "{{ section.summary }}"
         {% if not(loop.last) %}
             <a class="mt-3 text-center text-white" href="{{ '#hms-'~ suivant }}"><i class="fa fa-angle-double-down"></i></a>
+            <button id="copy{{ key }}" class="copy btn btn-icon ml-lg-5 italic text-white" data-copy="{{ key }}" data-copytype="html">{{ 'action.copy-light-1'|trans()|raw }}</button>
         {% endif %}
     </h4>
+    <span id="tocopy{{ key }}">
     {% include 'admin/hermes/template-libre/'~ section.code ~ '/index.html.twig' %}
+    </span>
 {% endfor %}

@@ -151,11 +151,16 @@ liip_imagine:
                 fixed:
                     width: 154
                     height: 215
-        app_fixed_filter_paysage:
+        app_fixed_filter_paysage_860:
             filters:
                 fixed:
                     width: 860
                     height: 618
+        app_fixed_filter_paysage_700:
+            filters:
+                fixed:
+                    width: 700
+                    height: 328
         app_fixed_folio_filter:
             filters:
                 # use and setup the "fixed" filter
