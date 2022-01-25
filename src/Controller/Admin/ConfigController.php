@@ -18,6 +18,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConfigController extends AbstractAdminController
 {
 
+    /**
+     * @Route("/navbar-type/{type}", name="config_navbar_type", methods={"GET"})
+     */
+    public function switchType(Request  $request, ConfigRepository $configRepository, $type): Response
+    {
+        $nav_bar = $configRepository->findOneBy(['code'=> 'nav_bar' ]);
+
+        $nav_bar->setValue($type);
+
+        $entityManager = $this->getDoctrine()->getManager('config');
+        $entityManager->persist($nav_bar);
+        $entityManager->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 
     /**
      * @Route("/new", name="config_new", methods={"GET","POST"})

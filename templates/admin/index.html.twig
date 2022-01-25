@@ -1,29 +1,11 @@
 {% extends '/admin/base.html.twig' %}
 
 {% block content %}
+
     <section class="mt-4 mt-md-1">
-        <p class="text-secondary lead mt-md-3">
-            {{ 'global.hello'|trans()|raw }}  {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }},
-        </p>
-        <p class="text-secondary lead">
-            {{ 'info.admin_presentation1'|trans()|raw }}
-        </p>
-        <ul class="text-secondary lead">
-            <li class="" style="list-style-type: circle !important ; ">{{ 'info.admin_sous_presentation11'|trans()|raw }}</li>
-            <li style="list-style-type: circle !important; ">{{ 'info.admin_sous_presentation12'|trans()|raw }}</li>
-            <li style="list-style-type: circle !important; ">{{ 'info.admin_sous_presentation13'|trans()|raw }}</li>
-        </ul>
-        <div class="mt-lg-2">
-            <p class="mt-lg-4 text-secondary lead "><i class="fa fa-info-circle"></i> {{  'info.begin1'|trans()|raw }} </p>
-            <p class="mt-lg-4 text-secondary lead"><i class="fa fa-info-circle"></i> {{  'info.begin2'|trans()|raw }} </p>
-            <p class="mt-lg-4 text-secondary lead">{{ 'info.begin3'|trans()|raw }} </p>
-            <p class="mt-lg-4 text-secondary lead">{{ 'info.begin4'|trans()|raw }} </p>
-        </h5>
-
-            <h2 class="mt-3 text-dark text-center">Nos templates libres Hermes</h2>
-            {% include 'admin/hermes/template-libre/show_liste_hms.html.twig' %}
-
-        </div>
+        {% include 'admin/admin_presentation.html.twig' %}
+        <hr class="my-lg-5" />
+        {% include 'admin/hermes/template-libre/show_liste_hms.html.twig' %}
     </section>
 
 {% endblock content %}
