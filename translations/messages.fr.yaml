@@ -14,6 +14,9 @@ form:
     delete: Supprimer
 
 info:
+  admin_type_site_1: 'Avant de commencer à créer vos pages web avec Hermès, il est important de bien choisir le type de site que vous souhaitez mettre en place.'
+  admin_type_site_2: 'Une fois le type de site choisi ("one-page" ou "multi-pages"), il vous sera toujours possible de passer de l''un à l''autre...mais gardez en tête que ce premier choix est important.'
+  admin_templates_1: 'Ci dessous, quelques templates Hermes à copier et adapter pour enrichir votre site'
   admin_presentation1: 'Hermes vous permet de créer toutes sortes de pages responsives, uniquement à partir de ses 2 types de templates et de sa configuration: '
   admin_sous_presentation11: 'Les templates de type "Libre" vous permettent de créer des contenus comme vous le souhaitez.'
   admin_sous_presentation12: 'Les templates de type "Liste" sont particulièrement adaptés pour afficher vos listes d''images, d''articles, de livres, de concerts... : les affichages correspondants seront au choix, des portfolios, des carousels ou des cartes.'
@@ -144,6 +147,7 @@ action:
   copy-1: <i class="hms-color1 btn btn-outline-success fa fa-1x fa-copy"></i>
   copy-2: <i class="hms-color1 btn btn-outline-success fa fa-2x fa-copy"></i>
   copy-3: <i class="hms-color1 btn btn-outline-success fa fa-3x fa-copy"></i>
+  copy-light-1: <i class="text-secondary btn btn-outline-light fa fa-1x fa-copy"></i>
   preview: <i class="hms-color1 btn btn-outline-success fa fa-eye" aria-hidden="true"></i>
 
 

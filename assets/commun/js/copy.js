@@ -3,31 +3,40 @@ const jQuery = $;
 (function ($) {
     "use strict"; // Start of use strict
 
-    $("#copy").on('click', function (event) {
-            docopy(event);
-        });
+    $(".copy").on('click', function (event) {
+        var key = this.dataset.copy ;
+        var type = this.dataset.copytype ;
+        docopy(event, key, type);
+    });
 
-    function docopy(e) {
+    function docopy(e, key, type) {
 
         e.preventDefault(); // Cancel the native event
         e.stopPropagation();// Don't bubble/capture the event
+        var target = 'tocopy'+ key;
 
-        var range = document.createRange();
-        var target = '#tocopy';
-        var fromElement = document.querySelector(target);
         try {
         // document.execCommand("Copy");
             const copy = require('clipboard-copy');
-            var copyHTML = document.getElementById(fromElement.getAttribute('id')).textContent;
-
-            if (typeof copyHTML === 'string') {
+            var text_alert = "";
+            var idCopy = 'copy'+ key;
+            if (type === 'text') {
+                var copyText = document.getElementById(target).textContent;
+                copy(copyText); // innerText
+                text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
+                    '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
+                    '            Le texte du template a bien été <strong>copié</strong>!.\n' +
+                    '        </div>';
+            }
+            if (type === 'html') {
+                var copyHTML = document.getElementById(target).innerHTML;
                 copy(copyHTML); // innerHtml
-                var text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
+                text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
                     '            Le code html du template a bien été <strong>copié</strong>!.\n' +
                     '        </div>';
-                document.getElementById('copy').insertAdjacentHTML('afterend',text_alert);
             }
+            document.getElementById(idCopy).insertAdjacentHTML('afterend',text_alert);
         } catch (err) {
             // Une erreur est survenue lors de la tentative de copie
             alert(err);

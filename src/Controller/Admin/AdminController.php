@@ -4,20 +4,25 @@ namespace App\Controller\Admin;
 
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Sheet;
+use App\Service\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @Route("/{_locale}/admin")
  */
 class AdminController extends AbstractAdminController
 {
+
     /**
      * @Route("/", name="admin_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Filesystem $filesystem, Image $image): Response
     {
+        $image->shuffle();
+
         $sheets = $this->getDoctrine()
             ->getRepository(Sheet::class)
             ->findAll();
