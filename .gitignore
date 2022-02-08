@@ -4,6 +4,9 @@
 /.env.*.local
 /public/bundles/
 /public/data/
+#/public/img/hermes/images/base/
+#/public/img/hermes/images/carre/
+#/public/img/hermes/images/1620x1080/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

@@ -17,21 +17,12 @@ class AdminController extends AbstractAdminController
 {
 
     /**
-     * @Route("/resize/{src}", name="admin_resize",defaults={ "title": "1620x1080"}, methods={"GET"})
-     */
-    public function resizeImg(Filesystem $filesystem, Image $image, $src){
-
-        $image->shuffle($src);
-
-        return $this->redirectToRoute('admin_index');
-
-    }
-
-    /**
      * @Route("/", name="admin_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Filesystem $filesystem, Image $image): Response
     {
+        $image->shuffle();
+
         $sheets = $this->getDoctrine()
             ->getRepository(Sheet::class)
             ->findAll();

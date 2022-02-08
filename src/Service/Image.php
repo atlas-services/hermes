@@ -22,24 +22,32 @@ class Image
 
     }
 
-    public function shuffle($src){
-        $basedir = getcwd()."/img/hermes/images";
-        $target = $basedir."/$src";
+    public function shuffle(){
 
-        $images = glob($target."/*.jpg");
-        //reset img*
-        foreach ($images as $filename) {
-            if(strpos($filename,$target.'/img') !== false ){
-                $this->filesystem->remove($filename);
-            }
+        $list= ['carre', '1620x1080'];
+        $currentDir = getcwd()."/img/hermes/images";
+        $baseDir =  $currentDir."/base";
+        $images_base = glob($baseDir."/*.jpg");
+
+        if([] == $images_base) {
+            $this->filesystem->mirror($currentDir, $baseDir);
+            $images_base = glob($baseDir."/*.jpg");
         }
 
-        $images = glob($target."/*.jpg");
-        shuffle($images);
+        shuffle($images_base);
 
-        foreach ($images as $key => $filename) {
-            $n = $key + 1;
-            $this->resize($filename, $target.'/img'.$n.'.jpg', $src, 100);
+        foreach ($list as $src) {
+            $target = $currentDir."/$src";
+
+            $images = glob($target."/img*.jpg");
+            if([] == $images){
+                $this->filesystem->mkdir($target);
+                foreach ($images_base as $key => $filename) {
+                    $n = $key + 1;
+                    $this->resize($filename, $target.'/img'.$n.'.jpg', $src, 100);
+                }
+                $images = glob($target."/img*.jpg");
+            }
         }
 
     }

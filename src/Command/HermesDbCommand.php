@@ -77,6 +77,22 @@ class HermesDbCommand extends Command
         $dbconfigcode = array_column($dbconfig, 'code');
         $dbtemplatecode = array_column($dbtemplate, 'code');
 
+
+        // remove old config si absente de hermes.yaml
+        $config_yaml = [];
+        foreach($configurations['config']as $configuration){
+            $config_yaml = array_merge($config_yaml, array_keys($configuration));
+        }
+
+        $config_diff = array_diff($dbconfigcode,$config_yaml);
+        foreach($config_diff as  $code){
+            $config_remove = $this->emConfig
+                ->getRepository(Config::class)
+                ->findOneBy(['code' => $code]);
+            dump($config_remove);
+//            $this->emConfig->remove($config_remove);
+        }
+die;
         foreach ($configurations as $key=>$value){
             if('user' == $key){
                 foreach ($value as $type=>$configuration){
