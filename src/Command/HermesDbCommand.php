@@ -89,10 +89,9 @@ class HermesDbCommand extends Command
             $config_remove = $this->emConfig
                 ->getRepository(Config::class)
                 ->findOneBy(['code' => $code]);
-            dump($config_remove);
-//            $this->emConfig->remove($config_remove);
+            $this->emConfig->remove($config_remove);
         }
-die;
+
         foreach ($configurations as $key=>$value){
             if('user' == $key){
                 foreach ($value as $type=>$configuration){
