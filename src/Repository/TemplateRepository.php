@@ -27,6 +27,7 @@ class TemplateRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('s')
             ->where('s.active = true ')
+            ->andWhere("s.code not like '%-hms-%' " )
             ->orderBy('s.name', 'ASC')
         ;
 

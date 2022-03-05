@@ -5,10 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Sheet;
 use App\Service\Image;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\TemplateLibreHermes;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @Route("/{_locale}/admin")
@@ -19,7 +18,7 @@ class AdminController extends AbstractAdminController
     /**
      * @Route("/", name="admin_index", methods={"GET"})
      */
-    public function index(Filesystem $filesystem, Image $image): Response
+    public function index(Image $image,TemplateLibreHermes $templateLibreHermes): Response
     {
         $image->shuffle();
 
@@ -40,15 +39,20 @@ class AdminController extends AbstractAdminController
 
         $configurations = $this->getParameter('init');
 
-        foreach ($configurations as $key=>$value){
-            if('template' == $key ){
-                foreach ($value as $code => $template){
-                    if( 'hms-' == substr($code, 0, 4) ){
-                        $array['sections'][] = $template;
-                    }
-                }
-            }
-        }
+        $arraySection = $templateLibreHermes->getList($configurations);
+//        dd($arraySection);
+        $array = array_merge($array, $arraySection);
+//        foreach ($configurations as $key=>$value){
+//            if('template' == $key ){
+//                $entetes = $value['entete'];
+//                foreach ($value as $code => $template){
+//                    if( 'hms-' == substr($code, 0, 4) ){
+//                        $array['sections'][] = $template;
+//                    }
+//                }
+//            }
+//        }
+//        dd($array['sections']);
 
         return $this->render('admin/index.html.twig', $array);
     }

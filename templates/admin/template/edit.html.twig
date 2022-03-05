@@ -3,10 +3,13 @@
 {% block title %} {{ 'sheet.edit'|trans() }}{% endblock %}
 
 {% block content %}
+    <a class="btn h-btn-outline-success"  href="{{ path('template_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1 class="text-secondary">{{ 'template.label'|trans() }}</h1>
 
     {{ include('admin/template/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a class="btn h-btn-outline-success"  href="{{ path('template_index') }}">back to list</a>
-
     {{ include('admin/template/_delete_form.html.twig') }}
+
+    <a class="btn h-btn-outline-success"  href="{{ path('template_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+
 {% endblock %}

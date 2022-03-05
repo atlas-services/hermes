@@ -88,74 +88,79 @@ parameters:
         summary: Carte de présentation avec photo
         code: card2
         name: Carte de présentation avec photo
-      hms-1:
-        summary: Entête-1
-        code: hms-1
-        name: Entête-1
-      hms-2:
-        summary: Entête-2
-        code: hms-2
-        name: Entête-2
-      hms-3:
-        summary: Entête-3
-        code: hms-3
-        name: Entête-3
-      hms-4:
-        summary: A la carte
-        code: hms-4
-        name: Template à la carte
-      hms-5:
-        summary: Vêtement
-        code: hms-5
-        name: Template vêtement
-      hms-6:
-        summary: Video
-        code: hms-6
-        name: Template video
-      hms-7:
-        summary: Présentation liste
-        code: hms-7
-        name: Template liste
-      hms-8:
-        summary: Image serrée
-        code: hms-8
-        name: Template serré
-      hms-9:
-        summary: forme Modal
-        code: hms-9
-        name: Template modal
-      hms-10:
-        summary: Image
-        code: hms-10
-        name: Template image
-      hms-11:
-        summary: Présentation
-        code: hms-11
-        name: Template Présentation
-      hms-12:
-        summary: Présentation Hermes
-        code: hms-12
-        name: Présentation Hermes
-      hms-13:
-        summary: Présentation Image
-        code: hms-13
-        name: Présentation Image
-      hms-14:
-        summary: Page d'accueil
-        code: hms-14
-        name: Page d'accueil
-      hms-15:
-        summary: Présentation Image V2
-        code: hms-15
-        name: Présentation Image V2
-      hms-16:
-        summary: Présentation Image V3
-        code: hms-16
-        name: Présentation Image V3
-      hms-17:
-        summary: Page d'accueil Hermes
-        code: hms-17
-        name: Page d'accueil Hermes
+
+    template_libre_hermes:
+      entete:
+        hms-1:
+          summary: Entête-1
+          code: hms-1
+          name: Entête-1
+        hms-2:
+          summary: Entête-2
+          code: hms-2
+          name: Entête-2
+        hms-3:
+          summary: Entête-3
+          code: hms-3
+          name: Entête-3
+        hms-4:
+          summary: Entête-4
+          code: hms-4
+          name: Entête-4
+      image:
+        hms-1:
+          summary: Images-1
+          code: hms-1
+          name: Images-1
+        hms-2:
+          summary: Images-2
+          code: hms-2
+          name: Images-2
+        hms-3:
+          summary: Images-3
+          code: hms-3
+          name: Images-3
+        hms-4:
+          summary: Images-4
+          code: hms-4
+          name: Images-4
+        hms-5:
+          summary: Images-5
+          code: hms-5
+          name: Images-5
+      bloc:
+        hms-1:
+          summary: Bloc-1
+          code: hms-1
+          name: Bloc-1
+        hms-2:
+          summary: Bloc-2
+          code: hms-2
+          name: Bloc-2
+        hms-3:
+          summary: Bloc-3
+          code: hms-3
+          name: Bloc-3
+        hms-4:
+          summary: Bloc-4
+          code: hms-4
+          name: Bloc-4
+        hms-5:
+          summary: Bloc-5
+          code: hms-5
+          name: Bloc-5
+        hms-6:
+          summary: Bloc-6
+          code: hms-6
+          name: Bloc-6
+        hms-7:
+          summary: Bloc-7
+          code: hms-7
+          name: Bloc-7
+        hms-8:
+          summary: Bloc-8
+          code: hms-8
+          name: Bloc-8
 
     config:
       site:

@@ -5,6 +5,7 @@ use App\Entity\Config\Config;
 use App\Entity\Hermes\Template;
 use App\Entity\Hermes\User;
 use App\Service\Onepage;
+use App\Service\TemplateLibreHermes;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -85,12 +86,26 @@ class HermesDbCommand extends Command
         }
 
         $config_diff = array_diff($dbconfigcode,$config_yaml);
+
         foreach($config_diff as  $code){
             $config_remove = $this->emConfig
                 ->getRepository(Config::class)
                 ->findOneBy(['code' => $code]);
             $this->emConfig->remove($config_remove);
         }
+
+
+        // remove old templates si absente de hermes.yaml
+        $template_yaml = array_keys($configurations['template']);
+        $template_diff = array_diff($dbtemplatecode,$template_yaml);
+
+        foreach($template_diff as  $code){
+            $template_remove = $this->em
+                ->getRepository(Template::class)
+                ->findOneBy(['code' => $code]);
+            $this->em->remove($template_remove);
+        }
+
 
         foreach ($configurations as $key=>$value){
             if('user' == $key){
@@ -124,17 +139,33 @@ class HermesDbCommand extends Command
                     }
                 }
             }
-            if('template' == $key){
-                foreach ($value as $code=>$conf){
-                    if(!in_array($code, $dbtemplatecode)){
-                        $template = new Template();
-                        $template->setCode($code);
-                        $template->setSummary($conf['summary']);
-                        $template->setName($conf['name']);
-                        $this->em->persist($template);
+//            if('template' == $key){
+//                foreach ($value as $code=>$conf){
+//                    if(!in_array($code, $dbtemplatecode)){
+//                        $template = new Template();
+//                        $template->setCode($code);
+//                        $template->setSummary($conf['summary']);
+//                        $template->setName($conf['name']);
+//                        $this->em->persist($template);
+//                    }
+//                }
+//            }
+
+            if(TemplateLibreHermes::TEMPLATE_LIBRE_HERMES == $key){
+                foreach ($value as $key=>$modele){
+                    foreach ($modele as $kcode=>$conf){
+                        $code = $key.'-'.$kcode;
+                        if(!in_array($kcode, $dbtemplatecode)){
+                            $template = new Template();
+                            $template->setCode($code);
+                            $template->setSummary($conf['summary']);
+                            $template->setName($conf['name']);
+                            $this->em->persist($template);
+                        }
                     }
                 }
             }
+
         }
         $this->em->flush();
         $this->emConfig->flush();

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/{_locale}/admin/template")
  */
-class TemplateController extends AbstractController
+class TemplateController extends AbstractAdminController
 {
     /**
      * @Route("/", name="template_index", methods={"GET"})
@@ -23,9 +23,12 @@ class TemplateController extends AbstractController
             ->getRepository(Template::class)
             ->findAll();
 
-        return $this->render('admin/template/index.html.twig', [
+        $array = [
             'templates' => $templates,
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/template/index.html.twig', $array);
     }
 
     /**
@@ -75,10 +78,13 @@ class TemplateController extends AbstractController
             return $this->redirectToRoute('template_index');
         }
 
-        return $this->render('admin/template/edit.html.twig', [
-            'template' => $template,
+        $array = [
+            'hms_template' => $template,
             'form' => $form->createView(),
-        ]);
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/template/edit.html.twig', $array );
     }
 
     /**
