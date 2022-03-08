@@ -139,17 +139,17 @@ class HermesDbCommand extends Command
                     }
                 }
             }
-//            if('template' == $key){
-//                foreach ($value as $code=>$conf){
-//                    if(!in_array($code, $dbtemplatecode)){
-//                        $template = new Template();
-//                        $template->setCode($code);
-//                        $template->setSummary($conf['summary']);
-//                        $template->setName($conf['name']);
-//                        $this->em->persist($template);
-//                    }
-//                }
-//            }
+            if('template' == $key){
+                foreach ($value as $code=>$conf){
+                    if(!in_array($code, $dbtemplatecode)){
+                        $template = new Template();
+                        $template->setCode($code);
+                        $template->setSummary($conf['summary']);
+                        $template->setName($conf['name']);
+                        $this->em->persist($template);
+                    }
+                }
+            }
 
             if(TemplateLibreHermes::TEMPLATE_LIBRE_HERMES == $key){
                 foreach ($value as $key=>$modele){

@@ -2,6 +2,7 @@
     <h2 class="mt-3 text-dark text-center"> {{ 'info.admin_templates_1'|trans()|raw }}</h2>
 {% for type, liste_section in sections %}
     {% for key, section in liste_section %}
+        {% set keytemplate = type ~ '-' ~ key  %}
         {% set suivant = key + 2 %}
         {% set precedent = key ?? 0 %}
         <div id="{{ type ~ '-' ~  section.code }}" class="mt-5 pt-5 pb-1" ></div>
@@ -12,10 +13,10 @@
             Template "{{ section.summary }}"
             {% if not(loop.last) %}
                 <a class="mt-3 text-center text-white" href="{{ '#' ~ type ~ '-hms-' ~ suivant }}"><i class="fa fa-angle-double-down"></i></a>
-                <button id="copy{{ key }}" class="copy btn btn-icon ml-lg-5 italic text-white" data-copy="{{ key }}" data-copytype="html">{{ 'action.copy-light-1'|trans()|raw }}</button>
             {% endif %}
+            <button id="copy{{ keytemplate }}" class="copy btn btn-icon ml-lg-5 italic text-white" data-copy="{{ keytemplate }}" data-copytype="html">{{ 'action.copy-light-1'|trans()|raw }}</button>
         </h4>
-        <span id="tocopy{{ key }}">
+        <span id="tocopy{{ keytemplate }}">
         {% include constant('App\\Service\\TemplateLibreHermes::TEMPLATE_LIBRE_HERMES_DIR') ~ '/' ~ type ~ '/' ~ section.code ~ '/index.html.twig' %}
         </span>
     {% endfor %}
