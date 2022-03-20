@@ -1,5 +1,5 @@
 <!-- Contact Section -->
-<section class="mh-100 pb-0  px-0 container col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ contact_bgcolor }} ; color:{{ contact_color }}; " >
+<section class="mh-100 pb-0  px-0 container-fluid col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ contact_bgcolor }} ; color:{{ contact_color }}; " >
     <div class="container col-lg-{{ content_container_width|col_lg() }}"  >
         {% if 'one page' == nav_bar  %}
             <div class="col-lg-12 col-12 text-center mb-5">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="col-lg-12 col-12 text-center">
+                    <div class="col-lg-12 col-12 text-center mb-5">
                         <div id="success"></div>
                         <button id="sendMessageButton" class="btn h-w-10 btn-outline-danger h-rounded-lg-4 btn-xl mt-5" type="submit">
                             {{ 'formulaire.send'|trans() }}

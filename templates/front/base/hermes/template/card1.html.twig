@@ -1,38 +1,35 @@
-<!-- Section card -->
-<section id="{{ section.name }}" class="pb-0  px-0">
-    {% if('previsualidation_sheet' == app.request.get('_route')) %}
-        {% set posts = section.getPrevisualisationPosts %}
-    {% else %}
-        {% set posts = section.posts %}
-    {% endif %}
+<!-- Portfolio Grid -->
+{#<section id="{{ section.name ~ section.template.name }}" class="portfolio bg-light page-section" >#}
+<section id="portfolio" class="pb-0 pb-lg-4  mx-auto px-0" style="background-color:{{ section.templateBgColor ?? content_bgcolor }}">
+    <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0" >
 
-    <div class="col-lg-{{ (section.templateWidth ?? card_container_width)|col_lg()  }}  col-12 mx-auto pl-0 pr-0">
-        {% for post in posts|sort((a, b) => a.position <=> b.position) %}
-            {% if loop.index is odd %}
-                <div class="row col-lg-12 col-12 mx-auto">
-                {% if not loop.last  %}
-                    {% set margin = 'ml-lg-auto mr-lg-4 mt-lg-3 ' %}
-                {% else %}
-                    {% set margin = 'ml-lg-auto mr-lg-auto mt-lg-3 ' %}
-                {% endif %}
-            {% else %}
-                {% set margin = 'mr-lg-auto ml-lg-4 mt-lg-3'  %}
-            {% endif %}
-            <div class="col-lg-5 col-12 h-rounded-lg-1 pt-5 pl-5 pr-5 pb-2 {{ margin }} my-3 w-auto shadow-lg text-center" style="background-color: {{ card_bgcolor }};color: {{ card_color }};">
-                <div class="text-left pb-5">
-                    {{ post.content|striptags|u.truncate(600, '...')|raw }}
-                </div>
-                {% if vich_uploader_asset(post, 'imageFile') is not null %}
-                    <div class="col-lg-10 col-12 text-center mx-auto h-position-absolute h-bottom-10 " >
-                         <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="col-lg-12 col-12 btn h-w-40 btn-outline-danger h-rounded-lg-4 pt-2 pb-2 "
-                           href="{{ asset(vich_uploader_asset(post, 'imageFile')) }}"
-                           rel="noopener noreferrer" target="_blank">Télécharger</a>
+        <div id="folio"  class="row ">
+            {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
+                {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
+                    <div class="col-lg-{{ section.templateNbCol|nb_col }} col-md-{{ section.templateNbCol|nb_col }} col-12 text-center mb-2 mb-md-4" >
+                        <div class="col-lg-12 col-md-12 col-12 text-center">
+                            <div class="col-lg-5 col-12 h-rounded-lg-1 pt-5 pl-5 pr-5 pb-2  my-3 w-auto shadow-lg text-center" style="background-color: {{ card_bgcolor }};color: {{ card_color }};">
+                                <p class="h3"> {{ post }}</p>
+                                <div class="text-left pb-5">
+                                    {{ post.content|striptags|u.truncate(600, '...')|raw }}
+                                </div>
+                                {% if vich_uploader_asset(post, 'imageFile') is not null %}
+                                    {#                    <div class="col-lg-10 col-12 text-center mx-auto h-position-absolute h-bottom-10 " >#}
+                                    <div class="col-lg-12 col-12 text-center mx-auto " >
+                                        <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'"
+                                           class="col-lg-2 col-12 btn btn-outline-danger h-rounded-lg-4 pt-2 pb-2 "
+                                           href="{{ asset(vich_uploader_asset(post, 'imageFile')) }}"
+                                           rel="noopener noreferrer" target="_blank">Télécharger</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 {% endif %}
-            </div>
-            {% if loop.index is  even %}
-                </div>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </section>
+
+<!-- Modale -->
+{% include 'front/base/hermes/template/modale.html.twig' %}

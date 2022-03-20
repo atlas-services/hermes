@@ -25,7 +25,15 @@
     {% endif %}
     {% if vich_uploader_asset(form.vars.data, 'imageFile') is not null %}
         <tr>
+           {% if ( 'pdf' !=  form.vars.data.imageFile.extension) %}
             <td><img  src="{{ asset(vich_uploader_asset(form.vars.data, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
+            {% else %}
+            <td>
+                <a class="col-lg-2 col-12 btn btn-outline-danger h-rounded-lg-4 pt-2 pb-2 "
+                   href="{{ asset(vich_uploader_asset(form.vars.data, 'imageFile'))  }}"
+                   rel="noopener noreferrer" target="_blank">Télécharger pdf "{{ form.vars.data }}"</a>
+            </td>
+            {% endif %}
         </tr>
     {% endif  %}
     {{ form_row(form.name) }}
