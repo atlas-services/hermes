@@ -55,9 +55,10 @@
             {% endblock nav %}
             {% set nb = 0 %}
             {% if  (vich_uploader_asset(logo, 'imageFile')) %}
-                {% set nb = 4 %}
+                {% set nb = 2 %}
             {% endif %}
-            <div class="content pt-lg-0 mt-lg-0 pt-{{ nb }} mt-{{ nb }}">
+{#            <div class="content pt-lg-0 mt-lg-0 pt-{{ nb }} mt-{{ nb }}">#}
+            <div class="content pt-lg-0 mt-lg-0 pt-0">
                 {% block content %}
                 {% endblock content %}
             </div>
