@@ -20,6 +20,7 @@ use App\Entity\Traits\UserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -81,10 +82,16 @@ class Section
     protected $template_width;
 
     /**
+     * @var bool
+     *
+     */
+    protected $transparent;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length(max=7)
+     * @Assert\Length(max=11)
      */
     protected $template_bgcolor;
 
@@ -237,10 +244,29 @@ class Section
     /**
      * @return string
      */
+    public function getTransparent(): ?bool
+    {
+        return $this->transparent;
+    }
+
+    /**
+     * @param bool
+     */
+    public function setTransparent($tranparent): void
+    {
+        $this->transparent = $tranparent;
+        if($this->transparent){
+            $this->setTemplateBgcolor('transparent');
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getTemplateBgcolor(): ?string
     {
-        if( null == $this->template_bgcolor){
-            return '#FFFFFF';
+        if( null == $this->template_bgcolor or $this->getTransparent()){
+            return  'transparent';
         }
         return $this->template_bgcolor;
     }

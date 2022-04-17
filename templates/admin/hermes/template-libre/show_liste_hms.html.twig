@@ -17,7 +17,11 @@
             <button id="copy{{ keytemplate }}" class="copy btn btn-icon ml-lg-5 italic text-white" data-copy="{{ keytemplate }}" data-copytype="html">{{ 'action.copy-light-1'|trans()|raw }}</button>
         </h4>
         <span id="tocopy{{ keytemplate }}">
-        {% include constant('App\\Service\\TemplateLibreHermes::TEMPLATE_LIBRE_HERMES_DIR') ~ '/' ~ type ~ '/' ~ section.code ~ '/index.html.twig' %}
+            {% set dnone = '' %}
+            {% if type == 'video' %}
+                {% set dnone = 'd-none' %}
+            {% endif %}
+            {{  include (constant('App\\Service\\TemplateLibreHermes::TEMPLATE_LIBRE_HERMES_DIR') ~ '/' ~ type ~ '/' ~ section.code ~ '/index.html.twig' , { dnone: dnone})  }}
         </span>
     {% endfor %}
 {% endfor %}

@@ -43,9 +43,9 @@
             {% endfor %}
             <div id="top" class="hide" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
-                {% if( 'libre' not in section.template.code) %}
-                    {{ include('front/base/hermes/template/libre.html.twig') }}
-                {% endif %}
+{#                {% if( 'libre' not in section.template.code) %}#}
+{#                    {{ include('front/base/hermes/template/libre.html.twig') }}#}
+{#                {% endif %}#}
                 {% include 'front/base/hermes/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %}
             {% endfor %}
         {% endif %}

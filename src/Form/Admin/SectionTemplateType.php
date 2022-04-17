@@ -56,6 +56,14 @@ class SectionTemplateType extends AbstractType
                     'required' => false,
                     'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
                 ])
+                ->add('transparent', ChoiceType::class,
+                    [
+                        'choices' =>  [
+                            'transparent.no' => false,
+                            'transparent.yes' => true ,
+                        ],
+                        'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                    ])
                 ->add('templateBgcolor', ColorType::class, [
                     'required' => false,
                 ])
@@ -138,6 +146,13 @@ class SectionTemplateType extends AbstractType
             FormEvents::POST_SUBMIT,
             [$this, 'onPostSubmitData']
         );
+
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            $data = $event->getData();
+            if($data->getTransparent()){
+                $data->setTemplateBgcolor('transparent');
+            }
+        });
     }
 
     public function onPostSubmitData(FormEvent $event)

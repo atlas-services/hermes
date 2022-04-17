@@ -22,6 +22,7 @@ const jQuery = $;
             var idCopy = 'copy'+ key;
             if (type === 'text') {
                 var copyText = document.getElementById(target).textContent;
+                copyText = copyText.replace('class="d-none ', 'class="');
                 copy(copyText); // innerText
                 text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
@@ -30,6 +31,7 @@ const jQuery = $;
             }
             if (type === 'html') {
                 var copyHTML = document.getElementById(target).innerHTML;
+                copyHTML = copyHTML.replace('class="d-none ', 'class="');
                 copy(copyHTML); // innerHtml
                 text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
