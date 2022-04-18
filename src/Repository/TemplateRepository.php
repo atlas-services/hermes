@@ -42,10 +42,12 @@ class TemplateRepository extends ServiceEntityRepository
         ;
         return $result;
     }
+
     public function getQbInitTemplates()
     {
         $qb = $this->getQbTemplates()
-            ->where('s.code in (:libre) ' )
+            ->where('s.active = true ')
+            ->andWhere('s.code in (:libre) ' )
             ->setParameter('libre',  ['libre', 'folio1'] )
             ->orderBy('s.id', 'ASC')
         ;

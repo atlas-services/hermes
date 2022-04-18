@@ -63,6 +63,7 @@ class SectionController extends AbstractAdminController
         $options['position'] = true;
         $options['content'] = true;
         $options['url'] = true;
+        $options['full_template'] = false;
         $form = $this->createForm(SectionTemplateType::class, $section, $options);
         $form->handleRequest($request);
 

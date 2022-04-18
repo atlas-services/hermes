@@ -180,7 +180,7 @@ class MenuController extends AbstractAdminController
         $section->addPost($post);
         $menu->addSection($section);
         $options['sheet'] = true;
-        $options['full_template'] = true;
+        $options['full_template'] = false;
         if(!is_null($sheet)) {
             $menu->setSheet($sheet);
             $options['sheet'] = false;
