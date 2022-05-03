@@ -18,7 +18,6 @@
 {% if( app.request.attributes.get('_route') in ['menu_section_post_new_sheet']) %}
     {% for form_section in form.sections  %}
         {{ form_row(form_section.template) }}
-{#        {{ form_row(form_section.remote) }}#}
         {{ form_row(form_section.templateWidth) }}
         {{ form_row(form_section.templateImageFilter) }}
         {{ form_row(form_section.templateNbCol) }}
@@ -27,17 +26,10 @@
             {% if( 'posts' == form_posts.vars.name) %}
                 {% for form_post in form_posts %}
                     {% form_theme form_post.tags 'admin/form/theme_tags.html.twig' %}
-                    {{ form_row(form_post.imageFile) }}
                     {{ form_row(form_post.name) }}
+                    {{ form_row(form_post.imageFile) }}
                     {{ form_row(form_post.url) }}
                     {{ form_row(form_post.content) }}
-{#                    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form_post.tags.vars.prototype)|e('html_attr') }}">#}
-{#                        {% for tag in form_post.tags %}#}
-{#                            <li class="list-unstyled btn btn-primary">#}
-{#                                {{ form_row(tag.name) }}#}
-{#                            </li>#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
                 {% endfor  %}
             {% endif  %}
         {% endfor  %}
@@ -45,7 +37,6 @@
 {% endif %}
 {% if( app.request.attributes.get('_route') in ['menu_section_post_new_sheet']) %}
     {{ form_row(form.saveAndAddPost) }}
-{#    {{ form_row(form.saveAndAddSectionPost) }}#}
 {% endif %}
     {{ form_row(form.save) }}
 {{ form_widget(form._token) }}

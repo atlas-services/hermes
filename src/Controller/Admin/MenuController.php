@@ -44,6 +44,41 @@ class MenuController extends AbstractAdminController
         return $this->render('admin/menu/index.html.twig', $array);
     }
 
+
+    /**
+     * @Route("/add/menu/new", name="menu_new", methods={"GET","POST"})
+     */
+    public function new(Request $request, MenuRepository $menuRepository): Response
+    {
+//        Le menun'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
+        $menu = new Menu();
+        $form = $this->createForm(BaseMenuType::class, $menu);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($menu);
+            $em->flush();
+
+            if ($form->get('saveAndAdd')->isClicked()) {
+                return $this->redirectToRoute('menu_section_post_new_sheet', ['sheet'=> $menu->getSheet()->getSlug()]);
+            }
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('menu_index');
+            }
+            return $this->redirectToRoute('menu_index');
+        }
+
+        $array = [
+            'menu' => $menu,
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/menu/new.html.twig', $array);
+    }
+
+
     /**
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-libre", name="menu_section_post_new_sheet_libre", methods={"GET","POST"})
      * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})

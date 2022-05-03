@@ -1,6 +1,32 @@
 import $ from 'jquery';
 const jQuery = $;
 
+window.addEventListener('load', (event) => {
+    var uri = window.location.pathname;
+    var urls = ['/nouveau-menu/nouveau-contenu', '/nouvelle-section/nouveau-contenu'];
+    urls.forEach(element => hiddeNew(element, uri));
+
+});
+
+function hiddeNew(element, uri) {
+    if(uri.includes(element)){
+    if(document.getElementById('menu_sections_0_templateWidth') != null){
+        document.getElementById('menu_sections_0_templateWidth').parentElement.parentElement.hidden = true;
+        document.getElementById('menu_sections_0_templateImageFilter').parentElement.parentElement.hidden = true;
+        document.getElementById('menu_sections_0_templateNbCol').parentElement.parentElement.hidden = true;
+        document.getElementById('menu_sections_0_template2Width').parentElement.parentElement.hidden = true;
+        document.getElementById('menu_sections_0_posts_0_url').parentElement.parentElement.hidden = true;
+    }
+    }
+    if(uri.includes(element)){
+        if(document.getElementById('section_template_transparent') != null){
+        document.getElementById('section_template_transparent').parentElement.parentElement.hidden = true;
+        document.getElementById('section_template_templateBgcolor').parentElement.parentElement.hidden = true;
+        document.getElementById('section_template_templateWidth').parentElement.parentElement.hidden = true;
+        }
+    }
+}
+
 (function ($) {
     "use strict"; // Start of use strict
 
@@ -12,20 +38,17 @@ const jQuery = $;
                 // $('.vich-image').hide();
                 $('.templateNbCol').parent().parent().children().hide();
                 $('#menu_sections_0_templateImageFilter').parent().parent().children().hide();
-                $('#menu_sections_0_remote').parent().parent().children().hide();
                 $('#menu_sections_0_template2').parent().parent().children().hide();
                 $('#menu_sections_0_template2Width').parent().parent().children().hide();
             } else {
                 // $('.vich-image').show();
                 $('#menu_sections_0_templateImageFilter').parent().parent().children().show();
-                $('#menu_sections_0_remote').parent().parent().children().show();
                 $('#menu_sections_0_template2').parent().parent().children().show();
                 $('#menu_sections_0_template2Width').parent().parent().children().show();
             }
             if (modeleselect == "Folio video classique") {
                 $('#menu_sections_0_posts_0_url').parent().parent().show();
                 $('#cke_menu_sections_0_posts_0_content').parent().parent().hide();
-                $('#menu_sections_0_remote').parent().parent().hide();
                 $('#menu_sections_0_template2').parent().parent().hide();
                 $('#menu_sections_0_template2Width').parent().parent().hide();
             }else {
@@ -38,19 +61,16 @@ const jQuery = $;
             if (modeleselect == "Libre" ) {
                 $('.vich-image').hide();
                 $('#section_template_templateImageFilter').parent().parent().children().hide();
-                $('#section_template_remote').parent().parent().children().hide();
                 $('#section_template_template2').parent().parent().children().hide();
                 $('#section_template_template2Width').parent().parent().children().hide();
                 $('#section_template_posts_0_url').parent().parent().children().hide();
             } else {
                 $('.vich-image').show();
                 $('#section_template_templateImageFilter').parent().parent().children().show();
-                $('#section_template_remote').parent().parent().children().show();
                 $('#section_template_template2').parent().parent().children().show();
                 $('#section_template_template2Width').parent().parent().children().show();
             }
             if (modeleselect == "Folio video classique") {
-                $('#section_template_remote').parent().parent().children().hide();
                 $('#section_template_template2').parent().parent().children().hide();
                 $('#section_template_template2Width').parent().parent().children().hide();
                 $('#section_template_content').parent().parent().children().hide();
@@ -87,7 +107,7 @@ const jQuery = $;
     //     });
     // }
 
-    // afficher/cacher la saisie de la couleur si transparent n'est pas séle ctionné
+    // afficher/cacher la saisie de la couleur si transparent n'est pas sélectionné
     var config_transparent = $("#config_transparent");
     if (config_transparent.length > 0) {
         config_transparent. change(function(){
