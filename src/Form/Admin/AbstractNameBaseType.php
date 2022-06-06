@@ -66,6 +66,16 @@ abstract class AbstractNameBaseType extends AbstractType
                     'label' =>  'menu.update_next_different'
                 ]);
         }
+        if (isset($options['saveAndAddHermesListe'])) {
+            if ($options['saveAndAddHermesListe']) {
+                $builder
+                    ->add('saveAndAddHermesListe', SubmitType::class, [
+                        'icon_before' => '<i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i>',
+                        'label_html' => true,
+                        'label' =>  'menu.list'
+                    ]);
+            }
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -80,7 +90,7 @@ abstract class AbstractNameBaseType extends AbstractType
             'saveAndAddLabel' => 'menu.update_next',
             'saveAndAddPost' => false,
             'saveAndAddSectionPost' => false,
-            'saveAndAddPost' => false,
+            'saveAndAddHermesListe' => false,
         ]);
     }
 }

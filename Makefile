@@ -1,12 +1,12 @@
 .PHONY:
 
 hermes-install:
-	mkdir data
-	mkdir public/build
-	mkdir public/data
-	mkdir public/data/uploads
-	mkdir public/data/uploads/entity
-	mkdir public/data/uploads/content
+	mkdir data 2> /dev/null || true
+	mkdir public/build 2> /dev/null || true
+	mkdir public/data 2> /dev/null || true
+	mkdir public/data/uploads 2> /dev/null || true
+	mkdir public/data/uploads/entity 2> /dev/null || true
+	mkdir public/data/uploads/content 2> /dev/null || true
 	yarn install
 	composer install
 	bin/console d:s:u --force

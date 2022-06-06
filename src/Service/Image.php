@@ -10,16 +10,17 @@ namespace App\Service;
 
 
 use Symfony\Component\Filesystem\Filesystem;
-
-
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Image
 {
+    const HERMES_DIR='hermes';
     protected $filesystem;
-    public function __construct(Filesystem $filesystem)
+    protected $parameterBag;
+    public function __construct(Filesystem $filesystem, ParameterBagInterface $parameterBag)
     {
         $this->filesystem = $filesystem;
-
+        $this->parameterBag = $parameterBag;
     }
 
     public function shuffle(){
@@ -83,5 +84,21 @@ class Image
         $imageFinal = imagecreatetruecolor($new_width, $new_height) ;
         $final = imagecopyresampled($imageFinal, $imageRessource, $dst_x, $dst_y, $src_x, $src_y, $new_width, $new_height, $width, $height) ;
         imagejpeg($imageFinal, $target, $quality) ;
+    }
+
+    // Charge les images du repertoire "hermes" pour les listes
+    public function getListHermesDirFiles($dir){
+        $listDir = getcwd().'/'.$this->parameterBag->get('hermes_path_content_images').'/Post/'.$dir;
+        $originDir = $this->getContentHermesDirFiles();
+        $this->filesystem->mirror($originDir, $listDir);
+        $images_base = glob($listDir."/*.jpg");
+        return $images_base;
+    }
+
+    // Charge les images du repertoire "hermes" pour les content des Post
+    public function getContentHermesDirFiles($dir = self::HERMES_DIR){
+        $contentDir = getcwd().'/'.$this->parameterBag->get('hermes_path_content_image_post').'/'.$dir;
+
+        return $contentDir;
     }
 }

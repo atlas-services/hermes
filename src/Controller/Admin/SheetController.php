@@ -8,6 +8,8 @@ use App\Form\Admin\SheetType;
 use App\Form\Admin\Libre\SheetLibreType;
 use App\Form\Admin\Liste\SheetListeType;
 use App\Repository\SheetRepository;
+use App\Service\Copy;
+use App\Service\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -49,7 +51,7 @@ class SheetController extends AbstractAdminController
     /**
      * @Route("/nouvelle-page", name="sheet_new", methods={"GET","POST"})
      */
-    public function new(Request $request,SheetRepository $sheetRepository): Response
+    public function new(Request $request,SheetRepository $sheetRepository, Copy $copy, Image $image): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
         $sheet = new Sheet();
@@ -65,6 +67,10 @@ class SheetController extends AbstractAdminController
                 return $this->redirectToRoute('menu_section_post_new_sheet', ['sheet'=> $sheet->getSlug()]);
             }
             if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('sheet_index');
+            }
+            if ($form->get('saveAndAddHermesListe')->isClicked()) {
+                $copy->handleHermesDir($sheet, $image);
                 return $this->redirectToRoute('sheet_index');
             }
         }
