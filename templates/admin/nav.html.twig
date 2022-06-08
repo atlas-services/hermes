@@ -21,6 +21,7 @@
             <a class="mr-2 px-1 text-decoration-none" href="{{ path('change_locale', {'locale': locale}) }}"><img
                         src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
         {% endfor %}
+
         <div class="navbar-header ">
             <button class="navbar-toggler navbar-toggler-right collapsed" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-label="Toggle navigation"
@@ -30,6 +31,11 @@
         </div>
         <div class="collapse navbar-collapse px-3 " id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
+            <ul class="nav navbar-nav mx-auto">
+                    <li class="px-md-4">
+                        <a class="h6 hms-color1 text-decoration-none  h-bay-jamjuree px-md-2" href="/elfinder" target="_blank"> Charger images </a>
+                    </li>
+
                 <ul class="nav navbar-nav mx-auto">
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="dropdown px-md-4">

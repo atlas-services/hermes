@@ -7,6 +7,7 @@ hermes-install:
 	mkdir public/data/uploads 2> /dev/null || true
 	mkdir public/data/uploads/entity 2> /dev/null || true
 	mkdir public/data/uploads/content 2> /dev/null || true
+	mkdir public/data/uploads/content/hermes 2> /dev/null || true
 	yarn install
 	composer install
 	bin/console d:s:u --force

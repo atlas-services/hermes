@@ -27,13 +27,15 @@ class Copy
 {
 
     private $em ;
+    private $image ;
     private $cacheManager;
     private $dataManager;
     private $filterManager;
 
-    public function __construct(EntityManagerInterface $em,CacheManager $cacheManager, DataManager $dataManager, FilterManager $filterManager)
+    public function __construct(EntityManagerInterface $em, Image $image,CacheManager $cacheManager, DataManager $dataManager, FilterManager $filterManager)
     {
         $this->em = $em;
+        $this->image = $image;
         $this->cacheManager  = $cacheManager;
         $this->dataManager   = $dataManager;
         $this->filterManager = $filterManager;
@@ -80,7 +82,7 @@ class Copy
 
     }
 
-    public function handleHermesDir(Sheet $sheet, Image $image){
+    public function handleHermesDir(Sheet $sheet){
 
         try {
             $menu = new Menu();
@@ -98,10 +100,10 @@ class Copy
             $section->setName($sheet->getName());
             $section->setMenu($menu);
             $section->setTemplate($template);
-            $files = $image->getListHermesDirFiles($sheet->getName());
+            $files = $this->image->getListHermesDirFiles($sheet->getName());
             foreach ($files as $key => $path){
-                $pos = strpos($path, 'public') +7;
                 $nb = $key + 1;
+                $pos = strpos($path, 'public') +7;
                 $filter_path = substr($path, $pos);
                 $cache_path = $this->filter($filter_path, 'app_fixed_filter_bd_154', 700 , 328 );
                 $file = new File($cache_path);

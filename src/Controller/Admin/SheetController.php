@@ -51,7 +51,7 @@ class SheetController extends AbstractAdminController
     /**
      * @Route("/nouvelle-page", name="sheet_new", methods={"GET","POST"})
      */
-    public function new(Request $request,SheetRepository $sheetRepository, Copy $copy, Image $image): Response
+    public function new(Request $request,SheetRepository $sheetRepository, Copy $copy): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
         $sheet = new Sheet();
@@ -70,7 +70,7 @@ class SheetController extends AbstractAdminController
                 return $this->redirectToRoute('sheet_index');
             }
             if ($form->get('saveAndAddHermesListe')->isClicked()) {
-                $copy->handleHermesDir($sheet, $image);
+                $copy->handleHermesDir($sheet);
                 return $this->redirectToRoute('sheet_index');
             }
         }
