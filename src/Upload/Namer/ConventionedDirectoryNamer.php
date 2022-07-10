@@ -10,6 +10,7 @@ namespace App\Upload\Namer;
 
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
 use Psr\Log\LoggerInterface;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
@@ -44,7 +45,12 @@ class ConventionedDirectoryNamer implements DirectoryNamerInterface
             }
             if($object instanceof Post){
                 $menu_code = $object->getSection()->getMenu()->getCode();
-                $path = $className.'/'.$menu_code.'/' ;
+                $section_id = $object->getSection()->getId();
+                if('' == $section_id){
+                    dd($object);
+                }
+//                $path = $className.'/'.$menu_code.'/' ;
+                $path = 'section'. $section_id.'/'.$menu_code.'/';
                 return $path;
             }
 

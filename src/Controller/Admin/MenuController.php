@@ -213,6 +213,7 @@ class MenuController extends AbstractAdminController
         $position_post = $postRepository->getMaxPosition($section);
         $post->setPosition($position_post);
         $section->addPost($post);
+        $post->setSection($section);
         $menu->addSection($section);
         $options['sheet'] = true;
         $options['full_template'] = false;
@@ -224,17 +225,19 @@ class MenuController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $position_menu = $menuRepository->getMaxPosition($sheet);
             $menu->setPosition($position_menu);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($section);
             $entityManager->persist($menu);
+            $entityManager->persist($post);
             $entityManager->flush();
-            if ($form->get('saveAndAddPost')->isClicked()) {
-                $section= $menu->getSections()[0];
+               if ($form->get('saveAndAddPost')->isClicked()) {
+//                $section= $menu->getSections()[0];
                 return $this->redirectToRoute('post_new_section', ['section'=> $section->getId()]);
             }
             if ($form->get('saveAndAddSectionPost')->isClicked()) {
-                $section= $menu->getSections()[0];
+//                $section= $menu->getSections()[0];
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
             }
             if ($form->get('save')->isClicked()) {

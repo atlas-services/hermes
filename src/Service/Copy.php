@@ -41,17 +41,17 @@ class Copy
         $this->filterManager = $filterManager;
     }
 
-    public function copySection(Section $section, Section $fromSection, $copy = false){
+    public function copySection(Section $section, Section $toSection, $copy = false){
 
         try {
             $this->em->persist($section);
 
             if($copy){
                 foreach($section->getPosts() as $post){
-                    $oldPost = clone $post;
-                    $oldPost->setSection($fromSection);
-                    $this->em->persist($fromSection);
-                    $this->em->persist($oldPost);
+                    $newPost = clone $post;
+                    $newPost->setSection($toSection);
+                    $this->em->persist($toSection);
+                    $this->em->persist($newPost);
                 }
             }
 
@@ -93,14 +93,19 @@ class Copy
                 ->getRepository(Template::class)
                 ->findOneBy(['code'=> $template::TEMPLATE_LISTE]);
 
-            $menu->setName($sheet->getName());
+            $menu->setName('menu'.$sheet->getName());
             $menu->setCode($sheet->getName());
             $menu->setSlug($sheet->getName());
             $menu->setSheet($sheet);
-            $section->setName($sheet->getName());
+            $section->setName('section'.$sheet->getName());
             $section->setMenu($menu);
             $section->setTemplate($template);
-            $files = $this->image->getListHermesDirFiles($sheet->getName());
+            $this->em->persist($section);
+            $this->em->persist($menu);
+            $this->em->persist($sheet);
+            $this->em->flush();
+            $dir = 'section'.$section->getId().'/'.$menu->getCode().'/';
+            $files = $this->image->getListHermesDirFiles($dir);
             foreach ($files as $key => $path){
                 $nb = $key + 1;
                 $pos = strpos($path, 'public') +7;
@@ -114,14 +119,11 @@ class Copy
                 $post->setFileName($file->getFilename());
                 $this->em->persist($post);
             }
-
-            $this->em->persist($section);
-            $this->em->persist($menu);
-            $this->em->persist($sheet);
             $this->em->flush();
             return ['info' => 'Post copié'];
 
         }catch (\Exception $e){
+            dd($e->getMessage());
             return ['warning' => $e->getMessage()];
         }
 

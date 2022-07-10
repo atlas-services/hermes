@@ -72,7 +72,7 @@ abstract class AbstractNameBaseType extends AbstractType
                     ->add('saveAndAddHermesListe', SubmitType::class, [
                         'icon_before' => '<i class="fa fa-save"></i> <i class="fa fa-plus-circle"></i>',
                         'label_html' => true,
-                        'label' =>  'menu.list'
+                        'label' =>  'menu.upload_hermes_dir'
                     ]);
             }
         }

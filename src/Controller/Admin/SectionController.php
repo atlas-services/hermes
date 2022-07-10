@@ -222,20 +222,17 @@ class SectionController extends AbstractAdminController
     public function copy(Request $request, Section $section, Copy $copy): Response
     {
         $form = $this->createForm(SectionCopyType::class, $section);
-        $fromSection = clone $section;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $toSection = clone $section;
             if ($form->get('move')->isClicked()) {
-                $copy->copySection($section, $fromSection, false);
-                return $this->redirectToRoute('section_index');
+                $bcopy = false;
             }
             if ($form->get('copy')->isClicked()) {
-                $copy->copySection($section, $fromSection, true);
-                return $this->redirectToRoute('section_index');
+                $bcopy = true;
             }
-
+            $copy->copySection($section, $toSection, $bcopy);
             return $this->redirectToRoute('section_index');
         }
 

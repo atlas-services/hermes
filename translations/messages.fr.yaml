@@ -238,6 +238,10 @@ sheet:
 
 menu:
 #  update_next: Ajouter un contenu avec le même affichage
+  speed_creation: Menu création rapide"
+#  upload_hermes_dir: Charger des images dans le repertoire hermes
+  upload_hermes_dir: Charger les images "hermes"
+#  update_next: Ajouter un contenu avec le même affichage
   update_next: Continuer
 #  update_next_different: Ajouter un contenu avec un affichage différent
   update_next_different: Nouveau

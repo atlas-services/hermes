@@ -31,12 +31,7 @@
         </div>
         <div class="collapse navbar-collapse px-3 " id="navbarResponsive">
             {% if is_granted('ROLE_ADMIN') %}
-            <ul class="nav navbar-nav mx-auto">
-                    <li class="px-md-4">
-                        <a class="h6 hms-color1 text-decoration-none  h-bay-jamjuree px-md-2" href="/elfinder" target="_blank"> Charger images </a>
-                    </li>
-
-                <ul class="nav navbar-nav mx-auto">
+               <ul class="nav navbar-nav mx-auto">
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="dropdown px-md-4">
                         <a id="{{ 'global.blocks'|trans() }}"
@@ -55,6 +50,19 @@
                     </li>
                     {% endif %}
                     {%  if nav_bar is defined %}
+                        <li class="dropdown px-md-4">
+                            <a id="{{ 'menu.speed_creation'|trans() }}"
+                               class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               href="#">
+                                {{ 'menu.speed_creation'|trans()|raw }}
+                            </a>
+                            <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"
+                                 aria-expanded="false">
+                                <p><a class="link-light text-decoration-none mx-3"
+                                      href="/elfinder" target="_blank"> {{ 'menu.upload_hermes_dir'|trans()|raw }} </a></p>
+                            </div>
+                        </li>
                         {%  if nav_bar ==  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
                             <li class="dropdown px-md-4">
                                 <a id="{{ 'global.menu_one_page'|trans() }}"
