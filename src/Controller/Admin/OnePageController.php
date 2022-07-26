@@ -31,9 +31,9 @@ class OnePageController extends AbstractAdminController
             if ( $form->isValid()) {
                 $templates = $request->request->get("template_libre_hms_collection")['templates'];
                 foreach ($templates as $key => $template){
-                    $libres[$key]['code'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getCode();
+                    $libres[$key]['code'] = str_replace('-', '/', $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getCode());
                     $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getName();
-                    $libres[$key]['name'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
+                    $libres[$key]['summary'] = $this->getDoctrine()->getRepository(Template::class)->find($template['code'])->getSummary();
                 }
 
                 $message = $onepage->addOnePageHmsLibre($libres);
@@ -131,7 +131,7 @@ class OnePageController extends AbstractAdminController
         foreach ($configurations as $key=>$value){
             if('template' == $key ){
                 foreach ($value as $code => $template){
-                    if( 'hms-' == substr($code, 0, 4) ){
+                    if( 'hms' == substr($code, 0, 3) ){
                         $array['sections'][] = $template;
                     }
                 }

@@ -92,84 +92,84 @@ parameters:
 
     template_libre_hermes:
       entete:
-        hms-1:
+        hms1:
           summary: Entête-1
-          code: hms-1
+          code: hms1
           name: Entête-1
-        hms-2:
+        hms2:
           summary: Entête-2
-          code: hms-2
+          code: hms2
           name: Entête-2
-        hms-3:
+        hms3:
           summary: Entête-3
-          code: hms-3
+          code: hms3
           name: Entête-3
-        hms-4:
+        hms4:
           summary: Entête-4
-          code: hms-4
+          code: hms4
           name: Entête-4
       image:
-        hms-1:
+        hms1:
           summary: Images-1
-          code: hms-1
+          code: hms1
           name: Images-1
-        hms-2:
+        hms2:
           summary: Images-2
-          code: hms-2
+          code: hms2
           name: Images-2
-        hms-3:
+        hms3:
           summary: Images-3
-          code: hms-3
+          code: hms3
           name: Images-3
-        hms-4:
+        hms4:
           summary: Images-4
-          code: hms-4
+          code: hms4
           name: Images-4
-        hms-5:
+        hms5:
           summary: Images-5
-          code: hms-5
+          code: hms5
           name: Images-5
       video:
-        hms-1:
+        hms1:
           summary: Video-1
-          code: hms-1
+          code: hms1
           name: Video-1
-        hms-2:
+        hms2:
           summary: Video-2
-          code: hms-2
+          code: hms2
           name: Video-2
       bloc:
-        hms-1:
+        hms1:
           summary: Bloc-1
-          code: hms-1
+          code: hms1
           name: Bloc-1
-        hms-2:
+        hms2:
           summary: Bloc-2
-          code: hms-2
+          code: hms2
           name: Bloc-2
-        hms-3:
+        hms3:
           summary: Bloc-3
-          code: hms-3
+          code: hms3
           name: Bloc-3
-        hms-4:
+        hms4:
           summary: Bloc-4
-          code: hms-4
+          code: hms4
           name: Bloc-4
-        hms-5:
+        hms5:
           summary: Bloc-5
-          code: hms-5
+          code: hms5
           name: Bloc-5
-        hms-6:
+        hms6:
           summary: Bloc-6
-          code: hms-6
+          code: hms6
           name: Bloc-6
-        hms-7:
+        hms7:
           summary: Bloc-7
-          code: hms-7
+          code: hms7
           name: Bloc-7
-        hms-8:
+        hms8:
           summary: Bloc-8
-          code: hms-8
+          code: hms8
           name: Bloc-8
 
     config:

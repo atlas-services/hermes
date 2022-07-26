@@ -17,7 +17,7 @@ class TemplateLibreHermes
     public function getListByType($configurations){
         $array=[];
         foreach ($configurations as $code => $template){
-            if( 'hms-' == substr($code, 0, 4) ){
+            if( 'hms' == substr($code, 0, 3) ){
                 $array[] = $template;
             }
         }

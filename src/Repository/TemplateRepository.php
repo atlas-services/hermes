@@ -99,7 +99,7 @@ class TemplateRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('s')
             ->where('s.code like :libre ' )
-            ->setParameter('libre',  '%hms-%' )
+            ->setParameter('libre',  '%hms%' )
         ;
 
         return $qb;
