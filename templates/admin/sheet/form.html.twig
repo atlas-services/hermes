@@ -23,11 +23,9 @@
                 <td>{{ sheet.position }}</td>
                 <td>{{ sheet.name }}</td>
                 <td>
-{#                    {% if( 'contact' != sheet.code) %}#}
                     {% if( null != sheet.slug) %}
                         <a id="{{ sheet.slug }}" href="{{ path('sheet_edit', {'sheet': sheet.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
                     {% endif %}
-{#                    {% endif %}#}
                 </td>
             </tr>
         {% endif %}

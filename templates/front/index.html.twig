@@ -1,19 +1,19 @@
 {% extends 'front/base/hermes/base.html.twig' %}
 
 {% block content %}
-    {% if 'true' == app_multi_users  %}
-        {% if menu.user.sections is defined  %}
-            {% set sections =  menu.user.sections %}
-            {% set user =  menu.user %}
-        {% endif %}
-    {% endif %}
+{#    {% if 'true' == app_multi_users  %}#}
+{#        {% if menu.user.sections is defined  %}#}
+{#            {% set sections =  menu.user.sections %}#}
+{#            {% set user =  menu.user %}#}
+{#        {% endif %}#}
+{#    {% endif %}#}
 
-    {% if 'false' == app_multi_users  %}
+{#    {% if 'false' == app_multi_users  %}#}
         {% if menu.sections is defined  %}
             {% set sections =  menu.sections %}
             {% set user =  null %}
         {% endif %}
-    {% endif %}
+{#    {% endif %}#}
 
     {% if sections is defined %}
         {% if sections|length > 0 %}
@@ -51,10 +51,10 @@
         {% endif %}
     {% endif %}
 
-    {% if('livre-d-or' == app.request.attributes.get('_route')) %}
+    {% if( constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE') == app.request.attributes.get('_route')) %}
         {% include 'front/base/hermes/template/temoignage.html.twig' with {'user': menu.user?? '', 'form': form } %}
     {% endif %}
-    {% if('contact' == app.request.attributes.get('_route')) %}
+    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')== app.request.attributes.get('_route')) %}
         {% include 'front/base/hermes/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}
     {% endif %}
     {% if livredor is defined %}

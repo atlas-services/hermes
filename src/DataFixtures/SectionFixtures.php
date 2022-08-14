@@ -27,7 +27,6 @@ class SectionFixtures extends Fixture implements FixtureGroupInterface, Dependen
         if ("true" != $base) {
             $multi_users = $_ENV['APP_MULTI_USERS'];
             $menus = explode(',', $_ENV['APP_MENUS']);
-            $templates = explode(',', $_ENV['APP_TEMPLATES']);
 
             // Sections accueil
             $menu = 'accueil';
@@ -47,7 +46,6 @@ class SectionFixtures extends Fixture implements FixtureGroupInterface, Dependen
 
             // Autres sections
             foreach ($menus as $s => $menu) {
-//            foreach ($templates as $i => $template) {
                 $item = new Section();
                 $item->setActive(true);
                 $item->setName("section $menu");
@@ -59,9 +57,6 @@ class SectionFixtures extends Fixture implements FixtureGroupInterface, Dependen
                 if ($this->hasReference($template)) {
                     $item->setTemplate($this->getReference("$template"));
                 }
-//                if ($this->hasReference(UserFixtures::USER_ADMIN_POST . $menu)) {
-//                    $item->setUser($this->getReference(UserFixtures::USER_ADMIN_POST . $menu));
-//                }
                 if ("true" == $multi_users) {
                     if ($this->hasReference(UserFixtures::USER_ADMIN_POST . $menu)) {
                         $item->setUser($this->getReference(UserFixtures::USER_ADMIN_POST . $menu));
@@ -75,7 +70,6 @@ class SectionFixtures extends Fixture implements FixtureGroupInterface, Dependen
                 $this->addReference("section$menu", $item);
                 $manager->persist($item);
 
-//            }
             }
             $manager->flush();
         }

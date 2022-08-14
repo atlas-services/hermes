@@ -139,7 +139,7 @@
                                   href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'contact'}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }}</a>
+                                  href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>

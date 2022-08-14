@@ -39,7 +39,7 @@
 </nav>
 
 {% set justify_content_center = 'justify-content-center' %}
-{% if(  app.request.attributes.get('_route')|lower in ['contact', 'livre-d-or', 'sheet', 'slug']) %}
+{% if(  app.request.attributes.get('_route')|lower in [constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT'), constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE'), 'sheet', 'slug']) %}
     {% set offset = 12 - nav_offset %}
     {% set col_offset = 'col-lg-' ~ offset ~ ' ' ~ 'offset-lg-'~ nav_offset %}
 {% endif %}
