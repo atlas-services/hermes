@@ -12,7 +12,7 @@ class TemplateLibreHermes
 {
     const TEMPLATE_LIBRE_HERMES = 'template_libre_hermes';
     const TEMPLATE_LIBRE_HERMES_DIR = 'admin/hermes/template-libre';
-    const MODELES = ['entete', 'image', 'video', 'bloc'];
+    const MODELES = ['entete', 'image', 'video', 'bloc', 'page'];
 
     public function getListByType($configurations){
         $array=[];

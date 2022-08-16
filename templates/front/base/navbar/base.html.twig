@@ -72,7 +72,7 @@
                     {% endif %}
                 {% endif %}
             {% endif %}
-            <ul class="nav navbar-nav  h-font-size-12 {{ col_offset  ?? ''}}" style="background-color: {{ nav_menu_bgcolor }}">
+            <ul class="nav navbar-nav mx-auto h-font-size-12 {{ col_offset  ?? ''}}" style="background-color: {{ nav_menu_bgcolor }}">
                 <hr class="d-block  d-sm-none w-100 bg-white">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}

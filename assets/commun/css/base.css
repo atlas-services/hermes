@@ -1,3 +1,5 @@
+@import "root.css";
+@import "hermes-bootstrap.css";
 @import "../../../node_modules/bootstrap";
 @import "../../../node_modules/font-awesome";
 @import "../../../node_modules/fontsource-oswald";
@@ -6,7 +8,6 @@
 @import '../../../node_modules/fontsource-snowburst-one';
 @import '../../../node_modules/fontsource-alfa-slab-one';
 @import '../../../node_modules/fontsource-lato';
-@import "hermes-bootstrap.css";
 @import "../../../node_modules/select2/dist/css/select2.css";
 @import "../../../node_modules/select2-theme-bootstrap4/dist/select2-bootstrap.css";
 

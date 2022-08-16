@@ -1,40 +1,4 @@
-:root {
-    --color-hermes1: #89c3a5;
-    --color-hermes2: #e18611;
-    --color-white: #fff;
-    --color-grey1: #eee;
-    --color-grey2: #d3d3d3;
-    --color-grey3: #565656;
-    --color-grey4: #444444;
-    --color-black: #000;
-    --color-yellow: #fed136;
-    --color-green1: #F5FFFA;
-    --color-green2: #B0F2B6;
-    --color-green3: #A5D152;
-    --color-green4: #82C46C;
-    --color-green5: #01796F;
-    --color-green6: #2E8B57;
-    --font-family-1: Verdana,sans-serif;
-    --percent-1: 99.9999999999%;
-    --percent-2: 49.9999999999%;
-    --percent-3: 33.3333333334%;
-    --percent-4: 24.9999999999%;
-    --percent-5: 19.9999999999%;
-    --percent-6: 16.6666666667%;
-    --percent-7: 14.28%;
-    --percent: var(--percent-4);
-    /*
-    vert/noir
-     */
-    --color-base-chevron: var(--color-hermes1);
-    --color-base1-front: var(--color-green4);
-    --color-base1-back: var(--color-black);
-    /*
-    noir/vert
- */
-    --color-base2-front: var(--color-black);
-    --color-base2-back: var(--color-green4);
-}
+@import "../../../commun/css/root.css";
 
 /*
 Content

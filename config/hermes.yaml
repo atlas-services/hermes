@@ -171,7 +171,11 @@ parameters:
           summary: Bloc-8
           code: hms8
           name: Bloc-8
-
+      page:
+        hms1:
+          summary: Page-1
+          code: hms1
+          name: Page-1
     config:
       site:
         template:
