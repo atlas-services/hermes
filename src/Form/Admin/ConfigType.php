@@ -79,6 +79,12 @@ class ConfigType extends AbstractBaseType
                 '4/12' => '4',
                 '5/12' => '5',
                 '6/12' => '6',
+                '7/12' => '7',
+                '8/12' => '8',
+                '9/12' => '9',
+                '10/12' => '10',
+                '11/12' => '11',
+                '12/12' => '12',
             ];
             $options_template_value = [
                 'one_page_1' => 'one_page_1',

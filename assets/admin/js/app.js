@@ -31,3 +31,4 @@ import './select2';
 import './modale';
 import './tags';
 import './active';
+import './js-hermes-templates';

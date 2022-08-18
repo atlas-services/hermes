@@ -147,6 +147,12 @@ class SectionTemplateType extends AbstractType
             [$this, 'onPostSubmitData']
         );
 
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $data = $event->getData();
+            if('transparent' == $data->getTemplateBgcolor()){
+                $data->setTransparent(true);
+            }
+        });
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
             if($data->getTransparent()){
