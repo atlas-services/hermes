@@ -221,15 +221,18 @@ class SectionController extends AbstractAdminController
      */
     public function copy(Request $request, Section $section, Copy $copy): Response
     {
+        $initMenu = $this->getDoctrine()->getRepository(Section::class)->find($section->getId())->getMenu();
         $form = $this->createForm(SectionCopyType::class, $section);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $toSection = clone $section;
             if ($form->get('move')->isClicked()) {
                 $bcopy = false;
             }
             if ($form->get('copy')->isClicked()) {
+                $section->setMenu($initMenu);
                 $bcopy = true;
             }
             $copy->copySection($section, $toSection, $bcopy);

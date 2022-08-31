@@ -6,6 +6,7 @@ use App\Entity\Hermes\Menu;
 
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Sheet;
+use App\Repository\SheetRepository;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,6 +30,9 @@ class BaseMenuType extends AbstractNameBaseType
             ->add('sheet', 'Symfony\Bridge\Doctrine\Form\Type\EntityType',
                 [
                     'class' => Sheet::class,
+                    'query_builder'=>  function (SheetRepository $er) {
+                        return $er->getQbSheetsWithoutContact();
+                    },
                     'required' => true,
                     'label' => 'global.sheet',
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3']

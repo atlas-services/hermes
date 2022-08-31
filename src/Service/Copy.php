@@ -44,8 +44,6 @@ class Copy
     public function copySection(Section $section, Section $toSection, $copy = false){
 
         try {
-            $this->em->persist($section);
-
             if($copy){
                 foreach($section->getPosts() as $post){
                     $newPost = clone $post;
@@ -53,6 +51,8 @@ class Copy
                     $this->em->persist($toSection);
                     $this->em->persist($newPost);
                 }
+            }else{
+                $this->em->persist($section);
             }
 
             $this->em->flush();
