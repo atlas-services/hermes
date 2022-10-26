@@ -64,7 +64,7 @@ class BlockPost extends AbstractContent implements \JsonSerializable
      */
     protected $block;
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         if(!is_null($this->name)){
             return $this->name;

@@ -95,20 +95,22 @@
                         </a>
                         <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
                              aria-expanded="false">
-                            {%  if nav_bar !=  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
-                            <p><a class="link-light text-decoration-none mx-3 "
-                                  href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
+                            {%  if nav_bar is defined %}
+                                {%  if nav_bar !=  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
+                                <p><a class="link-light text-decoration-none mx-3 "
+                                      href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
+                                <p><a class="link-light text-decoration-none mx-3"
+                                      href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
+                                {% endif %}
                             {% endif %}
                             <p><a class="link-light text-decoration-none  mx-3"
                                   href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <p><a class="link-light text-decoration-none mx-3"
-                                      href="{{ path('remote_index') }}"> {{ 'remote.affiche_list'|trans()|raw }}</a></p>
-                            {% endif %}
+{#                            {% if is_granted('ROLE_SUPER_ADMIN') %}#}
+{#                                <p><a class="link-light text-decoration-none mx-3"#}
+{#                                      href="{{ path('remote_index') }}"> {{ 'remote.affiche_list'|trans()|raw }}</a></p>#}
+{#                            {% endif %}#}
                             {% if is_granted('ROLE_ADMIN') %}
 {#                                {% if(config.value is defined) %}#}
 {#                                    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}#}

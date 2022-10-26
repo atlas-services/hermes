@@ -65,7 +65,7 @@ class Config
         $this->publishedAt = new \DateTime();
     }
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         if(!is_null($this->summary)){
             return $this->summary;

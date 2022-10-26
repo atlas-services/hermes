@@ -64,7 +64,7 @@ class Sheet
         $this->menus = new ArrayCollection();
     }
 
-    public function __toString(): ?string
+    public function __toString(): string
     {
         if(!is_null($this->name)){
             return $this->name;

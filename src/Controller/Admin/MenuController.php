@@ -57,7 +57,7 @@ class MenuController extends AbstractAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $last = $em->getRepository(Menu::class)->getMaxPosition();
+            $last = $em->getRepository(Menu::class)->getMaxPosition($menu->getSheet());
             $menu->setPosition($last);
             $em->persist($menu);
             $em->flush();
