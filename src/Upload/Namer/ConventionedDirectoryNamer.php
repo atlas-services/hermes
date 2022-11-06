@@ -12,16 +12,22 @@ use App\Entity\Config\Config;
 use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ConventionedDirectoryNamer implements DirectoryNamerInterface
 {
     protected $directoryNamerLogger;
+    protected $filesystem;
+    protected $params;
 
-    public function __construct(LoggerInterface $directoryNamerLogger)
+    public function __construct(LoggerInterface $directoryNamerLogger, Filesystem $filesystem, ParameterBagInterface $params)
     {
         $this->directoryNamerLogger = $directoryNamerLogger;
+        $this->filesystem = $filesystem;
+        $this->params = $params;
     }
 
     public function directoryName($object, PropertyMapping $mapping): string
@@ -47,7 +53,7 @@ class ConventionedDirectoryNamer implements DirectoryNamerInterface
                 $menu_code = $object->getSection()->getMenu()->getCode();
                 $section_id = $object->getSection()->getId();
                 if('' == $section_id){
-                    dd($object);
+//                    dd($object);
                 }
 //                $path = $className.'/'.$menu_code.'/' ;
                 $path = 'section'. $section_id.'/'.$menu_code.'/';

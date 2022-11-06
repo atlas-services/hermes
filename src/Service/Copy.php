@@ -15,6 +15,8 @@ use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Template;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
@@ -31,14 +33,20 @@ class Copy
     private $cacheManager;
     private $dataManager;
     private $filterManager;
+    private $filesystem;
+    private $params;
 
-    public function __construct(EntityManagerInterface $em, Image $image,CacheManager $cacheManager, DataManager $dataManager, FilterManager $filterManager)
+    public function __construct(EntityManagerInterface $em, Image $image,CacheManager $cacheManager, DataManager $dataManager,
+                                FilterManager $filterManager, Filesystem $filesystem, ParameterBagInterface $params
+    )
     {
         $this->em = $em;
         $this->image = $image;
         $this->cacheManager  = $cacheManager;
         $this->dataManager   = $dataManager;
         $this->filterManager = $filterManager;
+        $this->filesystem = $filesystem;
+        $this->params = $params;
     }
 
     public function copySection(Section $section, Section $toSection, $copy = false){
@@ -46,16 +54,25 @@ class Copy
         try {
             if($copy){
                 foreach($section->getPosts() as $post){
+//                    $path = $post->getImageFile()->getPath();
                     $newPost = clone $post;
                     $newPost->setSection($toSection);
                     $this->em->persist($toSection);
                     $this->em->persist($newPost);
                 }
+//                die;
             }else{
                 $this->em->persist($section);
             }
 
             $this->em->flush();
+            // Ajout répertoire copié
+            $menu_code = $toSection->getMenu()->getCode();
+            $section_id = $toSection->getId();
+            $newpath = 'section'. $section_id.'/'.$menu_code.'/';
+            $hermes_path_content_image = $this->params->get('hermes_path_content_image');
+            $newPath = $hermes_path_content_image.'/'.$newpath;
+            $this->filesystem->mirror($post->getImageFile()->getPath(),$newPath);
             return ['info' => 'Section copiée'];
 
         }catch (\Exception $e){
@@ -123,7 +140,6 @@ class Copy
             return ['info' => 'Post copié'];
 
         }catch (\Exception $e){
-            dd($e->getMessage());
             return ['warning' => $e->getMessage()];
         }
 
