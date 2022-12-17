@@ -26,7 +26,8 @@ class Image
     public function shuffle(){
 
         $list= ['carre', '1620x1080'];
-        $currentDir = getcwd()."/img/hermes/images";
+//        $currentDir = getcwd()."/public/img/hermes/images";
+        $currentDir = $this->parameterBag->get('hermes_path_hermes_images');
         $baseDir =  $currentDir."/base";
         $images_base = glob($baseDir."/*.jpg");
 

@@ -5,3 +5,6 @@ services:
 
     Tests\Behat\:
         resource: '../tests/Behat/*'
+
+    Tests\DataFixtures\:
+        resource: '../tests/DataFixtures/*'

@@ -10,6 +10,7 @@ parameters:
   hermes_path_content_image_post: '%env(APP_PATH_CONTENT_IMAGES_POSTS)%'
   hermes_path_content_images: '%env(APP_PATH_CONTENT_IMAGES)%'
   hermes_path_cache_image: '%env(APP_PATH_CACHE_IMAGES)%'
+  hermes_path_hermes_images: '%kernel.project_dir%/public/%env(APP_PATH_HERMES_IMAGES)%'
 #      hermes: hermes
 #      reveal: reveal
   init:

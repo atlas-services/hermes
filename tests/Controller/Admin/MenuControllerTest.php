@@ -5,18 +5,18 @@ namespace Tests\Controller\Admin;
 use Symfony\Component\Translation\TranslatorInterface;
 use Tests\Controller\AbstractBaseControllerTest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Tests\DataFixtures\LoadTemplate;
 
 class MenuControllerTest extends AbstractBaseControllerTest
 {
 
-    public function testLogin()
+    protected function setUp(): void
     {
-        $client = self::$client;
-
-        $client->request('GET', '/fr/admin/');
-
-        $this->assertResponseIsSuccessful();
-
+        parent::setUp();
+        static::$fixtures = $this->databaseTool
+            ->loadFixtures([
+                LoadTemplate::class,
+            ],true, false);
     }
 
     public function testAddSheetAndMenu( )

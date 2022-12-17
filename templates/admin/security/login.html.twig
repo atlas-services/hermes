@@ -42,9 +42,7 @@
                     <br>
                     <br>
                     <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}" >
-                    <button class="col-md-4 mx-auto btn h-btn-outline-success h-rounded-lg-4 btn-xl mt-3" type="submit">
-                        {{ 'user.sign_in'|trans() }}
-                    </button>
+                    <button class="col-md-4 mx-auto btn h-btn-outline-success h-rounded-lg-4 btn-xl mt-3" type="submit">{{'user.sign_in'|trans()}}</button>
 
                     <div class="col-md-12 mx-auto mt-5">
                         <a class="h-text-success text-decoration-none " id="forgotten_password"

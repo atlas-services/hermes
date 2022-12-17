@@ -17,6 +17,7 @@ class AbstractAdminController extends AbstractController
 
     protected function getActiveConfig()
     {
+        $config_simple=[];
         /*
          * On récupère la configuration du site.
          */
