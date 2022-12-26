@@ -72,7 +72,9 @@ class Copy
             $newpath = 'section'. $section_id.'/'.$menu_code.'/';
             $hermes_path_content_image = $this->params->get('hermes_path_content_image');
             $newPath = $hermes_path_content_image.'/'.$newpath;
-            $this->filesystem->mirror($post->getImageFile()->getPath(),$newPath);
+            if(!is_null($post->getImageFile())){
+                $this->filesystem->mirror($post->getImageFile()->getPath(),$newPath);
+            }
             return ['info' => 'Section copiée'];
 
         }catch (\Exception $e){

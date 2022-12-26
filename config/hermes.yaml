@@ -297,10 +297,10 @@ parameters:
           value: '45px'
         nav_li_bgcolor:
           summary: Couleur de fond des éléments du sous menu
-          value: '#888888'
+          value: '#e7bb42'
         nav_bgcolor:
           summary: Couleur de fond du menu
-          value: '#888888'
+          value: '#e7bb42'
         nav_bgcolor_shrink:
           summary: Couleur de fond de la barre de menu après scroll
           value: 'transparent'
@@ -318,7 +318,7 @@ parameters:
           value: ~
         nav_menu_bgcolor:
           summary: Couleur de fond de la barre de menu
-          value: '#888888'
+          value: '#e7bb42'
         nav_header_bgcolor:
           summary: Couleur de fond du header (barres du bouton responsive)
           value: 'transparent'
@@ -390,7 +390,7 @@ parameters:
           value: true
         footer_bgcolor:
           summary: Couleur de fond du footer
-          value: '#ffffff'
+          value: '#e7bb42'
         footer_color:
           summary: Couleur du texte du footer
           value: '#000000'
