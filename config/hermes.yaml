@@ -297,10 +297,10 @@ parameters:
           value: '45px'
         nav_li_bgcolor:
           summary: Couleur de fond des éléments du sous menu
-          value: '#e7bb42'
+          value: '#ffefaa'
         nav_bgcolor:
           summary: Couleur de fond du menu
-          value: '#e7bb42'
+          value: '#ffefaa'
         nav_bgcolor_shrink:
           summary: Couleur de fond de la barre de menu après scroll
           value: 'transparent'
@@ -309,16 +309,16 @@ parameters:
           value: 'transparent'
         nav_color_active:
           summary: Couleur du menu sélectionné
-          value: '#ffffff'
+          value: '#9141ac'
         nav_link_color:
           summary: Couleur des liens de la barre de menu
-          value: '#ffffff'
+          value: '#b5835a'
         nav_link_border_bottom:
           summary: Séparation des liens de la barre de menu
           value: ~
         nav_menu_bgcolor:
           summary: Couleur de fond de la barre de menu
-          value: '#e7bb42'
+          value: '#ffefaa'
         nav_header_bgcolor:
           summary: Couleur de fond du header (barres du bouton responsive)
           value: 'transparent'
@@ -390,7 +390,7 @@ parameters:
           value: true
         footer_bgcolor:
           summary: Couleur de fond du footer
-          value: '#e7bb42'
+          value: '#ffefaa'
         footer_color:
           summary: Couleur du texte du footer
           value: '#000000'
