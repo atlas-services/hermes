@@ -7,8 +7,7 @@
         <div class="row">
             {% if footer_about is defined %}
             <div class="col-sm-12 col-md-12">
-                <h6 style="color: {{ footer_color ?? '#ffffff' }}">{{ 'global.about'|trans() }}</h6>
-                <p class="text-justify">{{ footer_about ?? '' }}</p>
+                <p class="text-justify h5">{{ footer_about ?? '' }}</p>
             </div>
             {% endif %}
 
@@ -24,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-sm-6 col-12">
-                <p>Copyright &copy; {{ 'global.copyright'|trans() }} {{ site }}
+                <p>Copyright &copy;{{ 'global.copyright'|trans() }} {{ site }}
                 </p>
                 <p>{{ 'global.created_by'|trans()|raw }}</p>
             </div>

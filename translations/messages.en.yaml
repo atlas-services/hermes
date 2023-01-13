@@ -38,8 +38,8 @@ info:
   new_libelle_post: Add new contents
 
 global:
-  copyright: 2016 All Rights Reserved by
-  created_by: This site has been powered by the CMS<a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
+  copyright: 2023 All Rights Reserved by
+  created_by: This site has been powered by the CMS<a href="http://hermes-cms.org" target="_blanks">HERMES</a>
   about: A propos
   hello: Hello
   admin: Admin

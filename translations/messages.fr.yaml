@@ -38,19 +38,19 @@ info:
   first_step_next: Pour apprendre à ajouter un contenu,vous pouvez passer à l'étape suivante en cliquant sur le bouton
   second_step_p1: "La deuxième étape consiste à ajouter un contenu au menu \"<b>Mariage</b>\" en complétant les informations suivantes :"
   second_step_li1: "Page : Saisissez le nom de votre page \"<b>Vin d'honneur</b>\". Vous pourrez le modifier plus tard - c'est le nom que vous choisissez comme sous menu de \"<b>Mariage</b>\"."
-  second_step_li2: "Template : Pour ce premier exemple, nous choisirons le template \"Libre\". (vous pouvez consulter le <a href='http://hermes.atlas-services.fr/hermes/guide-utilisateur' target='_blank' > Guide Utilisateur  </a>)"
+  second_step_li2: "Template : Pour ce premier exemple, nous choisirons le template \"Libre\". (vous pouvez consulter le <a href='http://hermes-cms.org/hermes/guide-utilisateur' target='_blank' > Guide Utilisateur  </a>)"
   second_step_li3: "Nom : Saisissez le nom de votre contenu \"<b>Vin d'honneur</b>\" afin de le retrouver lorsque vous voudrez le modifier."
   second_step_li4: "Contenu : On y arrive! C'est ce qui sera affiché sur votre page et qui mérite tout nos soins."
-  second_step_li5: "Contenu (suite) : Afin de bien débuter, je vous invite à recopier le code html du \"Template 1\" à l'adresse suivante : <a href='http://hermes.atlas-services.fr/hermes/template-1' target='_blank' > Template 1  </a>"
+  second_step_li5: "Contenu (suite) : Afin de bien débuter, je vous invite à recopier le code html du \"Template 1\" à l'adresse suivante : <a href='http://hermes-cms.org/hermes/template-1' target='_blank' > Template 1  </a>"
   second_step_li6: "Contenu (suite et fin) : Coller le code après avoir cliqué sur l'onglet \"Source\" de l'éditeur de texte puis sauvegardez la page. Hermes ajoutera régulièrement des contenus \"Libre\" à recopier et à adapter à votre site."
   second_step_p2: Félicitations! Vous venez de créer votre première page.
   new_libelle_sheet_2: Créer une page - partie 2.
   new_libelle_post: Ajoutez de nouveaux contenus
 
 global:
-  copyright: 2016 Tous droits réservés par
-  created_by: Ce site a été conçu avec le CMS <a href="http://hermes.atlas-services.fr" target="_blanks">HERMES</a>
-  about: A propos
+  copyright: 2023 Tous droits réservés par
+  created_by: Ce site a été conçu avec le CMS <a href="http://hermes-cms.org" target="_blanks">HERMES</a>
+  about: ''
   hello: Bonjour
   admin: Admin
   blocks: Mes blocks de contenus
