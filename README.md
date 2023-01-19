@@ -4,14 +4,14 @@ Hermes - CMS
 Introduction -FR
 ----------------
 
-Hermes est un CMS basé sur Symfony5 et les standards du Web.
+Hermes est un CMS basé sur Symfony5, Bootstrap5 et les standards du Web.
 Il fournit une interface d'administration afin de créer des contenus riche pour votre site Web.
 Il fournit une interface d'administration pour configurer les couleurs, largeur...des différentes partie de votre site Web.
 Il fournit quelques templates de type folios, carousels, cards ainsi qu'une saisie "libre" qui utilise [FOSCKEditorBundle](https://symfony.com/doc/master/bundles/FOSCKEditorBundle/index.html) afin de créer de belles pages responsive.
 
 Introduction -EN
 ----------------
-Hermes is a CMS  based on Symfony5 and the standards of Web.
+Hermes is a CMS  based on Symfony5 and Bootstrap5 and the standards of Web.
 It provides an admin to create a complete web site.
 It provides configuration to select the color, background-color, width...for the different parts of your Web site (Menu, Content, Footer)
 It provides some templates like folios, carousels, cards or "free presentation" using the [FOSCKEditorBundle](https://symfony.com/doc/master/bundles/FOSCKEditorBundle/index.html) to create nice and responsive pages.
@@ -21,7 +21,7 @@ Documentation
 -------------
 
 In progress.
-    - require PHP7.4
+    - require PHP8.0
     - require yarn
 
 Show Room et modeles - FR
@@ -101,5 +101,5 @@ Admin interface
 
     http://127.0.0.1:8000/fr/admin/
     Admin User :
-    Login : firstname.lastname@yopmail.com
-    Password : firstname
+    Login : set up value in in .env (APP_HERMES_EMAIL_ADMIN="contact@hermes-cms.org")
+    Password : mycmsishermes

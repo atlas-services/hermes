@@ -48,7 +48,8 @@ info:
   new_libelle_post: Ajoutez de nouveaux contenus
 
 global:
-  copyright: 2023 Tous droits réservés par
+  copyright: &copy;2021 Tous droits réservés par
+  copyleft: 2021 Tous droits réservés par <a href="http://hermes-cms.org" target="_blanks">http://hermes-cms.org</a>
   created_by: Ce site a été conçu avec le CMS <a href="http://hermes-cms.org" target="_blanks">HERMES</a>
   about: ''
   hello: Bonjour

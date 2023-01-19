@@ -24,7 +24,6 @@ class Image
     }
 
     public function shuffle(){
-
         $list= ['carre', '1620x1080'];
 //        $currentDir = getcwd()."/public/img/hermes/images";
         $currentDir = $this->parameterBag->get('hermes_path_hermes_images');
@@ -33,7 +32,7 @@ class Image
 
         if([] == $images_base) {
             $this->filesystem->mirror($currentDir, $baseDir);
-            $images_base = glob($baseDir."/*.jpg");
+            $images_base = glob($baseDir."/*.*");
         }
 
         shuffle($images_base);
@@ -41,14 +40,14 @@ class Image
         foreach ($list as $src) {
             $target = $currentDir."/$src";
 
-            $images = glob($target."/img*.jpg");
+            $images = glob($target."/img*.*");
             if([] == $images){
                 $this->filesystem->mkdir($target);
                 foreach ($images_base as $key => $filename) {
                     $n = $key + 1;
                     $this->resize($filename, $target.'/img'.$n.'.jpg', $src, 100);
                 }
-                $images = glob($target."/img*.jpg");
+                $images = glob($target."/img*.*");
             }
         }
 
@@ -92,7 +91,8 @@ class Image
         $listDir = getcwd().'/'.$this->parameterBag->get('hermes_path_content_images').'/'.$dir;
         $originDir = $this->getContentHermesDirFiles();
         $this->filesystem->mirror($originDir, $listDir);
-        $images_base = glob($listDir."/*.jpg");
+//        $images_base = glob($listDir."/*.jpg");
+        $images_base = glob($listDir."/*.*");
         return $images_base;
     }
 

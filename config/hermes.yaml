@@ -1,4 +1,8 @@
 parameters:
+  hermes_admin_email: '%env(APP_HERMES_ADMIN_EMAIL)%'
+  hermes_admin_password: '%env(APP_HERMES_ADMIN_PASSWORD)%'
+  hermes_super_admin_email: '%env(APP_HERMES_SUPER_ADMIN_EMAIL)%'
+  hermes_super_admin_password: '%env(APP_HERMES_SUPER_ADMIN_PASSWORD)%'
   version: v1.0.0
   app.locales: [fr, en] #'%env(APP_LOCALES)%'
   hermes_pages: '%env(APP_PAGES)%'
@@ -18,15 +22,15 @@ parameters:
       super_admin:
         firstname: Hermes
         lastname: Hermes
-        email: hermes@atlas-services.fr
-        password: hermeshermes
+        email: '%hermes_super_admin_email%'
+        password: '%hermes_super_admin_password%'
         roles:
           ROLE_SUPER_ADMIN
       admin:
         firstname: Firstname
         lastname: Lastname
-        email: firstname.lastname@yopmail.com
-        password: firstname
+        email: '%hermes_admin_email%'
+        password: '%hermes_admin_password%'
         roles:
           ROLE_ADMIN
     template:
