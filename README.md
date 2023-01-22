@@ -89,7 +89,7 @@ Get php extensions and the vendors and post-install the project
      
 Install node modules 
 
-    yarn install  
+    yarn install --ignore-engines
       
 Start Server on a terminal
 

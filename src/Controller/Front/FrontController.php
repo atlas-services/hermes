@@ -175,5 +175,17 @@ class FrontController extends AbstractController
         return $this->render('front/index.html.twig', $array);
     }
 
+    /*
+    * @Route(
+    *     "/sitemap.xml",
+    *     name="slug",
+    *     methods={"GET|POST"}
+    *     )
+    */
+    public function sitemep(Request $request, CacheInterface $frontCache)
+    {
+
+    }
+
 
 }
