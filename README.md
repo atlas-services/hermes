@@ -76,7 +76,14 @@ Get the Repository
 
     git pull
     
-Get the vendors and post-install the project
+Get php extensions and the vendors and post-install the project
+
+    sudo apt install php8.0-curl
+    sudo apt install php8.0-gd
+    sudo apt install php8.0-dom
+    sudo apt install php8.0-zip
+    sudo apt install php8.0-sqlite3
+    sudo apt install php8.0-mbstring
 
     composer install
      
