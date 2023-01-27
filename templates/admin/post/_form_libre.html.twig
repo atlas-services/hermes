@@ -5,6 +5,9 @@
         {{ form_row(form.position) }}
     {% endif %}
     {{ form_row(form.name) }}
+    {% if form.content is defined %}
+        {{ form_row(form.content) }}
+    {% endif %}
     {% if form.imageFile is defined %}
         {{ form_row(form.imageFile) }}
     {% endif %}
@@ -15,9 +18,6 @@
     {% endif  %}
     {% if form.url is defined %}
         {{ form_row(form.url) }}
-    {% endif %}
-    {% if form.content is defined %}
-        {{ form_row(form.content) }}
     {% endif %}
     {{ form_row(form.save) }}
 {{ form_widget(form._token) }}

@@ -10,9 +10,14 @@
         {{ form.vars.data.templateBgcolor }}
         {{ form_row(form.templateWidth) }}
         {{ form_row(form.templateNbCol) }}
+        <a class="btn-primary btn btn-outline-secondary hms-bg-color1 mt-5 " data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions">
+            {{ 'global.autres_options'|trans }}
+        </a>
+        <div class="collapse" id="collapseOptions">
         {{ form_row(form.templateImageFilter) }}
         {{ form_row(form.template2) }}
         {{ form_row(form.template2Width) }}
+        </div>
     {% endif %}
 
     {% if form.posts is defined %}

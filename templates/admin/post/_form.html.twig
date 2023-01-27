@@ -8,14 +8,22 @@
     {% if form.active is defined %}
         {{ form_row(form.active) }}
     {% endif %}
+    {% if form.position is defined %}
+        {{ form_row(form.position) }}
+    {% endif %}
+    {{ form_row(form.name) }}
+    {% if form.content is defined %}
+        {{ form_row(form.content) }}
+    {% endif %}
+    <a class="btn-primary btn btn-outline-secondary hms-bg-color1 mt-5 " data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions">
+        {{ 'global.autres_options'|trans }}
+    </a>
+    <div class="collapse" id="collapseOptions">
     {% if form.startPublishedAt is defined %}
         {{ form_row(form.startPublishedAt) }}
     {% endif %}
     {% if form.endPublishedAt is defined %}
         {{ form_row(form.endPublishedAt) }}
-    {% endif %}
-    {% if form.position is defined %}
-        {{ form_row(form.position) }}
     {% endif %}
     {% if form.section is defined %}
         {{ form_row(form.section) }}
@@ -36,13 +44,10 @@
             {% endif %}
         </tr>
     {% endif  %}
-    {{ form_row(form.name) }}
     {% if form.url is defined %}
         {{ form_row(form.url) }}
     {% endif %}
-    {% if form.content is defined %}
-        {{ form_row(form.content) }}
-    {% endif %}
+
     {% if form.section is not defined %}
 {#    <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">#}
 {#        {% for tag in form.tags %}#}
@@ -59,6 +64,7 @@
         {{ form_row(form.saveAndAddPost) }}
 {#        {{ form_row(form.saveAndAddSectionPost) }}#}
     {% endif %}
+    </div>
     {{ form_row(form.save) }}
 {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
