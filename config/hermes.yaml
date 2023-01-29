@@ -206,7 +206,7 @@ parameters:
           value: true
         affiche_search:
           summary: Affichage de la barre de recherche
-          value: true
+          value: false
         accueil:
           summary: image d'accueil du site
           value: ~
@@ -298,13 +298,16 @@ parameters:
           value: base
         nav_height:
           summary: Hauteur du sous menu (en px)
-          value: '45px'
-        nav_li_bgcolor:
-          summary: Couleur de fond des éléments du sous menu
-          value: '#ffefaa'
+          value: '90px'
         nav_bgcolor:
           summary: Couleur de fond du menu
-          value: '#ffefaa'
+          value: '#ffffff'
+        nav_menu_bgcolor:
+          summary: Couleur de fond de la barre de menu
+          value: '#ffffff'          
+        nav_li_bgcolor:
+          summary: Couleur de fond des éléments du sous menu
+          value: '#ffffff'
         nav_bgcolor_shrink:
           summary: Couleur de fond de la barre de menu après scroll
           value: 'transparent'
@@ -320,9 +323,6 @@ parameters:
         nav_link_border_bottom:
           summary: Séparation des liens de la barre de menu
           value: ~
-        nav_menu_bgcolor:
-          summary: Couleur de fond de la barre de menu
-          value: '#ffefaa'
         nav_header_bgcolor:
           summary: Couleur de fond du header (barres du bouton responsive)
           value: 'transparent'
@@ -394,7 +394,7 @@ parameters:
           value: true
         footer_bgcolor:
           summary: Couleur de fond du footer
-          value: '#ffefaa'
+          value: '#ffffff'
         footer_color:
           summary: Couleur du texte du footer
           value: '#000000'
