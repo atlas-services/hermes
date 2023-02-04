@@ -182,13 +182,23 @@ parameters:
           code: hms1
           name: Page-1
     config:
+      head:
+        title:
+          summary: Texte affiché sur l'onglet du navigateur web
+          value: hermes-cms
+        description:
+          summary: Balise méta description
+          value: Mon site web
+        author:
+          summary: Balise méta author
+          value: Hermes CMS
+        robots:
+          summary: Balise méta robots
+          value: index, follow
       site:
         template:
           summary: Choix du template général d'affichage
           value: front
-        title:
-          summary: Texte affiché sur l'onglet du navigateur web
-          value: c-hermes
         favicon:
           summary: favicon
           value: ~

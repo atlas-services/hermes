@@ -18,7 +18,7 @@
             {% else %}
                 {% set flag = 'app_fixed_flag' %}
             {% endif %}
-            <a class="mr-2 px-1 text-decoration-none" href="{{ path('change_locale', {'locale': locale}) }}"><img
+            <a class="me-2 px-1 text-decoration-none" href="{{ path('change_locale', {'locale': locale}) }}"><img
                         src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
         {% endfor %}
 
@@ -35,7 +35,7 @@
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="dropdown px-md-4">
                         <a id="{{ 'global.blocks'|trans() }}"
-                           class=" hms-color1 text-decoration-none pr-md-4 page-scroll dropdown-toggle " role="button"
+                           class=" hms-color1 text-decoration-none pe-md-4 page-scroll dropdown-toggle " role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.blocks'|trans()|raw }}
@@ -52,7 +52,7 @@
                     {%  if nav_bar is defined %}
                         <li class="dropdown px-md-4">
                             <a id="{{ 'menu.speed_creation'|trans() }}"
-                               class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
+                               class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                href="#">
                                 {{ 'menu.speed_creation'|trans()|raw }}
@@ -66,7 +66,7 @@
                         {%  if nav_bar ==  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
                             <li class="dropdown px-md-4">
                                 <a id="{{ 'global.menu_one_page'|trans() }}"
-                                   class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
+                                   class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                    href="#">
                                     {{ 'global.menu_one_page'|trans()|raw }}
@@ -88,7 +88,7 @@
                     {% endif %}
                     <li class="dropdown px-md-4">
                         <a id="{{ 'global.dashboard'|trans() }}"
-                           class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
+                           class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'global.dashboard'|trans()|raw }}
@@ -127,7 +127,7 @@
 
                     <li class="dropdown px-md-4">
                         <a id="{{ 'config.label'|trans() }}"
-                           class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle " role="button"
+                           class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">
                             {{ 'config.list'|trans()|raw }}
@@ -136,6 +136,9 @@
                              aria-labelledby="{{ 'global.dashboard'|trans()|raw }}" aria-expanded="false">
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
+                            </p>
+                            <p><a class="link-light text-decoration-none mx-3"
+                                  href="{{ path('config_index', {'type': 'head'}) }}"> {{ 'config.affiche_list_head'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
@@ -173,7 +176,7 @@
                         </div>
                     </li>
                     <li class="dropdown px-md-4">
-                        <a id="{{ 'User'|trans() }}" class="h5 hms-color1 text-decoration-none pr-md-4  page-scroll dropdown-toggle "
+                        <a id="{{ 'User'|trans() }}" class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle "
                            role="button"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            href="#">

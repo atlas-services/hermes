@@ -165,6 +165,7 @@ config:
   value: Valeur
   list: Configuration
   affiche_list_image: Configuration des images
+  affiche_list_head: Configuration balises title et meta
   affiche_list: Configuration générale du site
   affiche_list_contact: Configuration du contact
   affiche_list_menu: Configuration du menu

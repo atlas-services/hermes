@@ -1,8 +1,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="{{ description ?? '' }}">
+    <meta name="author" content="{{ author ?? '' }}">
+    <meta name="robots" content="{{ robots ?? 'index, follow' }}">
 
     {% set config_favicon = favicon ?? logo  %}
     {% if(config_favicon.filename is null) %}
@@ -12,8 +13,7 @@
     {% endif %}
 
     <link rel="icon" href="{{ favicon}}" />
-
-    <title>{{ title.name ?? ''}}</title>
+    <title>{{ title ?? ''}}</title>
 
     {% block stylesheets %}
         {% if 'one page' == nav_bar  %}
