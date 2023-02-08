@@ -20,37 +20,35 @@ class Page
         $this->entityManager = $entityManager;
     }
 
-    public function getActiveMenu($configuration,$sheet, $slug, $route = null)
+    public function getActiveMenu($configuration,$sheet, $slug, $route = null, $locale='fr')
     {
         /*
          * On récupère la configuration du site.
          */
         $config = $this->getActiveConfig($configuration);
-//        dd($config);
 
         /*
          * On récupère la liste des pages, la liste des menus et le menu sélectionné .
          */
-        $sheet_actives = $this->entityManager->getRepository(Sheet::class)->findBy(['active' => true], ['position' => 'ASC']);
-
-        $menus = $this->entityManager->getRepository(Menu::class)->getMenus();
-        // Ajouter les formulaires configurés
-//        if (isset($config['form'])) {
-//            $menus = $this->getActiveForm($menus, ($config['form'])->getValue());
-//        }
+//        $sheet_actives_old = $this->entityManager->getRepository(Sheet::class)->findBy(['active' => true], ['position' => 'ASC']);
+//        dd($sheet_actives_old);
+        $sheet_actives = $this->entityManager->getRepository(Sheet::class)->findBy(['active' => true, 'locale' => $locale], ['position' => 'ASC']);
+        $menus = $this->entityManager->getRepository(Menu::class)->getMenusByLocale($locale);
         /*
          * @TODO simplification config
          */
         if (isset($config['forms'])) {
-            $menus = $this->getActiveForm($menus, $config['forms']);
+            $menus = $this->getActiveForm($menus, $config['forms'], $locale);
         }
 
-        $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug);
+        $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug, $locale);
 
         foreach ($sheet_actives as $menu_active) {
             $sheets[$menu_active->getName()] = $menu_active;
             $sheetsSlug[$menu_active->getName()] = $menu_active->getSlug();
         }
+
+        $locales =$this->entityManager->getRepository(Sheet::class)->getLocales();
 
         $array = [
 //            'config' => $config,
@@ -58,29 +56,38 @@ class Page
             'sheetsSlug' => $sheetsSlug ?? [],
             'menus' => $menus ?? $sheets,
             'menu' => $menu,
+            'locales' => $locales,
         ];
+
         /*
          * @TODO simplification config
          */
         $array = array_merge($array, $config);
 
-        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route);
+        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
         $array['nav'] = $nav;
 
         return $array;
 
     }
 
-    public function getActiveForm($menus, $listform)
+    public function getActiveForm($menus, $listform, $locale)
     {
         if (is_null($listform)) {
             return $menus;
         }
         $forms = explode(',', $listform);
-
         foreach ($forms as $form) {
             if (!array_key_exists(strtoupper($form), $menus)) {
-                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
+//                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true,  'name' => $form]);
+                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'locale' => $locale, 'name' => $form]);
+                if(!is_null($sheet_form)){
+                    if(is_null($sheet_form->getLocale())){
+                        $sheet_form->setLocale($locale);
+                        $this->entityManager->persist($sheet_form);
+                        $this->entityManager->flush();
+                    }
+                }
                 if (!is_null($sheet_form)) {
                     $menus = array_merge($menus, [$form => $sheet_form]);
                 }
@@ -109,11 +116,14 @@ class Page
         return $config;
     }
 
-    public function getInfoMenus($menus, $sheetsSlug, $sheet, $route)
+    public function getInfoMenus($menus, $sheetsSlug, $sheet, $route, $locale)
     {
         /*
          * On défini la configuration du menu.
          */
+//        dump($menus);
+//        dump($sheetsSlug);
+//        dd($sheet);
         $nav = [];
         $newMenus = [];
         foreach ($menus as $sheet_name => $listmenu) {

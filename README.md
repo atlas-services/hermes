@@ -84,6 +84,7 @@ Get php extensions and the vendors and post-install the project
     sudo apt install php8.0-zip
     sudo apt install php8.0-sqlite3
     sudo apt install php8.0-mbstring
+    sudo apt install php8.0-intl
 
     composer install
      

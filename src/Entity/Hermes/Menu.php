@@ -7,8 +7,10 @@ use App\Entity\Traits\ActiveTrait;
 use App\Entity\Traits\CodeTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\ImageTrait;
+use App\Entity\Traits\LocaleTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\PositionTrait;
+use App\Entity\Traits\ReferenceNameTrait;
 use App\Entity\Traits\SlugTrait;
 use App\Entity\Traits\SummaryTrait;
 use App\Entity\Traits\UpdatedTrait;
@@ -22,9 +24,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MenuRepository")
  * @UniqueEntity(
- *     fields={"sheet", "name"},
- *     errorPath="name",
- *     message="menu.exists"
+ *      fields={"locale", "referenceName"},
+ *      message="menu.exists"
  *  )
  * @ORM\Table(name="menu")
  *
@@ -37,8 +38,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Menu
 {
-    use ActiveTrait;
     use IdTrait;
+    use ActiveTrait;
+    use LocaleTrait;
+    use ReferenceNameTrait;
     use CodeTrait;
     use NameTrait;
     use PositionTrait;

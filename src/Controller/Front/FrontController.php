@@ -11,6 +11,8 @@ namespace App\Controller\Front;
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Block;
 use App\Entity\Hermes\Contact;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Sheet;
 use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Temoignage;
@@ -28,7 +30,9 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Doctrine\ORM\EntityManagerInterface;
-
+/**
+ * @Route("/{_locale}", defaults={"_locale": "fr"})
+ */
 class FrontController extends AbstractController
 {
     /**
@@ -82,9 +86,10 @@ class FrontController extends AbstractController
     public function form(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $route = $request->attributes->get('_route');
+        $locale = $request->attributes->get('_locale' , 'fr');
         $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         if (ContactInterface::LIVREDOR_ROUTE == $route) {
-            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
+            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
             $entity = new Temoignage();
             $form = $this->createForm(TemoignageType::class, $entity,
                 array(
@@ -96,7 +101,7 @@ class FrontController extends AbstractController
             $array[ContactInterface::LIVREDOR] = $livredor;
         }
         if (ContactInterface::CONTACT == $route) {
-            $array = $page->getActiveMenu($configuration, ContactInterface::CONTACT, ContactInterface::CONTACT,$route);
+            $array = $page->getActiveMenu($configuration, ContactInterface::CONTACT, ContactInterface::CONTACT,$route, $locale);
             $entity = new Contact();
             $form = $this->createForm(ContactType::class, $entity,
                 array(
@@ -151,26 +156,29 @@ class FrontController extends AbstractController
     public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $route = $request->attributes->get('_route');
+        $locale = $request->attributes->get('_locale' , 'fr');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $sheet = $entityManager->getRepository(Sheet::class)->getSheetSlugBySlugAndLocale($sheet, $locale);
+        $slug  = $entityManager->getRepository(Menu::class)->getMenuSlugBySlugAndLocale($slug, $locale);
+
         if ('contact' == $sheet) {
             return $this->redirectToRoute('contact');
         }
         if ('livre-d-or' == $sheet) {
             return $this->redirectToRoute('livre-d-or');
         }
-
-        if ('ACCUEIL' != strtoupper($sheet)) {
-            if (strtoupper($slug) == strtoupper($sheet)) {
-                return $this->redirectToRoute('slug', ['slug' => $slug]);
-            }
-        }
         $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
-        $array = $page->getActiveMenu($configuration, $sheet, $slug,$route);
+        $array = $page->getActiveMenu($configuration, $sheet, $slug,$route, $locale);
+        $array['locale'] = $locale;
         $entityManager = $this->getDoctrine()->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
         $blocks = $entityManager->getRepository(Block::class)->getBlocks();
         $array['blocks'] = $blocks;
 
         $array[ContactInterface::LIVREDOR] = $livredor;
+
+
 
         return $this->render('front/index.html.twig', $array);
     }

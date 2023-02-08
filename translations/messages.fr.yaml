@@ -102,6 +102,9 @@ global:
   menu: Sous Menu
   template: Affichage
   position: Position
+  locale: Langue
+  name_reference: Menu Référence
+  name_menu_reference: Page Référence
   label: Label
   code: Code
   name: Nom

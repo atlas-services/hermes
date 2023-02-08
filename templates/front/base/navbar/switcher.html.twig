@@ -1,0 +1,19 @@
+{%  if (menu is not null and locales|length > 1 ) %}
+<li class="d-none d-sm-block nav-item dropdown mx-lg-5 " style="background-color: {{ nav_bgcolor_active }};  ">
+    <a style="color: {{ nav_link_color }}" class="nav-link dropdown-toggle" href="#" id="dropdown-language" role="button"
+       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ sheets.0.locale|upper}}
+    </a>
+    <ul class=" dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-language">
+     {% for item in locales %}
+         <li><a class="dropdown-item" href="{{ path('sheet', {_locale: item.locale,'sheet': menu.sheet.slug, 'slug': menu.slug }) }}">{{ item.locale|upper }}</a></li>
+     {% endfor  %}
+    </ul>
+</li>
+
+<ul class="d-block d-sm-none list-group list-group-horizontal" style="background-color: {{ nav_bgcolor_active }}; " >
+    {% for item in locales %}
+        <li><a class="list-group-item" href="{{ path('sheet', {_locale: item.locale,'sheet': menu.sheet.slug, 'slug': menu.slug }) }}">{{ item.locale|upper }}</a></li>
+   {% endfor  %}
+</ul>
+{%  endif  %}

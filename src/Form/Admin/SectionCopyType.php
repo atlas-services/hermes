@@ -22,6 +22,9 @@ class SectionCopyType extends AbstractNameBaseType
             ->add('menu', EntityType::class, [
                 'required' => false,
                 'class' => Menu::class,
+                'choice_label' => function(Menu $menu) {
+                    return sprintf('%s - %s', $menu->getSheet()->getLocale(), $menu->getName());
+                },
                 'label_format' => 'section.menu_target',
                 'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3'],
             ])

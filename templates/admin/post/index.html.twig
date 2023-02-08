@@ -9,6 +9,7 @@
         <thead>
             <tr class="align-middle">
                 <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.locale'|trans() }}</th>
                 <th>{{ 'global.sheet'|trans() }}</th>
                 <th>{{ 'global.menu'|trans() }}</th>
                 <th>{{ 'global.template'|trans() }}</th>
@@ -30,6 +31,7 @@
                         <label class="custom-control-label" for="{{ post.id }}"></label>
                     </div>
                 </td>
+                <td>{{ post.section.menu.sheet.locale ?? '' }}</td>
                 <td>{{ post.section.menu.sheet ?? '' }}</td>
                 <td>{{ post.section.menu ?? '' }}</td>
                 <td>{{ post.section.template.name ?? '' }}</td>

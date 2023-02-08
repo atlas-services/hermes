@@ -33,6 +33,9 @@ class BaseMenuType extends AbstractNameBaseType
                     'query_builder'=>  function (SheetRepository $er) {
                         return $er->getQbSheetsWithoutContact();
                     },
+                    'choice_label' => function(Sheet $sheet) {
+                        return sprintf('%s - %s', $sheet->getLocale(), $sheet->getName());
+                    },
                     'required' => true,
                     'label' => 'global.sheet',
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3']
@@ -40,6 +43,15 @@ class BaseMenuType extends AbstractNameBaseType
             ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
                 'required' => false,
                 'label' => 'global.position',
+            ])
+            ->add('locale', 'Symfony\Component\Form\Extension\Core\Type\LocaleType', [
+                'choice_translation_locale' => 'fr',
+                'required' => false,
+                'label' => 'global.locale',
+            ])
+            ->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'required' => true,
+                'label' => 'global.name_menu_reference',
             ])
             ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
                 'required' => false,

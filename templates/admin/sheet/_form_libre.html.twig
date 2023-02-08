@@ -1,6 +1,7 @@
 {% form_theme form 'admin/form/theme_posts.html.twig' %}
 {{ form_start(form) }}
     {{ form_row(form.name) }}
+    {{ form_row(form.locale) }}
     {{ form_row(form.saveLibre) }}
 {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

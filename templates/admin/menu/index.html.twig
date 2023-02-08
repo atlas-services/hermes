@@ -16,6 +16,7 @@
     <table class="table">
         <thead>
                 <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.locale'|trans() }}</th>
                 <th>{{ 'global.sheet'|trans() }}</th>
                 <th>{{ 'global.name'|trans() }}</th>
                 <th>{{ 'global.position'|trans() }}</th>
@@ -32,6 +33,7 @@
                         <label class="custom-control-label" for="{{ menu.id }}"></label>
                     </div>
                 </td>
+                <td>{{ menu.sheet.locale }}</td>
                 <td>{{ menu.sheet }}</td>
                 <td>{{ menu.name }}</td>
                 <td>{{ menu.position }}</td>

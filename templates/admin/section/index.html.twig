@@ -8,7 +8,7 @@
         <select class="mt-4 select2 bg-primary" id="select_page" >
             <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
         {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
-            <option value="{{ menu.id }}">{{ menu.name }}</option>
+            <option value="{{ menu.id }}">{{ menu.sheet.locale }} - {{ menu.name }}</option>
         {% endfor %}
         </select>
     </div>
@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.locale'|trans() }}</th>
                 <th>{{ 'sheet.name'|trans() }}</th>
                 <th>{{ 'menu.name'|trans() }}</th>
                 <th>{{ 'template.name'|trans() }}</th>
@@ -34,6 +35,7 @@
                         <label class="custom-control-label" for="{{ section.id }}"></label>
                     </div>
                 </td>
+                <td>{{ section.menu.sheet.locale }}</td>
                 <td>{{ section.menu.sheet.name }}</td>
                 <td>{{ section.menu.name }}</td>
                 <td>{{ section.template.name }}</td>

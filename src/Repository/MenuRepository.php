@@ -48,11 +48,13 @@ class MenuRepository extends ServiceEntityRepository
         return 1;
     }
 
-    public function getQbMenus($active = true)
+    public function getQbMenus($active = true, $locale ='fr')
     {
         $qb = $this->createQueryBuilder('m')
             ->join('m.sheet', 'sheet')
             ->andWhere('sheet.active = true ')
+//            ->andWhere('sheet.locale = :locale ')
+//            ->setParameter('locale', $locale)
             ->orderBy('sheet.position', 'ASC')
             ->addOrderBy('m.position', 'ASC')
         ;
@@ -66,6 +68,32 @@ class MenuRepository extends ServiceEntityRepository
         return $qb;
     }
 
+
+    public function getMenusByLocale($locale)
+    {
+        try {
+            $list = $this->getQbMenus(true, $locale)
+                ->getQuery()
+                ->getResult()
+            ;
+
+            if([] == $list){
+                return [];
+            }
+            foreach ($list as $menu){
+                if($locale == $menu->getSheet()->getLocale()){
+                    $menus[$menu->getSheet()->getName()][$menu->getName()] = $menu;
+                }
+            }
+
+            $list = $menus;
+
+        }catch (\Exception $e){
+            return [];
+        }
+        return $list;
+
+    }
     public function getMenus()
     {
         try {
@@ -73,7 +101,6 @@ class MenuRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult()
             ;
-//            dd($list);
             if([] == $list){
                 return [];
             }
@@ -90,7 +117,7 @@ class MenuRepository extends ServiceEntityRepository
         return $list;
     }
 
-    public function getMyMenuBySheetAndMenuSlugs($sheet_slug, $menu_slug)
+    public function getMyMenuBySheetAndMenuSlugs($sheet_slug, $menu_slug, $locale)
     {
         $qb = $this->getQbMenus(false)
 //            ->where('m.active = true ')
@@ -100,6 +127,8 @@ class MenuRepository extends ServiceEntityRepository
             $qb
                 ->andWhere('sheet.slug = :sheet_slug')
                 ->setParameter('sheet_slug', $sheet_slug)
+                ->andWhere('sheet.locale = :locale')
+                ->setParameter('locale', $locale)
             ;
         }
 
@@ -114,6 +143,15 @@ class MenuRepository extends ServiceEntityRepository
             ->getResult()
         ;
 
+//        if( [] == $list ){
+//            $list = $this->getQbMenus()
+//                ->andWhere('sheet.locale = :locale')
+//                ->setParameter('locale', $locale)
+//                ->getQuery()
+//                ->getResult()
+//            ;
+//        }
+
         if(isset($list[0])){
             return $list[0];
         }
@@ -122,5 +160,44 @@ class MenuRepository extends ServiceEntityRepository
         }
         return $list;
     }
+
+
+    /**
+     * @return Menu
+     */
+    public function getMenuSlugBySlugAndLocale($menu_slug, $locale)
+    {
+        $qb = $this->createQueryBuilder('m')
+            ->where('m.active = true ')
+            ->andWhere('m.slug = :slug ')
+            ->setParameter('slug', $menu_slug)
+        ;
+
+        $menu = $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+        if(is_null($menu)){
+            return $menu_slug;
+        }
+
+        $referenceName = $menu->getReferenceName();
+
+        $menu = $this->createQueryBuilder('m')
+            ->where('m.active = true ')
+            ->andWhere('m.referenceName = :referenceName ')
+            ->andWhere('m.locale = :locale ')
+            ->setParameter('referenceName', $referenceName)
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if(is_null($menu)){
+            return $menu_slug;
+        }
+        $menu_slug= $menu->getSlug();
+
+        return $menu_slug;
+    }
+
 
 }

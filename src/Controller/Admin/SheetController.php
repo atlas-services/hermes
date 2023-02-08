@@ -155,8 +155,8 @@ class SheetController extends AbstractAdminController
     }
 
     /**
-     * @Route("/page/edit/{sheet}", name="sheet_edit", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
+     * @Route("/page/edit/{sheet}/{locale}", name="sheet_edit", methods={"GET","POST"})
+     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug", "locale": "locale"}})
      */
     public function edit(Request $request, CacheInterface $backCache, Sheet $sheet): Response
     {

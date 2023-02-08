@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6edd5dbae289d5377b01c8a5423b1f8e",
+    "content-hash": "446f9b844eef28dcc3892ed50583d6ed",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -4830,37 +4830,29 @@
         },
         {
             "name": "symfony/intl",
-            "version": "5.4.x-dev",
+            "version": "6.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "cfb7e99b5710153102231193a87604ee8d9ea6fe"
+                "reference": "a2e1ce9048ea549ee1e8d9ce521cbe9a9ec7d92c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/cfb7e99b5710153102231193a87604ee8d9ea6fe",
-                "reference": "cfb7e99b5710153102231193a87604ee8d9ea6fe",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/a2e1ce9048ea549ee1e8d9ce521cbe9a9ec7d92c",
+                "reference": "a2e1ce9048ea549ee1e8d9ce521cbe9a9ec7d92c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5",
-                "symfony/deprecation-contracts": "^2.1|^3",
-                "symfony/polyfill-php80": "^1.16"
+                "php": ">=8.0.2"
             },
             "require-dev": {
-                "symfony/filesystem": "^4.4|^5.0|^6.0"
+                "symfony/filesystem": "^5.4|^6.0"
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "Resources/functions.php"
-                ],
                 "psr-4": {
                     "Symfony\\Component\\Intl\\": ""
                 },
-                "classmap": [
-                    "Resources/stubs"
-                ],
                 "exclude-from-classmap": [
                     "/Tests/"
                 ]
@@ -4898,7 +4890,7 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/symfony/intl/tree/5.4"
+                "source": "https://github.com/symfony/intl/tree/6.0"
             },
             "funding": [
                 {
@@ -4914,7 +4906,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-02T07:33:46+00:00"
+            "time": "2023-01-01T08:36:10+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -12740,6 +12732,7 @@
         "liip/imagine-bundle": 20,
         "phpdocumentor/reflection-docblock": 20,
         "select2/select2": 20,
+        "symfony/intl": 20,
         "twig/inky-extra": 20,
         "twig/intl-extra": 20,
         "twig/string-extra": 20

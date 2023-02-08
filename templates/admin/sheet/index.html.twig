@@ -8,7 +8,8 @@
 
     <table class="table">
         <thead>
-        <th>{{ 'global.active'|trans() }}/{{ 'global.inactive'|trans() }}</th>
+        <th class="col-2">{{ 'global.active'|trans() }}/{{ 'global.inactive'|trans() }}</th>
+        <th class="col-2">{{ 'global.locale'|trans() }}</th>
         <th>{{ 'global.position'|trans() }}</th>
         <th>{{ 'global.name'|trans() }}</th>
         <th>{{ 'global.actions'|trans() }}</th>
@@ -18,18 +19,19 @@
         {% for sheet in sheets|sort((a, b) => a.position <=> b.position)  %}
             {% if(sheet.name not in config.value ) %}
                 <tr class="align-middle">
-                    <td>
+                    <td class="col-2">
                         <div class="form-check form-switch form-switch-sm my-0">
                             <input type="checkbox" class="sheet-active form-check-input" id="{{ sheet.id }}"  {{ sheet.isActive ? 'checked': '' }} >
                             <label class="custom-control-label" for="{{ sheet.id }}"></label>
                         </div>
                     </td>
+                    <td class="col-2">{{ sheet.locale }}</td>
                     <td>{{ sheet.position }}</td>
                     <td>{{ sheet.name }}</td>
                     <td>
                         {#                    {% if( 'contact' != sheet.code) %}#}
                         {% if( null != sheet.slug) %}
-                            <a id="{{ sheet.slug }}" href="{{ path('sheet_edit', {'sheet': sheet.slug}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                            <a id="{{ sheet.slug }}" href="{{ path('sheet_edit', {'sheet': sheet.slug , 'locale': sheet.locale}) }}">{{ 'action.edit'|trans()|raw }}</a>
                         {% endif %}
                         {#                    {% endif %}#}
                     </td>

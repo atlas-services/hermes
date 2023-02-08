@@ -9,6 +9,23 @@
 {#    {% endif %}#}
 
 {#    {% if 'false' == app_multi_users  %}#}
+
+{#    {% dump(locale) %}#}
+{#    {% dump(menu.sheet.locale) %}#}
+
+
+    {% if menu is null  %}
+        {% set testlocale = 'OK'  %}
+    {% else  %}
+        {% if menu.sheet.locale == locale  %}
+            {% set testlocale = 'OK'  %}
+        {% else  %}
+            {% set testlocale = 'KO'  %}
+        {% endif  %}
+    {% endif  %}
+
+    {% if testlocale == 'OK'  %}
+
         {% if menu.sections is defined  %}
             {% set sections =  menu.sections %}
             {% set user =  null %}
@@ -65,6 +82,9 @@
         {% for key, block in blocks  %}
             <div  id="react-data-{{ loop.index }}"  data-{{ loop.index }}='{{ block|json_encode|raw }}' data-key-{{ loop.index }}='{{ key }}' ></div>
         {% endfor   %}
+    {% endif %}
+
+
     {% endif %}
 {% endblock content %}
 

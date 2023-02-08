@@ -37,7 +37,7 @@
         "symfony/framework-bundle": "5.4.*",
         "symfony/http-client": "5.4.*",
         "symfony/http-kernel": "5.4.*",
-        "symfony/intl": "5.4.*",
+        "symfony/intl": "6.0.x-dev",
         "symfony/mailer": "5.4.*",
         "symfony/monolog-bundle": "3.5.0.*",
         "symfony/process": "5.4.*",

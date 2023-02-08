@@ -17,6 +17,16 @@ class SheetType extends AbstractNameBaseType
         $options['label_name'] = 'sheet.name';
         $options['tooltip'] = 'texte qui apparaitra sur l\'entête de menu';
         parent::buildForm($builder, $options);
+        $builder
+            ->add('locale', 'Symfony\Component\Form\Extension\Core\Type\LocaleType', [
+                'choice_translation_locale' => 'fr',
+                'required' => false,
+                'label' => 'global.locale',
+            ])
+            ->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'required' => true,
+                'label' => 'global.name_reference',
+            ]);
         if ($options['position']) {
             $builder
                 ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [

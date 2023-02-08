@@ -26,7 +26,6 @@ class SheetRepository extends ServiceEntityRepository
     /**
      * @return int Returns max position value
      */
-
     public function getMaxPosition()
     {
         $qb = $this->getQbMaxPosition();
@@ -44,11 +43,17 @@ class SheetRepository extends ServiceEntityRepository
         return 1;
     }
 
+
+
+
+
+
     public function getQbSheets()
     {
         $qb = $this->createQueryBuilder('s')
             ->where('s.active = true ')
-            ->orderBy('s.position', 'ASC')
+            ->orderBy('s.locale', 'ASC')
+            ->addOrderBy('s.position', 'ASC')
         ;
 
         return $qb;
@@ -77,5 +82,73 @@ class SheetRepository extends ServiceEntityRepository
 
         return $list;
     }
+
+
+    /**
+     * @return int Returns nb locales
+     */
+    public function getLocales()
+    {
+        $qb = $this->getQBLocales();
+
+        $locales = $qb
+            ->getQuery()
+            ->getResult();
+
+        return $locales;
+    }
+
+
+    public function getQBLocales()
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s.locale')
+            ->distinct()
+            ;
+    }
+
+
+
+    /**
+     * @return Sheet
+     */
+    public function getSheetSlugBySlugAndLocale($sheet_slug, $locale)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.active = true ')
+            ->andWhere('s.slug = :slug ')
+            ->setParameter('slug', $sheet_slug)
+        ;
+        $sheet = $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if(is_null($sheet)){
+            return $sheet_slug;
+        }
+        $referenceName = $sheet->getReferenceName();
+
+        $sheet = $this->createQueryBuilder('s')
+            ->where('s.active = true ')
+            ->andWhere('s.referenceName = :referenceName ')
+            ->andWhere('s.locale = :locale ')
+            ->setParameter('referenceName', $referenceName)
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if(is_null($sheet)){
+            return $sheet_slug;
+        }
+
+        $sheet_slug= $sheet->getSlug();
+
+        return $sheet_slug;
+    }
+    
+    
+    
+    
+    
 
 }
