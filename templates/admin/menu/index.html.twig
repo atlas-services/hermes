@@ -33,7 +33,7 @@
                         <label class="custom-control-label" for="{{ menu.id }}"></label>
                     </div>
                 </td>
-                <td>{{ menu.sheet.locale }}</td>
+                <td>{{ menu.sheet.locale }} - {{ menu.referenceName }}</td>
                 <td>{{ menu.sheet }}</td>
                 <td>{{ menu.name }}</td>
                 <td>{{ menu.position }}</td>
@@ -46,7 +46,7 @@
                 {% endif %}
                 <td>
                     {% if menu.sheet.slug is not null %}
-                    <a id="{{ menu.name }}-edit" href="{{ path('menu_edit', {'sheet': menu.sheet.slug ,'menu': menu.slug }) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a id="{{ menu.name }}-edit" href="{{ path('menu_edit', {'sheet': menu.sheet.slug, 'referenceName': menu.referenceName, 'locale': menu.locale}) }}">{{ 'action.edit'|trans()|raw }}</a>
                     {% endif %}
                     <a  id="{{ menu.name }}-add" href="{{ path('section_post_new_menu', {'menu': menu.slug }) }}">{{ 'action.add'|trans()|raw }}</a>
                     {% if (menu.sheet.slug is not null and menu.slug is not null)  %}

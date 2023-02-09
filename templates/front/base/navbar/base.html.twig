@@ -22,7 +22,7 @@
                 {% if logo.filename is defined %}
                     {% if logo.filename is not null %}
                         {% if affiche_logo_top == true %}
-                        <a class="navbar-brand js-scroll-trigger mt-3 ml-0 mr-0 d-none d-sm-block " href="{{ path('sheet') }}">
+                        <a class="navbar-brand js-scroll-trigger mt-3 ml-0 mr-0 d-none d-sm-block " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
                             <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 mx-auto app_logo">
                         </a>
                         {% endif %}
@@ -37,7 +37,7 @@
             {% endif %}
     </div>
 </nav>
-
+{% dump(_context) %}
 {% set justify_content_center = 'justify-content-center' %}
 {% if(  app.request.attributes.get('_route')|lower in [constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT'), constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE'), 'sheet', 'slug']) %}
     {% set offset = 12 - nav_offset %}
@@ -56,7 +56,7 @@
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}
                 {% if affiche_logo_top == true %}
-                    <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet') }}">
+                    <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
                         <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
                     </a>
                 {% endif %}
@@ -66,7 +66,7 @@
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
-                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('sheet') }}">
+                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
                                 <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                             </a>
                     {% endif %}

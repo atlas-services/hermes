@@ -159,8 +159,8 @@ class FrontController extends AbstractController
         $locale = $request->attributes->get('_locale' , 'fr');
 
         $entityManager = $this->getDoctrine()->getManager();
-        $sheet = $entityManager->getRepository(Sheet::class)->getSheetSlugBySlugAndLocale($sheet, $locale);
-        $slug  = $entityManager->getRepository(Menu::class)->getMenuSlugBySlugAndLocale($slug, $locale);
+//        $sheet = $entityManager->getRepository(Sheet::class)->getSheetSlugBySlugAndLocale($sheet, $locale);
+//        $slug  = $entityManager->getRepository(Menu::class)->getMenuSlugBySlugAndLocale($slug, $locale);
 
         if ('contact' == $sheet) {
             return $this->redirectToRoute('contact');

@@ -103,6 +103,7 @@ global:
   template: Affichage
   position: Position
   locale: Langue
+  add_locale: Ajouter une langue
   name_reference: Menu Référence
   name_menu_reference: Page Référence
   label: Label

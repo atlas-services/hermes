@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Config\Config;
 use App\Entity\Hermes\Sheet;
+use App\Form\Admin\LocaleType;
 use App\Form\Admin\SheetType;
 use App\Form\Admin\Libre\SheetLibreType;
 use App\Form\Admin\Liste\SheetListeType;
@@ -218,4 +219,32 @@ class SheetController extends AbstractAdminController
 
         return new Response('This is not ajax!', 400);
     }
+
+
+    /**
+     * @Route("/nouvelle-langue", name="sheet_locale_new", methods={"GET","POST"})
+     */
+    public function newLocale(Request $request, Copy $copy): Response
+    {
+        $form = $this->createForm(LocaleType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $locale = $request->request->get('locale')['locale'];
+            $copy->copyLocale($locale);
+            if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('admin_index');
+            }
+        }
+
+        $array = [
+            'form' => $form->createView(),
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/sheet/newLocale.html.twig', $array);
+    }
+
+
+
 }

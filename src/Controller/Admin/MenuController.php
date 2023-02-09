@@ -269,14 +269,13 @@ class MenuController extends AbstractAdminController
     }
 
     /**
-     * @Route("/page/{sheet}/menu/{menu}", name="menu_edit", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
-     * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
+     * @Route("/page/{sheet}/menu/{referenceName}/locale/{locale}", name="menu_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, CacheInterface $backCache,Sheet $sheet, Menu $menu, MenuRepository $menuRepository): Response
+    public function edit(Request $request, CacheInterface $backCache,MenuRepository $menuRepository, $sheet, $referenceName, $locale): Response
     {
-//        Le menun'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
-        $menu = $menuRepository->findOneBy(['slug'=> $menu->getSlug(), 'sheet'=>$sheet]);
+//        Le menu'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
+//        $menu = $menuRepository->findOneBy(['slug'=> $menu->getSlug(), 'sheet'=>$sheet]);
+        $menu = $menuRepository->findOneBy(['locale'=> $locale, 'referenceName'=>$referenceName]);
         $form = $this->createForm(BaseMenuType::class, $menu);
         $form->handleRequest($request);
 

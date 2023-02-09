@@ -169,4 +169,64 @@ class Copy
 //        return new RedirectResponse($this->cacheManager->resolve($path, $filter), Response::HTTP_MOVED_PERMANENTLY);
     }
 
+
+
+    public function copyLocale($locale){
+
+        try {
+            $contactLocale = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'slug' => 'contact']);
+            if(!is_null($contactLocale)){
+                $this->em->remove($contactLocale);
+                $this->em->flush();
+            }
+            $sheets = $this->em->getRepository(Sheet::class)->findBy(['locale' => $locale]);
+
+            if(!empty($sheets)){
+                foreach ($sheets as $sheet){
+                    $this->em->remove($sheet);
+                }
+                $this->em->flush();
+//                return ['info' => 'langue existe déjà'];
+            }
+            $sheets = $this->em->getRepository(Sheet::class)->findAll();
+            foreach ($sheets as $sheet){
+                $sheetLocale = clone $sheet;
+                $sheetLocale->setlocale($locale);
+                $sheetLocale->setName($sheet->getName(). '-'. $locale);
+                $sheetLocale->setSlug($sheet->getName());
+                $this->em->persist($sheetLocale);
+            }
+            $this->em->flush();
+
+            $menus = $this->em->getRepository(Menu::class)->findAll();
+            foreach ($menus as $menu){
+                $menuLocale = clone $menu;
+                $sheetLocale = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'referenceName' => $menu->getSheet()->getReferenceName() ]);
+                $menuLocale->setlocale($locale);
+                $menuLocale->setSheet($sheetLocale);
+                $menuLocale->setName($menu->getName(). '-'. $locale);
+                $menuLocale->setSlug($menu->getName());
+                $this->em->persist($menuLocale);
+            }
+            $this->em->flush();
+
+            $sections = $this->em->getRepository(Section::class)->findAll();
+            foreach ($sections as $section){
+                $sectionLocale = clone $section;
+                $this->copySection($section, $sectionLocale, true );
+                $menuLocale = $this->em->getRepository(Menu::class)->findOneBy(['locale' => $locale, 'referenceName' => $section->getMenu()->getReferenceName() ]);
+                $sectionLocale->setMenu($menuLocale);
+                $sectionLocale->setName($sectionLocale->getName(). '-'. $locale);
+                $this->em->persist($sectionLocale);
+            }
+            $this->em->flush();
+
+            return ['info' => 'nouvelle langue copiée'];
+
+        }catch (\Exception $e){
+            return ['warning' => $e->getMessage()];
+        }
+
+    }
+
 }

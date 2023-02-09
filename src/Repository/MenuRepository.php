@@ -199,5 +199,39 @@ class MenuRepository extends ServiceEntityRepository
         return $menu_slug;
     }
 
+    /**
+     * @return array Returns menu courant dans les locales
+     */
+    public function getLocalesByMenu($menu)
+    {
+        $locales = [];
+        if(!is_null($menu)){
+            $qb = $this->getQBLocalesByMenu($menu);
+
+            $menus = $qb
+                ->getQuery()
+                ->getResult();
+
+            foreach ($menus as $menu){
+                $locales[$menu->getLocale()] =[
+                    'locale' => $menu->getLocale(),
+                    'sheet' => $menu->getSheet()->getSlug(),
+                    'slug' => $menu->getSlug()
+                ] ;
+            }
+        }
+        return $locales;
+    }
+
+
+    public function getQBLocalesByMenu($menu)
+    {
+        $referenceName = $menu->getReferenceName();
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.referenceName = :referenceName ')
+            ->setParameter('referenceName', $referenceName)
+            ;
+    }
+
 
 }

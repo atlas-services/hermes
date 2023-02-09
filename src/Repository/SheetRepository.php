@@ -83,32 +83,6 @@ class SheetRepository extends ServiceEntityRepository
         return $list;
     }
 
-
-    /**
-     * @return int Returns nb locales
-     */
-    public function getLocales()
-    {
-        $qb = $this->getQBLocales();
-
-        $locales = $qb
-            ->getQuery()
-            ->getResult();
-
-        return $locales;
-    }
-
-
-    public function getQBLocales()
-    {
-        return $this->createQueryBuilder('s')
-            ->select('s.locale')
-            ->distinct()
-            ;
-    }
-
-
-
     /**
      * @return Sheet
      */
@@ -121,7 +95,9 @@ class SheetRepository extends ServiceEntityRepository
         ;
         $sheet = $qb
             ->getQuery()
-            ->getOneOrNullResult();
+//            ->getResult()
+            ->getOneOrNullResult()
+        ;
 
         if(is_null($sheet)){
             return $sheet_slug;

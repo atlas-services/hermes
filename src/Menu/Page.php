@@ -47,8 +47,14 @@ class Page
             $sheets[$menu_active->getName()] = $menu_active;
             $sheetsSlug[$menu_active->getName()] = $menu_active->getSlug();
         }
+        $locales =$this->entityManager->getRepository(Menu::class)->getLocalesByMenu($menu);
 
-        $locales =$this->entityManager->getRepository(Sheet::class)->getLocales();
+        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
+        $key_menu_home = array_keys($nav)[0];
+
+        $home_menu = $nav[$key_menu_home][$key_menu_home];
+        $home_menu_slug = $home_menu->getSlug();
+        $home_sheet_slug = $home_menu->getSheet()->getSlug();
 
         $array = [
 //            'config' => $config,
@@ -57,15 +63,14 @@ class Page
             'menus' => $menus ?? $sheets,
             'menu' => $menu,
             'locales' => $locales,
+            'nav' => $nav,
+            'home' => ['sheet' => $home_sheet_slug, 'slug' => $home_menu_slug],
         ];
 
         /*
          * @TODO simplification config
          */
         $array = array_merge($array, $config);
-
-        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
-        $array['nav'] = $nav;
 
         return $array;
 

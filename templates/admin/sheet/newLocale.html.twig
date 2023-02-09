@@ -1,0 +1,18 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'global.new_page'|trans() }}{% endblock %}
+
+{% block content %}
+    <a class="btn h-btn-outline-success"  href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <h1 class="text-success">{{ 'global.add_locale'|trans()|raw }}</h1>
+
+    {% form_theme form 'admin/form/theme_posts.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_row(form.locale) }}
+    {{ form_row(form.save) }}
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+
+    <a class="btn h-btn-outline-success"  href="{{ path('admin_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    </div>
+{% endblock %}
