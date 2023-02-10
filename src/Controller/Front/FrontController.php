@@ -153,15 +153,10 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
+    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet , $slug)
     {
         $route = $request->attributes->get('_route');
         $locale = $request->attributes->get('_locale' , 'fr');
-
-        $entityManager = $this->getDoctrine()->getManager();
-//        $sheet = $entityManager->getRepository(Sheet::class)->getSheetSlugBySlugAndLocale($sheet, $locale);
-//        $slug  = $entityManager->getRepository(Menu::class)->getMenuSlugBySlugAndLocale($slug, $locale);
-
         if ('contact' == $sheet) {
             return $this->redirectToRoute('contact');
         }

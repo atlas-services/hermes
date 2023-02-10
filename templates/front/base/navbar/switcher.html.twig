@@ -1,4 +1,4 @@
-{%  if (menu is not null and locales|length > 1 ) %}
+{%  if (menu is not null or locales|length > 1 ) %}
 <li class="d-none d-sm-block nav-item dropdown mx-lg-5 " style="background-color: {{ nav_bgcolor_active }};  ">
     <a style="color: {{ nav_link_color }}" class="nav-link dropdown-toggle" href="#" id="dropdown-language" role="button"
        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

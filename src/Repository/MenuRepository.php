@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
+use App\Entity\Interfaces\ContactInterface;
 use App\Repository\Traits\BaseRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
@@ -161,75 +162,69 @@ class MenuRepository extends ServiceEntityRepository
         return $list;
     }
 
-
-    /**
-     * @return Menu
-     */
-    public function getMenuSlugBySlugAndLocale($menu_slug, $locale)
-    {
-        $qb = $this->createQueryBuilder('m')
-            ->where('m.active = true ')
-            ->andWhere('m.slug = :slug ')
-            ->setParameter('slug', $menu_slug)
-        ;
-
-        $menu = $qb
-            ->getQuery()
-            ->getOneOrNullResult();
-        if(is_null($menu)){
-            return $menu_slug;
-        }
-
-        $referenceName = $menu->getReferenceName();
-
-        $menu = $this->createQueryBuilder('m')
-            ->where('m.active = true ')
-            ->andWhere('m.referenceName = :referenceName ')
-            ->andWhere('m.locale = :locale ')
-            ->setParameter('referenceName', $referenceName)
-            ->setParameter('locale', $locale)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        if(is_null($menu)){
-            return $menu_slug;
-        }
-        $menu_slug= $menu->getSlug();
-
-        return $menu_slug;
-    }
-
     /**
      * @return array Returns menu courant dans les locales
      */
-    public function getLocalesByMenu($menu)
+    public function getLocalesByMenu($menu,$sheet)
     {
         $locales = [];
+        if(ContactInterface::CONTACT == $sheet){
+            $qb = $this->getQBLocalesContactBySlug($sheet);
+
+            $menus = $qb
+                ->getQuery()
+                ->getResult();
+
+
+            foreach ($menus as $menu){
+                $locales[$menu->getLocale()] = [
+                    'locale' => $menu->getLocale(),
+                    'sheet' => $menu->getSlug(),
+                    'slug' => $menu->getSlug()
+                ] ;
+            }
+            return $locales;
+        }
+
         if(!is_null($menu)){
-            $qb = $this->getQBLocalesByMenu($menu);
+            $referenceName = $menu->getReferenceName();
+
+            $qb = $this->getQBLocalesByReferenceName($referenceName);
 
             $menus = $qb
                 ->getQuery()
                 ->getResult();
 
             foreach ($menus as $menu){
-                $locales[$menu->getLocale()] =[
+                $locales[$menu->getLocale()] = [
                     'locale' => $menu->getLocale(),
                     'sheet' => $menu->getSheet()->getSlug(),
                     'slug' => $menu->getSlug()
                 ] ;
             }
+
         }
+
+
         return $locales;
     }
 
 
-    public function getQBLocalesByMenu($menu)
+    public function getQBLocalesByReferenceName($referenceName)
     {
-        $referenceName = $menu->getReferenceName();
+
         return $this->createQueryBuilder('m')
             ->andWhere('m.referenceName = :referenceName ')
             ->setParameter('referenceName', $referenceName)
+            ;
+    }
+
+
+    public function getQBLocalesContactBySlug($slug)
+    {
+        return $this->getEntityManager()->getRepository(Sheet::class)->createQueryBuilder('s')
+            ->andWhere('s.slug = :slug ')
+            ->setParameter('slug', $slug)
             ;
     }
 

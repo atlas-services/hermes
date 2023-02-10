@@ -47,7 +47,7 @@ class Page
             $sheets[$menu_active->getName()] = $menu_active;
             $sheetsSlug[$menu_active->getName()] = $menu_active->getSlug();
         }
-        $locales =$this->entityManager->getRepository(Menu::class)->getLocalesByMenu($menu);
+        $locales =$this->entityManager->getRepository(Menu::class)->getLocalesByMenu($menu, $sheet);
 
         $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
         $key_menu_home = array_keys($nav)[0];
@@ -86,18 +86,31 @@ class Page
             if (!array_key_exists(strtoupper($form), $menus)) {
 //                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true,  'name' => $form]);
                 $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'locale' => $locale, 'name' => $form]);
-                if(!is_null($sheet_form)){
-                    if(is_null($sheet_form->getLocale())){
+                if(is_null($sheet_form)){
+                    $sheet_form_base = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true,  'name' => $form]);
+                    $sheet_form = clone $sheet_form_base;
+                    if($sheet_form->getLocale() != $locale){
+                        $sheet_form_base->setReferenceName($form);
+                        $sheet_form->setReferenceName($form);
                         $sheet_form->setLocale($locale);
                         $this->entityManager->persist($sheet_form);
+                        $this->entityManager->persist($sheet_form_base);
                         $this->entityManager->flush();
                     }
                 }
+//                if(!is_null($sheet_form)){
+//                    if(is_null($sheet_form->getLocale())){
+//                        $sheet_form->setLocale($locale);
+//                        $this->entityManager->persist($sheet_form);
+//                        $this->entityManager->flush();
+//                    }
+//                }
                 if (!is_null($sheet_form)) {
                     $menus = array_merge($menus, [$form => $sheet_form]);
                 }
             }
         }
+
         $this->entityManager->flush();
 
         return $menus;

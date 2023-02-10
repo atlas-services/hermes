@@ -83,44 +83,6 @@ class SheetRepository extends ServiceEntityRepository
         return $list;
     }
 
-    /**
-     * @return Sheet
-     */
-    public function getSheetSlugBySlugAndLocale($sheet_slug, $locale)
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->where('s.active = true ')
-            ->andWhere('s.slug = :slug ')
-            ->setParameter('slug', $sheet_slug)
-        ;
-        $sheet = $qb
-            ->getQuery()
-//            ->getResult()
-            ->getOneOrNullResult()
-        ;
-
-        if(is_null($sheet)){
-            return $sheet_slug;
-        }
-        $referenceName = $sheet->getReferenceName();
-
-        $sheet = $this->createQueryBuilder('s')
-            ->where('s.active = true ')
-            ->andWhere('s.referenceName = :referenceName ')
-            ->andWhere('s.locale = :locale ')
-            ->setParameter('referenceName', $referenceName)
-            ->setParameter('locale', $locale)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        if(is_null($sheet)){
-            return $sheet_slug;
-        }
-
-        $sheet_slug= $sheet->getSlug();
-
-        return $sheet_slug;
-    }
     
     
     
