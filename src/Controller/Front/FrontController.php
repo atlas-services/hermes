@@ -143,17 +143,12 @@ class FrontController extends AbstractController
 
     /**
      * @Route(
-     *     "/{sheet}/{slug}",
-     *     name="sheet",
-     *     methods={"GET|POST"}
-     *     )
-     * @Route(
-     *     "/{slug}",
+     *     "/{sheet}",
      *     name="slug",
      *     methods={"GET|POST"}
      *     )
      */
-    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet , $slug)
+    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet)
     {
         $route = $request->attributes->get('_route');
         $locale = $request->attributes->get('_locale' , 'fr');
@@ -163,6 +158,34 @@ class FrontController extends AbstractController
         if ('livre-d-or' == $sheet) {
             return $this->redirectToRoute('livre-d-or');
         }
+        $array = $this->getArray($page,$sheet, $sheet, $route, $locale);
+
+        return $this->render('front/index.html.twig', $array);
+    }
+
+    /**
+     * @Route(
+     *     "/{sheet}/{slug}",
+     *     name="sheet",
+     *     methods={"GET|POST"}
+     *     )
+     */
+    public function pageSheet(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet , $slug)
+    {
+        $route = $request->attributes->get('_route');
+        $locale = $request->attributes->get('_locale' , 'fr');
+        if ('contact' == $sheet) {
+            return $this->redirectToRoute('contact');
+        }
+        if ('livre-d-or' == $sheet) {
+            return $this->redirectToRoute('livre-d-or');
+        }
+        $array = $this->getArray($page,$sheet, $slug, $route, $locale);
+
+        return $this->render('front/index.html.twig', $array);
+    }
+
+    private function getArray($page, $sheet, $slug, $route, $locale){
         $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         $array = $page->getActiveMenu($configuration, $sheet, $slug,$route, $locale);
         $array['locale'] = $locale;
@@ -173,9 +196,7 @@ class FrontController extends AbstractController
 
         $array[ContactInterface::LIVREDOR] = $livredor;
 
-
-
-        return $this->render('front/index.html.twig', $array);
+        return $array;
     }
 
     /*

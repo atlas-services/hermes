@@ -204,8 +204,6 @@ class MenuRepository extends ServiceEntityRepository
             }
 
         }
-
-
         return $locales;
     }
 

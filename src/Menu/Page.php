@@ -51,10 +51,17 @@ class Page
 
         $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
         $key_menu_home = array_keys($nav)[0];
+        if(is_array($nav[$key_menu_home])){
+            $key_sous_menu_home = array_keys($nav[$key_menu_home])[0];
+            $home_menu = $nav[$key_menu_home][$key_sous_menu_home];
+            $home_menu_slug = $home_menu->getSlug();
+            $home_sheet_slug = $home_menu->getSheet()->getSlug();
+        }else{
+            $home_menu_slug = $nav[$key_menu_home];
+            $home_sheet_slug = $nav[$key_menu_home];
+        }
 
-        $home_menu = $nav[$key_menu_home][$key_menu_home];
-        $home_menu_slug = $home_menu->getSlug();
-        $home_sheet_slug = $home_menu->getSheet()->getSlug();
+
 
         $array = [
 //            'config' => $config,

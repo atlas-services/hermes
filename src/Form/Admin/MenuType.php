@@ -37,7 +37,7 @@ class MenuType extends AbstractNameBaseType
                     return $er->getQbSheetsWithoutContact();
                 },
                 'choice_label' => function(Sheet $sheet) {
-                    return sprintf('%s - %s', $sheet->getLocale(), $sheet->getName());
+                    return sprintf('%s ( %s )', $sheet->getName(), $sheet->getLocale());
                 },
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ]);

@@ -174,39 +174,51 @@ class Copy
     public function copyLocale($locale){
 
         try {
-            $contactLocale = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'slug' => 'contact']);
-            if(!is_null($contactLocale)){
-                $this->em->remove($contactLocale);
-                $this->em->flush();
-            }
-            $sheets = $this->em->getRepository(Sheet::class)->findBy(['locale' => $locale]);
+//            $contactLocale = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'slug' => 'contact']);
+//            if(!is_null($contactLocale)){
+//                $this->em->remove($contactLocale);
+//                $this->em->flush();
+//            }
+//            $sheets = $this->em->getRepository(Sheet::class)->findBy(['locale' => $locale]);
 
-            if(!empty($sheets)){
-                foreach ($sheets as $sheet){
-                    $this->em->remove($sheet);
-                }
-                $this->em->flush();
-//                return ['info' => 'langue existe déjà'];
-            }
+//            if(!empty($sheets)){
+//                foreach ($sheets as $sheet){
+//                    $this->em->remove($sheet);
+//                }
+//                $this->em->flush();
+////                return ['info' => 'langue existe déjà'];
+//            }
             $sheets = $this->em->getRepository(Sheet::class)->findAll();
             foreach ($sheets as $sheet){
-                $sheetLocale = clone $sheet;
-                $sheetLocale->setlocale($locale);
-                $sheetLocale->setName($sheet->getName(). '-'. $locale);
-                $sheetLocale->setSlug($sheet->getName());
-                $this->em->persist($sheetLocale);
+                $exists = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'referenceName' => $sheet->getReferenceName()]);
+                if(is_null($exists)){
+                    $sheet->setReferenceName($sheet->getName());
+                    $sheetLocale = clone $sheet;
+                    $sheetLocale->setlocale($locale);
+                    $sheetLocale->setReferenceName($sheet->getName());
+                    $sheetLocale->setName($sheet->getName(). '-'. $locale);
+                    $sheetLocale->setSlug($sheetLocale->getName());
+                    $this->em->persist($sheet);
+                    $this->em->persist($sheetLocale);
+                }
             }
             $this->em->flush();
 
             $menus = $this->em->getRepository(Menu::class)->findAll();
             foreach ($menus as $menu){
-                $menuLocale = clone $menu;
-                $sheetLocale = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'referenceName' => $menu->getSheet()->getReferenceName() ]);
-                $menuLocale->setlocale($locale);
-                $menuLocale->setSheet($sheetLocale);
-                $menuLocale->setName($menu->getName(). '-'. $locale);
-                $menuLocale->setSlug($menu->getName());
-                $this->em->persist($menuLocale);
+                $exists = $this->em->getRepository(Menu::class)->findOneBy(['locale' => $locale, 'referenceName' => $menu->getReferenceName()]);
+                if(is_null($exists)){
+                    $menu->setReferenceName($menu->getName());
+                    $menuLocale = clone $menu;
+                    $sheetLocale = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'referenceName' => $menu->getSheet()->getReferenceName() ]);
+                    $menuLocale->setlocale($locale);
+                    $menuLocale->setReferenceName($menu->getName());
+                    $menuLocale->setSheet($sheetLocale);
+                    $menuLocale->setName($menu->getName(). '-'. $locale);
+                    $menuLocale->setSlug($menuLocale->getName());
+                    $this->em->persist($menu);
+                    $this->em->persist($menuLocale);
+                }
             }
             $this->em->flush();
 
