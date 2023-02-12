@@ -60,6 +60,7 @@ class Sheet
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Menu", mappedBy="sheet",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="menu_sheet")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $menus;
 

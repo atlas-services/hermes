@@ -159,6 +159,12 @@ class FrontController extends AbstractController
             return $this->redirectToRoute('livre-d-or');
         }
         $array = $this->getArray($page,$sheet, $sheet, $route, $locale);
+        $localeNotExists = !in_array($locale, array_keys($array['locales']));
+        if('home' == $sheet or is_null($array['menu']) or $localeNotExists){
+            $home_sheet = $array['home']['sheet'];
+            $home_slug = $array['home']['slug'];
+            return $this->redirectToRoute('sheet', [ '_locale'=> $locale, 'sheet'=> $home_sheet, 'slug' => $home_slug]);
+        }
 
         return $this->render('front/index.html.twig', $array);
     }
@@ -174,6 +180,7 @@ class FrontController extends AbstractController
     {
         $route = $request->attributes->get('_route');
         $locale = $request->attributes->get('_locale' , 'fr');
+        $locale = $page->getLocale($locale);
         if ('contact' == $sheet) {
             return $this->redirectToRoute('contact');
         }
@@ -181,6 +188,12 @@ class FrontController extends AbstractController
             return $this->redirectToRoute('livre-d-or');
         }
         $array = $this->getArray($page,$sheet, $slug, $route, $locale);
+        $localeNotExists = !in_array($locale, array_keys($array['locales']));
+        if('home' == $sheet or is_null($array['menu']) or $localeNotExists){
+            $home_sheet = $array['home']['sheet'];
+            $home_slug = $array['home']['slug'];
+            return $this->redirectToRoute('sheet', [ '_locale'=> $locale, 'sheet'=> $home_sheet, 'slug' => $home_slug]);
+        }
 
         return $this->render('front/index.html.twig', $array);
     }
@@ -188,11 +201,12 @@ class FrontController extends AbstractController
     private function getArray($page, $sheet, $slug, $route, $locale){
         $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         $array = $page->getActiveMenu($configuration, $sheet, $slug,$route, $locale);
+
         $array['locale'] = $locale;
         $entityManager = $this->getDoctrine()->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
-        $blocks = $entityManager->getRepository(Block::class)->getBlocks();
-        $array['blocks'] = $blocks;
+//        $blocks = $entityManager->getRepository(Block::class)->getBlocks();
+//        $array['blocks'] = $blocks;
 
         $array[ContactInterface::LIVREDOR] = $livredor;
 

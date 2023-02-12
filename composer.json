@@ -57,6 +57,7 @@
         "twig/inky-extra": "3.x-dev",
         "twig/intl-extra": "3.x-dev",
         "twig/string-extra": "3.x-dev",
+        "twig/twig": "^2.12|^3.0",
         "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {

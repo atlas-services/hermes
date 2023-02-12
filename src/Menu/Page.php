@@ -3,25 +3,26 @@
 
 namespace App\Menu;
 
-
-use App\Entity\Config\Config;
 use App\Entity\Hermes\Menu;
-use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Sheet;
-use App\Entity\Hermes\Temoignage;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Page
 {
     protected $entityManager;
+    protected $parameterBag;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag)
     {
         $this->entityManager = $entityManager;
+        $this->parameterBag = $parameterBag;
     }
 
     public function getActiveMenu($configuration,$sheet, $slug, $route = null, $locale='fr')
     {
+        $locale = $this->getLocale($locale);
+
         /*
          * On récupère la configuration du site.
          */
@@ -49,19 +50,24 @@ class Page
         }
         $locales =$this->entityManager->getRepository(Menu::class)->getLocalesByMenu($menu, $sheet);
 
-        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
-        $key_menu_home = array_keys($nav)[0];
-        if(is_array($nav[$key_menu_home])){
-            $key_sous_menu_home = array_keys($nav[$key_menu_home])[0];
-            $home_menu = $nav[$key_menu_home][$key_sous_menu_home];
-            $home_menu_slug = $home_menu->getSlug();
-            $home_sheet_slug = $home_menu->getSheet()->getSlug();
+//        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
+
+        $nav = $this->getNavBarByLocaleAndSlug($locale, $slug )
+;       if(!empty($nav)){
+            $key_menu_home = array_keys($nav)[0];
+            if(is_array($nav[$key_menu_home])){
+                $key_sous_menu_home = array_keys($nav[$key_menu_home])[0];
+                $home_menu = $nav[$key_menu_home][$key_sous_menu_home];
+                $home_menu_slug = $home_menu->getSlug();
+                $home_sheet_slug = $home_menu->getSheet()->getSlug();
+            }else{
+                $home_menu_slug = $nav[$key_menu_home];
+                $home_sheet_slug = $nav[$key_menu_home];
+            }
+            $home = ['sheet' => $home_sheet_slug, 'slug' => $home_menu_slug];
         }else{
-            $home_menu_slug = $nav[$key_menu_home];
-            $home_sheet_slug = $nav[$key_menu_home];
+            $home =  ['sheet' => "/", 'slug' => null];
         }
-
-
 
         $array = [
 //            'config' => $config,
@@ -71,7 +77,7 @@ class Page
             'menu' => $menu,
             'locales' => $locales,
             'nav' => $nav,
-            'home' => ['sheet' => $home_sheet_slug, 'slug' => $home_menu_slug],
+            'home' => $home,
         ];
 
         /*
@@ -91,27 +97,7 @@ class Page
         $forms = explode(',', $listform);
         foreach ($forms as $form) {
             if (!array_key_exists(strtoupper($form), $menus)) {
-//                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true,  'name' => $form]);
                 $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'locale' => $locale, 'name' => $form]);
-                if(is_null($sheet_form)){
-                    $sheet_form_base = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true,  'name' => $form]);
-                    $sheet_form = clone $sheet_form_base;
-                    if($sheet_form->getLocale() != $locale){
-                        $sheet_form_base->setReferenceName($form);
-                        $sheet_form->setReferenceName($form);
-                        $sheet_form->setLocale($locale);
-                        $this->entityManager->persist($sheet_form);
-                        $this->entityManager->persist($sheet_form_base);
-                        $this->entityManager->flush();
-                    }
-                }
-//                if(!is_null($sheet_form)){
-//                    if(is_null($sheet_form->getLocale())){
-//                        $sheet_form->setLocale($locale);
-//                        $this->entityManager->persist($sheet_form);
-//                        $this->entityManager->flush();
-//                    }
-//                }
                 if (!is_null($sheet_form)) {
                     $menus = array_merge($menus, [$form => $sheet_form]);
                 }
@@ -173,9 +159,58 @@ class Page
             };
 
         };
-
         return $newMenus;
     }
+
+
+    public function getNavBarByLocaleAndSlug($locale, $slug)
+    {
+
+        $menuSlug = $this->entityManager->getRepository(Menu::class)
+            ->findOneBy(['locale' => $locale, 'slug'=>$slug]);
+
+        if(is_null($menuSlug)){
+            $referenceName = "home";
+        }else{
+            $referenceName = $menuSlug->getReferenceName();
+        }
+
+        $menusLocale = $this->entityManager->getRepository(Menu::class)
+            ->getMenusByLocaleOrderByPosition($locale)
+        ;
+
+        foreach ($menusLocale as $menu){
+            if($locale == $menu->getSheet()->getLocale()){
+                $menus[$menu->getSheet()->getName()][$menu->getName()] = $menu;
+            }
+        }
+
+        foreach ($menus as $sheet_name => $listmenu) {
+            $nav['active'] = '';
+            $nav['dropdown'] = '';
+            $nav['dropdowntoggle'] = '';
+            $nav['border_bottom'] = '';
+
+            if ($referenceName == $sheet_name) {
+                $nav['active'] = 'active';
+            }
+            $navbar[$sheet_name] = $listmenu;
+            if (is_array($listmenu)) {
+                if ((strtolower($sheet_name) != strtolower(array_key_first($listmenu))) or 2 < count($listmenu)) {
+                    $nav['href'] = '#';
+                    $nav['dropdown'] = 'dropdown';
+                    $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
+                    $nav['border_bottom'] = 'border-bottom';
+                }
+                $navbar[$sheet_name]['config'] = $nav;
+                $nav = [];
+            };
+
+        };
+
+        return $navbar;
+    }
+
 
     public function getCacheMenu($sheet, $slug)
     {
@@ -203,6 +238,15 @@ class Page
         }
 
         return $cache;
+    }
+
+    public function getLocale($locale){
+        $intl = \IntlCalendar::getAvailableLocales();
+
+        if( !in_array($locale, $intl)){
+            $locale = $this->parameterBag->get('app.default_locale');
+        }
+        return $locale;
     }
 
 }

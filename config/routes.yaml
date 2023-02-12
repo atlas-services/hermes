@@ -24,3 +24,17 @@ hermes_front:
   # loads routes from the PHP annotations of the controllers found in that directory
   resource: '../src/Controller/Front'
   type:     annotation
+
+homepage_base:
+  path: /
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /fr/home
+    permanent: true
+
+homepage:
+  path: /{text}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /fr/home
+    permanent: true
