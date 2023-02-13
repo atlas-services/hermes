@@ -31,8 +31,6 @@ class Page
         /*
          * On récupère la liste des pages, la liste des menus et le menu sélectionné .
          */
-//        $sheet_actives_old = $this->entityManager->getRepository(Sheet::class)->findBy(['active' => true], ['position' => 'ASC']);
-//        dd($sheet_actives_old);
         $sheet_actives = $this->entityManager->getRepository(Sheet::class)->findBy(['active' => true, 'locale' => $locale], ['position' => 'ASC']);
         $menus = $this->entityManager->getRepository(Menu::class)->getMenusByLocale($locale);
         /*
@@ -132,9 +130,6 @@ class Page
         /*
          * On défini la configuration du menu.
          */
-//        dump($menus);
-//        dump($sheetsSlug);
-//        dd($sheet);
         $nav = [];
         $newMenus = [];
         foreach ($menus as $sheet_name => $listmenu) {
@@ -241,6 +236,13 @@ class Page
     }
 
     public function getLocale($locale){
+
+        $locales = $this->entityManager->getRepository(Menu::class)->findBy(['locale' =>$locale]);
+
+        if(empty($locales)){
+            $locale = $this->parameterBag->get('app.default_locale');
+            return $locale;
+        }
         $intl = \IntlCalendar::getAvailableLocales();
 
         if( !in_array($locale, $intl)){

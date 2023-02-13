@@ -151,7 +151,8 @@ class FrontController extends AbstractController
     public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet)
     {
         $route = $request->attributes->get('_route');
-        $locale = $request->attributes->get('_locale' , 'fr');
+        $localeRouting = $request->attributes->get('_locale' , 'fr');
+        $locale = $page->getLocale($localeRouting);
         if ('contact' == $sheet) {
             return $this->redirectToRoute('contact');
         }
@@ -159,7 +160,7 @@ class FrontController extends AbstractController
             return $this->redirectToRoute('livre-d-or');
         }
         $array = $this->getArray($page,$sheet, $sheet, $route, $locale);
-        $localeNotExists = !in_array($locale, array_keys($array['locales']));
+        $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if('home' == $sheet or is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
             $home_slug = $array['home']['slug'];
@@ -179,8 +180,8 @@ class FrontController extends AbstractController
     public function pageSheet(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet , $slug)
     {
         $route = $request->attributes->get('_route');
-        $locale = $request->attributes->get('_locale' , 'fr');
-        $locale = $page->getLocale($locale);
+        $localeRouting = $request->attributes->get('_locale' , 'fr');
+        $locale = $page->getLocale($localeRouting);
         if ('contact' == $sheet) {
             return $this->redirectToRoute('contact');
         }
@@ -188,7 +189,8 @@ class FrontController extends AbstractController
             return $this->redirectToRoute('livre-d-or');
         }
         $array = $this->getArray($page,$sheet, $slug, $route, $locale);
-        $localeNotExists = !in_array($locale, array_keys($array['locales']));
+
+        $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if('home' == $sheet or is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
             $home_slug = $array['home']['slug'];

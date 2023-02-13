@@ -54,8 +54,6 @@ class MenuRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('m')
             ->join('m.sheet', 'sheet')
             ->andWhere('sheet.active = true ')
-//            ->andWhere('sheet.locale = :locale ')
-//            ->setParameter('locale', $locale)
             ->orderBy('sheet.position', 'ASC')
             ->addOrderBy('m.position', 'ASC')
         ;
@@ -121,37 +119,18 @@ class MenuRepository extends ServiceEntityRepository
     public function getMyMenuBySheetAndMenuSlugs($sheet_slug, $menu_slug, $locale)
     {
         $qb = $this->getQbMenus(false)
-//            ->where('m.active = true ')
-        ;
-
-        if('accueil' != $sheet_slug){
-            $qb
                 ->andWhere('sheet.slug = :sheet_slug')
                 ->setParameter('sheet_slug', $sheet_slug)
                 ->andWhere('sheet.locale = :locale')
                 ->setParameter('locale', $locale)
-            ;
-        }
-
-        if(!in_array($menu_slug, ['accueil', 'contact'])){
-            $qb
                 ->andWhere('m.slug = :menu_slug')
                 ->setParameter('menu_slug', $menu_slug)
-                ;
-        }
+            ;
+
         $list = $qb
             ->getQuery()
             ->getResult()
         ;
-
-//        if( [] == $list ){
-//            $list = $this->getQbMenus()
-//                ->andWhere('sheet.locale = :locale')
-//                ->setParameter('locale', $locale)
-//                ->getQuery()
-//                ->getResult()
-//            ;
-//        }
 
         if(isset($list[0])){
             return $list[0];
