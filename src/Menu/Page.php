@@ -5,6 +5,7 @@ namespace App\Menu;
 
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
+use App\Entity\Interfaces\ContactInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -36,11 +37,20 @@ class Page
         /*
          * @TODO simplification config
          */
-        if (isset($config['forms'])) {
-            $menus = $this->getActiveForm($menus, $config['forms'], $locale);
-        }
+//        if (isset($config['forms'])) {
+//            $menus = $this->getActiveForm($menus, $config['forms'], $locale);
+//        }
 
         $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug, $locale);
+        $hasContact = false;
+        if(!is_null(($menu))){
+            $sectionsMenu = $menu->getSections();
+            foreach ($sectionsMenu as $section){
+                if( ContactInterface::CONTACT  == $section->getTemplate()->getCode()){
+                    $hasContact = true;
+                }
+            }
+        }
 
         foreach ($sheet_actives as $menu_active) {
             $sheets[$menu_active->getName()] = $menu_active;
@@ -73,6 +83,7 @@ class Page
             'sheetsSlug' => $sheetsSlug ?? [],
             'menus' => $menus ?? $sheets,
             'menu' => $menu,
+            'hasContact' => $hasContact,
             'locales' => $locales,
             'nav' => $nav,
             'home' => $home,

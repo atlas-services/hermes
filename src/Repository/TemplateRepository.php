@@ -17,6 +17,8 @@ class TemplateRepository extends ServiceEntityRepository
 {
     use BaseRepositoryTrait;
 
+    const TEMPLATES_BASE = ['libre', 'contact', 'folio1'];
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Template::class);
@@ -48,7 +50,7 @@ class TemplateRepository extends ServiceEntityRepository
         $qb = $this->getQbTemplates()
             ->where('s.active = true ')
             ->andWhere('s.code in (:libre) ' )
-            ->setParameter('libre',  ['libre', 'folio1'] )
+            ->setParameter('libre',  self::TEMPLATES_BASE )
             ->orderBy('s.id', 'ASC')
         ;
         return $qb;

@@ -43,6 +43,10 @@ parameters:
         summary: Template libre et affichage du code
         code: libre_code
         name: Libre avec code
+      contact:
+        summary: Template contact
+        code: contact
+        name: Contact
       modale1:
         summary: Présentation modale slide
         code: modale1

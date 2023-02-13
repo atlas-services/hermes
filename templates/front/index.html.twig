@@ -64,6 +64,9 @@
 {#                    {{ include('front/base/hermes/template/libre.html.twig') }}#}
 {#                {% endif %}#}
                 {% include 'front/base/hermes/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %}
+                {% if( constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT') == section.template.code) %}
+{#                    {% include 'front/base/hermes/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}#}
+                {% endif %}
             {% endfor %}
         {% endif %}
     {% endif %}
@@ -71,9 +74,9 @@
     {% if( constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE') == app.request.attributes.get('_route')) %}
         {% include 'front/base/hermes/template/temoignage.html.twig' with {'user': menu.user?? '', 'form': form } %}
     {% endif %}
-    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')== app.request.attributes.get('_route')) %}
-        {% include 'front/base/hermes/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}
-    {% endif %}
+{#    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')== app.request.attributes.get('_route')) %}#}
+{#        {% include 'front/base/hermes/template/contact.html.twig' with {'user': menu.user?? '', 'form': form } %}#}
+{#    {% endif %}#}
     {% if livredor is defined %}
         <div  id="react-data-testimony"  data-testimonys='{{ livredor|json_encode|raw }}' ></div>
     {% endif %}

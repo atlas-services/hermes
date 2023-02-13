@@ -153,9 +153,6 @@ class FrontController extends AbstractController
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-        if ('contact' == $sheet) {
-            return $this->redirectToRoute('contact');
-        }
         if ('livre-d-or' == $sheet) {
             return $this->redirectToRoute('livre-d-or');
         }
@@ -182,9 +179,7 @@ class FrontController extends AbstractController
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-        if ('contact' == $sheet) {
-            return $this->redirectToRoute('contact');
-        }
+
         if ('livre-d-or' == $sheet) {
             return $this->redirectToRoute('livre-d-or');
         }
@@ -196,6 +191,52 @@ class FrontController extends AbstractController
             $home_slug = $array['home']['slug'];
             return $this->redirectToRoute('sheet', [ '_locale'=> $locale, 'sheet'=> $home_sheet, 'slug' => $home_slug]);
         }
+
+        if($array['hasContact']){
+
+            $entity = new Contact();
+            $form = $this->createForm(ContactType::class, $entity,
+//                array(
+//                    'action' => $this->generateUrl('contact'),
+//                    'method' => 'POST',
+//                )
+            );
+
+            // On vérifie qu'elle est de type « POST ».
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                if ($form->isValid()) {
+                    $entityManager = $this->getDoctrine()->getManager();
+                    if (ContactInterface::LIVREDOR_ROUTE == $route) {
+                        $entityManager->persist($form->getData());
+                        $entityManager->flush();
+                    }
+
+                    // On récupère notre objet.
+                    $entity = $form->getData();
+                    $context = array_merge(['contact_form'=>$entity], $array );
+                    $template = 'front/contact/_includes/email.html.twig';
+                    $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $context);
+                    $this->addFlash($return['type'], $return['message']);
+                    $notification = $return['message'];
+                    $this->addFlash('info', $notification);
+
+                    return $this->redirect('/');
+//                return $this->redirectToRoute($route);
+                } else {
+                    $notification = "Votre message n'a pas été envoyé.";
+                    $this->addFlash('error', $notification);
+                }
+                $array['notification'] = $notification;
+             }
+            $array['form'] = $form->createView();
+
+
+            return $this->render('front/index.html.twig', $array);
+
+        }
+
 
         return $this->render('front/index.html.twig', $array);
     }
