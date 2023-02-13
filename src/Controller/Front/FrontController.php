@@ -158,7 +158,7 @@ class FrontController extends AbstractController
         }
         $array = $this->getArray($page,$sheet, $sheet, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
-        if('home' == $sheet or is_null($array['menu']) or $localeNotExists){
+        if(is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
             $home_slug = $array['home']['slug'];
             return $this->redirectToRoute('sheet', [ '_locale'=> $locale, 'sheet'=> $home_sheet, 'slug' => $home_slug]);
@@ -179,14 +179,12 @@ class FrontController extends AbstractController
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-
         if ('livre-d-or' == $sheet) {
             return $this->redirectToRoute('livre-d-or');
         }
         $array = $this->getArray($page,$sheet, $slug, $route, $locale);
-
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
-        if('home' == $sheet or is_null($array['menu']) or $localeNotExists){
+        if(is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
             $home_slug = $array['home']['slug'];
             return $this->redirectToRoute('sheet', [ '_locale'=> $locale, 'sheet'=> $home_sheet, 'slug' => $home_slug]);

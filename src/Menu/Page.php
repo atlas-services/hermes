@@ -177,8 +177,11 @@ class Page
 
         if(is_null($menuSlug)){
             $referenceName = "home";
+            $localeName = "home";
         }else{
             $referenceName = $menuSlug->getReferenceName();
+            $localeName = $this->entityManager->getRepository(Menu::class)
+                ->findOneBy(['locale' => $locale, 'referenceName'=>$referenceName])->getName();
         }
 
         $menusLocale = $this->entityManager->getRepository(Menu::class)
@@ -190,14 +193,13 @@ class Page
                 $menus[$menu->getSheet()->getName()][$menu->getName()] = $menu;
             }
         }
-
         foreach ($menus as $sheet_name => $listmenu) {
             $nav['active'] = '';
             $nav['dropdown'] = '';
             $nav['dropdowntoggle'] = '';
             $nav['border_bottom'] = '';
 
-            if ($referenceName == $sheet_name) {
+            if ($referenceName == $sheet_name or in_array($localeName, array_keys($listmenu))) {
                 $nav['active'] = 'active';
             }
             $navbar[$sheet_name] = $listmenu;
