@@ -35,7 +35,7 @@ class MenuListeType extends AbstractType
                 'required' => true,
                 'label' => 'global.sheet',
                 'query_builder'=>  function (SheetRepository $er) {
-                    return $er->getQbSheetsWithoutContact();
+                    return $er->getQbSheets();
                 },
                 'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3 ']
             ]);

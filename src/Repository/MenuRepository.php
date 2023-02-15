@@ -210,6 +210,7 @@ class MenuRepository extends ServiceEntityRepository
     public function getMenusByLocaleOrderByPosition($locale)
     {
         return $this->createQueryBuilder('m')
+            ->andWhere('m.active = true')
             ->andWhere('m.locale = :locale')
             ->setParameter('locale', $locale)
             ->leftJoin('m.sheet', 'sheet')

@@ -34,7 +34,7 @@ class MenuType extends AbstractNameBaseType
                 'required' => true,
                 'label' => 'global.sheet',
                 'query_builder'=>  function (SheetRepository $er) {
-                    return $er->getQbSheetsWithoutContact();
+                    return $er->getQbSheets();
                 },
                 'choice_label' => function(Sheet $sheet) {
                     return sprintf('%s ( %s )', $sheet->getName(), $sheet->getLocale());

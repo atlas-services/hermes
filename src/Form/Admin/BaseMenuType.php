@@ -31,7 +31,7 @@ class BaseMenuType extends AbstractNameBaseType
                 [
                     'class' => Sheet::class,
                     'query_builder'=>  function (SheetRepository $er) {
-                        return $er->getQbSheetsWithoutContact();
+                        return $er->getQbSheets();
                     },
                     'choice_label' => function(Sheet $sheet) {
                         return sprintf('%s ( %s )', $sheet->getName(), $sheet->getLocale());

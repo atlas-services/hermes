@@ -59,20 +59,10 @@ class SheetRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function getQbSheetsWithoutContact()
-    {
-            $qb = $this->getQbSheets()
-                ->where('s.code != :contact ')
-                ->setParameter(ContactInterface::CONTACT, ContactInterface::CONTACT)
-            ;
-        return $qb;
-    }
-
-
     public function getSheetsWithoutContact()
     {
         try {
-            $list = $this->getQbSheetsWithoutContact()
+            $list = $this->getQbSheets()
                 ->getQuery()
                 ->getResult()
             ;

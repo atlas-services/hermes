@@ -173,7 +173,7 @@ class Page
     {
 
         $menuSlug = $this->entityManager->getRepository(Menu::class)
-            ->findOneBy(['locale' => $locale, 'slug'=>$slug]);
+            ->findOneBy(['active' => true ,'locale' => $locale, 'slug'=>$slug]);
 
         if(is_null($menuSlug)){
             $referenceName = "home";
@@ -181,7 +181,7 @@ class Page
         }else{
             $referenceName = $menuSlug->getReferenceName();
             $localeName = $this->entityManager->getRepository(Menu::class)
-                ->findOneBy(['locale' => $locale, 'referenceName'=>$referenceName])->getName();
+                ->findOneBy(['active' => true, 'locale' => $locale, 'referenceName'=>$referenceName])->getName();
         }
 
         $menusLocale = $this->entityManager->getRepository(Menu::class)
