@@ -1,0 +1,17 @@
+<div class="col-12 col-sm-8 offset-sm-4 row justify-content-end">
+    {% for url in urls %}
+        {%  if(url|length == 1 and url.0.name != url.0.sheetname) %}
+            <div class="col-12 col-sm-2 ">
+                <p>{{ url.0.sheetname}} </p>
+                <a class="text-decoration-none" href="{{ url.0.loc }}" > {{ url.0.name|lower}} </a>
+            </div>
+        {%  else %}
+            <div class="col-12 col-sm-2 ">
+                <p>{{ url.0.sheetname}} </p>
+            {% for menu in url %}
+                <a class="text-decoration-none" href="{{ menu.loc }}" > {{ menu.name|lower}} </a><br/>
+            {% endfor %}
+            </div>
+        {%  endif %}
+    {% endfor %}
+</div>

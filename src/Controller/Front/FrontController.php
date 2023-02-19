@@ -35,6 +35,33 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class FrontController extends AbstractController
 {
+
+
+    /**
+    * @Route(
+    *     "/sitemap.xml",
+    *     name="sitemap",
+    *     methods={"GET|POST"}
+    *     )
+    */
+    public function sitemap(Request $request, Page $page)
+    {
+        $localeRouting = $request->attributes->get('_locale' , 'fr');
+        $locale = $page->getLocale($localeRouting);
+        $host = $request->headers->get('host');
+        $urls = $page->getSitemapByLocale($locale, $host);
+
+        $response = new Response(
+            $this->renderView('front/base/hermes/sitemap/sitemapxml.html.twig', ['urls' => $urls['xml']]),
+            200
+        );
+        $response->headers->set('Content-Type', 'text/xml');
+
+        return $response;
+
+
+    }
+
     /**
 
      * @Route(
@@ -242,29 +269,18 @@ class FrontController extends AbstractController
     private function getArray($page, $sheet, $slug, $route, $locale){
         $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         $array = $page->getActiveMenu($configuration, $sheet, $slug,$route, $locale);
-
         $array['locale'] = $locale;
         $entityManager = $this->getDoctrine()->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
 //        $blocks = $entityManager->getRepository(Block::class)->getBlocks();
 //        $array['blocks'] = $blocks;
 
+        $urls = $page->getSitemapByLocale($locale);
+        $array['urls'] = $urls['html'];
+
         $array[ContactInterface::LIVREDOR] = $livredor;
 
         return $array;
     }
-
-    /*
-    * @Route(
-    *     "/sitemap.xml",
-    *     name="slug",
-    *     methods={"GET|POST"}
-    *     )
-    */
-    public function sitemep(Request $request, CacheInterface $frontCache)
-    {
-
-    }
-
 
 }

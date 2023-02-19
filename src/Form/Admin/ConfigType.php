@@ -234,7 +234,6 @@ class ConfigType extends AbstractBaseType
                 'modale' => 'modale',
                 'footer' => 'footer',
                 'réseaux sociaux' => 'network',
-                'formulaires' => 'forms',
                 'nd' => null,
             ],
             'nav_bar_choices' => [

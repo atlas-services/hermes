@@ -125,13 +125,13 @@ class ConfigController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager('config')->flush();
 
-            if('forms' == $config->getCode()){
-                $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();
-                // Ajouter les formulaires configurés
-
-                $this->updateForm($menus,$config->getValue(),$configInit->getValue());
-
-            }
+//            if('forms' == $config->getCode()){
+//                $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();
+//                // Ajouter les formulaires configurés
+//
+//                $this->updateForm($menus,$config->getValue(),$configInit->getValue());
+//
+//            }
 
             return $this->redirectToRoute('admin_index');
         }
@@ -161,34 +161,34 @@ class ConfigController extends AbstractAdminController
         return $this->redirectToRoute('admin_index');
     }
 
-    public function updateForm($menus,$listform,$listform_init)
-    {
-
-        $forms_init = explode(',', $listform_init);
-        $forms = explode(',', $listform);
-        $forms_add = array_diff($forms,$forms_init);// add
-        $forms_delete =  array_diff($forms_init,$forms);//delete
-
-        foreach ($forms_delete as $form){
-            $sheet_form = $this->getDoctrine()->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
-            if(!is_null($sheet_form)) {
-                $this->getDoctrine()->getManager()->remove($sheet_form);
-            }
-        }
-
-        foreach ($forms_add as $form){
-            if (!array_key_exists(strtoupper($form), $menus)) {
-                $sheet_form = $this->getDoctrine()->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
-                // Création sheet si le formulaire n'existe pas
-                if(is_null($sheet_form)){
-                    $newSheet = new Sheet();
-                    $newSheet->setCode($form);
-                    $newSheet->setName($form);
-                    $newSheet->setSlug($form);
-                    $this->getDoctrine()->getManager()->persist($newSheet);
-                }
-            }
-        }
-        $this->getDoctrine()->getManager()->flush();
-    }
+//    public function updateForm($menus,$listform,$listform_init)
+//    {
+//
+//        $forms_init = explode(',', $listform_init);
+//        $forms = explode(',', $listform);
+//        $forms_add = array_diff($forms,$forms_init);// add
+//        $forms_delete =  array_diff($forms_init,$forms);//delete
+//
+//        foreach ($forms_delete as $form){
+//            $sheet_form = $this->getDoctrine()->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
+//            if(!is_null($sheet_form)) {
+//                $this->getDoctrine()->getManager()->remove($sheet_form);
+//            }
+//        }
+//
+//        foreach ($forms_add as $form){
+//            if (!array_key_exists(strtoupper($form), $menus)) {
+//                $sheet_form = $this->getDoctrine()->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
+//                // Création sheet si le formulaire n'existe pas
+//                if(is_null($sheet_form)){
+//                    $newSheet = new Sheet();
+//                    $newSheet->setCode($form);
+//                    $newSheet->setName($form);
+//                    $newSheet->setSlug($form);
+//                    $this->getDoctrine()->getManager()->persist($newSheet);
+//                }
+//            }
+//        }
+//        $this->getDoctrine()->getManager()->flush();
+//    }
 }

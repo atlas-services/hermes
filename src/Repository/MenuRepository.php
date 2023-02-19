@@ -215,6 +215,7 @@ class MenuRepository extends ServiceEntityRepository
             ->setParameter('locale', $locale)
             ->leftJoin('m.sheet', 'sheet')
             ->orderBy('sheet.position', 'ASC')
+            ->addOrderBy('m.position', 'ASC')
             ->getQuery()
             ->execute();
     }

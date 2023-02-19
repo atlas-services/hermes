@@ -98,25 +98,25 @@ class Page
 
     }
 
-    public function getActiveForm($menus, $listform, $locale)
-    {
-        if (is_null($listform)) {
-            return $menus;
-        }
-        $forms = explode(',', $listform);
-        foreach ($forms as $form) {
-            if (!array_key_exists(strtoupper($form), $menus)) {
-                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'locale' => $locale, 'name' => $form]);
-                if (!is_null($sheet_form)) {
-                    $menus = array_merge($menus, [$form => $sheet_form]);
-                }
-            }
-        }
-
-        $this->entityManager->flush();
-
-        return $menus;
-    }
+//    public function getActiveForm($menus, $listform, $locale)
+//    {
+//        if (is_null($listform)) {
+//            return $menus;
+//        }
+//        $forms = explode(',', $listform);
+//        foreach ($forms as $form) {
+//            if (!array_key_exists(strtoupper($form), $menus)) {
+//                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'locale' => $locale, 'name' => $form]);
+//                if (!is_null($sheet_form)) {
+//                    $menus = array_merge($menus, [$form => $sheet_form]);
+//                }
+//            }
+//        }
+//
+//        $this->entityManager->flush();
+//
+//        return $menus;
+//    }
 
     public function getActiveConfig($configuration)
     {
@@ -171,7 +171,8 @@ class Page
 
     public function getNavBarByLocaleAndSlug($locale, $slug)
     {
-
+        $menus = [];
+        $navbar = [];
         $menuSlug = $this->entityManager->getRepository(Menu::class)
             ->findOneBy(['active' => true ,'locale' => $locale, 'slug'=>$slug]);
 
@@ -219,6 +220,49 @@ class Page
         return $navbar;
     }
 
+
+
+    public function getSitemapByLocale($locale, $host="")
+    {
+        $urls = [];
+        $menusLocale = $this->entityManager->getRepository(Menu::class)
+            ->getMenusByLocaleOrderByPosition($locale)
+        ;
+        foreach ($menusLocale as $menu){
+            $updated = $menu->getUpdatedAt();
+            if(is_null($updated)){
+                $updated = (new \DateTime("now"))->format('Y-m-d');
+            }else{
+                $updated = $menu->getUpdatedAt()->format('Y-m-d');
+            }
+            if($locale == $menu->getSheet()->getLocale()){
+                $name = $menu->getName();
+                $sheet_name = $menu->getSheet()->getName();
+                if($menu->getSheet()->getName() == $menu->getName()){
+                    $name = $menu->getSheet()->getName();
+                }
+                $urls_xml[] = [
+                    'name' => $name,
+                    'sheetname' => $sheet_name,
+                    'loc' => $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug(),
+                    'lastmod' => $updated,
+                    'changefreq' => 'weekly',
+                    'priority' => '0.5',
+                ];
+                $urls_html[$menu->getSheet()->getSlug()][] = [
+                    'name' => $name,
+                    'sheetname' => $sheet_name,
+                    'loc' => $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug(),
+                    'lastmod' => $updated,
+                    'changefreq' => 'weekly',
+                    'priority' => '0.5',
+                ];
+            }
+        }
+        $urls['xml'] = $urls_xml;
+        $urls['html'] = $urls_html;
+        return $urls;
+    }
 
     public function getCacheMenu($sheet, $slug)
     {

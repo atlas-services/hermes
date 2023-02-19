@@ -26,6 +26,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *      message="sheet.exists"
  *  )
  * @ORM\Table(name="sheet")
+ * @ORM\HasLifecycleCallbacks
  * Defines the properties of the Sheet entity to represent the blog menus.
  *
  * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class

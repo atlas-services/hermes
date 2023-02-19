@@ -2,6 +2,10 @@
 namespace App\Command;
 
 use App\Entity\Config\Config;
+use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Post;
+use App\Entity\Hermes\Section;
+use App\Entity\Hermes\Sheet;
 use App\Entity\Hermes\Template;
 use App\Entity\Hermes\User;
 use App\Service\Onepage;
@@ -19,6 +23,7 @@ class HermesDbCommand extends Command
 
     protected $configurations;
     protected $emConfig;
+    protected $locale;
     protected $onepage;
 
     public function __construct(EntityManagerInterface $em, ContainerInterface $container, Onepage $onepage)
@@ -27,6 +32,7 @@ class HermesDbCommand extends Command
         $this->emConfig = $container->get('doctrine')->getManager('config');
         $this->onepage = $onepage;
         $this->configurations = $container->getParameter('init');
+        $this->locale = $container->getParameter('app.default_locale');
 
         parent::__construct();
     }
@@ -169,5 +175,41 @@ class HermesDbCommand extends Command
         }
         $this->em->flush();
         $this->emConfig->flush();
+        $this->initPage('libre');
+    }
+
+    private function initPage($code){
+        $sheet = new Sheet();
+        $sheet->setLocale($this->locale);
+        $sheet->setName("Accueil");
+        $sheet->setReferenceName("Accueil");
+        $sheet->setSlug("Accueil");
+        $this->em->persist($sheet);
+        $this->em->flush();
+        $menu = new Menu();
+        $menu->setLocale($this->locale);
+        $menu->setSheet($sheet);
+        $menu->setName("Accueil");
+        $menu->setReferenceName("Accueil");
+        $menu->setSlug("Accueil");
+        $this->em->persist($menu);
+        $this->em->flush();
+        $template = $this->em
+            ->getRepository(Template::class)
+            ->findOneBy(['code' => $code]);
+        $section = new Section();
+        $section->setMenu($menu);
+        $section->setTemplate($template);
+        $section->setName("Accueil");
+        $this->em->persist($section);
+        $this->em->flush();
+        $post= new Post();
+        $post->setName("Accueil");
+        $post->setSection($section);
+        $post->setContent("<div class='col-12 col-sm-9 mx-auto my-5 py-5 h-100 card border-2 border-dark rounded'><p class='col-12 my-5 pY-5 h3 text-center'>Bienvenue sur la page du site en construction</p> </div>");
+        $this->em->persist($post);
+
+        $this->em->flush();
+
     }
 }

@@ -419,7 +419,7 @@ parameters:
         footer_about:
           summary: texte du footer about
           value: ~
-      forms:
-        forms:
-          summary: Formulaires
-          value: contact
+#      forms:
+#        forms:
+#          summary: Formulaires
+#          value: contact

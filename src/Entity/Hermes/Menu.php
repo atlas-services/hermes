@@ -28,6 +28,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *      message="menu.exists"
  *  )
  * @ORM\Table(name="menu")
+ * @ORM\HasLifecycleCallbacks
  *
  * Defines the properties of the Tag entity to represent the menu.
  *
