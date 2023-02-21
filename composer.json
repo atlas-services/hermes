@@ -14,7 +14,7 @@
         "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "composer/package-versions-deprecated": "1.x-dev",
+        "composer/package-versions-deprecated": "1.11.99",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "2.6.x-dev",
         "doctrine/doctrine-migrations-bundle": "^3.0@dev",

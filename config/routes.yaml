@@ -34,16 +34,16 @@ hermes_front:
   resource: '../src/Controller/Front'
   type:     annotation
 
-#homepage_base:
-#  path: /
-#  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-#  defaults:
-#    path: /fr/home
-#    permanent: true
-#
-#homepage:
-#  path: /{text}
-#  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-#  defaults:
-#    path: /fr/home
-#    permanent: true
+homepage_base:
+  path: /
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /fr/home
+    permanent: true
+
+homepage:
+  path: /{text}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /fr/home
+    permanent: true
