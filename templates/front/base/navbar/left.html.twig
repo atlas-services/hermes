@@ -4,7 +4,7 @@
             {% set affiche_logo = false %}
                   {% if logo.filename is defined %}
                     {% if logo.filename is not null %}
-                        <a class="navbar-brand js-scroll-trigger " href="{{ path('sheet') }}">
+                        <a class="navbar-brand js-scroll-trigger " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
                             <img style="max-width: 180px;" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="app_logo">
                         </a>
                     {% else %}
@@ -27,6 +27,7 @@
             </div>
             <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
                 <ul class="nav navbar-nav " style="background-color: {{ nav_menu_bgcolor }}">
+                    {% include '/front/base/navbar/switcher.html.twig'  %}
                     {% for sheet_name, listmenu in nav %}
                         {% set sheet_slug = sheetsSlug[sheet_name] %}
                         {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
@@ -38,23 +39,23 @@
                             {% set active = 'active' %}
                         {% endif %}
                         {% if('active' == active) %}
-                            <li class="nav-item {{ active }} {{ dropdown }} "  style="background-color: {{ nav_bgcolor_active }} "  >
+                            <li class="col-12 nav-item {{ active }} {{ dropdown }} "  style="background-color: {{ nav_bgcolor_active }} "  >
                         {% else %}
-                            <li class="nav-item {{ active }} {{ dropdown }} " >
+                            <li class="col-12 nav-item {{ active }} {{ dropdown }} " >
                         {% endif %}
                             <a style="color: {{ nav_link_color }}" id="{{ sheet_name }}" class="nav-link js-scroll {{ dropdowntoggle }} " role="button"  data-bs-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
                                href={{ href }}>{{ sheet_name }}
                             </a>
                             {% if (listmenu.name is not defined and (listmenu|keys|length > 1 or sheet_name|lower != listmenu|keys.0|lower)) %}
-                                <ul class="dropdown-menu"  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_link_color }} " >
+                                <ul class="dropdown-menu ms-2"  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_link_color }} " >
                                     {% if listmenu|length > 1 %}
                                         {% set border_bottom = "border-bottom" %}
                                     {% endif %}
     {#                                {% for menu_name, menu in listmenu|sort((a, b) => a.position <=> b.position) %}#}
                                     {% for menu_name, menu in listmenu %}
                                         {% if menu.slug is defined  %}
-                                            <li class="nav-item  mb-2 mr-2 {{ border_bottom }}" >
-                                                <a style="color: {{ nav_link_color }}"  class="page-scroll pl-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
+                                            <li class="col-12 nav-item  my-1 mr-2 {{ border_bottom }}" >
+                                                <a style="color: {{ nav_link_color }}"  class="page-scroll ps-2 py-1"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
                                             </li>
                                         {% endif %}
                                     {% endfor %}
