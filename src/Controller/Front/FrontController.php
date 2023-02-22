@@ -70,8 +70,9 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function search(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, TemoignageRepository $temoignageRepository, RouterInterface $router, Page $page)
+    public function search(Request $request, PostRepository $postRepository, TemoignageRepository $temoignageRepository, RouterInterface $router, Page $page)
     {
+        $locale = $request->attributes->get('_locale' , 'fr');
         $referer = $request->headers->get('referer');
         $refererPathInfo = Request::create($referer)->getPathInfo();
         $refererPathInfo = str_replace($request->getScriptName(), '', $refererPathInfo);
@@ -79,7 +80,7 @@ class FrontController extends AbstractController
         $configuration = $this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         if(ContactInterface::CONTACT == $routeInfos['_route'] || ContactInterface::LIVREDOR_ROUTE == $routeInfos['_route']){
             $route = $routeInfos['_route'];
-            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route);
+            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
         }else{
             $sheet = $routeInfos['sheet'];
             $slug = $routeInfos['slug'];
@@ -91,6 +92,8 @@ class FrontController extends AbstractController
             'posts' => array_merge($postRepository->findAllWithSearch($q),$temoignageRepository->findAllWithSearch($q) ),
         ];
 
+        $urls = $page->getSitemapByLocale($locale);
+        $array['urls'] = $urls['html'];
         $array = array_merge($array, $posts);
 
         return $this->render('front/search_result.html.twig', $array);

@@ -4,7 +4,6 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
@@ -18,7 +17,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('nb_col', [$this, 'nbCol']),
             new TwigFilter('change_px', [$this, 'changePx']),
             new TwigFilter('col_nb_char', [$this, 'colNbChar']),
-            new TwigFilter('get_class', 'getClass'),
+            new TwigFilter('get_class',  [$this, 'getClass']),
         ];
     }
 
