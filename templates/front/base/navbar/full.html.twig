@@ -4,7 +4,7 @@
         <span class="menu-icon__line menu-icon__line-right" style=" background-color: {{ nav_header_color ?? 'transparent' }}"></span>
 </div>
 
-<div class="nav col-lg-{{ nav_container_width }} col-12 mx-auto px-0" style=" background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}">
+<div class="nav-active nav col-lg-{{ nav_container_width }} col-12 mx-auto px-0" style=" background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}">
     <div class="nav__content">
         <ul class="nav__list" >
             {% for sheet_name, listmenu in nav %}
@@ -28,11 +28,11 @@
                    href={{ href }}>{{ sheet_name }}
                 </a>
                 {% if (listmenu.name is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
-                    <ul class="dropdown-menu nav__list "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_link_color }};border-color:{{ nav_link_color }};  " >
+                    <ul class="col-12 dropdown-menu nav__list  "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_link_color }};border-color:{{ nav_link_color }};  " >
                              {% for menu_name, menu in listmenu %}
                             {% if menu.slug is defined  %}
-                                <li class="nav__list-item  mb-2 mr-2 {{ nav_link_border_bottom }}" >
-                                    <a style="color: {{ nav_link_color }}"  class="page-scroll pl-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
+                                <li class=" mb-2 me-2 {{ nav_link_border_bottom }}" >
+                                    <a style="color: {{ nav_link_color }}"  class="text-decoration-none page-scroll ps-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -40,7 +40,6 @@
                 {% endif %}
                 </li>
             {% endfor %}
-            {% include '/front/base/navbar/switcher.html.twig'  %}
          </ul>
     </div>
 </div>

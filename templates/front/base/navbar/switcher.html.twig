@@ -6,14 +6,14 @@
     </a>
     <ul class=" dropdown-menu dropdown-menu-right ms-1 nav__list" aria-labelledby="dropdown-language">
      {% for item in locales %}
-         <li class="mx-auto nav__list-item"><a class="dropdown-item" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
+         <li class="mx-auto nav__list"><a class="dropdown-item" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
      {% endfor  %}
     </ul>
 </li>
 
-<ul class="d-block d-sm-none list-group list-group-horizontal" style="background-color: {{ nav_bgcolor_active }}; " >
+<ul class="d-block d-sm-none nav__list list-group list-group-horizontal" style="background-color: {{ nav_bgcolor_active }}; " >
     {% for item in locales %}
-        <li><a class="list-group-item" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
+        <li><a class="list-group-item nav__list" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
    {% endfor  %}
 </ul>
 {%  endif  %}
