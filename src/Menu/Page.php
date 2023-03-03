@@ -224,7 +224,7 @@ class Page
 
     public function getSitemapByLocale($locale, $host="")
     {
-        $urls = [];
+        $urls = $urls_xml = $urls_html = [];
         $menusLocale = $this->entityManager->getRepository(Menu::class)
             ->getMenusByLocaleOrderByPosition($locale)
         ;
