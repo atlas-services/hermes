@@ -52,15 +52,15 @@ This CMS is released under the MIT license. See the included
 Contribuer - FR
 ---------------
 
-Contributeurs bienvenus! Hermes est un projet open source. Si vous souhaitez contribuer, n'hésitez pas à proposer une PR! Vous pouvez lire le fichier [CONTRIBUTING](/CONTRIBUTING.md) qui vous indiquera quelques directions de contributions .
+Contributeurs bienvenus! Hermes est un logiciel libre. Si vous souhaitez contribuer, n'hésitez pas à proposer une PR! Vous pouvez lire le fichier [CONTRIBUTING](/CONTRIBUTING.md) qui vous indiquera quelques directions de contributions .
 
 Contribute - EN
 ---------------
-We love contributors! Hermes is an open source project. If you'd like to contribute, feel free to propose a PR! You
+We love contributors! Hermes is an free software. If you'd like to contribute, feel free to propose a PR! You
 can follow the [CONTRIBUTING](/CONTRIBUTING.md) file which will explain you some needs about contributing.
 
 
-Install 
+Install : Plateform Linux
 ====================================
 
 Get the Repository 
@@ -78,13 +78,15 @@ Get the Repository
     
 Get php extensions and the vendors and post-install the project
 
-    sudo apt install php8.0-curl
-    sudo apt install php8.0-gd
-    sudo apt install php8.0-dom
-    sudo apt install php8.0-zip
-    sudo apt install php8.0-sqlite3
-    sudo apt install php8.0-mbstring
-    sudo apt install php8.0-intl
+    sudo apt install phpversion-curl
+    sudo apt install phpversion-gd
+    sudo apt install phpversion-dom
+    sudo apt install phpversion-zip
+    sudo apt install phpversion-sqlite3
+    sudo apt install phpversion-mbstring
+    sudo apt install phpversion-intl
+
+    where phpversion = php8.0
 
     composer install
      
@@ -111,3 +113,10 @@ Admin interface
     Admin User :
     Login : set up value in in .env (APP_HERMES_EMAIL_ADMIN="contact@hermes-cms.org")
     Password : mycmsishermes
+
+    Install : Plateform != Linux
+====================================
+
+Hermes est un CMS qui devrait fonctionner sur toutes les plateformes.
+Néanmois, il n'existe pas de documentation pour les autres plateformes que linux.
+Contributeurs bienvenus : contact@hermes-cms.org

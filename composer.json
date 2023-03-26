@@ -21,7 +21,7 @@
         "doctrine/migrations": "3.*",
         "doctrine/orm": "2.*",
         "friendsofsymfony/ckeditor-bundle": "2.*",
-        "helios-ag/fm-elfinder-bundle": "10.*",
+        "helios-ag/fm-elfinder-bundle": "12.*",
         "liip/imagine-bundle": "2.*",
         "phpdocumentor/reflection-docblock": "5.*",
         "select2/select2": "4.*",
