@@ -7,6 +7,8 @@
 /public/img/hermes/images/base/
 /public/img/hermes/images/carre/
 /public/img/hermes/images/1620x1080/
+/public/img/hermes
+!/public/img/hermes/crmes
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
