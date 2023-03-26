@@ -32,6 +32,8 @@ const jQuery = $;
             if (type === 'html') {
                 var copyHTML = document.getElementById(target).innerHTML;
                 copyHTML = copyHTML.replace('class="d-none ', 'class="');
+                // change image "src local" to "src hermes-cms.org"
+                copyHTML = copyHTML.replaceAll('src="/data/uploads/content/Crms/Templates', 'src="http://hermes-cms.org/data/uploads/content/Crms/Templates');
                 copy(copyHTML); // innerHtml
                 text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
