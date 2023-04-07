@@ -2,7 +2,7 @@
 #    path: /
 #    controller: App\Controller\Front\FrontController::index
 
-sitemap_rediret:
+sitemap_redirect:
   path: /sitemap.xml
   controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
   defaults:
