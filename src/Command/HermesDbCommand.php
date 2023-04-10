@@ -24,6 +24,8 @@ class HermesDbCommand extends Command
     protected $configurations;
     protected $emConfig;
     protected $locale;
+
+    protected $app_name;
     protected $onepage;
 
     public function __construct(EntityManagerInterface $em, ContainerInterface $container, Onepage $onepage)
@@ -33,6 +35,7 @@ class HermesDbCommand extends Command
         $this->onepage = $onepage;
         $this->configurations = $container->getParameter('init');
         $this->locale = $container->getParameter('app.default_locale');
+        $this->app_name = $container->getParameter('app.name');
 
         parent::__construct();
     }
@@ -209,7 +212,7 @@ class HermesDbCommand extends Command
             $post= new Post();
             $post->setName("Accueil");
             $post->setSection($section);
-            $post->setContent("<div class='col-12 col-sm-9 mx-auto my-5 py-5 h-100 card border-2 border-dark rounded'><p class='col-12 my-5 pY-5 h3 text-center'>Bienvenue sur la page du site en construction</p> </div>");
+            $post->setContent("<div class='col-12 col-sm-9 mx-auto my-5 py-5 h-100 card border-2 border-dark rounded'><p class='col-12 my-5 pY-5 h3 text-center'>Bienvenue sur la page du site en construction de <b> $this->app_name </b> </p> </div>");
             $this->em->persist($post);
             $this->em->flush();
         }

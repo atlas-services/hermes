@@ -6,6 +6,7 @@ parameters:
   version: v1.0.0
   app.locales: [fr, en] #'%env(APP_LOCALES)%'
   app.default_locale: '%env(APP_DEFAULT_LOCALE)%'
+  app.name: '%env(APP_NAME)%'
   hermes_pages: '%env(APP_PAGES)%'
   hermes_list_templates: '%env(APP_LIST_TEMPLATES)%'
   hermes_list_type_image: '%env(APP_LIST_TYPE_IMAGE)%'
