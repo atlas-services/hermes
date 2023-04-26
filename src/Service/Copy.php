@@ -112,10 +112,13 @@ class Copy
                 ->getRepository(Template::class)
                 ->findOneBy(['code'=> $template::TEMPLATE_LISTE]);
 
+            $position = $this->em->getRepository(Menu::class)->getMaxPosition();
+
             $menu->setName('menu'.$sheet->getName());
             $menu->setCode($sheet->getName());
             $menu->setSlug($sheet->getName());
             $menu->setSheet($sheet);
+            $menu->setPosition($position);
             $section->setName('section'.$sheet->getName());
             $section->setMenu($menu);
             $section->setTemplate($template);

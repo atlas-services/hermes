@@ -31,6 +31,7 @@ class SheetType extends AbstractNameBaseType
             $builder
                 ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
                     'required' => false,
+                    'empty_data' => (string)$options['position'],
                     'label' => 'global.position',
                 ]);
         }
