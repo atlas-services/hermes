@@ -13,7 +13,7 @@ trait ValueTrait
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length(max=150)
+     * @Assert\Length(max=250)
      */
     protected $value;
 
