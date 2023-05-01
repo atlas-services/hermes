@@ -92,6 +92,18 @@ class ConfigType extends AbstractBaseType
                 'one_page_3' => 'one_page_3',
                 'front' => 'front',
             ];
+            $options_bg_submit = [
+                'btn-outline-primary' => 'btn-outline-primary',
+                'btn-outline-secondary' => 'btn-outline-secondary',
+                'btn-outline-success' => 'btn-outline-success',
+                'btn-outline-danger' => 'btn-outline-danger',
+                'btn-outline-warning' => 'btn-outline-warning',
+                'btn-outline-info' => 'btn-outline-info',
+                'btn-outline-light' => 'btn-outline-light',
+                'btn-outline-dark' => 'btn-outline-dark',
+                'btn-outline-link' => 'btn-outline-link',
+
+            ];
             switch ($code) {
                 // accueil
                 case 'accueil':
@@ -157,6 +169,12 @@ class ConfigType extends AbstractBaseType
                     $choice = true;
                     $options = $options_offset;
                     break;
+                // contact_bgcolor_btn
+                case 'contact_bgcolor_btn':
+                    $choice = true;
+                    $options = $options_bg_submit;
+                    break;
+                    
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [

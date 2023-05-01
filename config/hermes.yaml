@@ -305,6 +305,9 @@ parameters:
         contact_color:
           summary: Couleur des textes la page contact
           value: '#ffffff'
+        contact_bgcolor_btn:
+          summary: Couleur de fond du bouton de la page contact
+          value: 'btn-outline-white'
         contact_width:
           summary: Largeur de la page contact (max = 12)
           value: 12
