@@ -2,12 +2,7 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/public/bundles/
-/public/data/
-/public/img/hermes/images/base/
-/public/img/hermes/images/carre/
-/public/img/hermes/images/1620x1080/
-/public/img/hermes
+/public/*
 !/public/img/hermes/crms
 !/public/img/hermes/images
 /var/
