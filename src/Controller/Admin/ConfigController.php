@@ -124,16 +124,12 @@ class ConfigController extends AbstractAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager('config')->flush();
-
-//            if('forms' == $config->getCode()){
-//                $menus = $this->getDoctrine()->getManager()->getRepository(Menu::class)->getMenus();
-//                // Ajouter les formulaires configurés
-//
-//                $this->updateForm($menus,$config->getValue(),$configInit->getValue());
-//
-//            }
-
-            return $this->redirectToRoute('admin_index');
+            try {
+                $type = $request->attributes->get('config')->getType();
+                return $this->redirectToRoute('config_index', ['type' => $type ]);
+            } catch (\Exception $e) {                
+                return $this->redirectToRoute('admin_index');
+            }
         }
         $array = [
             'config' => $config,

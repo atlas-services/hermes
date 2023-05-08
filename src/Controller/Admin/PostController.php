@@ -208,7 +208,7 @@ class PostController extends AbstractAdminController
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
             }
             if ($form->get('save')->isClicked()) {
-                return $this->redirectToRoute('section_index');
+                return $this->redirectToRoute('section_index', ['menu' => $menu->getId()]);
             }
 
             return $this->redirectToRoute('post_index');

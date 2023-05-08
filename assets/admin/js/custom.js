@@ -27,6 +27,29 @@ function hiddeNew(element, uri) {
     }
 }
 
+// selectionner la page dans le menu "sections"
+var select = document.querySelector('#select_page');
+
+select.addEventListener('click', function() {
+    var selected = select.options[select.selectedIndex].value;
+    var options = select.getElementsByTagName('option');
+    var tbody = document.getElementById('tbody');
+    var cells = tbody.getElementsByTagName('tr');
+
+    if(options.length < 3 && 'All' == selected ){
+        window.location.href = "/fr/admin/section/";
+    } 
+    for (var k = 0; k < cells.length; ++k) {
+        if ( 'All' == selected || cells[k].classList.contains(selected)) {
+            cells[k].classList.remove("d-none");
+            cells[k].setAttribute("selected", true);
+        }else{
+            cells[k].classList.add("d-none");
+        }
+    }
+
+});
+
 (function ($) {
     "use strict"; // Start of use strict
 
@@ -120,6 +143,7 @@ function hiddeNew(element, uri) {
         });
     }
 
+    /*
 
     // selectionner la page dans le menu "sections"
     var select_page = $("#select_page");
@@ -133,5 +157,6 @@ function hiddeNew(element, uri) {
             }
         });
     });
+    */
 
 })(jQuery); // End of use strict

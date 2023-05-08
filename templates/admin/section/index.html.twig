@@ -5,10 +5,12 @@
 {% block content %}
     <div class="row mb-2">
     <h1 class="text-secondary">{{ 'section.list'|trans() }}</h1>
-        <select class="mt-4 select2 bg-primary" id="select_page" >
+        <select class="my-4 py-2 h-bg-success text-white" id="select_page" >
             <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
         {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
-            <option value="{{ menu.id }}">{{ menu.sheet.locale }} - {{ menu.name }}</option>
+
+        {% set selected = "" %}
+            <option {{ (menu.id == id) ? 'selected' : '' }} value="{{ menu.id }}">{{ menu.sheet.locale }} - {{ menu.name }}</option>
         {% endfor %}
         </select>
     </div>
@@ -26,7 +28,7 @@
                 <th>{{ 'global.actions'|trans() }}</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
             <tr class="align-middle {{ section.menu.id }}">
                 <td>

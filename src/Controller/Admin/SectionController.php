@@ -25,22 +25,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class SectionController extends AbstractAdminController
 {
     /**
-     * @Route("/section/", name="section_index", methods={"GET"})
+     * @Route("/section/{menu}", name="section_index", defaults={"menu": "All"}, methods={"GET"})
      */
-    public function index(): Response
+    public function index($menu): Response
     {
         $sections = $this->getDoctrine()
-            ->getRepository(Section::class)
-            ->findAll()
+        ->getRepository(Section::class)
+        ->findAll()
         ;
+        if('All' === $menu){
         $menus = $this->getDoctrine()
             ->getRepository(Menu::class)
             ->findAll()
         ;
+        }else{
+            $sections = $this->getDoctrine()
+            ->getRepository(Section::class)
+            ->findBy(['menu' => $menu])
+            ;
+            $menus = $this->getDoctrine()
+                ->getRepository(Menu::class)
+                ->findBy(['id'=> $menu])
+            ;
+        }
 
         $array = [
             'sections' => $sections,
             'menus' => $menus,
+            'id' => $menu,
         ];
         $array = $this->mergeActiveConfig($array);
 
