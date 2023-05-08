@@ -37,7 +37,8 @@ select.addEventListener('click', function() {
     var cells = tbody.getElementsByTagName('tr');
 
     if(options.length < 3 && 'All' == selected ){
-        window.location.href = "/fr/admin/section/";
+        var name = select.getAttribute('name');
+        window.location.href = "/fr/admin/"+ name + "/";
     } 
     for (var k = 0; k < cells.length; ++k) {
         if ( 'All' == selected || cells[k].classList.contains(selected)) {

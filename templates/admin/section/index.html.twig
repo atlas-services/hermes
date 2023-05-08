@@ -5,11 +5,9 @@
 {% block content %}
     <div class="row mb-2">
     <h1 class="text-secondary">{{ 'section.list'|trans() }}</h1>
-        <select class="my-4 py-2 h-bg-success text-white" id="select_page" >
+        <select class="my-4 py-2 h-bg-success text-white" id="select_page" name="section">
             <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
         {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
-
-        {% set selected = "" %}
             <option {{ (menu.id == id) ? 'selected' : '' }} value="{{ menu.id }}">{{ menu.sheet.locale }} - {{ menu.name }}</option>
         {% endfor %}
         </select>

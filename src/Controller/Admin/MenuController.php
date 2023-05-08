@@ -29,16 +29,30 @@ use Symfony\Contracts\Cache\CacheInterface;
 class MenuController extends AbstractAdminController
 {
     /**
-     * @Route("/menu/", name="menu_index", methods={"GET"})
+     * @Route("/menu/{sheet}", name="menu_index", defaults={"sheet": "All"},  methods={"GET"})
      */
-    public function index(): Response
+    public function index($sheet): Response
     {
         $menus = $this->getDoctrine()
-            ->getRepository(Menu::class)
+        ->getRepository(Menu::class)
+        ->findAll();
+        if('All' === $sheet){
+        $sheets = $this->getDoctrine()
+            ->getRepository(Sheet::class)
             ->findAll();
+        }else{
+            $menus = $this->getDoctrine()
+            ->getRepository(Menu::class)
+            ->findBy(['sheet' => $sheet]);
+            $sheets = $this->getDoctrine()
+            ->getRepository(Sheet::class)
+            ->findBy(['id' => $sheet]);
+        }
 
         $array = [
             'menus' => $menus,
+            'sheets' => $sheets,
+            'id' => $sheet
         ];
         $array = $this->mergeActiveConfig($array);
         return $this->render('admin/menu/index.html.twig', $array);
@@ -291,7 +305,7 @@ class MenuController extends AbstractAdminController
                 return $this->redirectToRoute('menu_section_post_new_sheet', ['sheet'=> $menu->getSheet()->getSlug()]);
             }
             if ($form->get('save')->isClicked()) {
-                return $this->redirectToRoute('menu_index');
+                return $this->redirectToRoute('menu_index', ['sheet' => $menu->getSheet()->getId()]);
             }
             return $this->redirectToRoute('menu_index');
         }

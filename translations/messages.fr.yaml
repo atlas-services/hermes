@@ -243,6 +243,8 @@ sheet:
   posts: Contenu
   image: Image de fond de la page (Taille maximale < 2 Mo)
   images: Images de la page (Taille maximale < 2 Mo)
+  all: All
+  all_text: Tout les menus
 
 menu:
 #  update_next: Ajouter un contenu avec le même affichage
@@ -260,7 +262,7 @@ menu:
   show: Menu
   add_section: Ajouter une section
   all: All
-  all_text: Tout les sous-menu
+  all_text: Tout les sous-menus
   label: Sous menus
   sheet: Page du menu
   sections: Sections du menu
