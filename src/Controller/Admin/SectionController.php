@@ -184,7 +184,7 @@ class SectionController extends AbstractAdminController
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
             }
             if ($form->get('save')->isClicked()) {
-                return $this->redirectToRoute('section_index');
+                return $this->redirectToRoute('section_index', ['menu' => $section->getMenu()->getId()]);
             }
             return $this->redirectToRoute('section_index');
         }
