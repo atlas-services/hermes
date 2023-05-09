@@ -14,6 +14,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('max_post_length', [$this, 'maxPostLength']),
             new TwigFilter('space_length', [$this, 'spaceLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
+            new TwigFilter('col_imgs', [$this, 'colImgs']),
             new TwigFilter('nb_col', [$this, 'nbCol']),
             new TwigFilter('change_px', [$this, 'changePx']),
             new TwigFilter('col_nb_char', [$this, 'colNbChar']),
@@ -176,4 +177,35 @@ class AppExtension extends AbstractExtension
 
         return $value;
     }
+
+    public function colImgs($section = null)
+    {
+        if(!is_null($section)){
+            $posts = $section->getPosts();
+            $nb_col = $section->getTemplateNbCol() ? $section->getTemplateNbCol() : 3   ;
+            $total = count($posts);
+            $nb_imgs_col = $total/$nb_col;
+            $nb_imgs_reste = $total%$nb_col;
+            $round = round($nb_imgs_col);
+ 
+
+            $pictures = array_chunk($posts->toArray(), $round);
+
+            if(isset($pictures[$nb_col])){
+                $lasts = array_pop($pictures);
+                foreach($lasts as $key => $picture){
+                    $pictures[$key][] = $picture;
+                }
+            }
+
+            return $pictures;
+
+        }
+        return $section;
+
+        $collg = 12;
+
+        return $collg;
+    }
+
 }

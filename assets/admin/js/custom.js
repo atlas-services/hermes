@@ -30,26 +30,29 @@ function hiddeNew(element, uri) {
 // selectionner la page dans le menu "sections"
 var select = document.querySelector('#select_page');
 
-select.addEventListener('click', function() {
-    var selected = select.options[select.selectedIndex].value;
-    var options = select.getElementsByTagName('option');
-    var tbody = document.getElementById('tbody');
-    var cells = tbody.getElementsByTagName('tr');
+if(null !=select){
+    select.addEventListener('click', function() {
+        var selected = select.options[select.selectedIndex].value;
+        var options = select.getElementsByTagName('option');
+        var tbody = document.getElementById('tbody');
+        var cells = tbody.getElementsByTagName('tr');
+    
+        if(options.length < 3 && 'All' == selected ){
+            var name = select.getAttribute('name');
+            window.location.href = "/fr/admin/"+ name + "/";
+        } 
+        for (var k = 0; k < cells.length; ++k) {
+            if ( 'All' == selected || cells[k].classList.contains(selected)) {
+                cells[k].classList.remove("d-none");
+                cells[k].setAttribute("selected", true);
+            }else{
+                cells[k].classList.add("d-none");
+            }
+        }    
+    });
+}
 
-    if(options.length < 3 && 'All' == selected ){
-        var name = select.getAttribute('name');
-        window.location.href = "/fr/admin/"+ name + "/";
-    } 
-    for (var k = 0; k < cells.length; ++k) {
-        if ( 'All' == selected || cells[k].classList.contains(selected)) {
-            cells[k].classList.remove("d-none");
-            cells[k].setAttribute("selected", true);
-        }else{
-            cells[k].classList.add("d-none");
-        }
-    }
 
-});
 
 (function ($) {
     "use strict"; // Start of use strict
