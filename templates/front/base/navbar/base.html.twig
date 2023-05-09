@@ -22,9 +22,15 @@
                 {% if logo.filename is defined %}
                     {% if logo.filename is not null %}
                         {% if affiche_logo_top == true %}
-                        <a class="navbar-brand js-scroll-trigger mt-3 ml-0 mr-0 d-none d-sm-block " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
-                            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 mx-auto app_logo">
-                        </a>
+                            {% if home.sheet == home.slug %}
+                                <a class="navbar-brand js-scroll-trigger mt-3 ml-0 mr-0 d-none d-sm-block " href="{{ path('slug', {'slug': home.slug }) }}">
+                                    <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 mx-auto app_logo">
+                                </a>
+                                {% else %}
+                                <a class="navbar-brand js-scroll-trigger mt-3 ml-0 mr-0 d-none d-sm-block " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
+                                    <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 mx-auto app_logo">
+                                </a>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         {% if affiche_img_hermes == true %}
@@ -56,9 +62,15 @@
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}
                 {% if affiche_logo_top == true %}
-                    <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
-                        <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
-                    </a>
+                        {% if home.sheet == home.slug %}
+                            <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('slug', {'slug': home.slug}) }}">
+                                <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
+                            </a>
+                        {% else %}
+                            <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
+                                <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
+                            </a>
+                        {% endif %}
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -66,9 +78,15 @@
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
+                        {% if home.sheet == home.slug %}
+                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('slug', {'slug': home.slug}) }}">
+                                <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                            </a>
+                        {% else %}
                             <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
                                 <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                             </a>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endif %}
@@ -76,7 +94,7 @@
                 <hr class="d-block  d-sm-none w-100 bg-white">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}
-                    {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
+                    {% set href = listmenu.config.href ?? path('slug', {'slug': sheet_slug }) %}
                     {% set active = listmenu.config.active ?? '' %}
                     {% set dropdown = listmenu.config.dropdown ?? '' %}
                     {% set dropdowntoggle = listmenu.config.dropdowntoggle ?? '' %}
@@ -104,7 +122,11 @@
                                 {% for menu_name, menu in listmenu %}
                                     {% if menu.slug is defined  %}
                                         <li class="nav-item  my-2 mr-2 {{ nav_link_border_bottom }}" >
+                                            {% if sheet_slug == menu.slug %}
+                                                <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 pb-2 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu.name }}</a>
+                                            {% else %}
                                             <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 pb-2 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
+                                            {% endif %}
                                         </li>
                                     {% endif %}
                                 {% endfor %}

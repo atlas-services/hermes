@@ -58,10 +58,8 @@ class Page
         }
         $locales =$this->entityManager->getRepository(Menu::class)->getLocalesByMenu($menu, $sheet);
 
-//        $nav = $this->getInfoMenus($menus, $sheetsSlug ?? [], $sheet, $route, $locale);
-
-        $nav = $this->getNavBarByLocaleAndSlug($locale, $slug )
-;       if(!empty($nav)){
+        $nav = $this->getNavBarByLocaleAndSlug($locale, $slug );       
+        if(!empty($nav)){
             $key_menu_home = array_keys($nav)[0];
             if(is_array($nav[$key_menu_home])){
                 $key_sous_menu_home = array_keys($nav[$key_menu_home])[0];
@@ -136,39 +134,6 @@ class Page
         return $config;
     }
 
-    public function getInfoMenus($menus, $sheetsSlug, $sheet, $route, $locale)
-    {
-        /*
-         * On défini la configuration du menu.
-         */
-        $nav = [];
-        $newMenus = [];
-        foreach ($menus as $sheet_name => $listmenu) {
-            $nav['active'] = '';
-            $nav['dropdown'] = '';
-            $nav['dropdowntoggle'] = '';
-            $nav['border_bottom'] = '';
-            $sheet_slug = $sheetsSlug[$sheet_name];
-            if ($sheet_slug == $sheet or $sheet_slug == $route) {
-                $nav['active'] = 'active';
-            }
-            $newMenus[$sheet_name] = $listmenu;
-            if (is_array($listmenu)) {
-                if ((strtolower($sheet_name) != strtolower(array_key_first($listmenu))) or 2 < count($listmenu)) {
-                    $nav['href'] = '#';
-                    $nav['dropdown'] = 'dropdown';
-                    $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
-                    $nav['border_bottom'] = 'border-bottom';
-                }
-                $newMenus[$sheet_name]['config'] = $nav;
-                $nav = [];
-            };
-
-        };
-        return $newMenus;
-    }
-
-
     public function getNavBarByLocaleAndSlug($locale, $slug)
     {
         $menus = [];
@@ -238,13 +203,15 @@ class Page
             if($locale == $menu->getSheet()->getLocale()){
                 $name = $menu->getName();
                 $sheet_name = $menu->getSheet()->getName();
-                if($menu->getSheet()->getName() == $menu->getName()){
+                if($menu->getSheet()->getSlug() == $menu->getSlug()){
                     $name = $menu->getSheet()->getName();
-                }
+                    $loc = $host. '/'. $locale. '/'.$menu->getSheet()->getSlug();
+                }else{
+                    $loc = $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug();                }
                 $urls_xml[] = [
                     'name' => $name,
                     'sheetname' => $sheet_name,
-                    'loc' => $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug(),
+                    'loc' => $loc,
                     'lastmod' => $updated,
                     'changefreq' => 'weekly',
                     'priority' => '0.5',
@@ -252,7 +219,7 @@ class Page
                 $urls_html[$menu->getSheet()->getSlug()][] = [
                     'name' => $name,
                     'sheetname' => $sheet_name,
-                    'loc' => $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug(),
+                    'loc' => $loc,
                     'lastmod' => $updated,
                     'changefreq' => 'weekly',
                     'priority' => '0.5',
