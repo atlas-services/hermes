@@ -182,7 +182,6 @@ class AppExtension extends AbstractExtension
     {
         if(!is_null($section)){
             $posts = $section->getPosts();
-            dump($posts->toArray());
             $nb_col = $section->getTemplateNbCol() ? $section->getTemplateNbCol() : 3   ;
             $total = count($posts);
             $nb_imgs_col = $total/$nb_col;
