@@ -1,7 +1,5 @@
 <!-- Portfolio Grid -->
 
-{% set nb_images_col = ((section.posts|length)/section.templateNbCol)|round %}
-{% set group_pictures = section.posts|sort((a, b) => a.position <=> b.position)|batch(nb_images_col, '') %}
 <section id="portfolio" class="pb-0 pb-lg-4  mx-auto px-0" style="background-color:{{ section.templateBgColor ?? content_bgcolor }}">
     <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0" >
         <div id="folio"  class="row mx-auto">        

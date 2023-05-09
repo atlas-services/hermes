@@ -62,6 +62,7 @@ class Section
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Post",  mappedBy="section",  cascade={"persist", "remove"})
      * @ORM\JoinTable(name="post_section")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $posts;
 

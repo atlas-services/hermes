@@ -71,6 +71,7 @@ class Menu
      * @var Section[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="menu",  cascade={"persist", "remove"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $sections;
 
