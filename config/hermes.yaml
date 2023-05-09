@@ -417,6 +417,12 @@ parameters:
         footer_color:
           summary: Couleur du texte du footer
           value: '#000000'
+        footer_link_color:
+          summary: Couleur des liens du footer
+          value: '#ffffff'
+        footer_link_hover_color:
+          summary: Couleur des liens du footer au passage de la souris
+          value: '#000000'  
         footer_container_width:
           summary: Largeur du footer (max= 12)
           value: 12

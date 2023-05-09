@@ -3,13 +3,13 @@
         {%  if(url|length == 1 and url.0.name != url.0.sheetname) %}
             <div class="col-6 col-sm-2 mb-3 mt-sm-0">
                 <p class="my-0 py-0">{{ url.0.sheetname}} </p>
-                <a class="text-decoration-none" href="{{ url.0.loc }}" > {{ url.0.name|lower}} </a>
+                <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'"  style="color: {{ footer_link_color ?? '#ffffff' }}"  class="text-decoration-none" href="{{ url.0.loc }}" > {{ url.0.name|lower}} </a>
             </div>
         {%  else %}
             <div class="col-6 col-sm-2 mb-3 mt-sm-0">
                 <p class="my-0 py-0">{{ url.0.sheetname}} </p>
             {% for menu in url %}
-                <a class="text-decoration-none" href="{{ menu.loc }}" > {{ menu.name|lower}} </a><br/>
+                <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" class="text-decoration-none" href="{{ menu.loc }}" > {{ menu.name|lower}} </a><br/>
             {% endfor %}
             </div>
         {%  endif %}

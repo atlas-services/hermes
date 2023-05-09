@@ -51,8 +51,8 @@ global:
   autres_options: Autres options
   autres_options_liste: Autres options (Liste)
   copyright: &copy;2021 Tous droits réservés par
-  copyleft: 2021 Tous droits réservés par <a href="http://hermes-cms.org" target="_blanks">http://hermes-cms.org</a>
-  created_by: Ce site a été conçu avec le CMS <a href="http://hermes-cms.org" target="_blanks">HERMES</a>
+  copyleft: 2021 Tous droits réservés par 
+  created_by: Ce site a été conçu avec le CMS 
   about: ''
   hello: Bonjour
   admin: Admin
