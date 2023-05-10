@@ -29,6 +29,7 @@ class Template
 {
     const TEMPLATE_LIBRE = 'libre';
     const TEMPLATE_LISTE = 'folio1';
+    const TEMPLATE_MODALE = 'modale1';
 
     use IdTrait;
     use ActiveTrait;

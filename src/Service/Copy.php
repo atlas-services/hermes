@@ -112,6 +112,10 @@ class Copy
                 ->getRepository(Template::class)
                 ->findOneBy(['code'=> $template::TEMPLATE_LISTE]);
 
+            $template2 = $this->em
+                ->getRepository(Template::class)
+                ->findOneBy(['code'=> $template::TEMPLATE_MODALE]);
+
             $position = $this->em->getRepository(Menu::class)->getMaxPosition();
 
             $menu->setName('menu'.$sheet->getName());
@@ -122,6 +126,9 @@ class Copy
             $section->setName('section'.$sheet->getName());
             $section->setMenu($menu);
             $section->setTemplate($template);
+            $section->setTemplate2($template2);
+            $section->setTemplateWidth(9);
+            $section->setTemplate2Width(4);
             $this->em->persist($section);
             $this->em->persist($menu);
             $this->em->persist($sheet);
@@ -131,9 +138,10 @@ class Copy
             foreach ($files as $key => $path){
                 $nb = $key + 1;
                 $pos = strpos($path, 'public') +7;
-                $filter_path = substr($path, $pos);
-                $cache_path = $this->filter($filter_path, 'app_fixed_filter_bd_154', 700 , 328 );
-                $file = new File($cache_path);
+                // $filter_path = substr($path, $pos);
+                // $cache_path = $this->filter($filter_path, 'app_fixed_filter_bd_154', 700 , 328 );
+                // $file = new File($cache_path);
+                $file = new File($path);
                 $post = new Post();
                 $post->setName('Image'.$nb);
                 $post->setSection($section);

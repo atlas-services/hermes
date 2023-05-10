@@ -90,6 +90,7 @@ class Image
     public function getListHermesDirFiles($dir){
         $listDir = getcwd().'/'.$this->parameterBag->get('hermes_path_content_images').'/'.$dir;
         $originDir = $this->getContentHermesDirFiles();
+
         $this->filesystem->mirror($originDir, $listDir);
 //        $images_base = glob($listDir."/*.jpg");
         $images_base = glob($listDir."/*.*");
