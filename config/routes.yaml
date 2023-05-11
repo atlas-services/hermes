@@ -41,9 +41,9 @@ homepage_base:
     path: /fr/home
     permanent: true
 
-homepage:
-  path: /{text}
-  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-  defaults:
-    path: /fr/home
-    permanent: true
+# homepage:
+#   path: /{text}
+#   controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+#   defaults:
+#     path: /fr/home
+#     permanent: true

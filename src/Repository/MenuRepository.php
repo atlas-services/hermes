@@ -141,6 +141,28 @@ class MenuRepository extends ServiceEntityRepository
         return $list;
     }
 
+    public function getHomeMenu($locale)
+    {
+        $qb = $this->getQbMenus(false)
+                ->Where('sheet.locale = :locale')
+                ->setParameter('locale', $locale)
+            ;
+
+        $list = $qb
+            ->getQuery()
+            ->getResult()
+        ;
+
+        if(isset($list[0])){
+            return $list[0];
+        }
+
+        if([] == $list){
+            return null;
+        }
+        return $list;
+    }
+
     /**
      * @return array Returns menu courant dans les locales
      */
