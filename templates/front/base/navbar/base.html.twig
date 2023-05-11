@@ -10,7 +10,6 @@
                             {% if accueil.value in 10..100 %}
                                 {% set app_filter = accueil.value %}
                             {% endif %}
-                                                            {% dump(app_filter) %}
                             <img class="flex-fill d-none  d-sm-block"  src="{{ asset(vich_uploader_asset(accueil, 'imageFile'))| imagine_filter('app_fixed_accueil_'~ app_filter)}}"  alt="{{ accueil.filename }}" class="app_accueil">
                             <img class="flex-fill d-block d-sm-none" src="{{ asset(vich_uploader_asset(accueil, 'imageFile'))| imagine_filter('app_fixed_logo')}}"  alt="{{ accueil.filename }}" class="app_accueil">
                         {% else %}
