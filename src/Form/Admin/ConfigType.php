@@ -57,6 +57,18 @@ class ConfigType extends AbstractBaseType
                 '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
                 'Verdana' => 'Verdana',
             ];
+            $options_cols_accueil = [
+                '10' => '10',
+                '20' => '20',
+                '30' => '30',
+                '40' => '40',
+                '50' => '50',
+                '60' => '60',
+                '70' => '70',
+                '80' => '80',
+                '90' => '90',
+                '100' => '100',
+            ];
             $options_cols = [
                 '1/12' => '1',
                 '2/12' => '2',
@@ -108,7 +120,7 @@ class ConfigType extends AbstractBaseType
                 // accueil
                 case 'accueil':
                     $choice = true;
-                    $options = $options_cols;
+                    $options = $options_cols_accueil;
                     break;
                 // accueil
                 case 'template':
