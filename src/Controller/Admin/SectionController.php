@@ -240,11 +240,12 @@ class SectionController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $toSection = clone $section;
+            $section->setMenu($initMenu);
             if ($form->get('move')->isClicked()) {
                 $bcopy = false;
             }
             if ($form->get('copy')->isClicked()) {
-                $section->setMenu($initMenu);
+                // $section->setMenu($initMenu);
                 $bcopy = true;
             }
             $copy->copySection($section, $toSection, $bcopy);

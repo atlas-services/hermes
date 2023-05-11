@@ -52,17 +52,11 @@ class Copy
     public function copySection(Section $section, Section $toSection, $copy = false){
 
         try {
-            if($copy){
-                foreach($section->getPosts() as $post){
-//                    $path = $post->getImageFile()->getPath();
-                    $newPost = clone $post;
-                    $newPost->setSection($toSection);
-                    $this->em->persist($toSection);
-                    $this->em->persist($newPost);
-                }
-//                die;
-            }else{
-                $this->em->persist($section);
+            foreach($section->getPosts() as $post){
+                $newPost = clone $post;
+                $newPost->setSection($toSection);
+                $this->em->persist($toSection);
+                $this->em->persist($newPost);
             }
 
             $this->em->flush();
@@ -72,8 +66,13 @@ class Copy
             $newpath = 'section'. $section_id.'/'.$menu_code.'/';
             $hermes_path_content_image = $this->params->get('hermes_path_content_image');
             $newPath = $hermes_path_content_image.'/'.$newpath;
-            if(!is_null($post->getImageFile())){
-                $this->filesystem->mirror($post->getImageFile()->getPath(),$newPath);
+            if(!is_null($toSection->getPosts()->first()->getImageFile())){
+                $this->filesystem->mirror($toSection->getPosts()->first()->getImageFile()->getPath(),$newPath);
+            }
+
+            if(!$copy){
+                $this->em->remove($section);
+                $this->em->flush();
             }
             return ['info' => 'Section copiée'];
 
