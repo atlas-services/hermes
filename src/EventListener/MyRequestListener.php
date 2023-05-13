@@ -21,12 +21,14 @@ class MyRequestListener {
         $request = $event->getRequest();
         $attributes = $request->attributes;
 
-
-
         $attr_locale = $attributes->get('_locale');
         $attr_sheet = $attributes->get('sheet');
         $attr_slug = $attributes->get('slug');
         $attr_route = $attributes->get('_route');
+        $attr_controller = $attributes->get('_controller');
+
+        if(!str_starts_with($attr_controller,'web_profiler.controller.profiler') ){
+
         switch ($attr_route) {
             case 'sheet' :
                 $menu = $this->menuRepository->getMyMenuBySheetAndMenuSlugs($attr_sheet, $attr_slug, $attr_locale);
@@ -71,6 +73,8 @@ class MyRequestListener {
             $event->setResponse($redirect);
 
         }
+    }
+
     }
 
 }
