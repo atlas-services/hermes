@@ -219,8 +219,11 @@ class FrontController extends AbstractController
                     // On récupère notre objet.
                     $entity = $form->getData();
                     $context = array_merge(['contact_form'=>$entity], $array );
+                    $email_context['contact_form'] = $context['contact_form'];
+                    $email_context['footer_container_width'] = $context['footer_container_width'];
+                    $email_context['footer_about'] = $context['footer_about'];
                     $template = 'front/contact/_includes/email.html.twig';
-                    $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $context);
+                    $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $email_context);
                     $this->addFlash($return['type'], $return['message']);
                     $notification = $return['message'];
                     $this->addFlash('info', $notification);

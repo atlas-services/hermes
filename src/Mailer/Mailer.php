@@ -11,6 +11,8 @@ namespace App\Mailer;
 use App\Entity\Hermes\Contact;
 use App\Entity\Interfaces\ContactInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
@@ -21,11 +23,30 @@ class Mailer
 {
     protected $mailer;
     protected $emailLogger;
+    protected $filesystem;
+    protected $params;
 
-    public function __construct(MailerInterface $mailer, LoggerInterface $emailLogger)
+    public function __construct(MailerInterface $mailer, LoggerInterface $emailLogger, Filesystem $filesystem ,ParameterBagInterface $params)
     {
         $this->mailer = $mailer;
         $this->emailLogger = $emailLogger;
+        $this->filesystem = $filesystem;
+        $this->params = $params;
+    }
+
+
+
+
+    public function addLogo()
+    {
+        $dir = getcwd(). "/".$this->params->get('hermes_path_content_image')."/Config/";
+        $files = array_values(array_diff(scandir($dir), array('..', '.')));              
+        if(isset($files[0])){
+            $this->filesystem->copy($dir.$files[0], $dir.'logo_email.png', true);
+        }else{
+            $logo_hermes = getcwd(). '/img/hermes.png';
+            $this->filesystem->copy($logo_hermes, $dir.'logo_email.png', true);
+        }
     }
 
     public function send(ContactInterface $contact, $to, $subject, $template, $context)
@@ -41,12 +62,14 @@ class Mailer
         if (method_exists($contact,'getContent')){
             $message = $contact->getContent();
         }
+        //ajout Logo
+        $this->addLogo();
         //envoi mail
         $toAddresses = explode(';', $to);
         try {
             $email = (new TemplatedEmail())
                 ->from(new Address($contact->getEmail()))
-                ->cc(new Address('contact@atlas-services.fr'))
+                // ->cc(new Address('contact@atlas-services.fr'))
                 ->subject($subject)
                 ->htmlTemplate($template)
                 ->context($context);

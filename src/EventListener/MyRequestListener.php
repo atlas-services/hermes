@@ -27,26 +27,26 @@ class MyRequestListener {
         $attr_route = $attributes->get('_route');
         $attr_controller = $attributes->get('_controller');
 
-        if(!str_starts_with($attr_controller,'web_profiler.controller.profiler') ){
+        if(!str_starts_with($attr_controller,'web_profiler.controller')){
 
-        switch ($attr_route) {
-            case 'sheet' :
-                $menu = $this->menuRepository->getMyMenuBySheetAndMenuSlugs($attr_sheet, $attr_slug, $attr_locale);
-                if(is_null($menu)){
-                    $redirectHome[] = $request->getPathInfo();
-                }
-                break;
-            case 'slug' :
-                $menu = $this->menuRepository->getMyMenuBySheetAndMenuSlugs($attr_slug, $attr_slug, $attr_locale);
-                if(is_null($menu)){
-                    $redirectHome[] = $request->getPathInfo();
-                }
+            switch ($attr_route) {
+                case 'sheet' :
+                    $menu = $this->menuRepository->getMyMenuBySheetAndMenuSlugs($attr_sheet, $attr_slug, $attr_locale);
+                    if(is_null($menu)){
+                        $redirectHome[] = $request->getPathInfo();
+                    }
+                    break;
+                case 'slug' :
+                    $menu = $this->menuRepository->getMyMenuBySheetAndMenuSlugs($attr_slug, $attr_slug, $attr_locale);
+                    if(is_null($menu)){
+                        $redirectHome[] = $request->getPathInfo();
+                    }
 
-                break;
-            case null :
-            // case 'homepage_base':
-                $redirectHome[] = $request->getPathInfo();
-           }
+                    break;
+                case null :
+                // case 'homepage_base':
+                    $redirectHome[] = $request->getPathInfo();
+            }
 
         // redirect vers "Home menu ou First menu"
         if (in_array($request->getPathInfo(), $redirectHome)){

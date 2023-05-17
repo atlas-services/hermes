@@ -8,6 +8,8 @@ use App\Entity\Hermes\Sheet;
 use App\Form\Admin\ConfigType;
 use App\Repository\ConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -104,7 +106,7 @@ class ConfigController extends AbstractAdminController
     /**
      * @Route("/{id}/edit", name="config_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Config $config): Response
+    public function edit(Request $request, Config $config, Filesystem $filesystem): Response
     {
         $configInit = clone $config;
         $directories= json_decode($this->getParameter('hermes_list_templates'),true);
