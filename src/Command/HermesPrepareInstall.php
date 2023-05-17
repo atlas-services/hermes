@@ -96,6 +96,10 @@ class HermesPrepareInstall extends Command
                 $add_dir .= '/'.$dir;
                 $this->filesystem->mkdir($base.$add_dir);
                 $created[] = $base.$add_dir;
+                if(str_contains($add_dir, 'uploads/entity')){
+                    $this->filesystem->mkdir($base.$add_dir.'/Config');
+                    $created[] = $base.$add_dir.'/Config';
+                }
             }
         }
         return $created;
