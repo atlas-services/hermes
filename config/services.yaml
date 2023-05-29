@@ -12,6 +12,7 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
+            $hermes_admin_email: '%env(APP_HERMES_ADMIN_EMAIL)%' # .
             $hermes_path_content_image_post: '%env(APP_PATH_CONTENT_IMAGES_POSTS)%' # .
             $hermes_path_content_images: '%env(APP_PATH_CONTENT_IMAGES)%' # .
             $hermes_path_cache_image: '%env(APP_PATH_CACHE_IMAGES)%' # .

@@ -70,6 +70,23 @@ class PostRepository extends ServiceEntityRepository
 
     }
 
+
+    /**
+     * @return int Returns max position value
+     */
+     public function getEditablePosts()
+     {
+ 
+        $allposts = $this->findAll();
+        foreach($allposts as $post){
+            if(!is_null($post->getSection())){
+                $posts[] = $post;
+            }
+        }
+
+         return $posts;
+ 
+     }
 //    /**
 //     * @return Collection
 //     */

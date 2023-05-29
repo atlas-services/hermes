@@ -23,11 +23,9 @@ class PostController extends AbstractAdminController
     /**
      * @Route("/contenu/", name="post_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(PostRepository $postRepository): Response
     {
-        $posts = $this->getDoctrine()
-            ->getRepository(Post::class)
-            ->findAll();
+        $posts = $postRepository->getEditablePosts();
 
         $array = [
             'posts' => $posts,

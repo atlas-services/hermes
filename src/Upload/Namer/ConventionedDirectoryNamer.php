@@ -50,13 +50,16 @@ class ConventionedDirectoryNamer implements DirectoryNamerInterface
                 return $path;
             }
             if($object instanceof Post){
-                $menu_code = $object->getSection()->getMenu()->getCode();
-                $section_id = $object->getSection()->getId();
-                if('' == $section_id){
-//                    dd($object);
+                $path = 'section';
+                if(!is_null($object->getSection())){
+                    $menu_code = $object->getSection()->getMenu()->getCode();
+                    $section_id = $object->getSection()->getId();
+                    if('' == $section_id){
+    //                    dd($object);
+                    }
+    //                $path = $className.'/'.$menu_code.'/' ;
+                    $path = 'section'. $section_id.'/'.$menu_code.'/';
                 }
-//                $path = $className.'/'.$menu_code.'/' ;
-                $path = 'section'. $section_id.'/'.$menu_code.'/';
                 return $path;
             }
 

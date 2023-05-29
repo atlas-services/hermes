@@ -67,9 +67,10 @@ class Mailer
         //envoi mail
         $toAddresses = explode(';', $to);
         try {
+            $from = $this->params->get('hermes_admin_email');
             $email = (new TemplatedEmail())
-                ->from(new Address($contact->getEmail()))
-                // ->cc(new Address('contact@atlas-services.fr'))
+                ->from(new Address($from))
+                // ->from(new Address($contact->getEmail()))
                 ->subject($subject)
                 ->htmlTemplate($template)
                 ->context($context);
