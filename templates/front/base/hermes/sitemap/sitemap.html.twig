@@ -1,4 +1,17 @@
-<div class="col-12 col-sm-8 offset-sm-4 mb-3 row justify-content-end">
+<button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal">
+    <p>Sitemap</p>
+</button>
+
+<!-- Modal -->
+<div class="modal fade modal-lg" id="sitemapModal" tabindex="-1" aria-labelledby="sitemapModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sitemapModalLabel">Sitemap</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
+    <div class="col-12 mb-3 row ">
     {% for url in urls %}
         {%  if(url|length == 1 and url.0.name != url.0.sheetname) %}
             <div class="col-6 col-sm-2 mb-3 mt-sm-0">
@@ -14,4 +27,10 @@
             </div>
         {%  endif %}
     {% endfor %}
+    </div>
+      </div>
+      <div class="modal-footer">
+       </div>
+    </div>
+  </div>
 </div>
