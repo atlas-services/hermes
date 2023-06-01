@@ -48,7 +48,7 @@ class FrontController extends AbstractController
     {
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-        $host = $request->headers->get('host');
+        $host = $request->getSchemeAndHttpHost();
         $urls = $page->getSitemapByLocale($locale, $host);
 
         $response = new Response(
