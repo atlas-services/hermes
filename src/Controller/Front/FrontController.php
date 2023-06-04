@@ -30,16 +30,13 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Doctrine\ORM\EntityManagerInterface;
-/**
- * @Route("/{_locale}", defaults={"_locale": "fr"})
- */
+
 class FrontController extends AbstractController
 {
 
-
     /**
     * @Route(
-    *     "/sitemap.xml",
+    *     "/{_locale}/sitemap.xml",
     *     name="sitemap",
     *     methods={"GET|POST"}
     *     )
@@ -63,9 +60,8 @@ class FrontController extends AbstractController
     }
 
     /**
-
      * @Route(
-     *     "/search",
+     *     "/{_locale}/search",
      *     name="search_content",
      *     methods={"GET|POST"}
      *     )
@@ -108,7 +104,7 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      * @Route(
-     *     "/livre-d-or",
+     *     "/{_locale}/livre-d-or",
      *     name="livre-d-or",
      *     methods={"GET|POST"}
      *     )
@@ -172,13 +168,54 @@ class FrontController extends AbstractController
     }
 
     /**
+     *  @Route(
+     *     "/",
+     *     name="home",
+     *     methods={"GET|POST"}
+     *     )
      * @Route(
-     *     "/{slug}",
+     *     "/{_locale?}",
+     *     name="homepage",
+     *     methods={"GET|POST"}
+     *     )
+     */
+    public function homepage(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page )
+    {
+        $route = $request->attributes->get('_route');
+        $localeRouting = $request->attributes->get('_locale' , 'fr');
+        $locale = $page->getLocale($localeRouting);
+        $home_menu = $this->getDoctrine()->getRepository(Menu::class)->getHomeMenu($locale);
+        $sheet = $home_menu->getSheet()->getSlug();
+        $slug = $home_menu->getSlug();
+        if ('livre-d-or' == $sheet) {
+            return $this->redirectToRoute('livre-d-or');
+        }
+        $array = $this->getArray($page, $sheet, $slug, $route, $locale);
+        $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
+        if(is_null($array['menu']) or $localeNotExists){
+            $home_sheet = $array['home']['sheet'];
+            $home_slug = $array['home']['slug'];
+            // return $this->redirectToRoute('sheet', [ '_locale'=> $locale, 'sheet'=> $home_sheet, 'slug' => $home_slug]);
+        }
+ 
+        if($array['hasContact']){
+            $array = $this->baseForm($request, $array, $mailer, $route);
+            if(!is_array($array)){
+                return $this->redirect($array);
+            }
+            return $this->render('front/index.html.twig', $array);
+        }
+        return $this->render('front/index.html.twig', $array);
+    }
+
+    /**
+     * @Route(
+     *     "/{_locale}/{slug}",
      *     name="slug",
      *     methods={"GET|POST"}
      *     )
      */
-    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $slug)
+    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $slug )
     {
         $sheet = $slug;
         $route = $request->attributes->get('_route');
@@ -196,59 +233,18 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-
-            $entity = new Contact();
-            $form = $this->createForm(ContactType::class, $entity,
-//                array(
-//                    'action' => $this->generateUrl('contact'),
-//                    'method' => 'POST',
-//                )
-            );
-
-            // On vérifie qu'elle est de type « POST ».
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted()) {
-                if ($form->isValid()) {
-                    $entityManager = $this->getDoctrine()->getManager();
-                    if (ContactInterface::LIVREDOR_ROUTE == $route) {
-                        $entityManager->persist($form->getData());
-                        $entityManager->flush();
-                    }
-
-                    // On récupère notre objet.
-                    $entity = $form->getData();
-                    $context = array_merge(['contact_form'=>$entity], $array );
-                    $email_context['contact_form'] = $context['contact_form'];
-                    $email_context['footer_container_width'] = $context['footer_container_width'];
-                    $email_context['footer_about'] = $context['footer_about'];
-                    $template = 'front/contact/_includes/email.html.twig';
-                    $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $email_context);
-                    $this->addFlash($return['type'], $return['message']);
-                    $notification = $return['message'];
-                    $this->addFlash('info', $notification);
-
-                    return $this->redirect('/');
-//                return $this->redirectToRoute($route);
-                } else {
-                    $notification = "Votre message n'a pas été envoyé.";
-                    $this->addFlash('error', $notification);
-                }
-                $array['notification'] = $notification;
-             }
-            $array['form'] = $form->createView();
-
-
+            $array = $this->baseForm($request, $array, $mailer, $route);
+            if(!is_array($array)){
+                return $this->redirect($array);
+            }
             return $this->render('front/index.html.twig', $array);
-
         }
-
         return $this->render('front/index.html.twig', $array);
     }
 
     /**
      * @Route(
-     *     "/{sheet}/{slug}",
+     *     "/{_locale}/{sheet}/{slug}",
      *     name="sheet",
      *     methods={"GET|POST"}
      *     )
@@ -270,14 +266,18 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
+            $array = $this->baseForm($request, $array, $mailer, $route);
+            if(!is_array($array)){
+                return $this->redirect($array);
+            }
+            return $this->render('front/index.html.twig', $array);
+        }
+        return $this->render('front/index.html.twig', $array);
+    }
 
+    private function baseForm($request, $array, $mailer, $route){
             $entity = new Contact();
-            $form = $this->createForm(ContactType::class, $entity,
-//                array(
-//                    'action' => $this->generateUrl('contact'),
-//                    'method' => 'POST',
-//                )
-            );
+            $form = $this->createForm(ContactType::class, $entity,);
 
             // On vérifie qu'elle est de type « POST ».
             $form->handleRequest($request);
@@ -295,11 +295,12 @@ class FrontController extends AbstractController
                     $context = array_merge(['contact_form'=>$entity], $array );
                     $template = 'front/contact/_includes/email.html.twig';
                     $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $context);
+
                     $this->addFlash($return['type'], $return['message']);
                     $notification = $return['message'];
                     $this->addFlash('info', $notification);
-
-                    return $this->redirect('/');
+                    $redirect = "/". $this->getLocale();
+                    return $redirect;
 //                return $this->redirectToRoute($route);
                 } else {
                     $notification = "Votre message n'a pas été envoyé.";
@@ -308,14 +309,8 @@ class FrontController extends AbstractController
                 $array['notification'] = $notification;
              }
             $array['form'] = $form->createView();
+            return $array;
 
-
-            return $this->render('front/index.html.twig', $array);
-
-        }
-
-
-        return $this->render('front/index.html.twig', $array);
     }
 
     private function getArray($page, $sheet, $slug, $route, $locale){

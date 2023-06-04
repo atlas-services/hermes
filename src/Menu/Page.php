@@ -193,7 +193,7 @@ class Page
         $menusLocale = $this->entityManager->getRepository(Menu::class)
             ->getMenusByLocaleOrderByPosition($locale)
         ;
-        foreach ($menusLocale as $menu){
+        foreach ($menusLocale as $key => $menu){
             $updated = $menu->getUpdatedAt();
             if(is_null($updated)){
                 $updated = (new \DateTime("now"))->format('Y-m-d');
@@ -207,7 +207,12 @@ class Page
                     $name = $menu->getSheet()->getName();
                     $loc = $host. '/'. $locale. '/'.$menu->getSheet()->getSlug();
                 }else{
-                    $loc = $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug();                }
+                    $loc = $host. '/'. $locale. '/'.$menu->getSheet()->getSlug(). '/' . $menu->getSlug();                
+                }
+                // homepage
+                if(0 == $key){
+                    $loc = $host. '/'. $locale;                
+                }
                 $urls_xml[] = [
                     'name' => $name,
                     'sheetname' => $sheet_name,

@@ -40,8 +40,13 @@ class Mailer
     public function addLogo()
     {
         $dir = getcwd(). "/".$this->params->get('hermes_path_content_image')."/Config/";
-        $files = array_values(array_diff(scandir($dir), array('..', '.')));              
-        if(isset($files[0])){
+        $files = array_values(array_diff(scandir($dir), array('..', '.')));     
+        foreach ($files as $key => $link) {
+            if(is_dir($dir.$link)){
+                unset($files[$key]);
+            }
+        }         
+        if(isset($files[0]) && $this->filesystem->exists($dir.$files[0])){
             $this->filesystem->copy($dir.$files[0], $dir.'logo_email.png', true);
         }else{
             $logo_hermes = getcwd(). '/img/hermes.png';

@@ -49,7 +49,7 @@
 </nav>
 
 {% set justify_content_center = 'justify-content-center' %}
-{% if(  app.request.attributes.get('_route')|lower in [constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT'), constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE'), 'sheet', 'slug']) %}
+{% if(  app.request.attributes.get('_route')|lower in [constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT'), constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE'), 'sheet', 'slug', 'home' , 'homepage']) %}
     {% set offset = 12 - nav_offset %}
     {% set col_offset = 'col-lg-' ~ offset ~ ' ' ~ 'offset-lg-'~ nav_offset %}
 {% endif %}
@@ -58,7 +58,7 @@
 {% endif %}
 {% if logo.filename is not null %}
     {% set justify_content_center = '' %}
-    {% set col_offset = 'col-lg-' ~ offset %}
+    {% set col_offset = 'col-lg-' ~ offset ?? '12' %}
 {% endif %}
 
 <nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
@@ -67,7 +67,7 @@
             {% if logo.filename is not null %}
                 {% if affiche_logo_top == true %}
                         {% if home.sheet == home.slug %}
-                            <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('slug', {'slug': home.slug}) }}">
+                            <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('home') }}">
                                 <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
                             </a>
                         {% else %}
@@ -83,7 +83,7 @@
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
                         {% if home.sheet == home.slug %}
-                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('slug', {'slug': home.slug}) }}">
+                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('home') }}">
                                 <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                             </a>
                         {% else %}
@@ -98,7 +98,11 @@
                 <hr class="d-block  d-sm-none w-100 bg-white">
                 {% for sheet_name, listmenu in nav %}
                     {% set sheet_slug = sheetsSlug[sheet_name] %}
-                    {% set href = listmenu.config.href ?? path('slug', {'slug': sheet_slug }) %}
+                    {% if(1 == loop.index) %}
+                        {% set href = listmenu.config.href ?? path('home') %}
+                    {% else %}
+                        {% set href = listmenu.config.href ?? path('slug', {'slug': sheet_slug }) %}
+                    {% endif %}
                     {% set active = listmenu.config.active ?? '' %}
                     {% set dropdown = listmenu.config.dropdown ?? '' %}
                     {% set dropdowntoggle = listmenu.config.dropdowntoggle ?? '' %}

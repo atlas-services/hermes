@@ -1,6 +1,6 @@
 #index:
 #    path: /
-#    controller: App\Controller\Front\FrontController::index
+#    controller: App\Controller\Front\FrontController::homepage
 
 sitemap_redirect:
   path: /sitemap.xml
@@ -34,12 +34,13 @@ hermes_front:
   resource: '../src/Controller/Front'
   type:     annotation
 
-homepage_base:
-  path: /
-  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-  defaults:
-    path: /fr/home
-    permanent: true
+
+# homepage:
+#   path: /
+#   controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+#   defaults:
+#     path: /%APP_DEFAULT_LOCALE%/
+#     permanent: false
 
 # homepage:
 #   path: /{text}
