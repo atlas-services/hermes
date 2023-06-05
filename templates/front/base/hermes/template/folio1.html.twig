@@ -4,24 +4,31 @@
     <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? folio_container_width)|col_lg() }} mx-auto px-0" >
         <div id="folio"  class="row mx-auto">        
         {% for pictures in section|col_imgs %}
-		<div class="col-lg-{{ section.templateNbCol|nb_col }} col-md-{{ section.templateNbCol|nb_col }} col-12 text-center mx-auto px-2" >
+        {% set px = 'px-1 ' %}
+        {% if(loop.first) %}
+            {% set px = 'px-1 ps-sm-2' %}
+        {% endif %}
+        {% if(loop.last) %}
+            {% set px = 'px-1 pe-sm-2' %}
+        {% endif %}
+		<div class="col-lg-{{ section.templateNbCol|nb_col }} col-md-{{ section.templateNbCol|nb_col }} col-12 text-center mx-auto {{ px }}" >
 		        {% for picture in pictures %}
                     {% if picture.name is defined %}
                         {% if( section.template2 == '') %}
-                            <img class="img-responsive col-12 py-2 mx-0 mx-sm-2" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">      
+                            <img class="img-responsive col-12 py-2 mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">      
                         {% endif %}
                         {% if( 'modale1' ==  section.template2.code) %}
                             <!-- Modale1  -->
                             <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail" href="#" data-image-id="" data-name="{{ picture.name }}" data-content="{{ picture.content }}"  data-bs-toggle="modal"
                                 data-image ="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}"
                                 data-bs-target="#image-gallery">
-                                <img class="img-responsive col-12 py-2 mx-0 mx-sm-2" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">            
+                                <img class="img-responsive col-12 py-2 mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">            
                             </a>
                         {% endif %}
                         {% if( 'modale2' ==  section.template2.code) %}
                             <!-- Modale2  -->
                             <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ picture.id }}">
-                                <img class="img-responsive col-12 py-2 mx-0 mx-sm-2" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">          
+                                <img class="img-responsive col-12 py-2 mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">          
                             </a>
                         {% endif %}                  
                     
