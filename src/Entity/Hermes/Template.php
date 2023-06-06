@@ -7,6 +7,7 @@ use App\Entity\Traits\CodeTrait;
 use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\SummaryTrait;
+use App\Entity\Traits\TypeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -33,6 +34,7 @@ class Template
 
     use IdTrait;
     use ActiveTrait;
+    use TypeTrait;
     use CodeTrait;
     use NameTrait;
     use SummaryTrait;

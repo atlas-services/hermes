@@ -44,10 +44,10 @@ class SectionTemplateType extends AbstractType
                 ->add('template', EntityType::class, [
                     'class' => Template::class,
                     'query_builder' => function (TemplateRepository $er) use ($options) {
-                        if ($options['full_template']) {
-                            return $er->getQbTemplates();
-                        }
-                        return $er->getQbInitTemplates();
+                        // if ($options['full_template']) {
+                        //     return $er->getQbTemplates();
+                        // }
+                        return $er->getQbTemplateByType($options['type_template']);
                     },
                     'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
                 ])
@@ -182,6 +182,7 @@ class SectionTemplateType extends AbstractType
             'url' => true,
             'menu' => false,
             'config' => null,
+            'type_template' => null,
             'template_width'=>  [
                 '1/12' => '1',
                 '2/12' => '2',

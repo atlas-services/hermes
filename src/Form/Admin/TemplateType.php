@@ -13,6 +13,7 @@ class TemplateType extends AbstractType
     {
         $builder
             ->add('active')
+            ->add('type')
             ->add('code')
             ->add('name')
             ->add('summary')

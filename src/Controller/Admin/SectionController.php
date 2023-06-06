@@ -165,6 +165,8 @@ class SectionController extends AbstractAdminController
             'entry_options' => ['label' => false, 'active'=> false, 'position'=>true, 'name'=>true, 'content'=>false, 'save_visibility' => false, 'save' => false, 'saveAndAdd' => false, 'saveAndAddPost' => false, 'saveAndAddSectionPost' => false,],
         ];
 
+        $options['type_template'] = $section->getTemplate()->getType();
+
         // On peut gérer les images remote ici => true
         $options['config'] = boolval($config);
 

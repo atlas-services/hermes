@@ -36,6 +36,21 @@ class TemplateRepository extends ServiceEntityRepository
         return $qb;
     }
 
+
+    public function getQbTemplateByType($type)
+    {
+        if(!is_null($type)){
+            $qb = $this->createQueryBuilder('s')
+            ->where('s.type = :type ' )
+            ->setParameter('type',  $type )
+        ;
+        }else{
+            return $this->getQbInitTemplates();
+        }
+        
+        return $qb;
+    }
+
     public function getTemplates()
     {
         $result = $this->getQbTemplates()

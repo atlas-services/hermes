@@ -37,66 +37,82 @@ parameters:
           ROLE_ADMIN
     template:
       libre:
+        type: libre
         summary: Template libre
         code: libre
         name: Libre
       libre_code:
+        type: libre
         summary: Template libre et affichage du code
         code: libre_code
         name: Libre avec code
       contact:
+        type: formulaire
         summary: Template contact
         code: contact
         name: Contact
       modale1:
+        type: modale 
         summary: Présentation modale slide
         code: modale1
         name: Modale slide
       modale2:
+        type: modale 
         summary: Présentation modale seule
         code: modale2
         name: Modale seule
       carousel1:
+        type: liste 
         summary: Présentation carousel slide
         code: carousel1
         name: Carousel slide
       carousel2:
+        type: liste 
         summary: Présentation carousel fade
         code: carousel2
         name: Carousel fade
       carousel3:
+        type: liste 
         summary: Présentation carousel par groupe de 3 images
         code: carousel3
         name: Carousel par groupe de 3 images
       folio1:
+        type: liste 
         summary: Folio classique
         code: folio1
         name: Folio classique
       folio2:
+        type: liste 
         summary: Folio effet survol (+)
         code: folio2
         name: Folio effet survol (+)
       folio3:
+        type: liste 
         summary: Folio gallery
         code: folio3
         name:  Folio gallery
       folio4:
+        type: liste 
         summary: Folio serré
         code: folio4
         name:  Folio serré
       folio5:
+        type: liste 
         summary: Folio gallery 2
         code: folio5
         name:  Folio gallery 2
       folio_video1:
-          summary: Folio video classique
-          code: folio_video1
-          name: Folio video classique
+        type: liste 
+        summary: Folio video classique
+        code: folio_video1
+        name: Folio video classique
       card1:
+        type: liste 
         summary: Cartes affichée par 2 avec fichier à télécharger
         code: card1
         name: Cartes avec pdf à télécharger
       card2:
+        type: liste 
         summary: Carte de présentation avec photo
         code: card2
         name: Carte de présentation avec photo
