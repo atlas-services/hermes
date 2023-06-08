@@ -157,6 +157,43 @@ class Copy
 
     }
 
+
+    public function handleUploadedDir(Section $section, $uploaded_dir){
+
+        try {
+
+            $template = $this->em
+                ->getRepository(Template::class)
+                ->findOneBy(['code'=> Template::TEMPLATE_LISTE]);
+
+            $template2 = $this->em
+                ->getRepository(Template::class)
+                ->findOneBy(['code'=> $template::TEMPLATE_MODALE]);
+
+            $dir = 'section'.$section->getId().'/'.$section->getMenu()->getCode().'/';
+            $files = $this->image->getListSelectedDirFiles($uploaded_dir, $dir);
+            foreach ($files as $key => $path){
+                $nb = $key + 1;
+                $pos = strpos($path, 'public') +7;
+                $file = new File($path);
+                $post = new Post();
+                $post->setName('Image'.$nb);
+                $post->setSection($section);
+                $post->setImageFile($file);
+                $post->setFileName($file->getFilename());
+                $this->em->persist($post);
+            }
+            $this->em->flush();
+            return ['info' => 'Post copié'];
+
+        }catch (\Exception $e){
+            return ['warning' => $e->getMessage()];
+        }
+
+    }
+
+
+
     public function filter($path, $filter, int $width, int $height) {
 
         if (!$this->cacheManager->isStored($path, $filter)) {

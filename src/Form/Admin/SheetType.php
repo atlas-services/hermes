@@ -93,7 +93,7 @@ class SheetType extends AbstractNameBaseType
             'saveAndAddLabel' => 'sheet.update_next',
             'saveAndAddPost' => false,
             'saveAndAddSectionPost' => false,
-            'saveAndAddHermesListe' => true,
+            // 'saveAndAddHermesListe' => true,
         ]);
     }
 }

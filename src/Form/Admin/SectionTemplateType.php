@@ -7,8 +7,10 @@ use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
 
 use App\Entity\Hermes\Template;
+use App\Service\Image;
 use App\Repository\TemplateRepository;
 use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
@@ -25,6 +27,18 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SectionTemplateType extends AbstractType
 {
+    private $dirs;
+    public function __construct(ParameterBagInterface $parameterBag, Image $image ){
+        $base_dir_hermes = getcwd().'/'.$parameterBag->get('hermes_path_content_image_post').'/';
+        $dirs = array_values(array_diff(scandir($base_dir_hermes), array('..', '.', '.tmb')));  
+        foreach ($dirs as $key => $link) {
+            if(!is_dir($base_dir_hermes.$link)){
+                unset($dirs[$key]);
+            }else{
+                $this->dirs[$link] = $base_dir_hermes.$link;
+            }
+        }  
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -49,8 +63,15 @@ class SectionTemplateType extends AbstractType
                         // }
                         return $er->getQbTemplateByType($options['type_template']);
                     },
-                    'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+                    'attr' => ['class' => 'custom-select custom-select-lg mb-3 ']
                 ])
+                ->add('uploaded', ChoiceType::class, [
+                        'mapped' => false,
+                        'choices' => $this->dirs,
+                        'placeholder' => 'global.upload_files' ,
+                        'required' => false,
+                        'attr' => ['class' => 'custom-select custom-select-lg mb-3 '],
+                    ])
                 ->add('templateWidth', ChoiceType::class, [
                     'choices' => $options['template_width'],
                     'required' => false,

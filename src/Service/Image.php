@@ -97,6 +97,17 @@ class Image
         return $images_base;
     }
 
+
+    // Charge les images du repertoire sélectionné pour les listes
+    public function getListSelectedDirFiles($uploaded_dir, $dir){
+
+        $listDir = getcwd().'/'.$this->parameterBag->get('hermes_path_content_images').'/'.$dir;
+        $this->filesystem->remove($listDir);
+        $this->filesystem->mirror($uploaded_dir, $listDir);
+        $images_base = glob($listDir."/*.*");
+        return $images_base;
+    }
+
     // Charge les images du repertoire "hermes" pour les content des Post
     public function getContentHermesDirFiles($dir = self::HERMES_DIR){
         $contentDir = getcwd().'/'.$this->parameterBag->get('hermes_path_content_image_post').'/'.$dir;

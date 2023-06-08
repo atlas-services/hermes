@@ -70,10 +70,10 @@ class SheetController extends AbstractAdminController
             if ($form->get('save')->isClicked()) {
                 return $this->redirectToRoute('sheet_index');
             }
-            if ($form->get('saveAndAddHermesListe')->isClicked()) {
-                $copy->handleHermesDir($sheet);
-                return $this->redirectToRoute('sheet_index');
-            }
+            // if ($form->get('saveAndAddHermesListe')->isClicked()) {
+            //     $copy->handleHermesDir($sheet);
+            //     return $this->redirectToRoute('sheet_index');
+            // }
         }
 
         $array = [

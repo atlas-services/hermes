@@ -14,6 +14,7 @@ use App\Repository\SectionRepository;
 use App\Service\Copy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,7 +65,7 @@ class SectionController extends AbstractAdminController
      * @Route("/menu/{menu}/nouvelle-section/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
      * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
-    public function SectionPostNewMenu(Request $request, ?Menu $menu): Response
+    public function SectionPostNewMenu(Request $request, Copy $copy, ?Menu $menu): Response
     {
         $section = new Section() ;
         $post = new Post();
@@ -80,7 +81,6 @@ class SectionController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($section);
             $entityManager->flush();
@@ -91,6 +91,16 @@ class SectionController extends AbstractAdminController
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug()]);
             }
             if ($form->get('save')->isClicked()) {
+                if(isset($form['uploaded']) && 'liste' === $section->getTemplate()->getType()){
+                    foreach($section->getPosts() as $post){
+                        $section->removePost($post);
+                        $entityManager->persist($section);
+                        $entityManager->flush();
+                    }
+                    $selected_dir = ($form['uploaded']->getData());
+                    $copy->handleUploadedDir($section, $selected_dir);
+                }
+
                 return $this->redirectToRoute('section_index');
             }
             return $this->redirectToRoute('menu_index');

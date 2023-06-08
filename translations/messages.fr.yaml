@@ -137,6 +137,7 @@ global:
   copy_texte: Vous pouvez désormais coller le texte copié en effectuant un "Ctrl v" dans la champ contenu.
   copy_html: Vous pouvez désormais coller le code html copié en effectuant un "Ctrl v" dans le champ contenu.
   all: Tout
+  upload_files: Sélectionner le répertoire contenant les photos à télecharger
   sort:
     title: Trier par
     original: Tri original
