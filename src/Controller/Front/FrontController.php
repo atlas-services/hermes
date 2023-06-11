@@ -199,7 +199,7 @@ class FrontController extends AbstractController
         }
  
         if($array['hasContact']){
-            $array = $this->baseForm($request, $array, $mailer, $route);
+            $array = $this->baseForm($request, $page, $array, $mailer, $route);
             if(!is_array($array)){
                 return $this->redirect($array);
             }
@@ -233,7 +233,7 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-            $array = $this->baseForm($request, $array, $mailer, $route);
+            $array = $this->baseForm($request, $page, $array, $mailer, $route);
             if(!is_array($array)){
                 return $this->redirect($array);
             }
@@ -266,7 +266,7 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-            $array = $this->baseForm($request, $array, $mailer, $route);
+            $array = $this->baseForm($request, $page, $array, $mailer, $route);
             if(!is_array($array)){
                 return $this->redirect($array);
             }
@@ -275,7 +275,7 @@ class FrontController extends AbstractController
         return $this->render('front/index.html.twig', $array);
     }
 
-    private function baseForm($request, $array, $mailer, $route){
+    private function baseForm($request, $page, $array, $mailer, $route){
             $entity = new Contact();
             $form = $this->createForm(ContactType::class, $entity,);
 
@@ -299,7 +299,7 @@ class FrontController extends AbstractController
                     $this->addFlash($return['type'], $return['message']);
                     $notification = $return['message'];
                     $this->addFlash('info', $notification);
-                    $redirect = "/". $this->getLocale();
+                    $redirect = "/". $page->getLocale();
                     return $redirect;
 //                return $this->redirectToRoute($route);
                 } else {
