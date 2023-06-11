@@ -299,7 +299,8 @@ class FrontController extends AbstractController
                     $this->addFlash($return['type'], $return['message']);
                     $notification = $return['message'];
                     $this->addFlash('info', $notification);
-                    $redirect = "/". $page->getLocale();
+                    $localeRouting = $request->attributes->get('_locale' , 'fr');
+                    $redirect = "/". $page->getLocale($localeRouting);
                     return $redirect;
 //                return $this->redirectToRoute($route);
                 } else {
