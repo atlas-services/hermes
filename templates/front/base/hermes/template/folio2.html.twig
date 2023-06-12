@@ -8,9 +8,9 @@
             </div>
             <div id="folio" class="row">
                 {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
-                    <div class="col-md-{{ section.templateNbCol|nb_col }} col-lg-{{ section.templateNbCol|nb_col }} portfolio-item text-center border h-border-success border-left-0 border-right-0 border-top-0">
+                    <div class="col-md-{{ section.templateNbCol|nb_col }} col-lg-{{ section.templateNbCol|nb_col }} portfolio-item text-center ">
                         {% if( section.template2 == '') %}
-                            <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                            <img class="img-fluid col-12 col-sm-8 " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                  alt="{{ post.name }}">
                         {% else %}
                             {% if section.template2.code in ['modale1', 'modale3' ] %}
@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
-                                        <img class="img-fluid " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
+                                        <img class="img-fluid col-12 col-sm-8 " src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                              alt="{{ post.name }}">
                                     {% endif %}
                                 </a>
@@ -46,9 +46,7 @@
                                 </a>
                             {% endif %}
                         {% endif %}
-                        <div class="portfolio-caption pt-3 pb-1 ">
-                            <h6>{{ post.name }}</h6>
-                        </div>
+
                     </div>
                 {% endfor %}
             </div>

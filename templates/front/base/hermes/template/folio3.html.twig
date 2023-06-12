@@ -5,24 +5,24 @@
             {% for post in  section.posts|sort((a, b) => a.position <=> b.position) %}
                 {% if(vich_uploader_asset(post, 'imageFile') is not null) %}
                     <div class="row mx-auto col-md-{{ section.templateNbCol|nb_col }} col-lg-{{ section.templateNbCol|nb_col }} col-12">
-                        <img class="img-fluid" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}"/>
-                        <h5>
+                          <h5>
                             {% if( 'modale1' ==  section.template2.code) %}
                                 <!-- Modale1  -->
                                 <a class="text-decoration-none" style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="d-block mb-4 h-100 thumbnail" href="#" data-image-id="" data-name="{{ post.name }}" data-content="{{ post.content }}" data-bs-toggle="modal"
                                    data-image ="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_filter_'~ section.templateImageFilter) }}"
                                    data-bs-target="#image-gallery">
-                                    {{ post.name }}
+                                    <img class="img-fluid" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}"/>
+                 
                                 </a>
                             {% endif %}
                             {% if( 'modale2' ==  section.template2.code) %}
                                 <!-- Modale2  -->
                                 <a class="text-decoration-none" style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ post.id }}">
-                                    {{ post.name }}
+                                         <img class="img-fluid" src="{{ asset(vich_uploader_asset(post, 'imageFile'))| imagine_filter('app_fixed_carre_300') }}"/>
                                 </a>
                             {% endif %}
                         </h5>
-                        <p> <span class="px-2 px-md-5">{{ post.content|raw }}</span> </p>
+                        {# <p> <span class="px-2 px-md-5">{{ post.content|raw }}</span> </p> #}
                     </div>
                 {% endif %}
             {% endfor %}
