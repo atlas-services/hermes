@@ -29,7 +29,9 @@ class SectionTemplateType extends AbstractType
 {
     private $dirs;
     public function __construct(ParameterBagInterface $parameterBag, Image $image ){
-        $base_dir_hermes = getcwd().'/'.$parameterBag->get('hermes_path_content_image_post').'/';
+        //$base_dir_hermes = getcwd().'/'.$parameterBag->get('hermes_path_content_image_post').'/';
+        $project_dir = $parameterBag->get('kernel.project_dir');
+        $base_dir_hermes = $project_dir.'/public/'.$parameterBag->get('hermes_path_content_image_post').'/';  
         $dirs = array_values(array_diff(scandir($base_dir_hermes), array('..', '.', '.tmb')));  
         foreach ($dirs as $key => $link) {
             if(!is_dir($base_dir_hermes.$link)){

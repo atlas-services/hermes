@@ -23,19 +23,19 @@ class LoadTemplate extends Fixture  implements FixtureGroupInterface, ContainerA
     public function load(ObjectManager $manager)
     {
         $configurations = $this->container->getParameter('init');
-        $templates = array_keys($configurations['template']);
-//        dd($template_yaml);
-//        $templates = explode(',', $_ENV['APP_TEMPLATES']);
+        $templates = $configurations['template'];
 
         foreach ($templates as $i => $value) {
 
             $item = new Template();
             $item->setActive(true);
-            $item->setCode($value);
-            $item->setName($value);
-            $item->setSummary("Texte sommaire concernant le Template $value");
+            $item->setType($value['type']);
+            $item->setCode($value['code']);
+            $item->setName($value['name']);
+            $item->setSummary($value['summary']);
 
-            $this->addReference("$value", $item);
+            $code = $value['code'];
+            $this->addReference("$code", $item);
 
             $manager->persist($item);
         }

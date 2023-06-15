@@ -2,6 +2,7 @@
 namespace Tests\Controller;
 
 use Tests\DataFixtures\LoadUser;
+use Tests\DataFixtures\LoadTemplate;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -27,6 +28,7 @@ abstract class AbstractBaseControllerTest extends WebTestCase
             static::$fixtures = $this->databaseTool
                 ->loadFixtures([
                     LoadUser::class,
+                    LoadTemplate::class,
                 ],);
         }
         $this->login();

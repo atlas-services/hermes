@@ -211,7 +211,8 @@ class Copy
         $url_image = $this->cacheManager->resolve($path, $filter);
         $pos = strpos($url_image, 'data') ;
         $filter_path = substr($url_image, $pos);
-        $image_path = getcwd().'/'.$filter_path;
+        $project_dir = $this->params->get('kernel.project_dir');
+        $image_path = $project_dir.'/public/'.$filter_path;
         return $image_path;
 //        return new RedirectResponse($this->cacheManager->resolve($path, $filter), Response::HTTP_MOVED_PERMANENTLY);
     }

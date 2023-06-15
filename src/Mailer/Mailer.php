@@ -39,7 +39,10 @@ class Mailer
 
     public function addLogo()
     {
-        $dir = getcwd(). "/".$this->params->get('hermes_path_content_image')."/Config/";
+        //$dir = getcwd(). "/".$this->params->get('hermes_path_content_image')."/Config/";
+        $project_dir = $this->params->get('kernel.project_dir');
+        $dir = $project_dir. "/public/".$this->params->get('hermes_path_content_image')."/Config/";
+      
         $files = array_values(array_diff(scandir($dir), array('..', '.')));     
         foreach ($files as $key => $link) {
             if(is_dir($dir.$link)){
@@ -49,7 +52,7 @@ class Mailer
         if(isset($files[0]) && $this->filesystem->exists($dir.$files[0])){
             $this->filesystem->copy($dir.$files[0], $dir.'logo_email.png', true);
         }else{
-            $logo_hermes = getcwd(). '/img/hermes.png';
+            $logo_hermes = $project_dir. '/public/img/hermes.png';
             $this->filesystem->copy($logo_hermes, $dir.'logo_email.png', true);
         }
     }

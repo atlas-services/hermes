@@ -49,7 +49,7 @@ class MenuRepository extends ServiceEntityRepository
         return 1;
     }
 
-    public function getQbMenus($active = true, $locale ='fr')
+    public function getQbMenus($active = true)
     {
         $qb = $this->createQueryBuilder('m')
             ->join('m.sheet', 'sheet')
@@ -71,7 +71,7 @@ class MenuRepository extends ServiceEntityRepository
     public function getMenusByLocale($locale)
     {
         try {
-            $list = $this->getQbMenus(true, $locale)
+            $list = $this->getQbMenus(true)
                 ->getQuery()
                 ->getResult()
             ;
