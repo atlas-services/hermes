@@ -15,7 +15,7 @@
     {% if form.content is defined %}
         {{ form_row(form.content) }}
     {% endif %}
-    <a class="btn-primary btn btn-outline-secondary hms-bg-color1 mt-5 " data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions">
+    <a id="id_collapseOptions" class="btn-primary btn btn-outline-secondary hms-bg-color1 mt-5 " data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions">
         {{ 'global.autres_options'|trans }}
     </a>
     <div class="collapse" id="collapseOptions">
