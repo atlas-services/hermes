@@ -73,14 +73,13 @@ class FrontController extends AbstractController
         $refererPathInfo = Request::create($referer)->getPathInfo();
         $refererPathInfo = str_replace($request->getScriptName(), '', $refererPathInfo);
         $routeInfos = $router->match($refererPathInfo);
-        $configuration = $this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
         if(ContactInterface::CONTACT == $routeInfos['_route'] || ContactInterface::LIVREDOR_ROUTE == $routeInfos['_route']){
             $route = $routeInfos['_route'];
-            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
+            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
         }else{
             $sheet = $routeInfos['sheet'];
             $slug = $routeInfos['slug'];
-            $array = $page->getActiveMenu($configuration, $sheet, $slug);
+            $array = $page->getActiveMenu($sheet, $slug);
         }
 
         $q = $request->query->get('q');
@@ -113,9 +112,9 @@ class FrontController extends AbstractController
     {
         $route = $request->attributes->get('_route');
         $locale = $request->attributes->get('_locale' , 'fr');
-        $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
+        
         if (ContactInterface::LIVREDOR_ROUTE == $route) {
-            $array = $page->getActiveMenu($configuration, ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
+            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
             $entity = new Temoignage();
             $form = $this->createForm(TemoignageType::class, $entity,
                 array(
@@ -127,7 +126,7 @@ class FrontController extends AbstractController
             $array[ContactInterface::LIVREDOR] = $livredor;
         }
         if (ContactInterface::CONTACT == $route) {
-            $array = $page->getActiveMenu($configuration, ContactInterface::CONTACT, ContactInterface::CONTACT,$route, $locale);
+            $array = $page->getActiveMenu(ContactInterface::CONTACT, ContactInterface::CONTACT,$route, $locale);
             $entity = new Contact();
             $form = $this->createForm(ContactType::class, $entity,
                 array(
@@ -320,8 +319,7 @@ class FrontController extends AbstractController
     }
 
     private function getArray($page, $sheet, $slug, $route, $locale){
-        $configuration =$this->getDoctrine()->getRepository(Config::class, 'config')->findBy(['active' => true]);
-        $array = $page->getActiveMenu($configuration, $sheet, $slug,$route, $locale);
+        $array = $page->getActiveMenu($sheet, $slug,$route, $locale);
         $array['locale'] = $locale;
         $entityManager = $this->getDoctrine()->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);

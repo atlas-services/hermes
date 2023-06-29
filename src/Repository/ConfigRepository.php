@@ -38,4 +38,24 @@ class ConfigRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+    public function getActiveConfig()
+    {
+        $config = $this->createQueryBuilder('c')
+        ->where('c.active = true')
+        ->getQuery()
+        ->getResult()
+        ;
+        if(is_null($config)){
+            return [];
+        }
+        foreach ($config as $conf) {
+            $config[$conf->getCode()] = $conf;
+            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
+                $config_simple[$conf->getCode()] = $conf->getValue();
+            }else{
+                $config_simple[$conf->getCode()] = $conf;
+            }
+        }
+        return $config_simple;
+    }
 }

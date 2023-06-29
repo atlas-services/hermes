@@ -3,31 +3,32 @@
 
 namespace App\Menu;
 
+use App\Entity\Config\Config;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
 use App\Entity\Interfaces\ContactInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Page
 {
     protected $entityManager;
     protected $parameterBag;
+    protected $config;
 
-    public function __construct(EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag)
+    public function __construct(EntityManagerInterface $entityManager, ContainerInterface $container, ParameterBagInterface $parameterBag)
     {
         $this->entityManager = $entityManager;
         $this->parameterBag = $parameterBag;
+        $emConfig = $container->get('doctrine')->getManager('config');
+        $this->config = $emConfig->getRepository(Config::class, 'config')->getActiveConfig();
+       
     }
 
-    public function getActiveMenu($configuration,$sheet, $slug, $route = null, $locale='fr')
+    public function getActiveMenu($sheet, $slug, $route = null, $locale='fr')
     {
         $locale = $this->getLocale($locale);
-
-        /*
-         * On récupère la configuration du site.
-         */
-        $config = $this->getActiveConfig($configuration);
 
         /*
          * On récupère la liste des pages, la liste des menus et le menu sélectionné .
@@ -90,48 +91,10 @@ class Page
         /*
          * @TODO simplification config
          */
-        $array = array_merge($array, $config);
+        $array = array_merge($array, $this->config);
 
         return $array;
 
-    }
-
-//    public function getActiveForm($menus, $listform, $locale)
-//    {
-//        if (is_null($listform)) {
-//            return $menus;
-//        }
-//        $forms = explode(',', $listform);
-//        foreach ($forms as $form) {
-//            if (!array_key_exists(strtoupper($form), $menus)) {
-//                $sheet_form = $this->entityManager->getRepository(Sheet::class)->findOneBy(['active' => true, 'locale' => $locale, 'name' => $form]);
-//                if (!is_null($sheet_form)) {
-//                    $menus = array_merge($menus, [$form => $sheet_form]);
-//                }
-//            }
-//        }
-//
-//        $this->entityManager->flush();
-//
-//        return $menus;
-//    }
-
-    public function getActiveConfig($configuration)
-    {
-        /*
-         * On récupère la configuration du site.
-         */
-         foreach ($configuration as $conf) {
-            $config[$conf->getCode()] = $conf;
-            if('bg_image' != $conf->getCode() && 'favicon' != $conf->getCode() && 'accueil' != $conf->getCode() && 'logo' != $conf->getCode()){
-                $config_simple[$conf->getCode()] = $conf->getValue();
-            }else{
-                $config_simple[$conf->getCode()] = $conf;
-            }
-        }
-
-        return $config_simple ;
-        return $config;
     }
 
     public function getNavBarByLocaleAndSlug($locale, $slug)

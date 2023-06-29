@@ -114,7 +114,9 @@ class InitController extends AbstractAdminController
     }
 
     private function addPage($libre){
-        $config = $this->getActiveConfig();
+        $emConfig = $this->get('doctrine')->getManager('config');
+        $config = $emConfig->getRepository(Config::class, 'config')->getActiveConfig();
+
         $entityManager = $this->getDoctrine()->getManager();
         $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
         $slug = strtolower($template_libre);
