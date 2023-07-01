@@ -336,10 +336,7 @@ parameters:
           value: '90px'
         nav_bgcolor:
           summary: Couleur de fond du menu
-          value: '#ffffff'
-        nav_menu_bgcolor:
-          summary: Couleur de fond de la barre de menu
-          value: '#ffffff'          
+          value: '#ffffff'       
         nav_li_bgcolor:
           summary: Couleur de fond des éléments du sous menu
           value: '#ffffff'
