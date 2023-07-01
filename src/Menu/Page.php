@@ -7,8 +7,7 @@ use App\Entity\Config\Config;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
 use App\Entity\Interfaces\ContactInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Container\ContainerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Page
@@ -17,12 +16,12 @@ class Page
     protected $parameterBag;
     protected $config;
 
-    public function __construct(EntityManagerInterface $entityManager, ContainerInterface $container, ParameterBagInterface $parameterBag)
+    public function __construct(ManagerRegistry $doctrine, ParameterBagInterface $parameterBag)
     {
-        $this->entityManager = $entityManager;
+        $this->em = $doctrine->getManager('default');
+        $this->emConfig = $doctrine->getManager('config');
         $this->parameterBag = $parameterBag;
-        $emConfig = $container->get('doctrine')->getManager('config');
-        $this->config = $emConfig->getRepository(Config::class, 'config')->getActiveConfig();
+        $this->config = $this->emConfig->getRepository(Config::class, 'config')->getActiveConfig();
        
     }
 
@@ -33,8 +32,8 @@ class Page
         /*
          * On récupère la liste des pages, la liste des menus et le menu sélectionné .
          */
-        $sheet_actives = $this->entityManager->getRepository(Sheet::class)->findBy(['active' => true, 'locale' => $locale], ['position' => 'ASC']);
-        $menus = $this->entityManager->getRepository(Menu::class)->getMenusByLocale($locale);
+        $sheet_actives = $this->em->getRepository(Sheet::class)->findBy(['active' => true, 'locale' => $locale], ['position' => 'ASC']);
+        $menus = $this->em->getRepository(Menu::class)->getMenusByLocale($locale);
         /*
          * @TODO simplification config
          */
@@ -42,7 +41,7 @@ class Page
 //            $menus = $this->getActiveForm($menus, $config['forms'], $locale);
 //        }
 
-        $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug, $locale);
+        $menu = $this->em->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug, $locale);
         $hasContact = false;
         if(!is_null(($menu))){
             $sectionsMenu = $menu->getSections();
@@ -57,7 +56,7 @@ class Page
             $sheets[$menu_active->getName()] = $menu_active;
             $sheetsSlug[$menu_active->getName()] = $menu_active->getSlug();
         }
-        $locales =$this->entityManager->getRepository(Menu::class)->getLocalesByMenu($menu, $sheet);
+        $locales =$this->em->getRepository(Menu::class)->getLocalesByMenu($menu, $sheet);
 
         $nav = $this->getNavBarByLocaleAndSlug($locale, $slug );       
         if(!empty($nav)){
@@ -101,7 +100,7 @@ class Page
     {
         $menus = [];
         $navbar = [];
-        $menuSlug = $this->entityManager->getRepository(Menu::class)
+        $menuSlug = $this->em->getRepository(Menu::class)
             ->findOneBy(['active' => true ,'locale' => $locale, 'slug'=>$slug]);
 
         if(is_null($menuSlug)){
@@ -109,11 +108,11 @@ class Page
             $localeName = "home";
         }else{
             $referenceName = $menuSlug->getReferenceName();
-            $localeName = $this->entityManager->getRepository(Menu::class)
+            $localeName = $this->em->getRepository(Menu::class)
                 ->findOneBy(['active' => true, 'locale' => $locale, 'referenceName'=>$referenceName])->getName();
         }
 
-        $menusLocale = $this->entityManager->getRepository(Menu::class)
+        $menusLocale = $this->em->getRepository(Menu::class)
             ->getMenusByLocaleOrderByPosition($locale)
         ;
 
@@ -153,7 +152,7 @@ class Page
     public function getSitemapByLocale($locale, $host="")
     {
         $urls = $urls_xml = $urls_html = [];
-        $menusLocale = $this->entityManager->getRepository(Menu::class)
+        $menusLocale = $this->em->getRepository(Menu::class)
             ->getMenusByLocaleOrderByPosition($locale)
         ;
         foreach ($menusLocale as $key => $menu){
@@ -201,7 +200,7 @@ class Page
 
     public function getCacheMenu($sheet, $slug)
     {
-        $menu = $this->entityManager->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug);
+        $menu = $this->em->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug);
 //        // cache remote pictures
         $cache = [];
         if(!is_null($menu)){
@@ -229,7 +228,7 @@ class Page
 
     public function getLocale($locale){
 
-        $locales = $this->entityManager->getRepository(Menu::class)->findBy(['locale' =>$locale]);
+        $locales = $this->em->getRepository(Menu::class)->findBy(['locale' =>$locale]);
 
         if(empty($locales)){
             $locale = $this->parameterBag->get('app.default_locale');

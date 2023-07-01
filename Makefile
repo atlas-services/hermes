@@ -56,6 +56,26 @@ phpunit-test-front:
 	vendor/bin/phpunit -c phpunit.xml tests/Controller/Admin/MenuContactControllerTest.php
 	vendor/bin/phpunit -c phpunit.xml tests/Controller/Front
 
+
+
+phpunit-test-page:
+	rm -r data/db/test.sqlite data/db/config/test.sqlite 2> /dev/null || true
+	bin/console doctrine:cache:clear-metadata
+	bin/console doctrine:cache:clear-query
+	bin/console doctrine:cache:clear-result
+	bin/console doctrine:database:drop --force --connection=default --env=test
+	bin/console doctrine:database:drop --force --connection=config --env=test
+	bin/console doctrine:database:create --env=test
+	bin/console d:s:u --force --em=default --env=test
+	bin/console d:s:u --force --em=config --env=test
+	SYMFONY_ENV=test composer install
+	bin/console hermes:db-update --env=test
+	rm -r var/cache/* var/log/* 2> /dev/null || true
+	bin/console doctrine:fixtures:load --env=test -n
+	vendor/bin/phpunit -c phpunit.xml tests/Menu/PageTest.php
+
+
+
 init-test:
 	cp .env.test .env
 	composer install

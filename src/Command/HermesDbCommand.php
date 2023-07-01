@@ -10,7 +10,7 @@ use App\Entity\Hermes\Template;
 use App\Entity\Hermes\User;
 use App\Service\Onepage;
 use App\Service\TemplateLibreHermes;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,16 +22,17 @@ class HermesDbCommand extends Command
     protected static $defaultName = 'hermes:db-update';
 
     protected $configurations;
+    protected $em;
     protected $emConfig;
     protected $locale;
 
     protected $app_name;
     protected $onepage;
 
-    public function __construct(EntityManagerInterface $em, ContainerInterface $container, Onepage $onepage)
+    public function __construct(ManagerRegistry $doctrine, ContainerInterface $container, Onepage $onepage)
     {
-        $this->em = $em;
-        $this->emConfig = $container->get('doctrine')->getManager('config');
+        $this->em = $doctrine->getManager('default');
+        $this->emConfig = $doctrine->getManager('config');
         $this->onepage = $onepage;
         $this->configurations = $container->getParameter('init');
         $this->locale = $container->getParameter('app.default_locale');
