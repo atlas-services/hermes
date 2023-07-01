@@ -435,7 +435,7 @@ parameters:
           value: '#000000'
         footer_link_color:
           summary: Couleur des liens du footer
-          value: '#ffffff'
+          value: '#99c1f1'
         footer_link_hover_color:
           summary: Couleur des liens du footer au passage de la souris
           value: '#000000'  

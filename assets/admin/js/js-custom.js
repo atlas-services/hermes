@@ -22,7 +22,11 @@ function hiddeNew(element, uri, hide) {
         }
         if(document.getElementById('id_collapseOptions') != null){
             document.getElementById('id_collapseOptions').hidden = true;
-        }  
+        }
+        // show name  
+        if(document.getElementById('section_template_posts_0_name') != null){
+            document.getElementById('section_template_posts_0_name').parentElement.parentElement.hidden = false;
+        }
     }
 }
 
@@ -57,14 +61,12 @@ function hiddeBaseListe(hide) {
 function hiddeBaseLibre(hide) {
     // switch hide/show "menu_section"
     if(document.getElementById('menu_sections_0_posts_0_content') != null){
-        document.getElementById('menu_sections_0_posts_0_name').parentElement.parentElement.hidden = hide;
         document.getElementById('menu_sections_0_posts_0_content').parentElement.parentElement.hidden = hide;
         document.getElementById('menu_sections_0_posts_0_imageFile_file').parentElement.parentElement.parentElement.parentElement.hidden = hide;
     }
 
     // switch hide/show "section"
     if(document.getElementById('section_template_posts_0_content') != null){
-        document.getElementById('section_template_posts_0_name').parentElement.parentElement.hidden = hide;
         document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = hide;
         document.getElementById('section_template_posts_0_imageFile_file').parentElement.parentElement.hidden = hide;
     }
