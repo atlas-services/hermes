@@ -1,9 +1,5 @@
-<button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal">
-    <p>Sitemap</p>
-</button>
-
 <!-- Modal -->
-<div class="modal fade modal-lg" id="sitemapModal" tabindex="-1" aria-labelledby="sitemapModalLabel" aria-hidden="true" >
+<div class="modal fade modal-lg fixed-top" id="sitemapModal" tabindex="-1" aria-labelledby="sitemapModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,26 +7,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
-    <div class="col-12 mb-3 row ">
-    {% for url in urls %}
-        {%  if(url|length == 1 and url.0.name != url.0.sheetname) %}
-            <div class="col-6 col-sm-2 mb-3 mt-sm-0">
-                <p class="my-0 py-0">{{ url.0.sheetname}} </p>
-                <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'"  style="color: {{ footer_link_color ?? '#ffffff' }}"  class="text-decoration-none" href="{{ url.0.loc }}" > {{ url.0.name|lower}} </a>
-            </div>
-        {%  else %}
-            <div class="col-6 col-sm-2 mb-3 mt-sm-0">
-                <p class="my-0 py-0">{{ url.0.sheetname}} </p>
-            {% for menu in url %}
-                <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" class="text-decoration-none" href="{{ menu.loc }}" > {{ menu.name|lower}} </a><br/>
-            {% endfor %}
-            </div>
-        {%  endif %}
-    {% endfor %}
-    </div>
+        <div class="col-12 mb-3 row ">
+          {% for url in urls %}
+            {%  if(url|length == 1 and url.0.name != url.0.sheetname) %}
+              <div class="col-6 col-sm-2 mb-3 mt-sm-0">
+                  <p class="my-0 py-0">{{ url.0.sheetname}} </p>
+                  <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'"  style="color: {{ footer_link_color ?? '#ffffff' }}"  class="text-decoration-none" href="{{ url.0.loc }}" > {{ url.0.name|lower}} </a>
+              </div>
+            {%  else %}
+              <div class="col-6 col-sm-2 mb-3 mt-sm-0">
+                  <p class="my-0 py-0">{{ url.0.sheetname}} </p>
+              {% for menu in url %}
+                  <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" class="text-decoration-none" href="{{ menu.loc }}" > {{ menu.name|lower}} </a><br/>
+              {% endfor %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
       <div class="modal-footer">
-       </div>
+      </div>
     </div>
   </div>
 </div>
