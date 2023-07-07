@@ -48,12 +48,14 @@ class BaseMenuType extends AbstractNameBaseType
                 'choice_translation_locale' => 'fr',
                 'required' => false,
                 'label' => 'global.locale',
-            ])
-            ->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+            ]);
+            if ($options['referenceName']) {
+                $builder->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'required' => true,
                 'label' => 'global.name_menu_reference',
-            ])
-            ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
+                ]);
+            }
+            $builder->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [
                 'required' => false,
                 'label' => 'global.image',
                 'translation_domain' => 'messages',
@@ -70,6 +72,10 @@ class BaseMenuType extends AbstractNameBaseType
     {
         $menu = $event->getData();
         $menu->setSlug($this->slugify($menu->getName()));
+        $menu->setActive(true);
+        if('ref' == $menu->getReferenceName()){
+            $menu->setReferenceName($menu->getName());
+        }
         $event->setData($menu);
     }
 
@@ -94,6 +100,7 @@ class BaseMenuType extends AbstractNameBaseType
         $resolver->setDefaults([
             'data_class' => Menu::class,
             'label_name' => 'global.name',
+            'referenceName' => true,
             'name_constraints'=> new NotBlank(['message'=> 'error_message.menu.name']),
             'save' => true,
             'saveAndAdd' => true,

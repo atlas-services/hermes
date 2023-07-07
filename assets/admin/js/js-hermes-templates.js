@@ -1,10 +1,9 @@
 let anchor = '#templates';
 let hermes_template = document.querySelector(anchor);
-
-hermes_template.addEventListener('click', function(e) {
-    if(hermes_template != null ){
+if(hermes_template != null ){
+    hermes_template.addEventListener('click', function(e) {
         document.querySelector(anchor).scrollIntoView({
             behavior: 'smooth'
         });
-    }
-});
+    });
+}

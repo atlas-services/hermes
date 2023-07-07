@@ -66,7 +66,8 @@ class MenuController extends AbstractAdminController
     {
 //        Le menun'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
         $menu = new Menu();
-        $form = $this->createForm(BaseMenuType::class, $menu);
+        $options = ['referenceName' => false];
+        $form = $this->createForm(BaseMenuType::class, $menu, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

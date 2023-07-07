@@ -80,7 +80,7 @@ class LoadFullMenu extends Fixture  implements FixtureGroupInterface, ContainerA
             $item = new Sheet();
             $item->setActive(true);
             $item->setLocale('fr');
-            $item->setReferenceName($value);
+            $item->setReferenceName($sheet->getName())($value));
             $item->setCode($value);
             $item->setName($value);
             $item->setSlug(strtolower($value));

@@ -25,6 +25,6 @@ trait ReferenceNameTrait
 
     public function setReferenceName(?string $referenceName): void
     {
-        $this->referenceName = $referenceName;
+        $this->referenceName = strtolower($referenceName);
     }
 }

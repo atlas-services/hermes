@@ -46,11 +46,13 @@ class MenuType extends AbstractNameBaseType
         'choice_translation_locale' => 'fr',
         'required' => false,
         'label' => 'global.locale',
-    ])
-        ->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+        ]);
+        if ($options['referenceName']) {
+            $builder->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
             'required' => true,
             'label' => 'global.name_reference',
-        ]);
+            ]);
+        }
         $builder
             ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
                 'required' => false,
@@ -88,6 +90,9 @@ class MenuType extends AbstractNameBaseType
             $menu->setActive(true);
             $menu->setCode($this->slugify($menu->getName()));
             $menu->setSlug($this->slugify($menu->getName()));
+            if('ref' == $menu->getReferenceName()){
+                $menu->setReferenceName($menu->getName());
+            }
             $sections = $menu->getSections();
             $section = $sections[0];
             if(!is_null($section)){
@@ -119,6 +124,7 @@ class MenuType extends AbstractNameBaseType
             'label_name' =>'global.name',
             'name_constraints'=> new NotBlank(['message'=> 'error_message.menu.name']),
             'sheet' => true,
+            'referenceName' => true,
             'save' => true,
             'saveAndAdd' => true,
             'saveAndAddLabel' => 'menu.update_next',

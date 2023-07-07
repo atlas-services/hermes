@@ -25,6 +25,7 @@
                 {% if form_post.url is defined %}
                     {{ form_row(form_post.url) }}
                 {% endif %}
+                {{ form_row(form.templateWidth) }}
                 {% if form_post.content is defined %}
                     {{ form_row(form_post.content) }}
                 {% endif %}
@@ -50,7 +51,6 @@
         {{ form_row(form.transparent) }}
         {{ form_row(form.templateBgcolor) }}
         {{ form.vars.data.templateBgcolor }}
-        {{ form_row(form.templateWidth) }}
         {{ form_row(form.templateNbCol) }}
         {{ form_row(form.templateImageFilter) }}
         {{ form_row(form.template2) }}

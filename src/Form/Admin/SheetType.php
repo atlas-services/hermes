@@ -23,10 +23,13 @@ class SheetType extends AbstractNameBaseType
                 'required' => false,
                 'label' => 'global.locale',
             ])
-            ->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+        ;
+        if ($options['referenceName']) {
+            $builder->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'required' => true,
                 'label' => 'global.name_reference',
             ]);
+        }
         if ($options['position']) {
             $builder
                 ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
@@ -58,6 +61,9 @@ class SheetType extends AbstractNameBaseType
         if (is_null($sheet->getId())) {
             $sheet->setActive(true);
             $sheet->setCode($this->slugify($sheet->getName()));
+            if('ref' == $sheet->getReferenceName()){
+                $sheet->setReferenceName($sheet->getName());
+            }
         }
         $sheet->setSlug($this->slugify($sheet->getName()));
         $event->setData($sheet);
@@ -84,6 +90,7 @@ class SheetType extends AbstractNameBaseType
             'data_class' => Sheet::class,
             'active' => true,
             'position' => true,
+            'referenceName' => true,
             'name' => true,
             'name_required' => false,
             'name_constraints'=> new NotBlank(['message'=> 'error_message.sheet.name']),

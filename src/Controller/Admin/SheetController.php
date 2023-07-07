@@ -57,7 +57,8 @@ class SheetController extends AbstractAdminController
         $position_sheet = $sheetRepository->getMaxPosition();
         $sheet = new Sheet();
         $sheet->setPosition($position_sheet);
-        $form = $this->createForm(SheetType::class, $sheet, ['position' => $position_sheet]);
+        $options = ['position' => $position_sheet, 'referenceName' =>false];
+        $form = $this->createForm(SheetType::class, $sheet, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -201,7 +201,7 @@ class HermesDbCommand extends Command
             $menu->setLocale($this->locale);
             $menu->setSheet($sheet);
             $menu->setName("Accueil");
-            $menu->setReferenceName("Accueil");
+            $menu->setReferenceName("accueil");
             $menu->setSlug("Accueil");
             $this->em->persist($menu);
             $this->em->flush();
