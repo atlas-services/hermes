@@ -15,20 +15,20 @@ class Page
 
     protected $doctrine;
     protected $parameterBag;
+    protected $config;
     public function __construct(ManagerRegistry $doctrine, ParameterBagInterface $parameterBag)
     {
         $this->doctrine = $doctrine;
-        $this->parameterBag = $parameterBag;      
+        $this->parameterBag = $parameterBag;     
+        $emConfig = $doctrine->getManager('config');
+        $this->config = $emConfig->getRepository(Config::class, 'config')->getActiveConfig(); 
     }
 
     public function getActiveMenu($sheet, $slug, $route = null, $locale='fr')
     {
         $locale = $this->getLocale($locale);
         $em = $this->doctrine->getManager('default');
-        $emConfig = $this->doctrine->getManager('config');
-        $config = $emConfig->getRepository(Config::class, 'config')->getActiveConfig();
-
-        /*
+          /*
          * On récupère la liste des pages, la liste des menus et le menu sélectionné .
          */
         $sheet_actives = $em->getRepository(Sheet::class)->findBy(['active' => true, 'locale' => $locale], ['position' => 'ASC']);
@@ -57,14 +57,15 @@ class Page
         }
         $locales =$em->getRepository(Menu::class)->getLocalesByMenu($menu, $sheet);
 
-        $nav = $this->getNavBarByLocaleAndSlug($locale, $slug );       
+        $nav = $this->getNavBarByLocaleAndSlug($locale, $slug );     
+
         if(!empty($nav)){
             $key_menu_home = array_keys($nav)[0];
             if(is_array($nav[$key_menu_home])){
                 $key_sous_menu_home = array_keys($nav[$key_menu_home])[0];
                 $home_menu = $nav[$key_menu_home][$key_sous_menu_home];
-                $home_menu_slug = $home_menu->getSlug();
-                $home_sheet_slug = $home_menu->getSheet()->getSlug();
+                $home_menu_slug = $home_menu['slug'];
+                $home_sheet_slug = $home_menu['sheet'];
             }else{
                 $home_menu_slug = $nav[$key_menu_home];
                 $home_sheet_slug = $nav[$key_menu_home];
@@ -89,7 +90,7 @@ class Page
         /*
          * @TODO simplification config
          */
-        $array = array_merge($array, $config);
+        $array = array_merge($array, $this->config);
 
         return $array;
 
@@ -103,12 +104,9 @@ class Page
         $menuSlug = $em->getRepository(Menu::class)
             ->findOneBy(['active' => true ,'locale' => $locale, 'slug'=>$slug]);
 
-        if(is_null($menuSlug)){
-            $referenceName = "home";
-            $localeName = "home";
-        }else{
+        if(!is_null($menuSlug)){
             $referenceName = $menuSlug->getReferenceName();
-            $localeName = $em->getRepository(Menu::class)
+            $menuName = $em->getRepository(Menu::class)
                 ->findOneBy(['active' => true, 'locale' => $locale, 'referenceName'=>$referenceName])->getName();
         }
 
@@ -118,7 +116,11 @@ class Page
 
         foreach ($menusLocale as $menu){
             if($locale == $menu->getSheet()->getLocale()){
-                $menus[$menu->getSheet()->getName()][$menu->getName()] = $menu;
+                $menus[$menu->getSheet()->getName()][$menu->getName()] = [
+                    'sheet' =>  $menu->getSheet()->getSlug(),
+                    'slug' =>  $menu->getSlug(),
+                ]
+                ;
             }
         }
         foreach ($menus as $sheet_name => $listmenu) {
@@ -126,9 +128,13 @@ class Page
             $nav['dropdown'] = '';
             $nav['dropdowntoggle'] = '';
             $nav['border_bottom'] = '';
+            $nav['color_link'] = $this->config['nav_link_color'];
+            $nav['bg_color_link'] = 'transparent';
 
-            if ($referenceName == $sheet_name or in_array($localeName, array_keys($listmenu))) {
+            if ($referenceName == $sheet_name or in_array($menuName, array_keys($listmenu))) {
                 $nav['active'] = 'active';
+                $nav['color_link'] = $this->config['nav_color_active'];
+                $nav['bg_color_link'] = $this->config['nav_bgcolor_active'];
             }
             $navbar[$sheet_name] = $listmenu;
             if (is_array($listmenu)) {
@@ -137,8 +143,10 @@ class Page
                     $nav['dropdown'] = 'dropdown';
                     $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
                     $nav['border_bottom'] = 'border-bottom';
+                }else{
+                    $nav['href'] = $url = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); ;
                 }
-                $navbar[$sheet_name]['config'] = $nav;
+                $navbar[$sheet_name] = array_merge($navbar[$sheet_name], $nav);
                 $nav = [];
             };
 
