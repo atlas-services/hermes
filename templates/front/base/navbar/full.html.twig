@@ -4,35 +4,22 @@
         <span class="menu-icon__line menu-icon__line-right" style=" background-color: {{ nav_header_color ?? 'transparent' }}"></span>
 </div>
 
-<div class="nav-active nav col-lg-{{ nav_container_width }} col-12 mx-auto px-0" style=" background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}">
+<div data-bg-color={{nav_bgcolor}}  class="nav-active nav col-lg-{{ nav_container_width }} col-12 mx-auto px-0" style=" background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}" >
     <div class="nav__content">
         <ul class="nav__list" >
             {% for sheet_name, listmenu in nav %}
             {% set sheet_slug = sheetsSlug[sheet_name] %}
-            {% set href = listmenu.config.href ?? path('sheet', {'sheet':sheet_slug, 'slug': sheet_slug }) %}
-            {% set active = listmenu.config.active ?? '' %}
-            {% set dropdown = listmenu.config.dropdown ?? '' %}
-            {% set dropdowntoggle = listmenu.config.dropdowntoggle ?? '' %}
-            {% set border_bottom = listmenu.config.border_bottom ?? '' %}
-            {% if (sheet_slug == app.request.get('_route')) %}
-                {% set active = 'active' %}
-            {% endif %}
-                   {% if('active' == active) %}
-                <li class="nav__list-item {{ active }} {{ dropdown }} "  style="background-color: {{ nav_bgcolor_active }}"  >
-               {% set colorlink =  nav_color_active  %}
-            {% else %}
-                <li class="nav__list-item {{ active }} {{ dropdown }} " >
-                {% set colorlink =  nav_link_color  %}
-            {% endif %}
-                <a style="color: {{ colorlink }}" id="{{ sheet_name }}" class="js-scroll {{ dropdowntoggle }} " role="button"  data-bs-toggle="{{ dropdown }}" aria-haspopup="true" aria-expanded="false"
-                   href={{ href }}>{{ sheet_name }}
+                {% set zindex = 100 - loop.index %}
+                <li class="nav__list-item {{ listmenu.active }} {{ listmenu.dropdown }} "  style="background-color: {{ listmenu.bg_color_link }} ;  z-index:{{ zindex }};"  >
+                <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="text-decoration-none js-scroll {{ listmenu.dropdowntoggle }} " role="button"  data-bs-toggle="{{ listmenu.dropdown }}" aria-haspopup="true" aria-expanded="false"
+                   href={{ listmenu.href }}>{{ sheet_name }}
                 </a>
-                {% if (listmenu.name is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
-                    <ul class="col-12 dropdown-menu nav__list  "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_link_color }};border-color:{{ nav_link_color }};  " >
-                             {% for menu_name, menu in listmenu %}
+                {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
+                    <ul class="col-12 dropdown-menu nav__list  "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_link_color }};border-color:{{ nav_link_color }};" >
+                        {% for menu_name, menu in listmenu %}
                             {% if menu.slug is defined  %}
-                                <li class=" mb-2 me-2 {{ nav_link_border_bottom }}" >
-                                    <a style="color: {{ nav_link_color }}"  class="text-decoration-none page-scroll ps-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu.name }}</a>
+                                <li class="  mb-2 me-2 {{ nav_link_border_bottom }}" >
+                                    <a style="color: {{ nav_link_color }}"  class="text-decoration-none page-scroll ps-2 pb-2"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -43,15 +30,6 @@
          </ul>
     </div>
 </div>
-{% if ( 'accueil' == app.request.attributes.get('sheet')|lower and accueil.value >= 80 ) %}
-    <div id="chevron_accueil_down_div" class="top right position-fixed" style="top: 50% ;right: 50% ;background-color: {{ chevron_accueil_bgcolor }}; opacity: {{ chevron_accueil_opacity }}" >
-        <h3 class="section-subheading text-right">
-            <a id ="chevron_down"  class="js-scroll-trigger" href="#top">
-                <i class="fa fa-chevron-{{ chevron ?? '' }}down " style="font-size: 80px; color: {{ chevron_accueil_color ?? '' }}; "></i>
-            </a>
-        </h3>
-    </div>
-{% endif %}
 <div id="chevron_down_div" class="top right" style="top: {{ chevron_position ?? '0%' }};right: {{ chevron_right ?? '15px' }};background-color: {{ chevron_bgcolor }}; opacity: {{ chevron_opacity }}" >
     <h3 class="section-subheading text-right">
         <a id ="chevron_down"  class="js-scroll-trigger" href="#section_bottom">
@@ -65,7 +43,6 @@
             <i class="fa fa-chevron-{{ chevron ?? '' }}up fa-6" style="color: {{ chevron_color ?? '' }};"></i></a>
     </h3>
 </div>
-
 {#<div class="menu-icon">#}
 {#    <span class="menu-icon__line menu-icon__line-left"></span>#}
 {#    <span class="menu-icon__line"></span>#}

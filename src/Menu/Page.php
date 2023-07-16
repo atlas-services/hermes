@@ -127,7 +127,6 @@ class Page
             $nav['active'] = '';
             $nav['dropdown'] = '';
             $nav['dropdowntoggle'] = '';
-            $nav['border_bottom'] = '';
             $nav['color_link'] = $this->config['nav_link_color'];
             $nav['bg_color_link'] = 'transparent';
 
@@ -142,7 +141,6 @@ class Page
                     $nav['href'] = '#';
                     $nav['dropdown'] = 'dropdown';
                     $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
-                    $nav['border_bottom'] = 'border-bottom';
                 }else{
                     $nav['href'] = $url = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); ;
                 }
