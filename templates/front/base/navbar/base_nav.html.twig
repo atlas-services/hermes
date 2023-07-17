@@ -10,8 +10,7 @@
     {% set justify_content_center = '' %}
     {% set col_offset = 'col-lg-' ~ offset ?? '12' %}
 {% endif %}
-
-<nav id="logo" style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+<nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
     <div class="col-lg-{{ nav_container_width|col_lg()   }}  container-fluid border-0 " style="background-color: {{nav_bgcolor}};">
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}

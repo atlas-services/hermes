@@ -1,10 +1,11 @@
+<div id="section_top" ></div>
 <div  class="menu-icon" style="background-color: 'transparent'" >
         <span class="menu-icon__line menu-icon__line-left " style=" background-color: {{ nav_header_color ?? 'transparent' }}"></span>
         <span class="menu-icon__line" style=" background-color: {{ nav_header_color ?? 'transparent' }}"></span>
         <span class="menu-icon__line menu-icon__line-right" style=" background-color: {{ nav_header_color ?? 'transparent' }}"></span>
 </div>
 
-<div id="logo" data-bg-color={{nav_bgcolor}}  class="nav-active nav col-lg-{{ nav_container_width }} col-12 mx-auto px-0" style=" background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}" >
+<div data-bg-color={{nav_bgcolor}}  class="nav-active nav col-lg-{{ nav_container_width }} col-12 mx-auto px-0" style=" background-color: {{nav_bgcolor}}; font-family: {{ nav_font_family }}" >
     <div class="nav__content">
         <ul class="nav__list" >
             {% for sheet_name, listmenu in nav %}
@@ -39,7 +40,7 @@
 </div>
 <div id="chevron_up_div" class="top"  style="top: {{ chevron_position ?? '0%' }};right: {{ chevron_right ?? '15px' }};background-color: {{ chevron_bgcolor }}; opacity: {{ chevron_opacity }}; display:none" >
     <h3 class="section-subheading text-muted">
-        <a id="chevron_up" class="js-scroll-trigger" href="#logo">
+        <a id="chevron_up" class="js-scroll-trigger" href="#section_top">
             <i class="fa fa-chevron-{{ chevron ?? '' }}up fa-6" style="color: {{ chevron_color ?? '' }};"></i></a>
     </h3>
 </div>
