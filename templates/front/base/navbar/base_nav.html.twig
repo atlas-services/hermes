@@ -16,15 +16,9 @@
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}
                 {% if affiche_logo_top == true %}
-                        {% if home.sheet == home.slug %}
-                            <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('slug', {'slug': home.slug}) }}">
-                                <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
-                            </a>
-                        {% else %}
-                            <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
-                                <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
-                            </a>
-                        {% endif %}
+                    <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('home') }}">
+                        <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
+                    </a>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -32,15 +26,9 @@
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
-                        {% if home.sheet == home.slug %}
-                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('slug', {'slug': home.slug}) }}">
-                                <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
-                            </a>
-                        {% else %}
-                            <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
-                                <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
-                            </a>
-                        {% endif %}
+                        <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('home') }}">
+                            <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                        </a>
                     {% endif %}
                 {% endif %}
             {% endif %}

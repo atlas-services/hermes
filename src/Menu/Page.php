@@ -137,13 +137,17 @@ class Page
             }
             $navbar[$sheet_name] = $listmenu;
             if (is_array($listmenu)) {
-                if ((strtolower($sheet_name) != strtolower(array_key_first($listmenu))) or 2 < count($listmenu)) {
-                    $nav['href'] = '#';
-                    $nav['dropdown'] = 'dropdown';
-                    $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
+                if ($sheet_name == array_key_first($menus)) {
+                    $nav['href'] = sprintf("/%s/", $locale);                
                 }else{
-                    $nav['href'] = $url = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); ;
-                }
+                    if ((strtolower($sheet_name) != strtolower(array_key_first($listmenu))) or 2 < count($listmenu)) {
+                        $nav['href'] = '#';
+                        $nav['dropdown'] = 'dropdown';
+                        $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
+                    }else{
+                       $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); ;
+                    }
+                 }
                 $navbar[$sheet_name] = array_merge($navbar[$sheet_name], $nav);
                 $nav = [];
             };
