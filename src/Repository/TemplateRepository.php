@@ -17,7 +17,7 @@ class TemplateRepository extends ServiceEntityRepository
 {
     use BaseRepositoryTrait;
 
-    const TEMPLATES_BASE = ['libre', 'contact', 'folio1'];
+    const TEMPLATES_BASE = ['libre', 'folio1','contact', 'newsletter','livredor' ];
 
     public function __construct(RegistryInterface $registry)
     {

@@ -42,11 +42,13 @@ class Page
 
         $menu = $em->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug, $locale);
         $hasContact = false;
+        $listForms = [];
         if(!is_null(($menu))){
             $sectionsMenu = $menu->getSections();
             foreach ($sectionsMenu as $section){
-                if( ContactInterface::CONTACT  == $section->getTemplate()->getCode()){
+                if( ContactInterface::TYPE  === $section->getTemplate()->getType()){
                     $hasContact = true;
+                    $listForms[] = $section->getTemplate()->getCode();
                 }
             }
         }
@@ -82,6 +84,7 @@ class Page
             'menus' => $menus ?? $sheets,
             'menu' => $menu,
             'hasContact' => $hasContact,
+            'listForms' => $listForms,
             'locales' => $locales,
             'nav' => $nav,
             'home' => $home,

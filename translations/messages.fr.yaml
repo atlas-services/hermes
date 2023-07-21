@@ -173,6 +173,7 @@ config:
   affiche_list_head: Configuration balises title et meta
   affiche_list: Configuration générale du site
   affiche_list_contact: Configuration du contact
+  affiche_list_newsletter: Configuration de la newsletter
   affiche_list_menu: Configuration du menu
   affiche_list_content: Configuration du contenu
   affiche_list_folio: Configuration des folios
@@ -375,6 +376,7 @@ general:
 ######### Titre page ############
 formulaire:
   contact: Contact
+  newsletter: Newsletter
   texte: Pour des informations supplémentaires
   titre: Formulaire de Contact
   name: Nom

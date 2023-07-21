@@ -1,3 +1,5 @@
+const formulaires = ["Contact", "Newsletter", "Livre d'or"] ;
+
 window.addEventListener('load', (event) => {
     var uri = window.location.pathname;
     var urls = ['/nouveau-menu/nouveau-contenu', '/nouvelle-section/nouveau-contenu'];
@@ -80,7 +82,7 @@ function handleSelectTemplate(select_template) {
             var selected_template_type = select_template.options[select_template.selectedIndex].innerHTML;
             showBase();   
 
-            if('Contact' == selected_template_type){
+            if(formulaires.includes(selected_template_type)){
                 collapseListe(true);
                 if(document.getElementById('section_template_posts_0_content') != null){
                     document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;

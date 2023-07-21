@@ -24,11 +24,11 @@
         <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal">
             <p>Sitemap</p>
         </button>
-            <div class="col-md-8 col-sm-6 col-12">
+            <div class="col-md-12 col-sm-6 col-12">
                 <p  >{{ 'global.created_by'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">HERMES</a> |  <img src="/img/copyleft.png" class="my-auto" width="20px" >{{ 'global.copyleft'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">http://hermes-cms.org</a>
                 </p>
             </div>
-            <div class="col-md-4 col-sm-6 col-12">
+            <div class="col-sm-6 col-12">
                 <ul class="social-icons">
                     {% if instagram is not null %}
                         <li><a  href="{{ instagram }}" target="_blanks"><i class="fa fa-instagram"></i></a></li>

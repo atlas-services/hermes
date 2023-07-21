@@ -51,6 +51,16 @@ parameters:
         summary: Template contact
         code: contact
         name: Contact
+      newsletter:
+        type: formulaire
+        summary: Template Newsletter
+        code: newsletter
+        name: Newsletter
+      livredor:
+        type: formulaire
+        summary: Template Livre d'or
+        code: livredor
+        name: Livre d'or
       modale1:
         type: modale 
         summary: Présentation modale slide
@@ -326,6 +336,25 @@ parameters:
           value: 'btn-outline-white'
         contact_width:
           summary: Largeur de la page contact (max = 12)
+          value: 12
+      newsletter:
+        newsletter_contact:
+          summary: Email de contact (utilisé dans le formulaire de newsletter)
+          value: newsletter@atlas-services.fr
+        newsletter_summary:
+          summary: Texte pour la Newsletter.
+          value: Inscrivez-vous à notre Newsletter
+        newsletter_bgcolor:
+          summary: Couleur de fond de la page newsletter
+          value: 'transparent'
+        newsletter_color:
+          summary: Couleur des textes la page newsletter
+          value: '#ffffff'
+        newsletter_bgcolor_btn:
+          summary: Couleur de fond du bouton de la page newsletter
+          value: 'btn-outline-white'
+        newsletter_width:
+          summary: Largeur de la page newsletter (max = 12)
           value: 12
       nav:
         nav_bar:

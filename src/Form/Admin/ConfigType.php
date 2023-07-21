@@ -186,12 +186,16 @@ class ConfigType extends AbstractBaseType
                     $choice = true;
                     $options = $options_bg_submit;
                     break;
-                    
+                // newsletter_bgcolor_btn
+                case 'newsletter_bgcolor_btn':
+                    $choice = true;
+                    $options = $options_bg_submit;
+                    break;                    
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
                     'choices' => $options,
-                    'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                    'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                 ]);
             }
             if(!$choice) {
@@ -204,21 +208,21 @@ class ConfigType extends AbstractBaseType
                             'transparent.no' => false,
                             'transparent.yes' => true ,
                         ],
-                        'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                        'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                     ]);
                 } else {
                     if ('width' == $code || strpos($code, 'width')) {
                         $form->add('value', ChoiceType::class, [
                             'required' => false,
                             'choices' =>   $options_cols,
-                            'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                            'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                         ]);
                     }else{
                         if('font_family' == $code || strpos($code, 'font_family')){
                             $form->add('value', ChoiceType::class, [
                                 'required' => false,
                                 'choices' =>   $options_font_family,
-                                'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                                'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                             ]);
                         }
                         else{
@@ -255,6 +259,7 @@ class ConfigType extends AbstractBaseType
                 'head' => 'head',
                 'générale' => 'site',
                 'contact' => 'contact',
+                'newsletter' => 'newsletter',
                 'image' => 'image',
                 'menu' => 'nav',
                 'contenu' => 'content',

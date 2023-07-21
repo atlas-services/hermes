@@ -3,28 +3,60 @@
 namespace App\Entity\Hermes;
 
 use App\Entity\Interfaces\ContactInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class Contact implements ContactInterface
 {
-    /**
-     * @Assert\Length(max=40)
-     * @Assert\NotBlank(message = "Le nom doit être renseigné")
-     */
-    private $name;
 
-    /**
-     * @Assert\NotBlank(message = "L'email doit être renseigné")
-     * @Assert\Email(message = "L'email n'est pas correct")
-     */
+    const NEWSLETTER = 'Newsletter';
+    const CONTACT = 'Contact';
+    const LIVREDOR = "Livredor";
+
+    private $name;
+    private $subject;
     private $email;
 
     private $telephone;
 
-    /**
-     * @Assert\Length(max=1000)
-     */
     private $message;
+
+    public function __construct()
+    {
+        $this->subject = self::CONTACT;
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
+    {
+        $metadata->addPropertyConstraint(
+            'email', 
+            new Assert\Email(
+                ['groups' => ['contact', 'newsletter', 'livredor'],
+        ]));
+
+        $metadata->addPropertyConstraint(
+            'name', 
+            new Assert\NotBlank(
+                ['groups' => ['contact', 'livredor'],
+        ]));
+        $metadata->addPropertyConstraint(
+            'name', 
+            new Assert\Length(
+                [
+                'min'    => 2,
+                'max'    => 40,
+                'groups' => ['contact', 'livredor'],
+            ]));
+
+        $metadata->addPropertyConstraint(
+            'message', 
+            new Assert\Length(
+                [
+                'groups' => ['contact', 'livredor'],
+                'min' => 2,
+                'max' => 1000,
+        ]));
+    }
 
     /**
      * @return mixed
@@ -85,9 +117,30 @@ class Contact implements ContactInterface
     /**
      * @param mixed $message
      */
-    public function setMessage($message): void
+    public function setMessage($message): self
     {
         $this->message = $message;
+
+        return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param mixed $subject
+     */
+    public function setSubject(?string $subject): self
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
 
 }

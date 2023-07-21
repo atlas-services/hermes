@@ -96,75 +96,6 @@ class FrontController extends AbstractController
     }
 
 
-    /**
-     * @Route(
-     *     "/contacta",
-     *     name="contact",
-     *     methods={"GET|POST"}
-     *     )
-     * @Route(
-     *     "/{_locale}/livre-d-or",
-     *     name="livre-d-or",
-     *     methods={"GET|POST"}
-     *     )
-     */
-    public function form(Request $request, CacheInterface $backCache, Mailer $mailer, Page $page, $sheet = 'accueil', $slug = 'accueil')
-    {
-        $route = $request->attributes->get('_route');
-        $locale = $request->attributes->get('_locale' , 'fr');
-        
-        if (ContactInterface::LIVREDOR_ROUTE == $route) {
-            $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
-            $entity = new Temoignage();
-            $form = $this->createForm(TemoignageType::class, $entity,
-                array(
-                    'action' => $this->generateUrl(ContactInterface::LIVREDOR_ROUTE),
-                    'method' => 'POST',
-                ));
-            $entityManager = $this->getDoctrine()->getManager();
-            $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
-            $array[ContactInterface::LIVREDOR] = $livredor;
-        }
-        if (ContactInterface::CONTACT == $route) {
-            $array = $page->getActiveMenu(ContactInterface::CONTACT, ContactInterface::CONTACT,$route, $locale);
-            $entity = new Contact();
-            $form = $this->createForm(ContactType::class, $entity,
-                array(
-                    'action' => $this->generateUrl('contact'),
-                    'method' => 'POST',
-                ));
-        }
-
-        // On vérifie qu'elle est de type « POST ».
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                if (ContactInterface::LIVREDOR_ROUTE == $route) {
-                    $entityManager->persist($form->getData());
-                    $entityManager->flush();
-                }
-
-                // On récupère notre objet.
-                $entity = $form->getData();
-                $context = array_merge(['contact_form'=>$entity], $array );
-                $template = 'front/contact/_includes/email.html.twig';
-                $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $context);
-                $this->addFlash($return['type'], $return['message']);
-                $notification = $return['message'];
-                $this->addFlash('info', $notification);
-                return $this->redirect('/');
-//                return $this->redirectToRoute($route);
-            } else {
-                $notification = "Votre message n'a pas été envoyé.";
-                $this->addFlash('error', $notification);
-            }
-            $array['notification'] = $notification;
-        }
-        $array['form'] = $form->createView();
-
-        return $this->render('front/index.html.twig', $array);
-    }
 
     /**
      *  @Route(
@@ -186,9 +117,6 @@ class FrontController extends AbstractController
         $home_menu = $this->getDoctrine()->getRepository(Menu::class)->getHomeMenu($locale);
         $sheet = $home_menu->getSheet()->getSlug();
         $slug = $home_menu->getSlug();
-        if ('livre-d-or' == $sheet) {
-            return $this->redirectToRoute('livre-d-or');
-        }
         $array = $this->getArray($page, $sheet, $slug, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if(is_null($array['menu']) or $localeNotExists){
@@ -220,9 +148,9 @@ class FrontController extends AbstractController
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-        if ('livre-d-or' == $sheet) {
-            return $this->redirectToRoute('livre-d-or');
-        }
+        // if ('livre-d-or' == $sheet) {
+        //     return $this->redirectToRoute('livre-d-or');
+        // }
         $array = $this->getArray($page, $sheet, $slug, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if(is_null($array['menu']) or $localeNotExists){
@@ -253,9 +181,9 @@ class FrontController extends AbstractController
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-        if ('livre-d-or' == $sheet) {
-            return $this->redirectToRoute('livre-d-or');
-        }
+        // if ('livre-d-or' == $sheet) {
+        //     return $this->redirectToRoute('livre-d-or');
+        // }
         $array = $this->getArray($page,$sheet, $slug, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if(is_null($array['menu']) or $localeNotExists){
@@ -275,8 +203,11 @@ class FrontController extends AbstractController
     }
 
     private function baseForm($request, $page, $array, $mailer, $route){
+            if(isset($array['listForms'])){
+                $validation_group = $array['listForms'][0];
+            }
             $entity = new Contact();
-            $form = $this->createForm(ContactType::class, $entity,);
+            $form = $this->createForm(ContactType::class, $entity,['validation_groups' => [$validation_group]]);
 
             // On vérifie qu'elle est de type « POST ».
             $form->handleRequest($request);

@@ -1,0 +1,38 @@
+<!-- Contact Section -->
+<section class=" pt-sm-3 pb-1  px-0 container-fluid col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ newsletter_bgcolor ?? contact_bgcolor }} ; color:{{ newsletter_color ?? contact_color }}; " >
+    <div class="container mt-0 col-lg-{{ content_container_width|col_lg() }}"  >
+        {% if 'one page' == nav_bar  %}
+            <div class="col-lg-12 col-12 text-center mb-5">
+                <p> <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="js-scroll-trigger main-btn wow fadeInUp rounded-pill" data-wow-delay="0.8s" data-wow-duration="1.0s" href="{{ path('sheet') }}">Retour sur le site</a></p>
+            </div>
+        {% endif %}
+
+        {% if newsletter_summary is defined and newsletter_summary is not null  %}
+            <div class="col-12 text-center mt-sm-0 mb-sm-1 my-1">
+                <p> {{ newsletter_summary }}</p>
+            </div>
+        {% endif %}
+        <div class="row col-12 mx-auto px-0">
+            <div class="col-lg-12 col-12 mx-auto px-0">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="row my-sm-4 my-3">
+                        <div class="col-6 ">
+                            {{ form_widget(form.email) }}
+                        </div>
+                        <div class="col-6">
+                        <button id="sendNewsletterButton" class="btn {{newsletter_bgcolor_btn ?? contact_bgcolor_btn ?? 'btn-outline-danger'}} h-rounded-lg-4 btn-xl " type="submit">
+                            {{ 'formulaire.send'|trans() }}
+                        </button>
+                        </div>
+                </div>
+                        {{ form_widget(form.csrf_token) }}
+                 {{ form_end(form, {render_rest: false}) }}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

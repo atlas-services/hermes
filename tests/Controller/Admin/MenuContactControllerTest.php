@@ -58,7 +58,6 @@ class MenuContactControllerTest extends AbstractBaseControllerTest
 
         $form_sheet["sheet[locale]"]->select('fr'); // 'fr_FR'
         $form_sheet["sheet[name]"] = 'Contact';
-        $form_sheet["sheet[referenceName]"] = 'contact';
         
         $crawler = $client->submit($form_sheet);
 

@@ -65,20 +65,20 @@ class MyRequestListener {
 
             }
         // redirect vers "Home menu ou First menu"
-            if (in_array($request->getPathInfo(), $redirectHome)){
-                $locale = $this->getLocale($request);
-                $home_menu= $this->menuRepository->getHomeMenu($locale);
-                $menu_slug = $home_menu->getSlug();
-                $sheet_slug = $home_menu->getSheet()->getSlug();
-                if($menu_slug == $sheet_slug){
-                    $url = sprintf("/%s/%s", $locale, $sheet_slug);
-                }else{
-                    $url = sprintf("/%s/%s/%s", $locale, $sheet_slug, $menu_slug);
-                }
-                $redirect = new RedirectResponse($url);
-                $event->setResponse($redirect);
+            // if (in_array($request->getPathInfo(), $redirectHome)){
+            //     $locale = $this->getLocale($request);
+            //     $home_menu= $this->menuRepository->getHomeMenu($locale);
+            //     $menu_slug = $home_menu->getSlug();
+            //     $sheet_slug = $home_menu->getSheet()->getSlug();
+            //     if($menu_slug == $sheet_slug){
+            //         $url = sprintf("/%s/%s", $locale, $sheet_slug);
+            //     }else{
+            //         $url = sprintf("/%s/%s/%s", $locale, $sheet_slug, $menu_slug);
+            //     }
+            //     $redirect = new RedirectResponse($url);
+            //     $event->setResponse($redirect);
 
-            }
+            // }
 
         }
 
