@@ -10,7 +10,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes:
-        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        # - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+        - '/Form/ckeditor_widget.html.twig'
         - 'admin/form/theme.html.twig'
     globals:
         content_images_prefix: '%env(APP_PATH_CONTENT_IMAGES)%'

@@ -7,6 +7,8 @@
     <a class="btn h-btn-outline-success"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     {{ include('admin/section/_form.html.twig') }}
+    
+    {{ include('admin/section/libres.html.twig') }}
 
     <a class="btn h-btn-outline-success"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 {% endblock %}

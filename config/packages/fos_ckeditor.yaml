@@ -3,6 +3,9 @@
 fos_ck_editor:
   configs:
     my_config:
+      input_sync: true
+      readOnly: false
+      # inline: true
       jquery: true
       toolbar: full
       height: '50%'

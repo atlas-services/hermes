@@ -103,6 +103,8 @@ Start Server on a terminal
        
 Start webpack on a second terminal
 
+    export NODE_OPTIONS=--openssl-legacy-provider 
+
     yarn encore dev --watch
     or
     yarn encore dev 

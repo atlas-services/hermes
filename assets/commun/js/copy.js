@@ -1,3 +1,4 @@
+import { firebase } from 'googleapis/build/src/apis/firebase';
 import $ from 'jquery';
 const jQuery = $;
 (function ($) {
@@ -35,15 +36,30 @@ const jQuery = $;
                 // change image "src local" to "src hermes-cms.org"
                 copyHTML = copyHTML.replaceAll('src="/hermes/uploads/content', 'src="https://hermes-cms.org/hermes/uploads/content');
                 copy(copyHTML); // innerHtml
+     
                 text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
                     '            Le code html du template a bien été <strong>copié</strong>!.\n' +
                     '        </div>';
             }
+
+            var source =  document.getElementById('cke_18');
+            var editable =  document.getElementById('cke_1_contents');
+
+            console.log(source);
+            editable.innerHTML(innerHTML);
+            source.click();
+            // // $("textarea.cke_source").append(copyHTML);
+
+            // $("body.cke_editable").append(copyHTML);
+            // $("#cke_18").click();
+
             document.getElementById(idCopy).insertAdjacentHTML('afterend',text_alert);
         } catch (err) {
             // Une erreur est survenue lors de la tentative de copie
             alert(err);
         }
+  
+ 
     }
 })(jQuery); // End of use strict
