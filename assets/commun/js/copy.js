@@ -35,6 +35,11 @@ const jQuery = $;
                 // change image "src local" to "src hermes-cms.org"
                 copyHTML = copyHTML.replaceAll('src="/hermes/uploads/content', 'src="https://hermes-cms.org/hermes/uploads/content');
                 copy(copyHTML); // innerHtml
+                let source = document.querySelector('#cke_18');
+                if(null != source){
+                    source.click();
+                    source.scrollIntoView();
+                }
                 text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
                     '            Le code html du template a bien été <strong>copié</strong>!.\n' +
