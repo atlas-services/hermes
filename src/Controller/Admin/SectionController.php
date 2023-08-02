@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Api\ApiClient;
 use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Menu;
@@ -65,8 +66,10 @@ class SectionController extends AbstractAdminController
      * @Route("/menu/{menu}/nouvelle-section/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
      * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
-    public function SectionPostNewMenu(Request $request, Copy $copy, ?Menu $menu): Response
+    public function SectionPostNewMenu(Request $request, Copy $copy,ApiClient $apiClient , ?Menu $menu): Response
     {
+        $libres = $apiClient->getTemplates('templates', 2);
+        dump($libres);
         $section = new Section() ;
         $post = new Post();
         $section->addPost($post);
@@ -108,7 +111,8 @@ class SectionController extends AbstractAdminController
 
         $array = [
             'form' => $form->createView(),
-            'menu' => $section->getMenu() ?? ''
+            'menu' => $section->getMenu() ?? '',
+            'libres' => $libres
         ];
         $array = $this->mergeActiveConfig($array);
 

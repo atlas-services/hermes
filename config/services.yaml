@@ -5,7 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 imports:
 - { resource: 'hermes.yaml' }
-
+parameters:
+    API_HERMES_TEMPLATES: '%env(API_HERMES_TEMPLATES)%'
 services:
     # default configuration for services in *this* file
     _defaults:
