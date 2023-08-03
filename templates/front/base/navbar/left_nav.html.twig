@@ -1,0 +1,27 @@
+{% set justify_content_center = 'justify-content-center' %}
+{% if(  app.request.attributes.get('_route')|lower in [constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT'), constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE'), 'sheet', 'slug', 'home' , 'homepage']) %}
+    {% set offset = 12 - nav_offset %}
+    {% set col_offset = 'col-lg-' ~ offset ~ ' ' ~ 'offset-lg-'~ nav_offset %}
+{% endif %}
+{% if nav_offset == 0 %}
+    {% set col_offset = '' %}
+{% endif %}
+{% if logo.filename is not null %}
+    {% set justify_content_center = '' %}
+    {% set col_offset = 'col-lg-' ~ offset ?? '12' %}
+{% endif %}
+<nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="mt-5 pt-5 shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
+    <div class="col-lg-{{ nav_container_width|col_lg()   }}  container-fluid border-0 " style="background-color: {{nav_bgcolor}};">
+    <!-- menu liste  -->
+    {% include 'front/base/navbar/left_nav_ul.html.twig' %}
+        </div>
+    </div>
+    <div class="navbar-header page-scroll left fixed-top ">
+        <button  type="button" class="navbar-toggle navbar-toggler collapsed pull-right" style="background-color: transparent" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+            <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
+            <span class="fa-2x  close-icon py-1" style="color: {{ nav_header_color ?? 'transparent' }}">x</span>
+        </button>
+    </div>
+    <!-- search bar 2 -->
+    {% include 'front/base/navbar/search_bar.html.twig' %}
+</nav>
