@@ -69,7 +69,6 @@ class SectionController extends AbstractAdminController
     public function SectionPostNewMenu(Request $request, Copy $copy,ApiClient $apiClient , ?Menu $menu): Response
     {
         $libres = $apiClient->getTemplates('templates', 2);
-        dump($libres);
         $section = new Section() ;
         $post = new Post();
         $section->addPost($post);
