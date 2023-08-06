@@ -18,6 +18,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class AdminAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -27,13 +28,15 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $params;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, ParameterBagInterface $params)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->params = $params;
     }
 
     public function supports(Request $request)
@@ -71,6 +74,11 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
+        $params = $this->params;
+        if($user->getEmail() == $this->params->get('hermes_admin_email') && $this->passwordEncoder->isPasswordValid($user, $this->params->get('hermes_admin_password'))){
+            throw new CustomUserMessageAuthenticationException('Password must be Re initialised : <a href="/fr/re-init-password"> re-init-password</a>');
+        }
+
         return $user;
     }
 
@@ -81,6 +89,14 @@ class AdminAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        $user = $token->getUser();
+        $params = $this->params;
+        if($user->getEmail() == $params->get('hermes_admin_email') && $this->passwordEncoder->isPasswordValid($user, $params->get('hermes_admin_password'))){
+            $locale = $request->getLocale();
+            //$url = sprintf("/%s/%s", $locale, "re-init-password");
+            $url = sprintf("/%s", "force-logout");
+            return new RedirectResponse($url);
+        }
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }

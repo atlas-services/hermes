@@ -22,6 +22,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/forgotten_password", name="app_forgotten_password")
+     * @Route("/re-init-password", name="app_init_password")
      */
     public function forgottenPassword(Request $request, Mailer $mailer,TokenGeneratorInterface $tokenGenerator): Response
     {

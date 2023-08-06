@@ -220,7 +220,7 @@ user:
   roles: Roles
   username: Username
   password: Mot de passe
-  forgot_password: Mot de passe oublié
+  forgot_password: Recevoir un nouveau mot de passe
   reset_password: Cliquer sur ce lien pour réinitialiser Votre mot de passe
   send_email: Envoyer
   admin: Mon espace d'administration

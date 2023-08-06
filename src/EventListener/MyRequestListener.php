@@ -55,15 +55,6 @@ class MyRequestListener {
                     break;
             }
 
-            // redirect vers "modifier mdp"
-            if(str_contains($attr_controller,'App\Controller\Admin')){
-                $user = $this->security->getuser();
-                $params = $this->params;
-                if($user->getEmail() == $params->get('hermes_admin_email')){
-                    
-                }
-
-            }
         // redirect vers "Home menu ou First menu"
             // if (in_array($request->getPathInfo(), $redirectHome)){
             //     $locale = $this->getLocale($request);
