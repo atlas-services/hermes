@@ -3,7 +3,7 @@
 {% block title %}{{ 'menu.show'|trans() }}{% endblock %}
 
 {% block content %}
-    <a class="btn h-btn-outline-success"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">{{ 'menu.show'|trans() }} {{ menu.name }}</h1>
 
     <table class="table">
@@ -23,7 +23,7 @@
         </tbody>
     </table>
 
-    <a class="btn h-btn-outline-success"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     <a class="hms-color1" href="{{ path('menu_edit', {'sheet': menu.sheet.slug, 'menu': menu.slug}) }}">edit</a>
 

@@ -3,7 +3,7 @@
 {% block title %}{{ 'user.show'|trans() }}{% endblock %}
 
 {% block content %}
-    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-secondary">{{ 'user.show'|trans() }} {{ user.name }}</h1>
 
     <table class="table">
@@ -23,7 +23,7 @@
         </tbody>
     </table>
 
-    <a class="btn h-btn-outline-success"  href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('user_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     <a class="hms-color1" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 

@@ -4,10 +4,10 @@
 
 {% block content %}
     {{ parent() }}
-    <a class="btn h-btn-outline-success"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     {{ include('admin/section/_form.html.twig', {'button_label': 'global.update'|trans()}) }}
     {{ include('admin/section/_delete_form.html.twig') }}
 
-    <a class="btn h-btn-outline-success"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('section_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
 {% endblock %}

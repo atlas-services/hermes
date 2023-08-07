@@ -4,9 +4,9 @@
 
 {% block content %}
     {{ parent() }}
-    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 
     {{ include('admin/post/_form.html.twig') }}
 
-    <a class="btn h-btn-outline-success"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('post_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
 {% endblock %}

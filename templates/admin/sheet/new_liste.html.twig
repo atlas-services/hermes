@@ -3,11 +3,11 @@
 {% block title %}{{ 'global.new_page'|trans() }}{% endblock %}
 
 {% block content %}
-    <a class="btn h-btn-outline-success"  href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     <h1 class="text-success">{{ 'global.new_page'|trans()|raw }}</h1>
 
     {{ include('admin/sheet/_form_liste.html.twig') }}
 
-    <a class="btn h-btn-outline-success"  href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
+    <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('sheet_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     </div>
 {% endblock %}
