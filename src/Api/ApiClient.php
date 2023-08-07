@@ -20,7 +20,7 @@ class ApiClient
        
         $api_formation = $this->params->get('API_HERMES_TEMPLATES').$entity;
         if($itemsPerPage){
-            $api_formation .= "?itemsPerPage=6";
+            $api_formation .= "?itemsPerPage=$itemsPerPage ";
         }
 
         try{
