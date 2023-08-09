@@ -25,7 +25,9 @@
                 {% if form_post.url is defined %}
                     {{ form_row(form_post.url) }}
                 {% endif %}
-                {{ form_row(form.templateWidth) }}
+                {% if form.templateWidth is defined %}
+                    {{ form_row(form.templateWidth) }}
+                {% endif %}
                 {% if form_post.content is defined %}
                     {{ form_row(form_post.content) }}
                 {% endif %}

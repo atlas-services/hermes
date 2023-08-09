@@ -33,7 +33,7 @@ const jQuery = $;
                 var copyHTML = document.getElementById(target).innerHTML;
                 copyHTML = copyHTML.replace('class="d-none ', 'class="');
                 // change image "src local" to "src hermes-cms.org"
-                copyHTML = copyHTML.replaceAll('src="/hermes/uploads/content', 'src="https://hermes-cms.org/hermes/uploads/content');
+                copyHTML = copyHTML.replaceAll('src="/images/api-hermes', 'src="https://api.hermes-cms.org/images/api-hermes');
                 copy(copyHTML); // innerHtml
                 let source = document.querySelector('#cke_18');
                 if(null != source){
