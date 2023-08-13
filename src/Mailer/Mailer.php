@@ -34,9 +34,6 @@ class Mailer
         $this->params = $params;
     }
 
-
-
-
     public function addLogo()
     {
         //$dir = getcwd(). "/".$this->params->get('hermes_path_content_image')."/Config/";
@@ -120,5 +117,57 @@ class Mailer
 
     }
 
+    public function sendNewsletter($subject, $template, $to, $context =[])
+    {
+
+        $toAddresses = explode(';', $to);
+        $nb= 0;
+
+        try {
+            $from = $this->params->get('hermes_admin_email');
+            foreach ($toAddresses as $addTo){
+            $email = (new TemplatedEmail())
+                ->from(new Address($from))
+                ->subject($subject)
+                ->htmlTemplate($template)
+                ->context($context);
+
+                $email->addTo(new Address($addTo));
+                $this->mailer->send($email);
+                $nb++;
+            }
+            $notification = "Votre Newsletter a bien été envoyée à $nb personnes";
+            $return = [
+                'type' => 'notice',
+                'message' => $notification
+            ];
+            $logContext = [
+                'statut' => 'ok',
+                'from' => $from,
+                'to' => $addTo,
+                'subject' => $subject,
+                'message' => $template,
+            ];
+            $this->emailLogger->info($notification, $logContext);
+        } catch (\Exception $e) {
+            $notification = "Votre message n'a pu être envoyé.";
+            $logContext = [
+                'exception' => $e->getMessage(),
+                'statut' => 'ko',
+                'from' => $from,
+                'to' => $addTo,
+                'subject' => $subject,
+                'message' => $template,
+            ];
+            $return = [
+                'type' => 'info',
+                'message' => $notification
+            ];
+            echo 'Exception reçue : ', $e->getMessage(), "\n";
+            $this->emailLogger->alert($notification, $logContext);
+        }
+        return $return;
+
+    }
 
 }

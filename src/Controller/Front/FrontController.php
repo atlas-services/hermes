@@ -17,7 +17,7 @@ use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Temoignage;
 use App\Form\ContactType;
-use App\Form\Admin\TemoignageType;
+use App\Form\TemoignageType;
 use App\Mailer\Mailer;
 use App\Menu\Page;
 use App\Repository\PostRepository;
@@ -208,16 +208,25 @@ class FrontController extends AbstractController
             }
             $entity = new Contact();
             $form = $this->createForm(ContactType::class, $entity,['validation_groups' => [$validation_group]]);
+            if (ContactInterface::LIVREDOR == $array['listForms'][0]) {
+                $entity = new Temoignage();
+                $form = $this->createForm(TemoignageType::class, $entity,['validation_groups' => [$validation_group]]);
+            }
 
             // On vérifie qu'elle est de type « POST ».
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
                 if ($form->isValid()) {
+
                     $entityManager = $this->getDoctrine()->getManager();
-                    if (ContactInterface::LIVREDOR_ROUTE == $route) {
+                    if (ContactInterface::LIVREDOR == $array['listForms'][0]) {
                         $entityManager->persist($form->getData());
                         $entityManager->flush();
+                        $notification = "Votre témoignage a été enregistré.";
+                        $this->addFlash('notice', $notification);
+                        $array['form'] = $form->createView();
+                        return $array;
                     }
 
                     // On récupère notre objet.
@@ -260,7 +269,9 @@ class FrontController extends AbstractController
         $urls = $page->getSitemapByLocale($locale);
         $array['urls'] = $urls['html'];
 
-        $array[ContactInterface::LIVREDOR] = $livredor;
+        if ( isset($array['listForms'][0]) && ContactInterface::LIVREDOR == $array['listForms'][0]) {
+            $array[ContactInterface::LIVREDOR] = $livredor;
+        }
 
         return $array;
     }

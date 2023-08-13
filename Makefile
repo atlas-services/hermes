@@ -74,7 +74,10 @@ phpunit-test-page:
 	bin/console doctrine:fixtures:load --env=test -n
 	vendor/bin/phpunit -c phpunit.xml tests/Menu/PageTest.php
 
-
+phpunit-test-sendNewsletter:
+	rm -r var/cache/* var/log/* 2> /dev/null || true
+	bin/console hermes:prepare-directories --env=test
+	vendor/bin/phpunit -c phpunit.xml tests/Mailer/MailerTest.php
 
 init-test:
 	cp .env.test .env

@@ -1,5 +1,5 @@
 <!-- Contact Section -->
-<section class="mh-100 pb-0  px-0 container-fluid col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ contact_bgcolor }} ; color:{{ contact_color }}; " >
+<section class="mh-100 pb-0  px-0 container-fluid col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ livredor_bgcolor }} ; color:{{ livredor_color }}; " >
     <div class="container col-lg-{{ content_container_width|col_lg() }}"  >
         {% if 'one page' == nav_bar  %}
             <div class="col-lg-12 col-12 text-center mb-5">
@@ -8,14 +8,8 @@
         {% endif %}
         <div class="row mt-0 mb-5">
             <div class="col-lg-12 col-12 text-center">
-                {% if contact_presentation is not null  %}
-                    <h3 class="section-subheading ">{{ contact_presentation }}</h3>
-                {% endif %}
-                {% if contact_user is not null  %}
-                    <h5 class="section-subheading ">{{ contact_user }}</h5>
-                {% endif %}
-                {% if contact is not null %}
-                    <h5 class="section-subheading"  >{{ 'formulaire.email'|trans() }} :  <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" href="mailto:{{ contact }}">{{ contact }}</a></h5>
+                {% if livredor_presentation is not null  %}
+                    <h3 class="section-subheading ">{{ livredor_presentation }}</h3>
                 {% endif %}
             </div>
         </div>
@@ -35,16 +29,10 @@
                             {#                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">#}
                             <p class="help-block text-danger"></p>
                         </div>
-                        <div class="form-group-contact">
-                            {{ form_widget(form.telephone) }}
-                            <h5 style="color: red">{{ form_errors(form.telephone) }}</h5>
-                            {#                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">#}
-                            <p class="help-block text-danger"></p>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group-contact">
-                            {{ form_widget(form.message) }}
+                            {{ form_widget(form.content) }}
                             {#                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>#}
                             <p class="help-block text-danger"></p>
                         </div>
@@ -52,7 +40,7 @@
                     <div class="clearfix"></div>
                     <div class="col-lg-12 col-12 text-center mb-5">
                         <div id="success"></div>
-                        <button name="" id="sendMessageButton" class="btn h-w-10 {{ contact_bgcolor_btn ?? 'btn-outline-danger'}} h-rounded-lg-4 btn-xl mt-5" type="submit">
+                        <button name="" id="sendMessageButton" class="btn h-w-10 {{ livredor_bgcolor_btn ?? 'btn-outline-danger'}} h-rounded-lg-4 btn-xl mt-5" type="submit">
                             {{ 'formulaire.send'|trans() }}
                         </button>
                     </div>
@@ -61,6 +49,12 @@
                 {{ form_end(form, {render_rest: false}) }}
             </div>
         </div>
+        {% for temoignage in livredor %}
+            <div class="card my-2 ">
+                <p class="mt-2 lead" >Nom : {{ temoignage.name }} </p>
+                <p class="lead"> Message : {{ temoignage.content|raw }}</p>
+            </div>
+        {% endfor %}
     </div>
 </section>
 

@@ -190,8 +190,12 @@ class ConfigType extends AbstractBaseType
                 case 'newsletter_bgcolor_btn':
                     $choice = true;
                     $options = $options_bg_submit;
-                    break;                    
-            }
+                    break;        
+                // livredor_bgcolor_btn
+                case 'livredor_bgcolor_btn':
+                    $choice = true;
+                    $options = $options_bg_submit;
+                    break;              }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
                     'choices' => $options,
@@ -258,16 +262,17 @@ class ConfigType extends AbstractBaseType
             'type_choices' => [
                 'head' => 'head',
                 'générale' => 'site',
+                'contenu' => 'content',
+                'footer' => 'footer',
                 'contact' => 'contact',
                 'newsletter' => 'newsletter',
+                'livredor' => 'livredor',
                 'image' => 'image',
                 'menu' => 'nav',
-                'contenu' => 'content',
                 'folio' => 'folio',
                 'carousel' => 'carousel',
                 'carte' => 'card',
                 'modale' => 'modale',
-                'footer' => 'footer',
                 'réseaux sociaux' => 'network',
                 'nd' => null,
             ],

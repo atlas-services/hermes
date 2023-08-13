@@ -1,0 +1,9 @@
+{% extends "/newsletter/base_email.html.twig" %}
+
+{% block content %}
+
+    {% if post.content is defined %}
+        {{ post.content|raw }} 
+    {% endif %}
+            
+{% endblock content %}

@@ -4,7 +4,8 @@ twig:
 #        '%kernel.project_dir%/public/%env(APP_PATH_CONTENT_IMAGES)%': images
         # '%kernel.project_dir%/public/img': images
         '%kernel.project_dir%/public/%env(APP_PATH_CONTENT_IMAGES)%/Config': images
-        '%kernel.project_dir%/assets/commun/css/inline': inline
+        # '%kernel.project_dir%/assets/commun/css/inline': inline
+        '%kernel.project_dir%/node_modules/bootstrap/dist/css': inline
         '%kernel.project_dir%/public/build': build
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'

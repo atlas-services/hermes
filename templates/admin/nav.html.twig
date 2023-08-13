@@ -136,16 +136,22 @@
                                   href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
+                                  href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>
+                            </p>
+                            <p><a class="link-light text-decoration-none mx-3"
+                                  href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>
+                            </p>
+                            <p><a class="link-light text-decoration-none mx-3"
+                                  href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>
+                            </p>
+                            <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::NEWSLETTER')}) }}"> {{ 'config.affiche_list_newsletter'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>
+                                  href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR')}) }}"> {{ 'config.affiche_list_livredor'|trans()|raw }}</a>
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'folio'}) }}"> {{ 'config.affiche_list_folio'|trans()|raw }}</a>
@@ -161,9 +167,6 @@
                             </p>
                             <p><a class="link-light text-decoration-none mx-3"
                                   href="{{ path('config_index', {'type': 'network'}) }}"> {{ 'config.affiche_list_network'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>
                             </p>
                         </div>
                     </li>

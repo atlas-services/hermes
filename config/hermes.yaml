@@ -318,7 +318,7 @@ parameters:
       contact:
         contact:
           summary: Email de contact (utilisé dans le formulaire de contact)
-          value: hermes@atlas-services.fr
+          value: hermes@hermes-cms.org
         contact_user:
           summary: contact (utilisé dans le formulaire de contact)
           value: ~
@@ -340,8 +340,8 @@ parameters:
       newsletter:
         newsletter_contact:
           summary: Email de contact (utilisé dans le formulaire de newsletter)
-          value: newsletter@atlas-services.fr
-        newsletter_summary:
+          value: newsletter@hermes-cms.org
+        newsletter_presentation:
           summary: Texte pour la Newsletter.
           value: Inscrivez-vous à notre Newsletter
         newsletter_bgcolor:
@@ -355,6 +355,25 @@ parameters:
           value: 'btn-outline-white'
         newsletter_width:
           summary: Largeur de la page newsletter (max = 12)
+          value: 12
+      livredor:
+        livredor_contact:
+          summary: Email de contact (utilisé dans le formulaire de livredor)
+          value: contact@hermes-cms.org
+        livredor_presentation:
+          summary: Texte pour la livredor.
+          value: Inscrivez-vous à notre livredor
+        livredor_bgcolor:
+          summary: Couleur de fond de la page livredor
+          value: 'transparent'
+        livredor_color:
+          summary: Couleur des textes la page livredor
+          value: '#ffffff'
+        livredor_bgcolor_btn:
+          summary: Couleur de fond du bouton de la page livredor
+          value: 'btn-outline-white'
+        livredor_width:
+          summary: Largeur de la page livredor (max = 12)
           value: 12
       nav:
         nav_bar:
