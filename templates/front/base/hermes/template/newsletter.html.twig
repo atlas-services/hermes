@@ -7,9 +7,9 @@
             </div>
         {% endif %}
 
-        {% if newsletter_summary is defined and newsletter_summary is not null  %}
+        {% if newsletter_presentation is defined and newsletter_presentation is not null  %}
             <div class="col-12 text-center mt-sm-0 mb-sm-1 my-1">
-                <p> {{ newsletter_summary }}</p>
+                <p class="display-6 "> {{ newsletter_presentation }}</p>
             </div>
         {% endif %}
         <div class="row col-12 mx-auto px-0">
@@ -26,8 +26,8 @@
                         </button>
                         </div>
                 </div>
-                        {{ form_widget(form.csrf_token) }}
-                 {{ form_end(form, {render_rest: false}) }}
+                {{ form_widget(form.csrf_token) }}
+                {{ form_end(form, {render_rest: false}) }}
             </div>
         </div>
     </div>
