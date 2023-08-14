@@ -16,6 +16,7 @@ use App\Entity\Hermes\Sheet;
 use App\Entity\Interfaces\ContactInterface;
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Temoignage;
+use App\Entity\Hermes\User;
 use App\Form\ContactType;
 use App\Form\TemoignageType;
 use App\Mailer\Mailer;
@@ -228,6 +229,33 @@ class FrontController extends AbstractController
                         $array['form'] = $form->createView();
                         return $array;
                     }
+
+                    if (ContactInterface::NEWSLETTER == $array['listForms'][0]) {
+                        $email = $form->getData()->getEmail();
+                        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+                        if(!is_null($user) ){
+                            $roles = $user->getRoles();
+                            if (in_array('ROLE_ADMIN', $roles)) {
+                                $notification = "Cet email est déja dans liste Newsletter.";
+                                $this->addFlash('notice', $notification);
+                                $array['form'] = $form->createView();
+                                return $array;
+                            }
+                        }else{
+                            $user = new User();
+                            $user->setFirstname('newsletter');
+                            $user->setLastname('newsletter');
+                            $user->setEmail($email);
+                            $user->setRoles(['ROLE_NEWSLETTER']);
+                            $entityManager->persist($user);
+                            $entityManager->flush();
+                            $notification = "Vous avez été ajouté à la liste Newsletter.";
+                            $this->addFlash('notice', $notification);
+                            $array['form'] = $form->createView();
+                            return $array;
+                        }
+                    }
+
 
                     // On récupère notre objet.
                     $entity = $form->getData();

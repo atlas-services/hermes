@@ -30,6 +30,39 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
 
+
+    public function findNewsletterUsers($role = "ROLE_NEWSLETTER"): ?array
+    {
+        $neswleter_users = [];
+        
+        $users =  $this->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        foreach($users as $user){
+            if( [$role, "ROLE_USER"] == $user->getRoles()){
+                $newsletter_users[] = $user;
+            }
+        }
+
+        return $newsletter_users;
+    }
+
+
+
+    public function findNewsletterEmails($role = "ROLE_NEWSLETTER"): ?array
+    {
+        $emails = [];
+        $newsletter_users = $this->findNewsletterUsers($role);
+        
+        foreach($newsletter_users as $user){
+            $emails[] = $user->getEmail();
+        }
+
+        return $emails;
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

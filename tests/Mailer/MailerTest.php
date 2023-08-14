@@ -12,7 +12,7 @@ class MailerTest extends KernelTestCase
 
         $subject = 'test send Newsletter';
         $template = 'newsletter/newsletter.html.twig'; # '<p> Newsletter test envoyée</p>';
-        $to ="tayebc@yahoo.fr; contact@atlas-services.fr; contact@hermes-cms.org";
+        $to = ['tayebc@yahoo.fr', 'contact@atlas-services.fr', 'contact@hermes-cms.org'];
         
         // (1) boot the Symfony kernel
         self::bootKernel();
@@ -24,7 +24,7 @@ class MailerTest extends KernelTestCase
         $newsletterGenerator = $container->get(Mailer::class);
         $newsletter = $newsletterGenerator->sendNewsletter($subject, $to, $template, ['ctx' => 'bon context']);
 
-        $nb = count(explode(';', $to));
+        $nb = count($to);
 
         $notification = "Votre Newsletter a bien été envoyée à $nb personnes";
         $return = [

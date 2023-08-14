@@ -13,6 +13,7 @@ use App\Form\Admin\SectionTemplateType;
 use App\Form\Admin\SectionType;
 use App\Mailer\Mailer;
 use App\Repository\SectionRepository;
+use App\Repository\UserRepository;
 use App\Service\Copy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -283,21 +284,24 @@ class SectionController extends AbstractAdminController
      * @Route("/section/sendNewsletter/{section}", name="section_send_newsletter", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
-    public function sendNewsletter(Request $request, Section $section, Mailer $mailer): Response
+    public function sendNewsletter(Request $request, Section $section, Mailer $mailer, UserRepository $userRepository): Response
     { 
-        $subject = 'Newsletter ' ;
+
+        $subject = "Newsletter";
+        if(isset( $section->getPosts()[0])){
+            $subject = $section->getPosts()[0]->getName() ;
+        }
+
+        $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_NEWSLETTER");
+
         $template = 'newsletter/newsletter.html.twig';
 
         $array = ['section' => $section];
 
         //return $this->render('newsletter/newsletter.html.twig', $array);
-        /* 
-            TODO :  remplacer valeur de $to par table newsletter
-        */
-        $to ="tayebc@yahoo.fr; contact@atlas-services.fr; contact@hermes-cms.org";
 
         if ( 'newsletter_template' == $section->getTemplate()->getCode()){
-            $mailer->sendNewsletter($subject, $to, $template, $array);
+            $mailer->sendNewsletter($subject, $newsletter_emails, $template, $array);
             $this->addFlash('success', 'Newsletter envoyée');
         }else{
             $this->addFlash('danger', 'Pas de Newletter!');
