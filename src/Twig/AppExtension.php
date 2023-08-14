@@ -216,9 +216,12 @@ class AppExtension extends AbstractExtension
     public function Newsletter($content, $host)
     {
 
-        if(str_contains($content, 'src="https://hermes-cms.org/')){
+        $src_img = 'src="=/';
 
-            $content = str_replace( 'src="=/', 'src="'.$host.'/' , $content);
+        if(str_contains($content, $src_img)){
+
+            $content = str_replace( $src_img, 'src="'.$host.'/' , $content);
+
             return $content;
         }
 
