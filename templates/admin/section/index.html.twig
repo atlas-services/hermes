@@ -69,7 +69,7 @@
 {#                    {% endif %}#}
                     <a class="hms-color1" href="{{ path('section_copy', {'section': section.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
                     {% if ( 'newsletter_template' == section.template.code)  %}
-                        <a class="hms-color1" href="{{ path('section_send_newsletter', {'section': section.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
+                        <a class="hms-color1" href="{{ path('section_send_newsletter', {'section': section.id, }) }}">{{ 'action.newsletter'|trans()|raw }}</a>
                     {% endif %}
                 </td>
             </tr>

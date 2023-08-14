@@ -285,7 +285,7 @@ class SectionController extends AbstractAdminController
      */
     public function sendNewsletter(Request $request, Section $section, Mailer $mailer): Response
     { 
-        $subject = 'test send Newsletter';
+        $subject = 'Newsletter ' ;
         $template = 'newsletter/newsletter.html.twig';
 
         $array = ['section' => $section];
