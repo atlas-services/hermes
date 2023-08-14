@@ -287,16 +287,20 @@ class SectionController extends AbstractAdminController
     { 
         $subject = 'test send Newsletter';
         $template = 'newsletter/newsletter.html.twig';
+
+        $array = ['section' => $section];
+
+        //return $this->render('newsletter/newsletter.html.twig', $array);
         /* 
             TODO :  remplacer valeur de $to par table newsletter
         */
         $to ="tayebc@yahoo.fr; contact@atlas-services.fr; contact@hermes-cms.org";
 
         if ( 'newsletter_template' == $section->getTemplate()->getCode()){
-            $mailer->sendNewsletter($subject, $to, $template, ['section' => $section]);
-            $this->addFlash('info', 'Newletter envoyée');
+            $mailer->sendNewsletter($subject, $to, $template, $array);
+            $this->addFlash('success', 'Newsletter envoyée');
         }else{
-            $this->addFlash('info', 'Pas de Newletter!');
+            $this->addFlash('danger', 'Pas de Newletter!');
         }
 
         return $this->redirectToRoute('section_index');

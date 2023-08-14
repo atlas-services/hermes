@@ -19,6 +19,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('change_px', [$this, 'changePx']),
             new TwigFilter('col_nb_char', [$this, 'colNbChar']),
             new TwigFilter('get_class',  [$this, 'getClass']),
+            new TwigFilter('newsletter',  [$this, 'Newsletter']),
         ];
     }
 
@@ -209,6 +210,19 @@ class AppExtension extends AbstractExtension
         $collg = 12;
 
         return $collg;
+    }
+
+
+    public function Newsletter($content, $host)
+    {
+
+        if(str_contains($content, 'src="https://hermes-cms.org/')){
+
+            $content = str_replace( 'src="=/', 'src="'.$host.'/' , $content);
+            return $content;
+        }
+
+        return $content;
     }
 
 }
