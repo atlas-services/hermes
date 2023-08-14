@@ -157,7 +157,7 @@ action:
   copy-3: <i class="hms-color1 btn btn-outline-success fa fa-3x fa-copy"></i>
   copy-light-1: <i class="text-secondary btn btn-outline-light fa fa-1x fa-copy"></i>
   preview: <i class="hms-color1 btn btn-outline-success fa fa-eye" aria-hidden="true"></i>
-  newsletter: <i class="fa-solid fa-envelope-open-text"></i>
+  newsletter: <i class="hms-color1 btn btn-outline-success fa fa-envelope"></i>
 
 
 
