@@ -10,7 +10,7 @@
     {% for post in posts|sort((a, b) => a.position <=> b.position) %}
         <div class="container-fluid col-lg-{{  (section.templateWidth ?? container_width)|col_lg() }} mx-auto px-0" >
             {% if post.content is defined %}
-                {{ post.content|raw|newsletter(app.request.server.get('REMOTE_ADDR')) }} 
+                {{ post.content|newsletter(app.request.server.get('REMOTE_ADDR'))|raw }} 
             {% endif %}
         </div>
     {% endfor %}
