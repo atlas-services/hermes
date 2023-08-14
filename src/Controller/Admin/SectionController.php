@@ -11,6 +11,7 @@ use App\Form\Admin\PostType;
 use App\Form\Admin\SectionCopyType;
 use App\Form\Admin\SectionTemplateType;
 use App\Form\Admin\SectionType;
+use App\Mailer\Mailer;
 use App\Repository\SectionRepository;
 use App\Service\Copy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -274,6 +275,31 @@ class SectionController extends AbstractAdminController
         $array = $this->mergeActiveConfig($array);
 
         return $this->render('admin/section/copy.html.twig', $array);
+    }
+
+
+
+    /**
+     * @Route("/section/sendNewsletter/{section}", name="section_send_newsletter", methods={"GET","POST"})
+     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
+     */
+    public function sendNewsletter(Request $request, Section $section, Mailer $mailer): Response
+    { 
+        $subject = 'test send Newsletter';
+        $template = 'newsletter/newsletter.html.twig';
+        /* 
+            TODO :  remplacer valeur de $to par table newsletter
+        */
+        $to ="tayebc@yahoo.fr; contact@atlas-services.fr; contact@hermes-cms.org";
+
+        if ( 'newsletter_template' == $section->getTemplate()->getCode()){
+            $mailer->sendNewsletter($subject, $to, $template, ['section' => $section]);
+            $this->addFlash('info', 'Newletter envoyée');
+        }else{
+            $this->addFlash('info', 'Pas de Newletter!');
+        }
+
+        return $this->redirectToRoute('section_index');
     }
 
 

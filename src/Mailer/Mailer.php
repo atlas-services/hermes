@@ -117,12 +117,11 @@ class Mailer
 
     }
 
-    public function sendNewsletter($subject, $template, $to, $context =[])
+    public function sendNewsletter($subject , $to, $template="", $context =[])
     {
 
         $toAddresses = explode(';', $to);
         $nb= 0;
-
         try {
             $from = $this->params->get('hermes_admin_email');
             foreach ($toAddresses as $addTo){

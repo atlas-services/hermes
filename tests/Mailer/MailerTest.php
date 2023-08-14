@@ -22,7 +22,7 @@ class MailerTest extends KernelTestCase
 
         // (3) run some service & test the result
         $newsletterGenerator = $container->get(Mailer::class);
-        $newsletter = $newsletterGenerator->sendNewsletter($subject, $template, $to, ['ctx' => 'bon context']);
+        $newsletter = $newsletterGenerator->sendNewsletter($subject, $to, $template, ['ctx' => 'bon context']);
 
         $nb = count(explode(';', $to));
 

@@ -63,7 +63,8 @@
 {#                {% if( 'libre' not in section.template.code) %}#}
 {#                    {{ include('front/base/hermes/template/libre.html.twig') }}#}
 {#                {% endif %}#}
-                {% include 'front/base/hermes/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %}
+                {# {% include 'front/base/hermes/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %} #}
+                {% include 'front/base/hermes/template/'~ section.template.type ~ '.html.twig' with {'menu': menu } %}
             {% endfor %}
         {% endif %}
     {% endif %}

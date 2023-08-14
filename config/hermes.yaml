@@ -41,24 +41,29 @@ parameters:
         summary: Template libre
         code: libre
         name: Libre
-      libre_code:
+      newsletter_template:
         type: libre
-        summary: Template libre et affichage du code
-        code: libre_code
-        name: Libre avec code
+        summary: Template Newsletter
+        code: newsletter_template
+        name: Template Newsletter        
+      # libre_code:
+      #   type: libre
+      #   summary: Template libre et affichage du code
+      #   code: libre_code
+      #   name: Libre avec code
       contact:
         type: formulaire
-        summary: Template contact
+        summary: Formulaire contact
         code: contact
         name: Contact
       newsletter:
         type: formulaire
-        summary: Template Newsletter
+        summary: Formulaire Newsletter
         code: newsletter
         name: Newsletter
       livredor:
         type: formulaire
-        summary: Template Livre d'or
+        summary: Formulaire Livre d'or
         code: livredor
         name: Livre d'or
       modale1:
