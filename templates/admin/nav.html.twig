@@ -96,8 +96,9 @@
                             {{ 'global.newsletter_and_testimony'|trans()|raw }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('section_newsletter') }}">{{ 'section.newsletter'|trans()|raw }}</a></p>
+                                <hr class="dropdown-divider">   
                                 <p><a class="link-light text-decoration-none mx-3" href="{{ path('temoignage_index') }}">{{ 'temoignage.affiche_list'|trans()|raw }}</a></p>
-                                <hr class="dropdown-divider">           
                             </ul>
                         </li>
                         <li class="nav-item mt-4 dropdown">
@@ -106,10 +107,9 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <p> <a class="link-light text-decoration-none mx-3 " href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}}  </a></p>
-                                {% if is_granted('ROLE_ADMIN') %}
+                                <hr class="dropdown-divider">   
                                 <p> <a class="link-light text-decoration-none mx-3" href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }} </a></p>
-                                {% endif %}
-                                </ul>
+                            </ul>
                         </li>
                         <li class="nav-item mt-4 mt-2 ">
                             <p> <a class="page-scroll link-light text-decoration-none " href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }}  </a></p>                           

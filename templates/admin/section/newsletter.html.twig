@@ -1,0 +1,80 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'section.newsletter'|trans() }}{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-success">
+            <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="text-center alert alert-danger">
+            <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="row mb-2">
+
+    <h1 class="text-secondary">{{ 'section.newsletter'|trans() }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'global.active'|trans() }}</th>
+                <th>{{ 'global.locale'|trans() }}</th>
+                <th>{{ 'sheet.name'|trans() }}</th>
+                <th>{{ 'menu.name'|trans() }}</th>
+                <th>{{ 'template.name'|trans() }}</th>
+                <th>{{ 'post.list'|trans() }}</th>
+                <th>{{ 'global.position'|trans() }}</th>
+                <th>{{ 'global.actions'|trans() }}</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
+            <tr class="align-middle {{ section.menu.id }}">
+                <td>
+                    <div class="form-check form-switch form-switch-sm my-0">
+                        <input type="checkbox" class="section-active form-check-input" id="{{ section.id }}"  {{ section.isActive ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ section.id }}"></label>
+                    </div>
+                </td>
+                <td>{{ section.menu.sheet.locale }}</td>
+                <td>{{ section.menu.sheet.name }}</td>
+                <td>{{ section.menu.name }}</td>
+                <td>{{ section.template.name }}</td>
+                <td>
+                    {%  for post in section.posts|sort((a, b) => a.position <=> b.position) %}
+                        <li class="list-unstyled">
+                            <a class=" hms-color1 h5" href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ post.name }}</a>
+                        </li>
+                    {%  endfor %}
+                </td>
+                <td>{{ section.position }}</td>
+                <td>
+{#                    <a class="hms-color1" href="{{ path('section_edit', {'section': section.name}) }}">{{ 'action.edit'|trans()|raw }}</a>#}
+                    <a class="hms-color1" href="{{ path('section_edit', {'section': section.id, 'config': 1 }) }}">{{ 'action.config'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('section_edit', {'section': section.id , 'config': 0 }) }}">{{ 'action.edit'|trans()|raw }}</a>
+                    <a class="hms-color1" href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
+{#                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}#}
+{#                        <a target="_blank" class="hms-color1" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>#}
+{#                    {% endif %}#}
+                    <a class="hms-color1" href="{{ path('section_copy', {'section': section.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
+                    {% if ( 'newsletter_template' == section.template.code)  %}
+                        <a class="hms-color1" href="{{ path('section_send_newsletter', {'section': section.id, }) }}">{{ 'action.newsletter'|trans()|raw }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr class="align-middle">
+                <td colspan="7">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a type="button" class="col-sm-2 btn btn-outline-secondary hms-bg-color1 text-white" href="{{ path('menu_section_post_new_sheet', {'sheet':'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
+{% endblock %}

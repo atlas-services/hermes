@@ -6,6 +6,7 @@ use App\Api\ApiClient;
 use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Menu;
+use App\Entity\Hermes\Template;
 //use App\Form\SectionType;
 use App\Form\Admin\PostType;
 use App\Form\Admin\SectionCopyType;
@@ -61,6 +62,30 @@ class SectionController extends AbstractAdminController
         $array = $this->mergeActiveConfig($array);
 
         return $this->render('admin/section/index.html.twig', $array );
+    }
+
+    /**
+     * @Route("/newsletters", name="section_newsletter", methods={"GET"})
+     */
+    public function newsletters(): Response
+    {
+
+        $newsletter_template = $this->getDoctrine()
+        ->getRepository(Template::class)
+        ->findOneBy(['code' => 'newsletter_template'])
+        ;       
+        
+        $sections = $this->getDoctrine()
+        ->getRepository(Section::class)
+        ->findBy(['template' => $newsletter_template])
+        ;
+
+        $array = [
+            'sections' => $sections,
+        ];
+        $array = $this->mergeActiveConfig($array);
+
+        return $this->render('admin/section/newsletter.html.twig', $array );
     }
 
 
@@ -286,7 +311,7 @@ class SectionController extends AbstractAdminController
      */
     public function sendNewsletter(Request $request, Section $section, Mailer $mailer, UserRepository $userRepository): Response
     { 
-
+        $referer = (string) $request->headers->get('referer'); // get the referer, it can be empty!
         $subject = "Newsletter";
         if(isset( $section->getPosts()[0])){
             $subject = $section->getPosts()[0]->getName() ;
@@ -307,7 +332,7 @@ class SectionController extends AbstractAdminController
             $this->addFlash('danger', 'Pas de Newletter!');
         }
 
-        return $this->redirectToRoute('section_index');
+        return $this->redirect($referer);
     }
 
 
