@@ -1,214 +1,126 @@
-<!-- Navigation -->
-{#<nav class="navbar navbar-expand-lg navbar-dark ftco-navbar-light fixed-top navbar-shrink" id="mainNav">#}
-{% set bgcolor = 'bg-white' %}
-{%  if nav_bar is defined %}
-    {%  if nav_bar ==  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
-        {% set bgcolor = 'bg-dark' %}
-    {% endif %}
-{% endif %}
-<nav class="navbar navbar-expand-lg fixed-top py-0 {{ bgcolor }} shadow-lg" id="mainNav">
-    <div class="container">
-        {% if is_granted('ROLE_ADMIN') %}
-{#            <img class="h-25" src="{{ asset('img/hermes.png') }}" alt="admin Hermes">#}
-            <a class="h6 hms-color1 text-decoration-none  h-bay-jamjuree px-md-2" href="{{ path('admin_index') }}"><img class="h-25" src="{{ asset('img/hermes.png') }}" alt="admin Hermes"> </a>
-        {% endif %}
-        {% for locale in locales %}
-            {% if locale == app.request.locale %}
-                {% set flag = 'app_fixed_flag_selected' %}
-            {% else %}
-                {% set flag = 'app_fixed_flag' %}
-            {% endif %}
-            <a class="me-2 px-1 text-decoration-none" href="{{ path('change_locale', {'locale': locale}) }}"><img
-                        src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"></a>
-        {% endfor %}
-
-        <div class="navbar-header ">
-            <button class="navbar-toggler navbar-toggler-right collapsed" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-label="Toggle navigation"
-                    aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
+{% if is_granted('ROLE_ADMIN') %}
+    <nav class="navbar navbar-dark bg-secondary fixed-top py-0">
+        <div class="container-fluid">
+            <a class="navbar-brand hms-color1 text-decoration-none lead" href="{{ path('admin_index') }}"><img class="h-25" src="{{ asset('img/hermes.png')? asset('img/hermes.png') }}" alt="admin Hermes"> </a>           
+            {% for locale in locales %}
+                {% if locale == app.request.locale %}
+                    {% set flag = 'app_fixed_flag_selected' %}
+                {% else %}
+                    {% set flag = 'app_fixed_flag' %}
+                {% endif %}
+                <a class="me-2 px-1 text-decoration-none" href="{{ path('change_locale', {'locale': locale}) }}"><img src="{{ asset('img/flag/'~ locale ~'.png')|imagine_filter(flag) }}"> </a>
+            {% endfor %}
+            <div id="chevron_down_div">
+                <h3 class="section-subheading text--end">
+                    <a id="chevron_down" class="js-scroll-trigger hms-color1" href="#section_bottom">
+                        <i class="fa fa-chevron-circle-down"></i>
+                    </a>
+                </h3>
+            </div>
+            <div id="chevron_up_div" style="display:none">
+                <h3 class="section-subheading text-muted">
+                    <a id="chevron_up" class="js-scroll-trigger hms-color1" href="#section_top">
+                        <i class="fa fa-chevron-circle-up"></i></a>
+                </h3>
+            </div>
+            <button class="navbar-toggler my-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="align-middle">{{ 'global.dashboard'|trans()|raw }}</span> <span class="navbar-toggler-icon"></span>
             </button>
-        </div>
-        <div class="collapse navbar-collapse px-3 " id="navbarResponsive">
-            {% if is_granted('ROLE_ADMIN') %}
-               <ul class="nav navbar-nav mx-auto">
-{#                    {% if is_granted('ROLE_SUPER_ADMIN') %}#}
-{#                    <li class="dropdown px-md-4">#}
-{#                        <a id="{{ 'global.blocks'|trans() }}"#}
-{#                           class=" hms-color1 text-decoration-none pe-md-4 page-scroll dropdown-toggle " role="button"#}
-{#                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"#}
-{#                           href="#">#}
-{#                            {{ 'global.blocks'|trans()|raw }}#}
-{#                        </a>#}
-{#                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.blocks'|trans()|raw }}"#}
-{#                             aria-expanded="false">#}
-{#                            <p><a class="link-light text-decoration-none mx-3 "#}
-{#                                  href="{{ path('block_index') }}"> {{ 'block.affiche_list'|trans()|raw }}</a></p>#}
-{#                            <p><a class="link-light text-decoration-none mx-3"#}
-{#                                  href="{{ path('blockpost_index') }}"> {{ 'blockpost.affiche_list'|trans()|raw }}</a></p>#}
-{#                        </div>#}
-{#                    </li>#}
-{#                    {% endif %}#}
-                    {%  if nav_bar is defined %}
-                        {%  if nav_bar ==  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
-                            <li class="dropdown px-md-4">
-                                <a id="{{ 'global.menu_one_page'|trans() }}"
-                                   class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                   href="#">
-                                    {{ 'global.menu_one_page'|trans()|raw }}
-                                </a>
-                                <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
-                                     aria-expanded="false">
-                                    <p>
-                                        <a class="link-light text-decoration-none mx-3 " href="{{ path('add_onepage_libre_hms') }}"> {{ 'global.new_post_libre_hms'|trans()|raw }}</a>
-                                    </p>
-                                    <p>
-                                        <a class="link-light text-decoration-none mx-3 " href="{{ path('add_onepage_libre') }}"> {{ 'global.new_post_libre'|trans()|raw }}</a>
-                                    </p>
-                                    <p>
-                                        <a class="link-light text-decoration-none mx-3 " href="{{ path('add_onepage_liste') }}"> {{ 'global.new_post_liste'|trans()|raw }}</a>
-                                    </p>
-                                </div>
-                            </li>
-                        {% endif %}
-                    {% endif %}
-                    <li class="dropdown px-md-4">
-                        <a id="{{ 'global.dashboard'|trans() }}"
-                           class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                           href="#">
-                            {{ 'global.dashboard'|trans()|raw }}
-                        </a>
-                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'global.dashboard'|trans()|raw }}"
-                             aria-expanded="false">
-                            {%  if nav_bar is defined %}
-                                {%  if nav_bar !=  constant('App\\Entity\\Hermes\\Sheet::ONE_PAGE_LIBELLE') %}
-                                <p><a class="link-light text-decoration-none mx-3 "
-                                      href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
-                                <p><a class="link-light text-decoration-none mx-3"
-                                      href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
-                                {% endif %}
-                            {% endif %}
-                            <p><a class="link-light text-decoration-none  mx-3"
-                                  href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
-{#                            {% if is_granted('ROLE_SUPER_ADMIN') %}#}
-{#                                <p><a class="link-light text-decoration-none mx-3"#}
-{#                                      href="{{ path('remote_index') }}"> {{ 'remote.affiche_list'|trans()|raw }}</a></p>#}
-{#                            {% endif %}#}
-                            {% if is_granted('ROLE_ADMIN') %}
-{#                                {% if(config.value is defined) %}#}
-{#                                    {% if(constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_TEXTE')  in config.value) %}#}
-                                        <p>
-                                            <a class="link-light text-decoration-none mx-3" href="{{ path('temoignage_index') }}">
-                                                {{ 'temoignage.affiche_list'|trans()|raw }}
-                                            </a>
-                                        </p>
-{#                                    {% endif %}#}
-{#                                {% endif %}#}
-                            {% endif %}
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="/elfinder" target="_blank"> {{ 'menu.upload_hermes_dir'|trans()|raw }} </a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('sheet_locale_new') }}"> {{ 'global.add_locale'|trans()|raw }} </a>
-                            </p>
-                    </li>
-
-                    <li class="dropdown px-md-4">
-                        <a id="{{ 'config.label'|trans() }}"
-                           class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle " role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                           href="#">
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">{{ 'global.dashboard'|trans()|raw }}</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item mt-4 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'global.menus_and_posts'|trans()|raw }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <p><a class="link-light text-decoration-none mx-3 " href="{{ path('sheet_index') }}"> {{ 'sheet.affiche_list'|trans()|raw }}</a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none  mx-3" href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
+                            </ul>
+                        </li>
+                        <li class="nav-item mt-4 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ 'config.list'|trans()|raw }}
-                        </a>
-                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" style="min-width: 17rem;"
-                             aria-labelledby="{{ 'global.dashboard'|trans()|raw }}" aria-expanded="false">
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'head'}) }}"> {{ 'config.affiche_list_head'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::NEWSLETTER')}) }}"> {{ 'config.affiche_list_newsletter'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR')}) }}"> {{ 'config.affiche_list_livredor'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'folio'}) }}"> {{ 'config.affiche_list_folio'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'carousel'}) }}"> {{ 'config.affiche_list_carousel'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'modale'}) }}"> {{ 'config.affiche_list_modale'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'card'}) }}"> {{ 'config.affiche_list_card'|trans()|raw }}</a>
-                            </p>
-                            <p><a class="link-light text-decoration-none mx-3"
-                                  href="{{ path('config_index', {'type': 'network'}) }}"> {{ 'config.affiche_list_network'|trans()|raw }}</a>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="dropdown px-md-4">
-                        <a id="{{ 'User'|trans() }}" class="h5 hms-color1 text-decoration-none pe-md-4  page-scroll dropdown-toggle "
-                           role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                           href="#">
-                            {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
-                        </a>
-                        <div class="dropdown-menu w-100 mt-1 mt-md-4 hms-bg-color1" aria-labelledby="{{ 'User'|trans() }}" aria-expanded="false">
-                            <p>
-                            <a class="link-light text-decoration-none mx-3 "
-                               href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}} </a>
-                            </p>
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <p>
-                            <a class="link-light text-decoration-none mx-3"
-                                   href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }}</a>
-                            </p>
-                            {% endif %}
-                            <p>
-                            <a class="page-scroll link-light text-decoration-none mx-3 "
-                               href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }} </a>
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-            {% endif %}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'head'}) }}"> {{ 'config.affiche_list_head'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'site'}) }}"> {{ 'config.affiche_list'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'content'}) }}"> {{ 'config.affiche_list_content'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'nav'}) }}"> {{ 'config.affiche_list_menu'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'footer'}) }}"> {{ 'config.affiche_list_footer'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT')}) }}"> {{ 'config.affiche_list_contact'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::NEWSLETTER')}) }}"> {{ 'config.affiche_list_newsletter'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR')}) }}"> {{ 'config.affiche_list_livredor'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'folio'}) }}"> {{ 'config.affiche_list_folio'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'carousel'}) }}"> {{ 'config.affiche_list_carousel'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'modale'}) }}"> {{ 'config.affiche_list_modale'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'card'}) }}"> {{ 'config.affiche_list_card'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'network'}) }}"> {{ 'config.affiche_list_network'|trans()|raw }} </a></p>
+                            </ul>
+                        </li>
+                        <li class="nav-item mt-4 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'global.uploads_and_locales'|trans()|raw }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <p><a class="link-light text-decoration-none mx-3" href="/elfinder" target="_blank"> {{ 'menu.upload_hermes_dir'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('sheet_locale_new') }}"> {{ 'global.add_locale'|trans()|raw }} </a></p>
+                            </ul>
+                        </li>
+                        <li class="nav-item mt-4 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'global.newsletter_and_testimony'|trans()|raw }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('temoignage_index') }}">{{ 'temoignage.affiche_list'|trans()|raw }}</a></p>
+                                <hr class="dropdown-divider">           
+                            </ul>
+                        </li>
+                        <li class="nav-item mt-4 dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'User'|trans()|raw }} {{ app.user.firstname ?? '' ~ ' ' ~  app.user.lastname ?? '' }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <p> <a class="link-light text-decoration-none mx-3 " href="{{ path('user_edit',  {'id': app.user.id} ) }}"><i class="fa fa-user"></i> {{ 'user.profil'|trans()}}  </a></p>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <p> <a class="link-light text-decoration-none mx-3" href="{{ path('user_index') }}"> {{ 'global.users'|trans()|raw }} </a></p>
+                                {% endif %}
+                                </ul>
+                        </li>
+                        <li class="nav-item mt-4 mt-2 ">
+                            <p> <a class="page-scroll link-light text-decoration-none " href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }}  </a></p>                           
+                        </li>
+                    </ul>
+                    {# <form class="d-flex mt-3" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                    </form> #}
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="chevron_down_div">
-        <h3 class="section-subheading text--end">
-            <a id="chevron_down" class="js-scroll-trigger hms-color1" href="#section_bottom">
-                <i class="fa fa-chevron-circle-down"></i>
-            </a>
-        </h3>
-    </div>
-    <div id="chevron_up_div" style="display:none">
-        <h3 class="section-subheading text-muted">
-            <a id="chevron_up" class="js-scroll-trigger hms-color1" href="#section_top">
-                <i class="fa fa-chevron-circle-up"></i></a>
-        </h3>
-    </div>
-</nav>
+    </nav>
+{% endif %}

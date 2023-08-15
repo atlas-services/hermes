@@ -14,8 +14,8 @@ form:
     delete: Supprimer
 
 info:
-  admin_type_site_1: 'Avant de commencer à créer vos pages web avec Hermès, il est important de bien choisir le type de site que vous souhaitez mettre en place.'
-  admin_type_site_2: 'Une fois le type de site choisi ("one-page" ou "multi-pages"), il vous sera toujours possible de passer de l''un à l''autre...mais gardez en tête que ce premier choix est important.'
+  admin_type_site_1: 'Hermes a été conçu pour vous permettre de créer facilement vos pages Web.'
+  admin_type_site_2: 'Les fonctionnalité présentées dans cette page vous permettront de créer, modifier, copier, déplacer, activer, désactiver vos pages...'
   admin_templates_1: 'Ci dessous, quelques templates Hermes à copier et adapter pour enrichir votre site'
   admin_presentation1: 'Hermes vous permet de créer toutes sortes de pages responsives, uniquement à partir de ses 2 types de templates et de sa configuration: '
   admin_sous_presentation11: 'Les templates de type "Libre" vous permettent de créer des contenus comme vous le souhaitez.'
@@ -59,6 +59,9 @@ global:
   blocks: Mes blocks de contenus
   speed_dashboard: Création rapide
   dashboard: Mon Tableau de Bord
+  menus_and_posts: Menus et pages
+  uploads_and_locales: Uploads images et locales
+  newsletter_and_testimony: Newsletter et livre d''or
   breadcrumb: 'Vous êtes ici : '
   new_content: Nouveau contenu
   new_menu: Nouveau menu
@@ -254,7 +257,7 @@ menu:
 #  update_next: Ajouter un contenu avec le même affichage
   speed_creation: Menu création rapide"
 #  upload_hermes_dir: Charger des images dans le repertoire hermes
-  upload_hermes_dir: Charger les images "hermes"
+  upload_hermes_dir: Charger les images pour les listes
 #  update_next: Ajouter un contenu avec le même affichage
   update_next: Continuer
 #  update_next_different: Ajouter un contenu avec un affichage différent
