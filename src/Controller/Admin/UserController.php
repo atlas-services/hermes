@@ -21,6 +21,22 @@ class UserController extends AbstractAdminController
     {
         $users = $this->getDoctrine()
             ->getRepository(User::class)
+            ->findNewsletterUsers();
+
+        $array = [
+            'users' => $users,
+        ];
+        $array = $this->mergeActiveConfig($array);
+        return $this->render('admin/user/index.html.twig', $array);
+    }
+
+        /**
+     * @Route("/", name="user_newsletter", methods={"GET"})
+     */
+    public function newsletter(): Response
+    {
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
             ->findAll();
 
         $array = [

@@ -41,7 +41,7 @@ class UserRepository extends ServiceEntityRepository
         ;
 
         foreach($users as $user){
-            if( [$role, "ROLE_USER"] == $user->getRoles()){
+            if( [$role, "ROLE_USER"] == $user->getRoles() || [$role] == $user->getRoles()){
                 $newsletter_users[] = $user;
             }
         }
