@@ -99,9 +99,9 @@ class ConfigType extends AbstractBaseType
                 '12/12' => '12',
             ];
             $options_template_value = [
-                'one_page_1' => 'one_page_1',
-                'one_page_2' => 'one_page_2',
-                'one_page_3' => 'one_page_3',
+                // 'one_page_1' => 'one_page_1',
+                // 'one_page_2' => 'one_page_2',
+                // 'one_page_3' => 'one_page_3',
                 'front' => 'front',
             ];
             $options_bg_submit = [
@@ -131,7 +131,7 @@ class ConfigType extends AbstractBaseType
                 case 'nav_bar':
                     $choice = true;
                     $options = [
-                        'one page' => 'one page',
+                        // 'one page' => 'one page',
                         'base' => 'base',
                         'left' => 'left',
                         'full' => 'full',
@@ -175,6 +175,13 @@ class ConfigType extends AbstractBaseType
                         'true'  => true,
                         'false' => false ,
                     ];
+                    break;
+                // logo
+                case 'logo':
+                    $choice = true;
+                    foreach (range(0, 500, 10) as $number) {
+                        $options[ $number."px"] = $number."px";
+                    }
                     break;
                 // nav_offset
                 case 'nav_offset':

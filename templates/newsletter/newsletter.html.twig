@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
     {% if section.posts is defined %}
     {% set posts = section.posts %}
     {% endif %}
@@ -10,7 +9,7 @@
     {% for post in posts|sort((a, b) => a.position <=> b.position) %}
         <div class="container-fluid col-lg-{{  (section.templateWidth ?? container_width)|col_lg() }} mx-auto px-0" >
             {% if post.content is defined %}
-                {{ post.content|newsletter(app.request.server.get('REMOTE_ADDR'))|raw }} 
+                {{ post.content|newsletter(app.request.server.get('HTTP_HOST'))|raw }} 
             {% endif %}
         </div>
     {% endfor %}
