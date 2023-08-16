@@ -306,18 +306,23 @@ class SectionController extends AbstractAdminController
 
 
     /**
-     * @Route("/section/sendNewsletter/{section}", name="section_send_newsletter", methods={"GET","POST"})
+     * @Route("/section/sendNewsletter/{section}/{test}", name="section_send_newsletter", methods={"GET","POST"})
      * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
-    public function sendNewsletter(Request $request, Section $section, Mailer $mailer, UserRepository $userRepository): Response
+    public function sendNewsletter(Request $request, Section $section, Mailer $mailer, UserRepository $userRepository, $test=null): Response
     { 
+
         $referer = (string) $request->headers->get('referer'); // get the referer, it can be empty!
         $subject = "Newsletter";
         if(isset( $section->getPosts()[0])){
             $subject = $section->getPosts()[0]->getName() ;
         }
 
-        $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_NEWSLETTER");
+        if(is_null($test)){
+            $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_NEWSLETTER");
+        }else{
+            $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_ADMIN");
+        }
 
         $template = 'newsletter/newsletter.html.twig';
 
@@ -327,7 +332,11 @@ class SectionController extends AbstractAdminController
 
         if ( 'newsletter_template' == $section->getTemplate()->getCode()){
             $mailer->sendNewsletter($subject, $newsletter_emails, $template, $array);
-            $this->addFlash('success', 'Newsletter envoyée');
+            if(is_null($test)){
+                $this->addFlash('success', 'Newsletter envoyée');
+            }else{
+                $this->addFlash('success', 'Newsletter envoyée (TEST)');
+            }
         }else{
             $this->addFlash('danger', 'Pas de Newletter!');
         }
