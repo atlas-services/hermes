@@ -321,6 +321,7 @@ class SectionController extends AbstractAdminController
         if(is_null($test)){
             $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_NEWSLETTER");
         }else{
+            $subject .= "(Test)";
             $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_ADMIN");
         }
 
