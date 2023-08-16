@@ -216,11 +216,11 @@ class AppExtension extends AbstractExtension
     public function Newsletter($content, $host)
     {
 
-        $src_img = 'src="=/';
+        $src_img = 'src="/';
 
         if(str_contains($content, $src_img)){
 
-            $content = str_replace( $src_img, 'src="'.$host.'/' , $content);
+            $content = str_replace( $src_img, 'src="https://'.$host.'/' , $content);
 
             return $content;
         }
