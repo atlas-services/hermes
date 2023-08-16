@@ -35,6 +35,7 @@ parameters:
         password: '%hermes_admin_password%'
         roles:
           ROLE_ADMIN
+          ROLE_TEST_NEWSLETTER
     template:
       libre:
         type: libre

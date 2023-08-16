@@ -311,7 +311,7 @@ class SectionController extends AbstractAdminController
      */
     public function sendNewsletter(Request $request, Section $section, Mailer $mailer, UserRepository $userRepository, $test=null): Response
     { 
-
+        $newsletter_emails = [];
         $referer = (string) $request->headers->get('referer'); // get the referer, it can be empty!
         $subject = "Newsletter";
         if(isset( $section->getPosts()[0])){
@@ -322,7 +322,7 @@ class SectionController extends AbstractAdminController
             $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_NEWSLETTER");
         }else{
             $subject .= "(Test)";
-            $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_ADMIN");
+            $newsletter_emails = $userRepository->findNewsletterEmails("ROLE_TEST_NEWSLETTER");
         }
 
         $template = 'newsletter/newsletter.html.twig';

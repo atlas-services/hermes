@@ -33,7 +33,7 @@ class UserRepository extends ServiceEntityRepository
 
     public function findNewsletterUsers($role = "ROLE_NEWSLETTER"): ?array
     {
-        $neswleter_users = [];
+        $newsletter_users = [];
         
         $users =  $this->createQueryBuilder('u')
             ->getQuery()
