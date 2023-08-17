@@ -5,6 +5,9 @@
     {% if form.position is defined %}
         {{ form_row(form.position) }}
         {{ form_row(form.template) }}
+        {% if form.templateWidth is defined %}
+            {{ form_row(form.templateWidth) }}
+        {% endif %}
     {% endif %}
 
     {% if form.posts is defined %}
@@ -24,9 +27,6 @@
                 {% endif  %}
                 {% if form_post.url is defined %}
                     {{ form_row(form_post.url) }}
-                {% endif %}
-                {% if form.templateWidth is defined %}
-                    {{ form_row(form.templateWidth) }}
                 {% endif %}
                 {% if form_post.content is defined %}
                     {{ form_row(form_post.content) }}
