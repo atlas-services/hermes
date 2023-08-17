@@ -83,7 +83,7 @@ class TemplateRepository extends ServiceEntityRepository
     public function getQbTemplateLibre()
     {
         $qb = $this->createQueryBuilder('s')
-            ->where('s.code = :libre ' )
+            ->where('s.type = :libre ' )
             ->setParameter('libre',  'libre' )
         ;
 

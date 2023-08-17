@@ -20,6 +20,7 @@ trait BaseRepositoryTrait
         return $this->createQueryBuilder('m')
             ->select('m.position')
             ->orderBy('m.position', 'DESC')
+            ->andWhere('m.position != 99')
            ;
     }
 
