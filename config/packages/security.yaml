@@ -6,7 +6,7 @@ security:
 
     role_hierarchy:
         ROLE_SUPER_ADMIN: ['ROLE_ADMIN']
-        ROLE_ADMIN: ['ROLE_USER']
+        ROLE_ADMIN: ['ROLE_USER', ROLE_TEST_NEWSLETTER]
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
