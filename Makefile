@@ -9,9 +9,9 @@ hermes-install:
 	mkdir public/data/uploads/content 2> /dev/null || true
 	mkdir public/data/uploads/content/hermes 2> /dev/null || true
 	yarn install --ignore-engines
-	php bin/console  assets:install
 	export NODE_OPTIONS=--openssl-legacy-provider  &&  yarn encore dev 
 	composer install
+	php bin/console  assets:install
 	php bin/console d:s:u --force
 	php bin/console d:s:u --force --em=config
 	php bin/console hermes:db-update
