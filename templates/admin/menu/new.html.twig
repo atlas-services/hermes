@@ -8,6 +8,8 @@
 
     {{ include('admin/menu/_form.html.twig') }}
 
+    {{ include('admin/section/libres.html.twig') }}
+    
     <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('menu_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
     </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Api\ApiClient;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
@@ -217,9 +218,9 @@ class MenuController extends AbstractAdminController
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu", name="menu_section_post_new_sheet", methods={"GET","POST"})
      * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
-    public function menuSectionPostNewSheet(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository): Response
+    public function menuSectionPostNewSheet(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository, ApiClient $apiClient): Response
     {
-
+        $libres = $apiClient->getTemplates('templates', 99);
         $menu = new Menu();
         if(isset($sheet)){
             $menu->setName('page '. $sheet->getName());
@@ -265,6 +266,7 @@ class MenuController extends AbstractAdminController
         $array = [
             'menu' => $menu,
             'form' => $form->createView(),
+            'libres' => $libres,
         ];
         $array = $this->mergeActiveConfig($array);
 
