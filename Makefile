@@ -9,51 +9,51 @@ hermes-install:
 	mkdir public/data/uploads/content 2> /dev/null || true
 	mkdir public/data/uploads/content/hermes 2> /dev/null || true
 	yarn install --ignore-engines
-	bin/console  assets:install
+	php bin/console  assets:install
 	export NODE_OPTIONS=--openssl-legacy-provider  &&  yarn encore dev 
 	composer install
-	bin/console d:s:u --force
-	bin/console d:s:u --force --em=config
-	bin/console hermes:db-update
-	bin/console cache:clear
+	php bin/console d:s:u --force
+	php bin/console d:s:u --force --em=config
+	php bin/console hermes:db-update
+	php bin/console cache:clear
 
 doctrine-init:
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console d:s:u --force
-	bin/console d:s:u --force --em=config
-	bin/console hermes:db-update
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console d:s:u --force
+	php bin/console d:s:u --force --em=config
+	php bin/console hermes:db-update
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 phpunit-test-admin:
 	rm -r data/db/test.sqlite data/db/config/test.sqlite 2> /dev/null || true
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console doctrine:database:drop --force --connection=default --env=test
-	bin/console doctrine:database:drop --force --connection=config --env=test
-	bin/console doctrine:database:create --env=test
-	bin/console d:s:u --force --em=default --env=test
-	bin/console d:s:u --force --em=config --env=test
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console doctrine:database:drop --force --connection=default --env=test
+	php bin/console doctrine:database:drop --force --connection=config --env=test
+	php bin/console doctrine:database:create --env=test
+	php bin/console d:s:u --force --em=default --env=test
+	php bin/console d:s:u --force --em=config --env=test
 	SYMFONY_ENV=test composer install
-	bin/console hermes:db-update --env=test
+	php bin/console hermes:db-update --env=test
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 	vendor/bin/phpunit -c phpunit.xml tests/Controller/Admin/MenuContactControllerTest.php
 
 
 phpunit-test-front:
 	rm -r data/db/test.sqlite data/db/config/test.sqlite 2> /dev/null || true
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console doctrine:database:drop --force --connection=default --env=test
-	bin/console doctrine:database:drop --force --connection=config --env=test
-	bin/console doctrine:database:create --env=test
-	bin/console d:s:u --force --em=default --env=test
-	bin/console d:s:u --force --em=config --env=test
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console doctrine:database:drop --force --connection=default --env=test
+	php bin/console doctrine:database:drop --force --connection=config --env=test
+	php bin/console doctrine:database:create --env=test
+	php bin/console d:s:u --force --em=default --env=test
+	php bin/console d:s:u --force --em=config --env=test
 	SYMFONY_ENV=test composer install
-	bin/console hermes:db-update --env=test
+	php bin/console hermes:db-update --env=test
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 	vendor/bin/phpunit -c phpunit.xml tests/Controller/Admin/MenuContactControllerTest.php
 	vendor/bin/phpunit -c phpunit.xml tests/Controller/Front
@@ -62,23 +62,23 @@ phpunit-test-front:
 
 phpunit-test-page:
 	rm -r data/db/test.sqlite data/db/config/test.sqlite 2> /dev/null || true
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console doctrine:database:drop --force --connection=default --env=test
-	bin/console doctrine:database:drop --force --connection=config --env=test
-	bin/console doctrine:database:create --env=test
-	bin/console d:s:u --force --em=default --env=test
-	bin/console d:s:u --force --em=config --env=test
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console doctrine:database:drop --force --connection=default --env=test
+	php bin/console doctrine:database:drop --force --connection=config --env=test
+	php bin/console doctrine:database:create --env=test
+	php bin/console d:s:u --force --em=default --env=test
+	php bin/console d:s:u --force --em=config --env=test
 	SYMFONY_ENV=test composer install
-	bin/console hermes:db-update --env=test
+	php bin/console hermes:db-update --env=test
 	rm -r var/cache/* var/log/* 2> /dev/null || true
-	bin/console doctrine:fixtures:load --env=test -n
+	php bin/console doctrine:fixtures:load --env=test -n
 	vendor/bin/phpunit -c phpunit.xml tests/Menu/PageTest.php
 
 phpunit-test-sendNewsletter:
 	rm -r var/cache/* var/log/* 2> /dev/null || true
-	bin/console hermes:prepare-directories --env=test
+	php bin/console hermes:prepare-directories --env=test
 	vendor/bin/phpunit -c phpunit.xml tests/Mailer/MailerTest.php
 
 init-test:
@@ -86,43 +86,43 @@ init-test:
 	composer install
 	yarn install
 	yarn encore dev
-	bin/console hermes:prepare-directories
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console doctrine:cache:clear-result
-	bin/console doctrine:database:drop --force
-	bin/console d:s:u --force
-	bin/console d:s:u --force --em=config
-	bin/console hermes:db-update
-	bin/console ckeditor:install --clear=skip
-	bin/console elfinder:install
-	bin/console assets:install --symlink
+	php bin/console hermes:prepare-directories
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console doctrine:cache:clear-result
+	php bin/console doctrine:database:drop --force
+	php bin/console d:s:u --force
+	php bin/console d:s:u --force --em=config
+	php bin/console hermes:db-update
+	php bin/console ckeditor:install --clear=skip
+	php bin/console elfinder:install
+	php bin/console assets:install --symlink
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 init-prod:
 	composer install --no-dev --optimize-autoloader
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console d:s:u --force
-	bin/console d:s:u --force --em=config
-	bin/console hermes:db-update
-	bin/console ckeditor:install --clear=skip
-	bin/console elfinder:install
-	bin/console assets:install --symlink
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console d:s:u --force
+	php bin/console d:s:u --force --em=config
+	php bin/console hermes:db-update
+	php bin/console ckeditor:install --clear=skip
+	php bin/console elfinder:install
+	php bin/console assets:install --symlink
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 doctrine-re-init:
-	bin/console doctrine:cache:clear-metadata
-	bin/console doctrine:cache:clear-query
-	bin/console doctrine:cache:clear-result
-	bin/console doctrine:database:drop --force --connection=default
-	bin/console doctrine:database:drop --force --connection=config
-	bin/console doctrine:database:create
-	bin/console d:s:u --force --em=default
-	bin/console d:s:u --force --em=config
-	bin/console hermes:db-update
+	php bin/console doctrine:cache:clear-metadata
+	php bin/console doctrine:cache:clear-query
+	php bin/console doctrine:cache:clear-result
+	php bin/console doctrine:database:drop --force --connection=default
+	php bin/console doctrine:database:drop --force --connection=config
+	php bin/console doctrine:database:create
+	php bin/console d:s:u --force --em=default
+	php bin/console d:s:u --force --em=config
+	php bin/console hermes:db-update
 # 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
 
@@ -166,23 +166,23 @@ behat-total:
 	clear && vendor/bin/behat
 
 make-fixtures:
-	bin/console make:fixtures
+	php bin/console make:fixtures
 
 fixtures-load:
-	bin/console doctrine:fixtures:load
+	php bin/console doctrine:fixtures:load
 
 fixtures-load-users:
-	bin/console doctrine:fixtures:load --group=users
+	php bin/console doctrine:fixtures:load --group=users
 
 fixtures-load-sheets:
-	bin/console doctrine:fixtures:load --group=sheets
+	php bin/console doctrine:fixtures:load --group=sheets
 
 ckeditor-install:
-	bin/console ckeditor:install
-	bin/console assets:install --symlink
+	php bin/console ckeditor:install
+	php bin/console assets:install --symlink
 
 elfinder-install:
-	bin/console elfinder:install
+	php bin/console elfinder:install
 
 section-template:
 	sed 's/id=\"section\"/id=\"$(SECTION2)\"/g' templates/front/base/template/$(SECTION1).html.twig > templates/front/base/template/$(SECTION2).html.twig
