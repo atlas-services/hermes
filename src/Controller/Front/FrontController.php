@@ -243,6 +243,7 @@ class FrontController extends AbstractController
                             }
                         }else{
                             $user = new User();
+                            $user->setActiveNewsletter(true);
                             $user->setFirstname('newsletter');
                             $user->setLastname('newsletter');
                             $user->setEmail($email);
