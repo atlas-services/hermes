@@ -12,6 +12,9 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('active_newsletter', null, [
+                'label' => 'global.active_newsletter',
+            ])
             ->add('firstname', null, [
                 'label' => 'user.firstname',
             ])

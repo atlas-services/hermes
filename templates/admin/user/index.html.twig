@@ -7,8 +7,8 @@
 
     <table class="table">
         <thead>
-        <th>{{ 'user.firstname'|trans() }}</th>
-        <th>{{ 'user.lastname'|trans() }}</th>
+        <th>{{ 'global.active_newsletter'|trans() }}</th>
+        <th>{{ 'user.firstname'|trans() }} / {{ 'user.lastname'|trans() }}</th>
         <th>{{ 'user.email'|trans() }}</th>
         <th>{{ 'user.roles'|trans() }}</th>
         <th>{{ 'global.actions'|trans() }}</th>
@@ -17,8 +17,8 @@
         <tbody>
         {% for user in users %}
             <tr class="align-middle">
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
+                <td>{{ user.active_newsletter  ? 'Ok':'Ko' }}</td>
+                <td> {{ user.firstname == 'newsletter' ? 'NC' }} / {{ user.lastname  == 'newsletter' ? 'NC'}}</td>
                 <td>{{ user.email }}</td>
                 <td>{% for role in user.roles%} {{ role }} <br/>  {% endfor %}</td>
                 <td>

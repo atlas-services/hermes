@@ -68,6 +68,7 @@ global:
   new_menu: Nouveau menu
   active: Actif
   inactive: Inactif
+  active_newsletter: Newsletter active
   new_page: Menus
   new_post: Nouveau contenu dans le menu
   menu_one_page: Menu One page

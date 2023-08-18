@@ -1,6 +1,7 @@
 {% form_theme form 'admin/form/theme_posts.html.twig' %}
 {#{% import "admin/section/macro_form.html.twig" as forms %}#}
 {{ form_start(form) }}
+    {{ form_row(form.active_newsletter) }}
     {{ form_row(form.firstname) }}
     {{ form_row(form.lastname) }}
     {{ form_row(form.email) }}

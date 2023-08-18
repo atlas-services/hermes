@@ -31,7 +31,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-    public function findNewsletterUsers($role = "ROLE_NEWSLETTER"): ?array
+    public function findNewsletterUsers($role = "ROLE_NEWSLETTER", $all = true): ?array
     {
         $newsletter_users = [];
         
@@ -41,8 +41,10 @@ class UserRepository extends ServiceEntityRepository
         ;
 
         foreach($users as $user){
-            if( [$role, "ROLE_USER"] == $user->getRoles() || [$role] == $user->getRoles()){
-                $newsletter_users[] = $user;
+            if($all == true OR $user->isActiveNewsletter()){
+                if( [$role, "ROLE_USER"] == $user->getRoles() || [$role] == $user->getRoles()){
+                    $newsletter_users[] = $user;
+                }
             }
         }
 
@@ -54,7 +56,7 @@ class UserRepository extends ServiceEntityRepository
     public function findNewsletterEmails($role = "ROLE_NEWSLETTER"): ?array
     {
         $emails = [];
-        $newsletter_users = $this->findNewsletterUsers($role);
+        $newsletter_users = $this->findNewsletterUsers($role, false);
         
         foreach($newsletter_users as $user){
             $emails[] = $user->getEmail();

@@ -21,7 +21,7 @@ class UserController extends AbstractAdminController
     {
         $users = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findNewsletterUsers();
+            ->findNewsletterUsers('ROLE_NEWSLETTER', true);
 
         $array = [
             'users' => $users,
