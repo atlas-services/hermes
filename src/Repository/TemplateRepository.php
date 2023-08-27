@@ -64,8 +64,8 @@ class TemplateRepository extends ServiceEntityRepository
     {
         $qb = $this->getQbTemplates()
             ->where('s.active = true ')
-            ->andWhere('s.code in (:libre) ' )
-            ->setParameter('libre',  self::TEMPLATES_BASE )
+            ->andWhere('s.code in (:code) ' )
+            ->setParameter('code',  self::TEMPLATES_BASE )
             ->orderBy('s.id', 'ASC')
         ;
         return $qb;

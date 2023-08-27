@@ -65,7 +65,7 @@ global:
   newsletter_users: Mail list Newsletter
   breadcrumb: 'Vous êtes ici : '
   new_content: Nouveau contenu
-  new_menu: Nouveau menu
+  new_menu: Nouveau sous menu
   active: Actif
   inactive: Inactif
   active_newsletter: Newsletter active

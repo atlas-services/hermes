@@ -149,7 +149,8 @@ class Page
                         $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
                     }else{
                     //    $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); ;
-                       $nav['href'] = sprintf("/%s/%s", $locale, strtolower($sheet_name)); ;
+                    //    $nav['href'] = sprintf("/%s/%s", $locale, strtolower($sheet_name)); 
+                       $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); 
                     }
                  }
                 $navbar[$sheet_name] = array_merge($navbar[$sheet_name], $nav);

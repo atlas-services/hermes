@@ -57,8 +57,8 @@ class Template
 
     public function __toString(): string
     {
-        if(!is_null($this->name)){
-            return $this->name;
+        if(!is_null($this->summary)){
+            return $this->summary;
         }
         return '';
     }
