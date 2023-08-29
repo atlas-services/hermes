@@ -49,9 +49,9 @@
                     <a id="{{ menu.name }}-edit" href="{{ path('menu_edit', {'sheet': menu.sheet.slug, 'referenceName': menu.referenceName, 'locale': menu.locale}) }}">{{ 'action.edit'|trans()|raw }}</a>
                     {% endif %}
                     <a  id="{{ menu.name }}-add" href="{{ path('section_post_new_menu', {'menu': menu.slug }) }}">{{ 'action.add'|trans()|raw }}</a>
-                    {% if (menu.sheet.slug is not null and menu.slug is not null)  %}
+                    {# {% if (menu.sheet.slug is not null and menu.slug is not null)  %}
                         <a target="_blank" class="" href="{{ path('previsualidation_sheet', {'sheet': menu.sheet.slug, 'slug': menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>
-                    {% endif %}
+                    {% endif %} #}
                 </td>
             </tr>
         {% else %}
