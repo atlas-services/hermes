@@ -1,6 +1,6 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}{{ 'menu.list'|trans() }}{% endblock %}
+{% block title %}{{ 'user.list'|trans() }}{% endblock %}
 
 {% block content %}
     <h1 class="text-secondary">{{ 'user.list'|trans() }}</h1>
@@ -17,7 +17,13 @@
         <tbody>
         {% for user in users %}
             <tr class="align-middle">
-                <td>{{ user.active_newsletter  ? 'Ok':'Ko' }}</td>
+                <td>
+                    <div class="form-check form-switch form-switch-sm my-0">
+                        <input type="checkbox" class="user-active form-check-input" id="{{ user.id }}"  {{ user.activeNewsletter ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ user.id }}"></label>
+                    </div>
+                </td>
+                {# <td>{{ user.activeNewsletter  ? 'Ok':'Ko' }}</td> #}
                 <td> {{ user.firstname == 'newsletter' ? 'NC' }} / {{ user.lastname  == 'newsletter' ? 'NC'}}</td>
                 <td>{{ user.email }}</td>
                 <td>{% for role in user.roles%} {{ role }} <br/>  {% endfor %}</td>

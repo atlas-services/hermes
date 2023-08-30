@@ -69,6 +69,15 @@ jQuery(document).ready(function () {
         $url = "/fr/admin/ajax/switch/block";
         switchActive($url, $id);
     });
+    // Switch active_newsletter user (user)
+    var $activeUser = $('.user-active');
+    $activeUser.on('click', function (e) {
+        // active/desactive
+        $id = $(this).attr('id');
+        $url = "/fr/admin/user/ajax/switch/user";
+        switchActive($url, $id);
+    });
+
 });
 
 function switchActive($url, $id) {

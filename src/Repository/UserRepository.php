@@ -31,7 +31,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-    public function findNewsletterUsers($role = "ROLE_NEWSLETTER", $all = true): ?array
+    public function findNewsletterUsers($role = "ROLE_NEWSLETTER", $all = true, $active_newsletter = true): ?array
     {
         $newsletter_users = [];
         
@@ -44,6 +44,17 @@ class UserRepository extends ServiceEntityRepository
             if($all == true OR $user->isActiveNewsletter()){
                 if( [$role, "ROLE_USER"] == $user->getRoles() || [$role] == $user->getRoles()){
                     $newsletter_users[] = $user;
+                    if(!$active_newsletter){
+                        $user->setActiveNewsletter($active_newsletter);
+                        $query = $this->createQueryBuilder('u')
+                        ->update()
+                        ->set('u.active_newsletter', ':active_newsletter')
+                        ->where('u.id = :id')
+                        ->setParameter('id', $user->getId())
+                        ->setParameter('active_newsletter', $active_newsletter)
+                        ->getQuery();
+                        $query->execute();
+                    }
                 }
             }
         }
@@ -53,10 +64,10 @@ class UserRepository extends ServiceEntityRepository
 
 
 
-    public function findNewsletterEmails($role = "ROLE_NEWSLETTER"): ?array
+    public function findNewsletterEmails($role = "ROLE_NEWSLETTER", $active_newsletter = false): ?array
     {
         $emails = [];
-        $newsletter_users = $this->findNewsletterUsers($role, false);
+        $newsletter_users = $this->findNewsletterUsers($role, false, $active_newsletter);
         
         foreach($newsletter_users as $user){
             $emails[] = $user->getEmail();
@@ -65,32 +76,22 @@ class UserRepository extends ServiceEntityRepository
         return $emails;
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+ 
+    public function switchActive(int $id)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $user = $this->findOneById($id);
+
+        if($user->isActiveNewsletter()){
+            $user->setActiveNewsletter(false);
+        }else{
+            $user->setActiveNewsletter(true);
+        }
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return $user;
+
     }
-    */
+
 }

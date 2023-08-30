@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Hermes\User;
 use App\Form\Admin\UserType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -145,5 +147,20 @@ class UserController extends AbstractAdminController
             }
         }
         return $roles;
+    }
+
+
+    /**
+     * @Route("/ajax/switch/user", name="switch_user_active_ajax")
+     */
+    public function ajaxActive(Request $request, UserRepository $userRepository)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $id = $request->request->get('id');
+            $data = $userRepository->switchActive($id);
+            return new JsonResponse(array('data' =>$data->isActive()));
+        }
+
+        return new Response('This is not ajax!', 400);
     }
 }
