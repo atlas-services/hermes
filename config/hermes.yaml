@@ -1,8 +1,7 @@
 parameters:
   hermes_admin_email: '%env(APP_HERMES_ADMIN_EMAIL)%'
   hermes_admin_password: '%env(APP_HERMES_ADMIN_PASSWORD)%'
-  hermes_super_admin_email: '%env(APP_HERMES_SUPER_ADMIN_EMAIL)%'
-  hermes_super_admin_password: '%env(APP_HERMES_SUPER_ADMIN_PASSWORD)%'
+  hermes_newsletter_email: '%env(APP_HERMES_NEWSLETTER_EMAIL)%'
   version: v1.0.0
   app.locales: [fr, en] #'%env(APP_LOCALES)%'
   app.default_locale: '%env(APP_DEFAULT_LOCALE)%'
