@@ -123,7 +123,7 @@ class Mailer
            $nb= 0;
            $list = '';
         try {
-            $from = $this->params->get('hermes_admin_email');
+            $from = $this->params->get('hermes_newsletter_email');
             if(empty($to)){
                 $to = [$from];
             }
