@@ -332,11 +332,13 @@ class SectionController extends AbstractAdminController
         //return $this->render('newsletter/newsletter.html.twig', $array);
 
         if ( 'newsletter_template' == $section->getTemplate()->getCode()){
-            $mailer->sendNewsletter($subject, $newsletter_emails, $template, $array);
+            $message = $mailer->sendNewsletter($subject, $newsletter_emails, $template, $array);
+            $type = $message['type'];
+            $libelle = $message['message'];
             if(is_null($test)){
-                $this->addFlash('success', 'Newsletter envoyée');
+                $this->addFlash($type, $libelle);
             }else{
-                $this->addFlash('success', 'Newsletter envoyée (TEST)');
+                $this->addFlash($type, "$libelle (TEST)");
             }
         }else{
             $this->addFlash('danger', 'Pas de Newletter!');

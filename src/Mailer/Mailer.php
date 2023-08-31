@@ -121,6 +121,7 @@ class Mailer
     {
 
            $nb= 0;
+           $list = '';
         try {
             $from = $this->params->get('hermes_admin_email');
             if(empty($to)){
@@ -136,10 +137,11 @@ class Mailer
                 $email->addTo(new Address($addTo));
                 $this->mailer->send($email);
                 $nb++;
+                $list .= ' - '. $addTo;
             }
-            $notification = "Votre Newsletter a bien été envoyée à $nb personnes";
+            $notification = "Votre Newsletter a bien été envoyée à $nb personnes : $list";
             $return = [
-                'type' => 'notice',
+                'type' => 'success',
                 'message' => $notification
             ];
             $logContext = [
@@ -151,7 +153,7 @@ class Mailer
             ];
             $this->emailLogger->info($notification, $logContext);
         } catch (\Exception $e) {
-            $notification = "Votre message n'a pu être envoyé.";
+            $notification = "Votre newsletter n'a pu être envoyé.";
             $logContext = [
                 'exception' => $e->getMessage(),
                 'statut' => 'ko',
