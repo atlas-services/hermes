@@ -9,7 +9,7 @@ interface ContactInterface
     const LIVREDOR = "livredor";
     const LIVREDOR_TEXTE = "livre d'or";
     const NEWSLETTER = "newsletter";
-    const NEWSLETTER_TEXTE = "Newletter";
+    const NEWSLETTER_TEXTE = "Newsletter";
     const LIVREDOR_ROUTE = "livre-d-or";
     public function getName();
     public function getEmail();
