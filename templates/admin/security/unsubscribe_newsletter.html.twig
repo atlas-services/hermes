@@ -1,0 +1,17 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Unsubscribe Newsletter{% endblock %}
+
+{% block body %} 
+
+        {% block nav %} 
+        {% endblock %}
+        {% block content %}
+
+                <h1 class="h3 mb-3 font-weight-normal">{{ 'formulaire.unsubscribe_newsletter'|trans() }} :</h1>
+
+                <h1 class="h3 mb-3 font-weight-normal"><a href="{{ url }}" target="_blank">{{ url }}</a></h1> 
+
+        {% endblock %}
+
+{% endblock %}

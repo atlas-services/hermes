@@ -88,7 +88,7 @@ class Onepage
             }
 
             $this->em->flush();
-            return ['info' => 'Page créée'];
+            return ['success' => 'Page créée'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];

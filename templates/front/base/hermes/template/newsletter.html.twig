@@ -17,14 +17,12 @@
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
                 <div class="row my-sm-4 my-3">
-                        <div class="col-6 ">
-                            {{ form_widget(form.email) }}
-                        </div>
-                        <div class="col-6">
-                        <button id="sendNewsletterButton" class="btn {{newsletter_bgcolor_btn ?? contact_bgcolor_btn ?? 'btn-outline-danger'}} h-rounded-lg-4 btn-xl " type="submit">
-                            {{ 'formulaire.send'|trans() }}
-                        </button>
-                        </div>
+                    <div class="col-12 col-sm-6 ">
+                        {{ form_widget(form.email) }}
+                    </div>
+                    <div class="col-2 col-sm-3">
+                        {{ form_widget(form.subscribeNewsletterButton) }}
+                    </div>
                 </div>
                 {{ form_widget(form.csrf_token) }}
                 {{ form_end(form, {render_rest: false}) }}

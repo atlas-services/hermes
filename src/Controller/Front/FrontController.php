@@ -208,7 +208,11 @@ class FrontController extends AbstractController
                 $validation_group = $array['listForms'][0];
             }
             $entity = new Contact();
-            $form = $this->createForm(ContactType::class, $entity,['validation_groups' => [$validation_group]]);
+            $options = [
+                'validation_groups' => [$validation_group],
+                'bgcolor_btn' => $array['newsletter_bgcolor_btn'],
+            ];
+            $form = $this->createForm(ContactType::class, $entity, $options);
             if (ContactInterface::LIVREDOR == $array['listForms'][0]) {
                 $entity = new Temoignage();
                 $form = $this->createForm(TemoignageType::class, $entity,['validation_groups' => [$validation_group]]);
@@ -235,26 +239,15 @@ class FrontController extends AbstractController
                         $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
                         if(!is_null($user) ){
                             $roles = $user->getRoles();
-                            if (in_array('ROLE_ADMIN', $roles)) {
-                                $notification = "Cet email est déja dans liste Newsletter.";
-                                $this->addFlash('notice', $notification);
-                                $array['form'] = $form->createView();
-                                return $array;
+                            if (in_array('ROLE_ADMIN', $roles) || in_array('ROLE_NEWSLETTER' , $roles)) {
+                                $notification = "Cet email est dans la liste Newsletter.";
                             }
                         }else{
-                            $user = new User();
-                            $user->setActiveNewsletter(true);
-                            $user->setFirstname('newsletter');
-                            $user->setLastname('newsletter');
-                            $user->setEmail($email);
-                            $user->setRoles(['ROLE_NEWSLETTER']);
-                            $entityManager->persist($user);
-                            $entityManager->flush();
                             $notification = "Vous avez été ajouté à la liste Newsletter.";
-                            $this->addFlash('notice', $notification);
-                            $array['form'] = $form->createView();
-                            return $array;
                         }
+                        $this->addFlash('notice', $notification);
+                        $array['form'] = $form->createView();
+                        return $array;
                     }
 
 
@@ -271,7 +264,7 @@ class FrontController extends AbstractController
 
                     $this->addFlash($return['type'], $return['message']);
                     $notification = $return['message'];
-                    $this->addFlash('info', $notification);
+                    $this->addFlash('success', $notification);
                     $localeRouting = $request->attributes->get('_locale' , 'fr');
                     $redirect = "/". $page->getLocale($localeRouting);
                     return $redirect;

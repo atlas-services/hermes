@@ -107,7 +107,7 @@ class Mailer
                 'message' => $message,
             ];
             $return = [
-                'type' => 'info',
+                'type' => 'success',
                 'message' => $notification
             ];
             echo 'Exception reçue : ', $e->getMessage(), "\n";
@@ -163,7 +163,7 @@ class Mailer
                 'message' => $template,
             ];
             $return = [
-                'type' => 'info',
+                'type' => 'success',
                 'message' => $notification
             ];
             echo 'Exception reçue : ', $e->getMessage(), "\n";

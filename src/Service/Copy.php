@@ -74,7 +74,7 @@ class Copy
                 $this->em->remove($section);
                 $this->em->flush();
             }
-            return ['info' => 'Section copiée'];
+            return ['success' => 'Section copiée'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
@@ -92,7 +92,7 @@ class Copy
             }
 
             $this->em->flush();
-            return ['info' => 'Post copié'];
+            return ['success' => 'Post copié'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
@@ -149,7 +149,7 @@ class Copy
                 $this->em->persist($post);
             }
             $this->em->flush();
-            return ['info' => 'Post copié'];
+            return ['success' => 'Post copié'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
@@ -184,7 +184,7 @@ class Copy
                 $this->em->persist($post);
             }
             $this->em->flush();
-            return ['info' => 'Post copié'];
+            return ['success' => 'Post copié'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];
@@ -234,7 +234,7 @@ class Copy
 //                    $this->em->remove($sheet);
 //                }
 //                $this->em->flush();
-////                return ['info' => 'langue existe déjà'];
+////                return ['success' => 'langue existe déjà'];
 //            }
             $sheets = $this->em->getRepository(Sheet::class)->findAll();
             foreach ($sheets as $sheet){
@@ -281,7 +281,7 @@ class Copy
             }
             $this->em->flush();
 
-            return ['info' => 'nouvelle langue copiée'];
+            return ['success' => 'nouvelle langue copiée'];
 
         }catch (\Exception $e){
             return ['warning' => $e->getMessage()];

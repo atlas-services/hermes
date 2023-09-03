@@ -41,6 +41,7 @@
     <body style="background: url({{ url ?? '' }}) ; {{ bgstyle1 }} ; color: {{ text_color ?? '#ff0000' }} ;font-family: {{ font_family }}">
         {% block body %}
             {% include 'front/base/hermes/sitemap/sitemap.html.twig' %}
+            {% include 'admin/security/send_unsubscribe_newsletter.html.twig' %}
             {% block nav %}
                 {% if  (vich_uploader_asset(logo, 'imageFile')) %}
                     {% set asset_logo1 = asset(vich_uploader_asset(logo, 'imageFile')) %}

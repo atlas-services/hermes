@@ -397,6 +397,9 @@ formulaire:
   message: Message
   message_placeholder: Votre message
   send: Envoyer
+  subscribe: S'inscrire
+  unsubscribe: Se désinscrire
+  unsubscribe_newsletter: Se désinscrire de la Newsletter 
 
 transparent:
   yes: transparent

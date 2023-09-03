@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Hermes\Contact;
+use App\Entity\Hermes\User;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -10,12 +12,21 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactType extends AbstractType
 {
     public $emailTo;
+    protected $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -67,7 +78,39 @@ class ContactType extends AbstractType
                     'attr' => ['class' => "form-control", 'id' => "message", 'data-validation-required-message' => "Please enter your name.",
                     'placeholder' => "formulaire.message_placeholder", 'rows' => '15']
                 ]
+            )
+            ->add('subscribeNewsletterButton', SubmitType::class, 
+                [
+                    'label' => 'formulaire.subscribe',
+                    'attr' => ['class' => $options['bgcolor_btn'] . " h-rounded-lg-4 btn-xl "],
+                ])
+                ;
+
+            $builder->addEventListener(
+                FormEvents::POST_SUBMIT,
+                [$this, 'onPostSubmitData']
             );
+        }
+        
+    public function onPostSubmitData(FormEvent $event)
+    {
+        $form = $event->getForm();
+        if ($form->get('subscribeNewsletterButton')->isClicked()){
+            $email = $form->getData()->getEmail();
+            $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => $email]); 
+            if (is_null($user)){
+                $user = new User();
+                $user->setFirstname('newsletter');
+                $user->setLastname('newsletter');
+                $user->setEmail($email);
+                $user->setRoles(['ROLE_NEWSLETTER']);
+            }else{
+                $user->setActiveNewsletter(true);
+                $user->setRoles(['ROLE_NEWSLETTER']);
+            }  
+            $this->doctrine->getManager()->persist($user);
+            $this->doctrine->getManager()->flush();              
+        }
     }
 
     public function getName()
@@ -79,6 +122,7 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'emailTo' => null,
+            'bgcolor_btn' => 'btn-outline-danger',
             'csrf_protection' => true,
             // the name of the hidden HTML field that stores the token
             'csrf_field_name' => 'csrf_token',

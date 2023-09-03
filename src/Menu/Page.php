@@ -42,6 +42,7 @@ class Page
 
         $menu = $em->getRepository(Menu::class)->getMyMenuBySheetAndMenuSlugs($sheet, $slug, $locale);
         $hasContact = false;
+        $hasNewsletter = false;
         $listForms = [];
         if(!is_null(($menu))){
             $sectionsMenu = $menu->getSections();
@@ -49,6 +50,9 @@ class Page
                 if( ContactInterface::TYPE  === $section->getTemplate()->getType()){
                     $hasContact = true;
                     $listForms[] = $section->getTemplate()->getCode();
+                    if( ContactInterface::NEWSLETTER  === $section->getTemplate()->getCode()){
+                        $hasNewsletter = true;
+                    }
                 }
             }
         }
@@ -84,6 +88,7 @@ class Page
             'menus' => $menus ?? $sheets,
             'menu' => $menu,
             'hasContact' => $hasContact,
+            'hasNewsletter' => $hasNewsletter,
             'listForms' => $listForms,
             'locales' => $locales,
             'nav' => $nav,

@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade modal-lg fixed-top" id="unsubscribeNewsletterModal" tabindex="-1" aria-labelledby="unsubscribeNewsletterModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="unsubscribeNewsletterModalLabel">Sitemap</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
+        <div class="col-12 mb-3 row ">
+            <form method="post" action={{ path('send_unsubscribe_newsletter')}}>
+                <div class="col-sm-10 mx-auto my-5 mx-5 px-5 py-5 border border-secondary rounded-3 text-center ">
+                    <h1 class="h3 font-weight-normal h-text-success">{{ 'formulaire.unsubscribe_newsletter'|trans() }}</h1>
+                    <label for="inputEmail" class="sr-only">Email</label>
+                    <input type="email" name="email" id="inputEmail" class="col-lg-4 mx-auto form-control h-border-success" placeholder="{{ 'user.email'|trans() }}" required autofocus>
+                    <button class="mx-auto btn h-w-30 h-btn-outline-success h-rounded-lg-4 btn-xl mt-3" type="submit">
+                        {{ 'user.send_email'|trans() }}
+                    </button>
+                </div>
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+

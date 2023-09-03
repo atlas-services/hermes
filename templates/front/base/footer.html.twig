@@ -21,9 +21,18 @@
     </div>
     <div class="container">
         <div class="row">
-        <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal">
-            <p>Sitemap</p>
-        </button>
+        <div class="col-sm-6 mx-auto text-center">
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal">
+                    <p>Sitemap</p>
+                </button>
+            </div>
+            {% if hasNewsletter %}
+                <div class="col-sm-6 mx-auto text-center">
+                    <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#unsubscribeNewsletterModal">
+                        <p>{{ 'formulaire.unsubscribe_newsletter'|trans() }}</p>
+                    </button>
+                </div>
+            {% endif %}
             <div class="col-md-12 col-sm-6 col-12">
                 <p  >{{ 'global.created_by'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">HERMES</a> |  <img src="/img/copyleft.png" class="my-auto" width="20px" >{{ 'global.copyleft'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">http://hermes-cms.org</a>
                 </p>

@@ -169,7 +169,7 @@ class InitController extends AbstractAdminController
             return $this->redirectToRoute('admin_index');
         }
         $entityManager->flush();
-        $this->addFlash('info', 'Page créée!');
+        $this->addFlash('success', 'Page créée!');
         return $this->redirectToRoute('admin_index');
     }
 

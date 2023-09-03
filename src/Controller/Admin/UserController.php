@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Hermes\User;
+use App\Entity\Interfaces\ContactInterface;
 use App\Form\Admin\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,13 +18,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractAdminController
 {
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("/{roles?}", name="user_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request, string $roles = null): Response
     {
-        $users = $this->getDoctrine()
+
+        if(!is_null($roles)){
+            $users = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findNewsletterUsers('ROLE_NEWSLETTER', true);
+            ->findNewsletterUsers($roles, true);
+        }else{
+            $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+        }
 
         $array = [
             'users' => $users,
@@ -33,13 +41,13 @@ class UserController extends AbstractAdminController
     }
 
         /**
-     * @Route("/", name="user_newsletter", methods={"GET"})
+     * @Route("/user/newsletter", name="user_newsletter", methods={"GET"})
      */
     public function newsletter(): Response
     {
         $users = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
+        ->getRepository(User::class)
+        ->findNewsletterUsers(strtoupper(ContactInterface::NEWSLETTER), true);
 
         $array = [
             'users' => $users,
