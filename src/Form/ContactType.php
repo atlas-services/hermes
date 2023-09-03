@@ -82,7 +82,7 @@ class ContactType extends AbstractType
             ->add('subscribeNewsletterButton', SubmitType::class, 
                 [
                     'label' => 'formulaire.subscribe',
-                    'attr' => ['class' => $options['bgcolor_btn'] . " h-rounded-lg-4 btn-xl "],
+                    'attr' => ['class' => $options['bgcolor_btn'] . " h-rounded-lg-4 btn-xl text-center mt-2 mt-sm-0 py-auto"],
                 ])
                 ;
 
