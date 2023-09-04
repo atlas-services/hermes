@@ -15,7 +15,7 @@
         {% if logo.filename is defined %}
             {% if logo.filename is not null %}
                 {% if affiche_logo_top == true %}
-                    <a class="row navbar-brand js-scroll-trigger d-block d-sm-none " href="{{ path('home') }}">
+                    <a class="row navbar-brand js-scroll-trigger " href="{{ path('home') }}">
                         <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
                     </a>
                 {% endif %}
@@ -25,7 +25,7 @@
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
-                        <a class="col-{{ nav_offset}} d-none  d-sm-block align-middle " href="{{ path('home') }}">
+                        <a class="col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
                             <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                         </a>
                     {% endif %}
