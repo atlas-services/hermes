@@ -3,11 +3,6 @@
 hermes-install:
 	mkdir data 2> /dev/null || true
 	mkdir public/build 2> /dev/null || true
-	mkdir public/data 2> /dev/null || true
-	mkdir public/data/uploads 2> /dev/null || true
-	mkdir public/data/uploads/entity 2> /dev/null || true
-	mkdir public/data/uploads/content 2> /dev/null || true
-	mkdir public/data/uploads/content/hermes 2> /dev/null || true
 	yarn install --ignore-engines
 	export NODE_OPTIONS=--openssl-legacy-provider  &&  yarn encore dev 
 	composer install
@@ -16,6 +11,11 @@ hermes-install:
 	php bin/console d:s:u --force --em=config
 	php bin/console hermes:db-update
 	php bin/console cache:clear
+
+hermes-re-init:
+	rm -r data/db/* 2> /dev/null || true
+	chmod -Rf 775 data/db/* 2> /dev/null || true
+	php bin/console hermes:prepare-directories
 
 doctrine-init:
 	php bin/console doctrine:cache:clear-metadata
