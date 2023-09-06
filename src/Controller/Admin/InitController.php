@@ -11,15 +11,29 @@ use App\Entity\Hermes\Template;
 use App\Entity\Hermes\User;
 use App\Form\Admin\ConfigType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/{_locale}/admin/add")
+ * @Route("/{_locale}/admin")
  */
 class InitController extends AbstractAdminController
 {
+    /**
+     * @Route("/init/media", name="init_media", methods={"GET"})
+     */
+    public function removeMedia(Filesystem $filesystem, ParameterBagInterface $params): Response
+    {
+        $image_dir = $params->get('hermes_path_content_images').'/*';
+        $image_post_dir = $params->get('hermes_path_content_image_post').'/*';
+        $filesystem->remove($image_dir, $image_post_dir);
+        return $this->redirectToRoute('admin_index');
+
+    }
+
     /**
      * @Route("/config/", name="add_config", methods={"GET"})
      */
