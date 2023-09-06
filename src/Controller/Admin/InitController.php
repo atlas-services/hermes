@@ -27,9 +27,10 @@ class InitController extends AbstractAdminController
      */
     public function removeMedia(Filesystem $filesystem, ParameterBagInterface $params): Response
     {
-        $image_dir = $params->get('hermes_path_content_images').'/*';
-        $image_post_dir = $params->get('hermes_path_content_image_post').'/*';
-        $filesystem->remove($image_dir, $image_post_dir);
+        $image_dir = $params->get('hermes_path_content_images');
+        $image_post_dir = $params->get('hermes_path_content_image_post');
+        $filesystem->remove([$image_dir, $image_post_dir]);
+        $filesystem->mkdir($image_dir.'/Config');
         return $this->redirectToRoute('admin_index');
 
     }
