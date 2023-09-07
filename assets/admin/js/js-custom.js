@@ -166,14 +166,14 @@ if(null !=select){
     });
 }
 
-var select = document.querySelector('#select_api_template');
+var select_api_template = document.querySelector('#select_api_template');
 
 if(null !=select){
-    select.addEventListener('click', function() {
-        var selected = select.options[select.selectedIndex].value;
+    select_api_template.addEventListener('click', function() {
+        var selected = select_api_template.options[select_api_template.selectedIndex].value;
         var selected_template = document.getElementById(selected);
         if(null !=selected){
-            for (var k = 1; k <= select.length; ++k) {
+            for (var k = 1; k <= select_api_template.length; ++k) {
                 var template = document.getElementById(k);
                 if(null != template){                    
                     if(selected_template == template){
