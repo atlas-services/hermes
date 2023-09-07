@@ -168,7 +168,7 @@ if(null !=select){
 
 var select_api_template = document.querySelector('#select_api_template');
 
-if(null !=select){
+if(null !=select_api_template){
     select_api_template.addEventListener('click', function() {
         var selected = select_api_template.options[select_api_template.selectedIndex].value;
         var selected_template = document.getElementById(selected);
