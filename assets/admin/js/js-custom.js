@@ -147,19 +147,50 @@ if(null !=select){
         var selected = select.options[select.selectedIndex].value;
         var options = select.getElementsByTagName('option');
         var tbody = document.getElementById('tbody');
-        var cells = tbody.getElementsByTagName('tr');
-    
-        if(options.length < 3 && 'All' == selected ){
-            var name = select.getAttribute('name');
-            window.location.href = "/fr/admin/"+ name + "/";
-        } 
-        for (var k = 0; k < cells.length; ++k) {
-            if ( 'All' == selected || cells[k].classList.contains(selected)) {
-                cells[k].classList.remove("d-none");
-                cells[k].setAttribute("selected", true);
-            }else{
-                cells[k].classList.add("d-none");
-            }
+        if(null != tbody){
+            var cells = tbody.getElementsByTagName('tr');
+        
+            if(options.length < 3 && 'All' == selected ){
+                var name = select.getAttribute('name');
+                window.location.href = "/fr/admin/"+ name + "/";
+            } 
+            for (var k = 0; k < cells.length; ++k) {
+                if ( 'All' == selected || cells[k].classList.contains(selected)) {
+                    cells[k].classList.remove("d-none");
+                    cells[k].setAttribute("selected", true);
+                }else{
+                    cells[k].classList.add("d-none");
+                }
+            }    
+        }
+    });
+}
+
+var select = document.querySelector('#select_api_template');
+
+if(null !=select){
+    select.addEventListener('click', function() {
+        var selected = select.options[select.selectedIndex].value;
+        var selected_template = document.getElementById(selected);
+        if(null !=selected){
+            for (var k = 1; k <= select.length; ++k) {
+                var template = document.getElementById(k);
+                if(null != template){                    
+                    if(selected_template == template){
+                        template.classList.remove("d-none");
+                        template.classList.add("d-block");
+                    }else{
+                        if(null == selected_template){
+                            template.classList.remove("d-none");
+                            template.classList.add("d-block");
+                        }else{
+                            template.classList.add("d-none");
+                            template.classList.remove("d-block");
+                        }
+                    }
+                    
+                }
+            }    
         }    
     });
 }
