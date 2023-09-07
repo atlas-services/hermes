@@ -178,6 +178,7 @@ class ConfigType extends AbstractBaseType
                     break;
                 // logo
                 case 'logo':
+                case 'nav_height':
                     $choice = true;
                     foreach (range(0, 500, 10) as $number) {
                         $options[ $number."px"] = $number."px";

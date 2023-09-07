@@ -172,7 +172,7 @@ class AppExtension extends AbstractExtension
             if(strpos($diff, 'px') > 0){
                 $diff = str_replace('px', '', $diff);
             }
-            $value = $value - $diff;
+            $value = ($value - $diff)/2 ;
             $value = $value.'px';
         }
 

@@ -229,7 +229,8 @@ user:
   username: Username
   password: Mot de passe
   forgot_password: Recevoir un nouveau mot de passe
-  reset_password: Cliquer sur ce lien pour réinitialiser Votre mot de passe
+  reset_password: Réinitialiser
+  reset_password_label: Cliquer sur ce lien pour réinitialiser Votre mot de passe
   send_email: Envoyer
   admin: Mon espace d'administration
   profil: Modifier mon profil

@@ -14,7 +14,7 @@
                 {% if contact_user is not null  %}
                     <h5 class="section-subheading ">{{ contact_user }}</h5>
                 {% endif %}
-                {% if contact is not null %}
+                {% if contact is not null and true == contact_affiche %}
                     <h5 class="section-subheading"  >{{ 'formulaire.email'|trans() }} :  <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" href="mailto:{{ contact }}">{{ contact }}</a></h5>
                 {% endif %}
             </div>

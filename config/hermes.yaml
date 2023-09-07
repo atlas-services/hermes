@@ -242,7 +242,7 @@ parameters:
           image: ~
         affiche_logo_top:
           summary: Position Top du logo
-          value: true
+          value: false
         affiche_search:
           summary: Affichage de la barre de recherche
           value: false
@@ -313,6 +313,9 @@ parameters:
           summary: configuration dribbble
           value: ~
       contact:
+        contact_affiche:
+          summary: Affiche Email de contact (utilisé dans le formulaire de contact)
+          value: false
         contact:
           summary: Email de contact (utilisé dans le formulaire de contact)
           value: hermes@hermes-cms.org

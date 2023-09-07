@@ -16,17 +16,17 @@
             {% if logo.filename is not null %}
                 {% if affiche_logo_top == true %}
                     <a class="row navbar-brand js-scroll-trigger " href="{{ path('home') }}">
-                        <img style="height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
+                        <img  src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
                     </a>
                 {% endif %}
             {% endif %}
         {% endif %}
-        <div class="collapse navbar-collapse {{ justify_content_center }}" id="navbarResponsive" style="height:{{ nav_height }};">
+        <div  class="collapse navbar-collapse {{ justify_content_center }}" id="navbarResponsive" style="height:{{ nav_height }};">
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
-                        <a class="col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
-                            <img style="margin-left:{{ logo.value }}; height:{{ nav_height|change_px(logo.value) }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                        <a  class="col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
+                            <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                         </a>
                     {% endif %}
                 {% endif %}
