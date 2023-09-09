@@ -3,18 +3,6 @@
 {% block title %}{{ 'section.list'|trans() }}{% endblock %}
 
 {% block content %}
-            {% for message in app.flashes('success') %}
-                <div class="text-center alert alert-success">
-                    <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('danger') %}
-                <div class="text-center alert alert-danger">
-                    <a href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
-                    {{ message }}
-                </div>
-            {% endfor %}
     <div class="row mb-2">
     <h1 class="text-secondary">{{ 'section.list'|trans() }}</h1>
         <select class="my-4 py-2 h-bg-success text-white" id="select_page" name="section">
