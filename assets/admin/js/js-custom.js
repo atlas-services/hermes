@@ -2,18 +2,33 @@ const formulaires = ["Formulaire Contact", "Formulaire Newsletter", "Formulaire 
 
 window.addEventListener('load', (event) => {
     var uri = window.location.pathname;
-    var urls = ['/nouveau-menu/nouveau-contenu', '/nouvelle-section/nouveau-contenu'];
+    var urls = ['/nouveau-menu/nouveau-contenu', '/nouvelle-section/nouveau-contenu', '/section/edit'];
     urls.forEach(element => hiddeNew(element, uri, true));
 
 });
 
+
 function hiddeNew(element, uri, hide) {
     if(uri.includes(element)){
-        showBase();
-        collapseListe(true);
-        if(document.getElementById('section_template_posts_0_content') != null){
-            document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
-        }        
+        // showBase();
+        // collapseListe(true);
+
+        // selectionner la page dans le menu "sections"
+        var menu_section_select_template = document.querySelector('#menu_sections_0_template');
+        if(null != menu_section_select_template){
+            handleSelectTemplate(menu_section_select_template);  
+        }
+
+        var section_template_select_template = document.querySelector('#section_template_template'); 
+        if(null != section_template_select_template){
+            handleSelectTemplate(section_template_select_template);                  
+        }
+
+
+
+        // if(document.getElementById('section_template_posts_0_content') != null){
+        //     document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
+        // }        
     }
 }
 
@@ -65,69 +80,113 @@ function collapseListe(collapse) {
 }
 
 // selectionner la page dans le menu "sections"
-var menu_section_select_template = document.querySelector('#menu_sections_0_template');
-handleSelectTemplate(menu_section_select_template);  
+var select_template = document.querySelector('#menu_sections_0_template');
+if(null != select_template){
+    select_template.addEventListener('change', function() {
+        handleSelectTemplate(select_template);  
+    });
+}
 
-var section_template_select_template = document.querySelector('#section_template_template'); 
-handleSelectTemplate(section_template_select_template);   
+ var select_template = document.querySelector('#section_template_template'); 
+ if(null != select_template){
+    select_template.addEventListener('change', function() {
+        handleSelectTemplate(select_template);  
+    });
+ }
+   
 
 
 function handleSelectTemplate(select_template) {
     if(null != select_template){
-        select_template.addEventListener('change', function() {
-            var selected = select_template.options[select_template.selectedIndex].value;
-            var options = select_template.getElementsByTagName('option');
-            var selected_template_type = select_template.options[select_template.selectedIndex].innerHTML;
-            showBase();   
+        var selected = select_template.options[select_template.selectedIndex].value;
+        var options = select_template.getElementsByTagName('option');
+        var selected_template_type = select_template.options[select_template.selectedIndex].innerHTML;
+        //showBase();   
+        // alert(selected_template_type);
+        if('Template Libre' == selected_template_type || 'Template Newsletter' == selected_template_type){
+            collapseListe(false);
+            if(document.getElementById('section_template_posts_0_content') != null){
+                document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
+            } 
+            if(document.getElementById('section_template_uploaded') != null){        
+                document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
 
-            if('Template Libre' == selected_template_type || 'Template Newsletter' == selected_template_type){
-                collapseListe(false);
-                if(document.getElementById('section_template_posts_0_content') != null){
-                    document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
-                } 
+            } 
+            if(document.getElementById('section_template_posts_0_url') != null){        
+                document.getElementById('section_template_posts_0_url').parentElement.parentElement.hidden = true; 
+            } 
+            if(document.getElementById('section_template_posts_0_imageFile_file') != null){        
+                document.getElementById('section_template_posts_0_imageFile_file').hidden = true;        
+            } 
+            if(document.getElementById('section_template_templateNbCol') != null){
+                document.getElementById('section_template_templateNbCol').parentElement.parentElement.hidden = true;
+            } 
+            if(document.getElementById('section_template_templateImageFilter') != null){
+                document.getElementById('section_template_templateImageFilter').parentElement.parentElement.hidden = true;
             }
-            if('Folio Classique' == selected_template_type){
-                if(document.getElementById('section_template_posts_0_content') != null){
-                    document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
-                }  
+            if(document.getElementById('section_template_template2') != null){
+                document.getElementById('section_template_template2').parentElement.parentElement.hidden = true;
+            }  
+            if(document.getElementById('section_template_template2Width') != null){
+                document.getElementById('section_template_template2Width').parentElement.parentElement.hidden = true;
+            } 
+            
+        }
+        if('Folio Classique' == selected_template_type){
+            if(document.getElementById('section_template_posts_0_content') != null){
+                document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
+            }  
 
-                if(document.getElementById('section_template_uploaded') != null){
-                    document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = false;
-                } 
-                if(document.getElementById('menu_section0_template_uploaded') != null){
-                    document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = false;
-                } 
-                
-                collapseListe(false);
+            if(document.getElementById('section_template_uploaded') != null){
+                document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = false;
+            } 
+            if(document.getElementById('menu_section0_template_uploaded') != null){
+                document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = false;
+            } 
 
-                if(document.getElementById('menu_saveAndAddPost') != null){
-                    document.getElementById('menu_saveAndAddPost').hidden = false;
-                }
-         
+            if(document.getElementById('section_template_templateNbCol') != null){
+                document.getElementById('section_template_templateNbCol').parentElement.parentElement.hidden = false;
+            } 
+            if(document.getElementById('section_template_templateImageFilter') != null){
+                document.getElementById('section_template_templateImageFilter').parentElement.parentElement.hidden = false;
             }
-            if(selected_template_type.includes('Formulaire')){
-                collapseListe(true);
-                if(document.getElementById('section_template_posts_0_content') != null){
-                    document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
-                } 
+            if(document.getElementById('section_template_template2') != null){
+                document.getElementById('section_template_template2').parentElement.parentElement.hidden = false;
+            }  
+            if(document.getElementById('section_template_template2Width') != null){
+                document.getElementById('section_template_template2Width').parentElement.parentElement.hidden = false;
+            } 
+            
+            collapseListe(false);
 
-                if(document.getElementById('section_template_posts_0_content') != null){
-                    document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
-                }  
-
-                if(document.getElementById('section_template_uploaded') != null){
-                    document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
-                } 
-                if(document.getElementById('menu_section0_template_uploaded') != null){
-                    document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = true;
-                } 
-                
-                if(document.getElementById('menu_saveAndAddPost') != null){
-                    document.getElementById('menu_saveAndAddPost').hidden = false;
-                }
+            if(document.getElementById('menu_saveAndAddPost') != null){
+                document.getElementById('menu_saveAndAddPost').hidden = false;
             }
+        
+        }
+        if(selected_template_type.includes('Formulaire')){
+            collapseListe(true);
+            if(document.getElementById('section_template_posts_0_content') != null){
+                document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
+            } 
 
-        });
+            if(document.getElementById('section_template_posts_0_content') != null){
+                document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
+            }  
+
+            if(document.getElementById('section_template_uploaded') != null){
+                document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
+            } 
+            if(document.getElementById('menu_section0_template_uploaded') != null){
+                document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = true;
+            } 
+            
+            if(document.getElementById('menu_saveAndAddPost') != null){
+                document.getElementById('menu_saveAndAddPost').hidden = false;
+            }
+        }
+
+
     }
 }
 
