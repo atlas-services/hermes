@@ -1,4 +1,4 @@
-const formulaires = ["Contact", "Newsletter", "Livre d'or"] ;
+const formulaires = ["Formulaire Contact", "Formulaire Newsletter", "Formulaire Livre d'or"] ;
 
 window.addEventListener('load', (event) => {
     var uri = window.location.pathname;
@@ -80,19 +80,13 @@ function handleSelectTemplate(select_template) {
             var selected_template_type = select_template.options[select_template.selectedIndex].innerHTML;
             showBase();   
 
-            if(formulaires.includes(selected_template_type)){
-                collapseListe(true);
-                if(document.getElementById('section_template_posts_0_content') != null){
-                    document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
-                }     
-            }  
-            if('Template libre' == selected_template_type || 'Template Newsletter' == selected_template_type){
+            if('Template Libre' == selected_template_type || 'Template Newsletter' == selected_template_type){
                 collapseListe(false);
                 if(document.getElementById('section_template_posts_0_content') != null){
                     document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
                 } 
             }
-            if('Folio classique' == selected_template_type){
+            if('Folio Classique' == selected_template_type){
                 if(document.getElementById('section_template_posts_0_content') != null){
                     document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
                 }  

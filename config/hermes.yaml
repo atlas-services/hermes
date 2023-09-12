@@ -30,7 +30,7 @@ parameters:
     template:
       libre:
         type: libre
-        summary: Template libre
+        summary: Template Libre
         code: libre
         name: Libre
       newsletter_template:
@@ -45,7 +45,7 @@ parameters:
       #   name: Libre avec code
       contact:
         type: formulaire
-        summary: Formulaire contact
+        summary: Formulaire Contact
         code: contact
         name: Contact
       newsletter:
@@ -85,9 +85,9 @@ parameters:
         name: Carousel par groupe de 3 images
       folio1:
         type: liste 
-        summary: Folio classique
+        summary: Folio Classique
         code: folio1
-        name: Folio classique
+        name: Folio Classique
       folio2:
         type: liste 
         summary: Folio effet survol (+)
