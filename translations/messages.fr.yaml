@@ -12,6 +12,14 @@ Readme: Readme
 form:
   label:
     delete: Supprimer
+    template: Type de présentation
+    template_width: Largeur de la page (de 1 à 12)
+    uploaded: Liste des images à charger
+    template_bg_color: Couleur de fond
+    template_nb_col: Nombre d'images par lignes
+    template_image_filter: Filtre à appliquer sur les images
+    template2: Type de présentation de la modale
+    template2_width: Largeur des images de la modale (de 1 à 12)
 
 info:
   admin_type_site_1: 'Hermes a été conçu pour vous permettre de créer facilement vos pages Web.'
