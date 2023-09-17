@@ -27,7 +27,8 @@
             </tr>
         </thead>
         <tbody id="tbody">
-        {% for section in sections|sort((a, b) => a.position <=> b.position)|sort((a, b) => a.menu.sheet.name <=> b.menu.sheet.name) %}
+        {% for section in sections|sort((a, b) => a.position <=> b.position) %}
+            {% if section.menu is defined and section.menu is not null %}            
             <tr class="align-middle {{ section.menu.id }}">
                 <td>
                     <div class="form-check form-switch form-switch-sm my-0">
@@ -62,6 +63,7 @@
                     {% endif %}
                 </td>
             </tr>
+        {% endif %}
         {% else %}
             <tr class="align-middle">
                 <td colspan="7">{{ 'global.no_record'|trans()|raw }}</td>

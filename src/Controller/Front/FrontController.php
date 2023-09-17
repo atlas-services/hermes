@@ -294,8 +294,7 @@ class FrontController extends AbstractController
 
         $urls = $page->getSitemapByLocale($locale);
         $array['urls'] = $urls['html'];
-
-        if ( isset($array['listForms'][0]) && ContactInterface::LIVREDOR == $array['listForms'][0]) {
+            if ( isset($array['listForms'][0]) && in_array( ContactInterface::LIVREDOR, $array['listForms']) ) {
             $array[ContactInterface::LIVREDOR] = $livredor;
         }
 
