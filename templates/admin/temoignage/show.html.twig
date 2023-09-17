@@ -4,7 +4,7 @@
 
 {% block content %}
     <a class="btn h-btn-outline-success mb-sm-3"  href="{{ path('temoignage_index') }}">{{ 'global.back_to_list'|trans()|raw }}</a>
-    <h1 class="text-secondary">{{ 'temoignage.show'|trans() }} {{ temoignage.name }}</h1>
+    <h1 class="text-secondary">{{ 'temoignage.show'|trans() }} {{ temoignage.firstname ~ ' ' ~ temoignage.lastname }}</h1>
 
     <table class="table">
         <tbody>
@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <th>{{ 'global.name'|trans() }}</th>
-                <td>{{ temoignage.name }}</td>
+                <td>{{ temoignage.firstname ~ ' ' ~ temoignage.lastname }}</td>
             </tr>
             <tr>
                 <th>{{ 'global.content'|trans() }}</th>
