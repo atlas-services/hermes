@@ -13,13 +13,14 @@ class Contact implements ContactInterface
     const CONTACT = 'Contact';
     const LIVREDOR = "Livredor";
 
-    private $name;
+    private $firstname;
+    private $lastname;
     private $subject;
     private $email;
 
     private $telephone;
 
-    private $message;
+    private $content;
 
     public function __construct()
     {
@@ -35,12 +36,12 @@ class Contact implements ContactInterface
         ]));
 
         $metadata->addPropertyConstraint(
-            'name', 
+            'firstname', 
             new Assert\NotBlank(
                 ['groups' => ['contact', 'livredor'],
         ]));
         $metadata->addPropertyConstraint(
-            'name', 
+            'firstname', 
             new Assert\Length(
                 [
                 'min'    => 2,
@@ -49,7 +50,21 @@ class Contact implements ContactInterface
             ]));
 
         $metadata->addPropertyConstraint(
-            'message', 
+            'lastname', 
+            new Assert\NotBlank(
+                ['groups' => ['contact', 'livredor'],
+        ]));
+        $metadata->addPropertyConstraint(
+            'lastname', 
+            new Assert\Length(
+                [
+                'min'    => 2,
+                'max'    => 40,
+                'groups' => ['contact', 'livredor'],
+            ]));
+    
+        $metadata->addPropertyConstraint(
+            'content', 
             new Assert\Length(
                 [
                 'groups' => ['contact', 'livredor'],
@@ -63,15 +78,39 @@ class Contact implements ContactInterface
      */
     public function getName()
     {
-        return $this->name;
+        return sprintf('%s , %s', $this->firstname, $this->lastname);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstname;
     }
 
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setFirstName($firstname): void
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setLastName($lastname): void
+    {
+        $this->lastname = $lastname;
     }
 
     /**
@@ -109,17 +148,17 @@ class Contact implements ContactInterface
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function getContent()
     {
-        return $this->message;
+        return $this->content;
     }
 
     /**
-     * @param mixed $message
+     * @param mixed $content
      */
-    public function setMessage($message): self
+    public function setContent($content): self
     {
-        $this->message = $message;
+        $this->content = $content;
 
         return $this;
     }

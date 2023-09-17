@@ -24,7 +24,7 @@
                     </div>
                 </td>
                 <td>{{ temoignage.position }}</td>
-                <td>{{ temoignage.name }}</td>
+                <td>{{ temoignage.firstname ~ ' ' ~ temoignage.lastname }}</td>
                 <td>{{ temoignage.content }}</td>
                 <td>
                     <a id="{{ temoignage.id }}" href="{{ path('temoignage_edit', {'id': temoignage.id}) }}">{{ 'action.edit'|trans()|raw }}</a>

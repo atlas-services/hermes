@@ -53,6 +53,7 @@ import '../../../commun/js/copy';
 import '../bootstrap/modale';
 import '../bootstrap/wow';
 import '../bootstrap/videos';
+import './js-form';
 // import '../hermes/aos';
 // import '../../../commun/js/lazy';
 // import '../hermes/video';

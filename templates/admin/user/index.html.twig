@@ -24,7 +24,7 @@
                     </div>
                 </td>
                 {# <td>{{ user.activeNewsletter  ? 'Ok':'Ko' }}</td> #}
-                <td> {{ user.firstname == 'newsletter' ? 'NC' }} / {{ user.lastname  == 'newsletter' ? 'NC'}}</td>
+                <td> {{ user.firstname == 'newsletter' ? 'NC /' : user.firstname }}  {{ user.lastname  == 'newsletter' ? 'NC': user.lastname}}</td>
                 <td>{{ user.email }}</td>
                 <td>{% for role in user.roles%} {{ role }} <br/>  {% endfor %}</td>
                 <td>

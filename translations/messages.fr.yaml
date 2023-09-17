@@ -399,13 +399,16 @@ formulaire:
   texte: Pour des informations supplémentaires
   titre: Formulaire de Contact
   name: Nom
-  name_placeholder: Votre Nom
+  firstname: Prénom
+  lastname: Nom
+  firstname_placeholder: Prénom
+  lastname_placeholder: Nom
   email: Email
-  email_placeholder: Votre Email
+  email_placeholder: Email
   phone: Téléphone
   phone_placehoder: Numéro de téléphone
   message: Message
-  message_placeholder: Votre message
+  message_placeholder: Message
   send: Envoyer
   subscribe: S'inscrire
   unsubscribe: Se désinscrire

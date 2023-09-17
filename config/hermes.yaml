@@ -337,7 +337,22 @@ parameters:
         contact_width:
           summary: Largeur de la page contact (max = 12)
           value: 12
+        contact_bgcolor_subject:
+          summary: Couleur de fond sujet du formulaire
+          value: '#000000'
+        contact_color_subject:
+          summary: Couleur sujet du formulaire
+          value: '#FFFFFF'
+        contact_bgcolor_input:
+          summary: Couleur de fond input du formulaire
+          value: '#FFFFFF'
+        contact_color_input:
+          summary: Couleur input du formulaire
+          value: '#000000'
       newsletter:
+        newsletter_active:
+          summary: Activer la newsletter dans les Formulaires
+          value: false
         newsletter_contact:
           summary: Email de contact (utilisé dans le formulaire de newsletter)
           value: newsletter@hermes-cms.org
@@ -357,20 +372,23 @@ parameters:
           summary: Largeur de la page newsletter (max = 12)
           value: 12
       livredor:
+        livredor_active:
+          summary: Activer le livre d'or dans les Formulaires
+          value: false
         livredor_contact:
           summary: Email de contact (utilisé dans le formulaire de livredor)
           value: contact@hermes-cms.org
         livredor_presentation:
           summary: Texte pour la livredor.
-          value: Inscrivez-vous à notre livredor
+          value: Inscrivez-vous à notre livre d'or
         livredor_bgcolor:
-          summary: Couleur de fond de la page livredor
+          summary: Couleur de fond de la page livre d'or
           value: 'transparent'
         livredor_color:
-          summary: Couleur des textes la page livredor
+          summary: Couleur des textes la page livre d'or
           value: '#ffffff'
         livredor_bgcolor_btn:
-          summary: Couleur de fond du bouton de la page livredor
+          summary: Couleur de fond du bouton de la page livre d'or
           value: 'btn-outline-white'
         livredor_width:
           summary: Largeur de la page livredor (max = 12)

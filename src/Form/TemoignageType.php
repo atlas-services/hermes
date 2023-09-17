@@ -21,10 +21,14 @@ class TemoignageType extends AbstractBaseType
         $builder
             ->add('active')
             ->add('position')
-            ->add('name', TextType::class,
+            ->add('firstname', TextType::class,
                 array('constraints' => new Assert\Type('string'),
-                    'label' => 'Nom', 'attr' => array('class' => "form-control", 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
-                    'placeholder' => "formulaire.name_placeholder")))
+                    'label' => 'Prénom', 'attr' => array('class' => "form-control", 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
+                    'placeholder' => "formulaire.firstname_placeholder")))
+                ->add('lastname', TextType::class,
+                    array('constraints' => new Assert\Type('string'),
+                        'label' => 'Nom', 'attr' => array('class' => "form-control", 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
+                        'placeholder' => "formulaire.lastname_placeholder")))
             ->add('email', EmailType::class,
                 array('label' => '* Email ', 'attr' => array('class' => "form-control", 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre émail.",
                     'placeholder' => "formulaire.email_placeholder")))

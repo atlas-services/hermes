@@ -211,6 +211,11 @@ class FrontController extends AbstractController
             $options = [
                 'validation_groups' => [$validation_group],
                 'bgcolor_btn' => $array['newsletter_bgcolor_btn'],
+                'contact_bgcolor_subject' => $array['contact_bgcolor_subject'],
+                'contact_color_subject' => $array['contact_color_subject'],
+                'contact_bgcolor_input' => $array['contact_bgcolor_input'],
+                'contact_color_input' => $array['contact_color_input'],
+                'contact_subjects' => $array['contact_subjects'],
             ];
             $form = $this->createForm(ContactType::class, $entity, $options);
             if (ContactInterface::LIVREDOR == $array['listForms'][0]) {
@@ -223,6 +228,7 @@ class FrontController extends AbstractController
 
             if ($form->isSubmitted()) {
                 if ($form->isValid()) {
+                    $subject = $form->getData()->getSubject();
 
                     $entityManager = $this->getDoctrine()->getManager();
                     if (ContactInterface::LIVREDOR == $array['listForms'][0]) {
@@ -233,17 +239,16 @@ class FrontController extends AbstractController
                         $array['form'] = $form->createView();
                         return $array;
                     }
-
-                    if (ContactInterface::NEWSLETTER == $array['listForms'][0]) {
+                    if (strtolower(ContactInterface::NEWSLETTER) == strtolower($subject) || ContactInterface::NEWSLETTER == $array['listForms'][0]) {
                         $email = $form->getData()->getEmail();
                         $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
                         if(!is_null($user) ){
                             $roles = $user->getRoles();
                             if (in_array('ROLE_ADMIN', $roles) || in_array('ROLE_NEWSLETTER' , $roles)) {
-                                $notification = "Cet email est dans la liste Newsletter.";
+                                $notification = "Cet email a été ajouté à la liste de diffusion de la Newsletter.";
                             }
                         }else{
-                            $notification = "Vous avez été ajouté à la liste Newsletter.";
+                            $notification = "Cet email a été ajouté à la liste de diffusion de la Newsletter.";
                         }
                         $this->addFlash('notice', $notification);
                         $array['form'] = $form->createView();

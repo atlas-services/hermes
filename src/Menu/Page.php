@@ -4,6 +4,7 @@
 namespace App\Menu;
 
 use App\Entity\Config\Config;
+use App\Entity\Hermes\Contact;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
 use App\Entity\Interfaces\ContactInterface;
@@ -81,6 +82,18 @@ class Page
             $home =  ['sheet' => "/", 'slug' => null];
         }
 
+        $contact_subjects = [
+            Contact::CONTACT => Contact::CONTACT ,
+        ];
+
+        if(($this->config['newsletter_active'])){
+            $contact_subjects[Contact::NEWSLETTER_TEXTE]  = Contact::NEWSLETTER ;
+        }
+        
+        if(($this->config['livredor_active'])){
+            $contact_subjects[Contact::LIVREDOR_TEXTE]  = Contact::LIVREDOR ;
+        }
+
         $array = [
 //            'config' => $config,
             'sheets' => $sheet_actives ?? [],
@@ -93,6 +106,7 @@ class Page
             'locales' => $locales,
             'nav' => $nav,
             'home' => $home,
+            'contact_subjects' => $contact_subjects,
         ];
 
         /*

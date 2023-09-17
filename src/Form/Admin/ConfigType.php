@@ -170,10 +170,12 @@ class ConfigType extends AbstractBaseType
                 case 'affiche_search':
                 // affiche_footer
                 case 'footer_affiche':
+                case 'newsletter_active':
+                case 'livredor_active':
                     $choice = true;
                     $options = [
-                        'true'  => true,
-                        'false' => false ,
+                        'activer'  => true,
+                        'desactiver' => false ,
                     ];
                     break;
                 // logo
