@@ -1,6 +1,6 @@
 <!-- Contact Section -->
-<section class="mh-100 pb-0  px-0 container-fluid col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ contact_bgcolor }} ; color:{{ contact_color }}; " >
-    <div class="container col-lg-{{ content_container_width|col_lg() }}"  >
+<section id="formulaire" class="mh-100 pb-0  px-0 container-fluid col-lg-{{ container_width|col_lg() }} col-12 text-center"  style="background-color:{{ contact_bgcolor }} ; color:{{ contact_color }}; " >
+    <div class="container col-lg-{{ content_container_width|col_lg() }}  mt-3"  >
         {% if 'one page' == nav_bar  %}
             <div class="col-lg-12 col-12 text-center mb-5">
                 <p> <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="js-scroll-trigger main-btn wow fadeInUp rounded-pill" data-wow-delay="0.8s" data-wow-duration="1.0s" href="{{ path('sheet') }}">Retour sur le site</a></p>
