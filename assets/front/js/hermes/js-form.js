@@ -7,7 +7,20 @@ const form_telephone = document.getElementById("contact_telephone");
 const form_content = document.getElementById("contact_content");
 const form_button = document.getElementById("sendMessageButton");
 
-form_subject.addEventListener("input", (event) => {
+if(form_subject != null){
+    window.addEventListener("load", (event) => {
+
+            inputForm();
+
+
+    });
+
+    form_subject.addEventListener("input", (event) => {
+        inputForm();
+    });
+}
+
+function inputForm(){
     if( 'Newsletter' == form_subject.value){
         form_content.removeAttribute('required');
         form_content.hidden = true ;
@@ -25,5 +38,4 @@ form_subject.addEventListener("input", (event) => {
         form_content.hidden = false ;
         form_button.innerHTML = "Envoyer";
     }
-
-});
+}
