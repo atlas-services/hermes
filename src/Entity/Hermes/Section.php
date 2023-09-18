@@ -324,7 +324,7 @@ class Section
     public function getTemplate2Width(): ?int
     {
         if( '' == $this->template2_width || null == $this->template2_width){
-            return '10';
+            return '4';
         }
         return $this->template2_width;
     }
@@ -332,7 +332,7 @@ class Section
     /**
      * @param int $template2_width
      */
-    public function setTemplate2Width(?int $template2_width=100): void
+    public function setTemplate2Width(?int $template2_width=4): void
     {
         $this->template2_width = $template2_width;
     }

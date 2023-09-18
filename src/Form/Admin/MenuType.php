@@ -20,7 +20,6 @@ class MenuType extends AbstractNameBaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $options['label_name']= 'menu.name';
         $options['tooltip']= 'texte qui apparaitra sur le menu';
         $options['name_required'] = true;
         $options['active'] = true;
@@ -121,7 +120,7 @@ class MenuType extends AbstractNameBaseType
     {
         $resolver->setDefaults([
             'data_class' => Menu::class,
-            'label_name' =>'global.name',
+            'label_name' =>'global.menu',
             'name_constraints'=> new NotBlank(['message'=> 'error_message.menu.name']),
             'sheet' => true,
             'referenceName' => true,

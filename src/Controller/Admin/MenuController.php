@@ -68,6 +68,7 @@ class MenuController extends AbstractAdminController
 //        Le menun'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
         $menu = new Menu();
         $options = ['referenceName' => false];
+        $options['label_name']= 'global.menu';
         $form = $this->createForm(BaseMenuType::class, $menu, $options);
         $form->handleRequest($request);
 
@@ -293,7 +294,8 @@ class MenuController extends AbstractAdminController
 //        Le menu'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
 //        $menu = $menuRepository->findOneBy(['slug'=> $menu->getSlug(), 'sheet'=>$sheet]);
         $menu = $menuRepository->findOneBy(['locale'=> $locale, 'referenceName'=>$referenceName]);
-        $form = $this->createForm(BaseMenuType::class, $menu);
+        $options['label_name']= 'global.menu';
+        $form = $this->createForm(BaseMenuType::class, $menu, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
