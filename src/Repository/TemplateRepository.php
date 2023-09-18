@@ -17,11 +17,12 @@ class TemplateRepository extends ServiceEntityRepository
 {
     use BaseRepositoryTrait;
 
-    const TEMPLATES_BASE = ['libre' => 'libre', 
+    const TEMPLATES_BASE = [
+    'libre' => 'libre', 
     'folio1' => 'folio1' ,
     'contact' => 'contact', 
     'newsletter' => 'newsletter',
-    'livredor' => 'livredor', 
+    // 'livredor' => 'livredor', 
     'newsletter_template' => 'newsletter_template'
  ];
 
