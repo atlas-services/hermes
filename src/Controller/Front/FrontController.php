@@ -163,7 +163,7 @@ class FrontController extends AbstractController
         if($array['hasContact']){
             $array = $this->baseForm($request, $page, $array, $mailer, $route);
             if(!is_array($array)){
-                $referer = $request->headers->get('referer');
+                $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
             }
             return $this->render('front/index.html.twig', $array);

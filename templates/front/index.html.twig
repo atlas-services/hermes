@@ -34,7 +34,6 @@
 
     {% if sections is defined %}
         {% if sections|length > 0 %}
-        {% include('/front/base/hermes/_flash_message.html.twig') %}
             <div id="top" class="hide" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
 {#                {% if( 'libre' not in section.template.code) %}#}
