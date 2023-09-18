@@ -17,7 +17,13 @@ class TemplateRepository extends ServiceEntityRepository
 {
     use BaseRepositoryTrait;
 
-    const TEMPLATES_BASE = ['libre', 'folio1','contact', 'newsletter','livredor', 'newsletter_template' ];
+    const TEMPLATES_BASE = ['libre' => 'libre', 
+    'folio1' => 'folio1' ,
+    'contact' => 'contact', 
+    'newsletter' => 'newsletter',
+    'livredor' => 'livredor', 
+    'newsletter_template' => 'newsletter_template'
+ ];
 
     public function __construct(RegistryInterface $registry)
     {
@@ -37,15 +43,15 @@ class TemplateRepository extends ServiceEntityRepository
     }
 
 
-    public function getQbTemplateByType($type)
+    public function getQbTemplateByType($type, $active_form = true)
     {
         if(!is_null($type)){
             $qb = $this->createQueryBuilder('s')
             ->where('s.type = :type ' )
             ->setParameter('type',  $type )
-        ;
+        ;     
         }else{
-            return $this->getQbInitTemplates();
+            $qb = $this->getQbInitTemplates($active_form);
         }
         
         return $qb;
@@ -60,12 +66,21 @@ class TemplateRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getQbInitTemplates()
+    public function getQbInitTemplates($active_form = true)
     {
+
+        // il y a déja un formulaire
+        $template_base = self::TEMPLATES_BASE ;        
+        if(false == $active_form){
+            unset($template_base['contact']);
+            unset($template_base['newsletter']); 
+            unset($template_base['livredor']); 
+        }
+
         $qb = $this->getQbTemplates()
             ->where('s.active = true ')
             ->andWhere('s.code in (:code) ' )
-            ->setParameter('code',  self::TEMPLATES_BASE )
+            ->setParameter('code',  $template_base)
             ->orderBy('s.id', 'ASC')
         ;
         return $qb;

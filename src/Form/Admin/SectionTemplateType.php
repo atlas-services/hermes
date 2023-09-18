@@ -63,7 +63,7 @@ class SectionTemplateType extends AbstractType
                         // if ($options['full_template']) {
                         //     return $er->getQbTemplates();
                         // }
-                        return $er->getQbTemplateByType($options['type_template']);
+                        return $er->getQbTemplateByType($options['type_template'], $options['active_form']);
                     },
                     'attr' => ['class' => 'custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template',
@@ -260,15 +260,19 @@ class SectionTemplateType extends AbstractType
                 if ($data instanceof Post) {
                     $template = $data->getSection()->getTemplate();
                 }
+                $validation_group = ['Default'];
                 if ('libre' == $template->getType()) {
-                    return ['Default', 'content'];
+                    $validation_group = ['Default', 'content'];
                 } else {
                     if (!$image_valid) {
-                        return ['Default', 'image'];
+                        $validation_group =  ['Default', 'image'];
                     }
                 }
+                return $validation_group;
+
                 return ['Default'];
             },
+            'active_form'=>true
         ]);
     }
 }

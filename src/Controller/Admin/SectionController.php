@@ -7,6 +7,7 @@ use App\Entity\Hermes\Post;
 use App\Entity\Hermes\Section;
 use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Template;
+use App\Entity\Interfaces\ContactInterface;
 //use App\Form\SectionType;
 use App\Form\Admin\PostType;
 use App\Form\Admin\SectionCopyType;
@@ -95,6 +96,12 @@ class SectionController extends AbstractAdminController
      */
     public function SectionPostNewMenu(Request $request, Copy $copy,ApiClient $apiClient , ?Menu $menu): Response
     {
+        $sections = $menu->getSections();
+        foreach($sections as $section){
+            if(Template::TEMPLATE_FORM == $section->getTemplate()->getType()){
+                $options['active_form'] = false;
+            }
+        }
         $libres = $apiClient->getTemplates('templates', 99);
         $section = new Section() ;
         $post = new Post();
