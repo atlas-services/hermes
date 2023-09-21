@@ -159,7 +159,7 @@ class Page
             }
             $navbar[$sheet_name] = $listmenu;
             if (is_array($listmenu)) {
-                if ($sheet_name == array_key_first($menus)) {
+                if ($sheet_name == array_key_first($menus) && (1 == count($menus[array_key_first($menus)])) ) {
                     $nav['href'] = sprintf("/%s/", $locale);                
                 }else{
                     if ((strtolower($sheet_name) != strtolower(array_key_first($listmenu))) or 2 < count($listmenu)) {
