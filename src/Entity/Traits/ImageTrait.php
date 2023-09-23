@@ -20,7 +20,7 @@ trait ImageTrait
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * @var File|null
-     * @Assert\File(maxSize="2M")
+     * @Assert\File(maxSize="10M")
      * @Assert\Image(
      *     mimeTypes={"image/jpeg", "image/jpg", "image/gif", "image/png", "image/svg", "image/svg+xml", "image/pdf", "image/webp", "application/pdf", "video/mp4"}
      * )
