@@ -51,7 +51,8 @@ class SecurityController extends AbstractController
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
             $contact = new Contact();
-            $contact->setName($user->getFirstname());
+            $contact->setFirstName($user->getFirstname());
+            $contact->setLastName($user->getLastname());
             $contact->setEmail($user->getEmail());
             $contact->setMessage('Reset');
             $contact->setTelephone('0122334455');
