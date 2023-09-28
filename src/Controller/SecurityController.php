@@ -54,7 +54,7 @@ class SecurityController extends AbstractController
             $contact->setFirstName($user->getFirstname());
             $contact->setLastName($user->getLastname());
             $contact->setEmail($user->getEmail());
-            $contact->setMessage('Reset');
+            $contact->setContent('Reset');
             $contact->setTelephone('0122334455');
             $context = [
                 'url' => $url,
