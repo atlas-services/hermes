@@ -12,20 +12,22 @@
 {% endif %}
 <nav style="height:{{ nav_height }}; background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}" class="shadow-sm navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0 " id="mainNav" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
     <div class="col-lg-{{ nav_container_width|col_lg()   }}  container-fluid border-0 " style="background-color: {{nav_bgcolor}};">
-        {% if logo.filename is defined %}
-            {% if logo.filename is not null %}
-                {% if affiche_logo_top == true %}
-                    <a class="row navbar-brand js-scroll-trigger " href="{{ path('home') }}">
-                        <img  src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="w-100 my-auto pl-4 mx-auto app_logo">
-                    </a>
-                {% endif %}
-            {% endif %}
-        {% endif %}
-        <div  class="collapse navbar-collapse {{ justify_content_center }}" id="navbarResponsive" style="height:{{ nav_height }};">
+        <div class="d-sm-none d-block " >
             {% if logo.filename is defined %}
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
                         <a  class="col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
+                            <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <div  class="collapse navbar-collapse {{ justify_content_center }}" id="navbarResponsive" style="height:{{ nav_height }};">
+            {% if logo.filename is defined %}
+                {% if logo.filename is not null %}
+                    {% if affiche_logo_top != true %}
+                        <a  class="d-none d-sm-block col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
                             <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                         </a>
                     {% endif %}
