@@ -17,7 +17,7 @@
                 {% if logo.filename is not null %}
                     {% if affiche_logo_top != true %}
                         <a  class="col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
-                            <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                            <img style="margin-left:{{ logo.value }};max-height:100px" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
                         </a>
                     {% endif %}
                 {% endif %}
