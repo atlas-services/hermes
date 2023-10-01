@@ -2,14 +2,14 @@
 <li class="d-none d-sm-block nav-item dropdown nav__list-item" style="background-color: {{ nav_bgcolor_active }};  ">
     <a style="color: {{ nav_link_color }}" class="nav-link dropdown-toggle" href="#" id="dropdown-language" role="button"
        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ sheets.0.locale|upper}}
+        {{ sheets.0.locale|locale_name|upper}}
     </a>
     <ul class=" dropdown-menu dropdown-menu-right ms-1 nav__list" aria-labelledby="dropdown-language">
      {% for item in locales %}
      {%  if (item.sheet == item.slug ) %}
-                <li class="mx-auto nav__list"><a class="dropdown-item" href="{{ path('slug', {_locale: item.locale,'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
+                <li class="mx-auto nav__list"><a class="dropdown-item" href="{{ path('slug', {_locale: item.locale,'slug': item.slug }) }}">{{ item.locale|locale_name|upper }}</a></li>
           {%  else %}
-                <li class="mx-auto nav__list"><a class="dropdown-item" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
+                <li class="mx-auto nav__list"><a class="dropdown-item" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|locale_name|upper }}</a></li>
           {%  endif %}
      {% endfor  %}
     </ul>
@@ -18,9 +18,9 @@
 <ul class="d-block d-sm-none nav__list list-group list-group-horizontal" style="background-color: {{ nav_bgcolor_active }}; " >
     {% for item in locales %}
          {%  if (item.sheet == item.slug ) %}
-            <li><a class="list-group-item nav__list" href="{{ path('slug', {_locale: item.locale, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
+            <li><a class="list-group-item nav__list" href="{{ path('slug', {_locale: item.locale, 'slug': item.slug }) }}">{{ item.locale|locale_name|upper }}</a></li>
             {%  else %}
-            <li><a class="list-group-item nav__list" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|upper }}</a></li>
+            <li><a class="list-group-item nav__list" href="{{ path('sheet', {_locale: item.locale,'sheet': item.sheet, 'slug': item.slug }) }}">{{ item.locale|locale_name|upper }}</a></li>
           {%  endif %}
    {% endfor  %}
 </ul>
