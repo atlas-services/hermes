@@ -236,7 +236,8 @@ class Copy
 //                $this->em->flush();
 ////                return ['success' => 'langue existe déjà'];
 //            }
-            $sheets = $this->em->getRepository(Sheet::class)->findAll();
+            $base_locale = $this->em->getRepository(Sheet::class)->findOneBy(['active' => true])->getLocale();
+            $sheets = $this->em->getRepository(Sheet::class)->findBy(['locale' => $base_locale]);
             foreach ($sheets as $sheet){
                 $exists = $this->em->getRepository(Sheet::class)->findOneBy(['locale' => $locale, 'referenceName' => $sheet->getReferenceName()]);
                 if(is_null($exists)){
@@ -252,7 +253,7 @@ class Copy
             }
             $this->em->flush();
 
-            $menus = $this->em->getRepository(Menu::class)->findAll();
+            $menus = $this->em->getRepository(Menu::class)->findBy(['locale' => $base_locale]);;
             foreach ($menus as $menu){
                 $exists = $this->em->getRepository(Menu::class)->findOneBy(['locale' => $locale, 'referenceName' => $menu->getReferenceName()]);
                 if(is_null($exists)){
@@ -272,12 +273,14 @@ class Copy
 
             $sections = $this->em->getRepository(Section::class)->findAll();
             foreach ($sections as $section){
-                $sectionLocale = clone $section;
-                $this->copySection($section, $sectionLocale, true );
-                $menuLocale = $this->em->getRepository(Menu::class)->findOneBy(['locale' => $locale, 'referenceName' => $section->getMenu()->getReferenceName() ]);
-                $sectionLocale->setMenu($menuLocale);
-                $sectionLocale->setName($sectionLocale->getName(). '-'. $locale);
-                $this->em->persist($sectionLocale);
+                if($base_locale == $section->getMenu()->getLocale() ) {
+                    $sectionLocale = clone $section;
+                    $this->copySection($section, $sectionLocale, true );
+                    $menuLocale = $this->em->getRepository(Menu::class)->findOneBy(['locale' => $locale, 'referenceName' => $section->getMenu()->getReferenceName() ]);
+                    $sectionLocale->setMenu($menuLocale);
+                    $sectionLocale->setName($sectionLocale->getName(). '-'. $locale);
+                    $this->em->persist($sectionLocale);
+                }
             }
             $this->em->flush();
 
