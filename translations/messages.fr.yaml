@@ -117,8 +117,8 @@ global:
   position: Position
   locale: Langue
   add_locale: Ajouter une langue
-  name_reference: Menu Référence
-  name_menu_reference: Page Référence
+  name_menu_reference: Menu Référence (commun à toutes les langues)
+  name_sous_menu_reference: Sous Menu Référence ( commun à toutes les langues )  
   label: Label
   code: Code
   name: Nom

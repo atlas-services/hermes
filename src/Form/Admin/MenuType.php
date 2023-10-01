@@ -49,7 +49,7 @@ class MenuType extends AbstractNameBaseType
         if ($options['referenceName']) {
             $builder->add('referenceName', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
             'required' => true,
-            'label' => 'global.name_reference',
+            'label' => 'global.name_menu_reference',
             ]);
         }
         $builder

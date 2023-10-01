@@ -11,7 +11,9 @@
     {{ form_row(form.locale) }}
     {{ form_row(form.name) }}
     {% if(form.referenceName is defined) %}
-        {{ form_row(form.referenceName) }}
+    {% set label_reference = 'global.name_sous_menu_reference'|trans() ~ ' : ' ~  locales|join('|')  %}
+        {{ form_label(form.referenceName,label_reference ) }}
+        {{ form_widget(form.referenceName) }} 
     {% endif %}
 {% if('menu_edit' == app.request.attributes.get('_route')) %}
     {{ form_row(form.imageFile) }}
