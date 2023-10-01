@@ -150,7 +150,11 @@ class PostController extends AbstractAdminController
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index');
+            try{
+                return $this->redirectToRoute('section_index', ['menu' => $post->getSection()->getMenu()->getId()]);
+            }catch(\Exception $e){
+                return $this->redirectToRoute('post_index');
+            }
         }
 
         $array = [
@@ -209,7 +213,11 @@ class PostController extends AbstractAdminController
                 return $this->redirectToRoute('section_index', ['menu' => $menu->getId()]);
             }
 
-            return $this->redirectToRoute('post_index');
+            try{
+                return $this->redirectToRoute('section_index', ['menu' => $post->getSection()->getMenu()->getId()]);
+            }catch(\Exception $e){
+                return $this->redirectToRoute('post_index');
+            }
         }
 
         $array = [
@@ -232,7 +240,12 @@ class PostController extends AbstractAdminController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('post_index');
+        try{
+            return $this->redirectToRoute('section_index', ['menu' => $post->getSection()->getMenu()->getId()]);
+        }catch(\Exception $e){
+            return $this->redirectToRoute('post_index');
+        }
+
     }
 
     /**
@@ -265,10 +278,26 @@ class PostController extends AbstractAdminController
 
             if ($form->get('move')->isClicked()) {
                 $copy->copyPost($post, $fromPost, false);
+                try{
+                    return $this->redirectToRoute('section_index', ['menu' => $post->getSection()->getMenu()->getId()]);
+                }catch(\Exception $e){
+                    return $this->redirectToRoute('post_index');
+                }
                 return $this->redirectToRoute('post_index');
             }
             if ($form->get('copy')->isClicked()) {
                 $copy->copyPost($post, $fromPost, true);
+                try{
+                    return $this->redirectToRoute('section_index', ['menu' => $post->getSection()->getMenu()->getId()]);
+                }catch(\Exception $e){
+                    return $this->redirectToRoute('post_index');
+                }
+                return $this->redirectToRoute('post_index');
+            }
+
+            try{
+                return $this->redirectToRoute('section_index', ['menu' => $post->getSection()->getMenu()->getId()]);
+            }catch(\Exception $e){
                 return $this->redirectToRoute('post_index');
             }
 

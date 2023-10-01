@@ -43,8 +43,8 @@
                                 <p><a class="link-light text-decoration-none mx-3" href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
                                 <hr class="dropdown-divider">
                                 <p><a class="link-light text-decoration-none  mx-3" href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
-                                <hr class="dropdown-divider">
-                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p>
+                                {# <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p> #}
                             </ul>
                         </li>
                         <li class="nav-item mt-4 dropdown">
@@ -118,10 +118,6 @@
                             <p> <a class="page-scroll link-light text-decoration-none " href="{{ path('app_logout') }}"> {{ 'user.logout'|trans() }}  </a></p>                           
                         </li>
                     </ul>
-                    {# <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success" type="submit">Search</button>
-                    </form> #}
                 </div>
             </div>
         </div>
