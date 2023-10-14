@@ -261,6 +261,9 @@ class SectionTemplateType extends AbstractType
                     $template = $data->getSection()->getTemplate();
                 }
                 $validation_group = ['Default'];
+                if ('livredor' == $template->getType() or 'formulaire' == $template->getType()) {
+                    return ['Default'];
+                }
                 if ('libre' == $template->getType()) {
                     $validation_group = ['Default', 'content'];
                 } else {

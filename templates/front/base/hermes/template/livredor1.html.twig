@@ -1,0 +1,17 @@
+<!-- Contact Section -->
+{% if livredor is defined %}
+    <section id="portfolio" class="pb-0 pb-lg-4  mx-auto px-0" style="background-color:{{ section.templateBgColor ?? content_bgcolor }}">
+        <div class="container-fluid col-12 col-lg-{{ (section.templateWidth ?? container_width)|col_lg() }} mx-auto px-0" >
+                {% for temoignage in livredor %}
+                    <div class="col-12 mx-auto my-2 " style="background-color:{{ livredor_bgcolor }} ; color:{{ livredor_color }}; ">
+                        <p class="mt-2 mt-sm-4 lead ">{{ temoignage.content|raw }}</p>
+                        <p class="mt-2 lead" >{{ temoignage.firstname }} {{ temoignage.lastname }} </p>
+                    </div>
+                {% endfor %}
+        </div>
+    </section>
+{% endif %}
+
+
+
+

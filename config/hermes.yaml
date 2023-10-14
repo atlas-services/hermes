@@ -123,6 +123,11 @@ parameters:
         summary: Carte de présentation avec photo
         code: card2
         name: Carte de présentation avec photo
+      livredor1:
+        type: livredor 
+        summary: Livre d'or classique
+        code: livredor1
+        name: Livre d'or Classique
 
     template_libre_hermes:
       entete:

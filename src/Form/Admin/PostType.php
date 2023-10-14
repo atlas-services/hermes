@@ -101,6 +101,9 @@ class PostType extends AbstractNameBaseType
             'validation_groups' => function (FormInterface $form) {
                 $data = $form->getData();
                 $template = $data->getSection()->getTemplate();
+                if ('livredor' == $template->getType()) {
+                    return ['Default'];
+                }
                 if ('libre' == $template->getType()) {
                     return ['Default','content'];
                 }else{

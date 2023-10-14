@@ -22,7 +22,7 @@ class TemplateRepository extends ServiceEntityRepository
     'folio1' => 'folio1' ,
     'contact' => 'contact', 
     'newsletter' => 'newsletter',
-    // 'livredor' => 'livredor', 
+    'livredor1' => 'livredor1', 
     'newsletter_template' => 'newsletter_template'
  ];
 

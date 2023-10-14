@@ -109,6 +109,7 @@ function handleSelectTemplate(select_template, uri) {
             collapseListe(false);
             if(document.getElementById('section_template_posts_0_content') != null){
                 document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
+                document.getElementById('section_template_posts_0_content').setAttribute('required', 'required');
             } 
             if(document.getElementById('section_template_uploaded') != null){        
                 document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
@@ -130,7 +131,10 @@ function handleSelectTemplate(select_template, uri) {
                 document.getElementById('section_template_template2Width').parentElement.parentElement.hidden = true;
             } 
             
+        }else{
+            document.getElementById('section_template_posts_0_content').removeAttribute('required');  
         }
+
         if('Folio Classique' == selected_template_type){
             if(document.getElementById('section_template_posts_0_content') != null){
                 document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
@@ -163,15 +167,54 @@ function handleSelectTemplate(select_template, uri) {
             }
         
         }
-        if(selected_template_type.includes('Formulaire')){
+
+        if(selected_template_type.includes("Livre d'or") ){
             collapseListe(true);
             if(document.getElementById('section_template_posts_0_content') != null){
                 document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
             } 
 
-            if(document.getElementById('section_template_posts_0_content') != null){
-                document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;
+            if(document.getElementById('menu_section0_template_posts_0_content') != null){
+                document.getElementById('menu_section0_template_posts_0_content').parentElement.parentElement.hidden = true;
             }  
+
+            if(document.getElementById('section_template_uploaded') != null){
+                document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
+            } 
+            if(document.getElementById('menu_section0_template_uploaded') != null){
+                document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = true;
+            } 
+
+            if(document.getElementById('section_template_url') != null){
+                document.getElementById('section_template_url').parentElement.parentElement.hidden = true;
+            } 
+
+            if(document.getElementById('section_template_posts_0_imageFile_file') != null){
+                document.getElementById('section_template_posts_0_imageFile_file').parentElement.parentElement.hidden = false;
+            }
+
+            if(document.getElementById('menu_section0_template_posts_0_imageFile_file') != null){
+                document.getElementById('menu_section0_template_posts_0_imageFile_file').parentElement.parentElement.hidden = false;
+            }
+
+            if(document.getElementById('section_template_url') != null){
+                document.getElementById('section_template_url').parentElement.parentElement.hidden = true;
+            } 
+
+            if(document.getElementById('menu_section0_template_url') != null){
+                document.getElementById('menu_section0_template_url').parentElement.parentElement.hidden = true;
+            } 
+            
+            if(document.getElementById('menu_saveAndAddPost') != null){
+                document.getElementById('menu_saveAndAddPost').hidden = false;
+            }
+        }
+
+        if(selected_template_type.includes('Formulaire')){
+            collapseListe(true);
+            if(document.getElementById('section_template_posts_0_content') != null){
+                document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = true;             
+            } 
 
             if(document.getElementById('section_template_uploaded') != null){
                 document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;

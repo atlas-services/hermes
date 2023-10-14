@@ -6,18 +6,30 @@ const form_email = document.getElementById("contact_email");
 const form_telephone = document.getElementById("contact_telephone");
 const form_content = document.getElementById("contact_content");
 const form_button = document.getElementById("sendMessageButton");
+var form = document.getElementById("formulaire");
+const mainNav = document.getElementById("mainNav");
+var currentUrl = document.URL
 
 if(form_subject != null){
     window.addEventListener("load", (event) => {
-
             inputForm();
-
-
     });
 
     form_subject.addEventListener("input", (event) => {
         inputForm();
     });
+
+    // window.addEventListener('scroll', function(event) {
+    //     if(true == currentUrl.includes('#formulaire')){
+    //         posYForm = form.offsetTop;
+    //         heightMainNav = mainNav.offsetHeight;
+    //         if(posYForm > heightMainNav){
+    //             var targetY = posYForm - heightMainNav;
+    //             window.scroll(0, targetY);  
+    //         }        
+    //     }
+    //    });
+
 }
 
 function inputForm(){
