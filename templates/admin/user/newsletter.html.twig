@@ -1,0 +1,49 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}{{ 'user.newsletter'|trans() }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-secondary">{{ 'user.newsletter'|trans() }}</h1>
+        <tr class="align-middle">
+        <td>
+            <div class="form-check form-switch form-switch-sm my-0">
+                <input type="checkbox" id="users-active" class="users-active form-check-input"  "checked" >
+                <label class="custom-control-label" ></label>
+            </div>
+        </td>
+        </tr>
+    <table class="table">
+        <thead>
+        <th>{{ 'global.active_newsletter'|trans() }}</th>
+        <th>{{ 'user.firstname'|trans() }} / {{ 'user.lastname'|trans() }}</th>
+        <th>{{ 'user.email'|trans() }}</th>
+        <th>{{ 'user.roles'|trans() }}</th>
+        <th>{{ 'global.actions'|trans() }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="align-middle">
+                <td>
+                    <div class="form-check form-switch form-switch-sm my-0">
+                        <input type="checkbox" class="user-active form-check-input" id="{{ user.id }}"  {{ user.activeNewsletter ? 'checked': '' }} >
+                        <label class="custom-control-label" for="{{ user.id }}"></label>
+                    </div>
+                </td>
+                {# <td>{{ user.activeNewsletter  ? 'Ok':'Ko' }}</td> #}
+                <td> {{ user.firstname == 'newsletter' ? 'NC /' : user.firstname }}  {{ user.lastname  == 'newsletter' ? 'NC': user.lastname}}</td>
+                <td>{{ user.email }}</td>
+                <td>{% for role in user.roles%} {{ role }} <br/>  {% endfor %}</td>
+                <td>
+                    <a class="hms-color1" href="{{ path('user_edit', {'id': user.id}) }}">{{ 'action.edit'|trans()|raw }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr class="align-middle">
+                <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-outline-secondary hms-bg-color1 text-white" href="{{ path('user_new') }}">{{ 'global.new'|trans() }}</a>
+{% endblock %}

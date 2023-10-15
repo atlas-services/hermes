@@ -53,7 +53,7 @@ class UserController extends AbstractAdminController
             'users' => $users,
         ];
         $array = $this->mergeActiveConfig($array);
-        return $this->render('admin/user/index.html.twig', $array);
+        return $this->render('admin/user/newsletter.html.twig', $array);
     }
 
     /**
@@ -166,7 +166,20 @@ class UserController extends AbstractAdminController
         if ($request->isXMLHttpRequest()) {
             $id = $request->request->get('id');
             $data = $userRepository->switchActive($id);
-            return new JsonResponse(array('data' =>$data->isActive()));
+            return new JsonResponse(array('data' =>$data->isActiveNewsletter()));
+        }
+
+        return new Response('This is not ajax!', 400);
+    }
+
+    /**
+     * @Route("/ajax/switch/users", name="switch_users_active_ajax")
+     */
+    public function ajaxActiveAll(Request $request, UserRepository $userRepository)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $data = $userRepository->switchActiveAll();
+            return new JsonResponse(array('data' => $data));
         }
 
         return new Response('This is not ajax!', 400);

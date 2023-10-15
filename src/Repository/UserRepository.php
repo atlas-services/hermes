@@ -94,4 +94,19 @@ class UserRepository extends ServiceEntityRepository
 
     }
 
+    public function switchActiveAll()
+    {
+        $newsletter_users = $this->findNewsletterUsers("ROLE_NEWSLETTER", true, true);
+
+        foreach($newsletter_users as $user){
+            $user->setActiveNewsletter(true);
+            $this->getEntityManager()->persist($user);
+
+        }
+        $this->getEntityManager()->flush();
+
+        return true;
+
+    }
+
 }

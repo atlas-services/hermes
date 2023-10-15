@@ -229,6 +229,7 @@ remote:
 # User
 user:
   list: Liste des utilisateurs
+  newsletter: Liste des abonnés à la newsletter
   label: Utilisateur
   firstname: Prénom
   lastname: Nom

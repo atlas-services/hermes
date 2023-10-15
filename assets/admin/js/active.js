@@ -76,7 +76,25 @@ jQuery(document).ready(function () {
         $id = $(this).attr('id');
         $url = "/fr/admin/user/ajax/switch/user";
         switchActive($url, $id);
+        //let switchvalue = document.getElementById($(this).attr('id')).getAttribute("checked");
+        // if('' == switchvalue){
+        //     document.getElementById('users-active').setAttribute("checked", ''); // 'checked="0'"
+        // }
+        
     });
+    // Switch active_newsletter users (user)
+    var $activeUsers = $('.users-active');
+    $activeUsers.on('click', function (e) {
+        // active/desactive
+        $url = "/fr/admin/user/ajax/switch/users";
+        switchActiveAll($url);
+        let actives = document.getElementsByClassName('user-active');
+        Array.from(actives).forEach( (el) => {
+            el.setAttribute("checked", true);
+          });
+       
+    });
+
 
 });
 
@@ -88,6 +106,18 @@ function switchActive($url, $id) {
         data: {
             id: $id
         },
+        dataType: "json",
+        success: function (response) {
+        }
+    });
+
+}
+
+function switchActiveAll($url) {
+
+    $.ajax({
+        type: "POST",
+        url: $url,
         dataType: "json",
         success: function (response) {
         }
