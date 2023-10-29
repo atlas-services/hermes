@@ -221,7 +221,17 @@ class SectionController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+            if(Template::TEMPLATE_TYPE_LISTE ==  $section->getTemplate()->getType()){
+                foreach($section->getPosts() as $post){
+                    if(is_null($post->getFilename())){
+                        $em->remove($post);
+                    }
+                }
+                $em->flush();
+            }
+
             $em->persist($section);
             $em->flush();
 

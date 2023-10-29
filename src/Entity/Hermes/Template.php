@@ -28,6 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Template
 {
+    const TEMPLATE_TYPE_LISTE = 'liste';
     const TEMPLATE_LIBRE = 'libre';
     const TEMPLATE_LISTE = 'folio1';
     const TEMPLATE_MODALE = 'modale1';
