@@ -152,7 +152,7 @@ class Page
             $nav['color_link'] = $this->config['nav_link_color'];
             $nav['bg_color_link'] = 'transparent';
 
-            if ($referenceName == $sheet_name or in_array($menuName, array_keys($listmenu))) {
+            if ((isset($referenceName) && $referenceName == $sheet_name) or (isset($menuName) && in_array($menuName, array_keys($listmenu)) )) {
                 $nav['active'] = 'active';
                 $nav['color_link'] = $this->config['nav_color_active'];
                 $nav['bg_color_link'] = $this->config['nav_bgcolor_active'];
