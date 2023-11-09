@@ -159,7 +159,6 @@ class Page
             }
             $navbar[$sheet_name] = $listmenu;
             if (is_array($listmenu)) {
-                // if ($sheet_name == array_key_first($menus) && (1 == count($menus[array_key_first($menus)])) ) {
                 if ($sheet_name == array_key_first($menus[array_key_first($menus)]) && (1 == count($menus[array_key_first($menus)])) ) {
                     $nav['href'] = sprintf("/%s/", $locale);                
                 }else{
@@ -168,9 +167,8 @@ class Page
                         $nav['dropdown'] = 'dropdown';
                         $nav['dropdowntoggle'] = 'page-scroll dropdown-toggle';
                     }else{
-                    //    $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); ;
-                    //    $nav['href'] = sprintf("/%s/%s", $locale, strtolower($sheet_name)); 
-                       $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); 
+                    //    $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[$sheet_name]['slug']); 
+                       $nav['href'] = sprintf("/%s/%s", $locale, $listmenu[array_key_first($listmenu)]['slug']); 
                     }
                  }
                 $navbar[$sheet_name] = array_merge($navbar[$sheet_name], $nav);
