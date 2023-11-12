@@ -25,7 +25,7 @@
                         Je met à jour l'affichage de mon sous-menu "{{ section.menu.name ?? menu.name ?? 'global.new_menu'|trans()|raw }}".
                     </span><br/>
                     <span class=" h-text-success me-2 h3 ">
-                        Je met à jour ses contenus (Nom et Image).
+                        Je met à jour ses contenus (Nom, position et image).
                     </span>
                 {% endif %}
                  {% if( app.request.attributes.get('_route') in ['post_edit' ]) %}
