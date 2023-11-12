@@ -28,14 +28,20 @@ class PostType extends AbstractNameBaseType
                     'class' => 'App\Entity\Hermes\Section',
                     'choice_label' => 'template',
                     'label_format' => 'section.template',
-                    'attr'=> ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                    'attr'=> ['class' => 'custom-select custom-select-lg mb-3']
                 ]);
         }
         if ($options['position']) {
             $builder
-                ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
+                ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                     'required' => false,
-                    'label' => 'global.position',
+                    'attr' => [
+                        'min' => 0,
+                        'max' => 999,                       
+                        'class' => 'custom-select custom-select-lg mb-3 ',
+                        'label' => 'global.position',
+                    ],
+                    'choices' => range(0, 999),
                 ]);
         }
         if ($options['url']) {

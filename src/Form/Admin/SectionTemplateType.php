@@ -53,7 +53,7 @@ class SectionTemplateType extends AbstractType
                 $builder
                     ->add('position', NumberType::class, [
                         'required' => false,
-                        'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+                        'attr' => ['class' => 'custom-select custom-select-lg mb-3 ']
                     ]);
             }
             $builder
@@ -79,7 +79,7 @@ class SectionTemplateType extends AbstractType
                 ->add('templateWidth', ChoiceType::class, [
                     'choices' => $options['template_width'],
                     'required' => false,
-                    'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
+                    'attr' => ['class' => 'templateWidth custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template_width',
                 ])
                 ->add('transparent', ChoiceType::class,
@@ -88,7 +88,7 @@ class SectionTemplateType extends AbstractType
                             'transparent.no' => false,
                             'transparent.yes' => true ,
                         ],
-                        'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']
+                        'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                     ])
                 ->add('templateBgcolor', ColorType::class, [
                     'required' => false,
@@ -104,7 +104,7 @@ class SectionTemplateType extends AbstractType
                         '6' => '6',
                     ],
                     'required' => false,
-                    'attr' => ['class' => 'templateNbCol select2 custom-select custom-select-lg mb-3 '],
+                    'attr' => ['class' => 'templateNbCol custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template_nb_col',
                 ])
                 ->add('templateImageFilter', ChoiceType::class, [
@@ -119,7 +119,7 @@ class SectionTemplateType extends AbstractType
                         'Format paysage 700*324' => 'paysage_700',
                     ],
                     'required' => false,
-                    'attr' => ['class' => 'templateImageFilter select2 custom-select custom-select-lg mb-3 '],
+                    'attr' => ['class' => 'templateImageFilter custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template_image_filter',
                 ])
                 ->add('template2', EntityType::class, [
@@ -127,20 +127,20 @@ class SectionTemplateType extends AbstractType
                     'query_builder' => function (TemplateRepository $er) use ($options) {
                         return $er->getQbTemplate2();
                     },
-                    'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 '],
+                    'attr' => ['class' => 'custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template2',
                 ])
                 ->add('template2Width', ChoiceType::class, [
                     'choices' => $options['template_width'],
                     'required' => false,
-                    'attr' => ['class' => 'templateWidth select2 custom-select custom-select-lg mb-3 '],
+                    'attr' => ['class' => 'templateWidth custom-select custom-select-lg mb-3 '],
                     'label' => 'form.label.template2_width',
                 ]);
             if ($options['menu']) {
                 $builder
                     ->add('menu', EntityType::class, [
                         'class' => Menu::class,
-                        'attr' => ['class' => 'select2 custom-select custom-select-lg mb-3 ']
+                        'attr' => ['class' => 'custom-select custom-select-lg mb-3 ']
                     ]);
             }
             if ($options['position']) {
