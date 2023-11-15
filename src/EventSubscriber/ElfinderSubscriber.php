@@ -52,18 +52,30 @@ class ElfinderSubscriber implements EventSubscriberInterface
                 $newHeight = $height * $ratio;
 
                 // Load
-                $thumb = imagecreatetruecolor($newWidth, $newHeight);
-                $source = imagecreatefromjpeg($realpath);
+                try {
+                    $thumb = imagecreatetruecolor($newWidth, $newHeight);
+                    $source = imagecreatefromjpeg($realpath);
+                } catch (\Exception $ex) {
+                    $source = false;
+                    $image_data = file_get_contents($realpath);
+                    try {
+                        $source = imagecreatefromstring($image_data);
+                    } catch (\Exception $ex) {
+                        $source = false;
+                    }               
+                }
 
-                // Resize
-                $return = imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                if ($source !== false){
+                    // Resize
+                    $return = imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
 
-                $newImg = $path. '/new'.$filename ;
+                    $newImg = $path. '/new'.$filename ;
 
-                imagejpeg($thumb, $newImg);
+                    imagejpeg($thumb, $newImg);
 
-                $this->filesystem->rename($newImg, $realpath, true);
+                    $this->filesystem->rename($newImg, $realpath, true);
+                }
  
             }
         }
