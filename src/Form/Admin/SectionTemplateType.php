@@ -51,9 +51,19 @@ class SectionTemplateType extends AbstractType
         if (true === $options['config'] || null  === $options['config']) {
             if ($options['position']) {
                 $builder
-                    ->add('position', NumberType::class, [
+                    // ->add('position', NumberType::class, [
+                    //     'required' => false,
+                    //     'attr' => ['class' => 'custom-select custom-select-lg mb-3 ']
+                    // ])
+                    ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                         'required' => false,
-                        'attr' => ['class' => 'custom-select custom-select-lg mb-3 ']
+                        'attr' => [
+                            'min' => 0,
+                            'max' => 999,                       
+                            'class' => 'custom-select custom-select-lg mb-3 ',
+                            'label' => 'global.position',
+                        ],
+                        'choices' => range(0, 999),
                     ]);
             }
             $builder

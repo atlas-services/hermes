@@ -32,10 +32,21 @@ class SheetType extends AbstractNameBaseType
         }
         if ($options['position']) {
             $builder
-                ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
+                // ->add('position', 'Symfony\Component\Form\Extension\Core\Type\NumberType', [
+                //     'required' => false,
+                //     'empty_data' => (string)$options['position'],
+                //     'label' => 'global.position',
+                // ])
+                ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                     'required' => false,
                     'empty_data' => (string)$options['position'],
-                    'label' => 'global.position',
+                    'attr' => [
+                        'min' => 0,
+                        'max' => 999,                       
+                        'class' => 'custom-select custom-select-lg mb-3 ',
+                        'label' => 'global.position',
+                    ],
+                    'choices' => range(0, 999),
                 ]);
         }
         if ($options['image_file']) {

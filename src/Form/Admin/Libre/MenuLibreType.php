@@ -41,9 +41,20 @@ class MenuLibreType extends AbstractType
             ]);
         }
         $builder
-            ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
+            // ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
+            //     'required' => false,
+            //     'label' => 'global.position',
+            // ])
+            ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                 'required' => false,
-                'label' => 'global.position',
+                'empty_data' => (string)$options['position'],
+                'attr' => [
+                    'min' => 0,
+                    'max' => 999,                       
+                    'class' => 'custom-select custom-select-lg mb-3 ',
+                    'label' => 'global.position',
+                ],
+                'choices' => range(0, 999),
             ])
              ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType',[
                 'required' => false,

@@ -30,7 +30,16 @@ class BlockPostType extends AbstractNameBaseType
                 ]);
         }
         $builder->add('name');
-        $builder->add('position');
+        $builder->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+            'required' => false,
+            'attr' => [
+                'min' => 0,
+                'max' => 99,                       
+                'class' => 'custom-select custom-select-lg mb-3 ',
+                'label' => 'global.position',
+            ],
+            'choices' => range(0, 99),
+        ]);;
         if ($options['image_file']) {
             $builder
                 ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType', [

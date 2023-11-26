@@ -53,9 +53,19 @@ class MenuType extends AbstractNameBaseType
             ]);
         }
         $builder
-            ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
+            // ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
+            //     'required' => false,
+            //     'label' => 'global.position',
+            // ])
+            ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                 'required' => false,
-                'label' => 'global.position',
+                'attr' => [
+                    'min' => 0,
+                    'max' => 99,                       
+                    'class' => 'custom-select custom-select-lg mb-3 ',
+                    'label' => 'global.position',
+                ],
+                'choices' => range(0, 99),
             ])
              ->add('imageFile', 'Vich\UploaderBundle\Form\Type\VichImageType',[
                 'required' => false,

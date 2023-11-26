@@ -27,9 +27,19 @@ class SectionType extends AbstractNameBaseType
                     'label' => 'section.template',
                     'attr'=> ['class' => 'select2 custom-select custom-select-lg mb-3']
                 ])
-            ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
+            // ->add('position','Symfony\Component\Form\Extension\Core\Type\NumberType', [
+            //     'required' => false,
+            //     'label' => 'global.position',
+            // ])
+            ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
                 'required' => false,
-                'label' => 'global.position',
+                'attr' => [
+                    'min' => 0,
+                    'max' => 999,                       
+                    'class' => 'custom-select custom-select-lg mb-3 ',
+                    'label' => 'global.position',
+                ],
+                'choices' => range(0, 999),
             ])
             ->add('posts', CollectionType::class, [
                 'entry_type' => PostType::class,
