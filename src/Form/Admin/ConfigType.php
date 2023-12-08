@@ -13,6 +13,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfigType extends AbstractBaseType
 {
+
+    const DECIMAL = [
+        '0.1' => '0.1',
+        '0.2' => '0.2',
+        '0.3' => '0.3',
+        '0.4' => '0.4',
+        '0.5' => '0.5',
+        '0.6' => '0.6',
+        '0.7' => '0.7',
+        '0.8' => '0.8',
+        '0.9' => '0.9',
+        '1.0' => '1.0',
+    ];
+
+    const MARGES = [
+        1 => 1 ,
+        2 => 2 ,
+        3 => 3 ,
+        4 => 4 ,
+        5 => 5 ,
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -138,6 +160,12 @@ class ConfigType extends AbstractBaseType
                     ];
                     break;
                 // nav_bar
+                case 'nav_espacement':
+                    $choice = true;
+                    $options = self::MARGES;
+                    break;
+                    
+                // nav_bar
                 case 'nav_link_border_bottom':
                     $choice = true;
                     $options = [
@@ -153,7 +181,17 @@ class ConfigType extends AbstractBaseType
                         'base' => '',
                     ];
                     break;
-                // chevron
+                // chevron opacity
+                case 'chevron_accueil_opacity':
+                    $choice = true;
+                    $options = self::DECIMAL;
+                    break;    
+                // chevron opacity
+                case 'chevron_opacity':
+                    $choice = true;
+                    $options = self::DECIMAL;
+                    break;                      
+                // chevron position
                 case 'chevron_position':
                     $choice = true;
                     $options = [
@@ -162,6 +200,14 @@ class ConfigType extends AbstractBaseType
                         'bottom' =>'95%',
                     ];
                     break;
+                case 'chevron_right':
+                    $choice = true;
+                    $options = [
+                        'right'  => '0%',
+                        'middle' => '50%' ,
+                        'left' =>'95%',
+                    ];
+                    break;                    
                 // affiche_img_hermes
                 case 'affiche_img_hermes':
                 // affiche_logo_top
