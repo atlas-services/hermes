@@ -22,7 +22,8 @@
     <div class="container">
         <div class="row">
         <div class="col-sm-6 mx-auto text-center">
-                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal">
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal" 
+                onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}">
                     <p>Sitemap</p>
                 </button>
             </div>

@@ -13,6 +13,49 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfigType extends AbstractBaseType
 {
+    const COLS = [
+        '1/12' => '1',
+        '2/12' => '2',
+        '3/12' => '3',
+        '4/12' => '4',
+        '5/12' => '5',
+        '6/12' => '6',
+        '7/12' => '7',
+        '8/12' => '8',
+        '9/12' => '9',
+        '10/12' => '10',
+        '11/12' => '11',
+        '12/12' => '12',
+    ];
+
+    const COLS_OFFSET = [
+        '0/12' => '0',
+        '1/12' => '1',
+        '2/12' => '2',
+        '3/12' => '3',
+        '4/12' => '4',
+        '5/12' => '5',
+        '6/12' => '6',
+        '7/12' => '7',
+        '8/12' => '8',
+        '9/12' => '9',
+        '10/12' => '10',
+        '11/12' => '11',
+        '12/12' => '12',
+    ];
+
+    const COLS_ACCUEIL =[
+        '10' => '10',
+        '20' => '20',
+        '30' => '30',
+        '40' => '40',
+        '50' => '50',
+        '60' => '60',
+        '70' => '70',
+        '80' => '80',
+        '90' => '90',
+        '100' => '100',
+    ];
 
     const DECIMAL = [
         '0.1' => '0.1',
@@ -33,6 +76,36 @@ class ConfigType extends AbstractBaseType
         3 => 3 ,
         4 => 4 ,
         5 => 5 ,
+    ];
+
+    const TEMPLATE_BASE =[
+        'front' => 'front',
+    ];
+
+    const FONT_FAMILY = [
+        'Alfa Slab One' => 'Alfa Slab One',
+        '\'Bai Jamjuree\', sans-serif' => '\'Bai Jamjuree\', sans-serif',
+        ' Comic Sans MS, Comic Sans, cursive' => ' Comic Sans MS, Comic Sans, cursive',
+        'Impact, fantasy' => 'Impact, fantasy',
+        '\'Oswald\',Helvetica,Arial,Lucida,sans-serif' => '\'Oswald\',Helvetica,Arial,Lucida,sans-serif',
+        '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif' => ' \'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
+        '\'Sofia\', sans-serif' => '\'Sofia\', sans-serif',
+        '\'Snowburst One\', sans-serif' => '\'Snowburst One\', sans-serif',
+        '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
+        'Verdana' => 'Verdana',
+    ];
+
+    const BTN_OUTLINE = [
+        'btn-outline-primary' => 'btn-outline-primary',
+        'btn-outline-secondary' => 'btn-outline-secondary',
+        'btn-outline-success' => 'btn-outline-success',
+        'btn-outline-danger' => 'btn-outline-danger',
+        'btn-outline-warning' => 'btn-outline-warning',
+        'btn-outline-info' => 'btn-outline-info',
+        'btn-outline-light' => 'btn-outline-light',
+        'btn-outline-dark' => 'btn-outline-dark',
+        'btn-outline-link' => 'btn-outline-link',
+
     ];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -67,87 +140,16 @@ class ConfigType extends AbstractBaseType
             $data = $event->getData();
             $form = $event->getForm();
             $code = $data->getCode();
-            $options_font_family = [
-                'Alfa Slab One' => 'Alfa Slab One',
-                '\'Bai Jamjuree\', sans-serif' => '\'Bai Jamjuree\', sans-serif',
-                ' Comic Sans MS, Comic Sans, cursive' => ' Comic Sans MS, Comic Sans, cursive',
-                'Impact, fantasy' => 'Impact, fantasy',
-                '\'Oswald\',Helvetica,Arial,Lucida,sans-serif' => '\'Oswald\',Helvetica,Arial,Lucida,sans-serif',
-                '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif' => ' \'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
-                '\'Sofia\', sans-serif' => '\'Sofia\', sans-serif',
-                '\'Snowburst One\', sans-serif' => '\'Snowburst One\', sans-serif',
-                '\'The Antiqua B\', Georgia, Droid-serif, serif' => '\'The Antiqua B\', Georgia, Droid-serif, serif',
-                'Verdana' => 'Verdana',
-            ];
-            $options_cols_accueil = [
-                '10' => '10',
-                '20' => '20',
-                '30' => '30',
-                '40' => '40',
-                '50' => '50',
-                '60' => '60',
-                '70' => '70',
-                '80' => '80',
-                '90' => '90',
-                '100' => '100',
-            ];
-            $options_cols = [
-                '1/12' => '1',
-                '2/12' => '2',
-                '3/12' => '3',
-                '4/12' => '4',
-                '5/12' => '5',
-                '6/12' => '6',
-                '7/12' => '7',
-                '8/12' => '8',
-                '9/12' => '9',
-                '10/12' => '10',
-                '11/12' => '11',
-                '12/12' => '12',
-            ];
-            $options_offset = [
-                '0/12' => '0',
-                '1/12' => '1',
-                '2/12' => '2',
-                '3/12' => '3',
-                '4/12' => '4',
-                '5/12' => '5',
-                '6/12' => '6',
-                '7/12' => '7',
-                '8/12' => '8',
-                '9/12' => '9',
-                '10/12' => '10',
-                '11/12' => '11',
-                '12/12' => '12',
-            ];
-            $options_template_value = [
-                // 'one_page_1' => 'one_page_1',
-                // 'one_page_2' => 'one_page_2',
-                // 'one_page_3' => 'one_page_3',
-                'front' => 'front',
-            ];
-            $options_bg_submit = [
-                'btn-outline-primary' => 'btn-outline-primary',
-                'btn-outline-secondary' => 'btn-outline-secondary',
-                'btn-outline-success' => 'btn-outline-success',
-                'btn-outline-danger' => 'btn-outline-danger',
-                'btn-outline-warning' => 'btn-outline-warning',
-                'btn-outline-info' => 'btn-outline-info',
-                'btn-outline-light' => 'btn-outline-light',
-                'btn-outline-dark' => 'btn-outline-dark',
-                'btn-outline-link' => 'btn-outline-link',
-
-            ];
             switch ($code) {
                 // accueil
                 case 'accueil':
                     $choice = true;
-                    $options = $options_cols_accueil;
+                    $options = self::COLS_ACCUEIL;
                     break;
                 // accueil
                 case 'template':
                     $choice = true;
-                    $options = $options_template_value;
+                    $options = self::TEMPLATE_BASE;
                     break;
                 // nav_bar
                 case 'nav_bar':
@@ -235,23 +237,24 @@ class ConfigType extends AbstractBaseType
                 // nav_offset
                 case 'nav_offset':
                     $choice = true;
-                    $options = $options_offset;
+                    $options = self::COLS_OFFSET;
                     break;
                 // contact_bgcolor_btn
                 case 'contact_bgcolor_btn':
                     $choice = true;
-                    $options = $options_bg_submit;
+                    $options = self::BTN_OUTLINE;
                     break;
                 // newsletter_bgcolor_btn
                 case 'newsletter_bgcolor_btn':
                     $choice = true;
-                    $options = $options_bg_submit;
+                    $options = self::BTN_OUTLINE;
                     break;        
                 // livredor_bgcolor_btn
                 case 'livredor_bgcolor_btn':
                     $choice = true;
-                    $options = $options_bg_submit;
-                    break;              }
+                    $options = self::BTN_OUTLINE;
+                    break;              
+            }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
                     'choices' => $options,
@@ -274,14 +277,14 @@ class ConfigType extends AbstractBaseType
                     if ('width' == $code || strpos($code, 'width')) {
                         $form->add('value', ChoiceType::class, [
                             'required' => false,
-                            'choices' =>   $options_cols,
+                            'choices' =>   self::COLS,
                             'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                         ]);
                     }else{
                         if('font_family' == $code || strpos($code, 'font_family')){
                             $form->add('value', ChoiceType::class, [
                                 'required' => false,
-                                'choices' =>   $options_font_family,
+                                'choices' =>   self::FONT_FAMILY,
                                 'attr' => ['class' => 'custom-select custom-select-lg mb-3']
                             ]);
                         }
