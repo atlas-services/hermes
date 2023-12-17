@@ -47,13 +47,13 @@ $(document)
             function updateGallery(selector) {
                 let $sel = selector;
                 current_image = $sel.data('image-id');
-                $('#image-gallery-title')
+                $('.image-gallery-title')
                     .text($sel.data('title'));
-                $('#image-gallery-image')
+                $('.image-gallery-image')
                     .attr('src', $sel.data('image'));
-                $('#post-name-gallery-image')
+                $('.post-name-gallery-image')
                     .html($sel.data('name'));
-                $('#post-content-gallery-image')
+                $('.post-content-gallery-image')
                     .html($sel.data('content'));
                 disableButtons(counter, $sel.data('image-id'));
             }

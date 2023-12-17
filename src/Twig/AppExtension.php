@@ -14,6 +14,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('max_post_length', [$this, 'maxPostLength']),
             new TwigFilter('space_length', [$this, 'spaceLength']),
             new TwigFilter('col_lg', [$this, 'colLg']),
+            new TwigFilter('col_lgH', [$this, 'colLgH']),
             new TwigFilter('col_imgs', [$this, 'colImgs']),
             new TwigFilter('nb_col', [$this, 'nbCol']),
             new TwigFilter('change_px', [$this, 'changePx']),
@@ -116,9 +117,26 @@ class AppExtension extends AbstractExtension
         }
         return intval($prct);
 
-        $collg = 12;
+    }
 
-        return $collg;
+    public function colLgH($width)
+    {
+        if(!is_null($width)){
+            if($width < 7 ){
+                return 100;
+            }
+            try {
+                $rapport = $width / 12;
+                if( $rapport > 0.8){
+                    return 170;
+                }
+                return (($width / 12 )* 100 + 100);
+            }catch(\Exception $e)
+            {
+                return 100;
+            }
+        }
+        return 100;
     }
 
     public function colNbChar($prct)

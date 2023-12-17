@@ -1,35 +1,18 @@
-<!-- Modale -->
+
+{% set basemodale %}
+    {% include 'front/base/hermes/template/includes/_modale1.html.twig' %}
+{% endset  %}
+
 <div class="modal fade px-lg-0  my-0" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen mx-auto mw-100 my-0">
-        <div class="modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
-            <div class="modal-header border-0">
-                <h4 class="modal-title" id="image-gallery-title"></h4>
-{#                <button type="button" class="close"  style="color: {{ modale_color }}" data-bs-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>#}
-{#                </button>#}
-                <button type="button" class="btn-close" style="background-color: {{ modale_color }}" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }} col-12 mx-auto px-0" >
-                <h4 class="text-center mt-4" id="post-name-gallery-image"> </h4>
-                </h4>
-                <div class="modal-body row col-12  mx-auto px-0">
-                    <div class="text-center my-3 mx-auto px-0">
-                        <button type="button" class="btn btn-secondary float-left me-2" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                        </button>
-
-                        <button type="button" id="show-next-image" class="btn btn-secondary float-right ms-2"><i class="fa fa-arrow-right"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <img id="image-gallery-image" class="img-responsive col-md-12 col-12  mx-auto px-0"  src="">
-                    </div>
-                    <div class="text-center" id="post-content-gallery-image">
-                    </div>
-                    <div class="modal-footer border-0">
-                    </div>
-                </div>
-            </div>
+        <div class="d-block d-sm-none modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}; height: 100%">
+            {{ basemodale }}
+        </div>
+        <div class="d-none d-sm-block modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}; height: {{ (section.template2Width ?? modale_container_width)|col_lgH()}}% ">
+            {{ basemodale }}
         </div>
     </div>
 </div>
+
 
 
