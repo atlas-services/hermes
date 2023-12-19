@@ -113,7 +113,11 @@ function handleSelectTemplate(select_template, uri) {
             } 
             if(document.getElementById('section_template_uploaded') != null){        
                 document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
-
+                document.getElementById('section_template_uploaded').removeAttribute('required');  
+            } 
+            if(document.getElementById('menu_section0_template_uploaded') != null){
+                document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = true;
+                document.getElementById('menu_section0_template_uploaded').removeAttribute('required');  
             } 
             if(document.getElementById('section_template_posts_0_url') != null){        
                 document.getElementById('section_template_posts_0_url').parentElement.parentElement.hidden = true; 
