@@ -220,7 +220,7 @@ class SectionTemplateType extends AbstractType
             'data_class' => Section::class,
             'save_visibility' => true,
             'content' => true,
-            'url' => true,
+            'url' => false,
             'menu' => false,
             'config' => null,
             'type_template' => null,

@@ -240,6 +240,9 @@ class Section
     public function setTemplateWidth(?int $template_width): void
     {
         $this->template_width = $template_width;
+        if(is_null($this->template_width)){
+            $this->template_width = 10;
+        }
     }
 
     /**
