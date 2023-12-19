@@ -134,7 +134,9 @@ class SectionController extends AbstractAdminController
                         $entityManager->flush();
                     }
                     $selected_dir = ($form['uploaded']->getData());
-                    $copy->handleUploadedDir($section, $selected_dir);
+                    if(!is_null($selected_dir)){
+                        $copy->handleUploadedDir($section, $selected_dir);
+                    }
                 }
 
                 return $this->redirectToRoute('section_index');
