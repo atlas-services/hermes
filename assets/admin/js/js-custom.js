@@ -109,13 +109,13 @@ function handleSelectTemplate(select_template, uri) {
             collapseListe(false);
             if(document.getElementById('section_template_posts_0_content') != null){
                 document.getElementById('section_template_posts_0_content').parentElement.parentElement.hidden = false;
-                document.getElementById('section_template_posts_0_content').setAttribute('required', 'required');
+                //document.getElementById('section_template_posts_0_content').setAttribute('required', 'required');
             } 
             if(document.getElementById('section_template_uploaded') != null){        
                 document.getElementById('section_template_uploaded').parentElement.parentElement.hidden = true;
-                if (document.getElementById('section_template_uploaded').hasAttribute("required")) {
-                    document.getElementById('section_template_uploaded').removeAttribute('required'); 
-                } 
+                // if (document.getElementById('section_template_uploaded').hasAttribute("required")) {
+                //     document.getElementById('section_template_uploaded').removeAttribute('required'); 
+                // } 
             } 
             if(document.getElementById('menu_section0_template_uploaded') != null){
                 document.getElementById('menu_section0_template_uploaded').parentElement.parentElement.hidden = true;
@@ -138,9 +138,9 @@ function handleSelectTemplate(select_template, uri) {
             } 
             
         }else{
-            if (document.getElementById('section_template_posts_0_content').hasAttribute("required")) {
-                document.getElementById('section_template_posts_0_content').removeAttribute('required'); 
-            } 
+            // if (document.getElementById('section_template_posts_0_content').hasAttribute("required")) {
+            //     document.getElementById('section_template_posts_0_content').removeAttribute('required'); 
+            // } 
         }
 
         if('Folio Classique' == selected_template_type){
