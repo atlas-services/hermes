@@ -26,7 +26,7 @@ import '../../commun/js/menu';
 import '../../commun/js/anime';
 import '../../commun/js/copy';
 //import './exemples';
-//import './js-custom';
+import './js-custom';
 import './select2';
 import './modale';
 import './tags';
