@@ -444,6 +444,12 @@ parameters:
         nav_offset:
           summary: "Espacement gauche du menu"
           value: 0
+        nav_menu_text_size:
+          summary: "Taille texte du menu"
+          value: h5 
+        nav_sub_menu_text_size:
+          summary: "Taille texte du sous menu"
+          value: h6 
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu

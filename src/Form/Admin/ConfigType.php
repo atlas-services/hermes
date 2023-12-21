@@ -78,6 +78,21 @@ class ConfigType extends AbstractBaseType
         5 => 5 ,
     ];
 
+    const TEXT_SIZE = [
+        'h1' => 'h1' ,
+        'h2' => 'h2' ,
+        'h3' => 'h3' ,
+        'h4' => 'h4' ,
+        'h5' => 'h5' ,
+        'h6' => 'h6' ,
+        'display-1' => 'display-1' ,
+        'display-2' => 'display-2' ,
+        'display-3' => 'display-3' ,
+        'display-4' => 'display-4' ,
+        'display-5' => 'display-5' ,
+        'display-6' => 'display-6' ,
+    ];
+
     const TEMPLATE_BASE =[
         'front' => 'front',
     ];
@@ -174,6 +189,16 @@ class ConfigType extends AbstractBaseType
                         'Aucune séparation' => ' ',
                         'border-bottom' => 'border-bottom',
                     ];
+                    break;
+                // nav_menu_text_size
+                case 'nav_menu_text_size':
+                    $choice = true;
+                    $options = self::TEXT_SIZE;
+                    break;
+                // nav_sub_menu_text_size
+                case 'nav_sub_menu_text_size':
+                    $choice = true;
+                    $options = self::TEXT_SIZE;
                     break;
                 // chevron
                 case 'chevron':
