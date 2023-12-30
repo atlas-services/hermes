@@ -3,12 +3,14 @@
     {% include 'front/base/hermes/template/includes/_modale1.html.twig' %}
 {% endset  %}
 
-<div class="modal fade px-lg-0  my-0" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen mx-auto mw-100 my-0">
-        <div class="d-block d-sm-none modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}; height: 100%">
+<div class="modal fade px-lg-0  my-0" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height: {{ (section.template2Width ?? modale_container_width)|col_lgH()}}% " >
+    <div class="d-block d-sm-none  modal-dialog modal-fullscreen mx-auto mw-100 my-0"  style="height: 100%">
+        <div class="modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }} ">
             {{ basemodale }}
         </div>
-        <div class="d-none d-sm-block modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}; height: {{ (section.template2Width ?? modale_container_width)|col_lgH()}}% ">
+    </div>
+    <div class="d-none d-sm-block modal-dialog modal-fullscreen mx-auto mw-100 my-0"  style="height: {{ (section.template2Width ?? modale_container_width)|col_lgH()}}% ">
+        <div class=" modal-content col-lg-{{ (section.template2Width ?? modale_container_width)|col_lg() }}  col-12  mx-auto px-0 " style="background-color: {{ modale_bgcolor }}; color: {{ modale_color }}">
             {{ basemodale }}
         </div>
     </div>

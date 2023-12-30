@@ -122,7 +122,7 @@ class AppExtension extends AbstractExtension
     public function colLgH($width)
     {
         if(!is_null($width)){
-            if($width < 7 ){
+            if($width < 4 ){
                 return 100;
             }
             try {
