@@ -420,6 +420,9 @@ parameters:
         nav_color_active:
           summary: Couleur du menu sélectionné
           value: '#9141ac'
+        nav_bgcolor_link:
+          summary: Couleur de fond des menus non sélectionnés
+          value: 'transparent'
         nav_link_color:
           summary: Couleur des liens de la barre de menu
           value: '#b5835a'
@@ -439,7 +442,16 @@ parameters:
           summary: Largeur du menu (max= 12)
           value: 12
         nav_espacement:
-          summary: "Espacement entre les éléments du menu(valeurs possibles : 1 - 2 - 3 - 4 - 5)"
+          summary: "Espacement entre les éléments du menu(valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+        nav_link_py:
+          summary: "Espacement vertical (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+        nav_link_px:
+          summary: "Padding horizontal des liens du menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3   
+        nav_link_rounded:
+          summary: "Arrondi (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
           value: 3
         nav_offset:
           summary: "Espacement gauche du menu"

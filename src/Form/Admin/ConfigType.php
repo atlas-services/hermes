@@ -71,6 +71,7 @@ class ConfigType extends AbstractBaseType
     ];
 
     const MARGES = [
+        0 => 0 ,
         1 => 1 ,
         2 => 2 ,
         3 => 3 ,
@@ -181,7 +182,16 @@ class ConfigType extends AbstractBaseType
                     $choice = true;
                     $options = self::MARGES;
                     break;
-                    
+                 // nav_link_py
+                case 'nav_link_py':
+                    $choice = true;
+                    $options = self::MARGES;
+                    break;  
+                // nav_link_rounded
+                case 'nav_link_rounded':
+                    $choice = true;
+                    $options = self::MARGES;
+                    break;  
                 // nav_bar
                 case 'nav_link_border_bottom':
                     $choice = true;

@@ -156,6 +156,8 @@ class Page
                 $nav['active'] = 'active';
                 $nav['color_link'] = $this->config['nav_color_active'];
                 $nav['bg_color_link'] = $this->config['nav_bgcolor_active'];
+            }else{
+                $nav['bg_color_link'] = $this->config['nav_bgcolor_link'];
             }
             $navbar[$sheet_name] = $listmenu;
             if (is_array($listmenu)) {
