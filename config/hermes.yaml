@@ -458,7 +458,10 @@ parameters:
           value: 0
         nav_menu_text_size:
           summary: "Taille texte du menu"
-          value: h5 
+          value: h5
+        nav_sub_menu_mx:
+          summary: "Marge entre Menu et sous menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3          
         nav_sub_menu_text_size:
           summary: "Taille texte du sous menu"
           value: h6 

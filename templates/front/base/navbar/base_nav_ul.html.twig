@@ -8,7 +8,7 @@
                 href={{ listmenu.href }}>{{ sheet_name }}
             </a>
             {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
-                <ul class="dropdown-menu rounded-{{ nav_link_rounded ?? '1'}} mt-2 mx-lg-{{ nav_espacement }}"  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
+                <ul class="dropdown-menu rounded-{{ nav_link_rounded ?? '1'}} mt-{{ nav_sub_menu_mx ?? '2' }} "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
                     {% for menu_name, menu in listmenu %}
                         {% if menu.slug is defined  %}
                             <li class="px-{{ nav_link_px ?? '2' }} {{ nav_sub_menu_text_size ?? 'h6' }} w-100 nav-item  my-2 {{ nav_link_border_bottom }}" >
