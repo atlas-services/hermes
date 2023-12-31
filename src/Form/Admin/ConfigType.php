@@ -192,6 +192,11 @@ class ConfigType extends AbstractBaseType
                     $choice = true;
                     $options = self::MARGES;
                     break;  
+                 // nav_link_px
+                 case 'nav_link_px':
+                    $choice = true;
+                    $options = self::MARGES;
+                    break;  
                 // nav_link_rounded
                 case 'nav_link_rounded':
                     $choice = true;
