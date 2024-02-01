@@ -15,8 +15,9 @@ use App\Form\Admin\SectionType;
 use App\Repository\MenuRepository;
 use App\Repository\PostRepository;
 use App\Repository\TemplateRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Runner\Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,20 +33,20 @@ class MenuController extends AbstractAdminController
     /**
      * @Route("/menu/{sheet}", name="menu_index", defaults={"sheet": "All"},  methods={"GET"})
      */
-    public function index($sheet): Response
+    public function index(ManagerRegistry $doctrine, $sheet): Response
     {
-        $menus = $this->getDoctrine()
+        $menus = $doctrine
         ->getRepository(Menu::class)
         ->findAll();
         if('All' === $sheet){
-        $sheets = $this->getDoctrine()
+        $sheets = $doctrine
             ->getRepository(Sheet::class)
             ->findAll();
         }else{
-            $menus = $this->getDoctrine()
+            $menus = $doctrine
             ->getRepository(Menu::class)
             ->findBy(['sheet' => $sheet]);
-            $sheets = $this->getDoctrine()
+            $sheets = $doctrine
             ->getRepository(Sheet::class)
             ->findBy(['id' => $sheet]);
         }
@@ -55,7 +56,7 @@ class MenuController extends AbstractAdminController
             'sheets' => $sheets,
             'id' => $sheet
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/menu/index.html.twig', $array);
     }
 
@@ -63,7 +64,7 @@ class MenuController extends AbstractAdminController
     /**
      * @Route("/add/menu/new", name="menu_new", methods={"GET","POST"})
      */
-    public function new(Request $request, MenuRepository $menuRepository): Response
+    public function new(Request $request, ManagerRegistry $doctrine, MenuRepository $menuRepository): Response
     {
 //        Le menun'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
         $menu = new Menu();
@@ -73,7 +74,7 @@ class MenuController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $doctrine->getManager();
             $last = $em->getRepository(Menu::class)->getMaxPosition($menu->getSheet());
             $menu->setPosition($last);
             $em->persist($menu);
@@ -92,7 +93,7 @@ class MenuController extends AbstractAdminController
             'menu' => $menu,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/menu/new.html.twig', $array);
     }
@@ -100,9 +101,8 @@ class MenuController extends AbstractAdminController
 
     /**
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-libre", name="menu_section_post_new_sheet_libre", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
-    public function menuSectionPostNewSheetLibre(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
+    public function menuSectionPostNewSheetLibre(Request $request, ManagerRegistry $doctrine ,#[MapEntity(mapping: ['sheet' => 'slug'])] Sheet $sheet ,MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
     {
 
         $menu = new Menu();
@@ -132,7 +132,7 @@ class MenuController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $position_menu = $menuRepository->getMaxPosition($sheet);
             $menu->setPosition($position_menu);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($menu);
             $entityManager->flush();
             if ($form->get('save')->isClicked()) {
@@ -148,7 +148,7 @@ class MenuController extends AbstractAdminController
             'menu' => $menu,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/menu/new_libre.html.twig', $array);
     }
@@ -156,9 +156,8 @@ class MenuController extends AbstractAdminController
 
     /**
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-liste", name="menu_section_post_new_sheet_liste", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
-    public function menuSectionPostNewSheetListe(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
+    public function menuSectionPostNewSheetListe(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['sheet' => 'slug'])] Sheet $sheet , MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
     {
 
         $menu = new Menu();
@@ -188,7 +187,7 @@ class MenuController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $position_menu = $menuRepository->getMaxPosition($sheet);
             $menu->setPosition($position_menu);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($menu);
             $entityManager->flush();
             if ($form->get('save')->isClicked()) {
@@ -208,7 +207,7 @@ class MenuController extends AbstractAdminController
             'menu' => $menu,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/menu/new_liste.html.twig', $array);
     }
@@ -217,9 +216,8 @@ class MenuController extends AbstractAdminController
 
     /**
      * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu", name="menu_section_post_new_sheet", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug"}})
      */
-    public function menuSectionPostNewSheet(Request $request, ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository, ApiClient $apiClient): Response
+    public function menuSectionPostNewSheet(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['sheet' => 'slug'])] ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository, ApiClient $apiClient): Response
     {
         $libres = $apiClient->getTemplates('templates', 99);
         $menu = new Menu();
@@ -244,7 +242,7 @@ class MenuController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $position_menu = $menuRepository->getMaxPosition($sheet);
             $menu->setPosition($position_menu);
             $entityManager->persist($section);
@@ -269,7 +267,7 @@ class MenuController extends AbstractAdminController
             'form' => $form->createView(),
             'libres' => $libres,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/menu/new.html.twig', $array);
     }
@@ -282,14 +280,14 @@ class MenuController extends AbstractAdminController
         $array = [
             'menu' => $menu,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/menu/show.html.twig', $array);
     }
 
     /**
      * @Route("/page/{sheet}/menu/{referenceName}/locale/{locale}", name="menu_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, CacheInterface $backCache,MenuRepository $menuRepository, $sheet, $referenceName, $locale): Response
+    public function edit(Request $request, ManagerRegistry $doctrine, CacheInterface $backCache,MenuRepository $menuRepository, $sheet, $referenceName, $locale): Response
     {
 //        Le menu'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
 //        $menu = $menuRepository->findOneBy(['slug'=> $menu->getSlug(), 'sheet'=>$sheet]);
@@ -299,7 +297,7 @@ class MenuController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $doctrine->getManager();
             $em->persist($menu);
             $em->flush();
 
@@ -319,16 +317,15 @@ class MenuController extends AbstractAdminController
             'menu' => $menu,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/menu/edit.html.twig', $array);
     }
 
     /**
      * @Route("/menu/{id}/modele/{section}", name="menu_section_edit", methods={"GET","POST"})
-     * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
-    public function editSection(Request $request, Menu $menu, ?Section $section): Response
+    public function editSection(Request $request, ManagerRegistry $doctrine, Menu $menu, #[MapEntity()] ?Section $section): Response
     {
 
         if(is_null($section)){
@@ -344,7 +341,7 @@ class MenuController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $doctrine->getManager();
             $em->persist($section);
             $em->flush();
 
@@ -355,7 +352,7 @@ class MenuController extends AbstractAdminController
             'section' => $section,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/edit.html.twig', $array);
     }
@@ -364,10 +361,10 @@ class MenuController extends AbstractAdminController
     /**
      * @Route("/menu/{id}", name="menu_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Menu $menu): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Menu $menu): Response
     {
         if ($this->isCsrfTokenValid('delete'.$menu->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($menu);
             $entityManager->flush();
         }

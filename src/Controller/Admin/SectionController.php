@@ -17,7 +17,8 @@ use App\Mailer\Mailer;
 use App\Repository\SectionRepository;
 use App\Repository\UserRepository;
 use App\Service\Copy;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,23 +34,23 @@ class SectionController extends AbstractAdminController
     /**
      * @Route("/section/{menu}", name="section_index", defaults={"menu": "All"}, methods={"GET"})
      */
-    public function index($menu): Response
+    public function index(ManagerRegistry $doctrine, $menu): Response
     {
-        $sections = $this->getDoctrine()
+        $sections = $doctrine
         ->getRepository(Section::class)
         ->findAll()
         ;
         if('All' === $menu){
-        $menus = $this->getDoctrine()
+        $menus = $doctrine
             ->getRepository(Menu::class)
             ->findAll()
         ;
         }else{
-            $sections = $this->getDoctrine()
+            $sections = $doctrine
             ->getRepository(Section::class)
             ->findBy(['menu' => $menu])
             ;
-            $menus = $this->getDoctrine()
+            $menus = $doctrine
                 ->getRepository(Menu::class)
                 ->findBy(['id'=> $menu])
             ;
@@ -60,7 +61,7 @@ class SectionController extends AbstractAdminController
             'menus' => $menus,
             'id' => $menu,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/index.html.twig', $array );
     }
@@ -68,15 +69,15 @@ class SectionController extends AbstractAdminController
     /**
      * @Route("/newsletters", name="section_newsletter", methods={"GET"})
      */
-    public function newsletters(): Response
+    public function newsletters(ManagerRegistry $doctrine): Response
     {
 
-        $newsletter_template = $this->getDoctrine()
+        $newsletter_template = $doctrine
         ->getRepository(Template::class)
         ->findOneBy(['code' => 'newsletter_template'])
         ;       
         
-        $sections = $this->getDoctrine()
+        $sections = $doctrine
         ->getRepository(Section::class)
         ->findBy(['template' => $newsletter_template])
         ;
@@ -84,7 +85,7 @@ class SectionController extends AbstractAdminController
         $array = [
             'sections' => $sections,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/newsletter.html.twig', $array );
     }
@@ -92,9 +93,8 @@ class SectionController extends AbstractAdminController
 
     /**
      * @Route("/menu/{menu}/nouvelle-section/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
-     * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
-    public function SectionPostNewMenu(Request $request, Copy $copy,ApiClient $apiClient , ?Menu $menu): Response
+    public function SectionPostNewMenu(Request $request, ManagerRegistry $doctrine, Copy $copy,ApiClient $apiClient , #[MapEntity(mapping: ['menu' => 'slug'])] ?Menu $menu): Response
     {
         $sections = $menu->getSections();
         foreach($sections as $section){
@@ -117,7 +117,7 @@ class SectionController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($section);
             $entityManager->flush();
             if ($form->get('saveAndAddPost')->isClicked()) {
@@ -149,7 +149,7 @@ class SectionController extends AbstractAdminController
             'menu' => $section->getMenu() ?? '',
             'libres' => $libres
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/new.html.twig', $array);
     }
@@ -157,7 +157,7 @@ class SectionController extends AbstractAdminController
     /**
      * @Route("/nouvelle-section", name="section_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $post = new Post();
         $section = new Section();
@@ -166,7 +166,7 @@ class SectionController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($section);
             $entityManager->flush();
 
@@ -177,7 +177,7 @@ class SectionController extends AbstractAdminController
             'section' => $section,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/new.html.twig', $array);
     }
@@ -190,16 +190,15 @@ class SectionController extends AbstractAdminController
         $array = [
             'section' => $section,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/show.html.twig', $array);
     }
 
     /**
      * @Route("/section/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
-     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
-    public function edit(Request $request, Section $section, $config = 1): Response
+    public function edit(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['section' => 'id'])] Section $section, $config = 1): Response
     {
 
         $options['posts'] = [
@@ -224,7 +223,7 @@ class SectionController extends AbstractAdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $doctrine->getManager();
             if(Template::TEMPLATE_TYPE_LISTE ==  $section->getTemplate()->getType()){
                 foreach($section->getPosts() as $post){
                     if(is_null($post->getFilename())){
@@ -254,7 +253,7 @@ class SectionController extends AbstractAdminController
             'section' => $section,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/edit.html.twig', $array);
     }
@@ -262,10 +261,10 @@ class SectionController extends AbstractAdminController
     /**
      * @Route("/section/{id}", name="section_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Section $section): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Section $section): Response
     {
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($section);
             $entityManager->flush();
         }
@@ -290,11 +289,10 @@ class SectionController extends AbstractAdminController
 
     /**
      * @Route("/section/copy/{section}", name="section_copy", methods={"GET","POST"})
-     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
-    public function copy(Request $request, Section $section, Copy $copy): Response
+    public function copy(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['section' => 'id'])] Section $section, Copy $copy): Response
     {
-        $initMenu = $this->getDoctrine()->getRepository(Section::class)->find($section->getId())->getMenu();
+        $initMenu = $doctrine->getRepository(Section::class)->find($section->getId())->getMenu();
         $form = $this->createForm(SectionCopyType::class, $section);
         $form->handleRequest($request);
 
@@ -317,7 +315,7 @@ class SectionController extends AbstractAdminController
             'section' => $section,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/section/copy.html.twig', $array);
     }
@@ -326,9 +324,8 @@ class SectionController extends AbstractAdminController
 
     /**
      * @Route("/section/sendNewsletter/{section}/{test}", name="section_send_newsletter", methods={"GET","POST"})
-     * @ParamConverter("section",class="App\Entity\Hermes\Section", options={"mapping": {"section": "id"}})
      */
-    public function sendNewsletter(Request $request, Section $section, Mailer $mailer, UserRepository $userRepository, $test=null): Response
+    public function sendNewsletter(Request $request, #[MapEntity(mapping: ['section' => 'id'])] Section $section, Mailer $mailer, UserRepository $userRepository, $test=null): Response
     { 
         $newsletter_emails = [];
         $referer = (string) $request->headers->get('referer'); // get the referer, it can be empty!

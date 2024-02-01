@@ -27,7 +27,7 @@ class PrevisualisationController extends AbstractAdminController
     public function previsualisation(Request $request, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $array = [];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         if( Sheet::ONE_PAGE_LIBELLE == $array['nav_bar']){
             return $this->redirect('/');
         }

@@ -9,7 +9,8 @@ use App\Form\Admin\PostCopyType;
 use App\Form\Admin\PostType;
 use App\Repository\PostRepository;
 use App\Service\Copy;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,16 +31,15 @@ class PostController extends AbstractAdminController
         $array = [
             'posts' => $posts,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/index.html.twig', $array);
     }
 
     /**
      * @Route("/nouveau-contenu/section/{section}/liste", name="post_new_section_liste", methods={"GET","POST"})
-     * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
-    public function postNewSectionListe(Request $request, ?Section $section, PostRepository $postRepository): Response
+    public function postNewSectionListe(Request $request, ManagerRegistry $doctrine, #[MapEntity()] ?Section $section, PostRepository $postRepository): Response
     {
         $numpost = count($section->getPosts()) + 1;
         $post = new Post();
@@ -59,7 +59,7 @@ class PostController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $position = $postRepository->getMaxPosition($section);
             $post->setPosition($position);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
             if ($form->get('saveAndAddPost')->isClicked()) {
@@ -82,7 +82,7 @@ class PostController extends AbstractAdminController
             'menu' => $section->getMenu() ?? '',
             'post' => $post ?? ''
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/new.html.twig', $array);
     }
@@ -90,9 +90,8 @@ class PostController extends AbstractAdminController
 
     /**
      * @Route("/nouveau-contenu/section/{section}", name="post_new_section", methods={"GET","POST"})
-     * @ParamConverter("section", class="App\Entity\Hermes\Section")
      */
-    public function postNewSection(Request $request, ?Section $section, PostRepository $postRepository): Response
+    public function postNewSection(Request $request, ManagerRegistry $doctrine, #[MapEntity()] ?Section $section, PostRepository $postRepository): Response
     {
         $numpost = count($section->getPosts()) + 1;
         $post = new Post();
@@ -107,7 +106,7 @@ class PostController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $position = $postRepository->getMaxPosition($section);
             $post->setPosition($position);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
             if ($form->get('saveAndAddPost')->isClicked()) {
@@ -130,7 +129,7 @@ class PostController extends AbstractAdminController
             'menu' => $section->getMenu() ?? '',
             'post' => $post ?? ''
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/new.html.twig', $array);
     }
@@ -138,7 +137,7 @@ class PostController extends AbstractAdminController
     /**
      * @Route("/nouveau-contenu", name="post_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $options= ['section'=> true];
         $post = new Post();
@@ -146,7 +145,7 @@ class PostController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -161,7 +160,7 @@ class PostController extends AbstractAdminController
             'post' => $post,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/new.html.twig', $array);
     }
@@ -175,17 +174,15 @@ class PostController extends AbstractAdminController
         $array = [
             'post' => $post,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/show.html.twig', $array);
     }
 
     /**
      * @Route("/menu/{menu}/contenu/{id}/{post}", name="post_edit", methods={"GET","POST"}, requirements={"post"=".+"})
-     * @ParamConverter("post",class="App\Entity\Hermes\Post", options={"mapping": {"post": "name"}})
-     * @ParamConverter("menu",class="App\Entity\Hermes\Menu", options={"mapping": {"menu": "slug"}})
      */
-    public function edit(Request $request,$id, Post $post, Menu $menu, PostRepository $postRepository): Response
+    public function edit(Request $request, ManagerRegistry $doctrine,$id, #[MapEntity(mapping: ['post' => 'name'])] Post $post, #[MapEntity(mapping: ['menu' => 'slug'])] Menu $menu, PostRepository $postRepository): Response
     {
         $referer = (string) $request->headers->get('referer');
 //        Le post'est pas unique pour un name donné, aussi il faut le récupérer avec l'id
@@ -198,7 +195,7 @@ class PostController extends AbstractAdminController
         $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             if ($form->get('saveAndAddPost')->isClicked()) {
                 $section = $post->getSection();
@@ -224,7 +221,7 @@ class PostController extends AbstractAdminController
             'post' => $post,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/edit.html.twig', $array);
     }
@@ -232,10 +229,10 @@ class PostController extends AbstractAdminController
     /**
      * @Route("/contenu/{id}", name="post_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Post $post): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Post $post): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($post);
             $entityManager->flush();
         }
@@ -266,9 +263,8 @@ class PostController extends AbstractAdminController
 
     /**
      * @Route("/contenu/copy/{post}", name="post_copy", methods={"GET","POST"})
-     * @ParamConverter("post",class="App\Entity\Hermes\Post", options={"mapping": {"post": "id"}})
      */
-    public function copy(Request $request, Post $post, Copy $copy): Response
+    public function copy(Request $request, #[MapEntity(mapping: ['post' => 'id'])] Post $post, Copy $copy): Response
     {
         $form = $this->createForm(PostCopyType::class, $post);
         $fromPost = clone $post;
@@ -308,7 +304,7 @@ class PostController extends AbstractAdminController
             'post' => $post,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/post/copy.html.twig', $array);
     }

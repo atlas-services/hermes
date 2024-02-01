@@ -6,6 +6,7 @@ use App\Entity\Hermes\User;
 use App\Entity\Interfaces\ContactInterface;
 use App\Form\Admin\UserType;
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,15 +21,15 @@ class UserController extends AbstractAdminController
     /**
      * @Route("/{roles?}", name="user_index", methods={"GET"})
      */
-    public function index(Request $request, string $roles = null): Response
+    public function index(Request $request, ManagerRegistry $doctrine, string $roles = null): Response
     {
 
         if(!is_null($roles)){
-            $users = $this->getDoctrine()
+            $users = $doctrine
             ->getRepository(User::class)
             ->findNewsletterUsers($roles, true);
         }else{
-            $users = $this->getDoctrine()
+            $users = $doctrine
             ->getRepository(User::class)
             ->findAll();
         }
@@ -36,30 +37,30 @@ class UserController extends AbstractAdminController
         $array = [
             'users' => $users,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/user/index.html.twig', $array);
     }
 
         /**
      * @Route("/user/newsletter", name="user_newsletter", methods={"GET"})
      */
-    public function newsletter(): Response
+    public function newsletter(ManagerRegistry $doctrine): Response
     {
-        $users = $this->getDoctrine()
+        $users = $doctrine
         ->getRepository(User::class)
         ->findNewsletterUsers('ROLE_NEWSLETTER', true);
 
         $array = [
             'users' => $users,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/user/newsletter.html.twig', $array);
     }
 
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){
             $this->redirectToRoute('user_index');
@@ -71,7 +72,7 @@ class UserController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -81,7 +82,7 @@ class UserController extends AbstractAdminController
             'user' => $user,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/user/new.html.twig', $array);
     }
 
@@ -98,7 +99,7 @@ class UserController extends AbstractAdminController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, ManagerRegistry $doctrine,User $user): Response
     {
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){
             $this->redirectToRoute('user_index');
@@ -112,7 +113,7 @@ class UserController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             return $this->redirectToRoute('user_index');
         }
@@ -121,7 +122,7 @@ class UserController extends AbstractAdminController
             'user' => $user,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/user/edit.html.twig', $array);
     }
@@ -129,10 +130,10 @@ class UserController extends AbstractAdminController
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
         }

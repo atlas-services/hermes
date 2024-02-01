@@ -15,6 +15,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class HermesDbCommand extends Command
 {
@@ -29,14 +30,14 @@ class HermesDbCommand extends Command
     protected $app_name;
     protected $onepage;
 
-    public function __construct(ManagerRegistry $doctrine, ContainerInterface $container, Onepage $onepage)
+    public function __construct(ManagerRegistry $doctrine,ParameterBagInterface $container,  Onepage $onepage)
     {
         $this->em = $doctrine->getManager('default');
         $this->emConfig = $doctrine->getManager('config');
         $this->onepage = $onepage;
-        $this->configurations = $container->getParameter('init');
-        $this->locale = $container->getParameter('app.default_locale');
-        $this->app_name = $container->getParameter('app.name');
+        $this->configurations = $container->get('init');
+        $this->locale = $container->get('app.default_locale');
+        $this->app_name = $container->get('app.name');
 
         parent::__construct();
     }

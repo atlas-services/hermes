@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Hermes\Contact;
 use App\Entity\Hermes\User;
 use App\Mailer\Mailer;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,13 +25,13 @@ class SecurityController extends AbstractController
      * @Route("/forgotten_password", name="app_forgotten_password")
      * @Route("/re-init-password", name="app_init_password")
      */
-    public function forgottenPassword(Request $request, Mailer $mailer,TokenGeneratorInterface $tokenGenerator): Response
+    public function forgottenPassword(Request $request, Mailer $mailer, ManagerRegistry $doctrine, TokenGeneratorInterface $tokenGenerator): Response
     {
         if ($request->isMethod('POST')) {
 
             $email = $request->request->get('email');
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
             /* @var $user User */
 
@@ -73,11 +74,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/reset_password/{token}", name="app_reset_password")
      */
-    public function resetPassword(Request $request, string $token)
+    public function resetPassword(Request $request,ManagerRegistry $doctrine, string $token)
     {
 
         if ($request->isMethod('POST')) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
 
             $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
             /* @var $user User */
@@ -107,11 +108,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/send/unsubscribe/newsletter", name="send_unsubscribe_newsletter")
      */
-    public function emailUnsubscribeNewsletter(Request $request, Mailer $mailer,TokenGeneratorInterface $tokenGenerator): Response
+    public function emailUnsubscribeNewsletter(Request $request, ManagerRegistry $doctrine, Mailer $mailer,TokenGeneratorInterface $tokenGenerator): Response
     {
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
             $referer = $request->headers->get('referer');
 
@@ -162,10 +163,10 @@ class SecurityController extends AbstractController
     /**
      * @Route("/unsubscribe_newsletter/{token}", name="app_unsubscribe_newsletter")
      */
-    public function unsubscribeNewsletter(Request $request, string $token)
+    public function unsubscribeNewsletter(Request $request, ManagerRegistry $doctrine, string $token)
     {
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $doctrine->getManager();
         $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
 
         if( is_null($user)){
@@ -179,8 +180,8 @@ class SecurityController extends AbstractController
 
         if (in_array('ROLE_NEWSLETTER' , $roles)) {
             $user->setRoles(['ROLE_UNSUBSRIBED_NEWSLETTER']);
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush($user);
+            $doctrine->getManager()->persist($user);
+            $doctrine->getManager()->flush($user);
             $notification = "Vous avez éte désinscrit de la  Newsletter.";
             $this->addFlash('success', $notification);
         }
@@ -191,22 +192,38 @@ class SecurityController extends AbstractController
 
 
 
-    /**
-     * @Route("/login", name="app_login")
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // if ($this->getUser()) {
-        //    $this->redirectToRoute('target_path');
-        // }
+    // /**
+    //  * @Route("/login", name="app_login")
+    //  */
+    // public function login(AuthenticationUtils $authenticationUtils): Response
+    // {
+    //     // if ($this->getUser()) {
+    //     //    $this->redirectToRoute('target_path');
+    //     // }
 
+    //     // get the login error if there is one
+    //     $error = $authenticationUtils->getLastAuthenticationError();
+    //     // last username entered by the user
+    //     $lastUsername = $authenticationUtils->getLastUsername();
+
+    //     return $this->render('admin/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    // }
+
+    #[Route('/login', name: 'app_login')]
+    public function index(AuthenticationUtils $authenticationUtils): Response
+     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('admin/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-    }
+         return $this->render('admin/security/login.html.twig', [
+            'controller_name' => 'SecurityController',
+            'last_username' => $lastUsername,
+            'error'         => $error,
+         ]);
+     }
 
     /**
      * @Route("/logout", name="app_logout")

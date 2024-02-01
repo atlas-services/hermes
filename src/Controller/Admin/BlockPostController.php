@@ -3,15 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Hermes\BlockPost;
-use App\Entity\Hermes\Block;
 use App\Form\Admin\BlockPostType;
 use App\Repository\BlockPostRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 /**
  * @Route("/{_locale}/admin")
@@ -21,9 +21,9 @@ class BlockPostController extends AbstractController
     /**
      * @Route("/block/contenu/", name="blockpost_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        $posts = $this->getDoctrine()
+        $posts = $doctrine
             ->getRepository(BlockPost::class)
             ->findAll();
 
@@ -35,7 +35,7 @@ class BlockPostController extends AbstractController
      /**
      * @Route("/block/nouveau-contenu", name="blockpost_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
 
         $post = new BlockPost();
@@ -43,7 +43,7 @@ class BlockPostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -70,7 +70,7 @@ class BlockPostController extends AbstractController
     /**
      * @Route("/block/contenu/{id}", name="blockpost_edit", methods={"GET","POST"}, requirements={"blockpost"=".+"})
      */
-    public function edit(Request $request,$id, BlockPostRepository $postRepository): Response
+    public function edit(Request $request,$id, ManagerRegistry $doctrine, BlockPostRepository $postRepository): Response
     {
 //        Le post'est pas unique pour un name donné, aussi il faut le récupérer avec l'id
         $post = $postRepository->findOneById($id);
@@ -81,7 +81,7 @@ class BlockPostController extends AbstractController
         $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             if ($form->get('saveAndAddPost')->isClicked()) {
                 $block = $post->getBlock();
@@ -106,12 +106,11 @@ class BlockPostController extends AbstractController
 
     /**
      * @Route("/block/contenu/{id}", name="blockpost_delete", methods={"DELETE"})
-     * @ParamConverter("post",class="App\Entity\Hermes\BlockPost", options={"mapping": {"blockpost": "post"}})
      */
-    public function delete(Request $request, BlockPost $post): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['blockpost' => 'post'])] BlockPost $post): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($post);
             $entityManager->flush();
         }

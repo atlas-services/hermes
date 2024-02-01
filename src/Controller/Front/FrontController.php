@@ -31,6 +31,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class FrontController extends AbstractController
 {
@@ -110,15 +111,15 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function homepage(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page )
+    public function homepage(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page )
     {
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
         $locale = $page->getLocale($localeRouting);
-        $home_menu = $this->getDoctrine()->getRepository(Menu::class)->getHomeMenu($locale);
+        $home_menu = $doctrine->getRepository(Menu::class)->getHomeMenu($locale);
         $sheet = $home_menu->getSheet()->getSlug();
         $slug = $home_menu->getSlug();
-        $array = $this->getArray($page, $sheet, $slug, $route, $locale);
+        $array = $this->getArray($doctrine, $page, $sheet, $slug, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if(is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
@@ -127,7 +128,7 @@ class FrontController extends AbstractController
         }
  
         if($array['hasContact']){
-            $array = $this->baseForm($request, $page, $array, $mailer, $route);
+            $array = $this->baseForm($request, $doctrine, $page, $array, $mailer, $route);
             if(!is_array($array)){
                 $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
@@ -144,7 +145,7 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function page(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $slug )
+    public function page(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page, $slug )
     {
         $sheet = $slug;
         $route = $request->attributes->get('_route');
@@ -153,7 +154,7 @@ class FrontController extends AbstractController
         // if ('livre-d-or' == $sheet) {
         //     return $this->redirectToRoute('livre-d-or');
         // }
-        $array = $this->getArray($page, $sheet, $slug, $route, $locale);
+        $array = $this->getArray($doctrine, $page, $sheet, $slug, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if(is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
@@ -162,7 +163,7 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-            $array = $this->baseForm($request, $page, $array, $mailer, $route);
+            $array = $this->baseForm($request, $doctrine, $page, $array, $mailer, $route);
             if(!is_array($array)){
                 $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
@@ -179,7 +180,7 @@ class FrontController extends AbstractController
      *     methods={"GET|POST"}
      *     )
      */
-    public function pageSheet(Request $request, CacheInterface $frontCache, Mailer $mailer, Page $page, $sheet , $slug)
+    public function pageSheet(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page, $sheet , $slug)
     {
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
@@ -187,7 +188,7 @@ class FrontController extends AbstractController
         // if ('livre-d-or' == $sheet) {
         //     return $this->redirectToRoute('livre-d-or');
         // }
-        $array = $this->getArray($page,$sheet, $slug, $route, $locale);
+        $array = $this->getArray($doctrine,$page,$sheet, $slug, $route, $locale);
         $localeNotExists = !in_array($localeRouting, array_keys($array['locales']));
         if(is_null($array['menu']) or $localeNotExists){
             $home_sheet = $array['home']['sheet'];
@@ -196,7 +197,7 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-            $array = $this->baseForm($request, $page, $array, $mailer, $route);
+            $array = $this->baseForm($request, $doctrine,$page, $array, $mailer, $route);
             if(!is_array($array)){
                 $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
@@ -206,7 +207,7 @@ class FrontController extends AbstractController
         return $this->render('front/index.html.twig', $array);
     }
 
-    private function baseForm($request, $page, $array, $mailer, $route){
+    private function baseForm($request, $doctrine, $page, $array, $mailer, $route){
             if(isset($array['listForms'])){
                 $validation_group = $array['listForms'][0];
             }
@@ -233,7 +234,7 @@ class FrontController extends AbstractController
                 if ($form->isValid()) {
                     $subject = $form->getData()->getSubject();
 
-                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager = $doctrine->getManager();
                     if (ContactInterface::LIVREDOR == $array['listForms'][0]) {
                         $entityManager->persist($form->getData());
                         $entityManager->flush();
@@ -287,10 +288,10 @@ class FrontController extends AbstractController
 
     }
 
-    private function getArray($page, $sheet, $slug, $route, $locale){
+    private function getArray($doctrine, $page, $sheet, $slug, $route, $locale){
         $array = $page->getActiveMenu($sheet, $slug,$route, $locale);
         $array['locale'] = $locale;
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $doctrine->getManager();
         $livredor = $entityManager->getRepository(Temoignage::class)->findBy(['active' => true]);
 //        $blocks = $entityManager->getRepository(Block::class)->getBlocks();
 //        $array['blocks'] = $blocks;

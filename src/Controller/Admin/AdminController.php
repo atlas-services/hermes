@@ -6,6 +6,7 @@ use App\Entity\Config\Config;
 use App\Entity\Hermes\Sheet;
 use App\Service\Image;
 use App\Service\TemplateLibreHermes;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,11 +19,11 @@ class AdminController extends AbstractAdminController
     /**
      * @Route("/", name="admin_index", methods={"GET"})
      */
-    public function index(Image $image,TemplateLibreHermes $templateLibreHermes): Response
+    public function index(ManagerRegistry $doctrine, Image $image,TemplateLibreHermes $templateLibreHermes): Response
     {
         $image->shuffle();
 
-        $sheets = $this->getDoctrine()
+        $sheets = $doctrine
             ->getRepository(Sheet::class)
             ->findAll();
         $listSheets='';
@@ -35,7 +36,7 @@ class AdminController extends AbstractAdminController
         }
 
         $array = ['sheets'=> $listSheets];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         $configurations = $this->getParameter('init');
 
@@ -64,7 +65,7 @@ class AdminController extends AbstractAdminController
     {
 
         $array = [];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/presentation.html.twig', $array);
     }

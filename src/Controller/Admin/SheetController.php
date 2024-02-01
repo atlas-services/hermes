@@ -11,7 +11,8 @@ use App\Form\Admin\Liste\SheetListeType;
 use App\Repository\SheetRepository;
 use App\Service\Copy;
 use App\Service\Image;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,17 +29,17 @@ class SheetController extends AbstractAdminController
      * @Route("/page/", name="sheet_index", methods={"GET"})
      * @Route("/form/", name="sheet_form_index", methods={"GET"})
      */
-    public function index(Request $request,SheetRepository $sheetRepository): Response
+    public function index(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $route = $request->attributes->get('_route');
         $sheets = $sheetRepository->findAll();
-        $config_form = $this->getDoctrine()->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'forms']);
+        $config_form = $doctrine->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'forms']);
 
         $array = [
             'sheets' => $sheets,
             'config' => $config_form,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         if('sheet_index' == $route){
             return $this->render('admin/sheet/index.html.twig', $array);
@@ -52,7 +53,7 @@ class SheetController extends AbstractAdminController
     /**
      * @Route("/nouvelle-page", name="sheet_new", methods={"GET","POST"})
      */
-    public function new(Request $request,SheetRepository $sheetRepository, Copy $copy): Response
+    public function new(Request $request, ManagerRegistry $doctrine,SheetRepository $sheetRepository, Copy $copy): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
         $sheet = new Sheet();
@@ -62,7 +63,7 @@ class SheetController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($sheet);
             $entityManager->flush();
             if ($form->get('saveAndAdd')->isClicked()) {
@@ -81,7 +82,7 @@ class SheetController extends AbstractAdminController
             'sheet' => $sheet,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/sheet/new.html.twig', $array);
     }
@@ -89,7 +90,7 @@ class SheetController extends AbstractAdminController
     /**
      * @Route("/nouvelle-page_libre", name="sheet_new_libre", methods={"GET","POST"})
      */
-    public function newLibre(Request $request,SheetRepository $sheetRepository): Response
+    public function newLibre(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
         $sheet = new Sheet();
@@ -98,7 +99,7 @@ class SheetController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($sheet);
             $entityManager->flush();
             if ($form->get('saveLibre')->isClicked()) {
@@ -110,14 +111,14 @@ class SheetController extends AbstractAdminController
             'sheet' => $sheet,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/sheet/new_libre.html.twig', $array);
     }
 
     /**
      * @Route("/nouvelle-page_liste", name="sheet_new_liste", methods={"GET","POST"})
      */
-    public function newListe(Request $request,SheetRepository $sheetRepository): Response
+    public function newListe(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
         $sheet = new Sheet();
@@ -126,7 +127,7 @@ class SheetController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($sheet);
             $entityManager->flush();
             if ($form->get('saveListe')->isClicked()) {
@@ -138,7 +139,7 @@ class SheetController extends AbstractAdminController
             'sheet' => $sheet,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/sheet/new_liste.html.twig', $array);
     }
@@ -151,23 +152,22 @@ class SheetController extends AbstractAdminController
         $array = [
             'sheet' => $sheet,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/sheet/show.html.twig', $array);
     }
 
     /**
      * @Route("/page/edit/{sheet}/{locale}", name="sheet_edit", methods={"GET","POST"})
-     * @ParamConverter("sheet",class="App\Entity\Hermes\Sheet", options={"mapping": {"sheet": "slug", "locale": "locale"}})
      */
-    public function edit(Request $request, CacheInterface $backCache, Sheet $sheet): Response
+    public function edit(Request $request, ManagerRegistry $doctrine, CacheInterface $backCache, #[MapEntity(mapping: ['sheet' => 'slug', 'locale' => 'locale'])] Sheet $sheet): Response
     {
 
         $form = $this->createForm(SheetType::class, $sheet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             $sheetslug = $sheet->getSlug();
             foreach ($sheet->getMenus() as $menu){
@@ -188,7 +188,7 @@ class SheetController extends AbstractAdminController
             'sheet' => $sheet,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/sheet/edit.html.twig', $array);
     }
@@ -196,10 +196,10 @@ class SheetController extends AbstractAdminController
     /**
      * @Route("/page/{id}", name="sheet_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Sheet $sheet): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Sheet $sheet): Response
     {
         if ($this->isCsrfTokenValid('delete' . $sheet->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($sheet);
             $entityManager->flush();
         }
@@ -241,7 +241,7 @@ class SheetController extends AbstractAdminController
         $array = [
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/sheet/newLocale.html.twig', $array);
     }

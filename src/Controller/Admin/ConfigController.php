@@ -7,6 +7,7 @@ use App\Entity\Hermes\Menu;
 use App\Entity\Hermes\Sheet;
 use App\Form\Admin\ConfigType;
 use App\Repository\ConfigRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -23,13 +24,13 @@ class ConfigController extends AbstractAdminController
     /**
      * @Route("/navbar-type/{type}", name="config_navbar_type", methods={"GET"})
      */
-    public function switchType(Request  $request, ConfigRepository $configRepository, $type): Response
+    public function switchType(Request  $request, ManagerRegistry $doctrine, ConfigRepository $configRepository, $type): Response
     {
         $nav_bar = $configRepository->findOneBy(['code'=> 'nav_bar' ]);
 
         $nav_bar->setValue($type);
 
-        $entityManager = $this->getDoctrine()->getManager('config');
+        $entityManager = $doctrine->getManager('config');
         $entityManager->persist($nav_bar);
         $entityManager->flush();
 
@@ -39,7 +40,7 @@ class ConfigController extends AbstractAdminController
     /**
      * @Route("/new", name="config_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $options['code_disabled'] = true;
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
@@ -50,7 +51,7 @@ class ConfigController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager('config');
+            $entityManager = $doctrine->getManager('config');
             $entityManager->persist($config);
             $entityManager->flush();
 
@@ -61,7 +62,7 @@ class ConfigController extends AbstractAdminController
             'config' => $config,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/config/new.html.twig', $array);
     }
@@ -69,15 +70,15 @@ class ConfigController extends AbstractAdminController
     /**
      * @Route("/{type}", name="config_index", methods={"GET"})
      */
-    public function index( $type): Response
+    public function index(ManagerRegistry $doctrine, $type): Response
     {
-        $configuration = $this->getDoctrine()
+        $configuration = $doctrine
             ->getRepository(Config::class, 'config')->createQueryBuilder('c')
             ->where('c.type = :type')
             ->setParameter('type', $type)
             ->orderBy('c.code', 'ASC')            ->getQuery()
             ->getResult();
-        $configRepository = $this->getDoctrine()->getRepository(Config::class, 'config');
+        $configRepository = $doctrine->getRepository(Config::class, 'config');
 
         if('undefined'== $type){
             $type=null;
@@ -87,7 +88,7 @@ class ConfigController extends AbstractAdminController
         $array = [
             'configs' => $config,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/config/index.html.twig', $array);
     }
 
@@ -99,14 +100,14 @@ class ConfigController extends AbstractAdminController
         $array = [
             'config' => $config,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/config/show.html.twig', $array);
     }
 
     /**
      * @Route("/{id}/edit", name="config_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Config $config, Filesystem $filesystem): Response
+    public function edit(Request $request, ManagerRegistry $doctrine, Config $config, Filesystem $filesystem): Response
     {
         $configInit = clone $config;
         $directories= json_decode($this->getParameter('hermes_list_templates'),true);
@@ -125,7 +126,7 @@ class ConfigController extends AbstractAdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager('config')->flush();
+            $doctrine->getManager('config')->flush();
             try {
                 $type = $request->attributes->get('config')->getType();
                 return $this->redirectToRoute('config_index', ['type' => $type ]);
@@ -137,21 +138,21 @@ class ConfigController extends AbstractAdminController
             'config' => $config,
             'form' => $form->createView(),
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
         return $this->render('admin/config/edit.html.twig', $array);
     }
 
     /**
      * @Route("/{id}", name="config_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Config $config): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Config $config): Response
     {
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){
             $this->redirectToRoute('admin_index');
         }
 
         if ($this->isCsrfTokenValid('delete' . $config->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager('config');
+            $entityManager = $doctrine->getManager('config');
             $entityManager->remove($config);
             $entityManager->flush();
         }
@@ -168,25 +169,25 @@ class ConfigController extends AbstractAdminController
 //        $forms_delete =  array_diff($forms_init,$forms);//delete
 //
 //        foreach ($forms_delete as $form){
-//            $sheet_form = $this->getDoctrine()->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
+//            $sheet_form = $doctrine->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
 //            if(!is_null($sheet_form)) {
-//                $this->getDoctrine()->getManager()->remove($sheet_form);
+//                $doctrine->getManager()->remove($sheet_form);
 //            }
 //        }
 //
 //        foreach ($forms_add as $form){
 //            if (!array_key_exists(strtoupper($form), $menus)) {
-//                $sheet_form = $this->getDoctrine()->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
+//                $sheet_form = $doctrine->getManager()->getRepository(Sheet::class)->findOneBy(['active' => true, 'name' => $form]);
 //                // Création sheet si le formulaire n'existe pas
 //                if(is_null($sheet_form)){
 //                    $newSheet = new Sheet();
 //                    $newSheet->setCode($form);
 //                    $newSheet->setName($form);
 //                    $newSheet->setSlug($form);
-//                    $this->getDoctrine()->getManager()->persist($newSheet);
+//                    $doctrine->getManager()->persist($newSheet);
 //                }
 //            }
 //        }
-//        $this->getDoctrine()->getManager()->flush();
+//        $doctrine->getManager()->flush();
 //    }
 }

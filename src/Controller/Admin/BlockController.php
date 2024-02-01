@@ -7,8 +7,9 @@ use App\Entity\Hermes\Block;
 use App\Form\Admin\BlockPostType;
 use App\Form\Admin\BlockType;
 use App\Repository\BlockRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Runner\Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +24,9 @@ class BlockController extends AbstractController
     /**
      * @Route("/block/", name="block_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        $blocks = $this->getDoctrine()
+        $blocks = $doctrine
             ->getRepository(Block::class)
             ->findAll()
         ;
@@ -39,7 +40,7 @@ class BlockController extends AbstractController
     /**
      * @Route("/menu/{menu}/nouveau-block/nouveau-contenu", name="block_post_new_menu", methods={"GET","POST"})
      */
-    public function BlockPostNewMenu(Request $request, ?Menu $menu): Response
+    public function BlockPostNewMenu(Request $request, ManagerRegistry $doctrine, ?Menu $menu): Response
     {
         $block = new Block() ;
         $post = new BlockPost();
@@ -54,7 +55,7 @@ class BlockController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($block);
             $entityManager->flush();
             if ($form->get('saveAndAddPost')->isClicked()) {
@@ -78,7 +79,7 @@ class BlockController extends AbstractController
     /**
      * @Route("/nouveau-block", name="block_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ManagerRegistry $doctrine): Response
     {
 //        $post = new BlockPost();
         $block = new Block();
@@ -87,7 +88,7 @@ class BlockController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($block);
             $entityManager->flush();
 
@@ -112,9 +113,9 @@ class BlockController extends AbstractController
 
     /**
      * @Route("/block/edit/{block}", name="block_edit", methods={"GET","POST"})
-     * @ParamConverter("block",class="App\Entity\Hermes\Block", options={"mapping": {"block": "id"}})
+     * 
      */
-    public function edit(Request $request, Block $block): Response
+    public function edit(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['block' => 'id'])] Block $block): Response
     {
 
         $form = $this->createForm(BlockType::class, $block);
@@ -124,7 +125,7 @@ class BlockController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 //            dd($block->getBlockPosts());
-            $em = $this->getDoctrine()->getManager();
+            $em = $doctrine->getManager();
             $em->persist($block);
             $em->flush();
 
@@ -150,10 +151,10 @@ class BlockController extends AbstractController
     /**
      * @Route("/block/{id}", name="block_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Block $block): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Block $block): Response
     {
         if ($this->isCsrfTokenValid('delete'.$block->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($block);
             $entityManager->flush();
         }

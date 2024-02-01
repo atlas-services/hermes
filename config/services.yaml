@@ -34,11 +34,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\EventListener\UserListener:
-        autowire: true
-        tags:
-        - { name: doctrine.event_listener, event: prePersist }
-        - { name: doctrine.event_listener, event: preUpdate }
+    # App\EventListener\UserListener:
+    #     autowire: true
+    #     tags:
+    #     - { name: doctrine.event_listener, event: prePersist }
+    #     - { name: doctrine.event_listener, event: preUpdate }
 
     App\Upload\Namer\ConventionedDirectoryNamer:
         public: true

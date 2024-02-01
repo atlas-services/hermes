@@ -1,12 +1,12 @@
 <?php
 namespace App\Command;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class HermesPrepareInstall extends Command
 {
@@ -16,7 +16,7 @@ class HermesPrepareInstall extends Command
     protected $container;
     protected $filesystem;
 
-    public function __construct(Filesystem $filesystem, ContainerInterface $container)
+    public function __construct(Filesystem $filesystem, ParameterBagInterface $container)
     {
         $this->filesystem = $filesystem;
         $this->container = $container;
@@ -65,18 +65,18 @@ class HermesPrepareInstall extends Command
             $this->filesystem->mkdir($build);
             //add database directory
             $pos = strlen( 'sqlite:///%kernel.project_dir%/' );
-            $data = substr($this->container->getParameter('hermes_database_dir'), $pos);
+            $data = substr($this->container->get('hermes_database_dir'), $pos);
             $this->hermes_database_dir = explode('/',$data );
             // add uploaded file directories
             $creat1 = $this->addDir($this->hermes_database_dir, $base);
-            $data_config = substr($this->container->getParameter('hermes_database_config_dir'), $pos);
+            $data_config = substr($this->container->get('hermes_database_config_dir'), $pos);
             $this->hermes_database_config_dir = explode('/',$data_config );
             $creat1_config = $this->addDir($this->hermes_database_config_dir, $base);
-            $this->hermes_path_content_image = explode('/',$this->container->getParameter('hermes_path_content_image') );
+            $this->hermes_path_content_image = explode('/',$this->container->get('hermes_path_content_image') );
             $creat2 = $this->addDir($this->hermes_path_content_image,$public);
-            $this->hermes_path_content_image_post = explode('/',$this->container->getParameter('hermes_path_content_image_post'));
+            $this->hermes_path_content_image_post = explode('/',$this->container->get('hermes_path_content_image_post'));
             $creat3 = $this->addDir($this->hermes_path_content_image_post,$public);
-            $this->hermes_path_cache_image = explode('/',$this->container->getParameter('hermes_path_cache_image'));
+            $this->hermes_path_cache_image = explode('/',$this->container->get('hermes_path_cache_image'));
             $creat4 = $this->addDir($this->hermes_path_cache_image,$public);
         } catch (IOExceptionInterface $exception) {
             echo "An error occurred while creating your directories at ".$exception->getPath();

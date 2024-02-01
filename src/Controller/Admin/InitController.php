@@ -10,6 +10,7 @@ use App\Entity\Hermes\Sheet;
 use App\Entity\Hermes\Template;
 use App\Entity\Hermes\User;
 use App\Form\Admin\ConfigType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -38,20 +39,20 @@ class InitController extends AbstractAdminController
     /**
      * @Route("/config/", name="add_config", methods={"GET"})
      */
-    public function newConfig(): Response
+    public function newConfig(ManagerRegistry $doctrine): Response
     {
         $configurations = $this->getParameter('init');
         try {
-            $dbuser = $this->getDoctrine()
+            $dbuser = $doctrine
                 ->getRepository(User::class)
                 ->findAll();
-            $dbconfig = $this->getDoctrine()
+            $dbconfig = $doctrine
                 ->getRepository(Config::class, 'config')
                 ->findAll();
-            $dbtemplate = $this->getDoctrine()
+            $dbtemplate = $doctrine
                 ->getRepository(Template::class)
                 ->findAll();
-            $this->addConfig($configurations, $dbuser, $dbconfig,$dbtemplate);
+            $this->addConfig($doctrine, $configurations, $dbuser, $dbconfig,$dbtemplate);
         }catch (\Exception $e){
             echo $e->getMessage();
             echo $e->getTraceAsString();
@@ -64,17 +65,17 @@ class InitController extends AbstractAdminController
     /**
      * @Route("/page/{libre}", name="add_page", methods={"GET"})
      */
-    public function newPage($libre): Response
+    public function newPage(ManagerRegistry $doctrine, $libre): Response
     {
 
-        $this->addPage($libre);
+        $this->addPage($doctrine, $libre);
         return $this->redirectToRoute('admin_index');
 
     }
 
-    private function addConfig($configurations, $dbuser,$dbconfig,$dbtemplate){
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManagerConfig = $this->getDoctrine()->getManager('config');
+    private function addConfig($doctrine, $configurations, $dbuser,$dbconfig,$dbtemplate){
+        $entityManager = $doctrine->getManager();
+        $entityManagerConfig = $doctrine->getManager('config');
         $dbuseremail = array_column($dbuser, 'email');
         $dbconfigcode = array_column($dbconfig, 'code');
         $dbtemplatecode = array_column($dbtemplate, 'code');
@@ -128,17 +129,17 @@ class InitController extends AbstractAdminController
         $entityManagerConfig->flush();
     }
 
-    private function addPage($libre){
-        $emConfig = $this->get('doctrine')->getManager('config');
+    private function addPage($doctrine, $libre){
+        $emConfig = $doctrine>getManager('config');
         $config = $emConfig->getRepository(Config::class, 'config')->getActiveConfig();
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $doctrine->getManager();
         $template_libre = str_replace('é', 'e',str_replace(' ', '-', str_replace('\'', '-', $libre)));
         $slug = strtolower($template_libre);
 //        $content = $this->render('admin/hermes/template-libre/'.$template_libre.'.html.twig', $config)->getContent();
         $content = $this->render('admin/hermes/template-libre/'.$template_libre.'/index.html.twig', $config)->getContent();
         try {
-            $sheet = $this->getDoctrine()
+            $sheet = $doctrine
                 ->getRepository(Sheet::class)
                 ->findBy(['code'=> 'new_sheet'.$libre]);
             if(!$sheet){
@@ -157,7 +158,7 @@ class InitController extends AbstractAdminController
                 $menu->setSlug($slug);
                 $menu->setSheet($sheet);
                 // add section
-                $template = $this->getDoctrine()
+                $template = $doctrine
                     ->getRepository(Template::class)
                     ->findOneBy(['code'=> 'libre']);
                 $section = new Section();

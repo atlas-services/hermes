@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Hermes\Temoignage;
 use App\Form\Admin\TemoignageType;
 use App\Repository\TemoignageRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,15 +20,15 @@ class TemoignageController extends AbstractAdminController
     /**
      * @Route("/temoignage/", name="temoignage_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        $temoignages = $this->getDoctrine()
+        $temoignages = $doctrine
             ->getRepository(Temoignage::class)
             ->findAll();
         $array = [
             'temoignages' => $temoignages,
         ];
-        $array = $this->mergeActiveConfig($array);
+        $array = $this->mergeActiveConfig($doctrine, $array);
 
         return $this->render('admin/temoignage/index.html.twig', $array);
     }
@@ -35,14 +36,14 @@ class TemoignageController extends AbstractAdminController
     /**
      * @Route("/edit/{id}", name="temoignage_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Temoignage $temoignage): Response
+    public function edit(Request $request, ManagerRegistry $doctrine, Temoignage $temoignage): Response
     {
 
         $form = $this->createForm(TemoignageType::class, $temoignage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $doctrine->getManager()->flush();
 
             return $this->redirectToRoute('temoignage_index');
         }
@@ -67,10 +68,10 @@ class TemoignageController extends AbstractAdminController
     /**
      * @Route("/temoignage/{id}", name="temoignage_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Temoignage $temoignage): Response
+    public function delete(Request $request, ManagerRegistry $doctrine, Temoignage $temoignage): Response
     {
         if ($this->isCsrfTokenValid('delete'.$temoignage->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->remove($temoignage);
             $entityManager->flush();
         }
