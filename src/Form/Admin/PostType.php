@@ -4,6 +4,7 @@ namespace App\Form\Admin;
 
 use App\Entity\Hermes\Post;
 use App\Form\Traits\ImageFileTrait;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -57,7 +58,7 @@ class PostType extends AbstractNameBaseType
         }
         if ($options['content']) {
         $builder
-            ->add('content', 'FOS\CKEditorBundle\Form\Type\CKEditorType', [
+            ->add('content', CKEditorType::class, [
                 'config_name' => 'my_config',
                 'label_format' => 'global.content',
                 'required'=> true,

@@ -4,10 +4,9 @@ namespace App\EventListener;
 
 use App\Repository\MenuRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
-// use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
+//use Symfony\Component\Security\Core\Security;
 
 class MyRequestListener {
     private $menuRepository;
