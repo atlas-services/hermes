@@ -50,6 +50,7 @@
         "symfony/web-link": "6.4.*",
         "symfony/webpack-encore-bundle": "1.*",
         "symfony/yaml": "6.4.*",
+        "tinymce/tinymce": "dev-master",
         "twig/cssinliner-extra": "3.*",
         "twig/extra-bundle": "3.*",
         "twig/inky-extra": "3.*",

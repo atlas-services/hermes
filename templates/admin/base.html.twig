@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 {% set bgcolor= "#ffffff" %}
@@ -22,6 +23,12 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('hermes_admin') }}
             <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
+            <script src="{{ asset('tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+            <script>
+                tinymce.init({
+                    selector: '#post_content'
+                });
+            </script>
         {% endblock %}
     </head>
 {% endblock head %}
