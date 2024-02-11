@@ -58,7 +58,7 @@ class PostListeType extends AbstractType
             ->add('content', AppEditorType::class, [
                 'label_format' => 'global.content',
                 'required'=> true,
-                'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']
+                'attr'=> ['id'=> 'post_content', 'hidden' => false, 'class' => 'mb-3 w-100']
             ]);
         }
         $builder->add('save', SubmitType::class, [
