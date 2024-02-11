@@ -156,18 +156,6 @@
             ".php-cs-fixer.dist.php"
         ]
     },
-    "friendsofsymfony/ckeditor-bundle": {
-        "version": "2.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.0",
-            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
-        },
-        "files": [
-            "config/packages/fos_ckeditor.yaml"
-        ]
-    },
     "guzzlehttp/guzzle": {
         "version": "6.5.3"
     },
@@ -176,19 +164,6 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.x-dev"
-    },
-    "helios-ag/fm-elfinder-bundle": {
-        "version": "10.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "10.0",
-            "ref": "dcc740749981bf9f4df447dae46483d41bad7f73"
-        },
-        "files": [
-            "config/packages/fm_elfinder.yaml",
-            "config/routes/fm_elfinder.yaml"
-        ]
     },
     "imagine/imagine": {
         "version": "1.2.3"
@@ -303,9 +278,6 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
-    },
-    "studio-42/elfinder": {
-        "version": "2.1.53"
     },
     "symfony/asset": {
         "version": "v4.3.3"

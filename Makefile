@@ -95,8 +95,6 @@ init-test:
 	php bin/console d:s:u --force
 	php bin/console d:s:u --force --em=config
 	php bin/console hermes:db-update
-	php bin/console ckeditor:install --clear=skip
-	php bin/console elfinder:install
 	php bin/console assets:install --symlink
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
@@ -108,8 +106,6 @@ init-prod:
 	php bin/console d:s:u --force
 	php bin/console d:s:u --force --em=config
 	php bin/console hermes:db-update
-	php bin/console ckeditor:install --clear=skip
-	php bin/console elfinder:install
 	php bin/console assets:install --symlink
 	rm -r var/cache/* var/log/* 2> /dev/null || true
 
@@ -176,13 +172,6 @@ fixtures-load-users:
 
 fixtures-load-sheets:
 	php bin/console doctrine:fixtures:load --group=sheets
-
-ckeditor-install:
-	php bin/console ckeditor:install
-	php bin/console assets:install --symlink
-
-elfinder-install:
-	php bin/console elfinder:install
 
 section-template:
 	sed 's/id=\"section\"/id=\"$(SECTION2)\"/g' templates/front/base/template/$(SECTION1).html.twig > templates/front/base/template/$(SECTION2).html.twig

@@ -3,13 +3,9 @@
 namespace App\Form\Admin;
 
 use App\Entity\Hermes\BlockPost;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType ;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\GroupSequence;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class BlockPostType extends AbstractNameBaseType
@@ -51,8 +47,7 @@ class BlockPostType extends AbstractNameBaseType
         }
         if ($options['content']) {
         $builder
-            ->add('content', 'FOS\CKEditorBundle\Form\Type\CKEditorType', [
-                'config_name' => 'my_config',
+            ->add('content', AppEditorType::class, [
                 'label_format' => 'global.content',
                 'required'=> true,
                 'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']

@@ -4,14 +4,12 @@ namespace App\Form\Admin;
 
 use App\Entity\Hermes\Post;
 use App\Form\Traits\ImageFileTrait;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType ;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\GroupSequence;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostType extends AbstractNameBaseType
@@ -58,8 +56,7 @@ class PostType extends AbstractNameBaseType
         }
         if ($options['content']) {
         $builder
-            ->add('content', CKEditorType::class, [
-                'config_name' => 'my_config',
+            ->add('content', AppEditorType::class, [
                 'label_format' => 'global.content',
                 'required'=> true,
                 'attr'=> ['id'=> 'app_cke_post','class' => 'mb-3 w-100']
