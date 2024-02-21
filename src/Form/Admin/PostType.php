@@ -4,7 +4,8 @@ namespace App\Form\Admin;
 
 use App\Entity\Hermes\Post;
 use App\Form\Traits\ImageFileTrait;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType ;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType2 ;
+use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,7 +37,7 @@ class PostType extends AbstractNameBaseType
                     'required' => false,
                     'attr' => [
                         'min' => 0,
-                        'max' => 999,                       
+                        'max' => 999,
                         'class' => 'custom-select custom-select-lg mb-3 ',
                         'label' => 'global.position',
                     ],

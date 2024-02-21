@@ -6,6 +6,8 @@ hermes-install:
 	yarn install --ignore-engines
 	export NODE_OPTIONS=--openssl-legacy-provider  &&  yarn encore dev 
 	composer install
+	php bin/console ckeditor:install --tag=4.22.1
+	php bin/console elfinder:install
 	php bin/console  assets:install
 	php bin/console d:s:u --force
 	php bin/console d:s:u --force --em=config
@@ -172,6 +174,12 @@ fixtures-load-users:
 
 fixtures-load-sheets:
 	php bin/console doctrine:fixtures:load --group=sheets
+
+section-template:
+	sed 's/id=\"section\"/id=\"$(SECTION2)\"/g' templates/front/base/template/$(SECTION1).html.twig > templates/front/base/template/$(SECTION2).html.twig
+
+elfinder-install:
+	php bin/console elfinder:install
 
 section-template:
 	sed 's/id=\"section\"/id=\"$(SECTION2)\"/g' templates/front/base/template/$(SECTION1).html.twig > templates/front/base/template/$(SECTION2).html.twig
