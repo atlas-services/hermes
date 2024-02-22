@@ -112,12 +112,12 @@
     "scripts": {
         "auto-scripts": {
             "hermes:prepare-directories": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "d:s:u --em=default --force --complete ": "symfony-cmd",
             "d:s:u --em=config --force --complete ": "symfony-cmd",
             "hermes:db-update": "symfony-cmd",
             "ckeditor:install --tag=4.22.1": "symfony-cmd",
-            "elfinder:install": "symfony-cmd"
+            "elfinder:install": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
