@@ -10,7 +10,7 @@ php bin/console d:s:c --env=test --em=config
 
 
 php bin/console hermes:prepare-directories
-php bin/console ckeditor:install --clear=skip
+php bin/console ckeditor:install --tag=4.22.1 --clear=skip
 php bin/console elfinder:install
 php bin/console assets:install --symlink
 
