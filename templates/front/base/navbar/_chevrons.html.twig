@@ -1,22 +1,3 @@
-<div id="section_top" ></div>
-<nav style="background-color: transparent;" id="mainNav"  class="navbar fixed-top">
-        {% if logo.filename is defined %}
-            {% if logo.filename is not null %}
-                {% if affiche_logo_top != true %}
-                    <a  class="d-none d-sm-block col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
-                        <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
-                    </a>
-                {% endif %}
-            {% endif %}
-        {% endif %}
-
-    <button  type="button" class="navbar-toggle navbar-toggler collapsed fixed-right" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
-        <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
-        <span class="fa-2x  close-icon py-1" style="color: {{ nav_header_color ?? 'transparent' }}">x</span>
-    </button>
-    {% include 'front/base/navbar/left_nav_ul.html.twig' %}
-</nav>
-
 {% set slug_accueil =  _context.menus|keys|first|lower %}
 {% if ( slug_accueil == app.request.attributes.get('sheet')|lower and accueil.filename is not null and accueil.value >= 80 ) %}
     <div id="chevron_accueil_down_div" class="top right position-fixed" style="top: 50% ;right: 50% ;background-color: {{ chevron_accueil_bgcolor }}; opacity: {{ chevron_accueil_opacity }}" >
