@@ -128,7 +128,11 @@ class ConfigController extends AbstractAdminController
         if ($form->isSubmitted() && $form->isValid()) {
             $doctrine->getManager('config')->flush();
             try {
-                $type = $request->attributes->get('config')->getType();
+                if(is_null($request->attributes->get('config'))){
+                    $type = $config->getType();
+                }else{
+                    $type = $request->attributes->get('config')->getType();
+                }
                 return $this->redirectToRoute('config_index', ['type' => $type ]);
             } catch (\Exception $e) {                
                 return $this->redirectToRoute('admin_index');

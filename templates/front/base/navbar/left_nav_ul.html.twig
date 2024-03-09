@@ -1,28 +1,45 @@
-<ul class="nav navbar-nav w-100 "  >
-    <hr class="d-block  d-sm-none w-100 bg-white">
-    {% for sheet_name, listmenu in nav %}
-        {% set sheet_slug = sheetsSlug[sheet_name] %}
-            <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item {{ listmenu.active }} {{ listmenu.dropdown }} "  style="background-color: {{ listmenu.bg_color_link }};  "  >  
-            <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
-                href={{ listmenu.href }}>{{ sheet_name }}
-            </a>
-            {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
-                <ul class="dropdown-menu mt-1 mx-lg-{{ nav_espacement }}"  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
-                    {% for menu_name, menu in listmenu %}
-                        {% if menu.slug is defined  %}
-                            <li class="nav-item mt-0 mb-1 ms-1 {{ nav_link_border_bottom }}" >
-                                {% if sheet_slug == menu.slug %}
-                                    <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 1 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu_name }}</a>
-                                {% else %}
-                                <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 pb-1 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
-                                {% endif %}
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+<div style="background-color: {{nav_bgcolor}};" class="top col-lg-{{ nav_container_width }} offcanvas offcanvas-start text-bg-dark mt-0 pt-0 shadow-sm " tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas-header">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        {% if logo.filename is defined %}
+            {% if logo.filename is not null %}
+                {% if affiche_logo_top != true %}
+                    <a  class="d-sm-none d-block col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
+                        <img style="margin-left:{{ logo.value }};max-height:100px" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                    </a>
+
+                {% endif %}
             {% endif %}
-        </li>
-        <hr class="d-block  d-sm-none w-100 bg-white">
-    {% endfor %}
-    {% include '/front/base/navbar/switcher.html.twig'  %}
-</ul>
+        {% endif %}
+        <ul class="navbar-nav justify-content-start  ps-3 "  >
+            <hr class="d-block  d-sm-none w-100 bg-white">
+            {% for sheet_name, listmenu in nav %}
+                {% set sheet_slug = sheetsSlug[sheet_name] %}
+                    <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item {{ listmenu.active }} {{ listmenu.dropdown }} rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }} "  style="background-color: {{ listmenu.bg_color_link }};  "  >  
+                    <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
+                        href={{ listmenu.href }}>{{ sheet_name }}
+                    </a><br/>
+                    {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
+                        <ul class="dropdown-menu mt-1 mx-lg-{{ nav_espacement }}"  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
+                            {% for menu_name, menu in listmenu %}
+                                {% if menu.slug is defined  %}
+                                    <li class="nav-item mt-0 mb-1 ms-1 {{ nav_link_border_bottom }}" >
+                                        {% if sheet_slug == menu.slug %}
+                                            <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 1 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                        {% else %}
+                                        <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 pb-1 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+                <hr class="d-block  d-sm-none w-100 bg-white">
+            {% endfor %}
+            {% include '/front/base/navbar/switcher.html.twig'  %}    
+        </ul>
+    </div>
+</div>

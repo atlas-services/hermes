@@ -1,46 +1,18 @@
-<div class="sidebar" style=" background-color:{{ nav_bgcolor }}; font-family: {{ nav_font_family }}">
-    <nav style="background-color: transparent" id="logo" class="center navbar navbar-expand-lg navbar-dark col-lg-{{ nav_container_width }} col-12 mx-auto px-0" data-nav-bgcolor="{{ nav_bgcolor }}" data-nav-bgcolor-shrink="{{ nav_bgcolor_shrink }}">
-        <div class="container-fluid justify-content-center" style="background-color: transparent">
-            {% set affiche_logo = false %}
-                  {% if logo.filename is defined %}
-                    {% if logo.filename is not null %}
-                        <a class="mb-4 navbar-brand js-scroll-trigger " href="{{ path('sheet', {'sheet': home.sheet, 'slug': home.slug}) }}">
-                            <img src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}" class="app_logo">
-                        </a>
-                    {% else %}
-                        {{ logo.value ?? "" }}
-                    {% endif %}
-                {% else %}
-                {{ logo.value ?? "" }}
+<nav style="background-color: transparent;"  class="navbar fixed-top">
+        {% if logo.filename is defined %}
+            {% if logo.filename is not null %}
+                {% if affiche_logo_top != true %}
+                    <a  class="d-none d-sm-block col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
+                        <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                    </a>
                 {% endif %}
-        </div>
-    {#    <div><i class="fa fa-close" onclick="$('.sidebar').css('width', '200px');"></i></div>#}
-    </nav>
+            {% endif %}
+        {% endif %}
 
-    {% include 'front/base/navbar/left_nav.html.twig' %}
+    <button  type="button" class="navbar-toggle navbar-toggler collapsed pull-right" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
+        <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
+        <span class="fa-2x  close-icon py-1" style="color: {{ nav_header_color ?? 'transparent' }}">x</span>
+    </button>
+    {% include 'front/base/navbar/left_nav_ul.html.twig' %}
 
-    {% if(  app.request.attributes.get('_route')|lower in [constant('App\\Entity\\Interfaces\\ContactInterface::CONTACT'), constant('App\\Entity\\Interfaces\\ContactInterface::LIVREDOR_ROUTE'), 'sheet', 'slug']) %}
-    <div class="row col-lg-12 mx-auto px-0 col-12 float-left " >
-        <div class="col-lg-2 py-1">
-            <i id="search_icon" class='fa fa-search fa-2x' style="color:{{ nav_link_color }}"></i>
-        </div>
-        <div class="col-lg-10">
-            <form action="{{ path('search_content') }}">
-                <div class="input-group ">
-                    <input id="search_bar"
-                           type="text"
-                           name="q"
-                           class="border-0 form-control "
-                           placeholder="{{ 'global.search'|trans() }}"
-                           style="visibility: hidden"
-                    >
-                </div>
-            </form>
-        </div>
-    </div>
-    {% endif %}
-
-</div>
-
-
-
+</nav>
