@@ -124,6 +124,13 @@ class ConfigType extends AbstractBaseType
 
     ];
 
+    const NAV_OFFCANVAS_POSITION =[
+        'start' => 'start',
+        'end' => 'end',
+        'top' => 'top',
+        'bottom' => 'bottom',
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -254,7 +261,7 @@ class ConfigType extends AbstractBaseType
                         'middle' => '50%' ,
                         'left' =>'95%',
                     ];
-                    break;                    
+                    break;
                 // affiche_img_hermes
                 case 'affiche_img_hermes':
                 // affiche_logo_top
@@ -298,7 +305,18 @@ class ConfigType extends AbstractBaseType
                 case 'livredor_bgcolor_btn':
                     $choice = true;
                     $options = self::BTN_OUTLINE;
-                    break;              
+                    break;
+                case 'nav_offcanvas_position':
+                    $choice = true;
+                    $options = self::NAV_OFFCANVAS_POSITION;
+                    break;
+                case 'nav_offcanvas_width':
+                    $choice = true;
+                    $choice = true;
+                    foreach (range(0, 100, 1) as $number) {
+                        $options[ $number] = $number;
+                    }
+                    break;
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [

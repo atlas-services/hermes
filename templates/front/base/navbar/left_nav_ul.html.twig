@@ -1,4 +1,4 @@
-<div style="background-color: {{nav_bgcolor}};" class="top col-lg-{{ nav_container_width }} offcanvas offcanvas-{{ nav_position ?? 'start' }} mt-0 pt-0 shadow-sm "  data-bs-scroll="true" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+<div style="background-color: {{nav_bgcolor}}; width:{{nav_offcanvas_width ?? '15'}}%;" class="top show offcanvas offcanvas-{{ nav_offcanvas_position ?? 'start' }} mt-0 pt-0 shadow-sm "  data-bs-scroll="true" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
     <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -17,7 +17,7 @@
             <hr class="d-block  d-sm-none w-100 bg-white">
             {% for sheet_name, listmenu in nav %}
                 {% set sheet_slug = sheetsSlug[sheet_name] %}
-                    <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item {{ listmenu.active }} {{ listmenu.dropdown }} rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }} "  style="background-color: {{ listmenu.bg_color_link }};  "  >  
+                    <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item {{ listmenu.active }} {{ listmenu.dropdown }} rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} my-lg-{{ nav_espacement }} py-lg-{{ nav_espacement }} "  style="background-color: {{ listmenu.bg_color_link }};  "  >  
                     <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
                         href={{ listmenu.href }}>{{ sheet_name }}
                     </a><br/>
@@ -27,9 +27,9 @@
                                 {% if menu.slug is defined  %}
                                     <li class="nav-item mt-0 mb-1 ms-1 {{ nav_link_border_bottom }}" >
                                         {% if sheet_slug == menu.slug %}
-                                            <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 1 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                            <a style="color: {{ nav_link_color }}"  class="page-scroll px-1 pb-1 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu_name }}</a>
                                         {% else %}
-                                        <a style="color: {{ nav_link_color }}"  class="page-scroll px-2 pb-1 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                        <a style="color: {{ nav_link_color }}"  class="page-scroll px-1 pb-1 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
                                         {% endif %}
                                     </li>
                                 {% endif %}
