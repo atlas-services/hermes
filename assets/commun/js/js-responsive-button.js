@@ -9,6 +9,11 @@ document.querySelector('.navbar-toggler').addEventListener('click', function(eve
     openCloseNavbarButton();
 
 });
+document.querySelector('#btnOffcanvasDarkNavbarSmall').addEventListener('click', function(event) {
+
+    document.querySelector('#btnOffcanvasDarkNavbarSmall').remove("show");
+
+});
 
 var i;
 for (i = 0; i < items.length; i++) {

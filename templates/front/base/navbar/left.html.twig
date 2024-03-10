@@ -11,11 +11,16 @@
             {% endif %}
         {% endif %}
     {% endif %}
-    <div class="float-end ">
-        <button  type="button" class="navbar-toggle navbar-toggler collapsed float-end" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
+    <div class="d_block d-sm-none float-end ">
+        <button id="btnOffcanvasDarkNavbarSmall" type="button" class="navbar-toggle navbar-toggler collapsed float-end" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbarSmall">
             <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
         </button>
     </div>
-    {% include 'front/base/navbar/left_nav_ul.html.twig' %}
+        <div class="d-none d-sm-block float-end ">
+        <button  id="btnOffcanvasDarkNavbar" type="button" class="navbar-toggle navbar-toggler collapsed float-end" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
+            <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
+        </button>
+    </div>
+    {% include 'front/base/navbar/left_nav.html.twig' %}
 </nav>
 {% include 'front/base/navbar/_chevrons.html.twig' %}
