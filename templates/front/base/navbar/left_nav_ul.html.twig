@@ -1,7 +1,8 @@
-<div class="offcanvas-header">
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-</div>
 <div class="offcanvas-body">
+  <button type="button" class="d-block d-sm-none btn-close btn-close-white position-absolute end-0 pt-2 me-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="offcanvas-header">
+    <button type="button" class="d-none d-sm-block btn-close btn-close-white position-absolute end-0 mt-sm-5 mt-0 me-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
     {% if logo.filename is defined %}
         {% if logo.filename is not null %}
             {% if affiche_logo_top != true %}
