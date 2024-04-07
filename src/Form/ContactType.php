@@ -146,7 +146,7 @@ class ContactType extends AbstractType
                 $user->setActiveNewsletter(true);
                 $user->setRoles(['ROLE_NEWSLETTER']);
             }
-            $user->setPassword(['NEWSLETTER']);
+            $user->setPassword('NEWSLETTER');
             $this->doctrine->getManager()->persist($user);
             $this->doctrine->getManager()->flush();              
         }
