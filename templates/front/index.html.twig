@@ -1,19 +1,6 @@
 {% extends 'front/base/hermes/base.html.twig' %}
 
 {% block content %}
-{#    {% if 'true' == app_multi_users  %}#}
-{#        {% if menu.user.sections is defined  %}#}
-{#            {% set sections =  menu.user.sections %}#}
-{#            {% set user =  menu.user %}#}
-{#        {% endif %}#}
-{#    {% endif %}#}
-
-{#    {% if 'false' == app_multi_users  %}#}
-
-{#    {% dump(locale) %}#}
-{#    {% dump(menu.sheet.locale) %}#}
-
-
     {% if menu is null  %}
         {% set testlocale = 'OK'  %}
     {% else  %}
@@ -30,16 +17,11 @@
             {% set sections =  menu.sections %}
             {% set user =  null %}
         {% endif %}
-{#    {% endif %}#}
 
     {% if sections is defined %}
         {% if sections|length > 0 %}
             <div id="top" class="hide" ></div>
             {% for section in sections|sort((a, b) => a.position <=> b.position)  %}
-{#                {% if( 'libre' not in section.template.code) %}#}
-{#                    {{ include('front/base/hermes/template/libre.html.twig') }}#}
-{#                {% endif %}#}
-                {# {% include 'front/base/hermes/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %} #}
                 {% include 'front/base/hermes/template/'~ section.template.code ~ '.html.twig' with {'menu': menu } %}
             {% endfor %}
         {% endif %}
@@ -61,7 +43,3 @@
 
     {% endif %}
 {% endblock content %}
-
-
-
-

@@ -6,6 +6,15 @@
         {% endif %}
     {% endif %}
 {% endif %}
+{% if bgcolor is not defined  %}
+    {% set bgcolor = 'transparent' %}
+{% endif %}
+{% if font_family is not defined  %}
+    {% set font_family = 'Arial' %}
+{% endif %}
+{% if urls is not defined  %}
+    {% set urls = '' %}
+{% endif %}
 
 {% if menus['contact'] is defined %}
     {% if menus['contact'] is not null %}
@@ -52,10 +61,12 @@
                     {% include 'front/base/navbar/' ~ nav_bar ~'.html.twig' %}
                 {% endif %}
             {% endblock nav %}
+            {% block nopreview %}
             {% set nb = 0 %}
             {% if  (vich_uploader_asset(logo, 'imageFile')) %}
                 {% set nb = 2 %}
             {% endif %}
+            {% endblock nopreview %}
             <div class="content mx-auto pt-lg-0 mt-lg-0 pt-0">
                 {% block content %}
                 {% endblock content %}

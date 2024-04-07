@@ -5,7 +5,8 @@
     <meta name="author" content="{{ author ?? '' }}">
     <meta name="robots" content="{{ robots ?? 'index, follow' }}">
 
-    {% set config_favicon = favicon ?? logo  %}
+    {% set config_favicon = favicon ?? logo ?? '' %}
+    {% if(config_favicon != '') %}
     {% if(config_favicon.filename is null) %}
         {% set favicon = asset('favicon.ico')  %}
     {% else %}
@@ -13,14 +14,21 @@
     {% endif %}
 
     <link rel="icon" href="{{ favicon}}" />
+    {% endif %}
+
     <title>{{ title ?? ''}}</title>
 
     {% block stylesheets %}
+        {% if nav_bar is not defined  %}
+            {% set nav_bar = 'base' %}
+        {% endif %}
         {% if 'one page' == nav_bar  %}
             {% set nav_bar = 'base' %}
         {% endif %}
         {{ encore_entry_link_tags('hermes_nav_'~ nav_bar) }}
-        {{ encore_entry_link_tags('hermes_' ~ template) }}
+        {% if template is defined  %}
+            {{ encore_entry_link_tags('hermes_' ~ template) }}
+        {% endif %}
         <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
     {% endblock %}
 

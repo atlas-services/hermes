@@ -1,0 +1,19 @@
+{% set section = form.parent.vars.data.section %}
+{% if color == 'white' %}
+{% set bgcolor = 'black' %}
+{% set btncolor = 'white' %}
+{% else  %}
+{% set bgcolor = 'white' %}
+{% set btncolor = 'red' %}
+{% endif  %}
+<div class="modal fade col-10 px-lg-0  my-0" id="previewModal{{color}}" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true" style="height: 100% " >
+
+    <div class="d-none d-sm-block modal-dialog modal-fullscreen mx-auto mw-100 my-0"  style="height: 100% ">
+        <div class=" modal-content col-10  mx-auto px-0 " style="background-color: {{ bgcolor }}; color: {{ color }}">
+            <div class="modal-header border-0 " >
+                <button type="button" class="btn-close" style="background-color: {{ btncolor }};"  data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {% include 'front/base/hermes/template/libre.html.twig' with {'menu': section.menu } %}
+        </div>
+    </div>
+</div>

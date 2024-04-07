@@ -28,6 +28,16 @@
                 <h6><i class="fa fa-info-circle"></i> {{ 'info.guide'|trans() }}
                 </h6>
             </a>
+            <!-- Preview white -->
+            <a type="button"class="btn btn-outline-secondary hms-bg-color1 text-white portfolio-link btn-outline-secondary" data-bs-toggle="modal" href="#previewModalwhite">
+                <h6><i class="fa fa-link"></i> Preview dark</h6> 
+                {% include '/admin/post/preview.html.twig' with {'color': 'white'} %}
+            </a>
+            <!-- Preview black  -->
+            <a type="button"class="btn btn-outline-secondary hms-bg-color1 text-white portfolio-link btn-outline-secondary" data-bs-toggle="modal" href="#previewModalblack">
+                <h6><i class="fa fa-link"></i> Preview white</h6> 
+                {% include '/admin/post/preview.html.twig' with {'color': 'black'} %}
+            </a>
          {% if 'test' == app.environment   %}
 {#            {% include '/admin/exemple/libre.html.twig' %}#}
         {% endif %}
