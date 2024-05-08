@@ -310,7 +310,7 @@ class ConfigType extends AbstractBaseType
                     $choice = true;
                     $options = self::NAV_OFFCANVAS_POSITION;
                     break;
-                case 'nav_offcanvas_width':
+                case 'nav_offcanvas_pct':
                     $choice = true;
                     $choice = true;
                     foreach (range(0, 100, 1) as $number) {

@@ -465,7 +465,7 @@ parameters:
         nav_sub_menu_text_size:
           summary: "Taille texte du sous menu"
           value: h6 
-        nav_offcanvas_width:
+        nav_offcanvas_pct:
           summary: "Largeur menu offcanvas (en %)"
           value: 15
         nav_offcanvas_position:

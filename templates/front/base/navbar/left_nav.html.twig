@@ -2,6 +2,6 @@
         {% include 'front/base/navbar/left_nav_ul.html.twig' %}
 </div>
 
-<div style="background-color: {{nav_bgcolor}}; width:{{nav_offcanvas_width ?? '15'}}%;" class="d-none d-sm-block show top offcanvas offcanvas-{{ nav_offcanvas_position ?? 'start' }} mt-0 pt-0 shadow-sm "  data-bs-scroll="true" data-bs-backdrop="false"  tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+<div style="background-color: {{nav_bgcolor}}; width:{{nav_offcanvas_pct ?? '15'}}%;" class="d-none d-sm-block show top offcanvas offcanvas-{{ nav_offcanvas_position ?? 'start' }} mt-0 pt-0 shadow-sm "  data-bs-scroll="true" data-bs-backdrop="false"  tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         {% include 'front/base/navbar/left_nav_ul.html.twig' %}
 </div>

@@ -1,22 +1,22 @@
 <div id="section_top" ></div>
 <nav style="background-color: transparent;" id="mainNav"  class="navbar fixed-top col-12 ">
+    <div class="float-start mt-3">
     {% if logo.filename is defined %}
         {% if logo.filename is not null %}
             {% if affiche_logo_top != true %}
-                <div class="float-start ">
-                    <a  class="d-none d-sm-block col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
-                        <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
-                    </a>
-                </div>
+                <a  class="d-none d-sm-block col-{{ nav_offset}} align-middle " href="{{ path('home') }}">
+                    <img style="margin-left:{{ logo.value }};" src="{{ asset(vich_uploader_asset(logo, 'imageFile'))}}"  alt="{{ logo.filename }}">
+                </a>
             {% endif %}
         {% endif %}
     {% endif %}
-    <div class="d_block d-sm-none float-end ">
+    </div>
+    <div class="d_block d-sm-none position-absolute {{nav_offcanvas_position }}-0 top-100 ">
         <button id="btnOffcanvasDarkNavbarSmall" type="button" class="navbar-toggle navbar-toggler collapsed float-end" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbarSmall">
             <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
         </button>
     </div>
-        <div class="d-none d-sm-block float-end ">
+    <div class="d-none d-sm-block position-absolute {{nav_offcanvas_position }}-0 top-100  ">
         <button  id="btnOffcanvasDarkNavbar" type="button" class="navbar-toggle navbar-toggler collapsed float-end" style="background-color: transparent" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
             <span class="navbar-toggler-icon sr-only">Toggle navigation</span><i class="hms-color1 fa fa-2x fa-bars" style="color: {{ nav_header_color ?? 'transparent' }}"></i>
         </button>
