@@ -3,28 +3,23 @@
 <footer class="footer pt-3 col-lg-{{ footer_container_width|col_lg() }} col-12 mx-auto px-0"
         style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
     <div class="container">
-        <div class="row">
-            {% if footer_about is defined %}
-            <div class="col-sm-12 col-md-12">
-                <p class="text-justify h5">{{ footer_about ?? '' }}</p>
+        {% if footer_about is defined %}
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <p class="text-justify h5">{{ footer_about ?? '' }}</p>
+                </div>
             </div>
-            {% endif %}
-
-{#            <div class="col-12 col-md-3">#}
-{#                <h6  style="color: {{ footer_color ?? '#ffffff' }}">Categories</h6>#}
-{#                <ul class="footer-links">#}
-{#                    <li  style="color: {{ footer_color ?? '#ffffff' }}"><a href="http://scanfcode.com/category/c-language/">C</a></li>#}
-{#                </ul>#}
-{#            </div>#}
-        </div>
-        <hr>
-    </div>
-    <div class="container">
+            <hr>
+        {% endif %}
         <div class="row">
-        <div class="col-sm-6 mx-auto text-center">
+            <div class="col-sm-12 mx-auto text-center">
                 <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#sitemapModal" 
                 onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}">
                     <p>Sitemap</p>
+                </button>
+                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#creditModal" 
+                onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}">
+                    <p>credits</p>
                 </button>
             </div>
             {% if hasNewsletter %}
@@ -34,10 +29,11 @@
                     </button>
                 </div>
             {% endif %}
-            <div class="col-md-12 col-sm-6 col-12">
+
+            {# <div class="col-md-12 col-sm-6 col-12">
                 <p  >{{ 'global.created_by'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">HERMES</a> |  <img src="/img/copyleft.png" class="my-auto" width="20px" >{{ 'global.copyleft'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">http://hermes-cms.org</a>
                 </p>
-            </div>
+            </div> #}
             <div class="col-sm-6 col-12">
                 <ul class="social-icons">
                     {% if instagram is not null %}

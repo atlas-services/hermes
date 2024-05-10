@@ -1,0 +1,21 @@
+<!-- Modal -->
+<div class="modal fade modal-lg fixed-top" id="creditModal" tabindex="-1" aria-labelledby="creditModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="creditModalLabel">credit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
+        <div class="col-12 mb-3 row ">
+            <div class="col-md-12 col-sm-6 col-12">
+                <p  >{{ 'global.created_by'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">HERMES</a> |  <img src="/img/copyleft.png" class="my-auto" width="20px" >{{ 'global.copyleft'|trans()|raw }} <a onmouseover="this.style.color='{{ footer_link_hover_color ?? '#ffffff' }}'" onmouseout="this.style.color='{{ footer_link_color ?? '#ffffff' }}'" style="color: {{ footer_link_color ?? '#ffffff' }}" href="http://hermes-cms.org" target="_blanks">http://hermes-cms.org</a>
+                </p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
