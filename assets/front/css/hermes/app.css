@@ -25,6 +25,8 @@ body {
     border-left: 1px solid #8f2160;
 }
 
+.text-justify{text-align:justify !important;}
+
 a {
     color: var(--color-hermes1);
 }
@@ -156,5 +158,3 @@ div.youtube-play-btn {
     top: 0;
     left: 0;
 }
-
-
