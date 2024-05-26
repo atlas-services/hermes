@@ -4,12 +4,11 @@ const jQuery = $;
 
     // When the user scrolls the page, execute stickyfy
     window.onscroll = function() {stickyfy()};
-
+    window.onload = function() {footerify()};
 // Get the header
     var header = document.getElementById("mainNav");
     if(header != null) {
         var sticky = header.offsetTop;
-        window.onload = function() {footerify()};
     }
 
     function footerify() {
