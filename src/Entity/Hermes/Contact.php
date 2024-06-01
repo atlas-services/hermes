@@ -84,6 +84,14 @@ class Contact implements ContactInterface
     /**
      * @return mixed
      */
+    public function getUserName()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFirstName()
     {
         return $this->firstname;
