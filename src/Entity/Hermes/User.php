@@ -169,6 +169,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return sprintf('%s , %s', $this->firstname, $this->lastname);
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
