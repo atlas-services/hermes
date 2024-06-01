@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -74,7 +75,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/reset_password/{token}", name="app_reset_password")
      */
-    public function resetPassword(Request $request,ManagerRegistry $doctrine, string $token)
+    public function resetPassword(Request $request,ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher,string $token)
     {
 
         if ($request->isMethod('POST')) {
@@ -90,7 +91,14 @@ class SecurityController extends AbstractController
 
             $user->setResetToken(null);
 
-            $user->setPassword($request->request->get('password'));
+            // hash the password (based on the security.yaml config for the $user class)
+            $plaintextPassword = $request->request->get('password');
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
+
+            $user->setPassword($hashedPassword);
             $entityManager->persist($user);
             $entityManager->flush();
 
