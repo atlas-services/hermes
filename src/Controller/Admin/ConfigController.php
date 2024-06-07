@@ -84,6 +84,7 @@ class ConfigController extends AbstractAdminController
             $type=null;
         }
 
+        $config = $configRepository->findBy(['code' => 'admin']);
         $config = $configRepository->getConfigByTypeOrderByCode($type);
         $array = [
             'configs' => $config,
@@ -95,7 +96,7 @@ class ConfigController extends AbstractAdminController
     /**
      * @Route("/{id}", name="config_show", methods={"GET"})
      */
-    public function show(Config $config): Response
+    public function show(ManagerRegistry $doctrine, Config $config): Response
     {
         $array = [
             'config' => $config,

@@ -262,6 +262,8 @@ class ConfigType extends AbstractBaseType
                         'left' =>'95%',
                     ];
                     break;
+                // affiche_admin_post
+                case 'affiche_admin_post':
                 // affiche_img_hermes
                 case 'affiche_img_hermes':
                 // affiche_logo_top
@@ -382,6 +384,7 @@ class ConfigType extends AbstractBaseType
             'value_choices' => null,
             'type_image' => false,
             'type_choices' => [
+                'admin' => 'admin',
                 'head' => 'head',
                 'générale' => 'site',
                 'contenu' => 'content',

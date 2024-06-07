@@ -43,8 +43,10 @@
                                 <p><a class="link-light text-decoration-none mx-3" href="{{ path('menu_index') }}"> {{ 'menu.affiche_list'|trans()|raw }}</a></p>
                                 <hr class="dropdown-divider">
                                 <p><a class="link-light text-decoration-none  mx-3" href="{{ path('section_index') }}"> {{ 'section.affiche_list'|trans()|raw }}</a></p>
-                                {# <hr class="dropdown-divider">
-                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p> #}
+                                {% if affiche_admin_post is defined and affiche_admin_post == true %}
+                                    <hr class="dropdown-divider">
+                                    <p><a class="link-light text-decoration-none mx-3" href="{{ path('post_index') }}"> {{ 'post.affiche_list'|trans()|raw }}</a></p> 
+                                {% endif %}
                             </ul>
                         </li>
                         <li class="nav-item mt-4 dropdown">
@@ -53,6 +55,8 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'undefined'}) }}"> {{ 'config.affiche_list_undefined'|trans()|raw }} </a></p>
+                                <hr class="dropdown-divider">
+                                <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'admin'}) }}"> {{ 'config.affiche_list_admin'|trans()|raw }} </a></p>
                                 <hr class="dropdown-divider">
                                 <p><a class="link-light text-decoration-none mx-3" href="{{ path('config_index', {'type': 'head'}) }}"> {{ 'config.affiche_list_head'|trans()|raw }} </a></p>
                                 <hr class="dropdown-divider">

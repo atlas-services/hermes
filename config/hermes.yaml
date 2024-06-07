@@ -216,6 +216,10 @@ parameters:
           code: hms1
           name: Page-1
     config:
+      admin:
+        affiche_admin_post:
+          summary: Affichage des posts dans le menu "Menu et pages"
+          value: false
       head:
         title:
           summary: Texte affiché sur l'onglet du navigateur web

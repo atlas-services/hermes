@@ -185,6 +185,7 @@ config:
   value: Valeur
   list: Configuration
   affiche_list_image: Configuration des images
+  affiche_list_admin: Configuration du Tableau de bord admin
   affiche_list_head: Configuration balises title et meta
   affiche_list: Configuration générale du site
   affiche_list_contact: Configuration du contact
@@ -418,4 +419,3 @@ formulaire:
 transparent:
   yes: transparent
   no: couleur
-
