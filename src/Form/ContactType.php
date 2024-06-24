@@ -128,6 +128,7 @@ class ContactType extends AbstractType
         if ( strtolower(ContactInterface::NEWSLETTER) == strtolower($subject) || $form->get('subscribeNewsletterButton')->isClicked()){
             $email = $data->getEmail();
             $user = $this->doctrine->getRepository(User::class)->findOneBy(['email' => $email]); 
+            $roles = $user->getRoles();
             if (is_null($user)){
                 $user = new User();
                 $firstname = $data->getFirstName();
@@ -144,8 +145,9 @@ class ContactType extends AbstractType
                 $user->setRoles(['ROLE_NEWSLETTER']);
                 $user->setPassword('NEWSLETTER');
             }else{
+                $roles[]= 'ROLE_NEWSLETTER';
                 $user->setActiveNewsletter(true);
-                $user->setRoles(['ROLE_NEWSLETTER']);
+                $user->setRoles($roles);
             }
             $this->doctrine->getManager()->persist($user);
             $this->doctrine->getManager()->flush();              
