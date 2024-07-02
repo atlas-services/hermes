@@ -7,16 +7,26 @@ $(document)
 
         loadGallery(true, 'a.thumbnail');
 
-        //This function disables buttons when needed
+        //Cette fonction cache les boutons de défilement des images si necessaire.
         function disableButtons(counter_max, counter_current) {
-            $('#show-previous-image, #show-next-image')
-                .show();
+            [...document.getElementsByClassName('show-next-image')].forEach(el => {
+                el.classList.remove("d-none");
+            });
+            [...document.getElementsByClassName('show-previous-image')].forEach(el => {
+                el.classList.remove("d-none");
+            });
             if (counter_max === counter_current) {
-                $('#show-next-image')
-                    .hide();
+
+                [...document.getElementsByClassName('show-next-image')].forEach(el => {
+                    el.classList.add("d-none");
+                })
+
             } else if (counter_current === 1) {
-                $('#show-previous-image')
-                    .hide();
+                
+                [...document.getElementsByClassName('show-previous-image')].forEach(el => {
+                    el.classList.add("d-none");
+                })
+
             }
         }
 
