@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -39,7 +40,7 @@ class InitController extends AbstractAdminController
     /**
      * @Route("/config/", name="add_config", methods={"GET"})
      */
-    public function newConfig(ManagerRegistry $doctrine): Response
+    public function newConfig(ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher): Response
     {
         $configurations = $this->getParameter('init');
         try {
@@ -52,7 +53,7 @@ class InitController extends AbstractAdminController
             $dbtemplate = $doctrine
                 ->getRepository(Template::class)
                 ->findAll();
-            $this->addConfig($doctrine, $configurations, $dbuser, $dbconfig,$dbtemplate);
+            $this->addConfig($doctrine, $passwordHasher, $configurations, $dbuser, $dbconfig, $dbtemplate);
         }catch (\Exception $e){
             echo $e->getMessage();
             echo $e->getTraceAsString();
@@ -73,7 +74,7 @@ class InitController extends AbstractAdminController
 
     }
 
-    private function addConfig($doctrine, $configurations, $dbuser,$dbconfig,$dbtemplate){
+    private function addConfig($doctrine, $passwordHasher, $configurations, $dbuser,$dbconfig,$dbtemplate){
         $entityManager = $doctrine->getManager();
         $entityManagerConfig = $doctrine->getManager('config');
         $dbuseremail = array_column($dbuser, 'email');
@@ -87,10 +88,15 @@ class InitController extends AbstractAdminController
                         if('email' == $code){
                             if(!in_array($conf, $dbuseremail)){
                                 $user = new User();
+                                $plaintextPassword = $configuration['password'];
+                                $hashedPassword = $passwordHasher->hashPassword(
+                                    $user,
+                                    $plaintextPassword
+                                );
                                 $user->setFirstname($configuration['firstname']);
                                 $user->setLastname($configuration['lastname']);
                                 $user->setEmail($configuration['email']);
-                                $user->setPassword($configuration['password']);
+                                $user->setPassword($hashedPassword);
                                 $user->setRoles([$configuration['roles']]);
                                 $entityManager->persist($user);
                             }

@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class HermesDbCommand extends Command
 {
@@ -28,9 +29,10 @@ class HermesDbCommand extends Command
     protected $locale;
 
     protected $app_name;
+    protected $passwordHasher;
     protected $onepage;
 
-    public function __construct(ManagerRegistry $doctrine,ParameterBagInterface $container,  Onepage $onepage)
+    public function __construct(ManagerRegistry $doctrine,ParameterBagInterface $container,  UserPasswordHasherInterface $passwordHasher, Onepage $onepage)
     {
         $this->em = $doctrine->getManager('default');
         $this->emConfig = $doctrine->getManager('config');
@@ -38,6 +40,7 @@ class HermesDbCommand extends Command
         $this->configurations = $container->get('init');
         $this->locale = $container->get('app.default_locale');
         $this->app_name = $container->get('app.name');
+        $this->passwordHasher = $passwordHasher;
 
         parent::__construct();
     }
@@ -125,10 +128,15 @@ class HermesDbCommand extends Command
                         if('email' == $code){
                             if(!in_array($conf, $dbuseremail)){
                                 $user = new User();
+                                $plaintextPassword = $configuration['password'];
+                                $hashedPassword = $this->passwordHasher->hashPassword(
+                                    $user,
+                                    $plaintextPassword
+                                );
                                 $user->setFirstname($configuration['firstname']);
                                 $user->setLastname($configuration['lastname']);
                                 $user->setEmail($configuration['email']);
-                                $user->setPassword($configuration['password']);
+                                $user->setPassword($hashedPassword);
                                 $user->setRoles([$configuration['roles']]);
                                 $this->em->persist($user);
                             }
