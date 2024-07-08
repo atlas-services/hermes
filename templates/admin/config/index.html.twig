@@ -14,6 +14,7 @@
         {% endif %}
         <th>{{ 'global.summary'|trans() }}</th>
         <th>{{ 'global.value'|trans() }}</th>
+        <th>{{ 'global.position'|trans() }}</th>
         <th>{{ 'global.image'|trans() }}</th>
         <th>{{ 'global.actions'|trans() }}</th>
         </tr>
@@ -33,6 +34,7 @@
                         {% endif %}
                         {{ config.value }}{{ 'width' in config.code  ? '/12' : '' }}
                     </td>
+                    <td>{{ config.position }}</td>
                     <td>
                         {% if vich_uploader_asset(config, 'imageFile') is not null %}
                         <img style="max-height: 100px;" src="{{ asset(vich_uploader_asset(config, 'imageFile')) }}" /></td>

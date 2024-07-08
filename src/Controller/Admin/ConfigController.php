@@ -76,7 +76,7 @@ class ConfigController extends AbstractAdminController
             ->getRepository(Config::class, 'config')->createQueryBuilder('c')
             ->where('c.type = :type')
             ->setParameter('type', $type)
-            ->orderBy('c.code', 'ASC')            ->getQuery()
+            ->orderBy('c.position', 'ASC')            ->getQuery()
             ->getResult();
         $configRepository = $doctrine->getRepository(Config::class, 'config');
 
@@ -85,7 +85,7 @@ class ConfigController extends AbstractAdminController
         }
 
         $config = $configRepository->findBy(['code' => 'admin']);
-        $config = $configRepository->getConfigByTypeOrderByCode($type);
+        $config = $configRepository->getConfigByTypeOrderByPosition($type);
         $array = [
             'configs' => $config,
         ];
