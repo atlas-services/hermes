@@ -14,6 +14,7 @@ namespace App\Entity\Config;
 use App\Entity\Traits\CodeTrait;
 use App\Entity\Traits\ConfigTypeTrait;
 use App\Entity\Traits\ImageTrait;
+use App\Entity\Traits\PositionTrait;
 use App\Entity\Traits\PublishedTrait;
 use App\Entity\Traits\ValueTrait;
 use App\Entity\Traits\IdTrait;
@@ -50,6 +51,7 @@ class Config
     use UpdatedTrait;
     use PublishedTrait;
     use ActiveTrait;
+    use PositionTrait;
 
     /**
      * @var \DateTime

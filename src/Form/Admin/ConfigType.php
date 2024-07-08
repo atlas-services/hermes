@@ -135,6 +135,16 @@ class ConfigType extends AbstractBaseType
     {
         $builder
             ->add('code', TextType::class, ['disabled' => $options['code_disabled']])
+            ->add('position', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'required' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 99,                       
+                    'class' => 'custom-select custom-select-lg mb-3 ',
+                    'label' => 'global.position',
+                ],
+                'choices' => range(0, 99),
+            ])
             ->add('type', ChoiceType::class, [
                 'choices' => $options['type_choices'],
                 'attr' => ['class' => 'select2 custom-select select2 custom-select-lg mb-3']

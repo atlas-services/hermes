@@ -140,11 +140,15 @@ class HermesDbCommand extends Command
                 foreach ($value as $type=>$configuration){
                     foreach ($configuration as $code=>$conf){
                         if(!in_array($code, $dbconfigcode)){
+                            if(!isset($conf['position'])){
+                                $conf['position'] = 99;
+                            }
                             $config = new Config();
                             $config->setType($type);
                             $config->setCode($code);
                             $config->setSummary($conf['summary']);
                             $config->setValue($conf['value']);
+                            $config->setPosition($conf['position']);
                             $this->emConfig->persist($config);
                         }
                     }

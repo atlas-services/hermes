@@ -22,18 +22,18 @@ class ConfigRepository extends ServiceEntityRepository
         parent::__construct($registry, Config::class);
     }
 
-    public function getQbConfigByTypeOrderByCode($type)
+    public function getQbConfigByTypeOrderByPosition($type)
     {
         return $this->createQueryBuilder('c')
             ->where('c.type = :type')
             ->setParameter('type', $type)
-            ->orderBy('c.code', 'ASC')
-//            ->addOrderBy('c.position', 'ASC')
+            //->orderBy('c.code', 'ASC')
+            ->addOrderBy('c.position', 'ASC')
             ;
     }
-    public function getConfigByTypeOrderByCode($type)
+    public function getConfigByTypeOrderByPosition($type)
     {
-        return $this->getQbConfigByTypeOrderByCode($type)
+        return $this->getQbConfigByTypeOrderByPosition($type)
             ->getQuery()
             ->getResult()
             ;

@@ -237,71 +237,92 @@ parameters:
         template:
           summary: Choix du template général d'affichage
           value: front
+          position: 7
         favicon:
           summary: favicon
           value: ~
           image: ~
+          position: 5
         bg_image:
           summary: Image de fond par défaut
           value: ~
           image: ~
+          position: 8
         logo:
           summary: Image du logo (Value fixe la marge verticale)
           value: ~
           image: ~
+          position: 2
         affiche_logo_top:
           summary: Position Top du logo
           value: false
+          position: 4
         affiche_search:
           summary: Affichage de la barre de recherche
           value: false
+          position: 6
         accueil:
           summary: image d'accueil du site
           value: ~
           image: ~
+          position: 1
         affiche_img_hermes:
           summary: image d'Hermes - si pas de logo
           value: true
           image: ~
+          position: 3
         bgcolor:
           summary: Couleur de fond par défaut
           value: '#ffffff'
+          position: 10
         text_color:
           summary: Couleur par défaut
           value: '#666666'
+          position: 9
         font_family:
           summary: Font
           value: "'Bai Jamjuree', sans-serif"
+          position: 23
         container_width:
           summary: Largeur du contenu affiché ( max = 12)
           value: 12
+          position: 22
         chevron:
           summary: Style chevron
           value: ~
+          position: 21
         chevron_position:
           summary: Position verticale du chevron
           value: '95%'
+          position: 19
         chevron_right:
           summary: Position latérale du chevron
           value: ~
+          position: 20
         chevron_color:
           summary: Couleur du chevron
           value: '#000000'
+          position: 13
         chevron_bgcolor:
           summary: Couleur de fond du chevron
           value: '#ffffff'
+          position: 14
         chevron_opacity:
           summary: Opacité de fond du chevron
           value: 0.5
+          position: 17
         chevron_accueil_color:
           summary: Couleur du chevron de l'accueil
           value: '#000000'
+          position: 15
         chevron_accueil_bgcolor:
           summary: Couleur de fond du chevron de l'accueil
           value: '#ffffff'
+          position: 16
         chevron_accueil_opacity:
           summary: Opacité de fond du chevron de l'accueil
           value: 0.4
+          position: 18
       network:
         linkedin:
           summary: configuration linkedin
@@ -325,172 +346,227 @@ parameters:
         contact_affiche:
           summary: Affiche Email de contact (utilisé dans le formulaire de contact)
           value: false
+          position: 2
         contact:
           summary: Email de contact (utilisé dans le formulaire de contact)
           value: hermes@hermes-cms.org
+          position: 1
         contact_user:
           summary: contact (utilisé dans le formulaire de contact)
-          value: ~
+          value: ~$$$
+          position: 3
         contact_presentation:
           summary: présentation contact (utilisé dans le formulaire de contact)
           value: ~
+          position: 4
         contact_bgcolor:
           summary: Couleur de fond de la page contact
           value: 'transparent'
+          position: 7
         contact_color:
           summary: Couleur des textes la page contact
           value: '#ffffff'
+          position: 6
         contact_bgcolor_btn:
           summary: Couleur de fond du bouton de la page contact
           value: 'btn-outline-white'
+          position: 8
         contact_width:
           summary: Largeur de la page contact (max = 12)
           value: 12
+          position: 5
         contact_bgcolor_subject:
           summary: Couleur de fond sujet du formulaire
           value: '#000000'
+          position: 10
         contact_color_subject:
           summary: Couleur sujet du formulaire
           value: '#FFFFFF'
+          position: 9
         contact_bgcolor_input:
           summary: Couleur de fond input du formulaire
           value: '#FFFFFF'
+          position: 12
         contact_color_input:
           summary: Couleur input du formulaire
           value: '#000000'
+          postion: 11
       newsletter:
         newsletter_active:
           summary: Activer la newsletter dans les Formulaires
           value: false
+          position: 1
         newsletter_contact:
           summary: Email de contact (utilisé dans le formulaire de newsletter)
           value: newsletter@hermes-cms.org
+          position: 2
         newsletter_presentation:
           summary: Texte pour la Newsletter.
           value: Inscrivez-vous à notre Newsletter
+          position: 3
         newsletter_bgcolor:
           summary: Couleur de fond de la page newsletter
           value: 'transparent'
+          position: 6
         newsletter_color:
           summary: Couleur des textes la page newsletter
           value: '#ffffff'
+          position: 5
         newsletter_bgcolor_btn:
           summary: Couleur de fond du bouton de la page newsletter
           value: 'btn-outline-white'
+          position: 7
         newsletter_width:
           summary: Largeur de la page newsletter (max = 12)
           value: 12
+          position: 4
       livredor:
         livredor_active:
           summary: Activer le livre d'or dans les Formulaires
           value: false
+          position: 1
         livredor_contact:
           summary: Email de contact (utilisé dans le formulaire de livredor)
           value: contact@hermes-cms.org
+          position: 2
         livredor_presentation:
           summary: Texte pour la livredor.
           value: Inscrivez-vous à notre livre d'or
+          position: 3
         livredor_bgcolor:
           summary: Couleur de fond de la page livre d'or
           value: 'transparent'
+          position: 6
         livredor_color:
           summary: Couleur des textes la page livre d'or
           value: '#ffffff'
+          position: 5
         livredor_bgcolor_btn:
           summary: Couleur de fond du bouton de la page livre d'or
           value: 'btn-outline-white'
+          position: 7
         livredor_width:
           summary: Largeur de la page livredor (max = 12)
           value: 12
+          position: 4
       nav:
         nav_bar:
           summary: selection de la barre de menu
           value: base
-        nav_height:
-          summary: Hauteur du sous menu (en px)
-          value: '90px'
-        nav_bgcolor:
-          summary: Couleur de fond du menu
-          value: '#ffffff'       
-        nav_li_bgcolor:
-          summary: Couleur de fond des éléments du sous menu
-          value: '#ffffff'
-        nav_bgcolor_shrink:
-          summary: Couleur de fond de la barre de menu après scroll
-          value: 'transparent'
-        nav_bgcolor_active:
-          summary: Couleur de fond du menu sélectionné
-          value: 'transparent'
-        nav_color_active:
-          summary: Couleur du menu sélectionné
-          value: '#9141ac'
-        nav_bgcolor_link:
-          summary: Couleur de fond des menus non sélectionnés
-          value: 'transparent'
-        nav_link_color:
-          summary: Couleur des liens de la barre de menu
-          value: '#b5835a'
-        nav_link_border_bottom:
-          summary: Séparation des liens de la barre de menu
-          value: ~
-        nav_header_bgcolor:
-          summary: Couleur de fond du header (barres du bouton responsive)
-          value: 'transparent'
-        nav_header_color:
-          summary: Couleur du header (barres du bouton responsive)
-          value: '#000000'
-        nav_font_family:
-            summary: Font
-            value: "'Bai Jamjuree', sans-serif"
-        nav_container_width:
-          summary: Largeur du menu (max= 12)
-          value: 12
-        nav_espacement:
-          summary: "Espacement entre les éléments du menu(valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
-          value: 3
-        nav_link_py:
-          summary: "Espacement vertical (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
-          value: 3
-        nav_link_px:
-          summary: "Padding horizontal des liens du menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
-          value: 3   
-        nav_link_rounded:
-          summary: "Arrondi (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
-          value: 3
-        nav_offset:
-          summary: "Espacement gauche du menu"
-          value: 0
-        nav_menu_text_size:
-          summary: "Taille texte du menu"
-          value: h5
-        nav_sub_menu_mx:
-          summary: "Marge entre Menu et sous menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
-          value: 3          
-        nav_sub_menu_text_size:
-          summary: "Taille texte du sous menu"
-          value: h6 
+          position: 1
+        nav_offcanvas_position:
+          summary: "Position menu offcanvas (start, end, top, bottom)"
+          value: start
+          position: 2
         nav_offcanvas_pct:
           summary: "Largeur menu offcanvas (en %)"
           value: 15
-        nav_offcanvas_position:
-          summary: "Position menu offcanvas (start, end, top, bottom)"
-          value: start 
+          position: 3
+        nav_height:
+          summary: Hauteur du sous menu (en px)
+          value: '90px'
+          position: 23
+        nav_bgcolor:
+          summary: Couleur de fond du menu
+          value: '#ffffff'
+          position: 4     
+        nav_li_bgcolor:
+          summary: Couleur de fond des éléments du sous menu
+          value: '#ffffff'
+          position: 12
+        nav_bgcolor_shrink:
+          summary: Couleur de fond de la barre de menu après scroll
+          value: 'transparent'
+          position: 5
+        nav_bgcolor_active:
+          summary: Couleur de fond du menu sélectionné
+          value: 'transparent'
+          position: 7
+        nav_color_active:
+          summary: Couleur du menu sélectionné
+          value: '#9141ac'
+          position : 9
+        nav_bgcolor_link:
+          summary: Couleur de fond des menus non sélectionnés
+          value: 'transparent'
+          position : 8
+        nav_link_color:
+          summary: Couleur des liens de la barre de menu
+          value: '#b5835a'
+          position: 4
+        nav_link_border_bottom:
+          summary: Séparation des liens de la barre de menu
+          value: ~
+          position: 13
+        nav_header_bgcolor:
+          summary: Couleur de fond du header (barres du bouton responsive)
+          value: 'transparent'
+          position: 10
+        nav_header_color:
+          summary: Couleur du header (barres du bouton responsive)
+          value: '#000000'
+          position: 11
+        nav_font_family:
+            summary: Font
+            value: "'Bai Jamjuree', sans-serif"
+            position: 24
+        nav_container_width:
+          summary: Largeur du menu (max= 12)
+          value: 12
+          position: 14
+        nav_espacement:
+          summary: "Espacement entre les éléments du menu(valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+          position: 15
+        nav_link_py:
+          summary: "Espacement vertical (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+          position: 17
+        nav_link_px:
+          summary: "Padding horizontal des liens du menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+          position: 16
+        nav_link_rounded:
+          summary: "Arrondi (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+          position: 18
+        nav_offset:
+          summary: "Espacement gauche du menu"
+          value: 0
+          position: 19
+        nav_menu_text_size:
+          summary: "Taille texte du menu"
+          value: h5
+          position: 20
+        nav_sub_menu_mx:
+          summary: "Marge entre Menu et sous menu (valeurs possibles : 0 - 1 - 2 - 3 - 4 - 5)"
+          value: 3
+          position: 21       
+        nav_sub_menu_text_size:
+          summary: "Taille texte du sous menu"
+          value: h6
+          position: 22
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu
           value: 'transparent'
+          position: 1
         content_color:
           summary: Couleur du contenu
           value: '#000000'
+          position: 2
         content_link_color:
           summary: Couleur des liens du contenu
           value: '#000000'
+          position: 3
         content_link_hover_color:
           summary: Couleur des liens au survol du contenu
           value: '#ffffff'
+          position: 4
         content_container_width:
           summary: Largeur du contenu affiché (max= 12)
           value: 12
+          position: 5
       folio:
         folio_container_width:
           summary: Largeur du folio affiché (max= 12)
@@ -506,44 +582,57 @@ parameters:
         modale_bgcolor:
           summary: Couleur de fond des modales
           value: '#000000'
+          position: 2
         modale_color:
           summary: Couleur des modales et du bouton
           value: '#ffffff'
+          position: 1
         modale_container_width:
           summary: Largeur du modales affiché (max= 12)
           value: 6
+          position: 3
       card:
         card_bgcolor:
           summary: Couleur de fond des cards
           value: '#000000'
+          position: 2
         card_color:
           summary: Couleur des cards et du bouton
           value: '#ffffff'
+          position: 1
         card_container_width:
           summary: Largeur du cards affiché (max= 12)
           value: 9
+          position: 3
       footer:
         footer_affiche:
           summary: Affichage du footer
           value: true
+          position: 1
         footer_bgcolor:
           summary: Couleur de fond du footer
           value: '#ffffff'
+          position: 5
         footer_color:
           summary: Couleur du texte du footer
           value: '#000000'
+          position: 4
         footer_link_color:
           summary: Couleur des liens du footer
           value: '#99c1f1'
+          position: 6
         footer_link_hover_color:
           summary: Couleur des liens du footer au passage de la souris
           value: '#000000'  
+          position: 7
         footer_container_width:
           summary: Largeur du footer (max= 12)
           value: 12
+          position: 3
         footer_about:
           summary: texte du footer about
           value: ~
+          position: 2
 #      forms:
 #        forms:
 #          summary: Formulaires
