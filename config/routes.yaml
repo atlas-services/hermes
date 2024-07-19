@@ -24,6 +24,16 @@ admin:
     route: admin_index
     permanent: true
 
+daddl3_symfonyckeditor5webpackvite_imageupload_upload:
+    path: /ckeditor/upload
+    controller: daddl3\SymfonyCKEditor5WebpackViteBundle\Controller\ImageUploadController::upload
+    methods: [POST]
+
+daddl3_symfonyckeditor5webpackvite_imageupload_browse:
+    path: /ckeditor/browse
+    controller: daddl3\SymfonyCKEditor5WebpackViteBundle\Controller\ImageUploadController::browse
+    methods: [GET]
+
 hermes_admin:
   # loads routes from the PHP annotations of the controllers found in that directory
   resource: '../src/Controller/Admin/AdminController.php'

@@ -4,7 +4,8 @@ namespace App\Form\Admin;
 
 use App\Entity\Hermes\BlockPost;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType2 ;
-use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
+//use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
+use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType as AppEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;

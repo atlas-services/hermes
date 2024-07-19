@@ -5,7 +5,8 @@ namespace App\Form\Admin;
 use App\Entity\Hermes\Post;
 use App\Form\Traits\ImageFileTrait;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType2 ;
-use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
+//use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
+use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType as AppEditorType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -60,7 +61,7 @@ class PostType extends AbstractNameBaseType
             ->add('content', AppEditorType::class, [
                 'label_format' => 'global.content',
                 'required'=> true,
-                'attr'=> ['id'=> 'post_content', 'hidden' => false,'class' => 'mb-3 w-100']
+                'attr'=> ['data-ckeditor5-config' => 'custom', 'id'=> 'post_content', 'hidden' => false,'class' => 'mb-3 w-100']
             ]);
         }
         $builder->add('tags', CollectionType::class, [

@@ -18,10 +18,12 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-dev-utils": "^40.5.0",
         "@fontsource/raleway": "^4.2.1",
         "@icon/icofont": "^1.0.1-alpha.1",
         "@popperjs/core": "^2.9.2",
         "@rollup/plugin-commonjs": "^16.0.0",
+        "@symfony/ckeditor5": "file:vendor/daddl3/symfony-ckeditor-5-webpack",
         "@types/react-scrollspy": "^3.3.4",
         "accordion": "^3.0.2",
         "anim": "0.0.1",
@@ -41,7 +43,6 @@
         "boxicons": "^2.0.7",
         "card": "^2.4.0",
         "carousel": "0.0.3",
-        "ckeditor4": "^4.13.0",
         "clipboard": "^2.0.6",
         "clipboard-copy": "^3.1.0",
         "clipboard.js": "^1.0.1",

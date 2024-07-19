@@ -1,21 +1,27 @@
 var Encore = require('@symfony/webpack-encore');
-
+const addCKEditor = require("./vendor/daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor-webpack-entry");
+addCKEditor(Encore, true);
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
-
 Encore
-    .copyFiles([
-        {from: './node_modules/ckeditor4/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
-        {from: './node_modules/ckeditor4/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
-        {from: './node_modules/ckeditor4/lang', to: 'ckeditor/lang/[path][name].[ext]'},
-        {from: './node_modules/ckeditor4/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
-        {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
-        {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'}
-    ])
+    .addLoader({
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
+        options: {
+            presets: ["@babel/preset-react", "@babel/preset-env"]
+            // helperDirs: [
+            //     __dirname + '/helpers1',
+            //     __dirname + '/helpers2',
+            // ],
+            // partialDirs: [
+            //     path.join(__dirname, 'templates', 'partials')
+            // ]
+        }
+    })
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
@@ -32,7 +38,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-     .addEntry('hermes_react', './assets/commun/js/react/hermes_react.js')
+     .addEntry("ckeditor5","./vendor/daddl3/symfony-ckeditor-5-webpack/assets/js/ckeditor5.js")
+    //  .addEntry('hermes_react', './assets/commun/js/react/hermes_react.js')
      .addEntry('hermes_admin', './assets/admin/js/app.js')
      .addEntry('hermes_front', './assets/front/js/hermes/app.js')
      .addEntry('hermes_one_page_1', './assets/front/js/hermes/app_one_page_1.js')
