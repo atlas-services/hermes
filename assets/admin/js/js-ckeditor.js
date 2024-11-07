@@ -1,5 +1,7 @@
 import {
     ClassicEditor,
+    Alignment,
+    BlockQuote,
     Bold,
     Essentials,
     Font,
@@ -8,6 +10,8 @@ import {
     FontFamily,
     GeneralHtmlSupport,
     HtmlEmbed,
+    Indent, 
+    IndentBlock,
     Italic,
     ImageBlock,
     ImageCaption,
@@ -19,12 +23,15 @@ import {
     ImageToolbar,
     ImageUpload,
     Image,
+    List,
     Link,
+    MediaEmbed,
     Paragraph,
     SimpleUpload,
     SimpleUploadAdapter,
     SourceEditing,
     Strikethrough,
+    Underline,
   } from "ckeditor5";
   
   import 'ckeditor5/dist/ckeditor5.css';
@@ -39,6 +46,8 @@ ckeditor.innerHTML = postContentValue;
 
 const editConfig =  {
     plugins: [ 
+      Alignment,
+      BlockQuote,
       Bold, 
       Essentials, 
       Font, 
@@ -47,6 +56,8 @@ const editConfig =  {
       FontFamily, 
       GeneralHtmlSupport,
       HtmlEmbed,  
+      Indent, 
+      IndentBlock,
       Italic,     
       ImageBlock,
       ImageCaption,
@@ -58,11 +69,14 @@ const editConfig =  {
       ImageToolbar,
       ImageUpload,
       Image,
+      List,
       Link,
+      MediaEmbed,
       Paragraph,
       SimpleUploadAdapter, 
       SourceEditing,
-      Strikethrough
+      Strikethrough,
+      Underline
     ],
     toolbar: {
       items: [
@@ -70,19 +84,64 @@ const editConfig =  {
         "undo",
         "redo",
         "|",
-        "bold",
-        "italic",
-        'underline',
-        'strikethrough',
-        "|",
+        "list",
+        "paragraph",
         "fontSize",
         "fontFamily",
         "fontColor",
         "fontBackgroundColor",
+        "|",
+        "bold",
+        "italic",
+        'underline',
+        'strikethrough',
+        "blockQuote",
+        '|', 'alignment:left', 'alignment:center', 'alignment:justify', 'alignment:right',
+        "|",
+        'bulletedList',
+        'numberedList',
+        "|",
+        'outdent', 
+        'indent',
+        "|",
         'link',
-        'insertImage'
+        'mediaEmbed',
+        'insertImage',
       ],
     },
+    heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph',
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1',
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2',
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3',
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4',
+				},
+			],
+		},
     htmlSupport: {
       allow: [
           {
@@ -96,7 +155,10 @@ const editConfig =  {
     simpleUpload :{
       uploadUrl: "/api/file/upload"
 
-    }
+    },
+    mediaEmbed: {
+      previewsInData:true
+    },
   };
   ClassicEditor.create(ckeditor, editConfig)
     .then((editor) => {
