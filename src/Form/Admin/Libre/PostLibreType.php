@@ -5,9 +5,7 @@ namespace App\Form\Admin\Libre;
 use App\Entity\Hermes\Post;
 use App\Form\Traits\ImageFileTrait;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType2 ;
-//use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
-use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType as AppEditorType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType as AppEditorType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,7 +41,7 @@ class PostLibreType extends AbstractType
             ->add('content', AppEditorType::class, [
                 'label_format' => 'global.content',
                 'required'=> true,
-                'attr'=> ['data-ckeditor5-config' => 'custom','id'=> 'post_content', 'hidden' => false, 'class' => 'mb-3 w-100']
+                'attr'=> ['id'=> 'post_content', 'hidden' => false, 'class' => 'mb-3 w-100']
             ]);
         }
         $builder

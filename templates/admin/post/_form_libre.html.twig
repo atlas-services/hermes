@@ -7,6 +7,8 @@
     {{ form_row(form.name) }}
     {% if form.content is defined %}
         {{ form_row(form.content) }}
+        <div id="editor">
+        </div>
     {% endif %}
     {% if form.imageFile is defined %}
         {{ form_row(form.imageFile) }}

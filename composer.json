@@ -15,7 +15,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.*",
-        "daddl3/symfony-ckeditor-5-webpack": "0.0.8",
         "doctrine/annotations": "1.*",
         "doctrine/doctrine-bundle": "2.*",
         "doctrine/doctrine-migrations-bundle": "3.*",

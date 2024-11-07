@@ -27,6 +27,7 @@ import '../../commun/js/anime';
 import '../../commun/js/copy';
 //import './exemples';
 import './js-custom';
+import './js-ckeditor';
 import './select2';
 import './modale';
 import './tags';

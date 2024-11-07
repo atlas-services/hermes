@@ -20,9 +20,6 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
-    "daddl3/symfony-ckeditor-5-webpack": {
-        "version": "dev-main"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

@@ -3,9 +3,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Hermes\BlockPost;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType as AppEditorType2 ;
-//use FOS\CKEditorBundle\Form\Type\CKEditorType as AppEditorType;
-use daddl3\SymfonyCKEditor5WebpackViteBundle\Form\Ckeditor5TextareaType as AppEditorType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType as AppEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -32,7 +30,7 @@ class BlockPostType extends AbstractNameBaseType
             'required' => false,
             'attr' => [
                 'min' => 0,
-                'max' => 99,                       
+                'max' => 99,
                 'class' => 'custom-select custom-select-lg mb-3 ',
                 'label' => 'global.position',
             ],
