@@ -45,7 +45,7 @@ class FileUploadController
         }
 
         // Return a JSON response that includes the URL to the uploaded file. This URL is used by CKEditor to reference the image
-        $url = $request->getSchemeAndHttpHost().'/uploads/'.$uploadedFile->getClientOriginalName();
+        $url = $request->getSchemeAndHttpHost().'/'.$this->params->get('hermes_path_content_image_post').'/'.$uploadedFile->getClientOriginalName();
 
         return new JsonResponse(['url' => $url]);
     }
