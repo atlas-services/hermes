@@ -33,7 +33,7 @@ class TemoignageType extends AbstractBaseType
                 array('label' => '* Email ', 'attr' => array('class' => "form-control", 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre émail.",
                     'placeholder' => "formulaire.email_placeholder")))
              ->add('content', TextareaType::class,
-                array('label' => '* Votre témoignage ', 'attr' => array('class' => "form-control", 'id' => "message", 'data-validation-required-message' => "Merci de saisir votre message.",
+                array('constraints' => new Assert\NotBlank(),'label' => '* Votre témoignage ', 'attr' => array('class' => "form-control", 'id' => "message", 'data-validation-required-message' => "Merci de saisir votre message.",
                     'placeholder' => "formulaire.message_placeholder", 'rows' => '15')))
             ->add('save', SubmitType::class, [
                 'icon_before' => '<i class="fa fa-save"></i>',
