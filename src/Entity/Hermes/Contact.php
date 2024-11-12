@@ -62,7 +62,7 @@ class Contact implements ContactInterface
                 'max'    => 40,
                 'groups' => ['contact', 'livredor'],
             ]));
-    
+
         $metadata->addPropertyConstraint(
             'content', 
             new Assert\Length(
@@ -70,6 +70,12 @@ class Contact implements ContactInterface
                 'groups' => ['contact', 'livredor'],
                 'min' => 2,
                 'max' => 1000,
+        ]));
+        $metadata->addPropertyConstraint(
+            'content', 
+            new Assert\NotBlank(
+                [
+                'groups' => ['contact', 'livredor'],
         ]));
     }
 
