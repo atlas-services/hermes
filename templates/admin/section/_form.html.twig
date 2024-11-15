@@ -33,14 +33,9 @@
                 {% endif %}
                 {% if form_post.content is defined %}
                     {{ form_row(form_post.content) }}
+                    <div id="editor">
+                    </div>
                 {% endif %}
-{#                <ul class="tags mt-4 m-0 p-0" data-prototype="{{ form_widget(form_post.tags.vars.prototype)|e('html_attr') }}">#}
-{#                    {% for tag in form_post.tags %}#}
-{#                        <li class="list-unstyled btn btn-primary">#}
-{#                            {{ form_row(tag.name) }}#}
-{#                        </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
                 <hr style="  border: 1px dashed #123456;"/>
             {% endfor  %}
         {% endif  %}

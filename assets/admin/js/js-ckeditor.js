@@ -37,8 +37,12 @@ import {
   import 'ckeditor5/dist/ckeditor5.css';
   
 // post_content est la valeur issue du formulaire (donc de la base de donnée)
-const postContent = document.querySelector('#post_content');
-const postContentValue =postContent.value;
+let postContent = document.querySelector('#post_content');
+if(null == postContent){
+  postContent = document.querySelector('#section_template_posts_0_content');
+}
+let postContentValue = postContent.value;
+
 // editor est la balise contenant le formattage ckeditor
 const ckeditor = document.querySelector("#editor");
 // on insert les datas de la base dans le formattage ckeditor

@@ -6,7 +6,6 @@ hermes-install:
 	yarn install --ignore-engines
 	export NODE_OPTIONS=--openssl-legacy-provider  &&  yarn encore dev 
 	composer install
-	php bin/console ckeditor:install --tag=4.22.1
 	php bin/console elfinder:install
 	php bin/console  assets:install
 	php bin/console d:s:u --force

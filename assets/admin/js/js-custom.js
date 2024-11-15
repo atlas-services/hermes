@@ -303,5 +303,3 @@ if(null !=select_api_template){
         }    
     });
 }
-
-

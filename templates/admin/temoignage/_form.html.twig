@@ -5,7 +5,9 @@
     {{ form_row(form.firstname) }}
     {{ form_row(form.lastname) }}
     {{ form_row(form.email) }}
-    {{ form_row(form.content) }}
+    {{ form_row(form.content) }}    
+    <div id="editor">
+    </div>
     {{ form_row(form.save) }}
 {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
