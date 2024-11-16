@@ -87,6 +87,7 @@ function handleSelectTemplate(select_template, uri) {
         var options = select_template.getElementsByTagName('option');
         var selected_template_type = select_template.options[select_template.selectedIndex].innerHTML;
 
+        const ckeditor = document.querySelector(".ck-editor");
         let section_template_posts_0_content = document.getElementById('section_template_posts_0_content');
         let section_template_uploaded = document.getElementById('section_template_uploaded');
         let menu_section0_template_uploaded = document.getElementById('menu_section0_template_uploaded');
@@ -106,8 +107,9 @@ function handleSelectTemplate(select_template, uri) {
 
         if(TemplateLibre == selected_template_type || TemplateNewsletter == selected_template_type){
             collapseListe(false);
+            ckeditor.hidden = false;
             if(section_template_posts_0_content != null){
-                section_template_posts_0_content.parentElement.parentElement.hidden = false;
+                //section_template_posts_0_content.parentElement.parentElement.hidden = false;
                 //section_template_posts_0_content.setAttribute('required', 'required');
             } 
             if(section_template_uploaded != null){        
@@ -136,6 +138,7 @@ function handleSelectTemplate(select_template, uri) {
             } 
             
         }else{
+            ckeditor.hidden = true;
             // if (section_template_posts_0_content.hasAttribute("required")) {
             //     section_template_posts_0_content.removeAttribute('required'); 
             // } 
@@ -143,9 +146,13 @@ function handleSelectTemplate(select_template, uri) {
 
         if(FolioClassique == selected_template_type){
             if(section_template_posts_0_content != null){
-                section_template_posts_0_content.parentElement.parentElement.hidden = true;
+                ckeditor.hidden = true;
+                //section_template_posts_0_content.parentElement.parentElement.hidden = true;
                 if (section_template_posts_0_content.hasAttribute("required")) {
-                    section_template_posts_0_content.removeAttribute('required'); 
+                    section_template_posts_0_content.removeAttribute('required');
+                } 
+                if(section_template_posts_0_url != null){        
+                    section_template_posts_0_url.parentElement.parentElement.hidden = true; 
                 } 
             }  
 
@@ -179,7 +186,7 @@ function handleSelectTemplate(select_template, uri) {
         if(selected_template_type.includes(LivreDor) ){
             collapseListe(true);
             if(section_template_posts_0_content != null){
-                section_template_posts_0_content.parentElement.parentElement.hidden = true;
+                //section_template_posts_0_content.parentElement.parentElement.hidden = true;
             } 
 
             if(menu_section0_template_posts_0_content != null){
@@ -221,7 +228,7 @@ function handleSelectTemplate(select_template, uri) {
         if(selected_template_type.includes(Formulaire)){
             collapseListe(true);
             if(section_template_posts_0_content != null){
-                section_template_posts_0_content.parentElement.parentElement.hidden = true;             
+                //section_template_posts_0_content.parentElement.parentElement.hidden = true;             
             } 
 
             if(section_template_uploaded != null){

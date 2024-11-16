@@ -126,7 +126,7 @@ class SectionController extends AbstractAdminController
             if ($form->get('saveAndAddSectionPost')->isClicked()) {
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug()]);
             }
-            if ($form->get('save')->isClicked()) {
+            // if ($form->get('save')->isClicked()) {
                 if(isset($form['uploaded']) && 'liste' === $section->getTemplate()->getType()){
                     foreach($section->getPosts() as $post){
                         $section->removePost($post);
@@ -137,7 +137,7 @@ class SectionController extends AbstractAdminController
                     if(!is_null($selected_dir)){
                         $copy->handleUploadedDir($section, $selected_dir);
                     }
-                }
+                // }
 
                 return $this->redirectToRoute('section_index');
             }
