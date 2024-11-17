@@ -18,67 +18,60 @@ window.addEventListener('load', (event) => {
 
 function hiddeNew(element, uri, hide) {
     if(uri.includes(element)){
-        // collapseListe(true);
 
         // selectionner la page dans le menu "sections"
         var menu_section_select_template = document.querySelector('#menu_sections_0_template');
         if(null != menu_section_select_template){
-            handleSelectTemplate(menu_section_select_template, uri);   
+            handleSelectTemplate(menu_section_select_template, uri);
         }
 
-        var section_template_select_template = document.querySelector('#section_template_template'); 
+        var section_template_select_template = document.querySelector('#section_template_template');
         if(null != section_template_select_template){
-            handleSelectTemplate(section_template_select_template, uri);             
+            handleSelectTemplate(section_template_select_template, uri);
         }
-
-        // if(section_template_posts_0_content != null){
-        //     section_template_posts_0_content.parentElement.parentElement.hidden = false;
-        // }        
     }
 }
 
 function collapseListe(collapse) {
     // collapse and show/hide non List inputs"
-    
     let collapseButton = document.getElementById('id_collapseOptions');
     let collapseOptions = document.getElementById('collapseOptions');
 
-    if(collapseButton != null){  
-        collapseButton.hidden = false;  
-        if(collapseOptions != null){  
-            collapseOptions.hidden = false; 
-            collapseOptions.classList.remove('show'); 
+    if(collapseButton != null){
+        collapseButton.hidden = false;
+        if(collapseOptions != null){
+            collapseOptions.hidden = false;
+            collapseOptions.classList.remove('show');
         }
-        collapseButton.classList.remove('collapsed') ;  
-        collapseButton.setAttribute('data-bs-toggle',  'collapse') ;  
-        collapseButton.setAttribute('aria-expanded',  'false') ;  
-        if(collapse){ 
-            collapseButton.setAttribute('data-bs-toggle',  'collapsed') ;  
-            collapseButton.setAttribute('aria-expanded',  'true') ;  
-            collapseButton.classList.add('collapsed') ;  
-            collapseButton.hidden = true; 
-            if(collapseOptions != null){  
-                collapseOptions.hidden = true; 
+        collapseButton.classList.remove('collapsed') ;
+        collapseButton.setAttribute('data-bs-toggle',  'collapse') ;
+        collapseButton.setAttribute('aria-expanded',  'false') ;
+        if(collapse){
+            collapseButton.setAttribute('data-bs-toggle',  'collapsed') ;
+            collapseButton.setAttribute('aria-expanded',  'true') ;
+            collapseButton.classList.add('collapsed') ;
+            collapseButton.hidden = true;
+            if(collapseOptions != null){
+                collapseOptions.hidden = true;
             }
-        } 
-    } 
+        }
+    }
 }
 
 // selectionner la page dans le menu "sections"
 var select_template = document.querySelector('#menu_sections_0_template');
 if(null != select_template){
     select_template.addEventListener('change', function() {
-        handleSelectTemplate(select_template, uri);  
+        handleSelectTemplate(select_template, uri);
     });
 }
 
- var select_template = document.querySelector('#section_template_template'); 
+ var select_template = document.querySelector('#section_template_template');
  if(null != select_template){
     select_template.addEventListener('change', function() {
-        handleSelectTemplate(select_template, uri);  
+        handleSelectTemplate(select_template, uri);
     });
  }
-   
 
 
 function handleSelectTemplate(select_template, uri) {
@@ -108,101 +101,84 @@ function handleSelectTemplate(select_template, uri) {
         if(TemplateLibre == selected_template_type || TemplateNewsletter == selected_template_type){
             collapseListe(false);
             ckeditor.hidden = false;
-            if(section_template_posts_0_content != null){
-                //section_template_posts_0_content.parentElement.parentElement.hidden = false;
-                //section_template_posts_0_content.setAttribute('required', 'required');
-            } 
-            if(section_template_uploaded != null){        
+            if(section_template_uploaded != null){
                 section_template_uploaded.parentElement.parentElement.hidden = true;
-                // if (section_template_uploaded.hasAttribute("required")) {
-                //     section_template_uploaded.removeAttribute('required'); 
-                // } 
-            } 
+            }
             if(menu_section0_template_uploaded != null){
-                menu_section0_template_uploaded.parentElement.parentElement.hidden = true; 
-            } 
-            if(section_template_posts_0_url != null){        
-                section_template_posts_0_url.parentElement.parentElement.hidden = true; 
-            } 
+                menu_section0_template_uploaded.parentElement.parentElement.hidden = true;
+            }
+            if(section_template_posts_0_url != null){
+                section_template_posts_0_url.parentElement.parentElement.hidden = true;
+            }
             if(section_template_templateNbCol != null){
                 section_template_templateNbCol.parentElement.parentElement.hidden = true;
-            } 
+            }
             if(section_template_templateImageFilter != null){
                 section_template_templateImageFilter.parentElement.parentElement.hidden = true;
             }
             if(section_template_template2 != null){
                 section_template_template2.parentElement.parentElement.hidden = true;
-            }  
+            }
             if(section_template_template2Width != null){
                 section_template_template2Width.parentElement.parentElement.hidden = true;
-            } 
+            }
             
         }else{
             ckeditor.hidden = true;
-            // if (section_template_posts_0_content.hasAttribute("required")) {
-            //     section_template_posts_0_content.removeAttribute('required'); 
-            // } 
         }
 
         if(FolioClassique == selected_template_type){
             if(section_template_posts_0_content != null){
                 ckeditor.hidden = true;
-                //section_template_posts_0_content.parentElement.parentElement.hidden = true;
                 if (section_template_posts_0_content.hasAttribute("required")) {
                     section_template_posts_0_content.removeAttribute('required');
-                } 
-                if(section_template_posts_0_url != null){        
-                    section_template_posts_0_url.parentElement.parentElement.hidden = true; 
-                } 
-            }  
+                }
+                if(section_template_posts_0_url != null){
+                    section_template_posts_0_url.parentElement.parentElement.hidden = true;
+                }
+            }
 
             if(section_template_uploaded != null){
                 section_template_uploaded.parentElement.parentElement.hidden = false;
-            } 
+            }
             if(menu_section0_template_uploaded != null){
                 menu_section0_template_uploaded.parentElement.parentElement.hidden = false;
-            } 
+            }
             if(section_template_templateNbCol != null){
                 section_template_templateNbCol.parentElement.parentElement.hidden = false;
-            } 
+            }
             if(section_template_templateImageFilter != null){
                 section_template_templateImageFilter.parentElement.parentElement.hidden = false;
             }
             if(section_template_template2 != null){
                 section_template_template2.parentElement.parentElement.hidden = false;
-            }  
+            }
             if(section_template_template2Width != null){
                 section_template_template2Width.parentElement.parentElement.hidden = false;
-            } 
-            
+            }
             collapseListe(false);
-
             if(menu_saveAndAddPost != null){
                 menu_saveAndAddPost.hidden = false;
             }
-        
         }
 
         if(selected_template_type.includes(LivreDor) ){
             collapseListe(true);
-            if(section_template_posts_0_content != null){
-                //section_template_posts_0_content.parentElement.parentElement.hidden = true;
-            } 
 
             if(menu_section0_template_posts_0_content != null){
                 menu_section0_template_posts_0_content.parentElement.parentElement.hidden = true;
-            }  
+            }
 
             if(section_template_uploaded != null){
                 section_template_uploaded.parentElement.parentElement.hidden = true;
-            } 
+            }
             if(menu_section0_template_uploaded != null){
                 menu_section0_template_uploaded.parentElement.parentElement.hidden = true;
-            } 
+            }
 
             if(section_template_url != null){
                 section_template_url.parentElement.parentElement.hidden = true;
-            } 
+            }
 
             if(section_template_posts_0_imageFile_file != null){
                 section_template_posts_0_imageFile_file.parentElement.parentElement.hidden = false;
@@ -214,7 +190,7 @@ function handleSelectTemplate(select_template, uri) {
 
             if(section_template_url != null){
                 section_template_url.parentElement.parentElement.hidden = true;
-            } 
+            }
 
             if(menu_section0_template_url != null){
                 menu_section0_template_url.parentElement.parentElement.hidden = true;
@@ -227,27 +203,23 @@ function handleSelectTemplate(select_template, uri) {
 
         if(selected_template_type.includes(Formulaire)){
             collapseListe(true);
-            if(section_template_posts_0_content != null){
-                //section_template_posts_0_content.parentElement.parentElement.hidden = true;             
-            } 
 
             if(section_template_uploaded != null){
                 section_template_uploaded.parentElement.parentElement.hidden = true;
-            } 
+            }
             if(menu_section0_template_uploaded != null){
                 menu_section0_template_uploaded.parentElement.parentElement.hidden = true;
-            } 
-            
+            }
             if(menu_saveAndAddPost != null){
                 menu_saveAndAddPost.hidden = false;
             }
         }else{
             if(section_template_posts_0_imageFile_file != null){
-                section_template_posts_0_imageFile_file.hidden = true;  
+                section_template_posts_0_imageFile_file.hidden = true;
                 if(uri.includes(section_edit)){
-                    section_template_posts_0_imageFile_file.hidden = false;     
+                    section_template_posts_0_imageFile_file.hidden = false;
                 }
-            }  
+            }
         }
 
     }
@@ -265,7 +237,6 @@ if(null !=select){
         var tbody = document.getElementById('tbody');
         if(null != tbody){
             var cells = tbody.getElementsByTagName('tr');
-        
             if(options.length < 3 && 'All' == selected ){
                 var name = select.getAttribute('name');
                 window.location.href = "/fr/admin/"+ name + "/";
@@ -277,7 +248,7 @@ if(null !=select){
                 }else{
                     cells[k].classList.add("d-none");
                 }
-            }    
+            }
         }
     });
 }
@@ -291,7 +262,7 @@ if(null !=select_api_template){
         if(null !=selected){
             for (var k = 1; k <= select_api_template.length; ++k) {
                 var template = document.getElementById(k);
-                if(null != template){                    
+                if(null != template){
                     if(selected_template == template){
                         template.classList.remove("d-none");
                         template.classList.add("d-block");
@@ -304,9 +275,8 @@ if(null !=select_api_template){
                             template.classList.remove("d-block");
                         }
                     }
-                    
                 }
-            }    
-        }    
+            }
+        }
     });
 }
