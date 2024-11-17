@@ -41,7 +41,10 @@ let postContent = document.querySelector('#post_content');
 if(null == postContent){
   postContent = document.querySelector('#section_template_posts_0_content');
 }
-let postContentValue = postContent.value;
+let postContentValue = '';
+if(null != postContent){
+  postContentValue = postContent.value;
+}
 
 // editor est la balise contenant le formattage ckeditor
 const ckeditor = document.querySelector("#editor");
