@@ -35,10 +35,15 @@ const jQuery = $;
                 // change image "src local" to "src hermes-cms.org"
                 copyHTML = copyHTML.replaceAll('src="/images/api-hermes', 'src="https://api.hermes-cms.org/images/api-hermes');
                 copy(copyHTML); // innerHtml
-                let source = document.querySelector('#cke_18');
+                // let source = document.querySelector('#cke_18');
+                let source = document.querySelector('.ck-source-editing-button');
                 if(null != source){
+                    const scrollOptions = {
+                        behavior: 'smooth',
+                        block: 'end'
+                      };
                     source.click();
-                    source.scrollIntoView();
+                    source.scrollIntoView(scrollOptions);
                 }
                 text_alert = '<div id="alert" class="mt-3 alert alert-success ">\n' +
                     '            <a href="#" class="hidden close" data-bs-dismiss="alert" aria-label="close">&times;</a>\n' +
