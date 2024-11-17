@@ -48,6 +48,8 @@ if(null != postContent){
 
 // editor est la balise contenant le formattage ckeditor
 const ckeditor = document.querySelector("#editor");
+
+if(null != ckeditor){
 // on insert les datas de la base dans le formattage ckeditor
 ckeditor.innerHTML = postContentValue;
 
@@ -176,4 +178,4 @@ const editConfig =  {
       });
     })
     .catch(/* ... */);
-  
+}
