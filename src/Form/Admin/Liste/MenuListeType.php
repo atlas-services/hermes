@@ -75,12 +75,12 @@ class MenuListeType extends AbstractType
         ;
 
         $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            [$this, 'onPostSubmitData']
+            FormEvents::SUBMIT,
+            [$this, 'onSubmitData']
         );
     }
 
-    public function onPostSubmitData(FormEvent $event)
+    public function onSubmitData(FormEvent $event)
     {
         $menu= $event->getData();
         $sections = $menu->getSections();
@@ -129,5 +129,3 @@ class MenuListeType extends AbstractType
         ]);
     }
 }
-
-

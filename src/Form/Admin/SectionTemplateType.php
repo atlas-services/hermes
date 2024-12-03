@@ -184,8 +184,8 @@ class SectionTemplateType extends AbstractType
         }
 
         $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            [$this, 'onPostSubmitData']
+            FormEvents::SUBMIT,
+            [$this, 'onSubmitData']
         );
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -204,7 +204,7 @@ class SectionTemplateType extends AbstractType
         });
     }
 
-    public function onPostSubmitData(FormEvent $event)
+    public function onSubmitData(FormEvent $event)
     {
         $section = $event->getData();
         $form = $event->getForm();

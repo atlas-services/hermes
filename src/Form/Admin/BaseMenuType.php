@@ -73,12 +73,12 @@ class BaseMenuType extends AbstractNameBaseType
             ]);
 
         $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            [$this, 'onPostSubmitData']
+            FormEvents::SUBMIT,
+            [$this, 'onSubmitData']
         );
     }
 
-    public function onPostSubmitData(FormEvent $event)
+    public function onSubmitData(FormEvent $event)
     {
         $menu = $event->getData();
         $menu->setSlug($this->slugify($menu->getName()));
@@ -120,5 +120,3 @@ class BaseMenuType extends AbstractNameBaseType
         ]);
     }
 }
-
-

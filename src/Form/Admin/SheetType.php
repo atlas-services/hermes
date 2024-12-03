@@ -60,13 +60,13 @@ class SheetType extends AbstractNameBaseType
         }
 
             $builder->addEventListener(
-                FormEvents::POST_SUBMIT,
-                [$this, 'onPostSubmitData']
+                FormEvents::SUBMIT,
+                [$this, 'onSubmitData']
             );
 
     }
 
-    public function onPostSubmitData(FormEvent $event)
+    public function onSubmitData(FormEvent $event)
     {
         $sheet = $event->getData();
         if (is_null($sheet->getId())) {
