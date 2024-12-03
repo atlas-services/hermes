@@ -13,19 +13,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TemplateRepository")
- * @ORM\Table(name="template")
- * Defines the properties of the Sheet entity to represent the blog menus.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */
+#[ORM\Table(name: 'template')]
+#[ORM\Entity(repositoryClass: \App\Repository\TemplateRepository::class)]
 class Template
 {
     const TEMPLATE_TYPE_LISTE = 'liste';
@@ -43,10 +37,9 @@ class Template
 
     /**
      * @var Section[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="template",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="section_template")
      */
+    #[ORM\JoinTable(name: 'section_template')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Section::class, mappedBy: 'template', cascade: ['persist', 'remove'])]
     private $sections;
 
     /**

@@ -25,21 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SectionRepository")
- * @ORM\Table(name="section")
- *
- * Defines the properties of the Post entity to represent the blog posts.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'section')]
+#[ORM\Entity(repositoryClass: \App\Repository\SectionRepository::class)]
 class Section
 {
     use ActiveTrait;
@@ -51,35 +44,31 @@ class Section
 
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\User::class, inversedBy: 'sections')]
     protected $user;
 
     /**
      * @var Posts[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Post",  mappedBy="section",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="post_section")
-     * @ORM\OrderBy({"position" = "ASC"})
      */
+    #[ORM\JoinTable(name: 'post_section')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Post::class, mappedBy: 'section', cascade: ['persist', 'remove'])]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     protected $posts;
 
     /**
      * @var Template
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Template", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\Template::class, inversedBy: 'sections')]
     protected $template;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Length(max=3)
      */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Length(max: 3)]
     protected $template_width;
 
     /**
@@ -90,52 +79,40 @@ class Section
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length(max=11)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Length(max: 11)]
     protected $template_bgcolor;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Length(max=1)
      */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Length(max: 1)]
     protected $template_nb_col;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $template_image_filter;
 
     /**
      * @var Template
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Template", inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\Template::class, inversedBy: 'sections')]
     protected $template2;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Length(max=3)
      */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Length(max: 3)]
     protected $template2_width;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Menu", inversedBy="sections")
-     * @ORM\JoinColumn(
-     *      name="menu",
-     *      referencedColumnName="id",
-     *      onDelete="CASCADE",
-     *      nullable=true
-     * )
-     */
+    #[ORM\JoinColumn(name: 'menu', referencedColumnName: 'id', onDelete: 'CASCADE', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\Menu::class, inversedBy: 'sections')]
     protected $menu;
 
     public function __construct()

@@ -20,15 +20,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class SheetController extends AbstractAdminController
 {
-    /**
-     * @Route("/page/", name="sheet_index", methods={"GET"})
-     * @Route("/form/", name="sheet_form_index", methods={"GET"})
-     */
+    #[Route(path: '/page/', name: 'sheet_index', methods: ['GET'])]
+    #[Route(path: '/form/', name: 'sheet_form_index', methods: ['GET'])]
     public function index(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $route = $request->attributes->get('_route');
@@ -50,9 +46,7 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/index.html.twig', $array);
     }
 
-    /**
-     * @Route("/nouvelle-page", name="sheet_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouvelle-page', name: 'sheet_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine,SheetRepository $sheetRepository, Copy $copy): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
@@ -87,9 +81,7 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/nouvelle-page_libre", name="sheet_new_libre", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouvelle-page_libre', name: 'sheet_new_libre', methods: ['GET', 'POST'])]
     public function newLibre(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
@@ -115,9 +107,7 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/new_libre.html.twig', $array);
     }
 
-    /**
-     * @Route("/nouvelle-page_liste", name="sheet_new_liste", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouvelle-page_liste', name: 'sheet_new_liste', methods: ['GET', 'POST'])]
     public function newListe(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $position_sheet = $sheetRepository->getMaxPosition();
@@ -144,9 +134,7 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/new_liste.html.twig', $array);
     }
 
-    /**
-     * @Route("/page/{id}", name="sheet_show", methods={"GET"})
-     */
+    #[Route(path: '/page/{id}', name: 'sheet_show', methods: ['GET'])]
     public function show(Sheet $sheet): Response
     {
         $array = [
@@ -157,9 +145,7 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/show.html.twig', $array);
     }
 
-    /**
-     * @Route("/page/edit/{sheet}/{locale}", name="sheet_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/page/edit/{sheet}/{locale}', name: 'sheet_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, CacheInterface $backCache, #[MapEntity(mapping: ['sheet' => 'slug', 'locale' => 'locale'])] Sheet $sheet): Response
     {
 
@@ -193,9 +179,7 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/edit.html.twig', $array);
     }
 
-    /**
-     * @Route("/page/{id}", name="sheet_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/page/{id}', name: 'sheet_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Sheet $sheet): Response
     {
         if ($this->isCsrfTokenValid('delete' . $sheet->getId(), $request->request->get('_token'))) {
@@ -207,9 +191,7 @@ class SheetController extends AbstractAdminController
         return $this->redirectToRoute('sheet_index');
     }
 
-    /**
-     * @Route("/ajax/switch/sheet", name="switch_sheet_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/sheet', name: 'switch_sheet_active_ajax')]
     public function ajaxActive(Request $request, SheetRepository $sheetRepository)
     {
         if ($request->isXMLHttpRequest()) {
@@ -222,9 +204,7 @@ class SheetController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/nouvelle-langue", name="sheet_locale_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouvelle-langue', name: 'sheet_locale_new', methods: ['GET', 'POST'])]
     public function newLocale(Request $request, Copy $copy): Response
     {
         $form = $this->createForm(LocaleType::class);

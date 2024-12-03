@@ -17,13 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PrevisualisationController extends AbstractAdminController
 {
-    /**
-     * @Route(
-     *     "/{_locale}/admin/previsualisation/{sheet}/{slug}",
-     *     name="previsualidation_sheet",
-     *     methods={"GET|POST"}
-     *     )
-     */
+    #[Route(path: '/{_locale}/admin/previsualisation/{sheet}/{slug}', name: 'previsualidation_sheet', methods: ['GET|POST'])]
     public function previsualisation(Request $request, Page $page, $sheet = 'accueil', $slug = 'accueil')
     {
         $array = [];

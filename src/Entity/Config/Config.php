@@ -25,21 +25,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ConfigRepository")
- * @ORM\Table(name="config")
- * Defines the properties of the Config entity to represent the configuration.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- * @Vich\Uploadable
  *
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'config')]
+#[ORM\Entity(repositoryClass: \App\Repository\ConfigRepository::class)]
 class Config
 {
     use IdTrait;
@@ -55,9 +49,8 @@ class Config
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: 'datetime')]
     private $publishedAt;
 
     public $transparent;

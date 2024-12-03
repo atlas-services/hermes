@@ -9,10 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait LocaleTrait
 {
-    /**
-     * @Assert\Locale()
-     * @ORM\Column(type="string" , nullable=true, options={"default":"fr"})
-     */
+    #[ORM\Column(type: 'string', nullable: true, options: ['default' => 'fr'])]
+    #[Assert\Locale]
     protected $locale = "fr";
 
 

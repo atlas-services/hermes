@@ -8,81 +8,66 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
     const ROLE_SUPER_ADMIN =  'ROLE_SUPER_ADMIN' ;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
+    #[ORM\Column(type: 'string', length: 25)]
     private $firstname;
 
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
+    #[ORM\Column(type: 'string', length: 25)]
     private $lastname;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: 'json')]
     private $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private $password;
 
     /**
      * @var boolean
-     * @ORM\Column(type="boolean", nullable=true)
      */
+    #[ORM\Column(type: 'boolean', nullable: true)]
     public $superAdmin = false;
 
     /**
      * @var Post[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Post", mappedBy="user",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="post_user")
      */
+    #[ORM\JoinTable(name: 'post_user')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Post::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
     private $posts;
 
     /**
      * @var Section[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="user",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="section_user")
      */
+    #[ORM\JoinTable(name: 'section_user')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Section::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
     private $sections;
 
     /**
      * @var Menu[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Menu", mappedBy="user",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="menu_user")
      */
+    #[ORM\JoinTable(name: 'menu_user')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Menu::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
     private $menus;
 
     /**
      * @var string le token qui servira lors de l'oubli de mot de passe
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $resetToken;
 
     use ActiveNewsletterTrait;
@@ -223,7 +208,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

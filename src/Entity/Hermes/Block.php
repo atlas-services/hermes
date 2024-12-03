@@ -24,21 +24,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\BlockRepository")
- * @ORM\Table(name="block")
- *
- * Defines the properties of the Block entity to represent the blog posts.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'block')]
+#[ORM\Entity(repositoryClass: \App\Repository\BlockRepository::class)]
 class Block
 {
     use ActiveTrait;
@@ -48,18 +41,16 @@ class Block
 
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="blocks")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\User::class, inversedBy: 'blocks')]
     protected $user;
 
     /**
      * @var BlockPosts[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\BlockPost",  mappedBy="block",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="blockpost_block")
      */
+    #[ORM\JoinTable(name: 'blockpost_block')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\BlockPost::class, mappedBy: 'block', cascade: ['persist', 'remove'])]
     protected $blockPosts;
 
 

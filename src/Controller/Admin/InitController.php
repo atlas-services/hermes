@@ -19,14 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class InitController extends AbstractAdminController
 {
-    /**
-     * @Route("/init/media", name="init_media", methods={"GET"})
-     */
+    #[Route(path: '/init/media', name: 'init_media', methods: ['GET'])]
     public function removeMedia(Filesystem $filesystem, ParameterBagInterface $params): Response
     {
         $image_dir = $params->get('hermes_path_content_images');
@@ -37,9 +33,7 @@ class InitController extends AbstractAdminController
 
     }
 
-    /**
-     * @Route("/config/", name="add_config", methods={"GET"})
-     */
+    #[Route(path: '/config/', name: 'add_config', methods: ['GET'])]
     public function newConfig(ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher): Response
     {
         $configurations = $this->getParameter('init');
@@ -63,9 +57,7 @@ class InitController extends AbstractAdminController
 
     }
 
-    /**
-     * @Route("/page/{libre}", name="add_page", methods={"GET"})
-     */
+    #[Route(path: '/page/{libre}', name: 'add_page', methods: ['GET'])]
     public function newPage(ManagerRegistry $doctrine, $libre): Response
     {
 

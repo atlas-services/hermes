@@ -11,10 +11,9 @@ trait EmailTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\Email()
      */
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\Email]
     protected $email;
 
 

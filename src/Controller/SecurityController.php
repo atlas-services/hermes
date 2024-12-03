@@ -16,16 +16,12 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * @Route("/{_locale}")
- */
+#[Route(path: '/{_locale}')]
 class SecurityController extends AbstractController
 {
 
-    /**
-     * @Route("/forgotten_password", name="app_forgotten_password")
-     * @Route("/re-init-password", name="app_init_password")
-     */
+    #[Route(path: '/forgotten_password', name: 'app_forgotten_password')]
+    #[Route(path: '/re-init-password', name: 'app_init_password')]
     public function forgottenPassword(Request $request, Mailer $mailer, ManagerRegistry $doctrine, TokenGeneratorInterface $tokenGenerator): Response
     {
         if ($request->isMethod('POST')) {
@@ -72,9 +68,7 @@ class SecurityController extends AbstractController
         return $this->render('admin/security/forgotten_password.html.twig');
     }
 
-    /**
-     * @Route("/reset_password/{token}", name="app_reset_password")
-     */
+    #[Route(path: '/reset_password/{token}', name: 'app_reset_password')]
     public function resetPassword(Request $request,ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher,string $token)
     {
 
@@ -113,9 +107,7 @@ class SecurityController extends AbstractController
     }
 
 
-    /**
-     * @Route("/send/unsubscribe/newsletter", name="send_unsubscribe_newsletter")
-     */
+    #[Route(path: '/send/unsubscribe/newsletter', name: 'send_unsubscribe_newsletter')]
     public function emailUnsubscribeNewsletter(Request $request, ManagerRegistry $doctrine, Mailer $mailer,TokenGeneratorInterface $tokenGenerator): Response
     {
         if ($request->isMethod('POST')) {
@@ -168,9 +160,7 @@ class SecurityController extends AbstractController
     }
 
 
-    /**
-     * @Route("/unsubscribe_newsletter/{token}", name="app_unsubscribe_newsletter")
-     */
+    #[Route(path: '/unsubscribe_newsletter/{token}', name: 'app_unsubscribe_newsletter')]
     public function unsubscribeNewsletter(Request $request, ManagerRegistry $doctrine, string $token)
     {
 
@@ -233,17 +223,13 @@ class SecurityController extends AbstractController
          ]);
      }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
-    /**
-     * @Route("/change_locale/{locale}", name="change_locale")
-     */
+    #[Route(path: '/change_locale/{locale}', name: 'change_locale')]
     public function changeLocale($locale, Request $request, RouterInterface $router)
     {
         // On stocke la langue dans la session

@@ -13,14 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class BlockPostController extends AbstractController
 {
-    /**
-     * @Route("/block/contenu/", name="blockpost_index", methods={"GET"})
-     */
+    #[Route(path: '/block/contenu/', name: 'blockpost_index', methods: ['GET'])]
     public function index(ManagerRegistry $doctrine): Response
     {
         $posts = $doctrine
@@ -32,9 +28,7 @@ class BlockPostController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/block/nouveau-contenu", name="blockpost_new", methods={"GET","POST"})
-     */
+     #[Route(path: '/block/nouveau-contenu', name: 'blockpost_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
 
@@ -56,9 +50,7 @@ class BlockPostController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/contenu/{id}", name="blockpost_show", methods={"GET"})
-     */
+    #[Route(path: '/block/contenu/{id}', name: 'blockpost_show', methods: ['GET'])]
     public function show(BlockPost $post): Response
     {
 
@@ -67,9 +59,7 @@ class BlockPostController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/contenu/{id}", name="blockpost_edit", methods={"GET","POST"}, requirements={"blockpost"=".+"})
-     */
+    #[Route(path: '/block/contenu/{id}', name: 'blockpost_edit', methods: ['GET', 'POST'], requirements: ['blockpost' => '.+'])]
     public function edit(Request $request,$id, ManagerRegistry $doctrine, BlockPostRepository $postRepository): Response
     {
 //        Le post'est pas unique pour un name donné, aussi il faut le récupérer avec l'id
@@ -104,9 +94,7 @@ class BlockPostController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/contenu/{id}", name="blockpost_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/block/contenu/{id}', name: 'blockpost_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['blockpost' => 'post'])] BlockPost $post): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
@@ -118,9 +106,7 @@ class BlockPostController extends AbstractController
         return $this->redirectToRoute('blockpost_index');
     }
 
-    /**
-     * @Route("/ajax/switch/blockpost", name="switch_blockpost_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/blockpost', name: 'switch_blockpost_active_ajax')]
     public function ajaxActive(Request $request, BlockPostRepository $postRepository)
     {
         if ($request->isXMLHttpRequest()) {

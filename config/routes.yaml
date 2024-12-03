@@ -25,14 +25,14 @@ admin:
     permanent: true
 
 hermes_admin:
-  # loads routes from the PHP annotations of the controllers found in that directory
+  # loads routes from the PHP attributes of the controllers found in that directory
   resource: '../src/Controller/Admin/AdminController.php'
-  type:     annotation
+  type:     attribute
 
 hermes_front:
-  # loads routes from the PHP annotations of the controllers found in that directory
+  # loads routes from the PHP attributes of the controllers found in that directory
   resource: '../src/Controller/Front'
-  type:     annotation
+  type:     attribute
 
 
 # homepage:

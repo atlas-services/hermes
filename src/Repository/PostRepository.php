@@ -76,7 +76,7 @@ class PostRepository extends ServiceEntityRepository
      */
      public function getEditablePosts()
      {
- 
+
         $allposts = $this->findAll();
         foreach($allposts as $post){
             if(!is_null($post->getSection())){
@@ -85,7 +85,7 @@ class PostRepository extends ServiceEntityRepository
         }
 
          return $posts;
- 
+
      }
 //    /**
 //     * @return Collection

@@ -11,10 +11,9 @@ trait ReferenceNameTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=false, options={"default":"ref"})
-     * @Assert\Length(max=100)
      */
+    #[ORM\Column(type: 'string', nullable: false, options: ['default' => 'ref'])]
+    #[Assert\Length(max: 100)]
     protected $referenceName ="ref";
 
 

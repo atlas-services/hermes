@@ -11,17 +11,15 @@ trait PublishedTrait
 {
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     *
      * @var \DateTime
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $startPublishedAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     *
      * @var \DateTime
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $endPublishedAt;
 
 

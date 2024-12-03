@@ -12,14 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class TemoignageController extends AbstractAdminController
 {
-    /**
-     * @Route("/temoignage/", name="temoignage_index", methods={"GET"})
-     */
+    #[Route(path: '/temoignage/', name: 'temoignage_index', methods: ['GET'])]
     public function index(ManagerRegistry $doctrine): Response
     {
         $temoignages = $doctrine
@@ -33,9 +29,7 @@ class TemoignageController extends AbstractAdminController
         return $this->render('admin/temoignage/index.html.twig', $array);
     }
 
-    /**
-     * @Route("/edit/{id}", name="temoignage_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/edit/{id}', name: 'temoignage_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, Temoignage $temoignage): Response
     {
 
@@ -54,9 +48,7 @@ class TemoignageController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * @Route("/temoignage/{id}", name="temoignage_show", methods={"GET"})
-     */
+    #[Route(path: '/temoignage/{id}', name: 'temoignage_show', methods: ['GET'])]
     public function show(Temoignage $temoignage): Response
     {
         return $this->render('admin/temoignage/show.html.twig', [
@@ -65,9 +57,7 @@ class TemoignageController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/temoignage/{id}", name="temoignage_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/temoignage/{id}', name: 'temoignage_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Temoignage $temoignage): Response
     {
         if ($this->isCsrfTokenValid('delete'.$temoignage->getId(), $request->request->get('_token'))) {
@@ -79,9 +69,7 @@ class TemoignageController extends AbstractAdminController
         return $this->redirectToRoute('temoignage_index');
     }
 
-    /**
-     * @Route("/ajax/switch/temoignage", name="switch_temoignage_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/temoignage', name: 'switch_temoignage_active_ajax')]
     public function ajaxActive(Request $request, TemoignageRepository $temoignageRepository)
     {
         if ($request->isXMLHttpRequest()) {

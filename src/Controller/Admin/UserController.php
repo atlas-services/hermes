@@ -13,14 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin/user")
- */
+#[Route(path: '/{_locale}/admin/user')]
 class UserController extends AbstractAdminController
 {
-    /**
-     * @Route("/{roles?}", name="user_index", methods={"GET"})
-     */
+    #[Route(path: '/{roles?}', name: 'user_index', methods: ['GET'])]
     public function index(Request $request, ManagerRegistry $doctrine, string $roles = null): Response
     {
 
@@ -41,9 +37,7 @@ class UserController extends AbstractAdminController
         return $this->render('admin/user/index.html.twig', $array);
     }
 
-        /**
-     * @Route("/user/newsletter", name="user_newsletter", methods={"GET"})
-     */
+        #[Route(path: '/user/newsletter', name: 'user_newsletter', methods: ['GET'])]
     public function newsletter(ManagerRegistry $doctrine): Response
     {
         $users = $doctrine
@@ -57,9 +51,7 @@ class UserController extends AbstractAdminController
         return $this->render('admin/user/newsletter.html.twig', $array);
     }
 
-    /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/new', name: 'user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){
@@ -86,9 +78,7 @@ class UserController extends AbstractAdminController
         return $this->render('admin/user/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('admin/user/show.html.twig', [
@@ -96,9 +86,7 @@ class UserController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine,User $user): Response
     {
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){
@@ -127,9 +115,7 @@ class UserController extends AbstractAdminController
         return $this->render('admin/user/edit.html.twig', $array);
     }
 
-    /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/{id}', name: 'user_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
@@ -159,9 +145,7 @@ class UserController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/ajax/switch/user", name="switch_user_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/user', name: 'switch_user_active_ajax')]
     public function ajaxActive(Request $request, UserRepository $userRepository)
     {
         if ($request->isXMLHttpRequest()) {
@@ -173,9 +157,7 @@ class UserController extends AbstractAdminController
         return new Response('This is not ajax!', 400);
     }
 
-    /**
-     * @Route("/ajax/switch/users", name="switch_users_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/users', name: 'switch_users_active_ajax')]
     public function ajaxActiveAll(Request $request, UserRepository $userRepository)
     {
         if ($request->isXMLHttpRequest()) {

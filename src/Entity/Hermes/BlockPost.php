@@ -23,45 +23,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(
- *     fields={"block", "name"},
- *     errorPath="name",
- *     message="post.exists"
- * )
- * @ORM\Table(name="block_post")
- *
- * Defines the properties of the Post entity to represent the blog posts.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'block_post')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['block', 'name'], errorPath: 'name', message: 'post.exists')]
 class BlockPost extends AbstractContent implements \JsonSerializable
 {
     use PositionTrait;
     use PublishedTrait;
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\User::class, inversedBy: 'posts')]
     protected $user;
 
     /**
      * @var Block
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Block", inversedBy="blockPosts")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\Block::class, inversedBy: 'blockPosts')]
     protected $block;
 
     public function __toString(): string

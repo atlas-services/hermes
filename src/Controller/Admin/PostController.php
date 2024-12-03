@@ -16,14 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class PostController extends AbstractAdminController
 {
-    /**
-     * @Route("/contenu/", name="post_index", methods={"GET"})
-     */
+    #[Route(path: '/contenu/', name: 'post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository,ManagerRegistry $doctrine,): Response
     {
         $posts = $postRepository->getEditablePosts();
@@ -36,9 +32,7 @@ class PostController extends AbstractAdminController
         return $this->render('admin/post/index.html.twig', $array);
     }
 
-    /**
-     * @Route("/nouveau-contenu/section/{section}/liste", name="post_new_section_liste", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouveau-contenu/section/{section}/liste', name: 'post_new_section_liste', methods: ['GET', 'POST'])]
     public function postNewSectionListe(Request $request, ManagerRegistry $doctrine, #[MapEntity()] ?Section $section, PostRepository $postRepository): Response
     {
         $numpost = count($section->getPosts()) + 1;
@@ -88,9 +82,7 @@ class PostController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/nouveau-contenu/section/{section}", name="post_new_section", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouveau-contenu/section/{section}', name: 'post_new_section', methods: ['GET', 'POST'])]
     public function postNewSection(Request $request, ManagerRegistry $doctrine, #[MapEntity()] ?Section $section, PostRepository $postRepository): Response
     {
         $numpost = count($section->getPosts()) + 1;
@@ -134,9 +126,7 @@ class PostController extends AbstractAdminController
         return $this->render('admin/post/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/nouveau-contenu", name="post_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouveau-contenu', name: 'post_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $options= ['section'=> true];
@@ -165,9 +155,7 @@ class PostController extends AbstractAdminController
         return $this->render('admin/post/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/contenu/{id}", name="post_show", methods={"GET"})
-     */
+    #[Route(path: '/contenu/{id}', name: 'post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
 
@@ -179,9 +167,7 @@ class PostController extends AbstractAdminController
         return $this->render('admin/post/show.html.twig', $array);
     }
 
-    /**
-     * @Route("/menu/{menu}/contenu/{id}/{post}", name="post_edit", methods={"GET","POST"}, requirements={"post"=".+"})
-     */
+    #[Route(path: '/menu/{menu}/contenu/{id}/{post}', name: 'post_edit', methods: ['GET', 'POST'], requirements: ['post' => '.+'])]
     public function edit(Request $request, ManagerRegistry $doctrine,$id, #[MapEntity(mapping: ['post' => 'name'])] Post $post, #[MapEntity(mapping: ['menu' => 'slug'])] Menu $menu, PostRepository $postRepository): Response
     {
         $referer = (string) $request->headers->get('referer');
@@ -226,9 +212,7 @@ class PostController extends AbstractAdminController
         return $this->render('admin/post/edit.html.twig', $array);
     }
 
-    /**
-     * @Route("/contenu/{id}", name="post_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/contenu/{id}', name: 'post_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Post $post): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
@@ -245,9 +229,7 @@ class PostController extends AbstractAdminController
 
     }
 
-    /**
-     * @Route("/ajax/switch/post", name="switch_post_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/post', name: 'switch_post_active_ajax')]
     public function ajaxActive(Request $request, PostRepository $postRepository)
     {
         if ($request->isXMLHttpRequest()) {
@@ -261,9 +243,7 @@ class PostController extends AbstractAdminController
 
 
 
-    /**
-     * @Route("/contenu/copy/{post}", name="post_copy", methods={"GET","POST"})
-     */
+    #[Route(path: '/contenu/copy/{post}', name: 'post_copy', methods: ['GET', 'POST'])]
     public function copy(Request $request, #[MapEntity(mapping: ['post' => 'id'])] Post $post, Copy $copy): Response
     {
         $form = $this->createForm(PostCopyType::class, $post);

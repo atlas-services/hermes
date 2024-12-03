@@ -11,10 +11,9 @@ trait UpdatedTrait
 {
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     *
      * @var \DateTime
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $updatedAt;
 
 
@@ -37,9 +36,8 @@ trait UpdatedTrait
 
     /**
      * Gets triggered every time on update
-
-     * @ORM\PreUpdate
      */
+    #[ORM\PreUpdate]
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");

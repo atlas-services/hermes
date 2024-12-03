@@ -20,25 +20,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SheetRepository")
- * @UniqueEntity(
- *      fields={"locale", "referenceName"},
- *      message="sheet.exists"
- *  )
- * @ORM\Table(name="sheet")
- * @ORM\HasLifecycleCallbacks
- * Defines the properties of the Sheet entity to represent the blog menus.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- *  * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'sheet')]
+#[ORM\Entity(repositoryClass: \App\Repository\SheetRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['locale', 'referenceName'], message: 'sheet.exists')] // Defines the properties of the Sheet entity to represent the blog menus.
 class Sheet
 {
     const ONE_PAGE = 'one-page';
@@ -58,11 +49,10 @@ class Sheet
 
     /**
      * @var Menu[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Menu", mappedBy="sheet",  cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="menu_sheet")
-     * @ORM\OrderBy({"position" = "ASC"})
      */
+    #[ORM\JoinTable(name: 'menu_sheet')]
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Menu::class, mappedBy: 'sheet', cascade: ['persist', 'remove'])]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private $menus;
 
     public function __construct()

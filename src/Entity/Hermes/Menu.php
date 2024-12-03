@@ -22,21 +22,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\MenuRepository")
- * @UniqueEntity(
- *      fields={"locale", "referenceName"},
- *      message="menu.exists"
- *  )
- * @ORM\Table(name="menu")
- * @ORM\HasLifecycleCallbacks
- *
- * Defines the properties of the Tag entity to represent the menu.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
  *
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'menu')]
+#[ORM\Entity(repositoryClass: \App\Repository\MenuRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['locale', 'referenceName'], message: 'menu.exists')] // Defines the properties of the Tag entity to represent the menu.
 class Menu
 {
     use IdTrait;
@@ -53,26 +46,23 @@ class Menu
 
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="menus")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\User::class, inversedBy: 'menus')]
     protected $user;
 
     /**
      * @var Sheet
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Sheet", inversedBy="menus")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\Sheet::class, inversedBy: 'menus')]
     private $sheet;
 
     /**
      * @var Section[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Hermes\Section", mappedBy="menu",  cascade={"persist", "remove"})
-     * @ORM\OrderBy({"position" = "ASC"})
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\Hermes\Section::class, mappedBy: 'menu', cascade: ['persist', 'remove'])]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     protected $sections;
 
     public function __construct()

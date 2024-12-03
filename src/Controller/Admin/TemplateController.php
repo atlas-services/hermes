@@ -10,14 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin/template")
- */
+#[Route(path: '/{_locale}/admin/template')]
 class TemplateController extends AbstractAdminController
 {
-    /**
-     * @Route("/", name="template_index", methods={"GET"})
-     */
+    #[Route(path: '/', name: 'template_index', methods: ['GET'])]
     public function index(ManagerRegistry $doctrine): Response
     {
         $templates = $doctrine
@@ -32,9 +28,7 @@ class TemplateController extends AbstractAdminController
         return $this->render('admin/template/index.html.twig', $array);
     }
 
-    /**
-     * @Route("/new", name="template_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/new', name: 'template_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $template = new Template();
@@ -55,9 +49,7 @@ class TemplateController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="template_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'template_show', methods: ['GET'])]
     public function show(Template $template): Response
     {
         return $this->render('admin/template/show.html.twig', [
@@ -65,9 +57,7 @@ class TemplateController extends AbstractAdminController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="template_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/{id}/edit', name: 'template_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, Template $template): Response
     {
         $form = $this->createForm(TemplateType::class, $template);
@@ -88,9 +78,7 @@ class TemplateController extends AbstractAdminController
         return $this->render('admin/template/edit.html.twig', $array );
     }
 
-    /**
-     * @Route("/{id}", name="template_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/{id}', name: 'template_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Template $template): Response
     {
         if(!$this->isGranted('ROLE_SUPER_ADMIN')){

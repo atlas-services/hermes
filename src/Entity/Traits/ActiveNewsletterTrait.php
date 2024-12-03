@@ -12,9 +12,8 @@ trait ActiveNewsletterTrait
 {
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean" , nullable=true)
      */
+    #[ORM\Column(type: 'boolean', nullable: true)]
     protected $active_newsletter= true;
 
 

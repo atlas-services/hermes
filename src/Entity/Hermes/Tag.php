@@ -9,24 +9,18 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\NameTrait;
 
 /**
- * @ORM\Entity()
- * @ORM\Table(name="tag")
- *
- * Defines the properties of the Tag entity to represent the post tags.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
  *
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */
+#[ORM\Table(name: 'tag')]
+#[ORM\Entity]
 class Tag
 {
     use IdTrait;
     use NameTrait;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Hermes\Post", mappedBy="tags", cascade={"persist"})
-     * @ORM\JoinTable(name="post_tag")
-     */
+    #[ORM\JoinTable(name: 'post_tag')]
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Hermes\Post::class, mappedBy: 'tags', cascade: ['persist'])]
     private $posts;
 
     public function __construct()

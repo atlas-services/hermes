@@ -11,10 +11,9 @@ trait ContentTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank(groups={"content"}, message="error_message.post.content")
      */
+    #[ORM\Column(type: 'text', nullable: true)]
+    #[Assert\NotBlank(groups: ['content'], message: 'error_message.post.content')]
     protected $content;
 
     public function getContent(): ?string

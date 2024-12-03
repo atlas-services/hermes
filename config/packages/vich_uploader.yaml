@@ -1,6 +1,7 @@
 vich_uploader:
     db_driver: orm
-
+    metadata:
+        type: attribute    # or annotation
 #    mappings:
 #        products:
 #            uri_prefix: /images/products

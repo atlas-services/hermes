@@ -11,10 +11,9 @@ trait PositionTrait
 {
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Length(max=2)
      */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Length(max: 2)]
     protected $position = 1 ;
 
 

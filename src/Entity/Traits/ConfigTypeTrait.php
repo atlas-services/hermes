@@ -11,10 +11,9 @@ trait ConfigTypeTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length(max=50)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Length(max: 50)]
     protected $type;
 
 

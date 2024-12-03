@@ -24,27 +24,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity()
- * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(
- *     fields={"section", "name"},
- *     errorPath="name",
- *     message="post.exists"
- * )
- * @ORM\Table(name="post")
- *
- * Defines the properties of the Post entity to represent the blog posts.
- *
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
- * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\Table(name: 'post')]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['section', 'name'], errorPath: 'name', message: 'post.exists')]
 class Post extends AbstractContent
 {
     use PositionTrait;
@@ -52,27 +41,24 @@ class Post extends AbstractContent
     use PublishedTrait;
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\User", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\User::class, inversedBy: 'posts')]
     protected $user;
 
     /**
      * @var Tag[]|ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Hermes\Tag", inversedBy="posts",  cascade={"persist"})
-     * @ORM\JoinTable(name="post_tag")
-     * @Assert\Count(max="40", maxMessage="post.too_many_tags")
      */
+    #[ORM\JoinTable(name: 'post_tag')]
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Hermes\Tag::class, inversedBy: 'posts', cascade: ['persist'])]
+    #[Assert\Count(max: 40, maxMessage: 'post.too_many_tags')]
     private $tags;
 
     /**
      * @var Section
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hermes\Section", inversedBy="posts")
-     * @ORM\JoinColumn(nullable=true)
      */
+    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Hermes\Section::class, inversedBy: 'posts')]
     private $section;
 
     public function __construct()

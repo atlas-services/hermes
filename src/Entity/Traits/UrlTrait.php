@@ -11,12 +11,9 @@ trait UrlTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Url(
-     *  protocols = {"http", "https"}
-     * )
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Url(protocols: ['http', 'https'])]
     protected $url;
 
 

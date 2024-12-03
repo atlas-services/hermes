@@ -36,13 +36,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class FrontController extends AbstractController
 {
 
-    /**
-    * @Route(
-    *     "/{_locale}/sitemap.xml",
-    *     name="sitemap",
-    *     methods={"GET|POST"}
-    *     )
-    */
+    #[Route(path: '/{_locale}/sitemap.xml', name: 'sitemap', methods: ['GET|POST'])]
     public function sitemap(Request $request, Page $page)
     {
         $localeRouting = $request->attributes->get('_locale' , 'fr');
@@ -61,13 +55,7 @@ class FrontController extends AbstractController
 
     }
 
-    /**
-     * @Route(
-     *     "/{_locale}/search",
-     *     name="search_content",
-     *     methods={"GET|POST"}
-     *     )
-     */
+    #[Route(path: '/{_locale}/search', name: 'search_content', methods: ['GET|POST'])]
     public function search(Request $request, PostRepository $postRepository, TemoignageRepository $temoignageRepository, RouterInterface $router, Page $page)
     {
         $locale = $request->attributes->get('_locale' , 'fr');
@@ -99,18 +87,8 @@ class FrontController extends AbstractController
 
 
 
-    /**
-     *  @Route(
-     *     "/",
-     *     name="home",
-     *     methods={"GET|POST"}
-     *     )
-     * @Route(
-     *     "/{_locale?}",
-     *     name="homepage",
-     *     methods={"GET|POST"}
-     *     )
-     */
+    #[Route(path: '/', name: 'home', methods: ['GET|POST'])]
+    #[Route(path: '/{_locale?}', name: 'homepage', methods: ['GET|POST'])]
     public function homepage(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page )
     {
         $route = $request->attributes->get('_route');
@@ -138,13 +116,7 @@ class FrontController extends AbstractController
         return $this->render('front/index.html.twig', $array);
     }
 
-    /**
-     * @Route(
-     *     "/{_locale}/{slug}",
-     *     name="slug",
-     *     methods={"GET|POST"}
-     *     )
-     */
+    #[Route(path: '/{_locale}/{slug}', name: 'slug', methods: ['GET|POST'])]
     public function page(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page, $slug )
     {
         $sheet = $slug;
@@ -173,13 +145,7 @@ class FrontController extends AbstractController
         return $this->render('front/index.html.twig', $array);
     }
 
-    /**
-     * @Route(
-     *     "/{_locale}/{sheet}/{slug}",
-     *     name="sheet",
-     *     methods={"GET|POST"}
-     *     )
-     */
+    #[Route(path: '/{_locale}/{sheet}/{slug}', name: 'sheet', methods: ['GET|POST'])]
     public function pageSheet(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page, $sheet , $slug)
     {
         $route = $request->attributes->get('_route');

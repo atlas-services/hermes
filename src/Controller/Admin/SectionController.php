@@ -26,14 +26,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class SectionController extends AbstractAdminController
 {
-    /**
-     * @Route("/section/{menu}", name="section_index", defaults={"menu": "All"}, methods={"GET"})
-     */
+    #[Route(path: '/section/{menu}', name: 'section_index', defaults: ['menu' => 'All'], methods: ['GET'])]
     public function index(ManagerRegistry $doctrine, $menu): Response
     {
         $sections = $doctrine
@@ -66,9 +62,7 @@ class SectionController extends AbstractAdminController
         return $this->render('admin/section/index.html.twig', $array );
     }
 
-    /**
-     * @Route("/newsletters", name="section_newsletter", methods={"GET"})
-     */
+    #[Route(path: '/newsletters', name: 'section_newsletter', methods: ['GET'])]
     public function newsletters(ManagerRegistry $doctrine): Response
     {
 
@@ -91,9 +85,7 @@ class SectionController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/menu/{menu}/nouvelle-section/nouveau-contenu", name="section_post_new_menu", methods={"GET","POST"})
-     */
+    #[Route(path: '/menu/{menu}/nouvelle-section/nouveau-contenu', name: 'section_post_new_menu', methods: ['GET', 'POST'])]
     public function SectionPostNewMenu(Request $request, ManagerRegistry $doctrine, Copy $copy,ApiClient $apiClient , #[MapEntity(mapping: ['menu' => 'slug'])] ?Menu $menu): Response
     {
         $sections = $menu->getSections();
@@ -154,9 +146,7 @@ class SectionController extends AbstractAdminController
         return $this->render('admin/section/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/nouvelle-section", name="section_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouvelle-section', name: 'section_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
         $post = new Post();
@@ -182,9 +172,7 @@ class SectionController extends AbstractAdminController
         return $this->render('admin/section/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/section/{id}", name="section_show", methods={"GET"})
-     */
+    #[Route(path: '/section/{id}', name: 'section_show', methods: ['GET'])]
     public function show(Section $section): Response
     {
         $array = [
@@ -195,9 +183,7 @@ class SectionController extends AbstractAdminController
         return $this->render('admin/section/show.html.twig', $array);
     }
 
-    /**
-     * @Route("/section/edit/{section}/{config}", name="section_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/section/edit/{section}/{config}', name: 'section_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['section' => 'id'])] Section $section, $config = 1): Response
     {
 
@@ -258,9 +244,7 @@ class SectionController extends AbstractAdminController
         return $this->render('admin/section/edit.html.twig', $array);
     }
 
-    /**
-     * @Route("/section/{id}", name="section_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/section/{id}', name: 'section_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Section $section): Response
     {
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {
@@ -272,9 +256,7 @@ class SectionController extends AbstractAdminController
         return $this->redirectToRoute('section_index');
     }
 
-    /**
-     * @Route("/ajax/switch/section", name="switch_section_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/section', name: 'switch_section_active_ajax')]
     public function ajaxActive(Request $request, SectionRepository $sectionRepository)
     {
         if ($request->isXMLHttpRequest()) {
@@ -287,9 +269,7 @@ class SectionController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/section/copy/{section}", name="section_copy", methods={"GET","POST"})
-     */
+    #[Route(path: '/section/copy/{section}', name: 'section_copy', methods: ['GET', 'POST'])]
     public function copy(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['section' => 'id'])] Section $section, Copy $copy): Response
     {
         $initMenu = $doctrine->getRepository(Section::class)->find($section->getId())->getMenu();
@@ -322,9 +302,7 @@ class SectionController extends AbstractAdminController
 
 
 
-    /**
-     * @Route("/section/sendNewsletter/{section}/{test}", name="section_send_newsletter", methods={"GET","POST"})
-     */
+    #[Route(path: '/section/sendNewsletter/{section}/{test}', name: 'section_send_newsletter', methods: ['GET', 'POST'])]
     public function sendNewsletter(Request $request, #[MapEntity(mapping: ['section' => 'id'])] Section $section, Mailer $mailer, UserRepository $userRepository, $test=null): Response
     { 
         $newsletter_emails = [];

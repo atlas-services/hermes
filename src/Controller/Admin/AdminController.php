@@ -10,15 +10,11 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class AdminController extends AbstractAdminController
 {
 
-    /**
-     * @Route("/", name="admin_index", methods={"GET"})
-     */
+    #[Route(path: '/', name: 'admin_index', methods: ['GET'])]
     public function index(ManagerRegistry $doctrine, Image $image,TemplateLibreHermes $templateLibreHermes): Response
     {
         $image->shuffle();
@@ -58,9 +54,7 @@ class AdminController extends AbstractAdminController
         return $this->render('admin/index.html.twig', $array);
     }
 
-    /**
-     * @Route("/presentation", name="admin_presentation", methods={"GET"})
-     */
+    #[Route(path: '/presentation', name: 'admin_presentation', methods: ['GET'])]
     public function presentation(): Response
     {
 

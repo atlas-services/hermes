@@ -20,11 +20,9 @@ use App\Entity\Traits\SummaryTrait;
 use App\Entity\Traits\UpdatedTrait;
 use App\Entity\Traits\ActiveTrait;
 
-/**
- * @ORM\Entity()
- * @ORM\Table(name="readme")
- *
- */
+
+#[ORM\Table(name: 'readme')]
+#[ORM\Entity]
 class Readme
 {
     use IdTrait;
@@ -36,9 +34,8 @@ class Readme
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: 'datetime')]
     private $publishedAt;
 
     public function __construct()

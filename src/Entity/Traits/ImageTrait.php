@@ -9,24 +9,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 trait ImageTrait
 {
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $fileName;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * @var File|null
-     * @Assert\File(maxSize="10M")
-     * @Assert\Image(
-     *     mimeTypes={"image/jpeg", "image/jpg", "image/gif", "image/png", "image/svg", "image/svg+xml", "image/pdf", "image/webp", "application/pdf", "video/mp4"}
-     * )
-     * @Assert\NotBlank(groups={"image"}, message="error_message.post.image")
-     * @Vich\UploadableField(mapping="content_images", fileNameProperty="filename")
+     **@*Vich\UploadableField(mapping="content_images", fileNameProperty="filename")
      */
+    #[Vich\UploadableField(mapping: 'content_images', fileNameProperty: 'filename')]
+    #[Assert\File(maxSize: '10M')]
+    #[Assert\Image(mimeTypes: ['image/jpeg', 'image/jpg', 'image/gif', 'image/png', 'image/svg', 'image/svg+xml', 'image/pdf', 'image/webp', 'application/pdf', 'video/mp4'])]
+    #[Assert\NotBlank(groups: ['image'], message: 'error_message.post.image')]
     protected $imageFile;
 
     /**

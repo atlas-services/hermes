@@ -16,14 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class BlockController extends AbstractController
 {
-    /**
-     * @Route("/block/", name="block_index", methods={"GET"})
-     */
+    #[Route(path: '/block/', name: 'block_index', methods: ['GET'])]
     public function index(ManagerRegistry $doctrine): Response
     {
         $blocks = $doctrine
@@ -37,9 +33,7 @@ class BlockController extends AbstractController
     }
 
 
-    /**
-     * @Route("/menu/{menu}/nouveau-block/nouveau-contenu", name="block_post_new_menu", methods={"GET","POST"})
-     */
+    #[Route(path: '/menu/{menu}/nouveau-block/nouveau-contenu', name: 'block_post_new_menu', methods: ['GET', 'POST'])]
     public function BlockPostNewMenu(Request $request, ManagerRegistry $doctrine, ?Menu $menu): Response
     {
         $block = new Block() ;
@@ -76,9 +70,7 @@ class BlockController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/nouveau-block", name="block_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/nouveau-block', name: 'block_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine): Response
     {
 //        $post = new BlockPost();
@@ -101,9 +93,7 @@ class BlockController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/{id}", name="block_show", methods={"GET"})
-     */
+    #[Route(path: '/block/{id}', name: 'block_show', methods: ['GET'])]
     public function show(Block $block): Response
     {
         return $this->render('admin/block/show.html.twig', [
@@ -111,10 +101,8 @@ class BlockController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/edit/{block}", name="block_edit", methods={"GET","POST"})
-     * 
-     */
+    
+    #[Route(path: '/block/edit/{block}', name: 'block_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['block' => 'id'])] Block $block): Response
     {
 
@@ -148,9 +136,7 @@ class BlockController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/{id}", name="block_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/block/{id}', name: 'block_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Block $block): Response
     {
         if ($this->isCsrfTokenValid('delete'.$block->getId(), $request->request->get('_token'))) {
@@ -162,9 +148,7 @@ class BlockController extends AbstractController
         return $this->redirectToRoute('block_index');
     }
 
-    /**
-     * @Route("/ajax/switch/block", name="switch_block_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/block', name: 'switch_block_active_ajax')]
     public function ajaxActive(Request $request, BlockRepository $blockRepository)
     {
         if ($request->isXMLHttpRequest()) {

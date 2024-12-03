@@ -25,14 +25,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 
-/**
- * @Route("/{_locale}/admin")
- */
+#[Route(path: '/{_locale}/admin')]
 class MenuController extends AbstractAdminController
 {
-    /**
-     * @Route("/menu/{sheet}", name="menu_index", defaults={"sheet": "All"},  methods={"GET"})
-     */
+    #[Route(path: '/menu/{sheet}', name: 'menu_index', defaults: ['sheet' => 'All'], methods: ['GET'])]
     public function index(ManagerRegistry $doctrine, $sheet): Response
     {
         $menus = $doctrine
@@ -61,9 +57,7 @@ class MenuController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/add/menu/new", name="menu_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/add/menu/new', name: 'menu_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ManagerRegistry $doctrine, MenuRepository $menuRepository): Response
     {
 //        Le menun'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
@@ -99,9 +93,7 @@ class MenuController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-libre", name="menu_section_post_new_sheet_libre", methods={"GET","POST"})
-     */
+    #[Route(path: '/page/{sheet}/nouveau-menu/nouveau-contenu-libre', name: 'menu_section_post_new_sheet_libre', methods: ['GET', 'POST'])]
     public function menuSectionPostNewSheetLibre(Request $request, ManagerRegistry $doctrine ,#[MapEntity(mapping: ['sheet' => 'slug'])] Sheet $sheet ,MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
     {
 
@@ -154,9 +146,7 @@ class MenuController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu-liste", name="menu_section_post_new_sheet_liste", methods={"GET","POST"})
-     */
+    #[Route(path: '/page/{sheet}/nouveau-menu/nouveau-contenu-liste', name: 'menu_section_post_new_sheet_liste', methods: ['GET', 'POST'])]
     public function menuSectionPostNewSheetListe(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['sheet' => 'slug'])] Sheet $sheet , MenuRepository $menuRepository, TemplateRepository $templateRepository, PostRepository $postRepository): Response
     {
 
@@ -214,9 +204,7 @@ class MenuController extends AbstractAdminController
 
 
 
-    /**
-     * @Route("/page/{sheet}/nouveau-menu/nouveau-contenu", name="menu_section_post_new_sheet", methods={"GET","POST"})
-     */
+    #[Route(path: '/page/{sheet}/nouveau-menu/nouveau-contenu', name: 'menu_section_post_new_sheet', methods: ['GET', 'POST'])]
     public function menuSectionPostNewSheet(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['sheet' => 'slug'])] ?Sheet $sheet, MenuRepository $menuRepository, PostRepository $postRepository, ApiClient $apiClient): Response
     {
         $libres = $apiClient->getTemplates('templates', 99);
@@ -272,9 +260,7 @@ class MenuController extends AbstractAdminController
         return $this->render('admin/menu/new.html.twig', $array);
     }
 
-    /**
-     * @Route("/menu/{id}", name="menu_show", methods={"GET"})
-     */
+    #[Route(path: '/menu/{id}', name: 'menu_show', methods: ['GET'])]
     public function show(Menu $menu): Response
     {
         $array = [
@@ -284,9 +270,7 @@ class MenuController extends AbstractAdminController
         return $this->render('admin/menu/show.html.twig', $array);
     }
 
-    /**
-     * @Route("/page/{sheet}/menu/{referenceName}/locale/{locale}", name="menu_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/page/{sheet}/menu/{referenceName}/locale/{locale}', name: 'menu_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, CacheInterface $backCache,MenuRepository $menuRepository, $sheet, $referenceName, $locale): Response
     {
 //        Le menu'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
@@ -322,9 +306,7 @@ class MenuController extends AbstractAdminController
         return $this->render('admin/menu/edit.html.twig', $array);
     }
 
-    /**
-     * @Route("/menu/{id}/modele/{section}", name="menu_section_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/menu/{id}/modele/{section}', name: 'menu_section_edit', methods: ['GET', 'POST'])]
     public function editSection(Request $request, ManagerRegistry $doctrine, Menu $menu, #[MapEntity()] ?Section $section): Response
     {
 
@@ -358,9 +340,7 @@ class MenuController extends AbstractAdminController
     }
 
 
-    /**
-     * @Route("/menu/{id}", name="menu_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/menu/{id}', name: 'menu_delete', methods: ['POST', 'DELETE'])]
     public function delete(Request $request, ManagerRegistry $doctrine, Menu $menu): Response
     {
         if ($this->isCsrfTokenValid('delete'.$menu->getId(), $request->request->get('_token'))) {
@@ -372,9 +352,7 @@ class MenuController extends AbstractAdminController
         return $this->redirectToRoute('menu_index');
     }
 
-    /**
-     * @Route("/ajax/switch/menu", name="switch_menu_active_ajax")
-     */
+    #[Route(path: '/ajax/switch/menu', name: 'switch_menu_active_ajax')]
     public function ajaxActive(Request $request, MenuRepository $menuRepository)
     {
         if ($request->isXMLHttpRequest()) {

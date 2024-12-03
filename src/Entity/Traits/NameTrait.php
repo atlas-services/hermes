@@ -11,10 +11,9 @@ trait NameTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\Length(max=100)
      */
+    #[ORM\Column(type: 'string', nullable: false)]
+    #[Assert\Length(max: 100)]
     protected $name;
 
 

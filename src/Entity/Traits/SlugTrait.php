@@ -11,10 +11,9 @@ trait SlugTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length(max=255)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Length(max: 255)]
     protected $slug;
 
 

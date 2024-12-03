@@ -32,7 +32,7 @@ doctrine:
                 mappings:
                     App:
                         is_bundle: false
-                        type: annotation
+                        type: attribute
                         dir: '%kernel.project_dir%/src/Entity/Hermes'
                         prefix: 'App\Entity\Hermes'
                         alias: App
@@ -42,7 +42,7 @@ doctrine:
                 mappings:
                     Config:
                         is_bundle: false
-                        type: annotation
+                        type: attribute
                         dir: '%kernel.project_dir%/src/Entity/Config'
                         prefix: 'App\Entity\Config'
                         alias: Config

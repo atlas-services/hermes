@@ -11,10 +11,8 @@ use App\Entity\Traits\IdTrait;
 use App\Entity\Traits\PositionTrait;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\TemoignageRepository")
- * @ORM\Table(name="temoignage")
- */
+#[ORM\Table(name: 'temoignage')]
+#[ORM\Entity(repositoryClass: \App\Repository\TemoignageRepository::class)]
 class Temoignage implements ContactInterface, \JsonSerializable
 
 {

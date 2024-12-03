@@ -15,6 +15,11 @@ class HermesPrepareInstall extends Command
 
     protected $container;
     protected $filesystem;
+    protected $hermes_database_dir;
+    protected $hermes_database_config_dir;
+    protected $hermes_path_content_image;
+    protected $hermes_path_content_image_post;
+    protected $hermes_path_cache_image;
 
     public function __construct(Filesystem $filesystem, ParameterBagInterface $container)
     {
@@ -33,7 +38,7 @@ class HermesPrepareInstall extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         // ... put here the code to run in your command
         $created = $this->addInstallDir();
