@@ -28,7 +28,7 @@ class MenuRepository extends ServiceEntityRepository
      * @return int Returns max position value
      */
 
-    public function getMaxPosition(Sheet $sheet = null)
+    public function getMaxPosition(Sheet $sheet)
     {
         $qb = $this->getQbMaxPosition();
         if (isset($sheet)) {

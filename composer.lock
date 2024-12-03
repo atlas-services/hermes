@@ -1644,16 +1644,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-imagine/Imagine.git",
-                "reference": "8908a6cee4242a5fd4e4457ab5713449b1934cfa"
+                "reference": "c754ffae58f45f5687212f7e8b6f021e70c65ae3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-imagine/Imagine/zipball/8908a6cee4242a5fd4e4457ab5713449b1934cfa",
-                "reference": "8908a6cee4242a5fd4e4457ab5713449b1934cfa",
+                "url": "https://api.github.com/repos/php-imagine/Imagine/zipball/c754ffae58f45f5687212f7e8b6f021e70c65ae3",
+                "reference": "c754ffae58f45f5687212f7e8b6f021e70c65ae3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.4 || ^9.3"
@@ -1699,7 +1699,7 @@
                 "issues": "https://github.com/php-imagine/Imagine/issues",
                 "source": "https://github.com/php-imagine/Imagine/tree/develop"
             },
-            "time": "2024-11-18T07:50:36+00:00"
+            "time": "2024-12-03T14:39:39+00:00"
         },
         {
             "name": "jms/metadata",
@@ -2693,12 +2693,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "190be213b01fa58dc013c362615a3de9f06d14a2"
+                "reference": "724fe3c33344e05d7fa2a892f1a009d301886a5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/190be213b01fa58dc013c362615a3de9f06d14a2",
-                "reference": "190be213b01fa58dc013c362615a3de9f06d14a2",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/724fe3c33344e05d7fa2a892f1a009d301886a5f",
+                "reference": "724fe3c33344e05d7fa2a892f1a009d301886a5f",
                 "shasum": ""
             },
             "require": {
@@ -2753,7 +2753,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-17T01:27:40+00:00"
+            "time": "2024-12-03T17:28:10+00:00"
         },
         {
             "name": "symfony/asset",
@@ -8908,12 +8908,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "33849703bddd4649113e41426ca51514b6d89c5f"
+                "reference": "0ac81474ff69abc0c334b2d19cbc054d1c364f18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/33849703bddd4649113e41426ca51514b6d89c5f",
-                "reference": "33849703bddd4649113e41426ca51514b6d89c5f",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/0ac81474ff69abc0c334b2d19cbc054d1c364f18",
+                "reference": "0ac81474ff69abc0c334b2d19cbc054d1c364f18",
                 "shasum": ""
             },
             "require": {
@@ -8964,7 +8964,7 @@
                 "issues": "https://github.com/Behat/Gherkin/issues",
                 "source": "https://github.com/Behat/Gherkin/tree/master"
             },
-            "time": "2024-11-15T09:41:03+00:00"
+            "time": "2024-12-03T12:18:51+00:00"
         },
         {
             "name": "behat/mink-selenium2-driver",
@@ -8972,12 +8972,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/MinkSelenium2Driver.git",
-                "reference": "c085ffb1ad88caa190a276f7e48091c150902487"
+                "reference": "0f020ab5e1fc848f0788e461773948490e40dc52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/c085ffb1ad88caa190a276f7e48091c150902487",
-                "reference": "c085ffb1ad88caa190a276f7e48091c150902487",
+                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/0f020ab5e1fc848f0788e461773948490e40dc52",
+                "reference": "0f020ab5e1fc848f0788e461773948490e40dc52",
                 "shasum": ""
             },
             "require": {
@@ -9035,7 +9035,7 @@
                 "issues": "https://github.com/minkphp/MinkSelenium2Driver/issues",
                 "source": "https://github.com/minkphp/MinkSelenium2Driver/tree/master"
             },
-            "time": "2024-11-19T15:29:57+00:00"
+            "time": "2024-12-03T13:28:06+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -9470,12 +9470,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "c85fb527d3c1ca33e20502b581ed9eac69eb857d"
+                "reference": "bd59519a7532b9e1a41cef4049d5326dfac7def9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/c85fb527d3c1ca33e20502b581ed9eac69eb857d",
-                "reference": "c85fb527d3c1ca33e20502b581ed9eac69eb857d",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/bd59519a7532b9e1a41cef4049d5326dfac7def9",
+                "reference": "bd59519a7532b9e1a41cef4049d5326dfac7def9",
                 "shasum": ""
             },
             "require": {
@@ -9550,7 +9550,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-30T23:33:48+00:00"
+            "time": "2024-12-03T17:07:51+00:00"
         },
         {
             "name": "evenement/evenement",
