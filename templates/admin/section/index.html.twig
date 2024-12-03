@@ -43,7 +43,11 @@
                 <td>
                     {%  for post in section.posts|sort((a, b) => a.position <=> b.position) %}
                         <li class="list-unstyled">
-                            <a class=" hms-color1 h5" href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ post.name }}</a>
+                        {% set  italic = '' %}
+                        {% if post.isActive == false  %}
+                            {% set  italic = 'fst-italic text-decoration-line-through text-black-50' %}
+                        {% endif  %}
+                            <a class=" hms-color1 h5 {{ italic}} " href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ post.name }}</a>
                         </li>
                     {%  endfor %}
                 </td>

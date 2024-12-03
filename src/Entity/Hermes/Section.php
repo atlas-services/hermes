@@ -171,9 +171,9 @@ class Section
                     $this->removePost($post);
                 }
             }
-            if(!$post->isActive()){
-                $this->removePost($post);
-            }
+            // if(!$post->isActive()){
+            //     $this->removePost($post);
+            // }
         }
         return $this->posts;
     }
