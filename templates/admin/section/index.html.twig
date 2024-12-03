@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody id="tbody">
-        {% for section in sections|sort((a, b) => a.position <=> b.position) %}
+        {% for section in sections|sort((a, b) => b.active <=> a.active)|sort((a, b) => a.position <=> b.position) %}
             {% if section.menu is defined and section.menu is not null %}            
             <tr class="align-middle {{ section.menu.id }}">
                 <td>
