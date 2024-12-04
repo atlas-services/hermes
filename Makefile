@@ -177,8 +177,5 @@ fixtures-load-sheets:
 section-template:
 	sed 's/id=\"section\"/id=\"$(SECTION2)\"/g' templates/front/base/template/$(SECTION1).html.twig > templates/front/base/template/$(SECTION2).html.twig
 
-ckeditor-install:
-	php bin/console ckeditor:install 
-
 elfinder-install:
 	php bin/console elfinder:install

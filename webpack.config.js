@@ -29,6 +29,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+     .addEntry('hermes_admin_vue', './assets/admin/js/vue/app.js')
      .addEntry('hermes_admin', './assets/admin/js/app.js')
      .addEntry('hermes_front', './assets/front/js/hermes/app.js')
      .addEntry('hermes_one_page_1', './assets/front/js/hermes/app_one_page_1.js')
@@ -56,6 +57,9 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
+
+    // enables vue loader
+    .enableVueLoader()
 
     // enables @babel/preset-env polyfills
     .configureBabelPresetEnv((config) => {

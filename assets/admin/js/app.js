@@ -28,6 +28,7 @@ import '../../commun/js/copy';
 //import './exemples';
 import './js-custom';
 import './js-ckeditor';
+import './vue/app';
 import './select2';
 import './modale';
 import './tags';
