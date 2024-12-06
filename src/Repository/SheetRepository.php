@@ -43,10 +43,13 @@ class SheetRepository extends ServiceEntityRepository
         return 1;
     }
 
-
-
-
-
+    public function getArrayResults(){
+        $qb = $this->createQueryBuilder('s')
+        ->orderBy('s.locale', 'ASC')
+        ->addOrderBy('s.position', 'ASC')
+        ;
+        return $qb->getQuery()->getArrayResult();
+    }
 
     public function getQbSheets()
     {

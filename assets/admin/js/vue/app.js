@@ -1,7 +1,11 @@
 import { createApp } from 'vue'
 import HermesTemplate from './components/HermesTemplate.vue' // Import du Composant Hermestemplate
+import ListSheet from './components/Sheet/ListSheet.vue'
 
-// const app = createApp(CountButton).mount('#app')
 const app = createApp(HermesTemplate)
+const admin_list_sheet = createApp(ListSheet)
+
 app.config.globalProperties.$log = console.log
-instanceComposant = app.mount('#templates_hermes')
+
+app.mount('#vue_templates_hermes')
+admin_list_sheet.mount('#vue_admin_list_sheet')

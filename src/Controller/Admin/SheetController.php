@@ -28,7 +28,7 @@ class SheetController extends AbstractAdminController
     public function index(Request $request, ManagerRegistry $doctrine, SheetRepository $sheetRepository): Response
     {
         $route = $request->attributes->get('_route');
-        $sheets = $sheetRepository->findAll();
+        $sheets = $sheetRepository->getArrayResults();
         $config_form = $doctrine->getRepository(Config::class, 'config')->findOneBy(['active'=> true, 'code'=>'forms']);
 
         $array = [

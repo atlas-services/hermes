@@ -4,7 +4,7 @@ Vous pouvez basculer entre les deux id_templates principales.
 -->
 
 <script setup>
-import { ref, watchEffect, onMounted } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const API_URL = `https://api.hermes-cms.org/api/templates/`
 const id_templates =  range(1, 26)

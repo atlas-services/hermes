@@ -4,24 +4,41 @@
 
 {% block content %}
 
-    <h1 class="text-secondary">{{ 'sheet.list'|trans() }}</h1>
+    {% set global = {
+        'active':'global.active'|trans(),
+        'inactive':'global.inactive'|trans(),
+        'inactive':'global.inactive'|trans(),
+        'locale':'global.locale'|trans(),
+        'position':'global.position'|trans(),
+        'name':'global.name'|trans(),
+        'actions':'global.actions'|trans(),
+        }
+    %}
 
-    <table class="table">
+    {% set norecord = {
+        'norecord':'global.no_record'|trans()|raw ,
+        }
+    %}
+
+    <h1 class="text-secondary">{{ 'sheet.list'|trans() }}</h1>
+    <input id="vue_items_sheet" type="hidden" value="{{ sheets|json_encode }}" data-global="{{ global|json_encode}}" data-norecord="{{ norecord|json_encode}}"  />
+    <!-- Composant Vue ListSheet -->
+    <table class="table" id="vue_admin_list_sheet" ></table>
+
+    {# <table class="table">
         <thead>
         <th class="col-2">{{ 'global.active'|trans() }}/{{ 'global.inactive'|trans() }}</th>
         <th class="col-2">{{ 'global.locale'|trans() }}</th>
         <th>{{ 'global.position'|trans() }}</th>
         <th>{{ 'global.name'|trans() }}</th>
         <th>{{ 'global.actions'|trans() }}</th>
-        </tr>
         </thead>
         <tbody>
-        {% for sheet in sheets|sort((a, b) => a.position <=> b.position)  %}
-{#            {% if(sheet.name not in config.value or is_granted('ROLE_SUPER_ADMIN') ) %}#}
+        {% for sheet in sheets  %}
                 <tr class="align-middle">
                     <td class="col-2">
                         <div class="form-check form-switch form-switch-sm my-0">
-                            <input type="checkbox" class="sheet-active form-check-input" id="{{ sheet.id }}"  {{ sheet.isActive ? 'checked': '' }} >
+                            <input type="checkbox" class="sheet-active form-check-input" id="{{ sheet.id }}"  {{ sheet.active ? 'checked': '' }} >
                             <label class="custom-control-label" for="{{ sheet.id }}"></label>
                         </div>
                     </td>
@@ -29,14 +46,11 @@
                     <td>{{ sheet.position }}</td>
                     <td>{{ sheet.name }}</td>
                     <td>
-                        {#                    {% if( 'contact' != sheet.code) %}#}
                         {% if( null != sheet.slug) %}
                             <a id="{{ sheet.slug }}" href="{{ path('sheet_edit', {'sheet': sheet.slug , 'locale': sheet.locale}) }}">{{ 'action.edit'|trans()|raw }}</a>
                         {% endif %}
-                        {#                    {% endif %}#}
                     </td>
                 </tr>
-{#            {% endif %}#}
         {% else %}
             <tr class="align-middle">
                 <td colspan="5">{{ 'global.no_record'|trans()|raw }}</td>
@@ -44,9 +58,7 @@
 
         {% endfor %}
         </tbody>
-    </table>
-
-
+    </table> #}
 
     <a type="button" class="btn btn-outline-secondary hms-bg-color1 text-white" id="sheet-add" href="{{ path('sheet_new') }}">{{ 'global.new'|trans() }}</a>
 {% endblock %}
