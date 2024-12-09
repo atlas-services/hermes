@@ -22,7 +22,11 @@ const orderItems = (index, direction) => {
 }
 
 const changeIndex = (index, direction) => {
-    indexchange.value = index
+    if( index != indexchange.value){
+        indexchange.value = index
+    }else{
+        indexchange.value = index + 1
+    }
     if('up' === direction){
         getUp(index)
     }
