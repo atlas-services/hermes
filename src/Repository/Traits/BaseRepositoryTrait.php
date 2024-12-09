@@ -6,6 +6,7 @@ use App\Entity\AbstractContent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 //use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
+use phpDocumentor\Reflection\Types\Boolean;
 use phpDocumentor\Reflection\Types\Collection;
 
 trait BaseRepositoryTrait
@@ -43,6 +44,33 @@ trait BaseRepositoryTrait
 
         return $data;
 
+    }
+
+
+    /**
+     * @return Boolean
+     */
+    public function switchPosition(int $id1, int $id2) : bool
+    {
+        try{
+            $data1 = $this->findOneById($id1);  
+            $data2 = $this->findOneById($id2);
+ 
+            $position1 = $data1->getPosition();
+            $position2 = $data2->getPosition();
+    
+            $data1->setPosition($position2);
+            $data2->setPosition($position1);
+    
+            $this->getEntityManager()->persist($data1);
+            $this->getEntityManager()->persist($data2);
+            
+            $this->getEntityManager()->flush();
+    
+            return true;
+        }catch(\Exception $e){
+            return false;
+        }
     }
 
     /**

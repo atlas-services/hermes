@@ -226,6 +226,18 @@ class SheetController extends AbstractAdminController
         return $this->render('admin/sheet/newLocale.html.twig', $array);
     }
 
+    #[Route(path: '/ajax/switch-position/sheet', name: 'switch_sheet_position_ajax', methods: ['POST', 'PUT'])]
+    public function ajaxPosition(Request $request, SheetRepository $menuRepository)
+    {
+        $ids = json_decode($request->getContent(), true);
+        if ($request->isXMLHttpRequest()) {
+            $id1= $ids['id1'];
+            $id2= $ids['id2'];
+            $bpos = $menuRepository->switchPosition($id1, $id2);
+            return new JsonResponse(array('data' => $bpos));
+        }
 
+        return new Response('This is not ajax!', 400);
+    }
 
 }

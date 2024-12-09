@@ -4,6 +4,7 @@ import {ref, watch } from 'vue'
 const props = defineProps(['items', 'norecord'])
 let myitems = ref(props.items)
 const indexchange = ref(-1)
+const URI = `/fr/admin/ajax/switch-position/sheet`
 
 const getMenuHref = (item) => {
   return "/" + item.locale + "/admin/page/edit/" + item.slug + "/" + item.locale
@@ -33,22 +34,47 @@ watch(indexchange, (newValue, oldValue) =>{
 )
 
 
-// si l'item est au moins deuxième, on diminue son index de 1 et on augment l'index du précédent item de 1
+// si on remonte un item d'un cran (et du coup on baisse d'un niveau celui qu'on remplace)
 const getUp = (index) => {
     if(index > -1){
-        const tomove = myitems[index]
-        const before = myitems[index-1]
+        const up = myitems[index]
+        const down = myitems[index-1]
+
+        // mise à jour des position en base de donnéd
+        ajaxSwitchPosition(down, up)
+        const position2  = up['position']
+        const position1  = down['position']
+
+        // inverser position
+        up['position'] =  position1
+        down['position'] =  position2
+
         const arraydeb = myitems.slice(0, index-1) // tableau 0 - "index-1"
         const arrayfin = myitems.slice(index+1) // tableau index+1 - "fin"
-        arrayfin.unshift(before)
-        arrayfin.unshift(tomove)
+        arrayfin.unshift(down)
+        arrayfin.unshift(up)
         myitems = arraydeb.concat(arrayfin)
     }else{
         myitems = props.items
     }
-    //indexchange.value = index;
     return myitems
 }
+
+// on met à jour les positions des 2 items en base
+const ajaxSwitchPosition = (item1, item2) => {
+    const requestOptions = {
+    method: "POST",
+    headers: { 
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': 'Bearer my-token',
+    },
+    body: JSON.stringify({'id1': item1['id'],  'id2': item2['id'] })
+  };
+  fetch(URI, requestOptions)
+    .then(response => response.json())
+}
+
 </script>
 
 <template>
