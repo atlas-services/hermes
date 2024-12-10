@@ -14,6 +14,7 @@ use App\Form\Admin\Liste\MenuListeType;
 use App\Form\Admin\SectionType;
 use App\Repository\MenuRepository;
 use App\Repository\PostRepository;
+use App\Repository\SheetRepository;
 use App\Repository\TemplateRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Runner\Exception;
@@ -29,22 +30,29 @@ use Symfony\Contracts\Cache\CacheInterface;
 class MenuController extends AbstractAdminController
 {
     #[Route(path: '/menu/{sheet}', name: 'menu_index', defaults: ['sheet' => 'All'], methods: ['GET'])]
-    public function index(ManagerRegistry $doctrine, $sheet): Response
+    public function index(ManagerRegistry $doctrine, SheetRepository $sheetRepository, MenuRepository $menuRepository, $sheet): Response
     {
-        $menus = $doctrine
-        ->getRepository(Menu::class)
-        ->findAll();
+        //  $menus = $doctrine
+        // ->getRepository(Menu::class)
+        // ->findAll();
+        // dd($menus);
+        $menus = $menuRepository->getArrayResults();
+        //dd($menus);
         if('All' === $sheet){
-        $sheets = $doctrine
-            ->getRepository(Sheet::class)
-            ->findAll();
+        // $sheets = $doctrine
+        //     ->getRepository(Sheet::class)
+        //     ->findAll();
+        $sheets = $sheetRepository->getArrayResults();
         }else{
-            $menus = $doctrine
-            ->getRepository(Menu::class)
-            ->findBy(['sheet' => $sheet]);
+            // $menus = $doctrine
+            // ->getRepository(Menu::class)
+            // ->findBy(['sheet' => $sheet]);
+            $menus = $menuRepository->getArrayResults($sheet);
             $sheets = $doctrine
             ->getRepository(Sheet::class)
             ->findBy(['id' => $sheet]);
+            $sheets = $sheetRepository->getArrayResults();
+
         }
 
         $array = [
@@ -270,7 +278,7 @@ class MenuController extends AbstractAdminController
         return $this->render('admin/menu/show.html.twig', $array);
     }
 
-    #[Route(path: '/page/{sheet}/menu/{referenceName}/locale/{locale}', name: 'menu_edit', methods: ['GET', 'POST'])]
+    #[Route(path: '/page/{sheet}/edit/menu/{referenceName}/locale/{locale}', name: 'menu_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ManagerRegistry $doctrine, CacheInterface $backCache,MenuRepository $menuRepository, $sheet, $referenceName, $locale): Response
     {
 //        Le menu'est pas unique pour un slug donné, aussi il faut le récupérer avec le slug menu et le sheet
@@ -359,6 +367,20 @@ class MenuController extends AbstractAdminController
             $id = $request->request->get('id');
             $data = $menuRepository->switchActive($id);
             return new JsonResponse(array('data' =>$data->isActive()));
+        }
+
+        return new Response('This is not ajax!', 400);
+    }
+
+    #[Route(path: '/ajax/switch-position/menu', name: 'switch_menu_position_ajax', methods: ['POST', 'PUT'])]
+    public function ajaxPosition(Request $request, MenuRepository $menuRepository)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $ids = json_decode($request->getContent(), true);
+            $id1= $ids['id1'];
+            $id2= $ids['id2'];
+            $bpos = $menuRepository->switchPosition($id1, $id2);
+            return new JsonResponse(array('data' => $bpos));
         }
 
         return new Response('This is not ajax!', 400);

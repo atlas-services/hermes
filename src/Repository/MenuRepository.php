@@ -116,6 +116,24 @@ class MenuRepository extends ServiceEntityRepository
         return $list;
     }
 
+    public function getArrayResults($sheet=null){
+        $qb = $this->createQueryBuilder('m')
+        ->select('m.id,m.active, m.position, m.name, m.slug, m.referenceName, m.fileName')
+        ->addSelect('s.name as sheet, s.id as sheet_id, s.locale as locale, s.slug as sheet_slug')
+        ->leftJoin('m.sheet', 's')
+        ->orderBy('s.locale', 'ASC')
+        ->addOrderBy('s.name', 'ASC')
+        ->addOrderBy('m.position', 'ASC')
+        ;
+
+        if(!is_null($sheet)){
+            $qb->andWhere('m.sheet = :sheet ')
+            ->setParameter('sheet', $sheet);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     public function getMyMenuBySheetAndMenuSlugs($sheet_slug, $menu_slug, $locale)
     {
         $qb = $this->getQbMenus(false)
