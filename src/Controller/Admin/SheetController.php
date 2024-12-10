@@ -229,8 +229,8 @@ class SheetController extends AbstractAdminController
     #[Route(path: '/ajax/switch-position/sheet', name: 'switch_sheet_position_ajax', methods: ['POST', 'PUT'])]
     public function ajaxPosition(Request $request, SheetRepository $menuRepository)
     {
-        $ids = json_decode($request->getContent(), true);
         if ($request->isXMLHttpRequest()) {
+            $ids = json_decode($request->getContent(), true);
             $id1= $ids['id1'];
             $id2= $ids['id2'];
             $bpos = $menuRepository->switchPosition($id1, $id2);

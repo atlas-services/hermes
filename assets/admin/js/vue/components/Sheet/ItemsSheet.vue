@@ -1,5 +1,7 @@
 <script setup>
-import {reactive, ref, watch } from 'vue'
+import {ref, watch } from 'vue'
+//import Items from '../Base/Items.vue';
+import { useAjaxSwitchPosition } from '../Base/BaseItems'
 
 const props = defineProps(['items', 'norecord'])
 let myitems = ref(props.items)
@@ -13,15 +15,14 @@ const getMenuHref = (item) => {
   return "/" + item.locale + "/admin/page/edit/" + item.slug + "/" + item.locale
 }
 
-const orderItems = (index, direction) => {
-    direction = directionchange.value
+function orderItems(direction, index){
     if(typeof index !== 'undefined' && index == -1 ){
         return getUpOrDown(direction, index)
     }
     return myitems
 }
 
-const changeIndex = (index, direction) => {
+const changeIndex = (direction, index) => {
     if( index != indexchange.value){
         indexchange.value = index
     }else{
@@ -29,11 +30,11 @@ const changeIndex = (index, direction) => {
     }
     directionchange.value = direction
    
-    getUpOrDown(direction, index)
+    myitems = getUpOrDown(direction, index)
 }
 
-watch(indexchange, (newValue, oldValue) =>{
-    myitems = orderItems(newValue)
+watch(indexchange, (newIndex, oldValue) =>{
+    myitems = orderItems(directionchange.value, newIndex)
     }
 )
 
@@ -54,7 +55,8 @@ const getUpOrDown = (direction, index) => {
         const down = myitems[index2.value]
 
         // mise à jour des position en base de donnéd
-        ajaxSwitchPosition(down, up)
+        // ajaxSwitchPosition(down, up)
+        useAjaxSwitchPosition(URI, down, up)
         const position2  = up['position']
         const position1  = down['position']
 
@@ -78,26 +80,11 @@ const getUpOrDown = (direction, index) => {
     return myitems
 }
 
-// on met à jour les positions des 2 items en base
-const ajaxSwitchPosition = (item1, item2) => {
-    const requestOptions = {
-    method: "POST",
-    headers: { 
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': 'Bearer my-token',
-    },
-    body: JSON.stringify({'id1': item1['id'],  'id2': item2['id'] })
-  };
-  fetch(URI, requestOptions)
-    .then(response => response.json())
-}
-
 </script>
 
 <template>
 <tbody>
-    <tr v-for="(item, index) in orderItems(indexchange, directionchange)" class="align-middle">
+    <tr v-for="(item, index) in orderItems(directionchange, indexchange)" class="align-middle">
         <td class="col-2">
             <div class="form-check form-switch form-switch-sm my-0">
                 <input type="checkbox" class="sheet-active form-check-input" :id="item.id" :checked="item.active ? true : false">
@@ -107,13 +94,13 @@ const ajaxSwitchPosition = (item1, item2) => {
         <td class="col-2">{{ item.locale }}</td>
         <td>
             <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary " @click="changeIndex(index, 'up')" >
+            <button type="button" class="btn btn-outline-secondary " @click="changeIndex('up', index)" >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
             </svg> &nbsp;
             <span class="visually-hidden">Button</span>
             </button>
-            <button type="button" class="btn btn-outline-secondary " @click="changeIndex(index, 'down')">
+            <button type="button" class="btn btn-outline-secondary " @click="changeIndex('down', index)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
             </svg>
