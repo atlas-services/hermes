@@ -1,8 +1,13 @@
 <script setup>
-import {inject, ref, watch } from 'vue'
+import {computed, inject, ref, watch } from 'vue'
+import HeaderMenu from './HeaderMenu.vue';
 import { useAjaxSwitchPosition } from '../Base/BaseItems'
 
-const props = defineProps(['items', 'norecord'])
+
+const props = defineProps(['header', 'items', 'norecord'])
+const header = computed(() => {
+   return props.header
+})
 let myitems = ref(props.items)
 const indexchange = ref(-1)
 const directionchange = ref('up')
@@ -93,6 +98,8 @@ const myfilter = (item) => {
 </script>
 
 <template>
+<table class="table mt-4" >
+<HeaderMenu :header="header" ></HeaderMenu>
 <tbody>
     <template v-for="(item, index) in orderItems(directionchange, indexchange)">
     <tr v-if="myfilter(item)" class="align-middle">
@@ -132,6 +139,7 @@ const myfilter = (item) => {
     </tr>
     </template>
 </tbody>
+</table>
 </template>
 
 <style>

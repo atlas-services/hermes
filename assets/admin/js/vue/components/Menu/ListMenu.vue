@@ -35,8 +35,7 @@ const norecord = computed(() => {
 <template>
    <SelectMenu>
       <FiltreMenu :items="filtre" ></FiltreMenu>
-      <HeaderMenu :header="header" ></HeaderMenu>
-      <ItemsMenu :items="items" :norecord="norecord"></ItemsMenu>
+      <ItemsMenu :header="header" :items="items" :norecord="norecord"></ItemsMenu>
     </SelectMenu>
 </template>
 

@@ -26,8 +26,7 @@
     <h1 class="text-secondary">{{ 'menu.list'|trans() }}</h1>
     <input id="vue_items_menu" type="hidden" value="{{ menus|json_encode }}" data-filtre="{{ sheets|json_encode }}"  data-global="{{ global|json_encode}}" data-norecord="{{ norecord|json_encode}}"  />
     <!-- Composant Vue ListSheet -->
-    {# <div class="row" id="vue_admin_filtre_list_menu" ></div> #}
-    <table class="table" id="vue_admin_list_menu" ></table>
+    <div id="vue_admin_list_menu" ></div>
 
         {# <select class="mt-4 py-2 h-bg-success text-white" id="select_page" name="menu" >
             <option value="{{ 'sheet.all'|trans() }}" >{{ 'sheet.all_text'|trans() }}</option>
