@@ -22,65 +22,17 @@
         }
     %}
 
+    {% set buttons = {
+        'addpost': path('menu_section_post_new_sheet', {'sheet': 'nouvelle'}) ,
+        'addmenu': path('menu_new') ,
+        'newcontent': 'global.new_content'|trans(),
+        'newmenu': 'global.new_menu'|trans(),
+        }
+    %}
+
     <div class="row mb-2">
     <h1 class="text-secondary">{{ 'menu.list'|trans() }}</h1>
-    <input id="vue_items_menu" type="hidden" value="{{ menus|json_encode }}" data-filtre="{{ sheets|json_encode }}"  data-global="{{ global|json_encode}}" data-norecord="{{ norecord|json_encode}}"  />
+    <input id="vue_items_menu" type="hidden" value="{{ menus|json_encode }}" data-filtre="{{ sheets|json_encode }}"  data-global="{{ global|json_encode}}" data-norecord="{{ norecord|json_encode}}" data-buttons="{{ buttons|json_encode}}"  />
     <!-- Composant Vue ListSheet -->
     <div id="vue_admin_list_menu" ></div>
-
-        {# <select class="mt-4 py-2 h-bg-success text-white" id="select_page" name="menu" >
-            <option value="{{ 'sheet.all'|trans() }}" >{{ 'sheet.all_text'|trans() }}</option>
-            {% for sheet in sheets|sort((a, b) => a.name <=> b.name) %}
-                <option {{ (sheet.id == id) ? 'selected' : '' }} value="{{ sheet.id }}">{{ sheet.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <table class="table">
-        <thead>
-                <th>{{ 'global.active'|trans() }}</th>
-                <th>{{ 'global.locale'|trans() }}</th>
-                <th>{{ 'global.sheet'|trans() }}</th>
-                <th>{{ 'global.name'|trans() }}</th>
-                <th>{{ 'global.position'|trans() }}</th>
-                <th>{{ 'global.image_fond'|trans() }}</th>
-                <th>{{ 'global.actions'|trans() }}</th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
-        {% for menu in menus|sort((a, b) =>a.position <=> b.position)|sort((a, b) =>a.sheet <=> b.sheet) %}
-            <tr class="align-middle {{ menu.sheet_id }}" >
-                <td>
-                    <div class="form-check form-switch form-switch-sm my-0">
-                        <input type="checkbox" class="menu-active form-check-input" id="{{ menu.id }}"  {{ menu.active ? 'checked': '' }} >
-                        <label class="custom-control-label" for="{{ menu.id }}"></label>
-                    </div>
-                </td>
-                <td>{{ menu.locale }}</td>
-                <td>{{ menu.sheet }}</td>
-                <td>{{ menu.name }}</td>
-                <td>{{ menu.position }}</td>
-                {% if menu.fileName is not null %}
-                    <td>
-                        <img  src="{{ asset(vich_uploader_asset(menu, 'imageFile')) | imagine_filter('app_thumb')  }}" /></td>
-                    </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                <td>
-                    {% if menu.sheet_slug is not null %}
-                    <a id="{{ menu.name }}-edit" href="{{ path('menu_edit', {'sheet': menu.sheet_slug, 'referenceName': menu.referenceName, 'locale': menu.locale}) }}">{{ 'action.edit'|trans()|raw }}</a>
-                    {% endif %}
-                    <a  id="{{ menu.name }}-add" href="{{ path('section_post_new_menu', {'menu': menu.slug }) }}">{{ 'action.add'|trans()|raw }}</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr class="align-middle">
-                <td colspan="7">{{ 'global.no_record'|trans() }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table> #}
-
-    <a type="button" class="col-6 col-sm-2 btn btn-outline-secondary hms-bg-color1 text-white " id="menu-add" href="{{ path('menu_section_post_new_sheet', {'sheet': 'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
-    <a type="button" class="col-6 col-sm-2 mx-2 btn btn-outline-secondary hms-bg-color1 text-white " id="menu-new" href="{{ path('menu_new') }}">{{ 'global.new_menu'|trans() }}</a>
 {% endblock %}
