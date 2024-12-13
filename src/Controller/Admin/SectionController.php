@@ -14,6 +14,7 @@ use App\Form\Admin\SectionCopyType;
 use App\Form\Admin\SectionTemplateType;
 use App\Form\Admin\SectionType;
 use App\Mailer\Mailer;
+use App\Repository\MenuRepository;
 use App\Repository\SectionRepository;
 use App\Repository\UserRepository;
 use App\Service\Copy;
@@ -30,17 +31,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class SectionController extends AbstractAdminController
 {
     #[Route(path: '/section/{menu}', name: 'section_index', defaults: ['menu' => 'All'], methods: ['GET'])]
-    public function index(ManagerRegistry $doctrine, $menu): Response
+    public function index(ManagerRegistry $doctrine, SectionRepository $sectionRepository, MenuRepository $menuRepository, $menu): Response
     {
-        $sections = $doctrine
-        ->getRepository(Section::class)
-        ->findAll()
-        ;
+        // $sections = $doctrine
+        // ->getRepository(Section::class)
+        // ->findAll()
+        // ;
+        $sections = $sectionRepository->getArrayResults();
         if('All' === $menu){
-        $menus = $doctrine
-            ->getRepository(Menu::class)
-            ->findAll()
-        ;
+        // $menus = $doctrine
+        //     ->getRepository(Menu::class)
+        //     ->findAll()
+        // ;
+        $menus = $menuRepository->getArrayResults();
         }else{
             $sections = $doctrine
             ->getRepository(Section::class)
@@ -230,6 +233,7 @@ class SectionController extends AbstractAdminController
                 return $this->redirectToRoute('section_post_new_menu', ['menu'=> $menu->getSlug(), 'section'=> $section->getId()]);
             }
             if ($form->get('save')->isClicked()) {
+                return $this->redirectToRoute('section_index');
                 return $this->redirectToRoute('section_index', ['menu' => $section->getMenu()->getId()]);
             }
             return $this->redirectToRoute('section_index');

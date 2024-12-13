@@ -3,78 +3,37 @@
 {% block title %}{{ 'section.list'|trans() }}{% endblock %}
 
 {% block content %}
+
+    {% set global = {
+        'active':'global.active'|trans(),
+        'inactive':'global.inactive'|trans(),
+        'locale':'global.locale'|trans(),
+        'sheet':'sheet.name'|trans(),
+        'menu':'menu.name'|trans(),
+        'template':'template.name'|trans(),
+        'post':'post.list'|trans(),
+        'position':'global.position'|trans(),
+        'actions':'global.actions'|trans(),
+        'config':'action.config'|trans()|raw ,
+        }
+    %}
+
+    {% set norecord = {
+        'norecord':'global.no_record'|trans()|raw ,
+        }
+    %}
+
+    {% set buttons = {
+        'addpost': path('menu_section_post_new_sheet', {'sheet':'nouvelle'}) ,
+        'newcontent': 'global.new_content'|trans(),
+        }
+    %}
+
     <div class="row mb-2">
     <h1 class="text-secondary">{{ 'section.list'|trans() }}</h1>
-        <select class="my-4 py-2 h-bg-success text-white" id="select_page" name="section">
-            <option value="{{ 'section.all'|trans() }}" >{{ 'section.all_text'|trans() }}</option>
-        {% for menu in menus|sort((a, b) => a.name <=> b.name) %}
-            <option {{ (menu.id == id) ? 'selected' : '' }} value="{{ menu.id }}">{{ menu.sheet.locale }} - {{ menu.name }}</option>
-        {% endfor %}
-        </select>
-    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>{{ 'global.active'|trans() }}</th>
-                <th>{{ 'global.locale'|trans() }}</th>
-                <th>{{ 'sheet.name'|trans() }}</th>
-                <th>{{ 'menu.name'|trans() }}</th>
-                <th>{{ 'template.name'|trans() }}</th>
-                <th>{{ 'post.list'|trans() }}</th>
-                <th>{{ 'global.position'|trans() }}</th>
-                <th>{{ 'global.actions'|trans() }}</th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
-        {% for section in sections|sort((a, b) => b.active <=> a.active)|sort((a, b) => a.position <=> b.position) %}
-            {% if section.menu is defined and section.menu is not null %}            
-            <tr class="align-middle {{ section.menu.id }}">
-                <td>
-                    <div class="form-check form-switch form-switch-sm my-0">
-                        <input type="checkbox" class="section-active form-check-input" id="{{ section.id }}"  {{ section.isActive ? 'checked': '' }} >
-                        <label class="custom-control-label" for="{{ section.id }}"></label>
-                    </div>
-                </td>
-                <td>{{ section.menu.sheet.locale }}</td>
-                <td>{{ section.menu.sheet.name }}</td>
-                <td>{{ section.menu.name }}</td>
-                <td>{{ section.template.name }}</td>
-                <td>
-                    {%  for post in section.posts|sort((a, b) => a.position <=> b.position) %}
-                        <li class="list-unstyled">
-                        {% set  italic = '' %}
-                        {% if post.isActive == false  %}
-                            {% set  italic = 'fst-italic text-decoration-line-through text-black-50' %}
-                        {% endif  %}
-                            <a class=" hms-color1 h5 {{ italic}} " href="{{ path('post_edit', {'id': post.id,'post': post.name,'menu': post.section.menu.slug}) }}">{{ post.name }}</a>
-                        </li>
-                    {%  endfor %}
-                </td>
-                <td>{{ section.position }}</td>
-                <td>
-{#                    <a class="hms-color1" href="{{ path('section_edit', {'section': section.name}) }}">{{ 'action.edit'|trans()|raw }}</a>#}
-                    <a class="hms-color1" href="{{ path('section_edit', {'section': section.id, 'config': 1 }) }}">{{ 'action.config'|trans()|raw }}</a>
-                    <a class="hms-color1" href="{{ path('section_edit', {'section': section.id , 'config': 0 }) }}">{{ 'action.edit'|trans()|raw }}</a>
-                    <a class="hms-color1" href="{{ path('section_post_new_menu', {'menu': section.menu.slug , 'section': section.id }) }}">  {{ 'action.add_diff'|trans()|raw }}</a>
-{#                    {% if (section.menu.sheet.slug is not null and section.menu.slug is not null)  %}#}
-{#                        <a target="_blank" class="hms-color1" href="{{ path('previsualidation_sheet', {'sheet': section.menu.sheet.slug, 'slug': section.menu.slug}) }}"> {{ 'action.preview'|trans()|raw }}</a>#}
-{#                    {% endif %}#}
-                    <a class="hms-color1" href="{{ path('section_copy', {'section': section.id, }) }}">{{ 'action.copy-1'|trans()|raw }}</a>
-                    {% if ( 'newsletter_template' == section.template.code)  %}
-                        <a class="hms-color1" href="{{ path('section_send_newsletter', {'section': section.id }) }}">{{ 'action.send_newsletter'|trans()|raw }}</a>
-                        <a class="hms-color1" href="{{ path('section_send_newsletter', {'section': section.id, 'test': true, }) }}">{{ 'action.send_newsletter_test'|trans()|raw }}</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endif %}
-        {% else %}
-            <tr class="align-middle">
-                <td colspan="7">{{ 'global.no_record'|trans()|raw }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <input id="vue_items_section" type="hidden" value="{{ sections|json_encode }}" data-filtre="{{ menus|json_encode }}"  data-global="{{ global|json_encode}}" data-norecord="{{ norecord|json_encode}}" data-buttons="{{ buttons|json_encode}}"  />
+    <!-- Composant Vue ListSheet -->
+    <div id="vue_admin_list_section" ></div>
 
-    <a type="button" class="btn btn-outline-secondary hms-bg-color1 text-white" href="{{ path('menu_section_post_new_sheet', {'sheet':'nouvelle'}) }}">{{ 'global.new_content'|trans() }}</a>
-{% endblock %}
+  {% endblock %}
