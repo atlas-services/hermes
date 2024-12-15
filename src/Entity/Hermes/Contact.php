@@ -71,12 +71,12 @@ class Contact implements ContactInterface
                 'min' => 2,
                 'max' => 1000,
         ]));
-        $metadata->addPropertyConstraint(
-            'content', 
-            new Assert\NotBlank(
-                [
-                'groups' => ['contact', 'livredor'],
-        ]));
+        // $metadata->addPropertyConstraint(
+        //     'content', 
+        //     new Assert\NotBlank(
+        //         [
+        //         'groups' => ['contact', 'livredor'],
+        // ]));
     }
 
     /**
