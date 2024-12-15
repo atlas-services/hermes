@@ -3,7 +3,7 @@
         {% if (sheetsSlug[sheet_name] is defined) %}
         {% set sheet_slug = sheetsSlug[sheet_name] %}
             <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
-            <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="px-{{ nav_link_px ?? '2' }}  {{ nav_menu_text_size ?? 'h4' }} text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
+            <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="list-group-item list-group-item-action px-{{ nav_link_px ?? '2' }}  {{ nav_menu_text_size ?? 'h4' }} text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
                 href={{ listmenu.href }}>{{ sheet_name }}
             </a>
             {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
@@ -12,10 +12,10 @@
                         {% if menu.slug is defined  %}
                             <li class="px-{{ nav_link_px ?? '2' }} {{ nav_sub_menu_text_size ?? 'h6' }}  nav-item  my-2 {{ nav_link_border_bottom }}" >
                                 {% if sheet_slug == menu.slug %}
-                                    <a style="color: {{ nav_link_color }}"  class=" page-scroll pb-2 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                    <a style="color: {{ nav_link_color }}"  class="list-group-item list-group-item-action page-scroll pb-2 text-decoration-none"  href="{{ path('slug', {'slug': menu.slug}) }}">{{ menu_name }}</a>
                                 {% else %}
-                                <a style="color: {{ nav_link_color }}"  class="d-none  d-sm-block page-scroll pb-2 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
-                                <a style="color: {{ nav_link_color }}"  class="d-block  d-sm-none text-wrap page-scroll pb-2 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                    <a style="color: {{ nav_link_color }}"  class="d-none  d-sm-block list-group-item list-group-item-action page-scroll pb-2 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
+                                    <a style="color: {{ nav_link_color }}"  class="d-block  d-sm-none list-group-item list-group-item-action text-wrap page-scroll pb-2 text-decoration-none"  href="{{ path('sheet', {'sheet':sheet_slug, 'slug': menu.slug}) }}">{{ menu_name }}</a>
                                 {% endif %}
                             </li>
                         {% endif %}
