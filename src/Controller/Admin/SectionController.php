@@ -272,6 +272,19 @@ class SectionController extends AbstractAdminController
         return new Response('This is not ajax!', 400);
     }
 
+    #[Route(path: '/ajax/switch-position/section', name: 'switch_section_position_ajax', methods: ['POST', 'PUT'])]
+    public function ajaxPosition(Request $request, SectionRepository $sectionRepository)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $ids = json_decode($request->getContent(), true);
+            $id1= $ids['id1'];
+            $id2= $ids['id2'];
+            $bpos = $sectionRepository->switchPosition($id1, $id2);
+            return new JsonResponse(array('data' => $bpos));
+        }
+
+        return new Response('This is not ajax!', 400);
+    }
 
     #[Route(path: '/section/copy/{section}', name: 'section_copy', methods: ['GET', 'POST'])]
     public function copy(Request $request, ManagerRegistry $doctrine, #[MapEntity(mapping: ['section' => 'id'])] Section $section, Copy $copy): Response
