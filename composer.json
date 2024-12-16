@@ -38,6 +38,7 @@
         "symfony/mailer": "7.2.*",
         "symfony/messenger": "7.2.*",
         "symfony/monolog-bundle": "3.*",
+        "symfony/polyfill-php72": "1.x-dev",
         "symfony/process": "7.2.*",
         "symfony/property-access": "7.2.*",
         "symfony/property-info": "7.2.*",
