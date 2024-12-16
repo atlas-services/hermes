@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f95d7b69eda7dec0e197acf77f1ccc77",
+    "content-hash": "09f03c59c599918be1d2565c4ac6ec95",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1357,12 +1357,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "579b67954ca6817a4d5a0a785c654fb7bc849b2e"
+                "reference": "1e04414f21f24483e95f48e6455aa7e67274decc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/579b67954ca6817a4d5a0a785c654fb7bc849b2e",
-                "reference": "579b67954ca6817a4d5a0a785c654fb7bc849b2e",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/1e04414f21f24483e95f48e6455aa7e67274decc",
+                "reference": "1e04414f21f24483e95f48e6455aa7e67274decc",
                 "shasum": ""
             },
             "require": {
@@ -1405,7 +1405,7 @@
                 "issues": "https://github.com/doctrine/sql-formatter/issues",
                 "source": "https://github.com/doctrine/sql-formatter/tree/1.5.x"
             },
-            "time": "2024-12-02T22:10:47+00:00"
+            "time": "2024-12-16T10:43:20+00:00"
         },
         {
             "name": "egulias/email-validator",
