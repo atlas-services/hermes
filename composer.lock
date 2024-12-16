@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25162a9a4030dfe29e051662ebeadaa3",
+    "content-hash": "61df7e0a6e9af70e9d52c3a7caa3469f",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -8736,7 +8736,7 @@
         },
         {
             "name": "vich/uploader-bundle",
-            "version": "dev-master",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
@@ -8809,7 +8809,6 @@
                 "symfony/form": "To handle uploads in forms",
                 "symfony/yaml": "To use YAML mapping"
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {

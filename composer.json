@@ -56,7 +56,7 @@
         "twig/intl-extra": "3.*",
         "twig/string-extra": "3.*",
         "twig/twig": "^2.12|^3.0",
-        "vich/uploader-bundle": "2.*"
+        "vich/uploader-bundle": "2.5.*"
     },
     "require-dev": {
         "behat/behat": "^v3.11.0",
