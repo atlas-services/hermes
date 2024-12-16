@@ -18,7 +18,7 @@ const URI = `/fr/admin/ajax/switch-position/menu`
 const myselect = inject('myselect')
 
 const getMenuHref = (item) => {
-  return "/" + item.locale + "/admin/page/" + item.sheet + "/edit/menu/" + item.referenceName + "/locale/" + item.locale
+    return "/" + item.locale + "/admin/page/" + item.sheet_slug + "/edit/menu/" + item.referenceName + "/locale/" + item.locale
 }
 
 const getAddMenuHref = (item) => {
