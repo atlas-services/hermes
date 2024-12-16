@@ -24,8 +24,12 @@ class SectionRepository extends ServiceEntityRepository
     }
 
     public function getArrayResults(){
-        $results = $this->createQueryBuilder('s')->getQuery()->getResult();
-        // dd($results);
+        $results = $this->createQueryBuilder('s')
+        ->orderBy('s.menu', 'ASC')
+        ->addOrderBy('s.position', 'ASC')
+        ->addOrderBy('s.active', 'DESC')
+        ->getQuery()
+        ->getResult();
         foreach($results as $key => $result){
             $sections[$key]['id'] = $result->getId();
             $sections[$key]['active'] = $result->isActive();

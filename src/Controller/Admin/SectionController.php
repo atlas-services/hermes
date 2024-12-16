@@ -38,22 +38,23 @@ class SectionController extends AbstractAdminController
         // ->findAll()
         // ;
         $sections = $sectionRepository->getArrayResults();
-        if('All' === $menu){
-        // $menus = $doctrine
-        //     ->getRepository(Menu::class)
-        //     ->findAll()
-        // ;
         $menus = $menuRepository->getArrayResults();
-        }else{
-            $sections = $doctrine
-            ->getRepository(Section::class)
-            ->findBy(['menu' => $menu])
-            ;
-            $menus = $doctrine
-                ->getRepository(Menu::class)
-                ->findBy(['id'=> $menu])
-            ;
-        }
+        // if('All' === $menu){
+        // // $menus = $doctrine
+        // //     ->getRepository(Menu::class)
+        // //     ->findAll()
+        // // ;
+        // $menus = $menuRepository->getArrayResults();
+        // }else{
+        //     $sections = $doctrine
+        //     ->getRepository(Section::class)
+        //     ->findBy(['menu' => $menu])
+        //     ;
+        //     $menus = $doctrine
+        //         ->getRepository(Menu::class)
+        //         ->findBy(['id'=> $menu])
+        //     ;
+        // }
 
         $array = [
             'sections' => $sections,
