@@ -37,23 +37,24 @@ class MenuController extends AbstractAdminController
         // ->findAll();
         // dd($menus);
         $menus = $menuRepository->getArrayResults();
-        //dd($menus);
-        if('All' === $sheet){
-        // $sheets = $doctrine
-        //     ->getRepository(Sheet::class)
-        //     ->findAll();
         $sheets = $sheetRepository->getArrayResults();
-        }else{
-            // $menus = $doctrine
-            // ->getRepository(Menu::class)
-            // ->findBy(['sheet' => $sheet]);
-            $menus = $menuRepository->getArrayResults($sheet);
-            $sheets = $doctrine
-            ->getRepository(Sheet::class)
-            ->findBy(['id' => $sheet]);
-            $sheets = $sheetRepository->getArrayResults();
+        //dd($menus);
+        // if('All' === $sheet){
+        // // $sheets = $doctrine
+        // //     ->getRepository(Sheet::class)
+        // //     ->findAll();
+        // $sheets = $sheetRepository->getArrayResults();
+        // }else{
+        //     // $menus = $doctrine
+        //     // ->getRepository(Menu::class)
+        //     // ->findBy(['sheet' => $sheet]);
+        //     $menus = $menuRepository->getArrayResults($sheet);
+        //     $sheets = $doctrine
+        //     ->getRepository(Sheet::class)
+        //     ->findBy(['id' => $sheet]);
+        //     $sheets = $sheetRepository->getArrayResults();
 
-        }
+        // }
 
         $array = [
             'menus' => $menus,
@@ -299,9 +300,9 @@ class MenuController extends AbstractAdminController
             if ($form->get('saveAndAdd')->isClicked()) {
                 return $this->redirectToRoute('menu_section_post_new_sheet', ['sheet'=> $menu->getSheet()->getSlug()]);
             }
-            if ($form->get('save')->isClicked()) {
-                return $this->redirectToRoute('menu_index', ['sheet' => $menu->getSheet()->getId()]);
-            }
+            // if ($form->get('save')->isClicked()) {
+            //     return $this->redirectToRoute('menu_index', ['sheet' => $menu->getSheet()->getId()]);
+            // }
             return $this->redirectToRoute('menu_index');
         }
 
