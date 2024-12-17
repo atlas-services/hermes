@@ -84,7 +84,7 @@ class BaseMenuType extends AbstractNameBaseType
         $menu->setSlug($this->slugify($menu->getName()));
         $menu->setActive(true);
         if('ref' == $menu->getReferenceName()){
-            $menu->setReferenceName($menu->getName());
+            $menu->setReferenceName($this->slugify($menu->getName()));
         }
         $event->setData($menu);
     }

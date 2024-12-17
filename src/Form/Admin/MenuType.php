@@ -100,7 +100,7 @@ class MenuType extends AbstractNameBaseType
             $menu->setCode($this->slugify($menu->getName()));
             $menu->setSlug($this->slugify($menu->getName()));
             if('ref' == $menu->getReferenceName()){
-                $menu->setReferenceName($menu->getName());
+                $menu->setReferenceName($this->slugify($menu->getName()));
             }
             $sections = $menu->getSections();
             $section = $sections[0];

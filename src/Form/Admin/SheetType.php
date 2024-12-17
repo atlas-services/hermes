@@ -73,7 +73,7 @@ class SheetType extends AbstractNameBaseType
             $sheet->setActive(true);
             $sheet->setCode($this->slugify($sheet->getName()));
             if('ref' == $sheet->getReferenceName()){
-                $sheet->setReferenceName($sheet->getName());
+                $sheet->setReferenceName($this->slugify($sheet->getName()));
             }
         }
         $sheet->setSlug($this->slugify($sheet->getName()));
