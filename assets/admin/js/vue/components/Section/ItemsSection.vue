@@ -1,7 +1,7 @@
 <script setup>
 import {computed, inject, ref, watch } from 'vue'
 import HeaderSection from './HeaderSection.vue';
-import { useAjaxSwitchPosition } from '../Base/BaseItems'
+import { useAjaxSwitchPosition, useMyfilter } from '../Base/BaseItems'
 
 const props = defineProps(['header', 'items', 'norecord'])
 const header = computed(() => {
@@ -98,14 +98,6 @@ const getUpOrDown = (direction, index) => {
     }
     return myitems
 }
-
-const myfilter = (item) => {
-    if(item.menu!=myselect.value && 'all' != myselect.value){
-        return false
-    }
-    return true
-}
-
 </script>
 
 <template>
@@ -113,7 +105,7 @@ const myfilter = (item) => {
     <HeaderSection :header="header" ></HeaderSection>
     <tbody>
         <template v-for="(item, index) in orderItems(directionchange, indexchange)">
-        <tr v-if="myfilter(item)" class="align-middle">
+        <tr v-if="useMyfilter(myselect,item.menu)" class="align-middle">
             <td class="col-1">
                 <div class="form-check form-switch form-switch-sm my-0">
                     <input type="checkbox" class="section-active form-check-input" :id="item.id" :checked="item.active ? true : false">

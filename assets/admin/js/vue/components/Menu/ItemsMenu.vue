@@ -1,7 +1,7 @@
 <script setup>
 import {computed, inject, ref, watch } from 'vue'
 import HeaderMenu from './HeaderMenu.vue';
-import { useAjaxSwitchPosition } from '../Base/BaseItems'
+import { useAjaxSwitchPosition, useMyfilter } from '../Base/BaseItems'
 
 
 const props = defineProps(['header', 'items', 'norecord'])
@@ -24,14 +24,6 @@ const getMenuHref = (item) => {
 const getAddMenuHref = (item) => {
   return "/" + item.locale + "/admin/menu/" + item.slug + "/nouvelle-section/nouveau-contenu"
 }
-
-function orderItems(direction, index){
-    if(typeof index !== 'undefined' && index == -1 ){
-        return getUpOrDown(direction, index)
-    }
-    return myitems
-}
-
 const changeIndex = (direction, index) => {
     if( index != indexchange.value){
         indexchange.value = index
@@ -44,7 +36,7 @@ const changeIndex = (direction, index) => {
 }
 
 watch(indexchange, (newIndex, oldValue) =>{
-    myitems = orderItems(directionchange.value, newIndex)
+    myitems = getUpOrDown(directionchange.value, newIndex)
     }
 )
 
@@ -87,22 +79,14 @@ const getUpOrDown = (direction, index) => {
     }
     return myitems
 }
-
-const myfilter = (item) => {
-    if(item.sheet!=myselect.value && 'all' != myselect.value){
-        return false
-    }
-    return true
-}
-
 </script>
 
 <template>
 <table class="table mt-4" >
 <HeaderMenu :header="header" ></HeaderMenu>
 <tbody>
-    <template v-for="(item, index) in orderItems(directionchange, indexchange)">
-    <tr v-if="myfilter(item)" class="align-middle">
+    <template v-for="(item, index) in getUpOrDown(directionchange, indexchange)">
+    <tr v-if="useMyfilter(myselect,item.sheet)" class="align-middle">
         <td class="col-2">
             <div class="form-check form-switch form-switch-sm my-0">
                 <input type="checkbox" class="menu-active form-check-input" :id="item.id" :checked="item.active ? true : false">

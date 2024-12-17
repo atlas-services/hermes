@@ -14,3 +14,10 @@ export function useAjaxSwitchPosition(uri, item1, item2){
   fetch(uri, requestOptions)
     .then(response => response.json())
 }
+
+export function useMyfilter(selected, item) {
+  if(item!= selected && 'all' != selected){
+      return false
+  }
+  return true
+}
