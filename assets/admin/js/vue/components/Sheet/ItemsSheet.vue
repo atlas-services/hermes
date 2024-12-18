@@ -15,13 +15,6 @@ const getMenuHref = (item) => {
   return "/" + item.locale + "/admin/page/edit/" + item.slug + "/" + item.locale
 }
 
-function orderItems(direction, index){
-    if(typeof index !== 'undefined' && index == -1 ){
-        return getUpOrDown(direction, index)
-    }
-    return myitems
-}
-
 const changeIndex = (direction, index) => {
     if( index != indexchange.value){
         indexchange.value = index
@@ -34,7 +27,7 @@ const changeIndex = (direction, index) => {
 }
 
 watch(indexchange, (newIndex, oldValue) =>{
-    myitems = orderItems(directionchange.value, newIndex)
+    myitems = getUpOrDown(directionchange.value, newIndex)
     }
 )
 
@@ -84,7 +77,7 @@ const getUpOrDown = (direction, index) => {
 
 <template>
 <tbody>
-    <tr v-for="(item, index) in orderItems(directionchange, indexchange)" class="align-middle">
+    <tr v-for="(item, index) in getUpOrDown(directionchange, indexchange)" class="align-middle">
         <td class="col-2">
             <div class="form-check form-switch form-switch-sm my-0">
                 <input type="checkbox" class="sheet-active form-check-input" :id="item.id" :checked="item.active ? true : false">

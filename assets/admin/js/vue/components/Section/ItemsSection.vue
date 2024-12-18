@@ -37,13 +37,6 @@ const getCopySectionHref = (item) => {
   return "/" + item.locale + "/admin/section/copy/" + item.id
 }
 
-function orderItems(direction, index){
-    if(typeof index !== 'undefined' && index == -1 ){
-        return getUpOrDown(direction, index)
-    }
-    return myitems
-}
-
 const changeIndex = (direction, index) => {
     if( index != indexchange.value){
         indexchange.value = index
@@ -55,13 +48,13 @@ const changeIndex = (direction, index) => {
 }
 
 watch(indexchange, (newIndex, oldValue) =>{
-    myitems = orderItems(directionchange.value, newIndex)
+    myitems = getUpOrDown(directionchange.value, newIndex)
     }
 )
 
 // si on remonte un item d'un cran (et du coup on baisse d'un niveau celui qu'on remplace)
 const getUpOrDown = (direction, index) => {
-    if(index > -1){
+     if(index > -1){
         if('up' == direction){
             index1.value = index
             index2.value = index - 1
@@ -104,7 +97,7 @@ const getUpOrDown = (direction, index) => {
 <table class="table mt-4" >
     <HeaderSection :header="header" ></HeaderSection>
     <tbody>
-        <template v-for="(item, index) in orderItems(directionchange, indexchange)">
+        <template v-for="(item, index) in getUpOrDown(directionchange, indexchange)">
         <tr v-if="useMyfilter(myselect,item.menu)" class="align-middle">
             <td class="col-1">
                 <div class="form-check form-switch form-switch-sm my-0">
