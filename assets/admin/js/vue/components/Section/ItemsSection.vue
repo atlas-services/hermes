@@ -56,8 +56,13 @@ watch(indexchange, (newIndex, oldValue) =>{
 const getUpOrDown = (direction, index) => {
      if(index > -1){
         if('up' == direction){
-            index1.value = index
-            index2.value = index - 1
+            if(index == myitems.length){
+                index1.value = index - 1
+                index2.value = index - 2
+            }else{
+                index1.value = index
+                index2.value = index - 1
+            }
         }
         if('down' == direction){
             index1.value = index + 1
