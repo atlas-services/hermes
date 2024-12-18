@@ -37,3 +37,8 @@
     <div id="vue_admin_list_section" ></div>
 
   {% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('hermes_admin_list_section_vue') }}
+{% endblock javascript %}

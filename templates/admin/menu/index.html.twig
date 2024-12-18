@@ -36,3 +36,8 @@
     <!-- Composant Vue ListSheet -->
     <div id="vue_admin_list_menu" ></div>
 {% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('hermes_admin_list_menu_vue') }}
+{% endblock javascript %}

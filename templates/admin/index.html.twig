@@ -9,3 +9,8 @@
     </section>
 
 {% endblock content %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('hermes_admin_list_template_hermes_vue') }}
+{% endblock javascript %}
