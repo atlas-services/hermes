@@ -21,11 +21,13 @@ use App\Form\ContactType;
 use App\Form\TemoignageType;
 use App\Mailer\Mailer;
 use App\Menu\Page;
+use App\Message\MailNotification;
 use App\Repository\PostRepository;
 use App\Repository\TemoignageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -89,7 +91,7 @@ class FrontController extends AbstractController
 
     #[Route(path: '/', name: 'home', methods: ['GET|POST'])]
     #[Route(path: '/{_locale?}', name: 'homepage', methods: ['GET|POST'])]
-    public function homepage(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page )
+    public function homepage(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, MessageBusInterface $bus, Mailer $mailer, Page $page )
     {
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
@@ -111,7 +113,7 @@ class FrontController extends AbstractController
         }
  
         if($array['hasContact']){
-            $array = $this->baseForm($request, $doctrine, $page, $array, $mailer, $route);
+            $array = $this->baseForm($request, $doctrine, $page, $array, $bus, $mailer);
             if(!is_array($array)){
                 $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
@@ -122,7 +124,7 @@ class FrontController extends AbstractController
     }
 
     #[Route(path: '/{_locale}/{slug}', name: 'slug', methods: ['GET|POST'])]
-    public function page(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page, $slug )
+    public function page(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, MessageBusInterface $bus, Mailer $mailer, Page $page, $slug )
     {
         $sheet = $slug;
         $route = $request->attributes->get('_route');
@@ -140,7 +142,7 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-            $array = $this->baseForm($request, $doctrine, $page, $array, $mailer, $route);
+            $array = $this->baseForm($request, $doctrine, $page, $array, $bus, $mailer);
             if(!is_array($array)){
                 $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
@@ -151,7 +153,7 @@ class FrontController extends AbstractController
     }
 
     #[Route(path: '/{_locale}/{sheet}/{slug}', name: 'sheet', methods: ['GET|POST'])]
-    public function pageSheet(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, Mailer $mailer, Page $page, $sheet , $slug)
+    public function pageSheet(Request $request, CacheInterface $frontCache, ManagerRegistry $doctrine, MessageBusInterface $bus ,Mailer $mailer, Page $page, $sheet , $slug)
     {
         $route = $request->attributes->get('_route');
         $localeRouting = $request->attributes->get('_locale' , 'fr');
@@ -168,7 +170,7 @@ class FrontController extends AbstractController
         }
 
         if($array['hasContact']){
-            $array = $this->baseForm($request, $doctrine,$page, $array, $mailer, $route);
+            $array = $this->baseForm($request, $doctrine,$page, $array, $bus, $mailer);
             if(!is_array($array)){
                 $referer = $request->headers->get('referer').'#formulaire';
                 return $this->redirect($referer);
@@ -178,7 +180,7 @@ class FrontController extends AbstractController
         return $this->render('front/index.html.twig', $array);
     }
 
-    private function baseForm($request, $doctrine, $page, $array, $mailer, $route){
+    private function baseForm($request, $doctrine, $page, $array, $bus, $mailer){
             // if(isset($array['listForms'])){
             //     $validation_group = $array['listForms'][0];
             // }
@@ -241,7 +243,14 @@ class FrontController extends AbstractController
                     $email_context['contact_form'] = $context['contact_form'];
                     $email_context['footer_container_width'] = $context['footer_container_width'];
                     $email_context['footer_about'] = $context['footer_about'];
-                    $return = $mailer->send($entity, $array['contact'], 'Contact', $template, $email_context);
+
+                    //$return = $mailer->send($entity, $array['contact'], 'Contact', $template, $email_context);
+                    $notification = "Votre message a bien été envoyé.";
+                    $return = [
+                        'type' => 'success',
+                        'message' => $notification
+                    ];
+                    $bus->dispatch(new MailNotification($entity, $array['contact'], $template, $email_context));
 
                     $this->addFlash($return['type'], $return['message']);
                     $notification = $return['message'];
