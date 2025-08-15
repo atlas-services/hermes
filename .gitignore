@@ -60,3 +60,5 @@ yarn.lock
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+/mysql
