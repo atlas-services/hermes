@@ -1,11 +1,19 @@
+{% set current_menu = app.request.attributes.get('slug') %}
+{% set current_sheet = app.request.attributes.get('sheet') %}
 <ul class="nav navbar-nav mx-auto h-font-size-12 {{ col_offset  ?? ''}}" >
     {% for sheet_name, listmenu in nav %}
         {% if (sheetsSlug[sheet_name] is defined) %}
         {% set sheet_slug = sheetsSlug[sheet_name] %}
-            <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
-            <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="list-group-item list-group-item-action px-{{ nav_link_px ?? '2' }}  {{ nav_menu_text_size ?? 'h4' }} text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
-                href={{ listmenu.href }}>{{ sheet_name }}
-            </a>
+        {% set data_aos = '' %}
+        {% set data_aos_duration = 1500 %}
+        {% if (sheet_slug == current_menu or sheet_slug == current_sheet or( current_menu == current_sheet and loop.index == 1 ))  %}
+            {% set data_aos = nav_data_aos %}
+            {% set data_aos_duration = 500  %}
+        {% endif %}
+        <li data-aos="{{ data_aos ?? ''}}" id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
+        <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="list-group-item list-group-item-action px-{{ nav_link_px ?? '2' }}  {{ nav_menu_text_size ?? 'h4' }} text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
+            href={{ listmenu.href }}>{{ sheet_name }}
+        </a>
             {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
                 <ul class="dropdown-menu rounded-{{ nav_link_rounded ?? '0'}} mt-{{ nav_sub_menu_mx ?? '2' }} "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
                     {% for menu_name, menu in listmenu %}

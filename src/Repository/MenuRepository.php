@@ -241,6 +241,7 @@ class MenuRepository extends ServiceEntityRepository
     {
         return $this->getEntityManager()->getRepository(Sheet::class)->createQueryBuilder('s')
             ->andWhere('s.slug = :slug ')
+            ->andWhere('s.active = true ')
             ->setParameter('slug', $slug)
             ;
     }

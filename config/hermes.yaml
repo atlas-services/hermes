@@ -557,6 +557,14 @@ parameters:
           summary: "Taille texte du sous menu"
           value: h6
           position: 22
+        nav_data_aos:
+          summary: "Effet data aos"
+          value: flip-left
+          position: 23
+        nav_data_aos_duration:
+          summary: "Durée Effet data aos"
+          value: 1000
+          position: 24
       content:
         content_bgcolor:
           summary: Couleur de fond du contenu

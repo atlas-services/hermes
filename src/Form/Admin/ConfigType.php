@@ -131,6 +131,47 @@ class ConfigType extends AbstractBaseType
         'bottom' => 'bottom',
     ];
 
+    const NAV_DATA_AOS =[
+            'fade' => 'fade',
+            'fade-up' => 'fade-up',
+            'fade-down' => 'fade-down',
+            'fade-left' => 'fade-left',
+            'fade-right' => 'fade-right',
+            'fade-up-right' => 'fade-up-right',
+            'fade-up-left' => 'fade-up-left',
+            'fade-down-right' => 'fade-down-right',
+            'fade-down-left' => 'fade-down-left',
+            'zoom-in' => 'zoom-in',
+            'zoom-in-up' => 'zoom-in-up',
+            'zoom-in-down' => 'zoom-in-down',
+            'zoom-in-left' => 'zoom-in-left',
+            'zoom-in-right' => 'zoom-in-right',
+            'zoom-out' => 'zoom-out',
+            'zoom-out-up' => 'zoom-out-up',
+            'zoom-out-down' => 'zoom-out-down',
+            'zoom-out-left' => 'zoom-out-left',
+            'zoom-out-right' => 'zoom-out-right',
+            'flip-left' => 'flip-left',
+            'flip-right' => 'flip-right',
+            'flip-up' => 'flip-up',
+            'flip-down' => 'flip-down',
+            'slide-up' => 'slide-up',
+            'slide-down' => 'slide-down',
+            'slide-left' => 'slide-left',
+            'slide-right' => 'slide-right',
+            'fade-zoom-in' => 'fade-zoom-in',
+    ];
+
+    const NAV_DATA_AOS_DURATION =[
+        500 => 500,
+        1000 => 1000,
+        1500 => 1500,
+        2000 => 2000,
+        2500 => 2500,
+        3000 => 3000,
+        3500 => 3500,
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -328,6 +369,14 @@ class ConfigType extends AbstractBaseType
                     foreach (range(0, 100, 1) as $number) {
                         $options[ $number] = $number;
                     }
+                    break;
+                case 'nav_data_aos':
+                    $choice = true;
+                    $options = self::NAV_DATA_AOS;
+                    break;
+                case 'nav_data_aos_duration':
+                    $choice = true;
+                    $options = self::NAV_DATA_AOS_DURATION;
                     break;
             }
             if ($choice) {
