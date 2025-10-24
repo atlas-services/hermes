@@ -5,12 +5,12 @@
         {% if (sheetsSlug[sheet_name] is defined) %}
         {% set sheet_slug = sheetsSlug[sheet_name] %}
         {% set data_aos = '' %}
-        {% set data_aos_duration = 1500 %}
+        {% set data_aos_duration = 3000 %}
         {% if (sheet_slug == current_menu or sheet_slug == current_sheet or( current_menu == current_sheet and loop.index == 1 ))  %}
             {% set data_aos = nav_data_aos %}
-            {% set data_aos_duration = 500  %}
+            {% set data_aos_duration = nav_data_aos_duration  %}
         {% endif %}
-        <li data-aos="{{ data_aos ?? ''}}" id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
+        <li data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
         <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="list-group-item list-group-item-action px-{{ nav_link_px ?? '2' }}  {{ nav_menu_text_size ?? 'h4' }} text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
             href={{ listmenu.href }}>{{ sheet_name }}
         </a>

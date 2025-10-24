@@ -155,7 +155,10 @@ const editConfig =  {
       allow: [
           {
               name: /.*/,
-              attributes: true,
+              attributes: {
+                  'data-aos': true,
+                  'data-aos-duration': true,
+              },
               classes: true,
               styles: true
           }
@@ -168,7 +171,7 @@ const editConfig =  {
     mediaEmbed: {
       previewsInData:true
     },
-    link: {			
+    link: {
       decorators: {
       isExternal: {
         mode: 'automatic',

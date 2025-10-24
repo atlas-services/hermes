@@ -27,6 +27,21 @@
 /*
 checkbox
  */
+/* .ck-editor__editable [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+} */
+
+/* Force l'affichage des éléments avec data-aos dans l'éditeur CKEditor */
+.ck-content [data-aos] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+}
+
 .form-check-input {
     clear: left;
 }

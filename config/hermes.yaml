@@ -545,7 +545,7 @@ parameters:
           summary: "Espacement gauche du menu"
           value: 0
           position: 19
-        nav_menu_text_size:
+        nav_menu_text_size  :
           summary: "Taille texte du menu"
           value: h5
           position: 20
