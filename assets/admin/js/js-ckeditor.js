@@ -155,10 +155,7 @@ const editConfig =  {
       allow: [
           {
               name: /.*/,
-              attributes: {
-                  'data-aos': true,
-                  'data-aos-duration': true,
-              },
+              attributes: true,
               classes: true,
               styles: true
           }
