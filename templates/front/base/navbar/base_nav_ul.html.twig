@@ -16,9 +16,9 @@
         </a>
         {% if nav_data_aos_active is defined and nav_data_aos_active == true %}
             {% if data_aos == nav_data_aos %}
-                <hr style="color: {{ listmenu.color_link }}"  data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" />
+                <hr class="d-none d-sm-block" style="color: {{ listmenu.color_link }}"  data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" />
             {% else %}
-                <hr style="color: {{ listmenu.color_link }}"  />
+                <hr class="d-none d-sm-block" style="color: {{ listmenu.color_link }}"  />
             {% endif %}
         {% endif %}
             {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
