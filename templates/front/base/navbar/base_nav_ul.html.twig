@@ -10,10 +10,17 @@
             {% set data_aos = nav_data_aos %}
             {% set data_aos_duration = nav_data_aos_duration  %}
         {% endif %}
-        <li data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
+        <li id="{{ listmenu.dropdown ~ loop.index }}" class="nav-item rounded-{{ nav_link_rounded ?? '0'}} py-{{ nav_link_py ?? '2' }} my-auto {{ listmenu.active }} {{ listmenu.dropdown }} mx-lg-{{ nav_espacement }} px-lg-{{ nav_espacement }}"  style="background-color: {{ listmenu.bg_color_link }};  "  >  
         <a style="color: {{ listmenu.color_link }}" id="{{ sheet_name }}" class="list-group-item list-group-item-action px-{{ nav_link_px ?? '2' }}  {{ nav_menu_text_size ?? 'h4' }} text-decoration-none remove-nav-link js-scroll {{ listmenu.dropdowntoggle }}  " role="button"  data-bs-toggle="{{ listmenu.dropdown }}"  aria-haspopup="true" aria-expanded="false"
             href={{ listmenu.href }}>{{ sheet_name }}
         </a>
+        {% if nav_data_aos_active is defined and nav_data_aos_active == true %}
+            {% if data_aos == nav_data_aos %}
+                <hr style="color: {{ listmenu.color_link }}"  data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" />
+            {% else %}
+                <hr style="color: {{ listmenu.color_link }}"  />
+            {% endif %}
+        {% endif %}
             {% if (listmenu.sheet is not defined and (listmenu|keys|length > 2 or sheet_name|lower != listmenu|keys.0|lower)) %}
                 <ul class="dropdown-menu rounded-{{ nav_link_rounded ?? '0'}} mt-{{ nav_sub_menu_mx ?? '2' }} "  style="background-color: {{ nav_li_bgcolor }}  ;color: {{ nav_color_active }};border-color:{{ nav_link_color }};  " >
                     {% for menu_name, menu in listmenu %}
