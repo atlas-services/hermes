@@ -603,6 +603,19 @@ parameters:
           summary: Padding Folio1 vertical (1 à 5)
           value: 2
           position: 2
+        folio_data_aos_active:
+          summary: "Activation Effet data aos folio"
+          value: false
+          position: 23
+        folio_data_aos:
+          summary: "Effet data aos folio"
+          value: flip-left
+          position: 24
+        folio_data_aos_duration:
+          summary: "Durée Effet data aos folio"
+          value: 1000
+          position: 25
+
       carousel:
         carousel_container_width:
           summary: Largeur du carousel affiché (max= 12)

@@ -131,7 +131,7 @@ class ConfigType extends AbstractBaseType
         'bottom' => 'bottom',
     ];
 
-    const NAV_DATA_AOS =[
+    const DATA_AOS =[
             'fade' => 'fade',
             'fade-up' => 'fade-up',
             'fade-down' => 'fade-down',
@@ -162,7 +162,7 @@ class ConfigType extends AbstractBaseType
             'fade-zoom-in' => 'fade-zoom-in',
     ];
 
-    const NAV_DATA_AOS_DURATION =[
+    const DATA_AOS_DURATION =[
         500 => 500,
         1000 => 1000,
         1500 => 1500,
@@ -372,12 +372,21 @@ class ConfigType extends AbstractBaseType
                     break;
                 case 'nav_data_aos':
                     $choice = true;
-                    $options = self::NAV_DATA_AOS;
+                    $options = self::DATA_AOS;
                     break;
                 case 'nav_data_aos_duration':
                     $choice = true;
-                    $options = self::NAV_DATA_AOS_DURATION;
+                    $options = self::DATA_AOS_DURATION;
                     break;
+                case 'folio_data_aos':
+                    $choice = true;
+                    $options = self::DATA_AOS;
+                    break;
+                case 'folio_data_aos_duration':
+                    $choice = true;
+                    $options = self::DATA_AOS_DURATION;
+                    break;
+
             }
             if ($choice) {
                 $form->add('value', ChoiceType::class, [
