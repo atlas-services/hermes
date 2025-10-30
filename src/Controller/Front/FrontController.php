@@ -188,9 +188,16 @@ class FrontController extends AbstractController
                 'bgcolor_btn' => $array['newsletter_bgcolor_btn'],
                 'contact_bgcolor_subject' => $array['contact_bgcolor_subject'],
                 'contact_color_subject' => $array['contact_color_subject'],
+                'contact_py_subject' => $array['contact_py_subject'],
+                'contact_my_subject' => $array['contact_my_subject'],
+                'contact_rounded_subject' => $array['contact_rounded_subject'],
                 'contact_bgcolor_input' => $array['contact_bgcolor_input'],
                 'contact_color_input' => $array['contact_color_input'],
                 'contact_subjects' => $array['contact_subjects'],
+                'contact_rounded_input' => $array['contact_rounded_input'],
+                'contact_py_input' => $array['contact_py_input'],
+                'contact_my_input' => $array['contact_my_input'],
+                'contact_border_color_input' => $array['contact_border_color_input'],
             ];
             $form = $this->createForm(ContactType::class, $entity, $options);
             if (ContactInterface::LIVREDOR == $array['listForms'][0]) {

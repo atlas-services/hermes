@@ -13,12 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,8 +37,15 @@ class ContactType extends AbstractType
         $this->emailTo = $options['emailTo'];
         $contact_bgcolor_subject = $options['contact_bgcolor_subject'];
         $contact_color_subject = $options['contact_color_subject'];
+        $contact_py_subject = $options['contact_py_subject'];
+        $contact_my_subject = $options['contact_my_subject'];
+        $contact_rounded_subject = $options['contact_rounded_subject'];
         $contact_bgcolor_input = $options['contact_bgcolor_input'];
         $contact_color_input = $options['contact_color_input'];
+        $contact_rounded_input = $options['contact_rounded_input'];
+        $contact_py_input = $options['contact_py_input'];
+        $contact_my_input = $options['contact_my_input'];
+        $contact_border_color_input = $options['contact_border_color_input'];
 
         $contact_subjects = $options['contact_subjects'];
         $builder
@@ -49,14 +54,14 @@ class ContactType extends AbstractType
                 // 'empty_data' => function () use ($options): string {
                 //         return ucfirst($options['validation_groups'][0]);
                 //     },
-                'attr' => ['class' => "form-select col-12 col-12 border-light rounded-0 text-center fst-italic", 'style' => "color:$contact_color_subject; background-color:$contact_bgcolor_subject" ,'id' => "subject", ]
+                'attr' => ['class' => "form-select col-12 form-control col-12  rounded-$contact_rounded_subject py-$contact_py_subject  my-$contact_my_subject  text-center fst-italic ", 'style' => "color:$contact_color_subject; background-color:$contact_bgcolor_subject" ,'id' => "subject", ]
                 ]
             )
             ->add('firstname', TextType::class,
                 [
                     'constraints' => new Assert\Type('string'),
                     'label' => 'Prénom', 
-                    'attr' => ['class' => "col-12 border-light rounded-0 ", 'style' => "color:$contact_color_input; background-color:$contact_bgcolor_input" ,'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
+                    'attr' => ['class' => "form-control col-12 rounded-$contact_rounded_input py-$contact_py_input  my-$contact_my_input ", 'style' => "border-color:$contact_border_color_input !important; color:$contact_color_input; background-color:$contact_bgcolor_input" ,'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
                     'placeholder' => "formulaire.firstname_placeholder"]
                 ]
             )
@@ -64,14 +69,14 @@ class ContactType extends AbstractType
                 [
                     'constraints' => new Assert\Type('string'),
                     'label' => 'Nom', 
-                    'attr' => ['class' => "col-12 border-light rounded-0", 'style' => "color:$contact_color_input; background-color:$contact_bgcolor_input" ,'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
+                    'attr' => ['class' => "form-control col-12  rounded-$contact_rounded_input py-$contact_py_input  my-$contact_my_input ", 'style' => "border-color:$contact_border_color_input !important; color:$contact_color_input; background-color:$contact_bgcolor_input" ,'id' => "name", 'data-validation-required-message' => "Merci de saisir votre nom.",
                     'placeholder' => "formulaire.lastname_placeholder"]
                 ]
             )
             ->add('email', EmailType::class,
                 [
                     'label' => '* Email ', 
-                    'attr' => ['class' => "col-12 border-light rounded-0", 'style' => "color:$contact_color_input; background-color:$contact_bgcolor_input" , 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre émail.",
+                    'attr' => ['class' => "form-control col-12  rounded-$contact_rounded_input py-$contact_py_input  my-$contact_my_input ", 'style' => "border-color:$contact_border_color_input !important; color:$contact_color_input; background-color:$contact_bgcolor_input" , 'id' => "name", 'data-validation-required-message' => "Merci de saisir votre émail.",
                     'placeholder' => "formulaire.email_placeholder"]
                 ]
             )
@@ -79,14 +84,14 @@ class ContactType extends AbstractType
                 [
                     'constraints' => new Assert\Length(['min' => 10, 'max' => 10, 'exactMessage' => 'contact.message.telephone']),
                     'label' => 'Téléphone ', 'required' => false, 
-                    'attr' => ['class' => "col-12 border-light rounded-0 ", 'style' => "color:$contact_color_input; background-color:$contact_bgcolor_input" , 'id' => "phone",
+                    'attr' => ['class' => "form-control col-12  rounded-$contact_rounded_input py-$contact_py_input  my-$contact_my_input  ", 'style' => "border-color:$contact_border_color_input !important; color:$contact_color_input; background-color:$contact_bgcolor_input" , 'id' => "phone",
                     'data-validation-required-message' => "error_phone.", 'placeholder' => "formulaire.phone_placehoder"]
                 ]
             )
             ->add('content', TextareaType::class,
                 [
                     'label' => '* Votre message ', 
-                    'attr' => ['class' => "col-12 border-light rounded-0 ", 'style' => "color:$contact_color_input; background-color:$contact_bgcolor_input" ,'id' => "message", 'data-validation-required-message' => "Please enter your name.",
+                    'attr' => ['class' => "form-control col-12  rounded-$contact_rounded_input py-$contact_py_input  my-$contact_my_input  ", 'style' => "border-color:$contact_border_color_input !important; color:$contact_color_input; background-color:$contact_bgcolor_input" ,'id' => "message", 'data-validation-required-message' => "Please enter your name.",
                     'placeholder' => "formulaire.message_placeholder", 'rows' => '15']
                 ]
             )
@@ -183,9 +188,16 @@ class ContactType extends AbstractType
             'emailTo' => null,
             'bgcolor_btn' => 'btn btn-outline-danger',
             'contact_bgcolor_subject' => '#000000',
+            'contact_py_subject' => 2,
+            'contact_my_subject' => 2,
+            'contact_rounded_subject' => 2,
             'contact_color_subject' => '#FFFFFF',
             'contact_bgcolor_input' => '#FFFFFF',
+            'contact_border_color_input' => '#FFFFFF',
             'contact_color_input' => '#000000',
+            'contact_rounded_input' => 0,
+            'contact_py_input' => 2,
+            'contact_my_input' => 2,
             'contact_subjects' => [ Contact::CONTACT => Contact::CONTACT],
             'csrf_protection' => true,
             // the name of the hidden HTML field that stores the token

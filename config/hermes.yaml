@@ -394,6 +394,22 @@ parameters:
           summary: Couleur sujet du formulaire
           value: '#FFFFFF'
           position: 9
+        contact_rounded_subject:
+          summary: Arrondi subject (max = 5)
+          value: 0
+          position: 13
+        contact_py_subject:
+          summary: Padding vertical subject (max = 5)
+          value: 2
+          position: 14
+        contact_my_subject:
+          summary: Margin vertical subject (max = 5)
+          value: 2
+          position: 15
+        contact_border_color_subject:
+          summary: Couleur border-color subject du formulaire
+          value: '#000000'
+          position: 16
         contact_bgcolor_input:
           summary: Couleur de fond input du formulaire
           value: '#FFFFFF'
@@ -402,6 +418,22 @@ parameters:
           summary: Couleur input du formulaire
           value: '#000000'
           position: 11
+        contact_rounded_input:
+          summary: Arrondi input (max = 5)
+          value: 0
+          position: 13
+        contact_py_input:
+          summary: Padding vertical input (max = 5)
+          value: 2
+          position: 14
+        contact_my_input:
+          summary: Margin vertical input (max = 5)
+          value: 2
+          position: 15
+        contact_border_color_input:
+          summary: Couleur border-color input du formulaire
+          value: '#000000'
+          position: 16
       newsletter:
         newsletter_active:
           summary: Activer la newsletter dans les Formulaires

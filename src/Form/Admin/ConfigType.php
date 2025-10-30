@@ -349,6 +349,15 @@ class ConfigType extends AbstractBaseType
                     $choice = true;
                     $options = self::BTN_OUTLINE;
                     break;
+                case 'contact_py_subject':
+                case 'contact_my_subject':
+                case 'contact_rounded_subject':
+                case 'contact_py_input':
+                case 'contact_my_input':
+                case 'contact_rounded_input':
+                    $choice = true;
+                    $options = self::MARGES;
+                    break;
                 // newsletter_bgcolor_btn
                 case 'newsletter_bgcolor_btn':
                     $choice = true;
