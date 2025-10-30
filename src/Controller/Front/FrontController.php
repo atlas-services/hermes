@@ -43,7 +43,7 @@ class FrontController extends AbstractController
             Disallow: /admin/
             Disallow: /login/
             Allow: /
-            Sitemap: $host/sitemap.xml"
+            Sitemap: https://$host/sitemap.xml"
         );
 
         $response->headers->set('Content-Type', 'text/plain');
