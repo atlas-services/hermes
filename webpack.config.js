@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -71,6 +72,13 @@ Encore
         config.corejs = 3;
     })
 
+    .configureTerserPlugin((options) => {
+        options.terserOptions.compress = {
+            drop_console: true, // Supprime les console.log en prod
+        };
+    })
+    .enablePostCssLoader()
+
     // enables Sass/SCSS support
     .enableSassLoader()
 
@@ -93,7 +101,10 @@ Encore
             );
         }
     })
-
+   .addPlugin(new WorkboxPlugin.GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true,
+    }))
 ;
 var config = Encore.getWebpackConfig();
 
