@@ -29,7 +29,15 @@
         {% if template is defined  %}
             {{ encore_entry_link_tags('hermes_' ~ template) }}
         {% endif %}
-        {# <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script> #}
+        {% set hasFolio = false %}
+        {% for section in menu.sections %}
+            {% if 'folio' in section.template.code %}
+                {% set hasFolio = true %}
+            {% endif %}
+        {% endfor %}
+        {% if hasFolio %}
+            <script src="{{ asset('js/anime-master/lib/anime.min.js') }}"></script>
+        {% endif %}
     {% endblock %}
 
 </head>
