@@ -36,6 +36,24 @@ use Doctrine\Persistence\ManagerRegistry;
 class FrontController extends AbstractController
 {
 
+    #[Route('/robots.txt', name: 'robots_txt', defaults: ['_format' => 'txt'])]
+    public function robots(Request $request): Response
+    {
+        $host = $request->getHttpHost();
+
+        $response = new Response(
+            "User-agent: *
+            Disallow: /admin/
+            Disallow: /login/
+            Allow: /
+            Sitemap: https://$host/sitemap.xml"
+        );
+
+        $response->headers->set('Content-Type', 'text/plain');
+
+        return $response;
+    }
+
     #[Route(path: '/{_locale}/sitemap.xml', name: 'sitemap', methods: ['GET|POST'])]
     public function sitemap(Request $request, Page $page)
     {
