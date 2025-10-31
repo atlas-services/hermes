@@ -14,15 +14,15 @@
         {% if(loop.last) %}
             {% set px = 'px' ~ padding_x ~ ' ps-sm-'~ padding_x ~ ' pe-sm-' ~ padding_x  %}
         {% endif %}
-		<div  data-aos="{{ folio_data_aos ?? ''}}" data-aos-duration="{{ folio_data_aos_duration ?? '' }}"  class="col-lg-{{ section.templateNbCol|nb_col }} col-md-{{ section.templateNbCol|nb_col }} col-12 text-center mx-auto {{ px }}" >
+		<div class="col-lg-{{ section.templateNbCol|nb_col }} col-md-{{ section.templateNbCol|nb_col }} col-12 text-center mx-auto {{ px }}" >
 		        {% for picture in pictures %}
                     {% if picture.name is defined %}
                         {% if( section.template2 == '') %}
-                            <img data-aos="{{ folio_data_aos ?? ''}}" data-aos-duration="{{ folio_data_aos_duration ?? '' }}"  class="img-responsive col-12 py-{{padding_y}} mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">      
+                            <img class="img-responsive col-12 py-{{padding_y}} mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">      
                         {% endif %}
                         {% if( 'modale1' ==  section.template2.code) %}
                             <!-- Modale1  -->
-                            <a data-aos="{{ folio_data_aos ?? ''}}" data-aos-duration="{{ folio_data_aos_duration ?? '' }}"  style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail" href="#" data-image-id="" data-name="{{ picture.name }}" data-content="{{ picture.content }}"  data-bs-toggle="modal"
+                            <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="thumbnail" href="#" data-image-id="" data-name="{{ picture.name }}" data-content="{{ picture.content }}"  data-bs-toggle="modal"
                                 data-image ="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}"
                                 data-bs-target="#image-gallery">
                                 <img class="img-responsive col-12 py-{{padding_y}} mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">            
@@ -30,7 +30,7 @@
                         {% endif %}
                         {% if( 'modale2' ==  section.template2.code) %}
                             <!-- Modale2  -->
-                            <a data-aos="{{ folio_data_aos ?? ''}}" data-aos-duration="{{ folio_data_aos_duration ?? '' }}"  style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ picture.id }}">
+                            <a style="color:{{ content_link_color }}" onmouseover="this.style.color='{{ content_link_hover_color }}'" onmouseout="this.style.color='{{ content_link_color }}'" class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal{{ picture.id }}">
                                 <img class="img-responsive col-12 py-{{padding_y}} mx-0 {{ px }}" src="{{ asset(vich_uploader_asset(picture, 'imageFile')) }}" alt="{{ 'picture' }}">          
                             </a>
                         {% endif %}
