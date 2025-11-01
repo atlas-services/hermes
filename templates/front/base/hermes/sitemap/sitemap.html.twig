@@ -1,9 +1,8 @@
-<!-- Modal -->
-<div class="modal fade modal-lg fixed-top" id="sitemapModal" tabindex="-1" aria-labelledby="sitemapModalLabel" aria-hidden="true" >
-  <div class="modal-dialog">
+<div class="modal fade" id="sitemapModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="sitemapModalLabel">Sitemap</h5>
+        <h5  style=" color: {{ footer_color ?? '#ffffff' }}" class="col-10 modal-title text-center" id="exampleModalLabel">Sitemap</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
