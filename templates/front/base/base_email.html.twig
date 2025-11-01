@@ -19,7 +19,7 @@
 
     {% block footer %}
     <!-- Site footer -->
-    <footer class="footer pt-3 col-lg-{{ footer_container_width|col_lg() }} col-12 mx-auto px-0"
+    <footer role="contentinfo" class="footer pt-3 col-lg-{{ footer_container_width|col_lg() }} col-12 mx-auto px-0"
             style="background-color: {{ footer_bgcolor ?? 'transparent' }}; color: {{ footer_color ?? '#ffffff' }}">
         <div class="row">
             {% if footer_about is defined %}

@@ -1,5 +1,5 @@
 {% if is_granted('ROLE_ADMIN') %}
-    <nav class="navbar navbar-dark bg-secondary fixed-top py-0">
+    <nav role="navigation" class="navbar navbar-dark bg-secondary fixed-top py-0">
         <div class="container-fluid">
             <a class="navbar-brand hms-color1 text-decoration-none lead" href="{{ path('admin_index') }}"><img class="h-25" src="{{ asset('img/hermes.png')? asset('img/hermes.png') }}" alt="admin Hermes"> </a>           
             {% for locale in locales %}
