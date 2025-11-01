@@ -16,7 +16,7 @@
         </a>
         {% if nav_data_aos_active is defined and nav_data_aos_active == true %}
             {% if data_aos == nav_data_aos %}
-                <hr class="d-none d-sm-block" style="color: {{ listmenu.color_link }}"  />
+                <hr class="d-none d-sm-block" style="color: {{ listmenu.color_link }}"  data-aos="{{ data_aos ?? ''}}" data-aos-duration="{{ data_aos_duration ?? '' }}" />
             {% else %}
                 <hr class="d-none d-sm-block" style="color: {{ listmenu.color_link }}"  />
             {% endif %}
