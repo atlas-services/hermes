@@ -159,13 +159,13 @@ div.youtube-play-btn {
     left: 0;
 }
 
-body, html {
+/* body, html {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #f8f9fa;
-}
+} */
 
 .container-full {
     width: 100vw;
