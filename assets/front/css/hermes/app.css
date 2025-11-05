@@ -158,3 +158,55 @@ div.youtube-play-btn {
     top: 0;
     left: 0;
 }
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.container-full {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.text-orbit {
+    position: absolute;
+    transform-origin: center;
+    font-weight: bold;
+    font-size: 24px;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+}
+
+/* Couleurs variées */
+.color-0 { color: #dc3545; }
+.color-1 { color: #fd7e14; }
+.color-2 { color: #ffc107; }
+.color-3 { color: #28a745; }
+.color-4 { color: #20c997; }
+.color-5 { color: #6f42c1; }
+.color-6 { color: #17a2b8; }
+.color-7 { color: #6c757d; }
