@@ -228,16 +228,20 @@ parameters:
           position: 1
         description:
           summary: Balise méta description
-          value: Mon site web
+          value: Création de site Web
           position: 2
+        keywords:
+          summary: Balise méta keywords
+          value: CMS Hermes, site Web, site internet, site vitrine
+          position: 3
         author:
           summary: Balise méta author
           value: Hermes CMS
-          position: 3
+          position: 4
         robots:
           summary: Balise méta robots
           value: index, follow
-          position: 4 
+          position: 5 
       site:
         template:
           summary: Choix du template général d'affichage
