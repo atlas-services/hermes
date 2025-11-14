@@ -7,6 +7,10 @@ imports:
 - { resource: 'hermes.yaml' }
 parameters:
     API_HERMES_TEMPLATES: '%env(API_HERMES_TEMPLATES)%'
+    API_HERMES_EMAIL: '%env(API_HERMES_EMAIL)%'
+    API_HERMES_PASSWORD: '%env(API_HERMES_PASSWORD)%'
+    API_HERMES_IS_CMS: '%env(bool:API_HERMES_IS_CMS)%'
+    API_HERMES_NOT_JWT_VERSION: '%env(bool:API_HERMES_NOT_JWT_VERSION)%'
 services:
     # default configuration for services in *this* file
     _defaults:
