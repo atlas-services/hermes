@@ -92,7 +92,7 @@ class ApiClient
             );
             $array = json_decode($response->getContent(), true);
         }catch(Exception $e){
-            dd($e->getMessage());
+            //dd($e->getMessage());
         }
 
         return $array;
