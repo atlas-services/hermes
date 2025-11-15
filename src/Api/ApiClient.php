@@ -53,7 +53,7 @@ class ApiClient
                 return $jwt;
             }
         }catch(Exception $e){
-            // dd($e->getMessage());
+             dd($e->getMessage());
         }
 
         return null;
@@ -86,12 +86,13 @@ class ApiClient
                 [
                     'headers' => [
                         'Authorization' => 'Bearer ' . $token,
+                        'Content-Type' => 'application/ld+json',
                     ],
                 ]
             );
             $array = json_decode($response->getContent(), true);
         }catch(Exception $e){
-            // dd($e->getMessage());
+            dd($e->getMessage());
         }
 
         return $array;
@@ -133,7 +134,7 @@ class ApiClient
 
             $array = json_decode($response->getContent(), true);
         }catch(Exception $e){
-
+            dd($e->getMessage());
         }
 
         return $array;
