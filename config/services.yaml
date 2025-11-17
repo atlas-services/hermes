@@ -6,6 +6,7 @@
 imports:
 - { resource: 'hermes.yaml' }
 parameters:
+    API_HERMES_BASE_URL: '%env(API_HERMES_BASE_URL)%'
     API_HERMES_TEMPLATES: '%env(API_HERMES_TEMPLATES)%'
     API_HERMES_EMAIL: '%env(API_HERMES_EMAIL)%'
     API_HERMES_PASSWORD: '%env(API_HERMES_PASSWORD)%'
