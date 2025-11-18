@@ -43,7 +43,7 @@ class ApiClient
                     'key' => base64_encode($key),
                     'isHermesCms' => $isHermesCms
             ];
-            dd(json_encode($json));
+            // dd(json_encode($json));
             $response = $this->client->request('POST', $this->params->get('API_HERMES_BASE_URL').'/api/login', [
                 'json' => $json,
             ]);
@@ -55,7 +55,7 @@ class ApiClient
                 return $jwt;
             }
         }catch(Exception $e){
-             dd($e->getMessage());
+             //dd($e->getMessage());
         }
 
         return null;
@@ -63,7 +63,7 @@ class ApiClient
 
     public function getEntities($method, $entity, $itemsPerPage= 5){
 
-        $this->session->set('jwt', null); // reset session uniquement pour tester
+        //$this->session->set('jwt', null); // reset session uniquement pour tester
 
         $array = [];
         try{
@@ -94,7 +94,7 @@ class ApiClient
             );
             $array = json_decode($response->getContent(), true);
         }catch(Exception $e){
-                dd($e->getMessage());
+                //dd($e->getMessage());
         }
 
         return $array;
