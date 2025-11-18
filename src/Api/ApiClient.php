@@ -43,7 +43,7 @@ class ApiClient
                     'key' => base64_encode($key),
                     'isHermesCms' => $isHermesCms
             ];
-            // dd(json_encode($json));
+            dd(json_encode($json));
             $response = $this->client->request('POST', $this->params->get('API_HERMES_BASE_URL').'/api/login', [
                 'json' => $json,
             ]);
