@@ -24,6 +24,7 @@ class SectionRepository extends ServiceEntityRepository
     }
 
     public function getArrayResults(){
+        $sections= [];
         $results = $this->createQueryBuilder('s')
         ->orderBy('s.menu', 'ASC')
         ->addOrderBy('s.position', 'ASC')
