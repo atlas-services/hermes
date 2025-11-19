@@ -105,9 +105,15 @@ class ApiClient
         $array = [];
 
         $entities = $this->getEntities('GET', $entity, $itemsPerPage);
+        // api-platform v3
         if(isset($entities['hydra:member']))
         {
             $array = $entities['hydra:member'];
+        }
+        // api-platform v4
+        if(isset($entities['member']))
+        {
+            $array = $entities['member'];
         }
 
         return $array;
