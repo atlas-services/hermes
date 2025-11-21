@@ -19,6 +19,29 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class HermesDbCommand extends Command
 {
+
+    const TEMPLATE_BIENVENUE = '
+        <div class="container-fluid col-sm-3 mx-auto py-2 text-sm-justify text-xs-left">
+            <div class="col-sm-12" data-aos="fade-up" data-aos-duration="1500">
+                <div class="card h-100 shadow-sm" style="background-color:#ffaaaa;">
+                    <div class="card-body">
+                        <h3 class="card-title " style="color:#074591;letter-spacing:4px;margin:10px 0;">
+                            Bienvenue dans votre site en construction
+                        </h3>
+                        <p class="card-text">
+                            <span style="color:#074591;">Vous avez reçu les identifiants pour vous connecter sur votre espace d\'adminitration</span> : si ce n\'est pas le cas, contactez moi (contact@les-ateliers-du-web.fr.
+                        </p>
+                        <p class="card-text">
+                            <span style="color:#074591;">Vous êtes en mesure d\'ajouter ou de mettre à jour le contenu de votre site, seul.e ou accompagné.e lors d\'un atelier du Web.</span>
+                        </p>
+                        <p class="card-text">
+                            <span style="color:#074591;">Bon atelier!</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        ';
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'hermes:db-update';
 
@@ -229,8 +252,8 @@ class HermesDbCommand extends Command
             $post= new Post();
             $post->setName("Accueil");
             $post->setSection($section);
-            $post->setContent("<div class='col-12 col-sm-9 mx-auto my-5 py-5 h-100 card border-2 border-dark rounded'><p class='col-12 my-5 pY-5 h3 text-center'>Bienvenue sur la page du site en construction de <b> $this->app_name </b> </p> </div>");
-            $this->em->persist($post);
+            $post->setContent(self::TEMPLATE_BIENVENUE);
+              $this->em->persist($post);
             $this->em->flush();
         }
     }
