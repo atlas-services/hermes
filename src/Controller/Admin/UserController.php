@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route(path: '/{_locale}/admin/user')]
@@ -88,9 +89,9 @@ class UserController extends AbstractAdminController
 
     #[Route(path: '/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     #[Route(path: '/{id}/newsletter/edit', name: 'user_newsletter_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ManagerRegistry $doctrine,User $user): Response
+    public function edit(Request $request, ManagerRegistry $doctrine,User $user,UserPasswordHasherInterface $passwordHasher): Response
     {
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if(!$this->isGranted('ROLE_ADMIN')){
             $this->redirectToRoute('user_index');
         }
 
@@ -100,8 +101,13 @@ class UserController extends AbstractAdminController
         $options['roles'] = $this->getRoles($user);
         $form = $this->createForm(UserType::class, $user, $options);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $plaintextPassword = $user->getPassword();
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $plaintextPassword
+            );
+            $user->setPassword($hashedPassword);
             $doctrine->getManager()->flush();
             $route = $request->attributes->get('_route');
             if('user_newsletter_edit' == $route){
