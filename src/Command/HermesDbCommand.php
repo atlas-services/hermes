@@ -29,7 +29,7 @@ class HermesDbCommand extends Command
                             Bienvenue dans votre site en cours construction!
                         </h3>
                         <p class="card-text">
-                            <span style="color:#074591;">Vous avez reçu les identifiants pour vous connecter sur votre espace d\'adminitration</span>
+                            <span style="color:#074591;">Vous avez reçu les identifiants pour vous connecter sur votre espace d\'administration</span>
                         </p>
                         <p class="card-text">
                             Si ce n\'est pas le cas, contactez moi : contact@les-ateliers-du-web.fr.
