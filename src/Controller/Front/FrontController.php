@@ -85,8 +85,17 @@ class FrontController extends AbstractController
             $route = $routeInfos['_route'];
             $array = $page->getActiveMenu(ContactInterface::LIVREDOR_TEXTE, ContactInterface::LIVREDOR_TEXTE, $route, $locale);
         }else{
-            $sheet = $routeInfos['sheet'];
-            $slug = $routeInfos['slug'];
+            if(in_array($routeInfos['_route'], ['home', 'homepage'])){
+                $sheet = '/';
+                $slug = '' ;
+            }else{
+                if(isset($routeInfos['slug'])){
+                    $sheet = $slug = $routeInfos['slug'];
+                }
+                if(isset($routeInfos['sheet'])){
+                    $sheet = $routeInfos['sheet'];
+                }
+            }
             $array = $page->getActiveMenu($sheet, $slug);
         }
 
