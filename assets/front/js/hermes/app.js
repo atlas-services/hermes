@@ -48,13 +48,14 @@ import '../../../commun/js/js-chevron';
 import '../../../commun/js/js-responsive-button';
 import '../../../commun/js/js-menu'; // @todo
 import '../../../commun/js/search';
+import './js-front';
 import '../../../commun/js/anime';
 import '../../../commun/js/copy';
 import '../bootstrap/modale';
 import '../bootstrap/wow';
 import '../bootstrap/videos';
 import './js-form';
-import './js-front';
+
 // import '../hermes/aos';
 // import '../../../commun/js/lazy';
 // import '../hermes/video';

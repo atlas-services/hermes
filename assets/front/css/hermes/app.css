@@ -235,6 +235,14 @@ div.youtube-play-btn {
     -o-background-size: cover;
     background-size: cover;
 }
+
+/* Alignement des slides */
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .carousel-caption {
     bottom: 3rem;
     z-index: 10;
@@ -256,4 +264,25 @@ div.youtube-play-btn {
     transform: translateX(-50%);
     top: 50%;
     text-align: center;
+}
+
+/* Rectangle idéal dans chaque slide */
+.img-box {
+    width: 100%;
+    height: 530px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* aligne l’image en haut */
+    overflow: hidden;
+}
+/* Images entièrement visibles */
+.img-box img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
