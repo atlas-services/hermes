@@ -1,6 +1,6 @@
 import $ from 'jquery';
 const jQuery = $;
-import '../../css/bootstrap/aos.css';
+import '../css/bootstrap/aos.css';
 import AOS from 'aos';
 
 /**

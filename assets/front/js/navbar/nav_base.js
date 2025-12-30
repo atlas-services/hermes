@@ -2,6 +2,7 @@
     css
  */
 import '../../../commun/css/base.css';
+// import '../../../commun/css/bootstrap/aos.css';
 import '../../css/navbar/base.css';
 
 /*
@@ -9,4 +10,4 @@ import '../../css/navbar/base.css';
  */
 // import '../hermes/scroll';
 import '../bootstrap/stickyfy';
-import '../bootstrap/aos';
+// import '../../../commun/js/aos';

@@ -25,6 +25,7 @@ import '../../commun/js/chevron';
 import '../../commun/js/menu';
 import '../../commun/js/anime';
 import '../../commun/js/copy';
+import '../../commun/js/aos';
 //import './exemples';
 import './js-custom';
 import './js-ckeditor';

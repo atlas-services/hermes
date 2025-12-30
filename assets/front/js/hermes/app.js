@@ -44,6 +44,7 @@ import 'owl.carousel';
 // import 'jquery.counterup';
 // import '../../../commun/js/scroll';
 // import '../../../commun/js/scrollspy';
+import '../../../commun/js/aos';
 import '../../../commun/js/js-chevron';
 import '../../../commun/js/js-responsive-button';
 import '../../../commun/js/js-menu'; // @todo
